@@ -1,0 +1,13 @@
+# dependencies
+node_modules/
+
+# build output
+lib/
+dist/
+
+# misc
+.DS_Store
+*.log
+coverage/
+.expo/
+.turbo/
