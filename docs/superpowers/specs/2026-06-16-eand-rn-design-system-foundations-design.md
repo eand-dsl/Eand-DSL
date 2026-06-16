@@ -20,7 +20,7 @@ Ship the **foundation** of an installable React Native UI package that mirrors t
 - **Target:** React Native, must run in **both Expo (managed) and bare RN**, **JS-only, zero native modules**, TypeScript throughout.
 - **Token source of truth:** `variables.json` — a Figma Variables export, 3 collections (`primitives`, `size`, `tokens`), **single mode (`value`)**, 830 tokens, DTCG-ish with cross-collection aliases (`{rem.1}`, `{font.size.10}`).
 - **Bilingual/RTL:** Latin + `aed/*` (Arabic) type ramps. Arabic font currently resolves to the same family (Suisse Int'l) — RTL handling is required; distinct Arabic typeface is TBD.
-- **No Figma dark mode:** light/dark expressed via explicit `inverse/*` tokens, not modes.
+- **No dark mode.** The system is light-only. `inverse/*` tokens are ordinary semantic colors for content placed on dark/brand surfaces (e.g. white text on midnight), **not** a dark theme — there is no mode to switch and no scheme-switching machinery.
 - **Fonts not bundled:** Suisse Int'l is commercial — the package exposes font-family tokens and setup docs; the consumer app licenses/loads the font (also keeps us Expo+bare friendly).
 - **Distribution:** private registry (note: Subzero itself is public npm; e& chose private).
 
@@ -33,7 +33,7 @@ src/
   tokens/            # GENERATED from variables.json via Style Dictionary
     colors.ts  typography.ts  spacing.ts  radius.ts  size.ts  index.ts
   Theme/
-    getColorScheme/  light.ts  dark.ts  index.ts  util.ts   # dark derived from inverse/* tokens
+    colors.ts        # single (light) semantic color set, incl. inverse/* for on-dark content
     getTypography.ts # Latin + aed ramps -> Restyle textVariants
     spacing.ts  radius.ts  elevation.ts  breakpoints.ts
     componentOverrides.ts                                   # per-component token defaults
@@ -74,7 +74,7 @@ Pipeline runs via `pnpm build:tokens` and is committed-output (generated files c
 
 ## 5. Theme & DsThemeProvider
 
-- `getColorScheme/light.ts` wires the default (light) semantic colors. `dark.ts` is **scaffolded** and derived from `inverse/*` tokens; **only light is wired in Phase 0**, dark is a fast-follow.
+- `colors.ts` wires the single (light) semantic color set. There is **no dark mode**; `inverse/*` tokens are exposed as ordinary semantic colors for content on dark/brand surfaces. No scheme-switching machinery.
 - `getTypography.ts` produces Restyle `textVariants` for each style (`heading.lg`, `title.md`, `body.md`, `button.md`, `badge.sm`, …) and an `aed`-prefixed parallel set.
 - `DsThemeProvider` wraps Restyle's `ThemeProvider`, exposes the theme, and reads **locale/direction** (from `locale.ts` / `I18nManager`) to select the Latin vs `aed` text variants and set RTL.
 - `withTheme` / `useDsTheme` hooks for consumers.
@@ -116,13 +116,12 @@ Not bundled. Export font-family name tokens + a `docs/fonts.md` with Expo (`expo
 
 ## 12. Out of scope (later phases)
 
-Per `AUDIT.md` §5: Phase 1 Controls, Phase 2 Nav/Layout, Phase 3 Feedback/Overlays, Phase 4 Cards/Product-specific. Each is its own spec → plan → build. Dark-mode wiring, high-contrast, codemod package, and a hosted (react-native-web) Storybook are explicitly deferred.
+Per `AUDIT.md` §5: Phase 1 Controls, Phase 2 Nav/Layout, Phase 3 Feedback/Overlays, Phase 4 Cards/Product-specific. Each is its own spec → plan → build. Codemod package and a hosted (react-native-web) Storybook are explicitly deferred. **Dark mode is not part of the e& system — the package is light-only by design.**
 
 ## 13. Open decisions (do not block Phase 0; defaults chosen)
 
 1. **npm scope / exact name** — default `@eand/react-native-design-system`; confirm real org scope before first publish.
 2. **Private registry** — default GitHub Packages (`.npmrc` + `publishConfig`); confirm before publish.
-3. **Dark mode** — scaffold now, wire later (light-only in Phase 0).
 
 ## 14. Success criteria (Phase 0 "done")
 
