@@ -26,7 +26,7 @@ Ship the **foundation** of an installable React Native UI package that mirrors t
 
 ## 3. Architecture (mirrors Subzero, adapted for RN)
 
-Single package, internally organized to parallel `@am92/react-design-system`:
+The package lives in a **pnpm monorepo** at `packages/react-native-design-system/` (the docs website is the sibling `apps/docs/` — see the website spec). The published artifact is still this single package. Its `src/` is organized to parallel `@am92/react-design-system`:
 
 ```
 src/
