@@ -1,0 +1,7 @@
+  - **Variants:** `State` (default, focused, disabled) × `Color` (default, inverse). Default & Inverse share identical anatomy — only color tokens differ.
+  - **Height:** 40px fixed. **Width:** hug content (varies with label). **Shape:** pill — corner radius 1200 (`border-radius/8`).
+  - **Border:** 1px stroke.
+  - **Layout:** single-line label + trailing **chevron icon 16px** (`icon/sm`). Label never wraps.
+  - **Behavior:** swipe gesture on mobile; 3 states per surface.
+  - **Color tokens:** `color/filter-pill/*` (see Color tokens above).
+  - **Figma variants:** symbols under `filter-pill` — State=Default,Color=Default `26130:30745`; Focused `26151:392`; Disabled `26151:442`; Inverse set `26151:3656/3664/3672`.

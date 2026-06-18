@@ -1,0 +1,7 @@
+  - **Variants:** `Style` (Filled, Outlined) × `State` (Enabled, Hovered, Focused, Error, Disabled) × `Leading icon` (on/off) × `Trailing icon` (on/off) × text configuration. Input **types:** text, comment, dropdown, otp, picker.
+  - **Anatomy (top → bottom):** Section Label → input container → Input status (helper/error text). Container is a row: `[leading icon] · label/value text · [trailing icon]`.
+  - **Shape:** corner radius 16px (`border-radius/5`). Outlined = 1px border; Filled = filled surface fill.
+  - **Spacing note:** no left padding on Label text or Input status (aligned to container edge).
+  - **Color tokens:** `color/input-field/*` (see Color tokens above).
+  - **Type:** label/value = `typography/body/*`.
+  - **Figma:** component set under `Input` (e.g. Filled·Enabled·no-icons = `28817:43927`).

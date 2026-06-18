@@ -1,0 +1,9 @@
+  - **Variants:** `type` (primary, secondary, tertiary, link) × `size` (lg, md, sm) × `surface`/tone (🔴 brand, ⚪️🔴 inverse-brand, ⚫️ midnight, ⚪️ white) × `state` (default, focus, disabled). 100-variant component set.
+  - **Heights:** lg 48 · md 40 · sm 32. **Shape:** pill — `border-radius/8` (fully rounded).
+  - **Layout:** horizontal, center-aligned row → `button-content` box → `[leading icon] · label · [trailing icon]`. Both icon slots optional.
+  - **Padding (horizontal):** scales with size — md = `spacing/md` (12); lg ≈ `spacing/lg` (16); sm ≈ `spacing/sm` (8). Label has `spacing/2xs` (2) inline padding.
+  - **Icon slot:** 20px box, pill radius, `spacing/2xs` padding, one glyph each side.
+  - **Fill vs outline:** primary = filled surface (`color/button/primary/surface/<tone>/<state>`); secondary = 2px border (`color/button/secondary/border/<tone>/<state>`) on transparent; tertiary/link = text-only.
+  - **Label type:** `typography/button/<size>` (lg 16/SemiBold, md 14/Medium, sm 12/Medium).
+  - **Text color:** `color/button/<type>/text/<tone>/<state>`.
+  - **Figma:** variant symbols live under section `Buttons`; e.g. primary·md·brand·default = `25421:83005`, secondary·lg·brand·default = `25421:84746`.

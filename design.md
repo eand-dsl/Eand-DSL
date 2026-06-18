@@ -244,7 +244,7 @@
 #### e& Logo
 - **Figma:** [`27020-6155`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=27020-6155)
 - **Role:** Brand logo lockups (primary, mono, app icon).
-- _anatomy: needs Figma extraction (no dedicated token group; uses shared semantic tokens)._
+- _anatomy: pending Figma extraction (no dedicated token group; uses shared semantic tokens)._
 
 #### Badges
 - **Figma:** [`22668-60275`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22668-60275)
@@ -304,6 +304,7 @@
       - `silver-number-plus` → `#ffffff`
       - `bronze-number` → `#ffffff`
 - **Typography:** `badge.lg`(14/Book), `badge.md`(12/Book), `badge.sm`(10/Book)
+- _anatomy: pending Figma extraction._
 
 #### Icon size
 - **Figma:** [`25460-22589`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25460-22589)
@@ -317,16 +318,17 @@
   - `2xl` → `32`
   - `3xl` → `40`
   - `4xl` → `48`
+- _anatomy: pending Figma extraction._
 
 #### Logo row
 - **Figma:** [`25996-32494`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25996-32494)
 - **Role:** Row of partner/product logos.
-- _anatomy: needs Figma extraction (no dedicated token group; uses shared semantic tokens)._
+- _anatomy: pending Figma extraction (no dedicated token group; uses shared semantic tokens)._
 
 #### Dismiss
 - **Figma:** _node-id TBD_
 - **Role:** Close / dismiss affordance.
-- _anatomy: needs Figma extraction (no dedicated token group; uses shared semantic tokens)._
+- _anatomy: pending Figma extraction (no dedicated token group; uses shared semantic tokens)._
 
 #### Progress bar
 - **Figma:** [`26663-89882`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=26663-89882)
@@ -341,6 +343,7 @@
   - `danger` → `#b85a1a`
   - `warning` → `#aa913a`
   - `positive` → `#3b8b53`
+- _anatomy: pending Figma extraction._
 
 #### Add trigger
 - **Figma:** [`25752-11470`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25752-11470)
@@ -422,11 +425,12 @@
       - `default` → `#191329`
       - `focus` → `#191329`
       - `disabled` → `#c0bfc8`
+- _anatomy: pending Figma extraction._
 
 #### Product assets
 - **Figma:** _node-id TBD_
 - **Role:** Product imagery / illustration assets.
-- _anatomy: needs Figma extraction (no dedicated token group; uses shared semantic tokens)._
+- _anatomy: pending Figma extraction (no dedicated token group; uses shared semantic tokens)._
 
 #### Atom Surfaces
 - **Figma:** [`26729-91998`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=26729-91998)
@@ -480,6 +484,7 @@
       - `lg` → `rgba(255, 255, 255, 0.2)`
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.1)`
+- _anatomy: pending Figma extraction._
 
 ### 02 · Controls
 
@@ -565,6 +570,16 @@
       - `focus` → `#191329`
       - `disabled` → `#c0bfc8`
 - **Typography:** `button.lg`(16/Semi bold), `button.md`(14/Medium), `button.sm`(12/Medium)
+- **Anatomy (from Figma):**
+  - **Variants:** `type` (primary, secondary, tertiary, link) × `size` (lg, md, sm) × `surface`/tone (🔴 brand, ⚪️🔴 inverse-brand, ⚫️ midnight, ⚪️ white) × `state` (default, focus, disabled). 100-variant component set.
+  - **Heights:** lg 48 · md 40 · sm 32. **Shape:** pill — `border-radius/8` (fully rounded).
+  - **Layout:** horizontal, center-aligned row → `button-content` box → `[leading icon] · label · [trailing icon]`. Both icon slots optional.
+  - **Padding (horizontal):** scales with size — md = `spacing/md` (12); lg ≈ `spacing/lg` (16); sm ≈ `spacing/sm` (8). Label has `spacing/2xs` (2) inline padding.
+  - **Icon slot:** 20px box, pill radius, `spacing/2xs` padding, one glyph each side.
+  - **Fill vs outline:** primary = filled surface (`color/button/primary/surface/<tone>/<state>`); secondary = 2px border (`color/button/secondary/border/<tone>/<state>`) on transparent; tertiary/link = text-only.
+  - **Label type:** `typography/button/<size>` (lg 16/SemiBold, md 14/Medium, sm 12/Medium).
+  - **Text color:** `color/button/<type>/text/<tone>/<state>`.
+  - **Figma:** variant symbols live under section `Buttons`; e.g. primary·md·brand·default = `25421:83005`, secondary·lg·brand·default = `25421:84746`.
 
 #### Input Field
 - **Figma:** [`22609-113539`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22609-113539)
@@ -607,6 +622,14 @@
   - `lg` → `2`
   - `xl` → `4`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+- **Anatomy (from Figma):**
+  - **Variants:** `Style` (Filled, Outlined) × `State` (Enabled, Hovered, Focused, Error, Disabled) × `Leading icon` (on/off) × `Trailing icon` (on/off) × text configuration. Input **types:** text, comment, dropdown, otp, picker.
+  - **Anatomy (top → bottom):** Section Label → input container → Input status (helper/error text). Container is a row: `[leading icon] · label/value text · [trailing icon]`.
+  - **Shape:** corner radius 16px (`border-radius/5`). Outlined = 1px border; Filled = filled surface fill.
+  - **Spacing note:** no left padding on Label text or Input status (aligned to container edge).
+  - **Color tokens:** `color/input-field/*` (see Color tokens above).
+  - **Type:** label/value = `typography/body/*`.
+  - **Figma:** component set under `Input` (e.g. Filled·Enabled·no-icons = `28817:43927`).
 
 #### Chips
 - **Figma:** [`28171-29640`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=28171-29640)
@@ -647,6 +670,13 @@
     - **border**
       - `focus` → `rgba(25, 19, 41, 0.5)`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+- **Anatomy (from Figma):**
+  - **Variants:** `state` (default, focus, disabled) × `Icon` (on, off); plus a **Loader** variant.
+  - **Height:** 40px fixed. **Width:** hug content. **Shape:** pill — corner radius 1200 (`border-radius/8`). **Border:** 1px stroke.
+  - **Layout:** `[leading visual] · label`. Leading visual = icon 20px, OR a 40×40 brand mark / illustration, OR none (text starts at leading edge). Label single-line, never wraps.
+  - **Color tokens:** `color/chips/*` (see Color tokens above).
+  - **Type:** label = `typography/body/*`.
+  - **Figma:** component set under `Chips` (`28472:2809`).
 
 #### Filter Pill
 - **Figma:** [`25581-9146`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25581-9146)
@@ -674,6 +704,14 @@
       - `focus` → `#ffffff`
       - `disabled` → `rgba(255, 255, 255, 0.4)`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+- **Anatomy (from Figma):**
+  - **Variants:** `State` (default, focused, disabled) × `Color` (default, inverse). Default & Inverse share identical anatomy — only color tokens differ.
+  - **Height:** 40px fixed. **Width:** hug content (varies with label). **Shape:** pill — corner radius 1200 (`border-radius/8`).
+  - **Border:** 1px stroke.
+  - **Layout:** single-line label + trailing **chevron icon 16px** (`icon/sm`). Label never wraps.
+  - **Behavior:** swipe gesture on mobile; 3 states per surface.
+  - **Color tokens:** `color/filter-pill/*` (see Color tokens above).
+  - **Figma variants:** symbols under `filter-pill` — State=Default,Color=Default `26130:30745`; Focused `26151:392`; Disabled `26151:442`; Inverse set `26151:3656/3664/3672`.
 
 #### Checkbox
 - **Figma:** [`25394-83294`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25394-83294)
@@ -754,6 +792,7 @@
   - `sm` → `16`
   - `md` → `20`
   - `xl` → `24`
+- _anatomy: pending Figma extraction._
 
 #### Switcher
 - **Figma:** [`25394-82591`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25394-82591)
@@ -885,6 +924,7 @@
     - **height**
       - `sm` → `16`
       - `md` → `20`
+- _anatomy: pending Figma extraction._
 
 #### Radio
 - **Figma:** [`25394-83997`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25394-83997)
@@ -964,6 +1004,7 @@
 - **Size tokens — `radio`:**
   - `sm` → `20`
   - `md` → `24`
+- _anatomy: pending Figma extraction._
 
 #### Searchbar
 - **Figma:** [`28114-62397`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=28114-62397)
@@ -1040,6 +1081,7 @@
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.1)`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+- _anatomy: pending Figma extraction._
 
 #### AI Search
 - **Figma:** [`28189-33142`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=28189-33142)
@@ -1116,6 +1158,7 @@
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.1)`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+- _anatomy: pending Figma extraction._
 
 #### Selectors
 - **Figma:** [`28278-1530`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=28278-1530)
@@ -1233,6 +1276,7 @@
       - `muted` → `#ffecab`
       - `disabled` → `#c0bfc8`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+- _anatomy: pending Figma extraction._
 
 ### 03 · Navigation
 
@@ -1313,6 +1357,7 @@
     - `muted` → `#ffe68f`
     - `disabled` → `#c0bfc8`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `heading.xl`(32/Bold), `heading.lg`(28/Bold), `heading.md`(24/Bold), `heading.sm`(20/Bold), `heading.xs`(16/Bold)
+- _anatomy: pending Figma extraction._
 
 #### Nav bar
 - **Figma:** [`22542-13964`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22542-13964)
@@ -1326,6 +1371,7 @@
     - `focus` → `#e00800`
     - `focus-special` → `#ffffff`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+- _anatomy: pending Figma extraction._
 
 #### Action bar
 - **Figma:** [`25519-15621`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25519-15621)
@@ -1448,6 +1494,7 @@
       - `focus` → `#191329`
       - `disabled` → `#c0bfc8`
 - **Typography:** `button.lg`(16/Semi bold), `button.md`(14/Medium), `button.sm`(12/Medium)
+- _anatomy: pending Figma extraction._
 
 #### Tabs
 - **Figma:** [`22542-13966`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22542-13966)
@@ -1474,6 +1521,7 @@
     - `md` → `40`
     - `sm` → `36`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+- _anatomy: pending Figma extraction._
 
 #### Section link
 - **Figma:** [`25460-83978`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25460-83978)
@@ -1515,6 +1563,7 @@
   - `md` → `36`
   - `lg` → `40`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+- _anatomy: pending Figma extraction._
 
 #### Quick Action
 - **Figma:** [`25507-13670`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25507-13670)
@@ -1592,6 +1641,7 @@
     - `muted` → `#ffe68f`
     - `disabled` → `#c0bfc8`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+- _anatomy: pending Figma extraction._
 
 ### 04 · Layout
 
@@ -1685,6 +1735,7 @@
       - `col-8` → `148`
       - `row-16` → `224`
 - **Typography:** `heading.xl`(32/Bold), `heading.lg`(28/Bold), `heading.md`(24/Bold), `heading.sm`(20/Bold), `heading.xs`(16/Bold), `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold)
+- _anatomy: pending Figma extraction._
 
 #### Accordion
 - **Figma:** [`27465-29326`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=27465-29326)
@@ -1834,6 +1885,7 @@
       - `muted` → `#ffecab`
       - `disabled` → `#c0bfc8`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+- _anatomy: pending Figma extraction._
 
 ### 05 · Feedback & Status
 
@@ -1924,6 +1976,7 @@
     - `muted` → `#ffe68f`
     - `disabled` → `#c0bfc8`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+- _anatomy: pending Figma extraction._
 
 #### Snackbar & Alert msg
 - **Figma:** [`22574-22808`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22574-22808)
@@ -2011,6 +2064,7 @@
     - `muted` → `#ffe68f`
     - `disabled` → `#c0bfc8`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+- _anatomy: pending Figma extraction._
 
 #### Alert Modals
 - **Figma:** [`23201-17897`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=23201-17897)
@@ -2098,6 +2152,7 @@
     - `muted` → `#ffe68f`
     - `disabled` → `#c0bfc8`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+- _anatomy: pending Figma extraction._
 
 ### 06 · Overlays
 
@@ -2178,6 +2233,7 @@
     - `muted` → `#ffe68f`
     - `disabled` → `#c0bfc8`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+- _anatomy: pending Figma extraction._
 
 #### Bottom sheet
 - **Figma:** [`27907-11716`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=27907-11716)
@@ -2255,6 +2311,7 @@
     - `muted` → `#ffe68f`
     - `disabled` → `#c0bfc8`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+- _anatomy: pending Figma extraction._
 
 ### 07 · Cards
 
@@ -2418,6 +2475,7 @@
     - `lg` → `224`
     - `xl` → `336`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+- _anatomy: pending Figma extraction._
 
 #### Product
 - **Figma:** [`25701-12472`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25701-12472)
@@ -2578,6 +2636,7 @@
     - `lg` → `224`
     - `xl` → `336`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+- _anatomy: pending Figma extraction._
 
 #### Deals for you
 - **Figma:** [`25717-33323`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25717-33323)
@@ -2738,6 +2797,7 @@
     - `lg` → `224`
     - `xl` → `336`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+- _anatomy: pending Figma extraction._
 
 #### Plans
 - **Figma:** [`25915-74211`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25915-74211)
@@ -2898,6 +2958,7 @@
     - `lg` → `224`
     - `xl` → `336`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+- _anatomy: pending Figma extraction._
 
 #### New on e&
 - **Figma:** [`25915-75766`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25915-75766)
@@ -3058,6 +3119,7 @@
     - `lg` → `224`
     - `xl` → `336`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+- _anatomy: pending Figma extraction._
 
 #### Recommendation
 - **Figma:** _node-id TBD_
@@ -3218,6 +3280,7 @@
     - `lg` → `224`
     - `xl` → `336`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+- _anatomy: pending Figma extraction._
 
 #### Service
 - **Figma:** [`26019-79144`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=26019-79144)
@@ -3378,6 +3441,7 @@
     - `lg` → `224`
     - `xl` → `336`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+- _anatomy: pending Figma extraction._
 
 ### 08 · Banners
 
@@ -3535,6 +3599,7 @@
       - `focus` → `#191329`
       - `disabled` → `#c0bfc8`
 - **Typography:** `heading.xl`(32/Bold), `heading.lg`(28/Bold), `heading.md`(24/Bold), `heading.sm`(20/Bold), `heading.xs`(16/Bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+- _anatomy: pending Figma extraction._
 
 ### 09 · Product-Specific
 
@@ -3685,6 +3750,7 @@
     - `muted` → `#ffe68f`
     - `disabled` → `#c0bfc8`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+- _anatomy: pending Figma extraction._
 
 #### Voucher
 - **Figma:** [`28278-13069`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=28278-13069)
@@ -3904,3 +3970,4 @@
       - `muted` → `#ffecab`
       - `disabled` → `#c0bfc8`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+- _anatomy: pending Figma extraction._

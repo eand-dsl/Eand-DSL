@@ -1,0 +1,6 @@
+  - **Variants:** `state` (default, focus, disabled) × `Icon` (on, off); plus a **Loader** variant.
+  - **Height:** 40px fixed. **Width:** hug content. **Shape:** pill — corner radius 1200 (`border-radius/8`). **Border:** 1px stroke.
+  - **Layout:** `[leading visual] · label`. Leading visual = icon 20px, OR a 40×40 brand mark / illustration, OR none (text starts at leading edge). Label single-line, never wraps.
+  - **Color tokens:** `color/chips/*` (see Color tokens above).
+  - **Type:** label = `typography/body/*`.
+  - **Figma:** component set under `Chips` (`28472:2809`).

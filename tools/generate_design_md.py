@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
 """Generate design.md from variables.json — resolves all token aliases to concrete
 values and maps them onto the component inventory. Output is a Figma-Make-friendly spec."""
-import json, os, sys
+import json, os, sys, re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VARS = os.path.join(ROOT, "variables.json")
 OUT = os.path.join(ROOT, "design.md")
+ANATOMY = os.path.join(ROOT, "tools", "anatomy")
 FILE_KEY = "IoDxMEgOiOuwfIL5IbJzi5"
 FIG = f"https://www.figma.com/design/{FILE_KEY}/e--Consumer-App-DSL-V1.0?node-id="
+
+def slugify(name):
+    s = name.lower().replace("&", "and")
+    return re.sub(r"[^a-z0-9]+", "-", s).strip("-")
 
 def is_leaf(n): return isinstance(n, dict) and "$value" in n
 
@@ -237,8 +242,13 @@ def main():
                                 styles.append(f"`{g}.{sz}`({props.get('font-size')}/{props.get('font-weight')})")
                 if styles:
                     w(f"- **Typography:** {', '.join(styles)}")
-            if not mapped and not tgroups:
-                w("- _anatomy: needs Figma extraction (no dedicated token group; uses shared semantic tokens)._")
+            apath = os.path.join(ANATOMY, slugify(name) + ".md")
+            if os.path.exists(apath):
+                w("- **Anatomy (from Figma):**")
+                w(open(apath).read().rstrip())
+            else:
+                note = "" if (mapped or tgroups) else " (no dedicated token group; uses shared semantic tokens)"
+                w(f"- _anatomy: pending Figma extraction{note}._")
 
     open(OUT, "w").write("\n".join(L) + "\n")
     print(f"Wrote {OUT} ({len(L)} lines)")
