@@ -567,12 +567,18 @@ export function getTypography(): Record<string, TextVariant> {
       if (isStyle(v)) {
         const weightName = String(v['font-weight']);
         const fontSize = Number(v['font-size']);
-        const lh = Number(v['line-height']); // 'relaxed' etc. stored as a ratio (~1.3-1.4)
+        // line-height is stored as a percentage string (e.g. "120%") -> convert to px.
+        const lhRaw = v['line-height'];
+        const ratio = typeof lhRaw === 'string' && lhRaw.trim().endsWith('%')
+          ? parseFloat(lhRaw) / 100
+          : Number(lhRaw);
         out[key] = {
           fontFamily: WEIGHT_TO_FAMILY[weightName] ?? 'SuisseIntl-Regular',
           fontWeight: WEIGHT_TO_NUMERIC[weightName] ?? '400',
           fontSize,
-          lineHeight: lh > 0 && lh < 4 ? Math.round(fontSize * lh) : lh,
+          lineHeight: Number.isFinite(ratio) && ratio > 0 && ratio < 4
+            ? Math.round(fontSize * ratio)
+            : Math.round(fontSize * 1.2),
           letterSpacing: Number(v['letter-spacing']) || 0,
         };
       } else if (v && typeof v === 'object') {
