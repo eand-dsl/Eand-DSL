@@ -1,0 +1,6 @@
+  - **States:** Default, Typing, Typed. **Surfaces:** white, midnight (two color schemes).
+  - **Height:** 52px. **Padding:** 16px inset. **Shape:** rounded (`border-radius/5` 16).
+  - **Layout:** row → `[leading icon 20px] · text/placeholder · [blinking cursor 2px] · [trailing icon 20px]`. Leading = search (magnifying glass); switches to clear (×) when text is present. Trailing = microphone OR arrow-right-circle (submit). Icons 20px.
+  - **Color tokens:** `color/input-field/*` + `color/surface/*` (see Color tokens above).
+  - **Type:** placeholder/value `typography/body/*`.
+  - **Figma:** section `Standard search` (`28114:62804`); example node `28114:62809`.

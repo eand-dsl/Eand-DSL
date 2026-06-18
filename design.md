@@ -1100,7 +1100,13 @@
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.1)`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- _anatomy: pending Figma extraction._
+- **Anatomy (from Figma):**
+  - **States:** Default, Typing, Typed. **Surfaces:** white, midnight (two color schemes).
+  - **Height:** 52px. **Padding:** 16px inset. **Shape:** rounded (`border-radius/5` 16).
+  - **Layout:** row → `[leading icon 20px] · text/placeholder · [blinking cursor 2px] · [trailing icon 20px]`. Leading = search (magnifying glass); switches to clear (×) when text is present. Trailing = microphone OR arrow-right-circle (submit). Icons 20px.
+  - **Color tokens:** `color/input-field/*` + `color/surface/*` (see Color tokens above).
+  - **Type:** placeholder/value `typography/body/*`.
+  - **Figma:** section `Standard search` (`28114:62804`); example node `28114:62809`.
 
 #### AI Search
 - **Figma:** [`28189-33142`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=28189-33142)
