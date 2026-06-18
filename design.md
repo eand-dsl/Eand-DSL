@@ -1,0 +1,3906 @@
+# e& Consumer App DSL — Design Spec
+
+> Auto-generated from `variables.json` (Figma Variables, fully resolved). Token values are exact and 1-1 with the Figma design system. Use this as the source spec when prompting **Figma Make**.
+
+## How to use with Figma Make
+
+1. Paste the **Global foundations** section so Make has the color/type/spacing scales.
+2. For each component, paste its section (variants, states, and the exact mapped tokens).
+3. Each component links to its Figma node (`node-id`) for visual reference.
+4. System is **light-only**; `inverse/*` tokens are for content on dark/brand surfaces. Bilingual: Latin + `aed/*` (Arabic, RTL).
+
+- Figma file: `IoDxMEgOiOuwfIL5IbJzi5` — node links: `https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=<node-id>`
+
+
+---
+
+## Global foundations
+
+### Color — primitive ramps
+
+- **white**: `1000`=#ffffff, `a90`=rgba(255, 255, 255, 0.9), `a80`=rgba(255, 255, 255, 0.8), `a70`=rgba(255, 255, 255, 0.7), `a60`=rgba(255, 255, 255, 0.6), `a50`=rgba(255, 255, 255, 0.5), `a40`=rgba(255, 255, 255, 0.4), `a30`=rgba(255, 255, 255, 0.3), `a20`=rgba(255, 255, 255, 0.2), `a15`=rgba(255, 255, 255, 0.15), `a10`=rgba(255, 255, 255, 0.1), `a5`=rgba(255, 255, 255, 0.05)
+- **midnight**: `50`=#f7f7fa, `100`=#f0f0f5, `150`=#e4e3ea, `200`=#d8d7de, `300`=#c0bfc8, `400`=#a8a6b1, `500`=#908e9a, `600`=#797584, `700`=#615d6d, `750`=#575362, `800`=#494456, `900`=#312c40, `1000`=#191329, `1100`=#140f21, `a90`=rgba(25, 19, 41, 0.9), `a80`=rgba(25, 19, 41, 0.8), `a75`=rgba(25, 19, 41, 0.75), `a70`=rgba(25, 19, 41, 0.7), `a60`=rgba(25, 19, 41, 0.6), `a50`=rgba(25, 19, 41, 0.5), `a40`=rgba(25, 19, 41, 0.4), `a30`=rgba(25, 19, 41, 0.3), `a20`=rgba(25, 19, 41, 0.2), `a10`=rgba(25, 19, 41, 0.1), `a7`=rgba(25, 19, 41, 0.07)
+- **red**: `50`=#fff2f2, `100`=#fce6e6, `200`=#f9cecc, `300`=#f6b5b3, `400`=#f39c99, `500`=#f08480, `600`=#ed6b66, `700`=#e9524d, `800`=#e73933, `900`=#e3211a, `1000`=#e00800, `1100`=#bb0700, `1200`=#950500, `1300`=#700400, `1400`=#4b0300, `1500`=#2d0200
+- **green**: `50`=#f9fefb, `100`=#edfdf2, `200`=#dafbe3, `300`=#c1f7d0, `400`=#9ff3b7, `500`=#6ced90, `600`=#54bc72, `700`=#3b8b53, `800`=#27633b, `900`=#164025, `1000`=#0e2916
+- **orange**: `50`=#fff8f3, `100`=#ffeedd, `200`=#ffe0c4, `300`=#ffd1a8, `400`=#ffc28b, `450`=#ffb16f, `500`=#ff9f52, `600`=#e07830, `700`=#b85a1a, `800`=#8c3f0c, `900`=#612a05, `1000`=#3a1602
+- **yellow**: `100`=#fff7dd, `200`=#fff2c7, `300`=#ffecab, `400`=#ffe68f, `500`=#ffdf73, `550`=#ffd957, `600`=#d5b549, `700`=#aa913a, `800`=#806d2c, `900`=#55481d, `1000`=#332b11
+- **special** (membership/loyalty palettes): mauve, red-sand, teal, burgundy, pink, gold, bronze, blue-platinum, silver
+
+### Color — semantic
+
+
+**surface**
+  - **canvas**
+    - `default` → `#ffffff`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#140f21`
+  - **base**
+    - `default` → `#f0f0f5`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e00800`
+    - `brand-muted` → `#fce6e6`
+    - `midnight` → `#191329`
+  - **sunken**
+    - `default` → `#e4e3ea`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#bb0700`
+    - `brand-muted` → `#f9cecc`
+    - `midnight` → `#140f21`
+  - **raised**
+    - `default` → `#ffffff`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#312c40`
+  - **overlay**
+    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `floating` → `#f7f7fa`
+    - `floating-middleground` → `#908e9a`
+    - `floating-inverse` → `#191329`
+  - **glass**
+    - **midnight**
+      - `lg` → `rgba(25, 19, 41, 0.3)`
+      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `sm` → `rgba(25, 19, 41, 0.07)`
+    - **white**
+      - `xl` → `rgba(255, 255, 255, 0.4)`
+      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `md` → `rgba(255, 255, 255, 0.15)`
+      - `sm` → `rgba(255, 255, 255, 0.1)`
+
+**text**
+  - **default**
+    - `default` → `#191329`
+    - `subtle` → `#575362`
+    - `muted` → `#908e9a`
+    - `disabled` → `#c0bfc8`
+    - `inverse` → `#ffffff`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+  - **brand**
+    - `default` → `#e00800`
+    - `subtle` → `#e73933`
+    - `muted` → `#ed6b66`
+    - `strong` → `#950500`
+    - `focus` → `#bb0700`
+    - `disabled` → `#a8a6b1`
+  - **positive**
+    - `default` → `#27633b`
+    - `subtle` → `#54bc72`
+    - `muted` → `#9ff3b7`
+    - `disabled` → `#c0bfc8`
+  - **danger**
+    - `default` → `#8c3f0c`
+    - `subtle` → `#e07830`
+    - `muted` → `#ffb16f`
+    - `disabled` → `#c0bfc8`
+  - **warning**
+    - `default` → `#806d2c`
+    - `subtle` → `#d5b549`
+    - `muted` → `#ffe68f`
+    - `disabled` → `#c0bfc8`
+
+**border**
+  - **surface-based**
+    - **canvas**
+      - `default` → `#f0f0f5`
+      - `inverse` → `#d8d7de`
+      - `brand` → `#ed6b66`
+      - `brand-muted` → `#f9cecc`
+      - `midnight` → `#312c40`
+    - **base**
+      - `default` → `#d8d7de`
+      - `inverse` → `#f0f0f5`
+      - `brand` → `#e9524d`
+      - `brand-muted` → `#f6b5b3`
+      - `midnight` → `#312c40`
+    - **raised**
+      - `default` → `#f0f0f5`
+      - `inverse` → `#f0f0f5`
+      - `brand` → `#ed6b66`
+      - `brand-muted` → `#f9cecc`
+      - `midnight` → `#494456`
+    - **sunken**
+      - `default` → `#d8d7de`
+      - `inverse` → `#d8d7de`
+      - `brand` → `#e73933`
+      - `brand-muted` → `#f08480`
+      - `midnight` → `#312c40`
+    - **overlay**
+      - `floating` → `#d8d7de`
+      - `floating inverse` → `#ffffff`
+    - **glass**
+      - **default**
+        - `lg` → `rgba(255, 255, 255, 0.6)`
+        - `md` → `rgba(255, 255, 255, 0.7)`
+        - `sm` → `rgba(255, 255, 255, 0.8)`
+      - **inverse**
+        - `lg` → `rgba(255, 255, 255, 0.8)`
+        - `md` → `rgba(255, 255, 255, 0.9)`
+        - `sm` → `#ffffff`
+  - **interactive**
+    - **default**
+      - `default` → `rgba(25, 19, 41, 0.2)`
+      - `subtle` → `rgba(25, 19, 41, 0.1)`
+      - `strong` → `rgba(25, 19, 41, 0.5)`
+      - `focus` → `#191329`
+      - `disabled` → `rgba(25, 19, 41, 0.07)`
+    - **inverse**
+      - `default` → `rgba(255, 255, 255, 0.6)`
+      - `subtle` → `rgba(255, 255, 255, 0.4)`
+      - `strong` → `rgba(255, 255, 255, 0.8)`
+      - `focus` → `#ffffff`
+      - `disabled` → `rgba(255, 255, 255, 0.4)`
+    - **accent**
+      - `default` → `#e00800`
+      - `focus` → `#bb0700`
+      - `subtle` → `#e9524d`
+      - `muted` → `#f08480`
+      - `disabled` → `#a8a6b1`
+    - **positive**
+      - `default` → `#3b8b53`
+      - `subtle` → `#6ced90`
+      - `muted` → `#c1f7d0`
+      - `disabled` → `#c0bfc8`
+    - **danger**
+      - `default` → `#b85a1a`
+      - `subtle` → `#ff9f52`
+      - `muted` → `#ffd1a8`
+      - `disabled` → `#c0bfc8`
+    - **warning**
+      - `default` → `#aa913a`
+      - `subtle` → `#ffd957`
+      - `muted` → `#ffecab`
+      - `disabled` → `#c0bfc8`
+
+**status**
+  - `default` → `#191329`
+  - `accent` → `#e00800`
+  - `accent-focus` → `#bb0700`
+  - `disabled` → `#c0bfc8`
+  - `disabled-inverse` → `#f0f0f5`
+  - `inverse` → `#ffffff`
+  - `danger` → `#b85a1a`
+  - `warning` → `#aa913a`
+  - `positive` → `#3b8b53`
+
+### Typography (Latin ramp)
+
+| style | size px | weight | line-height | letter-spacing | family |
+|---|---|---|---|---|---|
+| display.lg | 48 | Bold (700) | 120% | -0.6499999761581421 | Suisse int'l |
+| display.md | 40 | Bold (700) | 120% | -0.6499999761581421 | Suisse int'l |
+| heading.xl | 32 | Bold (700) | 120% | -0.6499999761581421 | Suisse int'l |
+| heading.lg | 28 | Bold (700) | 120% | -0.6499999761581421 | Suisse int'l |
+| heading.md | 24 | Bold (700) | 120% | -0.3499999940395355 | Suisse int'l |
+| heading.sm | 20 | Bold (700) | 120% | -0.3499999940395355 | Suisse int'l |
+| heading.xs | 16 | Bold (700) | 120% | 0 | Suisse int'l |
+| title.xl | 28 | Semi bold (600) | 120% | -0.3499999940395355 | Suisse int'l |
+| title.lg | 24 | Semi bold (600) | 120% | -0.3499999940395355 | Suisse int'l |
+| title.md | 20 | Semi bold (600) | 120% | -0.3499999940395355 | Suisse int'l |
+| title.sm | 16 | Semi bold (600) | 120% | 0 | Suisse int'l |
+| title.xs | 14 | Semi bold (600) | 120% | 0 | Suisse int'l |
+| body.xl | 20 | Regular (400) | 120% | 0 | Suisse int'l |
+| body.lg | 16 | Regular (400) | 120% | 0 | Suisse int'l |
+| body.md | 14 | Regular (400) | 120% | 0 | Suisse int'l |
+| body.sm | 12 | Regular (400) | 120% | 0 | Suisse int'l |
+| body.xs | 10 | Regular (400) | 120% | 0 | Suisse int'l |
+| button.lg | 16 | Semi bold (600) | 120% | 0 | Suisse int'l |
+| button.md | 14 | Medium (500) | 120% | 0 | Suisse int'l |
+| button.sm | 12 | Medium (500) | 120% | 0 | Suisse int'l |
+| badge.lg | 14 | Book (450/500) | 120% | 0 | Suisse int'l |
+| badge.md | 12 | Book (450/500) | 120% | 0 | Suisse int'l |
+| badge.sm | 10 | Book (450/500) | 120% | 0 | Suisse int'l |
+
+> Arabic ramp mirrors these as `aed/<style>` (same scale; family currently Suisse Int'l, distinct Arabic face TBD).
+
+
+### Spacing scale
+
+`2xs`=2, `xs`=4, `sm`=8, `md`=12, `lg`=16, `xl`=20, `2xl`=24, `3xl`=32, `4xl`=40, `5xl`=48, `6xl`=56, `7xl`=64, `8xl`=72
+
+### Border radius
+
+`1`=4, `2`=8, `3`=12, `4`=14, `5`=16, `6`=20, `7`=24, `8`=1200
+
+### Icon sizes
+
+`xs`=8, `sm`=12, `md`=16, `lg`=20, `xl`=24, `2xl`=32, `3xl`=40, `4xl`=48
+
+
+---
+
+## Components
+
+> For each: Figma node, role, and the **exact mapped tokens** (resolved values). Variant/state structure is read directly from the token groups. Items marked _anatomy: needs Figma extraction_ have no dedicated token group — they use the shared semantic tokens above; their precise layout should be pulled from the Figma node.
+
+
+### 01 · Primitives
+
+
+#### e& Logo
+- **Figma:** [`27020-6155`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=27020-6155)
+- **Role:** Brand logo lockups (primary, mono, app icon).
+- _anatomy: needs Figma extraction (no dedicated token group; uses shared semantic tokens)._
+
+#### Badges
+- **Figma:** [`22668-60275`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22668-60275)
+- **Role:** Membership/status badges (Gold, Silver, Platinum Blue, Bronze, +).
+- **Color tokens — `color.badge`:**
+  - **surface**
+    - **status**
+      - `neutral` → `#f0f0f5`
+      - `neutral-inverse` → `#191329`
+      - `disabled` → `#e4e3ea`
+      - `positive` → `#6ced90`
+      - `warning` → `#ffdf73`
+      - `danger` → `#ffb16f`
+      - `brand` → `#e00800`
+    - **offers**
+      - `new-card` → `#0e2916`
+      - `new-plan` → `#0e2916`
+      - `mega-deals` → `#e00800`
+      - `green-friday` → `#e00800`
+      - `discount` → `#e00800`
+      - `limited stock` → `#ffd957`
+      - `validity` → `#ffd957`
+      - `limited-time` → `#ffd957`
+      - `best-seller` → `#bb2d81`
+      - `online-exclusive` → `#7c0124`
+      - `exclusive-for-emirati` → `#7c0124`
+      - `sold-out` → `#797584`
+      - `neutral` → `#191329`
+      - `neutral-midnight` → `#f0f0f5`
+  - **text**
+    - **status**
+      - `neutral` → `#191329`
+      - `neutral-inverse` → `#ffffff`
+      - `disabled` → `#908e9a`
+      - `positive` → `#191329`
+      - `warning` → `#191329`
+      - `danger` → `#191329`
+      - `brand` → `#ffffff`
+    - **offers**
+      - `new-card` → `#ffffff`
+      - `new-plan` → `#ffffff`
+      - `mega-deals` → `#ffffff`
+      - `green-friday` → `#ffffff`
+      - `discount` → `#ffffff`
+      - `limited-stock` → `#191329`
+      - `validity` → `#191329`
+      - `limited-time` → `#191329`
+      - `best-seller` → `#ffffff`
+      - `online-exclusive` → `#ffffff`
+      - `exclusive-for-emirati` → `#ffffff`
+      - `sold-out` → `rgba(255, 255, 255, 0.7)`
+    - **tiers**
+      - `platinum-number` → `#191329`
+      - `gold-number` → `#462f2d`
+      - `gold-number-plus` → `#ffe68f`
+      - `silver-number` → `#191329`
+      - `silver-number-plus` → `#ffffff`
+      - `bronze-number` → `#ffffff`
+- **Typography:** `badge.lg`(14/Book), `badge.md`(12/Book), `badge.sm`(10/Book)
+
+#### Icon size
+- **Figma:** [`25460-22589`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25460-22589)
+- **Role:** Icon sizing scale.
+- **Size tokens — `icon`:**
+  - `xs` → `8`
+  - `sm` → `12`
+  - `md` → `16`
+  - `lg` → `20`
+  - `xl` → `24`
+  - `2xl` → `32`
+  - `3xl` → `40`
+  - `4xl` → `48`
+
+#### Logo row
+- **Figma:** [`25996-32494`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25996-32494)
+- **Role:** Row of partner/product logos.
+- _anatomy: needs Figma extraction (no dedicated token group; uses shared semantic tokens)._
+
+#### Dismiss
+- **Figma:** _node-id TBD_
+- **Role:** Close / dismiss affordance.
+- _anatomy: needs Figma extraction (no dedicated token group; uses shared semantic tokens)._
+
+#### Progress bar
+- **Figma:** [`26663-89882`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=26663-89882)
+- **Role:** Linear progress indicator.
+- **Color tokens — `color.status`:**
+  - `default` → `#191329`
+  - `accent` → `#e00800`
+  - `accent-focus` → `#bb0700`
+  - `disabled` → `#c0bfc8`
+  - `disabled-inverse` → `#f0f0f5`
+  - `inverse` → `#ffffff`
+  - `danger` → `#b85a1a`
+  - `warning` → `#aa913a`
+  - `positive` → `#3b8b53`
+
+#### Add trigger
+- **Figma:** [`25752-11470`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25752-11470)
+- **Role:** Add / plus trigger control.
+- **Color tokens — `color.button`:**
+  - **primary**
+    - **surface**
+      - **brand**
+        - `default` → `#e00800`
+        - `focus` → `#bb0700`
+        - `disabled` → `#c0bfc8`
+      - **inverse**
+        - `default` → `#ffffff`
+        - `focus` → `#fce6e6`
+        - `disabled` → `#f0f0f5`
+    - **text**
+      - **brand**
+        - `default` → `#ffffff`
+        - `focus` → `#ffffff`
+        - `disabled` → `rgba(255, 255, 255, 0.7)`
+      - **inverse**
+        - `default` → `#e00800`
+        - `focus` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+  - **secondary**
+    - **surface**
+      - **brand**
+        - `focus` → `#fce6e6`
+      - **inverse**
+        - `focus` → `#312c40`
+    - **text**
+      - **brand**
+        - `default` → `#e00800`
+        - `focus` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+      - **inverse**
+        - `default` → `#ffffff`
+        - `focus` → `#ffffff`
+        - `disabled` → `rgba(255, 255, 255, 0.7)`
+    - **border**
+      - **brand**
+        - `default` → `#e00800`
+        - `focus` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+      - **inverse**
+        - `default` → `#ffffff`
+        - `focus` → `#f0f0f5`
+        - `disabled` → `#d8d7de`
+  - **tertiary**
+    - **text**
+      - **brand**
+        - `default` → `#e00800`
+        - `focus` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+      - **midnight**
+        - `default` → `#191329`
+        - `focus` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+      - **inverse**
+        - `default` → `#ffffff`
+        - `focus` → `#bb0700`
+        - `disabled` → `rgba(255, 255, 255, 0.7)`
+  - **link**
+    - **text**
+      - **brand**
+        - `default` → `#e00800`
+        - `focus` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+      - **midnight**
+        - `default` → `#191329`
+        - `focus` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+      - **inverse**
+        - `default` → `#ffffff`
+        - `focus` → `#bb0700`
+        - `disabled` → `rgba(255, 255, 255, 0.7)`
+  - **text**
+    - **midnight**
+      - `default` → `#191329`
+      - `focus` → `#191329`
+      - `disabled` → `#c0bfc8`
+
+#### Product assets
+- **Figma:** _node-id TBD_
+- **Role:** Product imagery / illustration assets.
+- _anatomy: needs Figma extraction (no dedicated token group; uses shared semantic tokens)._
+
+#### Atom Surfaces
+- **Figma:** [`26729-91998`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=26729-91998)
+- **Role:** Base surface atoms (cards/containers).
+- **Color tokens — `color.atom-surfaces`:**
+  - `default` → `#e4e3ea`
+  - `red` → `#fcebeb`
+  - `orange` → `#fcf3eb`
+  - `yellow` → `#fcfceb`
+  - `green` → `#ecfce8`
+  - `blue` → `#ebf7fc`
+  - `purple` → `#ebebfc`
+  - `violet` → `#f9ebfc`
+- **Color tokens — `color.surface`:**
+  - **canvas**
+    - `default` → `#ffffff`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#140f21`
+  - **base**
+    - `default` → `#f0f0f5`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e00800`
+    - `brand-muted` → `#fce6e6`
+    - `midnight` → `#191329`
+  - **sunken**
+    - `default` → `#e4e3ea`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#bb0700`
+    - `brand-muted` → `#f9cecc`
+    - `midnight` → `#140f21`
+  - **raised**
+    - `default` → `#ffffff`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#312c40`
+  - **overlay**
+    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `floating` → `#f7f7fa`
+    - `floating-middleground` → `#908e9a`
+    - `floating-inverse` → `#191329`
+  - **glass**
+    - **midnight**
+      - `lg` → `rgba(25, 19, 41, 0.3)`
+      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `sm` → `rgba(25, 19, 41, 0.07)`
+    - **white**
+      - `xl` → `rgba(255, 255, 255, 0.4)`
+      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `md` → `rgba(255, 255, 255, 0.15)`
+      - `sm` → `rgba(255, 255, 255, 0.1)`
+
+### 02 · Controls
+
+
+#### Buttons
+- **Figma:** [`22542-13972`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22542-13972)
+- **Role:** Primary/secondary buttons across tones and states.
+- **Color tokens — `color.button`:**
+  - **primary**
+    - **surface**
+      - **brand**
+        - `default` → `#e00800`
+        - `focus` → `#bb0700`
+        - `disabled` → `#c0bfc8`
+      - **inverse**
+        - `default` → `#ffffff`
+        - `focus` → `#fce6e6`
+        - `disabled` → `#f0f0f5`
+    - **text**
+      - **brand**
+        - `default` → `#ffffff`
+        - `focus` → `#ffffff`
+        - `disabled` → `rgba(255, 255, 255, 0.7)`
+      - **inverse**
+        - `default` → `#e00800`
+        - `focus` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+  - **secondary**
+    - **surface**
+      - **brand**
+        - `focus` → `#fce6e6`
+      - **inverse**
+        - `focus` → `#312c40`
+    - **text**
+      - **brand**
+        - `default` → `#e00800`
+        - `focus` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+      - **inverse**
+        - `default` → `#ffffff`
+        - `focus` → `#ffffff`
+        - `disabled` → `rgba(255, 255, 255, 0.7)`
+    - **border**
+      - **brand**
+        - `default` → `#e00800`
+        - `focus` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+      - **inverse**
+        - `default` → `#ffffff`
+        - `focus` → `#f0f0f5`
+        - `disabled` → `#d8d7de`
+  - **tertiary**
+    - **text**
+      - **brand**
+        - `default` → `#e00800`
+        - `focus` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+      - **midnight**
+        - `default` → `#191329`
+        - `focus` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+      - **inverse**
+        - `default` → `#ffffff`
+        - `focus` → `#bb0700`
+        - `disabled` → `rgba(255, 255, 255, 0.7)`
+  - **link**
+    - **text**
+      - **brand**
+        - `default` → `#e00800`
+        - `focus` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+      - **midnight**
+        - `default` → `#191329`
+        - `focus` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+      - **inverse**
+        - `default` → `#ffffff`
+        - `focus` → `#bb0700`
+        - `disabled` → `rgba(255, 255, 255, 0.7)`
+  - **text**
+    - **midnight**
+      - `default` → `#191329`
+      - `focus` → `#191329`
+      - `disabled` → `#c0bfc8`
+- **Typography:** `button.lg`(16/Semi bold), `button.md`(14/Medium), `button.sm`(12/Medium)
+
+#### Input Field
+- **Figma:** [`22609-113539`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22609-113539)
+- **Role:** Text input with label/helper/error states.
+- **Color tokens — `color.input-field`:**
+  - **surface**
+    - **default**
+      - `default` → `#ffffff`
+      - `disabled` → `#f0f0f5`
+    - **inverse**
+      - `default` → `rgba(255, 255, 255, 0.15)`
+      - `disabled` → `rgba(255, 255, 255, 0.15)`
+  - **border**
+    - `default` → `#d8d7de`
+    - `active` → `#e9524d`
+    - `filled` → `#d8d7de`
+    - `error` → `#ff9f52`
+    - `disabled` → `rgba(25, 19, 41, 0.07)`
+  - **text**
+    - **default**
+      - `Color` → `#ffffff`
+      - **label**
+        - `default` → `#908e9a`
+        - `disabled` → `#c0bfc8`
+      - **value**
+        - `active` → `#191329`
+        - `disabled` → `#c0bfc8`
+    - **inverse**
+      - `Color` → `#ffffff`
+      - **label**
+        - `default` → `rgba(255, 255, 255, 0.5)`
+        - `disabled` → `rgba(255, 255, 255, 0.3)`
+      - **value**
+        - `active` → `#ffffff`
+        - `disabled` → `rgba(255, 255, 255, 0.3)`
+- **Size tokens — `border`:**
+  - `xs` → `0.5`
+  - `sm` → `1`
+  - `md` → `1.5`
+  - `lg` → `2`
+  - `xl` → `4`
+- **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+
+#### Chips
+- **Figma:** [`28171-29640`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=28171-29640)
+- **Role:** Selectable chips / tags.
+- **Color tokens — `color.chips`:**
+  - **default**
+    - **default**
+      - **surface**
+        - `focus` → `#140f21`
+      - **text**
+        - `default` → `#575362`
+        - `focus` → `#ffffff`
+        - `disabled` → `#c0bfc8`
+      - **border**
+        - `default` → `rgba(25, 19, 41, 0.5)`
+        - `focus` → `#191329`
+        - `disabled` → `rgba(25, 19, 41, 0.2)`
+    - **inverse**
+      - **surface**
+        - `focus` → `#ffffff`
+      - **text**
+        - `default` → `rgba(255, 255, 255, 0.7)`
+        - `focus` → `#191329`
+        - `disabled` → `rgba(255, 255, 255, 0.3)`
+      - **border**
+        - `default` → `rgba(255, 255, 255, 0.4)`
+        - `focus` → `#ffffff`
+        - `disabled` → `rgba(255, 255, 255, 0.4)`
+  - **suggestion**
+    - **surface**
+      - `default` → `#ffffff`
+      - `focus` → `#ffffff`
+      - `disabled` → `#e4e3ea`
+    - **text**
+      - `default` → `#575362`
+      - `focus` → `#191329`
+      - `disabled` → `#908e9a`
+    - **border**
+      - `focus` → `rgba(25, 19, 41, 0.5)`
+- **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+
+#### Filter Pill
+- **Figma:** [`25581-9146`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25581-9146)
+- **Role:** Filter pills with selected/unselected states.
+- **Color tokens — `color.filter-pill`:**
+  - **surface**
+    - **inverse**
+      - `focus` → `#f0f0f5`
+  - **text**
+    - **default**
+      - `default` → `#575362`
+      - `focus` → `#191329`
+      - `disabled` → `#c0bfc8`
+    - **inverse**
+      - `default` → `rgba(255, 255, 255, 0.7)`
+      - `focus` → `#191329`
+      - `disabled` → `rgba(255, 255, 255, 0.3)`
+  - **border**
+    - **default**
+      - `default` → `rgba(25, 19, 41, 0.5)`
+      - `focus` → `#191329`
+      - `disabled` → `rgba(25, 19, 41, 0.07)`
+    - **inverse**
+      - `default` → `rgba(255, 255, 255, 0.8)`
+      - `focus` → `#ffffff`
+      - `disabled` → `rgba(255, 255, 255, 0.4)`
+- **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+
+#### Checkbox
+- **Figma:** [`25394-83294`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25394-83294)
+- **Role:** Checkbox control.
+- **Color tokens — `color.border`:**
+  - **surface-based**
+    - **canvas**
+      - `default` → `#f0f0f5`
+      - `inverse` → `#d8d7de`
+      - `brand` → `#ed6b66`
+      - `brand-muted` → `#f9cecc`
+      - `midnight` → `#312c40`
+    - **base**
+      - `default` → `#d8d7de`
+      - `inverse` → `#f0f0f5`
+      - `brand` → `#e9524d`
+      - `brand-muted` → `#f6b5b3`
+      - `midnight` → `#312c40`
+    - **raised**
+      - `default` → `#f0f0f5`
+      - `inverse` → `#f0f0f5`
+      - `brand` → `#ed6b66`
+      - `brand-muted` → `#f9cecc`
+      - `midnight` → `#494456`
+    - **sunken**
+      - `default` → `#d8d7de`
+      - `inverse` → `#d8d7de`
+      - `brand` → `#e73933`
+      - `brand-muted` → `#f08480`
+      - `midnight` → `#312c40`
+    - **overlay**
+      - `floating` → `#d8d7de`
+      - `floating inverse` → `#ffffff`
+    - **glass**
+      - **default**
+        - `lg` → `rgba(255, 255, 255, 0.6)`
+        - `md` → `rgba(255, 255, 255, 0.7)`
+        - `sm` → `rgba(255, 255, 255, 0.8)`
+      - **inverse**
+        - `lg` → `rgba(255, 255, 255, 0.8)`
+        - `md` → `rgba(255, 255, 255, 0.9)`
+        - `sm` → `#ffffff`
+  - **interactive**
+    - **default**
+      - `default` → `rgba(25, 19, 41, 0.2)`
+      - `subtle` → `rgba(25, 19, 41, 0.1)`
+      - `strong` → `rgba(25, 19, 41, 0.5)`
+      - `focus` → `#191329`
+      - `disabled` → `rgba(25, 19, 41, 0.07)`
+    - **inverse**
+      - `default` → `rgba(255, 255, 255, 0.6)`
+      - `subtle` → `rgba(255, 255, 255, 0.4)`
+      - `strong` → `rgba(255, 255, 255, 0.8)`
+      - `focus` → `#ffffff`
+      - `disabled` → `rgba(255, 255, 255, 0.4)`
+    - **accent**
+      - `default` → `#e00800`
+      - `focus` → `#bb0700`
+      - `subtle` → `#e9524d`
+      - `muted` → `#f08480`
+      - `disabled` → `#a8a6b1`
+    - **positive**
+      - `default` → `#3b8b53`
+      - `subtle` → `#6ced90`
+      - `muted` → `#c1f7d0`
+      - `disabled` → `#c0bfc8`
+    - **danger**
+      - `default` → `#b85a1a`
+      - `subtle` → `#ff9f52`
+      - `muted` → `#ffd1a8`
+      - `disabled` → `#c0bfc8`
+    - **warning**
+      - `default` → `#aa913a`
+      - `subtle` → `#ffd957`
+      - `muted` → `#ffecab`
+      - `disabled` → `#c0bfc8`
+- **Size tokens — `checkbox`:**
+  - `sm` → `16`
+  - `md` → `20`
+  - `xl` → `24`
+
+#### Switcher
+- **Figma:** [`25394-82591`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25394-82591)
+- **Role:** Toggle switch.
+- **Color tokens — `color.surface`:**
+  - **canvas**
+    - `default` → `#ffffff`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#140f21`
+  - **base**
+    - `default` → `#f0f0f5`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e00800`
+    - `brand-muted` → `#fce6e6`
+    - `midnight` → `#191329`
+  - **sunken**
+    - `default` → `#e4e3ea`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#bb0700`
+    - `brand-muted` → `#f9cecc`
+    - `midnight` → `#140f21`
+  - **raised**
+    - `default` → `#ffffff`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#312c40`
+  - **overlay**
+    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `floating` → `#f7f7fa`
+    - `floating-middleground` → `#908e9a`
+    - `floating-inverse` → `#191329`
+  - **glass**
+    - **midnight**
+      - `lg` → `rgba(25, 19, 41, 0.3)`
+      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `sm` → `rgba(25, 19, 41, 0.07)`
+    - **white**
+      - `xl` → `rgba(255, 255, 255, 0.4)`
+      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `md` → `rgba(255, 255, 255, 0.15)`
+      - `sm` → `rgba(255, 255, 255, 0.1)`
+- **Color tokens — `color.border`:**
+  - **surface-based**
+    - **canvas**
+      - `default` → `#f0f0f5`
+      - `inverse` → `#d8d7de`
+      - `brand` → `#ed6b66`
+      - `brand-muted` → `#f9cecc`
+      - `midnight` → `#312c40`
+    - **base**
+      - `default` → `#d8d7de`
+      - `inverse` → `#f0f0f5`
+      - `brand` → `#e9524d`
+      - `brand-muted` → `#f6b5b3`
+      - `midnight` → `#312c40`
+    - **raised**
+      - `default` → `#f0f0f5`
+      - `inverse` → `#f0f0f5`
+      - `brand` → `#ed6b66`
+      - `brand-muted` → `#f9cecc`
+      - `midnight` → `#494456`
+    - **sunken**
+      - `default` → `#d8d7de`
+      - `inverse` → `#d8d7de`
+      - `brand` → `#e73933`
+      - `brand-muted` → `#f08480`
+      - `midnight` → `#312c40`
+    - **overlay**
+      - `floating` → `#d8d7de`
+      - `floating inverse` → `#ffffff`
+    - **glass**
+      - **default**
+        - `lg` → `rgba(255, 255, 255, 0.6)`
+        - `md` → `rgba(255, 255, 255, 0.7)`
+        - `sm` → `rgba(255, 255, 255, 0.8)`
+      - **inverse**
+        - `lg` → `rgba(255, 255, 255, 0.8)`
+        - `md` → `rgba(255, 255, 255, 0.9)`
+        - `sm` → `#ffffff`
+  - **interactive**
+    - **default**
+      - `default` → `rgba(25, 19, 41, 0.2)`
+      - `subtle` → `rgba(25, 19, 41, 0.1)`
+      - `strong` → `rgba(25, 19, 41, 0.5)`
+      - `focus` → `#191329`
+      - `disabled` → `rgba(25, 19, 41, 0.07)`
+    - **inverse**
+      - `default` → `rgba(255, 255, 255, 0.6)`
+      - `subtle` → `rgba(255, 255, 255, 0.4)`
+      - `strong` → `rgba(255, 255, 255, 0.8)`
+      - `focus` → `#ffffff`
+      - `disabled` → `rgba(255, 255, 255, 0.4)`
+    - **accent**
+      - `default` → `#e00800`
+      - `focus` → `#bb0700`
+      - `subtle` → `#e9524d`
+      - `muted` → `#f08480`
+      - `disabled` → `#a8a6b1`
+    - **positive**
+      - `default` → `#3b8b53`
+      - `subtle` → `#6ced90`
+      - `muted` → `#c1f7d0`
+      - `disabled` → `#c0bfc8`
+    - **danger**
+      - `default` → `#b85a1a`
+      - `subtle` → `#ff9f52`
+      - `muted` → `#ffd1a8`
+      - `disabled` → `#c0bfc8`
+    - **warning**
+      - `default` → `#aa913a`
+      - `subtle` → `#ffd957`
+      - `muted` → `#ffecab`
+      - `disabled` → `#c0bfc8`
+- **Size tokens — `switcher`:**
+  - **track**
+    - **width**
+      - `sm` → `32`
+      - `md` → `40`
+    - **height**
+      - `sm` → `20`
+      - `md` → `24`
+  - **thumb**
+    - **width**
+      - `sm` → `16`
+      - `md` → `20`
+    - **height**
+      - `sm` → `16`
+      - `md` → `20`
+
+#### Radio
+- **Figma:** [`25394-83997`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25394-83997)
+- **Role:** Radio control.
+- **Color tokens — `color.border`:**
+  - **surface-based**
+    - **canvas**
+      - `default` → `#f0f0f5`
+      - `inverse` → `#d8d7de`
+      - `brand` → `#ed6b66`
+      - `brand-muted` → `#f9cecc`
+      - `midnight` → `#312c40`
+    - **base**
+      - `default` → `#d8d7de`
+      - `inverse` → `#f0f0f5`
+      - `brand` → `#e9524d`
+      - `brand-muted` → `#f6b5b3`
+      - `midnight` → `#312c40`
+    - **raised**
+      - `default` → `#f0f0f5`
+      - `inverse` → `#f0f0f5`
+      - `brand` → `#ed6b66`
+      - `brand-muted` → `#f9cecc`
+      - `midnight` → `#494456`
+    - **sunken**
+      - `default` → `#d8d7de`
+      - `inverse` → `#d8d7de`
+      - `brand` → `#e73933`
+      - `brand-muted` → `#f08480`
+      - `midnight` → `#312c40`
+    - **overlay**
+      - `floating` → `#d8d7de`
+      - `floating inverse` → `#ffffff`
+    - **glass**
+      - **default**
+        - `lg` → `rgba(255, 255, 255, 0.6)`
+        - `md` → `rgba(255, 255, 255, 0.7)`
+        - `sm` → `rgba(255, 255, 255, 0.8)`
+      - **inverse**
+        - `lg` → `rgba(255, 255, 255, 0.8)`
+        - `md` → `rgba(255, 255, 255, 0.9)`
+        - `sm` → `#ffffff`
+  - **interactive**
+    - **default**
+      - `default` → `rgba(25, 19, 41, 0.2)`
+      - `subtle` → `rgba(25, 19, 41, 0.1)`
+      - `strong` → `rgba(25, 19, 41, 0.5)`
+      - `focus` → `#191329`
+      - `disabled` → `rgba(25, 19, 41, 0.07)`
+    - **inverse**
+      - `default` → `rgba(255, 255, 255, 0.6)`
+      - `subtle` → `rgba(255, 255, 255, 0.4)`
+      - `strong` → `rgba(255, 255, 255, 0.8)`
+      - `focus` → `#ffffff`
+      - `disabled` → `rgba(255, 255, 255, 0.4)`
+    - **accent**
+      - `default` → `#e00800`
+      - `focus` → `#bb0700`
+      - `subtle` → `#e9524d`
+      - `muted` → `#f08480`
+      - `disabled` → `#a8a6b1`
+    - **positive**
+      - `default` → `#3b8b53`
+      - `subtle` → `#6ced90`
+      - `muted` → `#c1f7d0`
+      - `disabled` → `#c0bfc8`
+    - **danger**
+      - `default` → `#b85a1a`
+      - `subtle` → `#ff9f52`
+      - `muted` → `#ffd1a8`
+      - `disabled` → `#c0bfc8`
+    - **warning**
+      - `default` → `#aa913a`
+      - `subtle` → `#ffd957`
+      - `muted` → `#ffecab`
+      - `disabled` → `#c0bfc8`
+- **Size tokens — `radio`:**
+  - `sm` → `20`
+  - `md` → `24`
+
+#### Searchbar
+- **Figma:** [`28114-62397`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=28114-62397)
+- **Role:** Search input.
+- **Color tokens — `color.input-field`:**
+  - **surface**
+    - **default**
+      - `default` → `#ffffff`
+      - `disabled` → `#f0f0f5`
+    - **inverse**
+      - `default` → `rgba(255, 255, 255, 0.15)`
+      - `disabled` → `rgba(255, 255, 255, 0.15)`
+  - **border**
+    - `default` → `#d8d7de`
+    - `active` → `#e9524d`
+    - `filled` → `#d8d7de`
+    - `error` → `#ff9f52`
+    - `disabled` → `rgba(25, 19, 41, 0.07)`
+  - **text**
+    - **default**
+      - `Color` → `#ffffff`
+      - **label**
+        - `default` → `#908e9a`
+        - `disabled` → `#c0bfc8`
+      - **value**
+        - `active` → `#191329`
+        - `disabled` → `#c0bfc8`
+    - **inverse**
+      - `Color` → `#ffffff`
+      - **label**
+        - `default` → `rgba(255, 255, 255, 0.5)`
+        - `disabled` → `rgba(255, 255, 255, 0.3)`
+      - **value**
+        - `active` → `#ffffff`
+        - `disabled` → `rgba(255, 255, 255, 0.3)`
+- **Color tokens — `color.surface`:**
+  - **canvas**
+    - `default` → `#ffffff`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#140f21`
+  - **base**
+    - `default` → `#f0f0f5`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e00800`
+    - `brand-muted` → `#fce6e6`
+    - `midnight` → `#191329`
+  - **sunken**
+    - `default` → `#e4e3ea`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#bb0700`
+    - `brand-muted` → `#f9cecc`
+    - `midnight` → `#140f21`
+  - **raised**
+    - `default` → `#ffffff`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#312c40`
+  - **overlay**
+    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `floating` → `#f7f7fa`
+    - `floating-middleground` → `#908e9a`
+    - `floating-inverse` → `#191329`
+  - **glass**
+    - **midnight**
+      - `lg` → `rgba(25, 19, 41, 0.3)`
+      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `sm` → `rgba(25, 19, 41, 0.07)`
+    - **white**
+      - `xl` → `rgba(255, 255, 255, 0.4)`
+      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `md` → `rgba(255, 255, 255, 0.15)`
+      - `sm` → `rgba(255, 255, 255, 0.1)`
+- **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+
+#### AI Search
+- **Figma:** [`28189-33142`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=28189-33142)
+- **Role:** AI-powered search entry.
+- **Color tokens — `color.input-field`:**
+  - **surface**
+    - **default**
+      - `default` → `#ffffff`
+      - `disabled` → `#f0f0f5`
+    - **inverse**
+      - `default` → `rgba(255, 255, 255, 0.15)`
+      - `disabled` → `rgba(255, 255, 255, 0.15)`
+  - **border**
+    - `default` → `#d8d7de`
+    - `active` → `#e9524d`
+    - `filled` → `#d8d7de`
+    - `error` → `#ff9f52`
+    - `disabled` → `rgba(25, 19, 41, 0.07)`
+  - **text**
+    - **default**
+      - `Color` → `#ffffff`
+      - **label**
+        - `default` → `#908e9a`
+        - `disabled` → `#c0bfc8`
+      - **value**
+        - `active` → `#191329`
+        - `disabled` → `#c0bfc8`
+    - **inverse**
+      - `Color` → `#ffffff`
+      - **label**
+        - `default` → `rgba(255, 255, 255, 0.5)`
+        - `disabled` → `rgba(255, 255, 255, 0.3)`
+      - **value**
+        - `active` → `#ffffff`
+        - `disabled` → `rgba(255, 255, 255, 0.3)`
+- **Color tokens — `color.surface`:**
+  - **canvas**
+    - `default` → `#ffffff`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#140f21`
+  - **base**
+    - `default` → `#f0f0f5`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e00800`
+    - `brand-muted` → `#fce6e6`
+    - `midnight` → `#191329`
+  - **sunken**
+    - `default` → `#e4e3ea`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#bb0700`
+    - `brand-muted` → `#f9cecc`
+    - `midnight` → `#140f21`
+  - **raised**
+    - `default` → `#ffffff`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#312c40`
+  - **overlay**
+    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `floating` → `#f7f7fa`
+    - `floating-middleground` → `#908e9a`
+    - `floating-inverse` → `#191329`
+  - **glass**
+    - **midnight**
+      - `lg` → `rgba(25, 19, 41, 0.3)`
+      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `sm` → `rgba(25, 19, 41, 0.07)`
+    - **white**
+      - `xl` → `rgba(255, 255, 255, 0.4)`
+      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `md` → `rgba(255, 255, 255, 0.15)`
+      - `sm` → `rgba(255, 255, 255, 0.1)`
+- **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+
+#### Selectors
+- **Figma:** [`28278-1530`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=28278-1530)
+- **Role:** Selector controls (segmented/option pickers).
+- **Color tokens — `color.surface`:**
+  - **canvas**
+    - `default` → `#ffffff`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#140f21`
+  - **base**
+    - `default` → `#f0f0f5`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e00800`
+    - `brand-muted` → `#fce6e6`
+    - `midnight` → `#191329`
+  - **sunken**
+    - `default` → `#e4e3ea`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#bb0700`
+    - `brand-muted` → `#f9cecc`
+    - `midnight` → `#140f21`
+  - **raised**
+    - `default` → `#ffffff`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#312c40`
+  - **overlay**
+    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `floating` → `#f7f7fa`
+    - `floating-middleground` → `#908e9a`
+    - `floating-inverse` → `#191329`
+  - **glass**
+    - **midnight**
+      - `lg` → `rgba(25, 19, 41, 0.3)`
+      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `sm` → `rgba(25, 19, 41, 0.07)`
+    - **white**
+      - `xl` → `rgba(255, 255, 255, 0.4)`
+      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `md` → `rgba(255, 255, 255, 0.15)`
+      - `sm` → `rgba(255, 255, 255, 0.1)`
+- **Color tokens — `color.border`:**
+  - **surface-based**
+    - **canvas**
+      - `default` → `#f0f0f5`
+      - `inverse` → `#d8d7de`
+      - `brand` → `#ed6b66`
+      - `brand-muted` → `#f9cecc`
+      - `midnight` → `#312c40`
+    - **base**
+      - `default` → `#d8d7de`
+      - `inverse` → `#f0f0f5`
+      - `brand` → `#e9524d`
+      - `brand-muted` → `#f6b5b3`
+      - `midnight` → `#312c40`
+    - **raised**
+      - `default` → `#f0f0f5`
+      - `inverse` → `#f0f0f5`
+      - `brand` → `#ed6b66`
+      - `brand-muted` → `#f9cecc`
+      - `midnight` → `#494456`
+    - **sunken**
+      - `default` → `#d8d7de`
+      - `inverse` → `#d8d7de`
+      - `brand` → `#e73933`
+      - `brand-muted` → `#f08480`
+      - `midnight` → `#312c40`
+    - **overlay**
+      - `floating` → `#d8d7de`
+      - `floating inverse` → `#ffffff`
+    - **glass**
+      - **default**
+        - `lg` → `rgba(255, 255, 255, 0.6)`
+        - `md` → `rgba(255, 255, 255, 0.7)`
+        - `sm` → `rgba(255, 255, 255, 0.8)`
+      - **inverse**
+        - `lg` → `rgba(255, 255, 255, 0.8)`
+        - `md` → `rgba(255, 255, 255, 0.9)`
+        - `sm` → `#ffffff`
+  - **interactive**
+    - **default**
+      - `default` → `rgba(25, 19, 41, 0.2)`
+      - `subtle` → `rgba(25, 19, 41, 0.1)`
+      - `strong` → `rgba(25, 19, 41, 0.5)`
+      - `focus` → `#191329`
+      - `disabled` → `rgba(25, 19, 41, 0.07)`
+    - **inverse**
+      - `default` → `rgba(255, 255, 255, 0.6)`
+      - `subtle` → `rgba(255, 255, 255, 0.4)`
+      - `strong` → `rgba(255, 255, 255, 0.8)`
+      - `focus` → `#ffffff`
+      - `disabled` → `rgba(255, 255, 255, 0.4)`
+    - **accent**
+      - `default` → `#e00800`
+      - `focus` → `#bb0700`
+      - `subtle` → `#e9524d`
+      - `muted` → `#f08480`
+      - `disabled` → `#a8a6b1`
+    - **positive**
+      - `default` → `#3b8b53`
+      - `subtle` → `#6ced90`
+      - `muted` → `#c1f7d0`
+      - `disabled` → `#c0bfc8`
+    - **danger**
+      - `default` → `#b85a1a`
+      - `subtle` → `#ff9f52`
+      - `muted` → `#ffd1a8`
+      - `disabled` → `#c0bfc8`
+    - **warning**
+      - `default` → `#aa913a`
+      - `subtle` → `#ffd957`
+      - `muted` → `#ffecab`
+      - `disabled` → `#c0bfc8`
+- **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+
+### 03 · Navigation
+
+
+#### Top bar
+- **Figma:** [`22542-13963`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22542-13963)
+- **Role:** App top/header bar.
+- **Color tokens — `color.surface`:**
+  - **canvas**
+    - `default` → `#ffffff`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#140f21`
+  - **base**
+    - `default` → `#f0f0f5`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e00800`
+    - `brand-muted` → `#fce6e6`
+    - `midnight` → `#191329`
+  - **sunken**
+    - `default` → `#e4e3ea`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#bb0700`
+    - `brand-muted` → `#f9cecc`
+    - `midnight` → `#140f21`
+  - **raised**
+    - `default` → `#ffffff`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#312c40`
+  - **overlay**
+    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `floating` → `#f7f7fa`
+    - `floating-middleground` → `#908e9a`
+    - `floating-inverse` → `#191329`
+  - **glass**
+    - **midnight**
+      - `lg` → `rgba(25, 19, 41, 0.3)`
+      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `sm` → `rgba(25, 19, 41, 0.07)`
+    - **white**
+      - `xl` → `rgba(255, 255, 255, 0.4)`
+      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `md` → `rgba(255, 255, 255, 0.15)`
+      - `sm` → `rgba(255, 255, 255, 0.1)`
+- **Color tokens — `color.text`:**
+  - **default**
+    - `default` → `#191329`
+    - `subtle` → `#575362`
+    - `muted` → `#908e9a`
+    - `disabled` → `#c0bfc8`
+    - `inverse` → `#ffffff`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+  - **brand**
+    - `default` → `#e00800`
+    - `subtle` → `#e73933`
+    - `muted` → `#ed6b66`
+    - `strong` → `#950500`
+    - `focus` → `#bb0700`
+    - `disabled` → `#a8a6b1`
+  - **positive**
+    - `default` → `#27633b`
+    - `subtle` → `#54bc72`
+    - `muted` → `#9ff3b7`
+    - `disabled` → `#c0bfc8`
+  - **danger**
+    - `default` → `#8c3f0c`
+    - `subtle` → `#e07830`
+    - `muted` → `#ffb16f`
+    - `disabled` → `#c0bfc8`
+  - **warning**
+    - `default` → `#806d2c`
+    - `subtle` → `#d5b549`
+    - `muted` → `#ffe68f`
+    - `disabled` → `#c0bfc8`
+- **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `heading.xl`(32/Bold), `heading.lg`(28/Bold), `heading.md`(24/Bold), `heading.sm`(20/Bold), `heading.xs`(16/Bold)
+
+#### Nav bar
+- **Figma:** [`22542-13964`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22542-13964)
+- **Role:** Bottom navigation bar.
+- **Color tokens — `color.navbar-tab`:**
+  - **surface**
+    - `focus` → `#ffffff`
+    - `focus-special` → `#e00800`
+  - **text**
+    - `default` → `#ffffff`
+    - `focus` → `#e00800`
+    - `focus-special` → `#ffffff`
+- **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+
+#### Action bar
+- **Figma:** [`25519-15621`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25519-15621)
+- **Role:** Sticky action bar.
+- **Color tokens — `color.surface`:**
+  - **canvas**
+    - `default` → `#ffffff`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#140f21`
+  - **base**
+    - `default` → `#f0f0f5`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e00800`
+    - `brand-muted` → `#fce6e6`
+    - `midnight` → `#191329`
+  - **sunken**
+    - `default` → `#e4e3ea`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#bb0700`
+    - `brand-muted` → `#f9cecc`
+    - `midnight` → `#140f21`
+  - **raised**
+    - `default` → `#ffffff`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#312c40`
+  - **overlay**
+    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `floating` → `#f7f7fa`
+    - `floating-middleground` → `#908e9a`
+    - `floating-inverse` → `#191329`
+  - **glass**
+    - **midnight**
+      - `lg` → `rgba(25, 19, 41, 0.3)`
+      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `sm` → `rgba(25, 19, 41, 0.07)`
+    - **white**
+      - `xl` → `rgba(255, 255, 255, 0.4)`
+      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `md` → `rgba(255, 255, 255, 0.15)`
+      - `sm` → `rgba(255, 255, 255, 0.1)`
+- **Color tokens — `color.button`:**
+  - **primary**
+    - **surface**
+      - **brand**
+        - `default` → `#e00800`
+        - `focus` → `#bb0700`
+        - `disabled` → `#c0bfc8`
+      - **inverse**
+        - `default` → `#ffffff`
+        - `focus` → `#fce6e6`
+        - `disabled` → `#f0f0f5`
+    - **text**
+      - **brand**
+        - `default` → `#ffffff`
+        - `focus` → `#ffffff`
+        - `disabled` → `rgba(255, 255, 255, 0.7)`
+      - **inverse**
+        - `default` → `#e00800`
+        - `focus` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+  - **secondary**
+    - **surface**
+      - **brand**
+        - `focus` → `#fce6e6`
+      - **inverse**
+        - `focus` → `#312c40`
+    - **text**
+      - **brand**
+        - `default` → `#e00800`
+        - `focus` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+      - **inverse**
+        - `default` → `#ffffff`
+        - `focus` → `#ffffff`
+        - `disabled` → `rgba(255, 255, 255, 0.7)`
+    - **border**
+      - **brand**
+        - `default` → `#e00800`
+        - `focus` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+      - **inverse**
+        - `default` → `#ffffff`
+        - `focus` → `#f0f0f5`
+        - `disabled` → `#d8d7de`
+  - **tertiary**
+    - **text**
+      - **brand**
+        - `default` → `#e00800`
+        - `focus` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+      - **midnight**
+        - `default` → `#191329`
+        - `focus` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+      - **inverse**
+        - `default` → `#ffffff`
+        - `focus` → `#bb0700`
+        - `disabled` → `rgba(255, 255, 255, 0.7)`
+  - **link**
+    - **text**
+      - **brand**
+        - `default` → `#e00800`
+        - `focus` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+      - **midnight**
+        - `default` → `#191329`
+        - `focus` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+      - **inverse**
+        - `default` → `#ffffff`
+        - `focus` → `#bb0700`
+        - `disabled` → `rgba(255, 255, 255, 0.7)`
+  - **text**
+    - **midnight**
+      - `default` → `#191329`
+      - `focus` → `#191329`
+      - `disabled` → `#c0bfc8`
+- **Typography:** `button.lg`(16/Semi bold), `button.md`(14/Medium), `button.sm`(12/Medium)
+
+#### Tabs
+- **Figma:** [`22542-13966`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22542-13966)
+- **Role:** Tab bar.
+- **Color tokens — `color.tab`:**
+  - **surface**
+    - **global**
+      - `default` → `#f0f0f5`
+      - `active` → `#fce6e6`
+    - **local**
+      - `active` → `#191329`
+  - **text**
+    - **global**
+      - `default` → `#908e9a`
+      - `active` → `#e00800`
+    - **local**
+      - `default` → `#908e9a`
+      - `active` → `#ffffff`
+  - **border**
+    - **local**
+      - `default` → `rgba(25, 19, 41, 0.5)`
+- **Size tokens — `tabs`:**
+  - **height**
+    - `md` → `40`
+    - `sm` → `36`
+- **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+
+#### Section link
+- **Figma:** [`25460-83978`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25460-83978)
+- **Role:** Section header link / see-all.
+- **Color tokens — `color.text`:**
+  - **default**
+    - `default` → `#191329`
+    - `subtle` → `#575362`
+    - `muted` → `#908e9a`
+    - `disabled` → `#c0bfc8`
+    - `inverse` → `#ffffff`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+  - **brand**
+    - `default` → `#e00800`
+    - `subtle` → `#e73933`
+    - `muted` → `#ed6b66`
+    - `strong` → `#950500`
+    - `focus` → `#bb0700`
+    - `disabled` → `#a8a6b1`
+  - **positive**
+    - `default` → `#27633b`
+    - `subtle` → `#54bc72`
+    - `muted` → `#9ff3b7`
+    - `disabled` → `#c0bfc8`
+  - **danger**
+    - `default` → `#8c3f0c`
+    - `subtle` → `#e07830`
+    - `muted` → `#ffb16f`
+    - `disabled` → `#c0bfc8`
+  - **warning**
+    - `default` → `#806d2c`
+    - `subtle` → `#d5b549`
+    - `muted` → `#ffe68f`
+    - `disabled` → `#c0bfc8`
+- **Size tokens — `section-link`:**
+  - `sm` → `32`
+  - `md` → `36`
+  - `lg` → `40`
+- **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+
+#### Quick Action
+- **Figma:** [`25507-13670`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25507-13670)
+- **Role:** Quick action shortcuts grid.
+- **Color tokens — `color.surface`:**
+  - **canvas**
+    - `default` → `#ffffff`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#140f21`
+  - **base**
+    - `default` → `#f0f0f5`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e00800`
+    - `brand-muted` → `#fce6e6`
+    - `midnight` → `#191329`
+  - **sunken**
+    - `default` → `#e4e3ea`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#bb0700`
+    - `brand-muted` → `#f9cecc`
+    - `midnight` → `#140f21`
+  - **raised**
+    - `default` → `#ffffff`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#312c40`
+  - **overlay**
+    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `floating` → `#f7f7fa`
+    - `floating-middleground` → `#908e9a`
+    - `floating-inverse` → `#191329`
+  - **glass**
+    - **midnight**
+      - `lg` → `rgba(25, 19, 41, 0.3)`
+      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `sm` → `rgba(25, 19, 41, 0.07)`
+    - **white**
+      - `xl` → `rgba(255, 255, 255, 0.4)`
+      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `md` → `rgba(255, 255, 255, 0.15)`
+      - `sm` → `rgba(255, 255, 255, 0.1)`
+- **Color tokens — `color.text`:**
+  - **default**
+    - `default` → `#191329`
+    - `subtle` → `#575362`
+    - `muted` → `#908e9a`
+    - `disabled` → `#c0bfc8`
+    - `inverse` → `#ffffff`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+  - **brand**
+    - `default` → `#e00800`
+    - `subtle` → `#e73933`
+    - `muted` → `#ed6b66`
+    - `strong` → `#950500`
+    - `focus` → `#bb0700`
+    - `disabled` → `#a8a6b1`
+  - **positive**
+    - `default` → `#27633b`
+    - `subtle` → `#54bc72`
+    - `muted` → `#9ff3b7`
+    - `disabled` → `#c0bfc8`
+  - **danger**
+    - `default` → `#8c3f0c`
+    - `subtle` → `#e07830`
+    - `muted` → `#ffb16f`
+    - `disabled` → `#c0bfc8`
+  - **warning**
+    - `default` → `#806d2c`
+    - `subtle` → `#d5b549`
+    - `muted` → `#ffe68f`
+    - `disabled` → `#c0bfc8`
+- **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+
+### 04 · Layout
+
+
+#### Section
+- **Figma:** [`25519-12055`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25519-12055)
+- **Role:** Content section container + header.
+- **Color tokens — `color.surface`:**
+  - **canvas**
+    - `default` → `#ffffff`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#140f21`
+  - **base**
+    - `default` → `#f0f0f5`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e00800`
+    - `brand-muted` → `#fce6e6`
+    - `midnight` → `#191329`
+  - **sunken**
+    - `default` → `#e4e3ea`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#bb0700`
+    - `brand-muted` → `#f9cecc`
+    - `midnight` → `#140f21`
+  - **raised**
+    - `default` → `#ffffff`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#312c40`
+  - **overlay**
+    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `floating` → `#f7f7fa`
+    - `floating-middleground` → `#908e9a`
+    - `floating-inverse` → `#191329`
+  - **glass**
+    - **midnight**
+      - `lg` → `rgba(25, 19, 41, 0.3)`
+      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `sm` → `rgba(25, 19, 41, 0.07)`
+    - **white**
+      - `xl` → `rgba(255, 255, 255, 0.4)`
+      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `md` → `rgba(255, 255, 255, 0.15)`
+      - `sm` → `rgba(255, 255, 255, 0.1)`
+- **Color tokens — `color.text`:**
+  - **default**
+    - `default` → `#191329`
+    - `subtle` → `#575362`
+    - `muted` → `#908e9a`
+    - `disabled` → `#c0bfc8`
+    - `inverse` → `#ffffff`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+  - **brand**
+    - `default` → `#e00800`
+    - `subtle` → `#e73933`
+    - `muted` → `#ed6b66`
+    - `strong` → `#950500`
+    - `focus` → `#bb0700`
+    - `disabled` → `#a8a6b1`
+  - **positive**
+    - `default` → `#27633b`
+    - `subtle` → `#54bc72`
+    - `muted` → `#9ff3b7`
+    - `disabled` → `#c0bfc8`
+  - **danger**
+    - `default` → `#8c3f0c`
+    - `subtle` → `#e07830`
+    - `muted` → `#ffb16f`
+    - `disabled` → `#c0bfc8`
+  - **warning**
+    - `default` → `#806d2c`
+    - `subtle` → `#d5b549`
+    - `muted` → `#ffe68f`
+    - `disabled` → `#c0bfc8`
+- **Size tokens — `section`:**
+  - **body**
+    - **height**
+      - `row-1` → `72`
+      - `row-2` → `148`
+      - `row-3` → `224`
+      - `row-4` → `300`
+      - `row-6` → `452`
+    - **width**
+      - `col-12` → `166`
+      - `col-6` → `72`
+      - `col-8` → `148`
+      - `row-16` → `224`
+- **Typography:** `heading.xl`(32/Bold), `heading.lg`(28/Bold), `heading.md`(24/Bold), `heading.sm`(20/Bold), `heading.xs`(16/Bold), `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold)
+
+#### Accordion
+- **Figma:** [`27465-29326`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=27465-29326)
+- **Role:** Expand/collapse accordion.
+- **Color tokens — `color.surface`:**
+  - **canvas**
+    - `default` → `#ffffff`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#140f21`
+  - **base**
+    - `default` → `#f0f0f5`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e00800`
+    - `brand-muted` → `#fce6e6`
+    - `midnight` → `#191329`
+  - **sunken**
+    - `default` → `#e4e3ea`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#bb0700`
+    - `brand-muted` → `#f9cecc`
+    - `midnight` → `#140f21`
+  - **raised**
+    - `default` → `#ffffff`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#312c40`
+  - **overlay**
+    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `floating` → `#f7f7fa`
+    - `floating-middleground` → `#908e9a`
+    - `floating-inverse` → `#191329`
+  - **glass**
+    - **midnight**
+      - `lg` → `rgba(25, 19, 41, 0.3)`
+      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `sm` → `rgba(25, 19, 41, 0.07)`
+    - **white**
+      - `xl` → `rgba(255, 255, 255, 0.4)`
+      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `md` → `rgba(255, 255, 255, 0.15)`
+      - `sm` → `rgba(255, 255, 255, 0.1)`
+- **Color tokens — `color.text`:**
+  - **default**
+    - `default` → `#191329`
+    - `subtle` → `#575362`
+    - `muted` → `#908e9a`
+    - `disabled` → `#c0bfc8`
+    - `inverse` → `#ffffff`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+  - **brand**
+    - `default` → `#e00800`
+    - `subtle` → `#e73933`
+    - `muted` → `#ed6b66`
+    - `strong` → `#950500`
+    - `focus` → `#bb0700`
+    - `disabled` → `#a8a6b1`
+  - **positive**
+    - `default` → `#27633b`
+    - `subtle` → `#54bc72`
+    - `muted` → `#9ff3b7`
+    - `disabled` → `#c0bfc8`
+  - **danger**
+    - `default` → `#8c3f0c`
+    - `subtle` → `#e07830`
+    - `muted` → `#ffb16f`
+    - `disabled` → `#c0bfc8`
+  - **warning**
+    - `default` → `#806d2c`
+    - `subtle` → `#d5b549`
+    - `muted` → `#ffe68f`
+    - `disabled` → `#c0bfc8`
+- **Color tokens — `color.border`:**
+  - **surface-based**
+    - **canvas**
+      - `default` → `#f0f0f5`
+      - `inverse` → `#d8d7de`
+      - `brand` → `#ed6b66`
+      - `brand-muted` → `#f9cecc`
+      - `midnight` → `#312c40`
+    - **base**
+      - `default` → `#d8d7de`
+      - `inverse` → `#f0f0f5`
+      - `brand` → `#e9524d`
+      - `brand-muted` → `#f6b5b3`
+      - `midnight` → `#312c40`
+    - **raised**
+      - `default` → `#f0f0f5`
+      - `inverse` → `#f0f0f5`
+      - `brand` → `#ed6b66`
+      - `brand-muted` → `#f9cecc`
+      - `midnight` → `#494456`
+    - **sunken**
+      - `default` → `#d8d7de`
+      - `inverse` → `#d8d7de`
+      - `brand` → `#e73933`
+      - `brand-muted` → `#f08480`
+      - `midnight` → `#312c40`
+    - **overlay**
+      - `floating` → `#d8d7de`
+      - `floating inverse` → `#ffffff`
+    - **glass**
+      - **default**
+        - `lg` → `rgba(255, 255, 255, 0.6)`
+        - `md` → `rgba(255, 255, 255, 0.7)`
+        - `sm` → `rgba(255, 255, 255, 0.8)`
+      - **inverse**
+        - `lg` → `rgba(255, 255, 255, 0.8)`
+        - `md` → `rgba(255, 255, 255, 0.9)`
+        - `sm` → `#ffffff`
+  - **interactive**
+    - **default**
+      - `default` → `rgba(25, 19, 41, 0.2)`
+      - `subtle` → `rgba(25, 19, 41, 0.1)`
+      - `strong` → `rgba(25, 19, 41, 0.5)`
+      - `focus` → `#191329`
+      - `disabled` → `rgba(25, 19, 41, 0.07)`
+    - **inverse**
+      - `default` → `rgba(255, 255, 255, 0.6)`
+      - `subtle` → `rgba(255, 255, 255, 0.4)`
+      - `strong` → `rgba(255, 255, 255, 0.8)`
+      - `focus` → `#ffffff`
+      - `disabled` → `rgba(255, 255, 255, 0.4)`
+    - **accent**
+      - `default` → `#e00800`
+      - `focus` → `#bb0700`
+      - `subtle` → `#e9524d`
+      - `muted` → `#f08480`
+      - `disabled` → `#a8a6b1`
+    - **positive**
+      - `default` → `#3b8b53`
+      - `subtle` → `#6ced90`
+      - `muted` → `#c1f7d0`
+      - `disabled` → `#c0bfc8`
+    - **danger**
+      - `default` → `#b85a1a`
+      - `subtle` → `#ff9f52`
+      - `muted` → `#ffd1a8`
+      - `disabled` → `#c0bfc8`
+    - **warning**
+      - `default` → `#aa913a`
+      - `subtle` → `#ffd957`
+      - `muted` → `#ffecab`
+      - `disabled` → `#c0bfc8`
+- **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+
+### 05 · Feedback & Status
+
+
+#### Plan Usage Bar
+- **Figma:** [`26663-89880`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=26663-89880)
+- **Role:** Plan/data usage meter.
+- **Color tokens — `color.status`:**
+  - `default` → `#191329`
+  - `accent` → `#e00800`
+  - `accent-focus` → `#bb0700`
+  - `disabled` → `#c0bfc8`
+  - `disabled-inverse` → `#f0f0f5`
+  - `inverse` → `#ffffff`
+  - `danger` → `#b85a1a`
+  - `warning` → `#aa913a`
+  - `positive` → `#3b8b53`
+- **Color tokens — `color.surface`:**
+  - **canvas**
+    - `default` → `#ffffff`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#140f21`
+  - **base**
+    - `default` → `#f0f0f5`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e00800`
+    - `brand-muted` → `#fce6e6`
+    - `midnight` → `#191329`
+  - **sunken**
+    - `default` → `#e4e3ea`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#bb0700`
+    - `brand-muted` → `#f9cecc`
+    - `midnight` → `#140f21`
+  - **raised**
+    - `default` → `#ffffff`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#312c40`
+  - **overlay**
+    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `floating` → `#f7f7fa`
+    - `floating-middleground` → `#908e9a`
+    - `floating-inverse` → `#191329`
+  - **glass**
+    - **midnight**
+      - `lg` → `rgba(25, 19, 41, 0.3)`
+      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `sm` → `rgba(25, 19, 41, 0.07)`
+    - **white**
+      - `xl` → `rgba(255, 255, 255, 0.4)`
+      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `md` → `rgba(255, 255, 255, 0.15)`
+      - `sm` → `rgba(255, 255, 255, 0.1)`
+- **Color tokens — `color.text`:**
+  - **default**
+    - `default` → `#191329`
+    - `subtle` → `#575362`
+    - `muted` → `#908e9a`
+    - `disabled` → `#c0bfc8`
+    - `inverse` → `#ffffff`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+  - **brand**
+    - `default` → `#e00800`
+    - `subtle` → `#e73933`
+    - `muted` → `#ed6b66`
+    - `strong` → `#950500`
+    - `focus` → `#bb0700`
+    - `disabled` → `#a8a6b1`
+  - **positive**
+    - `default` → `#27633b`
+    - `subtle` → `#54bc72`
+    - `muted` → `#9ff3b7`
+    - `disabled` → `#c0bfc8`
+  - **danger**
+    - `default` → `#8c3f0c`
+    - `subtle` → `#e07830`
+    - `muted` → `#ffb16f`
+    - `disabled` → `#c0bfc8`
+  - **warning**
+    - `default` → `#806d2c`
+    - `subtle` → `#d5b549`
+    - `muted` → `#ffe68f`
+    - `disabled` → `#c0bfc8`
+- **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+
+#### Snackbar & Alert msg
+- **Figma:** [`22574-22808`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22574-22808)
+- **Role:** Snackbars and inline alerts.
+- **Color tokens — `color.status`:**
+  - `default` → `#191329`
+  - `accent` → `#e00800`
+  - `accent-focus` → `#bb0700`
+  - `disabled` → `#c0bfc8`
+  - `disabled-inverse` → `#f0f0f5`
+  - `inverse` → `#ffffff`
+  - `danger` → `#b85a1a`
+  - `warning` → `#aa913a`
+  - `positive` → `#3b8b53`
+- **Color tokens — `color.surface`:**
+  - **canvas**
+    - `default` → `#ffffff`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#140f21`
+  - **base**
+    - `default` → `#f0f0f5`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e00800`
+    - `brand-muted` → `#fce6e6`
+    - `midnight` → `#191329`
+  - **sunken**
+    - `default` → `#e4e3ea`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#bb0700`
+    - `brand-muted` → `#f9cecc`
+    - `midnight` → `#140f21`
+  - **raised**
+    - `default` → `#ffffff`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#312c40`
+  - **overlay**
+    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `floating` → `#f7f7fa`
+    - `floating-middleground` → `#908e9a`
+    - `floating-inverse` → `#191329`
+  - **glass**
+    - **midnight**
+      - `lg` → `rgba(25, 19, 41, 0.3)`
+      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `sm` → `rgba(25, 19, 41, 0.07)`
+    - **white**
+      - `xl` → `rgba(255, 255, 255, 0.4)`
+      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `md` → `rgba(255, 255, 255, 0.15)`
+      - `sm` → `rgba(255, 255, 255, 0.1)`
+- **Color tokens — `color.text`:**
+  - **default**
+    - `default` → `#191329`
+    - `subtle` → `#575362`
+    - `muted` → `#908e9a`
+    - `disabled` → `#c0bfc8`
+    - `inverse` → `#ffffff`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+  - **brand**
+    - `default` → `#e00800`
+    - `subtle` → `#e73933`
+    - `muted` → `#ed6b66`
+    - `strong` → `#950500`
+    - `focus` → `#bb0700`
+    - `disabled` → `#a8a6b1`
+  - **positive**
+    - `default` → `#27633b`
+    - `subtle` → `#54bc72`
+    - `muted` → `#9ff3b7`
+    - `disabled` → `#c0bfc8`
+  - **danger**
+    - `default` → `#8c3f0c`
+    - `subtle` → `#e07830`
+    - `muted` → `#ffb16f`
+    - `disabled` → `#c0bfc8`
+  - **warning**
+    - `default` → `#806d2c`
+    - `subtle` → `#d5b549`
+    - `muted` → `#ffe68f`
+    - `disabled` → `#c0bfc8`
+- **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+
+#### Alert Modals
+- **Figma:** [`23201-17897`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=23201-17897)
+- **Role:** Modal alerts/dialogs.
+- **Color tokens — `color.status`:**
+  - `default` → `#191329`
+  - `accent` → `#e00800`
+  - `accent-focus` → `#bb0700`
+  - `disabled` → `#c0bfc8`
+  - `disabled-inverse` → `#f0f0f5`
+  - `inverse` → `#ffffff`
+  - `danger` → `#b85a1a`
+  - `warning` → `#aa913a`
+  - `positive` → `#3b8b53`
+- **Color tokens — `color.surface`:**
+  - **canvas**
+    - `default` → `#ffffff`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#140f21`
+  - **base**
+    - `default` → `#f0f0f5`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e00800`
+    - `brand-muted` → `#fce6e6`
+    - `midnight` → `#191329`
+  - **sunken**
+    - `default` → `#e4e3ea`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#bb0700`
+    - `brand-muted` → `#f9cecc`
+    - `midnight` → `#140f21`
+  - **raised**
+    - `default` → `#ffffff`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#312c40`
+  - **overlay**
+    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `floating` → `#f7f7fa`
+    - `floating-middleground` → `#908e9a`
+    - `floating-inverse` → `#191329`
+  - **glass**
+    - **midnight**
+      - `lg` → `rgba(25, 19, 41, 0.3)`
+      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `sm` → `rgba(25, 19, 41, 0.07)`
+    - **white**
+      - `xl` → `rgba(255, 255, 255, 0.4)`
+      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `md` → `rgba(255, 255, 255, 0.15)`
+      - `sm` → `rgba(255, 255, 255, 0.1)`
+- **Color tokens — `color.text`:**
+  - **default**
+    - `default` → `#191329`
+    - `subtle` → `#575362`
+    - `muted` → `#908e9a`
+    - `disabled` → `#c0bfc8`
+    - `inverse` → `#ffffff`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+  - **brand**
+    - `default` → `#e00800`
+    - `subtle` → `#e73933`
+    - `muted` → `#ed6b66`
+    - `strong` → `#950500`
+    - `focus` → `#bb0700`
+    - `disabled` → `#a8a6b1`
+  - **positive**
+    - `default` → `#27633b`
+    - `subtle` → `#54bc72`
+    - `muted` → `#9ff3b7`
+    - `disabled` → `#c0bfc8`
+  - **danger**
+    - `default` → `#8c3f0c`
+    - `subtle` → `#e07830`
+    - `muted` → `#ffb16f`
+    - `disabled` → `#c0bfc8`
+  - **warning**
+    - `default` → `#806d2c`
+    - `subtle` → `#d5b549`
+    - `muted` → `#ffe68f`
+    - `disabled` → `#c0bfc8`
+- **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+
+### 06 · Overlays
+
+
+#### Tooltip
+- **Figma:** [`23201-15868`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=23201-15868)
+- **Role:** Tooltip / coachmark.
+- **Color tokens — `color.surface`:**
+  - **canvas**
+    - `default` → `#ffffff`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#140f21`
+  - **base**
+    - `default` → `#f0f0f5`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e00800`
+    - `brand-muted` → `#fce6e6`
+    - `midnight` → `#191329`
+  - **sunken**
+    - `default` → `#e4e3ea`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#bb0700`
+    - `brand-muted` → `#f9cecc`
+    - `midnight` → `#140f21`
+  - **raised**
+    - `default` → `#ffffff`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#312c40`
+  - **overlay**
+    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `floating` → `#f7f7fa`
+    - `floating-middleground` → `#908e9a`
+    - `floating-inverse` → `#191329`
+  - **glass**
+    - **midnight**
+      - `lg` → `rgba(25, 19, 41, 0.3)`
+      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `sm` → `rgba(25, 19, 41, 0.07)`
+    - **white**
+      - `xl` → `rgba(255, 255, 255, 0.4)`
+      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `md` → `rgba(255, 255, 255, 0.15)`
+      - `sm` → `rgba(255, 255, 255, 0.1)`
+- **Color tokens — `color.text`:**
+  - **default**
+    - `default` → `#191329`
+    - `subtle` → `#575362`
+    - `muted` → `#908e9a`
+    - `disabled` → `#c0bfc8`
+    - `inverse` → `#ffffff`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+  - **brand**
+    - `default` → `#e00800`
+    - `subtle` → `#e73933`
+    - `muted` → `#ed6b66`
+    - `strong` → `#950500`
+    - `focus` → `#bb0700`
+    - `disabled` → `#a8a6b1`
+  - **positive**
+    - `default` → `#27633b`
+    - `subtle` → `#54bc72`
+    - `muted` → `#9ff3b7`
+    - `disabled` → `#c0bfc8`
+  - **danger**
+    - `default` → `#8c3f0c`
+    - `subtle` → `#e07830`
+    - `muted` → `#ffb16f`
+    - `disabled` → `#c0bfc8`
+  - **warning**
+    - `default` → `#806d2c`
+    - `subtle` → `#d5b549`
+    - `muted` → `#ffe68f`
+    - `disabled` → `#c0bfc8`
+- **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+
+#### Bottom sheet
+- **Figma:** [`27907-11716`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=27907-11716)
+- **Role:** Bottom sheet container.
+- **Color tokens — `color.surface`:**
+  - **canvas**
+    - `default` → `#ffffff`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#140f21`
+  - **base**
+    - `default` → `#f0f0f5`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e00800`
+    - `brand-muted` → `#fce6e6`
+    - `midnight` → `#191329`
+  - **sunken**
+    - `default` → `#e4e3ea`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#bb0700`
+    - `brand-muted` → `#f9cecc`
+    - `midnight` → `#140f21`
+  - **raised**
+    - `default` → `#ffffff`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#312c40`
+  - **overlay**
+    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `floating` → `#f7f7fa`
+    - `floating-middleground` → `#908e9a`
+    - `floating-inverse` → `#191329`
+  - **glass**
+    - **midnight**
+      - `lg` → `rgba(25, 19, 41, 0.3)`
+      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `sm` → `rgba(25, 19, 41, 0.07)`
+    - **white**
+      - `xl` → `rgba(255, 255, 255, 0.4)`
+      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `md` → `rgba(255, 255, 255, 0.15)`
+      - `sm` → `rgba(255, 255, 255, 0.1)`
+- **Color tokens — `color.text`:**
+  - **default**
+    - `default` → `#191329`
+    - `subtle` → `#575362`
+    - `muted` → `#908e9a`
+    - `disabled` → `#c0bfc8`
+    - `inverse` → `#ffffff`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+  - **brand**
+    - `default` → `#e00800`
+    - `subtle` → `#e73933`
+    - `muted` → `#ed6b66`
+    - `strong` → `#950500`
+    - `focus` → `#bb0700`
+    - `disabled` → `#a8a6b1`
+  - **positive**
+    - `default` → `#27633b`
+    - `subtle` → `#54bc72`
+    - `muted` → `#9ff3b7`
+    - `disabled` → `#c0bfc8`
+  - **danger**
+    - `default` → `#8c3f0c`
+    - `subtle` → `#e07830`
+    - `muted` → `#ffb16f`
+    - `disabled` → `#c0bfc8`
+  - **warning**
+    - `default` → `#806d2c`
+    - `subtle` → `#d5b549`
+    - `muted` → `#ffe68f`
+    - `disabled` → `#c0bfc8`
+- **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+
+### 07 · Cards
+
+
+#### General
+- **Figma:** [`26760-100129`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=26760-100129)
+- **Role:** General-purpose card.
+- **Color tokens — `color.surface`:**
+  - **canvas**
+    - `default` → `#ffffff`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#140f21`
+  - **base**
+    - `default` → `#f0f0f5`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e00800`
+    - `brand-muted` → `#fce6e6`
+    - `midnight` → `#191329`
+  - **sunken**
+    - `default` → `#e4e3ea`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#bb0700`
+    - `brand-muted` → `#f9cecc`
+    - `midnight` → `#140f21`
+  - **raised**
+    - `default` → `#ffffff`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#312c40`
+  - **overlay**
+    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `floating` → `#f7f7fa`
+    - `floating-middleground` → `#908e9a`
+    - `floating-inverse` → `#191329`
+  - **glass**
+    - **midnight**
+      - `lg` → `rgba(25, 19, 41, 0.3)`
+      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `sm` → `rgba(25, 19, 41, 0.07)`
+    - **white**
+      - `xl` → `rgba(255, 255, 255, 0.4)`
+      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `md` → `rgba(255, 255, 255, 0.15)`
+      - `sm` → `rgba(255, 255, 255, 0.1)`
+- **Color tokens — `color.border`:**
+  - **surface-based**
+    - **canvas**
+      - `default` → `#f0f0f5`
+      - `inverse` → `#d8d7de`
+      - `brand` → `#ed6b66`
+      - `brand-muted` → `#f9cecc`
+      - `midnight` → `#312c40`
+    - **base**
+      - `default` → `#d8d7de`
+      - `inverse` → `#f0f0f5`
+      - `brand` → `#e9524d`
+      - `brand-muted` → `#f6b5b3`
+      - `midnight` → `#312c40`
+    - **raised**
+      - `default` → `#f0f0f5`
+      - `inverse` → `#f0f0f5`
+      - `brand` → `#ed6b66`
+      - `brand-muted` → `#f9cecc`
+      - `midnight` → `#494456`
+    - **sunken**
+      - `default` → `#d8d7de`
+      - `inverse` → `#d8d7de`
+      - `brand` → `#e73933`
+      - `brand-muted` → `#f08480`
+      - `midnight` → `#312c40`
+    - **overlay**
+      - `floating` → `#d8d7de`
+      - `floating inverse` → `#ffffff`
+    - **glass**
+      - **default**
+        - `lg` → `rgba(255, 255, 255, 0.6)`
+        - `md` → `rgba(255, 255, 255, 0.7)`
+        - `sm` → `rgba(255, 255, 255, 0.8)`
+      - **inverse**
+        - `lg` → `rgba(255, 255, 255, 0.8)`
+        - `md` → `rgba(255, 255, 255, 0.9)`
+        - `sm` → `#ffffff`
+  - **interactive**
+    - **default**
+      - `default` → `rgba(25, 19, 41, 0.2)`
+      - `subtle` → `rgba(25, 19, 41, 0.1)`
+      - `strong` → `rgba(25, 19, 41, 0.5)`
+      - `focus` → `#191329`
+      - `disabled` → `rgba(25, 19, 41, 0.07)`
+    - **inverse**
+      - `default` → `rgba(255, 255, 255, 0.6)`
+      - `subtle` → `rgba(255, 255, 255, 0.4)`
+      - `strong` → `rgba(255, 255, 255, 0.8)`
+      - `focus` → `#ffffff`
+      - `disabled` → `rgba(255, 255, 255, 0.4)`
+    - **accent**
+      - `default` → `#e00800`
+      - `focus` → `#bb0700`
+      - `subtle` → `#e9524d`
+      - `muted` → `#f08480`
+      - `disabled` → `#a8a6b1`
+    - **positive**
+      - `default` → `#3b8b53`
+      - `subtle` → `#6ced90`
+      - `muted` → `#c1f7d0`
+      - `disabled` → `#c0bfc8`
+    - **danger**
+      - `default` → `#b85a1a`
+      - `subtle` → `#ff9f52`
+      - `muted` → `#ffd1a8`
+      - `disabled` → `#c0bfc8`
+    - **warning**
+      - `default` → `#aa913a`
+      - `subtle` → `#ffd957`
+      - `muted` → `#ffecab`
+      - `disabled` → `#c0bfc8`
+- **Color tokens — `color.text`:**
+  - **default**
+    - `default` → `#191329`
+    - `subtle` → `#575362`
+    - `muted` → `#908e9a`
+    - `disabled` → `#c0bfc8`
+    - `inverse` → `#ffffff`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+  - **brand**
+    - `default` → `#e00800`
+    - `subtle` → `#e73933`
+    - `muted` → `#ed6b66`
+    - `strong` → `#950500`
+    - `focus` → `#bb0700`
+    - `disabled` → `#a8a6b1`
+  - **positive**
+    - `default` → `#27633b`
+    - `subtle` → `#54bc72`
+    - `muted` → `#9ff3b7`
+    - `disabled` → `#c0bfc8`
+  - **danger**
+    - `default` → `#8c3f0c`
+    - `subtle` → `#e07830`
+    - `muted` → `#ffb16f`
+    - `disabled` → `#c0bfc8`
+  - **warning**
+    - `default` → `#806d2c`
+    - `subtle` → `#d5b549`
+    - `muted` → `#ffe68f`
+    - `disabled` → `#c0bfc8`
+- **Size tokens — `card`:**
+  - **height**
+    - `sm` → `96`
+    - `md` → `192`
+    - `lg` → `272`
+    - `xl` → `472`
+  - **width**
+    - `sm` → `88`
+    - `md` → `152`
+    - `lg` → `224`
+    - `xl` → `336`
+- **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+
+#### Product
+- **Figma:** [`25701-12472`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25701-12472)
+- **Role:** Product card.
+- **Color tokens — `color.surface`:**
+  - **canvas**
+    - `default` → `#ffffff`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#140f21`
+  - **base**
+    - `default` → `#f0f0f5`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e00800`
+    - `brand-muted` → `#fce6e6`
+    - `midnight` → `#191329`
+  - **sunken**
+    - `default` → `#e4e3ea`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#bb0700`
+    - `brand-muted` → `#f9cecc`
+    - `midnight` → `#140f21`
+  - **raised**
+    - `default` → `#ffffff`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#312c40`
+  - **overlay**
+    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `floating` → `#f7f7fa`
+    - `floating-middleground` → `#908e9a`
+    - `floating-inverse` → `#191329`
+  - **glass**
+    - **midnight**
+      - `lg` → `rgba(25, 19, 41, 0.3)`
+      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `sm` → `rgba(25, 19, 41, 0.07)`
+    - **white**
+      - `xl` → `rgba(255, 255, 255, 0.4)`
+      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `md` → `rgba(255, 255, 255, 0.15)`
+      - `sm` → `rgba(255, 255, 255, 0.1)`
+- **Color tokens — `color.border`:**
+  - **surface-based**
+    - **canvas**
+      - `default` → `#f0f0f5`
+      - `inverse` → `#d8d7de`
+      - `brand` → `#ed6b66`
+      - `brand-muted` → `#f9cecc`
+      - `midnight` → `#312c40`
+    - **base**
+      - `default` → `#d8d7de`
+      - `inverse` → `#f0f0f5`
+      - `brand` → `#e9524d`
+      - `brand-muted` → `#f6b5b3`
+      - `midnight` → `#312c40`
+    - **raised**
+      - `default` → `#f0f0f5`
+      - `inverse` → `#f0f0f5`
+      - `brand` → `#ed6b66`
+      - `brand-muted` → `#f9cecc`
+      - `midnight` → `#494456`
+    - **sunken**
+      - `default` → `#d8d7de`
+      - `inverse` → `#d8d7de`
+      - `brand` → `#e73933`
+      - `brand-muted` → `#f08480`
+      - `midnight` → `#312c40`
+    - **overlay**
+      - `floating` → `#d8d7de`
+      - `floating inverse` → `#ffffff`
+    - **glass**
+      - **default**
+        - `lg` → `rgba(255, 255, 255, 0.6)`
+        - `md` → `rgba(255, 255, 255, 0.7)`
+        - `sm` → `rgba(255, 255, 255, 0.8)`
+      - **inverse**
+        - `lg` → `rgba(255, 255, 255, 0.8)`
+        - `md` → `rgba(255, 255, 255, 0.9)`
+        - `sm` → `#ffffff`
+  - **interactive**
+    - **default**
+      - `default` → `rgba(25, 19, 41, 0.2)`
+      - `subtle` → `rgba(25, 19, 41, 0.1)`
+      - `strong` → `rgba(25, 19, 41, 0.5)`
+      - `focus` → `#191329`
+      - `disabled` → `rgba(25, 19, 41, 0.07)`
+    - **inverse**
+      - `default` → `rgba(255, 255, 255, 0.6)`
+      - `subtle` → `rgba(255, 255, 255, 0.4)`
+      - `strong` → `rgba(255, 255, 255, 0.8)`
+      - `focus` → `#ffffff`
+      - `disabled` → `rgba(255, 255, 255, 0.4)`
+    - **accent**
+      - `default` → `#e00800`
+      - `focus` → `#bb0700`
+      - `subtle` → `#e9524d`
+      - `muted` → `#f08480`
+      - `disabled` → `#a8a6b1`
+    - **positive**
+      - `default` → `#3b8b53`
+      - `subtle` → `#6ced90`
+      - `muted` → `#c1f7d0`
+      - `disabled` → `#c0bfc8`
+    - **danger**
+      - `default` → `#b85a1a`
+      - `subtle` → `#ff9f52`
+      - `muted` → `#ffd1a8`
+      - `disabled` → `#c0bfc8`
+    - **warning**
+      - `default` → `#aa913a`
+      - `subtle` → `#ffd957`
+      - `muted` → `#ffecab`
+      - `disabled` → `#c0bfc8`
+- **Color tokens — `color.text`:**
+  - **default**
+    - `default` → `#191329`
+    - `subtle` → `#575362`
+    - `muted` → `#908e9a`
+    - `disabled` → `#c0bfc8`
+    - `inverse` → `#ffffff`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+  - **brand**
+    - `default` → `#e00800`
+    - `subtle` → `#e73933`
+    - `muted` → `#ed6b66`
+    - `strong` → `#950500`
+    - `focus` → `#bb0700`
+    - `disabled` → `#a8a6b1`
+  - **positive**
+    - `default` → `#27633b`
+    - `subtle` → `#54bc72`
+    - `muted` → `#9ff3b7`
+    - `disabled` → `#c0bfc8`
+  - **danger**
+    - `default` → `#8c3f0c`
+    - `subtle` → `#e07830`
+    - `muted` → `#ffb16f`
+    - `disabled` → `#c0bfc8`
+  - **warning**
+    - `default` → `#806d2c`
+    - `subtle` → `#d5b549`
+    - `muted` → `#ffe68f`
+    - `disabled` → `#c0bfc8`
+- **Size tokens — `card`:**
+  - **height**
+    - `sm` → `96`
+    - `md` → `192`
+    - `lg` → `272`
+    - `xl` → `472`
+  - **width**
+    - `sm` → `88`
+    - `md` → `152`
+    - `lg` → `224`
+    - `xl` → `336`
+- **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+
+#### Deals for you
+- **Figma:** [`25717-33323`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25717-33323)
+- **Role:** Deals card.
+- **Color tokens — `color.surface`:**
+  - **canvas**
+    - `default` → `#ffffff`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#140f21`
+  - **base**
+    - `default` → `#f0f0f5`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e00800`
+    - `brand-muted` → `#fce6e6`
+    - `midnight` → `#191329`
+  - **sunken**
+    - `default` → `#e4e3ea`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#bb0700`
+    - `brand-muted` → `#f9cecc`
+    - `midnight` → `#140f21`
+  - **raised**
+    - `default` → `#ffffff`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#312c40`
+  - **overlay**
+    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `floating` → `#f7f7fa`
+    - `floating-middleground` → `#908e9a`
+    - `floating-inverse` → `#191329`
+  - **glass**
+    - **midnight**
+      - `lg` → `rgba(25, 19, 41, 0.3)`
+      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `sm` → `rgba(25, 19, 41, 0.07)`
+    - **white**
+      - `xl` → `rgba(255, 255, 255, 0.4)`
+      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `md` → `rgba(255, 255, 255, 0.15)`
+      - `sm` → `rgba(255, 255, 255, 0.1)`
+- **Color tokens — `color.border`:**
+  - **surface-based**
+    - **canvas**
+      - `default` → `#f0f0f5`
+      - `inverse` → `#d8d7de`
+      - `brand` → `#ed6b66`
+      - `brand-muted` → `#f9cecc`
+      - `midnight` → `#312c40`
+    - **base**
+      - `default` → `#d8d7de`
+      - `inverse` → `#f0f0f5`
+      - `brand` → `#e9524d`
+      - `brand-muted` → `#f6b5b3`
+      - `midnight` → `#312c40`
+    - **raised**
+      - `default` → `#f0f0f5`
+      - `inverse` → `#f0f0f5`
+      - `brand` → `#ed6b66`
+      - `brand-muted` → `#f9cecc`
+      - `midnight` → `#494456`
+    - **sunken**
+      - `default` → `#d8d7de`
+      - `inverse` → `#d8d7de`
+      - `brand` → `#e73933`
+      - `brand-muted` → `#f08480`
+      - `midnight` → `#312c40`
+    - **overlay**
+      - `floating` → `#d8d7de`
+      - `floating inverse` → `#ffffff`
+    - **glass**
+      - **default**
+        - `lg` → `rgba(255, 255, 255, 0.6)`
+        - `md` → `rgba(255, 255, 255, 0.7)`
+        - `sm` → `rgba(255, 255, 255, 0.8)`
+      - **inverse**
+        - `lg` → `rgba(255, 255, 255, 0.8)`
+        - `md` → `rgba(255, 255, 255, 0.9)`
+        - `sm` → `#ffffff`
+  - **interactive**
+    - **default**
+      - `default` → `rgba(25, 19, 41, 0.2)`
+      - `subtle` → `rgba(25, 19, 41, 0.1)`
+      - `strong` → `rgba(25, 19, 41, 0.5)`
+      - `focus` → `#191329`
+      - `disabled` → `rgba(25, 19, 41, 0.07)`
+    - **inverse**
+      - `default` → `rgba(255, 255, 255, 0.6)`
+      - `subtle` → `rgba(255, 255, 255, 0.4)`
+      - `strong` → `rgba(255, 255, 255, 0.8)`
+      - `focus` → `#ffffff`
+      - `disabled` → `rgba(255, 255, 255, 0.4)`
+    - **accent**
+      - `default` → `#e00800`
+      - `focus` → `#bb0700`
+      - `subtle` → `#e9524d`
+      - `muted` → `#f08480`
+      - `disabled` → `#a8a6b1`
+    - **positive**
+      - `default` → `#3b8b53`
+      - `subtle` → `#6ced90`
+      - `muted` → `#c1f7d0`
+      - `disabled` → `#c0bfc8`
+    - **danger**
+      - `default` → `#b85a1a`
+      - `subtle` → `#ff9f52`
+      - `muted` → `#ffd1a8`
+      - `disabled` → `#c0bfc8`
+    - **warning**
+      - `default` → `#aa913a`
+      - `subtle` → `#ffd957`
+      - `muted` → `#ffecab`
+      - `disabled` → `#c0bfc8`
+- **Color tokens — `color.text`:**
+  - **default**
+    - `default` → `#191329`
+    - `subtle` → `#575362`
+    - `muted` → `#908e9a`
+    - `disabled` → `#c0bfc8`
+    - `inverse` → `#ffffff`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+  - **brand**
+    - `default` → `#e00800`
+    - `subtle` → `#e73933`
+    - `muted` → `#ed6b66`
+    - `strong` → `#950500`
+    - `focus` → `#bb0700`
+    - `disabled` → `#a8a6b1`
+  - **positive**
+    - `default` → `#27633b`
+    - `subtle` → `#54bc72`
+    - `muted` → `#9ff3b7`
+    - `disabled` → `#c0bfc8`
+  - **danger**
+    - `default` → `#8c3f0c`
+    - `subtle` → `#e07830`
+    - `muted` → `#ffb16f`
+    - `disabled` → `#c0bfc8`
+  - **warning**
+    - `default` → `#806d2c`
+    - `subtle` → `#d5b549`
+    - `muted` → `#ffe68f`
+    - `disabled` → `#c0bfc8`
+- **Size tokens — `card`:**
+  - **height**
+    - `sm` → `96`
+    - `md` → `192`
+    - `lg` → `272`
+    - `xl` → `472`
+  - **width**
+    - `sm` → `88`
+    - `md` → `152`
+    - `lg` → `224`
+    - `xl` → `336`
+- **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+
+#### Plans
+- **Figma:** [`25915-74211`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25915-74211)
+- **Role:** Plan card.
+- **Color tokens — `color.surface`:**
+  - **canvas**
+    - `default` → `#ffffff`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#140f21`
+  - **base**
+    - `default` → `#f0f0f5`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e00800`
+    - `brand-muted` → `#fce6e6`
+    - `midnight` → `#191329`
+  - **sunken**
+    - `default` → `#e4e3ea`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#bb0700`
+    - `brand-muted` → `#f9cecc`
+    - `midnight` → `#140f21`
+  - **raised**
+    - `default` → `#ffffff`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#312c40`
+  - **overlay**
+    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `floating` → `#f7f7fa`
+    - `floating-middleground` → `#908e9a`
+    - `floating-inverse` → `#191329`
+  - **glass**
+    - **midnight**
+      - `lg` → `rgba(25, 19, 41, 0.3)`
+      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `sm` → `rgba(25, 19, 41, 0.07)`
+    - **white**
+      - `xl` → `rgba(255, 255, 255, 0.4)`
+      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `md` → `rgba(255, 255, 255, 0.15)`
+      - `sm` → `rgba(255, 255, 255, 0.1)`
+- **Color tokens — `color.border`:**
+  - **surface-based**
+    - **canvas**
+      - `default` → `#f0f0f5`
+      - `inverse` → `#d8d7de`
+      - `brand` → `#ed6b66`
+      - `brand-muted` → `#f9cecc`
+      - `midnight` → `#312c40`
+    - **base**
+      - `default` → `#d8d7de`
+      - `inverse` → `#f0f0f5`
+      - `brand` → `#e9524d`
+      - `brand-muted` → `#f6b5b3`
+      - `midnight` → `#312c40`
+    - **raised**
+      - `default` → `#f0f0f5`
+      - `inverse` → `#f0f0f5`
+      - `brand` → `#ed6b66`
+      - `brand-muted` → `#f9cecc`
+      - `midnight` → `#494456`
+    - **sunken**
+      - `default` → `#d8d7de`
+      - `inverse` → `#d8d7de`
+      - `brand` → `#e73933`
+      - `brand-muted` → `#f08480`
+      - `midnight` → `#312c40`
+    - **overlay**
+      - `floating` → `#d8d7de`
+      - `floating inverse` → `#ffffff`
+    - **glass**
+      - **default**
+        - `lg` → `rgba(255, 255, 255, 0.6)`
+        - `md` → `rgba(255, 255, 255, 0.7)`
+        - `sm` → `rgba(255, 255, 255, 0.8)`
+      - **inverse**
+        - `lg` → `rgba(255, 255, 255, 0.8)`
+        - `md` → `rgba(255, 255, 255, 0.9)`
+        - `sm` → `#ffffff`
+  - **interactive**
+    - **default**
+      - `default` → `rgba(25, 19, 41, 0.2)`
+      - `subtle` → `rgba(25, 19, 41, 0.1)`
+      - `strong` → `rgba(25, 19, 41, 0.5)`
+      - `focus` → `#191329`
+      - `disabled` → `rgba(25, 19, 41, 0.07)`
+    - **inverse**
+      - `default` → `rgba(255, 255, 255, 0.6)`
+      - `subtle` → `rgba(255, 255, 255, 0.4)`
+      - `strong` → `rgba(255, 255, 255, 0.8)`
+      - `focus` → `#ffffff`
+      - `disabled` → `rgba(255, 255, 255, 0.4)`
+    - **accent**
+      - `default` → `#e00800`
+      - `focus` → `#bb0700`
+      - `subtle` → `#e9524d`
+      - `muted` → `#f08480`
+      - `disabled` → `#a8a6b1`
+    - **positive**
+      - `default` → `#3b8b53`
+      - `subtle` → `#6ced90`
+      - `muted` → `#c1f7d0`
+      - `disabled` → `#c0bfc8`
+    - **danger**
+      - `default` → `#b85a1a`
+      - `subtle` → `#ff9f52`
+      - `muted` → `#ffd1a8`
+      - `disabled` → `#c0bfc8`
+    - **warning**
+      - `default` → `#aa913a`
+      - `subtle` → `#ffd957`
+      - `muted` → `#ffecab`
+      - `disabled` → `#c0bfc8`
+- **Color tokens — `color.text`:**
+  - **default**
+    - `default` → `#191329`
+    - `subtle` → `#575362`
+    - `muted` → `#908e9a`
+    - `disabled` → `#c0bfc8`
+    - `inverse` → `#ffffff`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+  - **brand**
+    - `default` → `#e00800`
+    - `subtle` → `#e73933`
+    - `muted` → `#ed6b66`
+    - `strong` → `#950500`
+    - `focus` → `#bb0700`
+    - `disabled` → `#a8a6b1`
+  - **positive**
+    - `default` → `#27633b`
+    - `subtle` → `#54bc72`
+    - `muted` → `#9ff3b7`
+    - `disabled` → `#c0bfc8`
+  - **danger**
+    - `default` → `#8c3f0c`
+    - `subtle` → `#e07830`
+    - `muted` → `#ffb16f`
+    - `disabled` → `#c0bfc8`
+  - **warning**
+    - `default` → `#806d2c`
+    - `subtle` → `#d5b549`
+    - `muted` → `#ffe68f`
+    - `disabled` → `#c0bfc8`
+- **Size tokens — `card`:**
+  - **height**
+    - `sm` → `96`
+    - `md` → `192`
+    - `lg` → `272`
+    - `xl` → `472`
+  - **width**
+    - `sm` → `88`
+    - `md` → `152`
+    - `lg` → `224`
+    - `xl` → `336`
+- **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+
+#### New on e&
+- **Figma:** [`25915-75766`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25915-75766)
+- **Role:** 'New on e&' card.
+- **Color tokens — `color.surface`:**
+  - **canvas**
+    - `default` → `#ffffff`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#140f21`
+  - **base**
+    - `default` → `#f0f0f5`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e00800`
+    - `brand-muted` → `#fce6e6`
+    - `midnight` → `#191329`
+  - **sunken**
+    - `default` → `#e4e3ea`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#bb0700`
+    - `brand-muted` → `#f9cecc`
+    - `midnight` → `#140f21`
+  - **raised**
+    - `default` → `#ffffff`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#312c40`
+  - **overlay**
+    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `floating` → `#f7f7fa`
+    - `floating-middleground` → `#908e9a`
+    - `floating-inverse` → `#191329`
+  - **glass**
+    - **midnight**
+      - `lg` → `rgba(25, 19, 41, 0.3)`
+      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `sm` → `rgba(25, 19, 41, 0.07)`
+    - **white**
+      - `xl` → `rgba(255, 255, 255, 0.4)`
+      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `md` → `rgba(255, 255, 255, 0.15)`
+      - `sm` → `rgba(255, 255, 255, 0.1)`
+- **Color tokens — `color.border`:**
+  - **surface-based**
+    - **canvas**
+      - `default` → `#f0f0f5`
+      - `inverse` → `#d8d7de`
+      - `brand` → `#ed6b66`
+      - `brand-muted` → `#f9cecc`
+      - `midnight` → `#312c40`
+    - **base**
+      - `default` → `#d8d7de`
+      - `inverse` → `#f0f0f5`
+      - `brand` → `#e9524d`
+      - `brand-muted` → `#f6b5b3`
+      - `midnight` → `#312c40`
+    - **raised**
+      - `default` → `#f0f0f5`
+      - `inverse` → `#f0f0f5`
+      - `brand` → `#ed6b66`
+      - `brand-muted` → `#f9cecc`
+      - `midnight` → `#494456`
+    - **sunken**
+      - `default` → `#d8d7de`
+      - `inverse` → `#d8d7de`
+      - `brand` → `#e73933`
+      - `brand-muted` → `#f08480`
+      - `midnight` → `#312c40`
+    - **overlay**
+      - `floating` → `#d8d7de`
+      - `floating inverse` → `#ffffff`
+    - **glass**
+      - **default**
+        - `lg` → `rgba(255, 255, 255, 0.6)`
+        - `md` → `rgba(255, 255, 255, 0.7)`
+        - `sm` → `rgba(255, 255, 255, 0.8)`
+      - **inverse**
+        - `lg` → `rgba(255, 255, 255, 0.8)`
+        - `md` → `rgba(255, 255, 255, 0.9)`
+        - `sm` → `#ffffff`
+  - **interactive**
+    - **default**
+      - `default` → `rgba(25, 19, 41, 0.2)`
+      - `subtle` → `rgba(25, 19, 41, 0.1)`
+      - `strong` → `rgba(25, 19, 41, 0.5)`
+      - `focus` → `#191329`
+      - `disabled` → `rgba(25, 19, 41, 0.07)`
+    - **inverse**
+      - `default` → `rgba(255, 255, 255, 0.6)`
+      - `subtle` → `rgba(255, 255, 255, 0.4)`
+      - `strong` → `rgba(255, 255, 255, 0.8)`
+      - `focus` → `#ffffff`
+      - `disabled` → `rgba(255, 255, 255, 0.4)`
+    - **accent**
+      - `default` → `#e00800`
+      - `focus` → `#bb0700`
+      - `subtle` → `#e9524d`
+      - `muted` → `#f08480`
+      - `disabled` → `#a8a6b1`
+    - **positive**
+      - `default` → `#3b8b53`
+      - `subtle` → `#6ced90`
+      - `muted` → `#c1f7d0`
+      - `disabled` → `#c0bfc8`
+    - **danger**
+      - `default` → `#b85a1a`
+      - `subtle` → `#ff9f52`
+      - `muted` → `#ffd1a8`
+      - `disabled` → `#c0bfc8`
+    - **warning**
+      - `default` → `#aa913a`
+      - `subtle` → `#ffd957`
+      - `muted` → `#ffecab`
+      - `disabled` → `#c0bfc8`
+- **Color tokens — `color.text`:**
+  - **default**
+    - `default` → `#191329`
+    - `subtle` → `#575362`
+    - `muted` → `#908e9a`
+    - `disabled` → `#c0bfc8`
+    - `inverse` → `#ffffff`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+  - **brand**
+    - `default` → `#e00800`
+    - `subtle` → `#e73933`
+    - `muted` → `#ed6b66`
+    - `strong` → `#950500`
+    - `focus` → `#bb0700`
+    - `disabled` → `#a8a6b1`
+  - **positive**
+    - `default` → `#27633b`
+    - `subtle` → `#54bc72`
+    - `muted` → `#9ff3b7`
+    - `disabled` → `#c0bfc8`
+  - **danger**
+    - `default` → `#8c3f0c`
+    - `subtle` → `#e07830`
+    - `muted` → `#ffb16f`
+    - `disabled` → `#c0bfc8`
+  - **warning**
+    - `default` → `#806d2c`
+    - `subtle` → `#d5b549`
+    - `muted` → `#ffe68f`
+    - `disabled` → `#c0bfc8`
+- **Size tokens — `card`:**
+  - **height**
+    - `sm` → `96`
+    - `md` → `192`
+    - `lg` → `272`
+    - `xl` → `472`
+  - **width**
+    - `sm` → `88`
+    - `md` → `152`
+    - `lg` → `224`
+    - `xl` → `336`
+- **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+
+#### Recommendation
+- **Figma:** _node-id TBD_
+- **Role:** Recommendation card.
+- **Color tokens — `color.surface`:**
+  - **canvas**
+    - `default` → `#ffffff`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#140f21`
+  - **base**
+    - `default` → `#f0f0f5`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e00800`
+    - `brand-muted` → `#fce6e6`
+    - `midnight` → `#191329`
+  - **sunken**
+    - `default` → `#e4e3ea`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#bb0700`
+    - `brand-muted` → `#f9cecc`
+    - `midnight` → `#140f21`
+  - **raised**
+    - `default` → `#ffffff`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#312c40`
+  - **overlay**
+    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `floating` → `#f7f7fa`
+    - `floating-middleground` → `#908e9a`
+    - `floating-inverse` → `#191329`
+  - **glass**
+    - **midnight**
+      - `lg` → `rgba(25, 19, 41, 0.3)`
+      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `sm` → `rgba(25, 19, 41, 0.07)`
+    - **white**
+      - `xl` → `rgba(255, 255, 255, 0.4)`
+      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `md` → `rgba(255, 255, 255, 0.15)`
+      - `sm` → `rgba(255, 255, 255, 0.1)`
+- **Color tokens — `color.border`:**
+  - **surface-based**
+    - **canvas**
+      - `default` → `#f0f0f5`
+      - `inverse` → `#d8d7de`
+      - `brand` → `#ed6b66`
+      - `brand-muted` → `#f9cecc`
+      - `midnight` → `#312c40`
+    - **base**
+      - `default` → `#d8d7de`
+      - `inverse` → `#f0f0f5`
+      - `brand` → `#e9524d`
+      - `brand-muted` → `#f6b5b3`
+      - `midnight` → `#312c40`
+    - **raised**
+      - `default` → `#f0f0f5`
+      - `inverse` → `#f0f0f5`
+      - `brand` → `#ed6b66`
+      - `brand-muted` → `#f9cecc`
+      - `midnight` → `#494456`
+    - **sunken**
+      - `default` → `#d8d7de`
+      - `inverse` → `#d8d7de`
+      - `brand` → `#e73933`
+      - `brand-muted` → `#f08480`
+      - `midnight` → `#312c40`
+    - **overlay**
+      - `floating` → `#d8d7de`
+      - `floating inverse` → `#ffffff`
+    - **glass**
+      - **default**
+        - `lg` → `rgba(255, 255, 255, 0.6)`
+        - `md` → `rgba(255, 255, 255, 0.7)`
+        - `sm` → `rgba(255, 255, 255, 0.8)`
+      - **inverse**
+        - `lg` → `rgba(255, 255, 255, 0.8)`
+        - `md` → `rgba(255, 255, 255, 0.9)`
+        - `sm` → `#ffffff`
+  - **interactive**
+    - **default**
+      - `default` → `rgba(25, 19, 41, 0.2)`
+      - `subtle` → `rgba(25, 19, 41, 0.1)`
+      - `strong` → `rgba(25, 19, 41, 0.5)`
+      - `focus` → `#191329`
+      - `disabled` → `rgba(25, 19, 41, 0.07)`
+    - **inverse**
+      - `default` → `rgba(255, 255, 255, 0.6)`
+      - `subtle` → `rgba(255, 255, 255, 0.4)`
+      - `strong` → `rgba(255, 255, 255, 0.8)`
+      - `focus` → `#ffffff`
+      - `disabled` → `rgba(255, 255, 255, 0.4)`
+    - **accent**
+      - `default` → `#e00800`
+      - `focus` → `#bb0700`
+      - `subtle` → `#e9524d`
+      - `muted` → `#f08480`
+      - `disabled` → `#a8a6b1`
+    - **positive**
+      - `default` → `#3b8b53`
+      - `subtle` → `#6ced90`
+      - `muted` → `#c1f7d0`
+      - `disabled` → `#c0bfc8`
+    - **danger**
+      - `default` → `#b85a1a`
+      - `subtle` → `#ff9f52`
+      - `muted` → `#ffd1a8`
+      - `disabled` → `#c0bfc8`
+    - **warning**
+      - `default` → `#aa913a`
+      - `subtle` → `#ffd957`
+      - `muted` → `#ffecab`
+      - `disabled` → `#c0bfc8`
+- **Color tokens — `color.text`:**
+  - **default**
+    - `default` → `#191329`
+    - `subtle` → `#575362`
+    - `muted` → `#908e9a`
+    - `disabled` → `#c0bfc8`
+    - `inverse` → `#ffffff`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+  - **brand**
+    - `default` → `#e00800`
+    - `subtle` → `#e73933`
+    - `muted` → `#ed6b66`
+    - `strong` → `#950500`
+    - `focus` → `#bb0700`
+    - `disabled` → `#a8a6b1`
+  - **positive**
+    - `default` → `#27633b`
+    - `subtle` → `#54bc72`
+    - `muted` → `#9ff3b7`
+    - `disabled` → `#c0bfc8`
+  - **danger**
+    - `default` → `#8c3f0c`
+    - `subtle` → `#e07830`
+    - `muted` → `#ffb16f`
+    - `disabled` → `#c0bfc8`
+  - **warning**
+    - `default` → `#806d2c`
+    - `subtle` → `#d5b549`
+    - `muted` → `#ffe68f`
+    - `disabled` → `#c0bfc8`
+- **Size tokens — `card`:**
+  - **height**
+    - `sm` → `96`
+    - `md` → `192`
+    - `lg` → `272`
+    - `xl` → `472`
+  - **width**
+    - `sm` → `88`
+    - `md` → `152`
+    - `lg` → `224`
+    - `xl` → `336`
+- **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+
+#### Service
+- **Figma:** [`26019-79144`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=26019-79144)
+- **Role:** Service card.
+- **Color tokens — `color.surface`:**
+  - **canvas**
+    - `default` → `#ffffff`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#140f21`
+  - **base**
+    - `default` → `#f0f0f5`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e00800`
+    - `brand-muted` → `#fce6e6`
+    - `midnight` → `#191329`
+  - **sunken**
+    - `default` → `#e4e3ea`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#bb0700`
+    - `brand-muted` → `#f9cecc`
+    - `midnight` → `#140f21`
+  - **raised**
+    - `default` → `#ffffff`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#312c40`
+  - **overlay**
+    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `floating` → `#f7f7fa`
+    - `floating-middleground` → `#908e9a`
+    - `floating-inverse` → `#191329`
+  - **glass**
+    - **midnight**
+      - `lg` → `rgba(25, 19, 41, 0.3)`
+      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `sm` → `rgba(25, 19, 41, 0.07)`
+    - **white**
+      - `xl` → `rgba(255, 255, 255, 0.4)`
+      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `md` → `rgba(255, 255, 255, 0.15)`
+      - `sm` → `rgba(255, 255, 255, 0.1)`
+- **Color tokens — `color.border`:**
+  - **surface-based**
+    - **canvas**
+      - `default` → `#f0f0f5`
+      - `inverse` → `#d8d7de`
+      - `brand` → `#ed6b66`
+      - `brand-muted` → `#f9cecc`
+      - `midnight` → `#312c40`
+    - **base**
+      - `default` → `#d8d7de`
+      - `inverse` → `#f0f0f5`
+      - `brand` → `#e9524d`
+      - `brand-muted` → `#f6b5b3`
+      - `midnight` → `#312c40`
+    - **raised**
+      - `default` → `#f0f0f5`
+      - `inverse` → `#f0f0f5`
+      - `brand` → `#ed6b66`
+      - `brand-muted` → `#f9cecc`
+      - `midnight` → `#494456`
+    - **sunken**
+      - `default` → `#d8d7de`
+      - `inverse` → `#d8d7de`
+      - `brand` → `#e73933`
+      - `brand-muted` → `#f08480`
+      - `midnight` → `#312c40`
+    - **overlay**
+      - `floating` → `#d8d7de`
+      - `floating inverse` → `#ffffff`
+    - **glass**
+      - **default**
+        - `lg` → `rgba(255, 255, 255, 0.6)`
+        - `md` → `rgba(255, 255, 255, 0.7)`
+        - `sm` → `rgba(255, 255, 255, 0.8)`
+      - **inverse**
+        - `lg` → `rgba(255, 255, 255, 0.8)`
+        - `md` → `rgba(255, 255, 255, 0.9)`
+        - `sm` → `#ffffff`
+  - **interactive**
+    - **default**
+      - `default` → `rgba(25, 19, 41, 0.2)`
+      - `subtle` → `rgba(25, 19, 41, 0.1)`
+      - `strong` → `rgba(25, 19, 41, 0.5)`
+      - `focus` → `#191329`
+      - `disabled` → `rgba(25, 19, 41, 0.07)`
+    - **inverse**
+      - `default` → `rgba(255, 255, 255, 0.6)`
+      - `subtle` → `rgba(255, 255, 255, 0.4)`
+      - `strong` → `rgba(255, 255, 255, 0.8)`
+      - `focus` → `#ffffff`
+      - `disabled` → `rgba(255, 255, 255, 0.4)`
+    - **accent**
+      - `default` → `#e00800`
+      - `focus` → `#bb0700`
+      - `subtle` → `#e9524d`
+      - `muted` → `#f08480`
+      - `disabled` → `#a8a6b1`
+    - **positive**
+      - `default` → `#3b8b53`
+      - `subtle` → `#6ced90`
+      - `muted` → `#c1f7d0`
+      - `disabled` → `#c0bfc8`
+    - **danger**
+      - `default` → `#b85a1a`
+      - `subtle` → `#ff9f52`
+      - `muted` → `#ffd1a8`
+      - `disabled` → `#c0bfc8`
+    - **warning**
+      - `default` → `#aa913a`
+      - `subtle` → `#ffd957`
+      - `muted` → `#ffecab`
+      - `disabled` → `#c0bfc8`
+- **Color tokens — `color.text`:**
+  - **default**
+    - `default` → `#191329`
+    - `subtle` → `#575362`
+    - `muted` → `#908e9a`
+    - `disabled` → `#c0bfc8`
+    - `inverse` → `#ffffff`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+  - **brand**
+    - `default` → `#e00800`
+    - `subtle` → `#e73933`
+    - `muted` → `#ed6b66`
+    - `strong` → `#950500`
+    - `focus` → `#bb0700`
+    - `disabled` → `#a8a6b1`
+  - **positive**
+    - `default` → `#27633b`
+    - `subtle` → `#54bc72`
+    - `muted` → `#9ff3b7`
+    - `disabled` → `#c0bfc8`
+  - **danger**
+    - `default` → `#8c3f0c`
+    - `subtle` → `#e07830`
+    - `muted` → `#ffb16f`
+    - `disabled` → `#c0bfc8`
+  - **warning**
+    - `default` → `#806d2c`
+    - `subtle` → `#d5b549`
+    - `muted` → `#ffe68f`
+    - `disabled` → `#c0bfc8`
+- **Size tokens — `card`:**
+  - **height**
+    - `sm` → `96`
+    - `md` → `192`
+    - `lg` → `272`
+    - `xl` → `472`
+  - **width**
+    - `sm` → `88`
+    - `md` → `152`
+    - `lg` → `224`
+    - `xl` → `336`
+- **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+
+### 08 · Banners
+
+
+#### Highlight
+- **Figma:** [`25460-83982`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25460-83982)
+- **Role:** Highlight / promo banner.
+- **Color tokens — `color.surface`:**
+  - **canvas**
+    - `default` → `#ffffff`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#140f21`
+  - **base**
+    - `default` → `#f0f0f5`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e00800`
+    - `brand-muted` → `#fce6e6`
+    - `midnight` → `#191329`
+  - **sunken**
+    - `default` → `#e4e3ea`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#bb0700`
+    - `brand-muted` → `#f9cecc`
+    - `midnight` → `#140f21`
+  - **raised**
+    - `default` → `#ffffff`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#312c40`
+  - **overlay**
+    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `floating` → `#f7f7fa`
+    - `floating-middleground` → `#908e9a`
+    - `floating-inverse` → `#191329`
+  - **glass**
+    - **midnight**
+      - `lg` → `rgba(25, 19, 41, 0.3)`
+      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `sm` → `rgba(25, 19, 41, 0.07)`
+    - **white**
+      - `xl` → `rgba(255, 255, 255, 0.4)`
+      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `md` → `rgba(255, 255, 255, 0.15)`
+      - `sm` → `rgba(255, 255, 255, 0.1)`
+- **Color tokens — `color.text`:**
+  - **default**
+    - `default` → `#191329`
+    - `subtle` → `#575362`
+    - `muted` → `#908e9a`
+    - `disabled` → `#c0bfc8`
+    - `inverse` → `#ffffff`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+  - **brand**
+    - `default` → `#e00800`
+    - `subtle` → `#e73933`
+    - `muted` → `#ed6b66`
+    - `strong` → `#950500`
+    - `focus` → `#bb0700`
+    - `disabled` → `#a8a6b1`
+  - **positive**
+    - `default` → `#27633b`
+    - `subtle` → `#54bc72`
+    - `muted` → `#9ff3b7`
+    - `disabled` → `#c0bfc8`
+  - **danger**
+    - `default` → `#8c3f0c`
+    - `subtle` → `#e07830`
+    - `muted` → `#ffb16f`
+    - `disabled` → `#c0bfc8`
+  - **warning**
+    - `default` → `#806d2c`
+    - `subtle` → `#d5b549`
+    - `muted` → `#ffe68f`
+    - `disabled` → `#c0bfc8`
+- **Color tokens — `color.button`:**
+  - **primary**
+    - **surface**
+      - **brand**
+        - `default` → `#e00800`
+        - `focus` → `#bb0700`
+        - `disabled` → `#c0bfc8`
+      - **inverse**
+        - `default` → `#ffffff`
+        - `focus` → `#fce6e6`
+        - `disabled` → `#f0f0f5`
+    - **text**
+      - **brand**
+        - `default` → `#ffffff`
+        - `focus` → `#ffffff`
+        - `disabled` → `rgba(255, 255, 255, 0.7)`
+      - **inverse**
+        - `default` → `#e00800`
+        - `focus` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+  - **secondary**
+    - **surface**
+      - **brand**
+        - `focus` → `#fce6e6`
+      - **inverse**
+        - `focus` → `#312c40`
+    - **text**
+      - **brand**
+        - `default` → `#e00800`
+        - `focus` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+      - **inverse**
+        - `default` → `#ffffff`
+        - `focus` → `#ffffff`
+        - `disabled` → `rgba(255, 255, 255, 0.7)`
+    - **border**
+      - **brand**
+        - `default` → `#e00800`
+        - `focus` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+      - **inverse**
+        - `default` → `#ffffff`
+        - `focus` → `#f0f0f5`
+        - `disabled` → `#d8d7de`
+  - **tertiary**
+    - **text**
+      - **brand**
+        - `default` → `#e00800`
+        - `focus` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+      - **midnight**
+        - `default` → `#191329`
+        - `focus` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+      - **inverse**
+        - `default` → `#ffffff`
+        - `focus` → `#bb0700`
+        - `disabled` → `rgba(255, 255, 255, 0.7)`
+  - **link**
+    - **text**
+      - **brand**
+        - `default` → `#e00800`
+        - `focus` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+      - **midnight**
+        - `default` → `#191329`
+        - `focus` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+      - **inverse**
+        - `default` → `#ffffff`
+        - `focus` → `#bb0700`
+        - `disabled` → `rgba(255, 255, 255, 0.7)`
+  - **text**
+    - **midnight**
+      - `default` → `#191329`
+      - `focus` → `#191329`
+      - `disabled` → `#c0bfc8`
+- **Typography:** `heading.xl`(32/Bold), `heading.lg`(28/Bold), `heading.md`(24/Bold), `heading.sm`(20/Bold), `heading.xs`(16/Bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+
+### 09 · Product-Specific
+
+
+#### Smiles Balance
+- **Figma:** [`26610-601`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=26610-601)
+- **Role:** Smiles loyalty balance module.
+- **Color tokens — `color.special`:**
+  - **mauve**
+    - `70` → `#f0e9ed`
+    - `100` → `#e0d2da`
+    - `200` → `#cbb3c1`
+    - `300` → `#b18ea3`
+    - `400` → `#976884`
+    - `500` → `#7d4265`
+    - `550` → `#631c46`
+    - `600` → `#53173a`
+    - `700` → `#42132f`
+    - `800` → `#320e23`
+    - `900` → `#210917`
+    - `1000` → `#14060e`
+  - **red-sand**
+    - `100` → `#f6e8e7`
+    - `200` → `#f0d9d7`
+    - `300` → `#e8c6c3`
+    - `400` → `#e0b3ae`
+    - `500` → `#d9a09a`
+    - `550` → `#d18d86`
+    - `600` → `#ae7670`
+    - `700` → `#8b5e59`
+    - `800` → `#694743`
+    - `900` → `#462f2d`
+    - `1000` → `#2a1c1b`
+  - **teal**
+    - `70` → `#eff2f2`
+    - `100` → `#d0d7d8`
+    - `150` → `#dadfdf`
+    - `200` → `#b1bcbd`
+    - `300` → `#8b9b9d`
+    - `400` → `#64797c`
+    - `500` → `#3d585b`
+    - `550` → `#16363a`
+    - `600` → `#122d30`
+    - `700` → `#0f2427`
+    - `800` → `#0b1b1d`
+    - `900` → `#071213`
+    - `1000` → `#040b0c`
+  - **burgundy**
+    - `70` → `#f2e6e9`
+    - `100` → `#e5ccd3`
+    - `200` → `#d3aab6`
+    - `300` → `#be8092`
+    - `400` → `#a8566d`
+    - `500` → `#922b49`
+    - `550` → `#7c0124`
+    - `600` → `#67011e`
+    - `700` → `#530118`
+    - `800` → `#3e0112`
+    - `900` → `#29000c`
+    - `1000` → `#190007`
+  - **pink**
+    - `1000` → `#bb2d81`
+    - `1100` → `#a92573`
+  - **gold**
+    - `200` → `#f6eed2`
+    - `400` → `#f1e3b4`
+    - `600` → `#e2c668`
+    - `800` → `#b78d3b`
+    - `1000` → `#a17a2f`
+  - **bronze**
+    - `700` → `#e8b8a4`
+    - `1000` → `#9f5739`
+  - **blue-platinum**
+    - `300` → `#c2c1e7`
+    - `1000` → `#595779`
+  - **silver**
+    - `1000` → `#e8e7ea`
+- **Color tokens — `color.surface`:**
+  - **canvas**
+    - `default` → `#ffffff`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#140f21`
+  - **base**
+    - `default` → `#f0f0f5`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e00800`
+    - `brand-muted` → `#fce6e6`
+    - `midnight` → `#191329`
+  - **sunken**
+    - `default` → `#e4e3ea`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#bb0700`
+    - `brand-muted` → `#f9cecc`
+    - `midnight` → `#140f21`
+  - **raised**
+    - `default` → `#ffffff`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#312c40`
+  - **overlay**
+    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `floating` → `#f7f7fa`
+    - `floating-middleground` → `#908e9a`
+    - `floating-inverse` → `#191329`
+  - **glass**
+    - **midnight**
+      - `lg` → `rgba(25, 19, 41, 0.3)`
+      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `sm` → `rgba(25, 19, 41, 0.07)`
+    - **white**
+      - `xl` → `rgba(255, 255, 255, 0.4)`
+      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `md` → `rgba(255, 255, 255, 0.15)`
+      - `sm` → `rgba(255, 255, 255, 0.1)`
+- **Color tokens — `color.text`:**
+  - **default**
+    - `default` → `#191329`
+    - `subtle` → `#575362`
+    - `muted` → `#908e9a`
+    - `disabled` → `#c0bfc8`
+    - `inverse` → `#ffffff`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+  - **brand**
+    - `default` → `#e00800`
+    - `subtle` → `#e73933`
+    - `muted` → `#ed6b66`
+    - `strong` → `#950500`
+    - `focus` → `#bb0700`
+    - `disabled` → `#a8a6b1`
+  - **positive**
+    - `default` → `#27633b`
+    - `subtle` → `#54bc72`
+    - `muted` → `#9ff3b7`
+    - `disabled` → `#c0bfc8`
+  - **danger**
+    - `default` → `#8c3f0c`
+    - `subtle` → `#e07830`
+    - `muted` → `#ffb16f`
+    - `disabled` → `#c0bfc8`
+  - **warning**
+    - `default` → `#806d2c`
+    - `subtle` → `#d5b549`
+    - `muted` → `#ffe68f`
+    - `disabled` → `#c0bfc8`
+- **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+
+#### Voucher
+- **Figma:** [`28278-13069`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=28278-13069)
+- **Role:** Voucher / coupon.
+- **Color tokens — `color.special`:**
+  - **mauve**
+    - `70` → `#f0e9ed`
+    - `100` → `#e0d2da`
+    - `200` → `#cbb3c1`
+    - `300` → `#b18ea3`
+    - `400` → `#976884`
+    - `500` → `#7d4265`
+    - `550` → `#631c46`
+    - `600` → `#53173a`
+    - `700` → `#42132f`
+    - `800` → `#320e23`
+    - `900` → `#210917`
+    - `1000` → `#14060e`
+  - **red-sand**
+    - `100` → `#f6e8e7`
+    - `200` → `#f0d9d7`
+    - `300` → `#e8c6c3`
+    - `400` → `#e0b3ae`
+    - `500` → `#d9a09a`
+    - `550` → `#d18d86`
+    - `600` → `#ae7670`
+    - `700` → `#8b5e59`
+    - `800` → `#694743`
+    - `900` → `#462f2d`
+    - `1000` → `#2a1c1b`
+  - **teal**
+    - `70` → `#eff2f2`
+    - `100` → `#d0d7d8`
+    - `150` → `#dadfdf`
+    - `200` → `#b1bcbd`
+    - `300` → `#8b9b9d`
+    - `400` → `#64797c`
+    - `500` → `#3d585b`
+    - `550` → `#16363a`
+    - `600` → `#122d30`
+    - `700` → `#0f2427`
+    - `800` → `#0b1b1d`
+    - `900` → `#071213`
+    - `1000` → `#040b0c`
+  - **burgundy**
+    - `70` → `#f2e6e9`
+    - `100` → `#e5ccd3`
+    - `200` → `#d3aab6`
+    - `300` → `#be8092`
+    - `400` → `#a8566d`
+    - `500` → `#922b49`
+    - `550` → `#7c0124`
+    - `600` → `#67011e`
+    - `700` → `#530118`
+    - `800` → `#3e0112`
+    - `900` → `#29000c`
+    - `1000` → `#190007`
+  - **pink**
+    - `1000` → `#bb2d81`
+    - `1100` → `#a92573`
+  - **gold**
+    - `200` → `#f6eed2`
+    - `400` → `#f1e3b4`
+    - `600` → `#e2c668`
+    - `800` → `#b78d3b`
+    - `1000` → `#a17a2f`
+  - **bronze**
+    - `700` → `#e8b8a4`
+    - `1000` → `#9f5739`
+  - **blue-platinum**
+    - `300` → `#c2c1e7`
+    - `1000` → `#595779`
+  - **silver**
+    - `1000` → `#e8e7ea`
+- **Color tokens — `color.surface`:**
+  - **canvas**
+    - `default` → `#ffffff`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#140f21`
+  - **base**
+    - `default` → `#f0f0f5`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e00800`
+    - `brand-muted` → `#fce6e6`
+    - `midnight` → `#191329`
+  - **sunken**
+    - `default` → `#e4e3ea`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#bb0700`
+    - `brand-muted` → `#f9cecc`
+    - `midnight` → `#140f21`
+  - **raised**
+    - `default` → `#ffffff`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#312c40`
+  - **overlay**
+    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `floating` → `#f7f7fa`
+    - `floating-middleground` → `#908e9a`
+    - `floating-inverse` → `#191329`
+  - **glass**
+    - **midnight**
+      - `lg` → `rgba(25, 19, 41, 0.3)`
+      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `sm` → `rgba(25, 19, 41, 0.07)`
+    - **white**
+      - `xl` → `rgba(255, 255, 255, 0.4)`
+      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `md` → `rgba(255, 255, 255, 0.15)`
+      - `sm` → `rgba(255, 255, 255, 0.1)`
+- **Color tokens — `color.text`:**
+  - **default**
+    - `default` → `#191329`
+    - `subtle` → `#575362`
+    - `muted` → `#908e9a`
+    - `disabled` → `#c0bfc8`
+    - `inverse` → `#ffffff`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+  - **brand**
+    - `default` → `#e00800`
+    - `subtle` → `#e73933`
+    - `muted` → `#ed6b66`
+    - `strong` → `#950500`
+    - `focus` → `#bb0700`
+    - `disabled` → `#a8a6b1`
+  - **positive**
+    - `default` → `#27633b`
+    - `subtle` → `#54bc72`
+    - `muted` → `#9ff3b7`
+    - `disabled` → `#c0bfc8`
+  - **danger**
+    - `default` → `#8c3f0c`
+    - `subtle` → `#e07830`
+    - `muted` → `#ffb16f`
+    - `disabled` → `#c0bfc8`
+  - **warning**
+    - `default` → `#806d2c`
+    - `subtle` → `#d5b549`
+    - `muted` → `#ffe68f`
+    - `disabled` → `#c0bfc8`
+- **Color tokens — `color.border`:**
+  - **surface-based**
+    - **canvas**
+      - `default` → `#f0f0f5`
+      - `inverse` → `#d8d7de`
+      - `brand` → `#ed6b66`
+      - `brand-muted` → `#f9cecc`
+      - `midnight` → `#312c40`
+    - **base**
+      - `default` → `#d8d7de`
+      - `inverse` → `#f0f0f5`
+      - `brand` → `#e9524d`
+      - `brand-muted` → `#f6b5b3`
+      - `midnight` → `#312c40`
+    - **raised**
+      - `default` → `#f0f0f5`
+      - `inverse` → `#f0f0f5`
+      - `brand` → `#ed6b66`
+      - `brand-muted` → `#f9cecc`
+      - `midnight` → `#494456`
+    - **sunken**
+      - `default` → `#d8d7de`
+      - `inverse` → `#d8d7de`
+      - `brand` → `#e73933`
+      - `brand-muted` → `#f08480`
+      - `midnight` → `#312c40`
+    - **overlay**
+      - `floating` → `#d8d7de`
+      - `floating inverse` → `#ffffff`
+    - **glass**
+      - **default**
+        - `lg` → `rgba(255, 255, 255, 0.6)`
+        - `md` → `rgba(255, 255, 255, 0.7)`
+        - `sm` → `rgba(255, 255, 255, 0.8)`
+      - **inverse**
+        - `lg` → `rgba(255, 255, 255, 0.8)`
+        - `md` → `rgba(255, 255, 255, 0.9)`
+        - `sm` → `#ffffff`
+  - **interactive**
+    - **default**
+      - `default` → `rgba(25, 19, 41, 0.2)`
+      - `subtle` → `rgba(25, 19, 41, 0.1)`
+      - `strong` → `rgba(25, 19, 41, 0.5)`
+      - `focus` → `#191329`
+      - `disabled` → `rgba(25, 19, 41, 0.07)`
+    - **inverse**
+      - `default` → `rgba(255, 255, 255, 0.6)`
+      - `subtle` → `rgba(255, 255, 255, 0.4)`
+      - `strong` → `rgba(255, 255, 255, 0.8)`
+      - `focus` → `#ffffff`
+      - `disabled` → `rgba(255, 255, 255, 0.4)`
+    - **accent**
+      - `default` → `#e00800`
+      - `focus` → `#bb0700`
+      - `subtle` → `#e9524d`
+      - `muted` → `#f08480`
+      - `disabled` → `#a8a6b1`
+    - **positive**
+      - `default` → `#3b8b53`
+      - `subtle` → `#6ced90`
+      - `muted` → `#c1f7d0`
+      - `disabled` → `#c0bfc8`
+    - **danger**
+      - `default` → `#b85a1a`
+      - `subtle` → `#ff9f52`
+      - `muted` → `#ffd1a8`
+      - `disabled` → `#c0bfc8`
+    - **warning**
+      - `default` → `#aa913a`
+      - `subtle` → `#ffd957`
+      - `muted` → `#ffecab`
+      - `disabled` → `#c0bfc8`
+- **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
