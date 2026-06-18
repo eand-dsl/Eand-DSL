@@ -792,7 +792,13 @@
   - `sm` → `16`
   - `md` → `20`
   - `xl` → `24`
-- _anatomy: pending Figma extraction._
+- **Anatomy (from Figma):**
+  - **Variants:** `size` (lg, md, sm) × `selected` (Yes/No) × `Disabled` (Yes/No).
+  - **Sizes:** lg 24×24 · sm 20×20 (md between). **Shape:** rounded square.
+  - **Anatomy:** square box. Off = unchecked, hollow with neutral border; On = filled box + white check glyph; disabled = reduced opacity.
+  - **Size tokens:** `checkbox/*` (see Size tokens above).
+  - **Colors:** unchecked border `color/border/*`; checked fill brand + check `color/icon/*`.
+  - **Figma:** component set under `checkbox` (`29200:17377`).
 
 #### Switcher
 - **Figma:** [`25394-82591`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25394-82591)
@@ -924,7 +930,14 @@
     - **height**
       - `sm` → `16`
       - `md` → `20`
-- _anatomy: pending Figma extraction._
+- **Anatomy (from Figma):**
+  - **Variants:** `size` (Large, Small) × `state` (On, Off) × `disabled` (yes/no) × `color-scheme` (default, inverse).
+  - **Sizes:** Large 56×24 · Small 48×20.
+  - **Anatomy:** filled track (no border/stroke) + circular knob. Knob padding 2px from track edge; position left when Off, right when On. Knob is **white always**.
+  - **Colors:** On track = brand red (`color/red/1000` / `surface/base/brand`); Off track = neutral; On-disabled = desaturated red + reduced opacity; Off-disabled = reduced opacity. `inverse` scheme for colored/dark backgrounds.
+  - **States:** Off, Off-disabled, On, On-disabled.
+  - **Size tokens:** `switcher/*` (see Size tokens above).
+  - **Figma:** component set under `switcher` (`26215:7141`); default·lg·On·enabled = `26215:7142`.
 
 #### Radio
 - **Figma:** [`25394-83997`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25394-83997)
@@ -1004,7 +1017,13 @@
 - **Size tokens — `radio`:**
   - `sm` → `20`
   - `md` → `24`
-- _anatomy: pending Figma extraction._
+- **Anatomy (from Figma):**
+  - **Variants:** `selected` (Yes/No) × `Disabled` (Yes/No); sizes Large & Small.
+  - **Sizes:** Large 24×24 (1.5rem) · Small 20×20 (1.25rem). **Shape:** circle.
+  - **Anatomy:** circular ring. Off = hollow with neutral border; On = brand ring + filled center dot; disabled = reduced opacity.
+  - **Size tokens:** `radio/*` (see Size tokens above).
+  - **Colors:** unchecked border `color/border/*`; selected `color/icon/accent` (brand).
+  - **Figma:** component set under `radio-button` (`26369:775`).
 
 #### Searchbar
 - **Figma:** [`28114-62397`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=28114-62397)

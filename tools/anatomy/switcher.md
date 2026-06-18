@@ -1,0 +1,7 @@
+  - **Variants:** `size` (Large, Small) × `state` (On, Off) × `disabled` (yes/no) × `color-scheme` (default, inverse).
+  - **Sizes:** Large 56×24 · Small 48×20.
+  - **Anatomy:** filled track (no border/stroke) + circular knob. Knob padding 2px from track edge; position left when Off, right when On. Knob is **white always**.
+  - **Colors:** On track = brand red (`color/red/1000` / `surface/base/brand`); Off track = neutral; On-disabled = desaturated red + reduced opacity; Off-disabled = reduced opacity. `inverse` scheme for colored/dark backgrounds.
+  - **States:** Off, Off-disabled, On, On-disabled.
+  - **Size tokens:** `switcher/*` (see Size tokens above).
+  - **Figma:** component set under `switcher` (`26215:7141`); default·lg·On·enabled = `26215:7142`.

@@ -1,0 +1,6 @@
+  - **Variants:** `size` (lg, md, sm) × `selected` (Yes/No) × `Disabled` (Yes/No).
+  - **Sizes:** lg 24×24 · sm 20×20 (md between). **Shape:** rounded square.
+  - **Anatomy:** square box. Off = unchecked, hollow with neutral border; On = filled box + white check glyph; disabled = reduced opacity.
+  - **Size tokens:** `checkbox/*` (see Size tokens above).
+  - **Colors:** unchecked border `color/border/*`; checked fill brand + check `color/icon/*`.
+  - **Figma:** component set under `checkbox` (`29200:17377`).

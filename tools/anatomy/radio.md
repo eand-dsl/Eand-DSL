@@ -1,0 +1,6 @@
+  - **Variants:** `selected` (Yes/No) × `Disabled` (Yes/No); sizes Large & Small.
+  - **Sizes:** Large 24×24 (1.5rem) · Small 20×20 (1.25rem). **Shape:** circle.
+  - **Anatomy:** circular ring. Off = hollow with neutral border; On = brand ring + filled center dot; disabled = reduced opacity.
+  - **Size tokens:** `radio/*` (see Size tokens above).
+  - **Colors:** unchecked border `color/border/*`; selected `color/icon/accent` (brand).
+  - **Figma:** component set under `radio-button` (`26369:775`).
