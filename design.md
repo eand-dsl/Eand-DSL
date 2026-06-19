@@ -1,16 +1,95 @@
-# e& Consumer App DSL — Design Spec
+# e& Consumer App DSL — Master Spec
 
-> Auto-generated from `variables.json` (Figma Variables, fully resolved). Token values are exact and 1-1 with the Figma design system. Use this as the source spec when prompting **Figma Make**.
+> **Master spec for Figma Make.** This file is the single source of truth for the e& Consumer App
+> design system: every token (resolved to its concrete value), every component (states, behavior,
+> placement, composition), the layout system, and recipes for assembling UI screens from UX wireframes.
+>
+> **What Make should do with it:** given a UX wireframe, identify the screen regions (header, scrollable
+> body, bottom nav, overlays), map each region/block to the right e& component(s), and assemble an
+> accurate, token-correct UI screen — picking carousels vs. stacked cards, filter rows, forms, etc.,
+> and applying the sizing rules below. Treat this as a **UI app library**, not loose mockups.
 
-## How to use with Figma Make
 
-1. Paste the **Global foundations** section so Make has the color/type/spacing scales.
-2. For each component, paste its section (variants, states, and the exact mapped tokens).
-3. Each component links to its Figma node (`node-id`) for visual reference.
-4. System is **light-only**; `inverse/*` tokens are for content on dark/brand surfaces. Bilingual: Latin + `aed/*` (Arabic, RTL).
+---
 
-- Figma file: `IoDxMEgOiOuwfIL5IbJzi5` — node links: `https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=<node-id>`
+## Layout system & screen composition
 
+**Screen archetype:** `OS status bar` → **Top bar** (sticky header) → **scroll body** = a vertical stack of full-width **Sections** → **Nav bar** (sticky bottom). Optional **Action bar** sticks above the Nav bar. Overlays (**Bottom sheet, Alert modal, Snackbar, Tooltip**) float above everything.
+
+**Sizing rules (apply to every component):**
+- **Controls** (Button, Input, Chip, Filter pill, Checkbox, Radio, Switcher, Searchbar, Tabs): `width: fill` (or `hug` for inline chips/pills/badges) + **fixed** height from tokens.
+- **Containers** (Section, all Cards, Accordion, Bottom sheet): `width: fill` + **hug** content height (internal paddings/min-heights from tokens).
+- **Bars** (Top bar, Nav bar, Action bar): `width: fill` + **fixed** height from tokens.
+- Cards in a **horizontal carousel** are `width: fixed`; the same card **stacked** in a vertical Section is `width: fill`.
+
+**Width & gutters:** components span the device width. Padded content is inset by the screen gutter (`spacing/lg` = 16); banners and carousels bleed edge-to-edge. **Vertical rhythm:** gap between Sections and between items uses spacing tokens. **Scroll:** body scrolls vertically between the sticky Top bar and Nav bar; carousels scroll horizontally inside their Section. **Safe areas:** Top bar respects the top inset, Nav bar the bottom inset. **RTL:** mirror horizontally for Arabic (`aed/*` type ramp; logical start/end).
+
+
+**Section** (`size.section`)
+- **body**
+  - **height**
+    - `row-1` → `72`
+    - `row-2` → `148`
+    - `row-3` → `224`
+    - `row-4` → `300`
+    - `row-6` → `452`
+  - **width**
+    - `col-12` → `166`
+    - `col-6` → `72`
+    - `col-8` → `148`
+    - `row-16` → `224`
+
+**Card** (`size.card`)
+- **height**
+  - `sm` → `96`
+  - `md` → `192`
+  - `lg` → `272`
+  - `xl` → `472`
+- **width**
+  - `sm` → `88`
+  - `md` → `152`
+  - `lg` → `224`
+  - `xl` → `336`
+
+**Tabs** (`size.tabs`)
+- **height**
+  - `md` → `40`
+  - `sm` → `36`
+
+**Section link** (`size.section-link`)
+- `sm` → `32`
+- `md` → `36`
+- `lg` → `40`
+
+**Scale** (`size.scale`)
+- `2` → `2`
+- `4` → `4`
+- `8` → `8`
+- `12` → `12`
+- `16` → `16`
+- `20` → `20`
+- `24` → `24`
+- `32` → `32`
+- `40` → `40`
+- `48` → `48`
+- `56` → `56`
+- `64` → `64`
+- `72` → `72`
+- `80` → `80`
+- `96` → `96`
+- `112` → `112`
+- `128` → `128`
+- `144` → `144`
+- `160` → `160`
+- `176` → `176`
+- `192` → `192`
+
+**Border width** (`size.border`)
+- `xs` → `0.5`
+- `sm` → `1`
+- `md` → `1.5`
+- `lg` → `2`
+- `xl` → `4`
 
 ---
 
@@ -211,12 +290,11 @@
 | button.lg | 16 | Semi bold (600) | 120% | 0 | Suisse int'l |
 | button.md | 14 | Medium (500) | 120% | 0 | Suisse int'l |
 | button.sm | 12 | Medium (500) | 120% | 0 | Suisse int'l |
-| badge.lg | 14 | Book (450/500) | 120% | 0 | Suisse int'l |
-| badge.md | 12 | Book (450/500) | 120% | 0 | Suisse int'l |
-| badge.sm | 10 | Book (450/500) | 120% | 0 | Suisse int'l |
+| badge.lg | 14 | Book (450) | 120% | 0 | Suisse int'l |
+| badge.md | 12 | Book (450) | 120% | 0 | Suisse int'l |
+| badge.sm | 10 | Book (450) | 120% | 0 | Suisse int'l |
 
-> Arabic ramp mirrors these as `aed/<style>` (same scale; family currently Suisse Int'l, distinct Arabic face TBD).
-
+> Arabic ramp mirrors these as `aed/<style>` (same scale; family Suisse Int'l, distinct Arabic face TBD).
 
 ### Spacing scale
 
@@ -233,9 +311,59 @@
 
 ---
 
+## Component composition map
+
+| Component | Slot | Width | Height |
+|---|---|---|---|
+| e& Logo | Primitive / brand | hug | fixed (lockup sizes) |
+| Badges | Primitive / indicator (inline) | hug | fixed (24; lg/md/sm) |
+| Icon size | Primitive / token (sizing scale) | n/a | fixed (xs8 sm12 md16 lg20 xl24 2xl32 3xl40 4xl48) |
+| Logo row | Primitive / media row | fill | hug |
+| Dismiss | Primitive / control (icon button) | fixed | fixed (≥24 glyph, ~40 tap target) |
+| Progress bar | Primitive / status | fill | fixed (thin track token) |
+| Add trigger | Primitive / control | hug | fixed |
+| Product assets | Primitive / media | varies (often fill or fixed tile) | hug (aspect-ratio) |
+| Atom Surfaces | Primitive / surface | fill | hug |
+| Buttons | Control / CTA | fill (block CTA) or hug (inline) | fixed (lg48 / md40 / sm32) |
+| Input Field | Control / form | fill | fixed (~52 + label/status) |
+| Chips | Control / selection (inline) | hug | fixed (40) |
+| Filter Pill | Control / filter (inline) | hug | fixed (40) |
+| Checkbox | Control / form | fixed | fixed (lg24 / sm20) |
+| Switcher | Control / form | fixed (lg56 / sm48) | fixed (24 / 20) |
+| Radio | Control / form | fixed | fixed (lg24 / sm20) |
+| Searchbar | Control / search | fill | fixed (52) |
+| AI Search | Control / search | fill | fixed |
+| Selectors | Control / selection | fill or hug | fixed |
+| Top bar | Header (sticky top, respects top safe-area) | fill | fixed (token) |
+| Nav bar | Bottom nav (sticky bottom, global, respects bottom safe-area) | fill | fixed (token + inset) |
+| Action bar | Footer (sticky, above Nav bar; optional) | fill | fixed (hug button + padding) |
+| Tabs | Body / in-page switcher | fill | fixed (tabs token) |
+| Section link | Body / section header row | fill | fixed (section-link token) |
+| Quick Action | Body / grid | fill | hug |
+| Section | Body / container (THE layout wrapper) | fill (full screen width) | hug (content) |
+| Accordion | Body / container | fill | hug (expands/collapses) |
+| Plan Usage Bar | Body / status module | fill | hug |
+| Snackbar & Alert msg | Overlay (transient, bottom) / inline alert | fill (with side margin) | hug |
+| Alert Modals | Overlay (centered modal + scrim) | fill (with margin) / max width | hug |
+| Tooltip | Overlay (anchored) | hug (max width) | hug |
+| Bottom sheet | Overlay (anchored bottom + scrim) | fill | hug / variable (snap points, max ~90%) |
+| General | Card (in a Section) | fill (stacked)  | hug |
+| Product | Card (carousel item, or stacked) | fixed (carousel) / fill (stacked) | hug |
+| Deals for you | Card (carousel item) | fixed (carousel) | hug |
+| Plans | Card (carousel or stacked) | fixed (carousel) / fill (stacked) | hug |
+| New on e& | Card (carousel item) | fixed (carousel) | hug |
+| Recommendation | Card (carousel item) | fixed (carousel) | hug |
+| Service | Card (grid/list cell in a Section) | grid cell / fill (row) | hug |
+| Highlight | Banner (full-bleed, in body) | fill (edge-to-edge) | hug / fixed aspect |
+| Smiles Balance | Body module / header widget | fill | hug |
+| Voucher | Card | fill / fixed (carousel) | hug |
+
+
+---
+
 ## Components
 
-> For each: Figma node, role, and the **exact mapped tokens** (resolved values). Variant/state structure is read directly from the token groups. Items marked _anatomy: needs Figma extraction_ have no dedicated token group — they use the shared semantic tokens above; their precise layout should be pulled from the Figma node.
+> Each component: behavior (slot / sizing), states, composition, use case, exact mapped tokens, and Figma-verified anatomy where extracted.
 
 
 ### 01 · Primitives
@@ -243,7 +371,11 @@
 
 #### e& Logo
 - **Figma:** [`27020-6155`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=27020-6155)
-- **Role:** Brand logo lockups (primary, mono, app icon).
+- **Role:** Brand logo lockups.
+- **Behavior:** slot `Primitive / brand` · width: hug · height: fixed (lockup sizes)
+- **States:** version: primary · monochrome · app-icon
+- **Composition:** contains logomark + wordmark · appears within Top bar, Highlight banner, splash
+- **Use case:** Brand identity mark.
 - **Anatomy (from Figma):**
   - **Variants:** `version` (default, midnight, red, white).
   - **Dimensions:** 100×100 · 96×96.
@@ -251,7 +383,11 @@
 
 #### Badges
 - **Figma:** [`22668-60275`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22668-60275)
-- **Role:** Membership/status badges (Gold, Silver, Platinum Blue, Bronze, +).
+- **Role:** Membership/status/promo badges.
+- **Behavior:** slot `Primitive / indicator (inline)` · width: hug · height: fixed (24; lg/md/sm)
+- **States:** type (tier: Gold/Silver/Platinum/Bronze/+ · promo: Best seller/Discount/New/Sold out/Limited… · status: positive/warning/danger/neutral/disabled) × size (lg/md/sm)
+- **Composition:** contains label (+ optional leading dot/icon) · appears within Cards, Product, Plans, list items, Top bar
+- **Use case:** Small status/tier/promo label attached to other content.
 - **Color tokens — `color.badge`:**
   - **surface**
     - **status**
@@ -319,6 +455,10 @@
 #### Icon size
 - **Figma:** [`25460-22589`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25460-22589)
 - **Role:** Icon sizing scale.
+- **Behavior:** slot `Primitive / token (sizing scale)` · width: n/a · height: fixed (xs8 sm12 md16 lg20 xl24 2xl32 3xl40 4xl48)
+- **States:** category: icon · 3d-icon · logo
+- **Composition:** contains — · appears within every icon-bearing component
+- **Use case:** Canonical icon dimensions; pick by density/role.
 - **Size tokens — `icon`:**
   - `xs` → `8`
   - `sm` → `12`
@@ -338,16 +478,28 @@
 #### Logo row
 - **Figma:** [`25996-32494`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25996-32494)
 - **Role:** Row of partner/product logos.
-- _anatomy: pending Figma extraction (no dedicated token group; uses shared semantic tokens)._
+- **Behavior:** slot `Primitive / media row` · width: fill · height: hug
+- **States:** —
+- **Composition:** contains row of brand/partner logos · appears within Sections, Highlight
+- **Use case:** Display a set of partner/product logos.
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 #### Dismiss
 - **Figma:** _node-id TBD_
-- **Role:** Close / dismiss affordance.
-- _anatomy: pending Figma extraction (no dedicated token group; uses shared semantic tokens)._
+- **Role:** Close / clear affordance.
+- **Behavior:** slot `Primitive / control (icon button)` · width: fixed · height: fixed (≥24 glyph, ~40 tap target)
+- **States:** default · pressed · disabled
+- **Composition:** contains close/×/clear icon · appears within Bottom sheet, Alert modal, Snackbar, removable Chips, Searchbar
+- **Use case:** Close/clear/remove affordance.
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 #### Progress bar
 - **Figma:** [`26663-89882`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=26663-89882)
 - **Role:** Linear progress indicator.
+- **Behavior:** slot `Primitive / status` · width: fill · height: fixed (thin track token)
+- **States:** determinate (0–100%) · indeterminate
+- **Composition:** contains track + fill · appears within Plan usage bar, onboarding, uploads
+- **Use case:** Linear progress / completion.
 - **Color tokens — `color.status`:**
   - `default` → `#191329`
   - `accent` → `#e00800`
@@ -358,11 +510,15 @@
   - `danger` → `#b85a1a`
   - `warning` → `#aa913a`
   - `positive` → `#3b8b53`
-- _anatomy: pending Figma extraction._
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 #### Add trigger
 - **Figma:** [`25752-11470`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25752-11470)
 - **Role:** Add / plus trigger control.
+- **Behavior:** slot `Primitive / control` · width: hug · height: fixed
+- **States:** default · pressed · disabled
+- **Composition:** contains plus icon + label · appears within lists, forms, empty states
+- **Use case:** Entry point to add an item (line/card/address).
 - **Color tokens — `color.button`:**
   - **primary**
     - **surface**
@@ -440,16 +596,24 @@
       - `default` → `#191329`
       - `focus` → `#191329`
       - `disabled` → `#c0bfc8`
-- _anatomy: pending Figma extraction._
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 #### Product assets
 - **Figma:** _node-id TBD_
 - **Role:** Product imagery / illustration assets.
-- _anatomy: pending Figma extraction (no dedicated token group; uses shared semantic tokens)._
+- **Behavior:** slot `Primitive / media` · width: varies (often fill or fixed tile) · height: hug (aspect-ratio)
+- **States:** —
+- **Composition:** contains product image/illustration · appears within Product/Deals/New cards
+- **Use case:** Product imagery; respects aspect ratio.
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 #### Atom Surfaces
 - **Figma:** [`26729-91998`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=26729-91998)
-- **Role:** Base surface atoms (cards/containers).
+- **Role:** Base container surfaces.
+- **Behavior:** slot `Primitive / surface` · width: fill · height: hug
+- **States:** surface levels (canvas/base/raised/sunken)
+- **Composition:** contains — · appears within Cards, Sections, Sheets (as background)
+- **Use case:** Base elevation surfaces for containers.
 - **Color tokens — `color.atom-surfaces`:**
   - `default` → `#e4e3ea`
   - `red` → `#fcebeb`
@@ -499,14 +663,18 @@
       - `lg` → `rgba(255, 255, 255, 0.2)`
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.1)`
-- _anatomy: pending Figma extraction._
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 ### 02 · Controls
 
 
 #### Buttons
 - **Figma:** [`22542-13972`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22542-13972)
-- **Role:** Primary/secondary buttons across tones and states.
+- **Role:** Primary/secondary/tertiary/link buttons.
+- **Behavior:** slot `Control / CTA` · width: fill (block CTA) or hug (inline) · height: fixed (lg48 / md40 / sm32)
+- **States:** type (primary/secondary/tertiary/link) × tone (brand/inverse/midnight/white) × state (default/focus/disabled)
+- **Composition:** contains leading icon? · label · trailing icon? · appears within Action bar, forms, Cards, Banners, Sheets
+- **Use case:** Trigger the primary or secondary action.
 - **Color tokens — `color.button`:**
   - **primary**
     - **surface**
@@ -598,7 +766,11 @@
 
 #### Input Field
 - **Figma:** [`22609-113539`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22609-113539)
-- **Role:** Text input with label/helper/error states.
+- **Role:** Text input with label/helper/error.
+- **Behavior:** slot `Control / form` · width: fill · height: fixed (~52 + label/status)
+- **States:** style (Filled/Outlined) × state (Enabled/Hovered/Focused/Error/Disabled) × leading/trailing icon · types: text/comment/dropdown/otp/picker
+- **Composition:** contains Section label · [leading icon · value/placeholder · trailing icon] · status (helper/error) · appears within forms inside Sections
+- **Use case:** Capture typed/selected input.
 - **Color tokens — `color.input-field`:**
   - **surface**
     - **default**
@@ -649,6 +821,10 @@
 #### Chips
 - **Figma:** [`28171-29640`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=28171-29640)
 - **Role:** Selectable chips / tags.
+- **Behavior:** slot `Control / selection (inline)` · width: hug · height: fixed (40)
+- **States:** state (default/focus/disabled) × icon (on/off) · Loader
+- **Composition:** contains leading visual (icon20 / 40×40 brand / none) · label · appears within horizontal chip/filter rows (scroll), forms
+- **Use case:** Selectable tag / quick filter.
 - **Color tokens — `color.chips`:**
   - **default**
     - **default**
@@ -695,7 +871,11 @@
 
 #### Filter Pill
 - **Figma:** [`25581-9146`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25581-9146)
-- **Role:** Filter pills with selected/unselected states.
+- **Role:** Filter pills with chevron.
+- **Behavior:** slot `Control / filter (inline)` · width: hug · height: fixed (40)
+- **States:** state (default/focus/disabled) × color (default/inverse)
+- **Composition:** contains label + trailing chevron (16) · appears within horizontal filter row (scroll) at top of a list Section
+- **Use case:** Toggle/open a filter.
 - **Color tokens — `color.filter-pill`:**
   - **surface**
     - **inverse**
@@ -731,6 +911,10 @@
 #### Checkbox
 - **Figma:** [`25394-83294`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25394-83294)
 - **Role:** Checkbox control.
+- **Behavior:** slot `Control / form` · width: fixed · height: fixed (lg24 / sm20)
+- **States:** selected (yes/no) × disabled × size
+- **Composition:** contains box + check glyph (+ optional label row) · appears within forms, consent rows, multi-select lists
+- **Use case:** Multi-select / boolean opt-in.
 - **Color tokens — `color.border`:**
   - **surface-based**
     - **canvas**
@@ -818,6 +1002,10 @@
 #### Switcher
 - **Figma:** [`25394-82591`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25394-82591)
 - **Role:** Toggle switch.
+- **Behavior:** slot `Control / form` · width: fixed (lg56 / sm48) · height: fixed (24 / 20)
+- **States:** state (on/off) × disabled × color-scheme (default/inverse) × size
+- **Composition:** contains track + white knob · appears within settings rows
+- **Use case:** Instant on/off toggle.
 - **Color tokens — `color.surface`:**
   - **canvas**
     - `default` → `#ffffff`
@@ -957,6 +1145,10 @@
 #### Radio
 - **Figma:** [`25394-83997`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25394-83997)
 - **Role:** Radio control.
+- **Behavior:** slot `Control / form` · width: fixed · height: fixed (lg24 / sm20)
+- **States:** selected (yes/no) × disabled
+- **Composition:** contains ring + center dot (+ optional label row) · appears within single-select option lists
+- **Use case:** Single-select from a set.
 - **Color tokens — `color.border`:**
   - **surface-based**
     - **canvas**
@@ -1043,6 +1235,10 @@
 #### Searchbar
 - **Figma:** [`28114-62397`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=28114-62397)
 - **Role:** Search input.
+- **Behavior:** slot `Control / search` · width: fill · height: fixed (52)
+- **States:** Default · Typing · Typed × surface (white/midnight)
+- **Composition:** contains leading search/clear icon20 · value · trailing mic/submit icon20 · appears within below Top bar or top of a list Section
+- **Use case:** Free-text search entry.
 - **Color tokens — `color.input-field`:**
   - **surface**
     - **default**
@@ -1125,7 +1321,11 @@
 
 #### AI Search
 - **Figma:** [`28189-33142`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=28189-33142)
-- **Role:** AI-powered search entry.
+- **Role:** AI / voice search entry.
+- **Behavior:** slot `Control / search` · width: fill · height: fixed
+- **States:** Default · Focus · Dictation started · Transcribing
+- **Composition:** contains search field + mic/AI affordance + transcription state · appears within search surfaces
+- **Use case:** Voice/AI-assisted search.
 - **Color tokens — `color.input-field`:**
   - **surface**
     - **default**
@@ -1198,11 +1398,15 @@
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.1)`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- _anatomy: pending Figma extraction._
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 #### Selectors
 - **Figma:** [`28278-1530`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=28278-1530)
-- **Role:** Selector controls (segmented/option pickers).
+- **Role:** Segmented / option selectors.
+- **Behavior:** slot `Control / selection` · width: fill or hug · height: fixed
+- **States:** default · selected · disabled
+- **Composition:** contains segmented options / option rows · appears within forms, filter sheets
+- **Use case:** Choose one option from a small set.
 - **Color tokens — `color.surface`:**
   - **canvas**
     - `default` → `#ffffff`
@@ -1316,14 +1520,18 @@
       - `muted` → `#ffecab`
       - `disabled` → `#c0bfc8`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- _anatomy: pending Figma extraction._
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 ### 03 · Navigation
 
 
 #### Top bar
-- **Figma:** [`22542-13963`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22542-13963)
-- **Role:** App top/header bar.
+- **Figma:** [`22542-13963`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22542-13963)  ·  **key building block**
+- **Role:** App header bar.
+- **Behavior:** slot `Header (sticky top, respects top safe-area)` · width: fill · height: fixed (token)
+- **States:** default · with title · with back · with actions · transparent/scrolled
+- **Composition:** contains leading (logo/back) · title · trailing action icons · appears within top of every screen
+- **Use case:** Screen identity, back nav, screen-level actions.
 - **Color tokens — `color.surface`:**
   - **canvas**
     - `default` → `#ffffff`
@@ -1397,11 +1605,15 @@
     - `muted` → `#ffe68f`
     - `disabled` → `#c0bfc8`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `heading.xl`(32/Bold), `heading.lg`(28/Bold), `heading.md`(24/Bold), `heading.sm`(20/Bold), `heading.xs`(16/Bold)
-- _anatomy: pending Figma extraction._
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 #### Nav bar
-- **Figma:** [`22542-13964`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22542-13964)
+- **Figma:** [`22542-13964`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22542-13964)  ·  **key building block**
 - **Role:** Bottom navigation bar.
+- **Behavior:** slot `Bottom nav (sticky bottom, global, respects bottom safe-area)` · width: fill · height: fixed (token + inset)
+- **States:** per tab: active / inactive (color/navbar-tab)
+- **Composition:** contains 3–5 nav-tab items (icon + label) · appears within bottom of top-level (tabbed) screens
+- **Use case:** Switch between top-level destinations.
 - **Color tokens — `color.navbar-tab`:**
   - **surface**
     - `focus` → `#ffffff`
@@ -1411,11 +1623,15 @@
     - `focus` → `#e00800`
     - `focus-special` → `#ffffff`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- _anatomy: pending Figma extraction._
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 #### Action bar
 - **Figma:** [`25519-15621`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25519-15621)
-- **Role:** Sticky action bar.
+- **Role:** Sticky action footer.
+- **Behavior:** slot `Footer (sticky, above Nav bar; optional)` · width: fill · height: fixed (hug button + padding)
+- **States:** 1-button · 2-button · with helper text
+- **Composition:** contains 1–2 Buttons (fill-width) · appears within bottom of task/flow screens
+- **Use case:** Persistent primary screen CTA.
 - **Color tokens — `color.surface`:**
   - **canvas**
     - `default` → `#ffffff`
@@ -1534,11 +1750,15 @@
       - `focus` → `#191329`
       - `disabled` → `#c0bfc8`
 - **Typography:** `button.lg`(16/Semi bold), `button.md`(14/Medium), `button.sm`(12/Medium)
-- _anatomy: pending Figma extraction._
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 #### Tabs
 - **Figma:** [`22542-13966`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22542-13966)
-- **Role:** Tab bar.
+- **Role:** In-page tab switcher.
+- **Behavior:** slot `Body / in-page switcher` · width: fill · height: fixed (tabs token)
+- **States:** per tab: selected/default (color/tab) · scrollable if overflow
+- **Composition:** contains tab items (label, optional badge) · appears within below Top bar or inside a Section
+- **Use case:** Switch content within one screen.
 - **Color tokens — `color.tab`:**
   - **surface**
     - **global**
@@ -1561,11 +1781,15 @@
     - `md` → `40`
     - `sm` → `36`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- _anatomy: pending Figma extraction._
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 #### Section link
 - **Figma:** [`25460-83978`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25460-83978)
-- **Role:** Section header link / see-all.
+- **Role:** Section header + see-all.
+- **Behavior:** slot `Body / section header row` · width: fill · height: fixed (section-link token)
+- **States:** with/without action · with/without chevron
+- **Composition:** contains title + 'see all' link/chevron · appears within top of a Section
+- **Use case:** Title a Section and link to its full view.
 - **Color tokens — `color.text`:**
   - **default**
     - `default` → `#191329`
@@ -1603,11 +1827,15 @@
   - `md` → `36`
   - `lg` → `40`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- _anatomy: pending Figma extraction._
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 #### Quick Action
 - **Figma:** [`25507-13670`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25507-13670)
-- **Role:** Quick action shortcuts grid.
+- **Role:** Quick-action shortcut grid.
+- **Behavior:** slot `Body / grid` · width: fill · height: hug
+- **States:** —
+- **Composition:** contains grid of icon + label shortcuts · appears within a Section near top of Home
+- **Use case:** Compact grid of top tasks.
 - **Color tokens — `color.surface`:**
   - **canvas**
     - `default` → `#ffffff`
@@ -1681,14 +1909,18 @@
     - `muted` → `#ffe68f`
     - `disabled` → `#c0bfc8`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- _anatomy: pending Figma extraction._
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 ### 04 · Layout
 
 
 #### Section
-- **Figma:** [`25519-12055`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25519-12055)
-- **Role:** Content section container + header.
+- **Figma:** [`25519-12055`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25519-12055)  ·  **key building block**
+- **Role:** Full-width content container.
+- **Behavior:** slot `Body / container (THE layout wrapper)` · width: fill (full screen width) · height: hug (content)
+- **States:** with/without header (Section link) · padded vs full-bleed body
+- **Composition:** contains optional Section link header + body (Cards / lists / controls / carousels) · appears within the vertical scroll stack between Top bar and Nav bar
+- **Use case:** Group related content into a titled, full-width block. The primary building block of a screen.
 - **Color tokens — `color.surface`:**
   - **canvas**
     - `default` → `#ffffff`
@@ -1775,11 +2007,15 @@
       - `col-8` → `148`
       - `row-16` → `224`
 - **Typography:** `heading.xl`(32/Bold), `heading.lg`(28/Bold), `heading.md`(24/Bold), `heading.sm`(20/Bold), `heading.xs`(16/Bold), `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold)
-- _anatomy: pending Figma extraction._
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 #### Accordion
 - **Figma:** [`27465-29326`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=27465-29326)
-- **Role:** Expand/collapse accordion.
+- **Role:** Expand/collapse container.
+- **Behavior:** slot `Body / container` · width: fill · height: hug (expands/collapses)
+- **States:** expanded · collapsed × disabled
+- **Composition:** contains header row (title + chevron) + collapsible body · appears within a Section (FAQ/details)
+- **Use case:** Progressive disclosure of grouped content.
 - **Color tokens — `color.surface`:**
   - **canvas**
     - `default` → `#ffffff`
@@ -1925,14 +2161,18 @@
       - `muted` → `#ffecab`
       - `disabled` → `#c0bfc8`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- _anatomy: pending Figma extraction._
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 ### 05 · Feedback & Status
 
 
 #### Plan Usage Bar
 - **Figma:** [`26663-89880`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=26663-89880)
-- **Role:** Plan/data usage meter.
+- **Role:** Plan / data usage meter.
+- **Behavior:** slot `Body / status module` · width: fill · height: hug
+- **States:** usage level: normal / warning / danger (color/status)
+- **Composition:** contains label + Progress bar + used/total values · appears within a Section on dashboard/plan screens
+- **Use case:** Show consumption against a plan/quota.
 - **Color tokens — `color.status`:**
   - `default` → `#191329`
   - `accent` → `#e00800`
@@ -2016,11 +2256,15 @@
     - `muted` → `#ffe68f`
     - `disabled` → `#c0bfc8`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- _anatomy: pending Figma extraction._
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 #### Snackbar & Alert msg
 - **Figma:** [`22574-22808`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22574-22808)
-- **Role:** Snackbars and inline alerts.
+- **Role:** Snackbars + inline alerts.
+- **Behavior:** slot `Overlay (transient, bottom) / inline alert` · width: fill (with side margin) · height: hug
+- **States:** info / positive / warning / danger (color/status) · with/without action · auto-dismiss
+- **Composition:** contains status icon + message + optional action + dismiss · appears within floats above content / inline in a Section
+- **Use case:** Transient feedback or inline status message.
 - **Color tokens — `color.status`:**
   - `default` → `#191329`
   - `accent` → `#e00800`
@@ -2104,11 +2348,15 @@
     - `muted` → `#ffe68f`
     - `disabled` → `#c0bfc8`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- _anatomy: pending Figma extraction._
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 #### Alert Modals
 - **Figma:** [`23201-17897`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=23201-17897)
-- **Role:** Modal alerts/dialogs.
+- **Role:** Modal alerts / dialogs.
+- **Behavior:** slot `Overlay (centered modal + scrim)` · width: fill (with margin) / max width · height: hug
+- **States:** info / positive / warning / danger · 1–2 actions
+- **Composition:** contains title + body + action Buttons + dismiss · appears within floats above content with scrim
+- **Use case:** Blocking confirmation / decision.
 - **Color tokens — `color.status`:**
   - `default` → `#191329`
   - `accent` → `#e00800`
@@ -2192,7 +2440,7 @@
     - `muted` → `#ffe68f`
     - `disabled` → `#c0bfc8`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- _anatomy: pending Figma extraction._
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 ### 06 · Overlays
 
@@ -2200,6 +2448,10 @@
 #### Tooltip
 - **Figma:** [`23201-15868`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=23201-15868)
 - **Role:** Tooltip / coachmark.
+- **Behavior:** slot `Overlay (anchored)` · width: hug (max width) · height: hug
+- **States:** placement: top/bottom/left/right · with/without arrow/title
+- **Composition:** contains text (+ optional title) · appears within anchored to a control/icon
+- **Use case:** Contextual hint or coachmark.
 - **Color tokens — `color.surface`:**
   - **canvas**
     - `default` → `#ffffff`
@@ -2273,11 +2525,15 @@
     - `muted` → `#ffe68f`
     - `disabled` → `#c0bfc8`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- _anatomy: pending Figma extraction._
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 #### Bottom sheet
-- **Figma:** [`27907-11716`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=27907-11716)
+- **Figma:** [`27907-11716`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=27907-11716)  ·  **key building block**
 - **Role:** Bottom sheet container.
+- **Behavior:** slot `Overlay (anchored bottom + scrim)` · width: fill · height: hug / variable (snap points, max ~90%)
+- **States:** snap sizes · with/without drag handle/header/footer
+- **Composition:** contains drag handle + header + scrollable content + optional Action bar footer · appears within slides up over content
+- **Use case:** Modal content, pickers, detail panels.
 - **Color tokens — `color.surface`:**
   - **canvas**
     - `default` → `#ffffff`
@@ -2351,14 +2607,18 @@
     - `muted` → `#ffe68f`
     - `disabled` → `#c0bfc8`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- _anatomy: pending Figma extraction._
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 ### 07 · Cards
 
 
 #### General
 - **Figma:** [`26760-100129`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=26760-100129)
-- **Role:** General-purpose card.
+- **Role:** Generic content card.
+- **Behavior:** slot `Card (in a Section)` · width: fill (stacked)  · height: hug
+- **States:** with/without media · with/without action
+- **Composition:** contains media/icon + title + body + optional Button/Badge · appears within a vertical Section
+- **Use case:** Generic content card.
 - **Color tokens — `color.surface`:**
   - **canvas**
     - `default` → `#ffffff`
@@ -2515,11 +2775,15 @@
     - `lg` → `224`
     - `xl` → `336`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- _anatomy: pending Figma extraction._
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 #### Product
 - **Figma:** [`25701-12472`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25701-12472)
 - **Role:** Product card.
+- **Behavior:** slot `Card (carousel item, or stacked)` · width: fixed (carousel) / fill (stacked) · height: hug
+- **States:** default · with badge · out-of-stock/disabled
+- **Composition:** contains image + title + price + Badge + CTA · appears within a horizontal carousel Section
+- **Use case:** Show a buyable product.
 - **Color tokens — `color.surface`:**
   - **canvas**
     - `default` → `#ffffff`
@@ -2676,11 +2940,15 @@
     - `lg` → `224`
     - `xl` → `336`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- _anatomy: pending Figma extraction._
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 #### Deals for you
 - **Figma:** [`25717-33323`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25717-33323)
-- **Role:** Deals card.
+- **Role:** Deal card.
+- **Behavior:** slot `Card (carousel item)` · width: fixed (carousel) · height: hug
+- **States:** default · expiring/limited (Badge)
+- **Composition:** contains image + offer text + Badge + CTA · appears within a horizontal 'Deals for you' carousel Section
+- **Use case:** Personalized offer tile.
 - **Color tokens — `color.surface`:**
   - **canvas**
     - `default` → `#ffffff`
@@ -2837,11 +3105,15 @@
     - `lg` → `224`
     - `xl` → `336`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- _anatomy: pending Figma extraction._
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 #### Plans
 - **Figma:** [`25915-74211`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25915-74211)
 - **Role:** Plan card.
+- **Behavior:** slot `Card (carousel or stacked)` · width: fixed (carousel) / fill (stacked) · height: hug
+- **States:** default · recommended/selected (Badge/border) · disabled
+- **Composition:** contains plan name + price + feature list + Badge + CTA · appears within a plans Section
+- **Use case:** Present a selectable plan.
 - **Color tokens — `color.surface`:**
   - **canvas**
     - `default` → `#ffffff`
@@ -2998,11 +3270,15 @@
     - `lg` → `224`
     - `xl` → `336`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- _anatomy: pending Figma extraction._
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 #### New on e&
 - **Figma:** [`25915-75766`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25915-75766)
 - **Role:** 'New on e&' card.
+- **Behavior:** slot `Card (carousel item)` · width: fixed (carousel) · height: hug
+- **States:** default
+- **Composition:** contains media + title + optional CTA · appears within a 'New on e&' carousel Section
+- **Use case:** Editorial / newly-launched tile.
 - **Color tokens — `color.surface`:**
   - **canvas**
     - `default` → `#ffffff`
@@ -3159,11 +3435,15 @@
     - `lg` → `224`
     - `xl` → `336`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- _anatomy: pending Figma extraction._
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 #### Recommendation
 - **Figma:** _node-id TBD_
 - **Role:** Recommendation card.
+- **Behavior:** slot `Card (carousel item)` · width: fixed (carousel) · height: hug
+- **States:** default
+- **Composition:** contains media + title + CTA · appears within a recommendations carousel Section
+- **Use case:** Recommended item tile.
 - **Color tokens — `color.surface`:**
   - **canvas**
     - `default` → `#ffffff`
@@ -3320,11 +3600,15 @@
     - `lg` → `224`
     - `xl` → `336`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- _anatomy: pending Figma extraction._
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 #### Service
 - **Figma:** [`26019-79144`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=26019-79144)
 - **Role:** Service card.
+- **Behavior:** slot `Card (grid/list cell in a Section)` · width: grid cell / fill (row) · height: hug
+- **States:** default · disabled
+- **Composition:** contains icon + label (+ optional chevron) · appears within a services grid/list Section
+- **Use case:** Entry to a service/feature.
 - **Color tokens — `color.surface`:**
   - **canvas**
     - `default` → `#ffffff`
@@ -3481,7 +3765,7 @@
     - `lg` → `224`
     - `xl` → `336`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- _anatomy: pending Figma extraction._
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 ### 08 · Banners
 
@@ -3489,6 +3773,10 @@
 #### Highlight
 - **Figma:** [`25460-83982`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25460-83982)
 - **Role:** Highlight / promo banner.
+- **Behavior:** slot `Banner (full-bleed, in body)` · width: fill (edge-to-edge) · height: hug / fixed aspect
+- **States:** default · with/without CTA · light/dark media
+- **Composition:** contains background media + title + subtitle + Button · appears within between Sections in the scroll stack
+- **Use case:** Promotional / announcement banner.
 - **Color tokens — `color.surface`:**
   - **canvas**
     - `default` → `#ffffff`
@@ -3639,7 +3927,7 @@
       - `focus` → `#191329`
       - `disabled` → `#c0bfc8`
 - **Typography:** `heading.xl`(32/Bold), `heading.lg`(28/Bold), `heading.md`(24/Bold), `heading.sm`(20/Bold), `heading.xs`(16/Bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- _anatomy: pending Figma extraction._
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 ### 09 · Product-Specific
 
@@ -3647,6 +3935,10 @@
 #### Smiles Balance
 - **Figma:** [`26610-601`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=26610-601)
 - **Role:** Smiles loyalty balance module.
+- **Behavior:** slot `Body module / header widget` · width: fill · height: hug
+- **States:** tier-themed (special palettes)
+- **Composition:** contains points balance + Smiles mark + CTA · appears within a Section near top of Home / rewards screen
+- **Use case:** Show loyalty points balance.
 - **Color tokens — `color.special`:**
   - **mauve**
     - `70` → `#f0e9ed`
@@ -3790,11 +4082,15 @@
     - `muted` → `#ffe68f`
     - `disabled` → `#c0bfc8`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- _anatomy: pending Figma extraction._
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
 
 #### Voucher
 - **Figma:** [`28278-13069`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=28278-13069)
 - **Role:** Voucher / coupon.
+- **Behavior:** slot `Card` · width: fill / fixed (carousel) · height: hug
+- **States:** active · redeemed · expired (status Badge)
+- **Composition:** contains value + code + validity + status Badge · appears within a vouchers/rewards Section
+- **Use case:** Coupon / voucher the user can redeem.
 - **Color tokens — `color.special`:**
   - **mauve**
     - `70` → `#f0e9ed`
@@ -4010,4 +4306,60 @@
       - `muted` → `#ffecab`
       - `disabled` → `#c0bfc8`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- _anatomy: pending Figma extraction._
+- _anatomy: pending Figma extraction (behavior/states above are from the token model)._
+
+
+---
+
+## Screen assembly recipes (UX → UI)
+
+Use this to turn a UX wireframe into a UI screen built from e& components.
+
+### Step 1 — Frame the screen
+- Screen width = device width (e.g. 375). Apply **Top bar** to the header region (sticky, top safe-area).
+- If the UX shows a persistent bottom tab bar → **Nav bar** (sticky, bottom safe-area). The area between Top bar and Nav bar is the **vertical scroll body**.
+- If the UX has one persistent primary CTA pinned at the bottom → **Action bar** (sticky, sits above Nav bar).
+
+### Step 2 — Split the body into Sections
+- Every distinct UX content block becomes a full-width **Section** (`width: fill`, `height: hug`).
+- If the block has a title (and maybe a "see all") → add a **Section link** header at the top of the Section.
+- Stack Sections vertically with the section gap token.
+
+### Step 3 — Fill each Section by matching the UX pattern
+| UX pattern in the wireframe | e& component(s) to use |
+|---|---|
+| Horizontal row of tiles / "cards you swipe" | carousel of **Product / Deals for you / New on e& / Recommendation / Plans** cards (`width: fixed`) |
+| Vertical list of content blocks | **General** cards or list rows (`width: fill`) |
+| Grid of icon+label shortcuts | **Quick Action** (or **Service** cells) |
+| Row of filter/sort chips | **Filter Pill** / **Chips** (`width: hug`, horizontal scroll) |
+| Tab switcher inside the screen | **Tabs** |
+| Form (text, choices, toggles) | **Input Field, Searchbar, Checkbox, Radio, Switcher, Selectors** |
+| Promo / announcement strip | **Highlight** banner (full-bleed) |
+| Usage / quota meter | **Plan Usage Bar** |
+| Expandable FAQ/detail | **Accordion** |
+| Loyalty points | **Smiles Balance** · Coupons → **Voucher** |
+
+### Step 4 — Overlays & feedback (not in the scroll flow)
+- Modal content / picker → **Bottom sheet**. Blocking decision → **Alert modal**. Transient toast → **Snackbar**. Contextual hint → **Tooltip**.
+
+### Step 5 — Apply the rules
+- **Controls** (Button, Input, Chip, Filter pill, Checkbox, Radio, Switcher, Searchbar, Tabs) → `width: fill` (or `hug` for inline chips/pills) + **fixed** token height.
+- **Containers** (Section, all Cards, Accordion, Bottom sheet) → `width: fill` + **hug** content height with token paddings.
+- **Bars** (Top bar, Nav bar, Action bar) → `width: fill` + **fixed** token height.
+- Inset padded content by the screen gutter; let banners/carousels bleed to the edges.
+- Apply color/typography/spacing/radius tokens from **Global foundations**. Mirror horizontally for Arabic (RTL).
+
+### Worked example — a Home screen
+```
+[ Top bar ]                         ← header: logo (leading) + profile/notification icons (trailing)
+──────────── scroll body ────────────
+[ Section ] Smiles Balance          ← loyalty module, fill width
+[ Section · "Quick actions" ]       ← Quick Action grid
+[ Section · "Deals for you" + see-all ]  ← horizontal carousel of Deals cards (fixed width)
+[ Highlight ] promo banner          ← full-bleed
+[ Section · "Plans" + see-all ]     ← carousel of Plan cards
+[ Section · "Services" ]            ← Service grid
+──────────────────────────────────────
+[ Nav bar ]                         ← Home · Shop · Services · More (active = Home)
+```
+
