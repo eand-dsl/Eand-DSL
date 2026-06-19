@@ -1,0 +1,5 @@
+  - **Variants:** `category` (3d-icon, icon, logo) × `size` (2xl, 3xl, 4xl, lg, md, sm, xl, xs).
+  - **Dimensions:** 48×48 · 40×40 · 32×32 · 24×24 · 20×20 · 16×16.
+  - **Shape:** pill/fully-rounded.
+  - **Anatomy parts:** bookmark, banner, flag, tag.
+  - **Figma node:** `25460:22589`

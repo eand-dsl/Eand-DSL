@@ -244,7 +244,10 @@
 #### e& Logo
 - **Figma:** [`27020-6155`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=27020-6155)
 - **Role:** Brand logo lockups (primary, mono, app icon).
-- _anatomy: pending Figma extraction (no dedicated token group; uses shared semantic tokens)._
+- **Anatomy (from Figma):**
+  - **Variants:** `version` (default, midnight, red, white).
+  - **Dimensions:** 100×100 · 96×96.
+  - **Figma node:** `27020:6155`
 
 #### Badges
 - **Figma:** [`22668-60275`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22668-60275)
@@ -304,7 +307,14 @@
       - `silver-number-plus` → `#ffffff`
       - `bronze-number` → `#ffffff`
 - **Typography:** `badge.lg`(14/Book), `badge.md`(12/Book), `badge.sm`(10/Book)
-- _anatomy: pending Figma extraction._
+- **Anatomy (from Figma):**
+  - **Variants:** `size` (lg, md, sm) × `type` (Best seller, Bronze number, Discount, Exclusive for Emirati, Gold number, Gold+ number, Green friday, Limited stock, Limited time offer, Mega deals, New card, New plan, Online exclusive, Platinum number, Silver number, Silver+ number, Sold out, Valid for 2 days, danger, disabled, neutral, positive, warning).
+  - **Dimensions:** 147×24 · 131×24 · 128×24 · 123×24 · 122×24 · 116×24.
+  - **Shape:** corner radius 8.
+  - **Anatomy parts:** label.
+  - **Specs (from Figma):**
+    - For desktop minimum label size is 52px, both for small and medium label and 54px for the large label.
+  - **Figma node:** `22668:60275`
 
 #### Icon size
 - **Figma:** [`25460-22589`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25460-22589)
@@ -318,7 +328,12 @@
   - `2xl` → `32`
   - `3xl` → `40`
   - `4xl` → `48`
-- _anatomy: pending Figma extraction._
+- **Anatomy (from Figma):**
+  - **Variants:** `category` (3d-icon, icon, logo) × `size` (2xl, 3xl, 4xl, lg, md, sm, xl, xs).
+  - **Dimensions:** 48×48 · 40×40 · 32×32 · 24×24 · 20×20 · 16×16.
+  - **Shape:** pill/fully-rounded.
+  - **Anatomy parts:** bookmark, banner, flag, tag.
+  - **Figma node:** `25460:22589`
 
 #### Logo row
 - **Figma:** [`25996-32494`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25996-32494)

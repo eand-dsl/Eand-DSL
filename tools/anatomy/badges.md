@@ -1,0 +1,7 @@
+  - **Variants:** `size` (lg, md, sm) × `type` (Best seller, Bronze number, Discount, Exclusive for Emirati, Gold number, Gold+ number, Green friday, Limited stock, Limited time offer, Mega deals, New card, New plan, Online exclusive, Platinum number, Silver number, Silver+ number, Sold out, Valid for 2 days, danger, disabled, neutral, positive, warning).
+  - **Dimensions:** 147×24 · 131×24 · 128×24 · 123×24 · 122×24 · 116×24.
+  - **Shape:** corner radius 8.
+  - **Anatomy parts:** label.
+  - **Specs (from Figma):**
+    - For desktop minimum label size is 52px, both for small and medium label and 54px for the large label.
+  - **Figma node:** `22668:60275`

@@ -1,0 +1,3 @@
+  - **Variants:** `version` (default, midnight, red, white).
+  - **Dimensions:** 100×100 · 96×96.
+  - **Figma node:** `27020:6155`
