@@ -1,0 +1,5 @@
+  - **Type:** consumption meter (data/minutes/quota vs plan).
+  - **Anatomy:** label + used/total values + **Progress bar** fill; optional status text/CTA ('Add data').
+  - **States (by level):** normal · warning (near limit) · danger (over/depleted) — `color/status/*`.
+  - **Sizing:** width fill; height hug.
+  - **Make hint:** map a UX usage/quota meter; pick level color by remaining %.

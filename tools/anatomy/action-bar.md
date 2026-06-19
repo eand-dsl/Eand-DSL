@@ -1,0 +1,5 @@
+  - **Type:** sticky action footer pinned above the Nav bar (or to the bottom on flow screens).
+  - **Anatomy:** top divider/elevation + 1–2 Buttons (fill-width) + optional helper text/price above.
+  - **Variants:** single primary · primary + secondary (stacked or side-by-side) · with helper/summary row.
+  - **Sizing:** width fill; height hug (button height + `spacing` padding); respects bottom inset.
+  - **Make hint:** when a UX screen has one persistent primary CTA at the bottom, use this (not an inline Button).

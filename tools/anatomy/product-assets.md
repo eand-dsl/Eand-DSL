@@ -1,0 +1,5 @@
+  - **Type:** product imagery / illustration assets. _(no node-id yet — send link to verify)_
+  - **Anatomy:** image asset rendered at a fixed aspect ratio; consistent background/padding within tiles.
+  - **States:** loaded · placeholder/skeleton.
+  - **Sizing:** fills its tile width or fixed tile size; height by aspect ratio.
+  - **Make hint:** the media slot inside Product/Deals/New cards.

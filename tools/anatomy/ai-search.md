@@ -1,0 +1,5 @@
+  - **Type:** AI / voice-assisted search entry.
+  - **Anatomy:** search field + mic/AI affordance; expands into dictation/transcription UI (waveform + live transcript + stop).
+  - **States:** Default · Focus · Dictation started · Transcribing (→ user taps stop). _(states confirmed via REST)_
+  - **Sizing:** width fill; height fixed (collapsed); expands when dictating.
+  - **Make hint:** UX 'search with mic / ask AI' → this; otherwise use Searchbar.

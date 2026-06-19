@@ -1,0 +1,5 @@
+  - **Type:** quick-action shortcut grid (top tasks on Home).
+  - **Anatomy:** grid (typically 4-up per row) of cells = circular/rounded icon tile + short label below; wraps to multiple rows.
+  - **States:** default · pressed · disabled (per cell); optional badge on a cell.
+  - **Sizing:** container width fill, height hug; cells equal-width (grid), fixed-height each.
+  - **Make hint:** map a UX grid of small icon+label shortcuts here.

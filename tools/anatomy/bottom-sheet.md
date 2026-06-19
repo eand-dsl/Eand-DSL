@@ -1,0 +1,5 @@
+  - **Type:** modal panel sliding up from the bottom over a scrim.
+  - **Anatomy:** drag handle (grabber) + optional header (title + dismiss) + scrollable content + optional sticky footer (Action bar).
+  - **States:** snap points (peek / half / full ~90%); with/without handle/header/footer; dismiss by drag-down or scrim tap.
+  - **Sizing:** width fill; height variable up to ~90% screen; content scrolls inside.
+  - **Make hint:** map UX 'slide-up panel / picker / detail drawer' here; put its primary CTA in the sheet's footer Action bar.

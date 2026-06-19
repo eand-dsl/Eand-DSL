@@ -1,0 +1,5 @@
+  - **Type:** product tile (device/accessory/plan add-on).
+  - **Anatomy:** product image + title + price (+ strikethrough/discount) + optional Badge (promo/new) + CTA (Add/Buy).
+  - **States:** default · discounted (Badge) · out-of-stock/disabled.
+  - **Sizing:** **fixed width** in a horizontal carousel; **fill width** if stacked. Height hug.
+  - **Make hint:** UX 'swipeable product row' → carousel Section of these (fixed width).

@@ -1,0 +1,5 @@
+  - **Type:** centered modal dialog over a scrim (blocking decision).
+  - **Anatomy:** optional illustration/icon + title + body text + action Buttons (1–2, stacked or row) + optional dismiss (×).
+  - **States:** info · positive · warning · danger; 1-action (acknowledge) · 2-action (confirm/cancel).
+  - **Sizing:** width fill with side margin (max width); height hug; centered; scrim behind.
+  - **Make hint:** use for confirmations/irreversible actions; not for transient info (use snackbar).

@@ -1,0 +1,5 @@
+  - **Type:** selectable plan card (tariff/bundle).
+  - **Anatomy:** plan name + price/period + feature list (data/mins/SMS) + Badge (recommended) + CTA (Choose); optional highlighted border when recommended/selected.
+  - **States:** default · recommended/selected (Badge + border) · disabled.
+  - **Sizing:** fixed width (carousel) or fill (stacked comparison); height hug.
+  - **Make hint:** UX plan picker → carousel or stacked Section of these; mark one 'recommended'.

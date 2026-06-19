@@ -1,0 +1,5 @@
+  - **Type:** the primary full-width body container — groups related content into a titled block.
+  - **Anatomy:** optional **Section link** header → body content (any of: card carousel, stacked cards, list rows, grid, controls). Vertical padding + inter-item gap from `size.section`.
+  - **Variants:** with/without header · padded body vs full-bleed body (carousels/banners bleed to edges) · light vs inverse surface.
+  - **Sizing:** width **fill** (full screen width); height **hug** content.
+  - **Make hint:** every distinct UX content block → one Section. Stack Sections vertically in the scroll body with the section-gap token.

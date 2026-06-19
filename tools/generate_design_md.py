@@ -53,6 +53,11 @@ def md_tree(d, indent=0):
 WEIGHT_NUM = {"Thin":"100","Light":"300","Regular":"400","Book":"450","Medium":"500",
               "Semi bold":"600","Bold":"700","Black":"800"}
 
+# Slugs whose anatomy was pulled directly from Figma (verified). All others with an
+# anatomy file are token-model-derived (labeled accordingly, pending verification).
+VERIFIED = {"buttons","input-field","chips","filter-pill","switcher","checkbox","radio",
+            "searchbar","eand-logo","badges","icon-size","top-bar"}
+
 # ---- component inventory: (name, node, role, color_groups, size_groups, typo_groups)
 SECTIONS = [
  ("01 · Primitives", [
@@ -445,9 +450,11 @@ def main():
                 if styles: w(f"- **Typography:** {', '.join(styles)}")
             apath = os.path.join(ANATOMY, slug + ".md")
             if os.path.exists(apath):
-                w("- **Anatomy (from Figma):**"); w(open(apath).read().rstrip())
+                label = ("Anatomy (Figma-verified)" if slug in VERIFIED
+                         else "Anatomy (derived from token model — Figma verification pending)")
+                w(f"- **{label}:**"); w(open(apath).read().rstrip())
             else:
-                w("- _anatomy: pending Figma extraction (behavior/states above are from the token model)._")
+                w("- _anatomy: pending (behavior/states above are from the token model)._")
 
     # ---------------- Assembly recipes ----------------
     w("\n\n---\n\n" + ASSEMBLY)

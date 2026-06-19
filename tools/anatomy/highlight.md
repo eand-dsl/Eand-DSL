@@ -1,0 +1,5 @@
+  - **Type:** promotional / announcement banner (full-bleed).
+  - **Anatomy:** background media/color + title + subtitle + CTA (Button) + optional logo/badge; can be a single banner or a swipeable carousel with dots.
+  - **States:** default · with/without CTA · light vs dark media (text/`button` tone adapts) · single vs carousel.
+  - **Sizing:** width fill **edge-to-edge** (bleeds past the screen gutter); height hug / fixed aspect.
+  - **Make hint:** UX hero/promo strip → place between Sections, full-bleed.

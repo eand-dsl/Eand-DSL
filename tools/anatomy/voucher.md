@@ -1,0 +1,5 @@
+  - **Type:** voucher / coupon.
+  - **Anatomy:** value/offer + code (with copy affordance) + validity/expiry + status Badge; often a ticket shape (notch/perforation).
+  - **States:** active · redeemed · expired (status Badge + dimming).
+  - **Sizing:** width fill (stacked) or fixed (carousel); height hug.
+  - **Make hint:** UX coupons/rewards list → Section of these; reflect status via Badge.

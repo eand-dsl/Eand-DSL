@@ -1,0 +1,5 @@
+  - **Type:** in-page tab switcher (segment the content of one screen).
+  - **Anatomy:** horizontal row of tab items (label, optional leading icon/badge) + active indicator (underline/pill); scrolls horizontally if items overflow.
+  - **States (per tab):** selected · default · disabled — `color/tab/*`; sizing from `size.tabs`.
+  - **Sizing:** width fill; height fixed (`tabs` token). Items hug or equal-distributed.
+  - **Make hint:** map a UX in-screen segmented control / tab strip here; place directly under Top bar or at a Section's top.

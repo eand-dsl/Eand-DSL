@@ -1,0 +1,5 @@
+  - **Type:** recommended item tile (cross-sell/upsell). _(no node-id yet — send link to verify)_
+  - **Anatomy:** media + title + short reason + CTA; optional Badge.
+  - **States:** default · disabled.
+  - **Sizing:** fixed width (carousel item); height hug.
+  - **Make hint:** UX 'Recommended for you' row → carousel Section.

@@ -1,0 +1,5 @@
+  - **Type:** option selectors (segmented control / option rows / quantity / dropdown trigger).
+  - **Anatomy:** group of options (segments or rows) with a selected indicator; or a value field + chevron that opens a Bottom sheet/menu.
+  - **States:** default · selected · disabled; single-select.
+  - **Sizing:** width fill or hug; height fixed.
+  - **Make hint:** UX 'pick one of a few' → segmented Selectors; 'pick from many' → Selector that opens a Bottom sheet.

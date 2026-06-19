@@ -1,0 +1,5 @@
+  - **Type:** small contextual hint / coachmark anchored to a control.
+  - **Anatomy:** container + text (optional title) + directional arrow pointing at the anchor; optional dismiss for coachmarks.
+  - **States (placement):** top · bottom · left · right (arrow follows); with/without title.
+  - **Sizing:** width hug (max width, wraps); height hug.
+  - **Make hint:** attach to an icon/control that needs explanation; keep copy short.

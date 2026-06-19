@@ -1,0 +1,5 @@
+  - **Type:** editorial 'newly launched' tile.
+  - **Anatomy:** media (image/illustration) + title + optional subtitle/CTA.
+  - **States:** default; optional 'New' Badge.
+  - **Sizing:** fixed width (carousel item); height hug.
+  - **Make hint:** UX 'New on e&' discovery row → carousel Section.

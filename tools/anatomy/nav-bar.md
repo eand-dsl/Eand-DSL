@@ -1,0 +1,5 @@
+  - **Type:** bottom tab bar — 3–5 destinations, sticky, respects bottom safe-area.
+  - **Item anatomy:** icon (24) over label (caption), centered; equal-width items. Optional badge dot/count on an item; optional center emphasized/FAB item.
+  - **States (per item):** active (icon + label use accent/brand) · inactive (muted) — `color/navbar-tab/*`.
+  - **Sizing:** width fill; height fixed (token) + bottom inset.
+  - **Make hint:** map any persistent UX bottom tab bar here; set the current screen's tab to active.

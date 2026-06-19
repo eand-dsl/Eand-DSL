@@ -1,0 +1,5 @@
+  - **Type:** service/feature entry.
+  - **Anatomy:** icon (or small image) + label (+ optional sublabel/chevron). Grid cell or full-width list row.
+  - **States:** default · pressed · disabled; optional badge.
+  - **Sizing:** grid cell (equal width) or fill (row); height hug/fixed-row.
+  - **Make hint:** UX services grid/list → Section of these (grid for icon+label, rows for richer items).

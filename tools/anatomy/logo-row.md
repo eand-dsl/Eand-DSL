@@ -1,0 +1,5 @@
+  - **Type:** row of partner/product logos.
+  - **Anatomy:** horizontal row (or wrap) of equal-height logo lockups with consistent gaps; optional 'as seen on / partners' label.
+  - **States:** default; scroll if overflow.
+  - **Sizing:** width fill; height hug (logos share a fixed height).
+  - **Make hint:** UX 'partners / works with' strip → this inside a Section.

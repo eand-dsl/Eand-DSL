@@ -1,0 +1,5 @@
+  - **Type:** expand/collapse disclosure container (FAQ, details).
+  - **Anatomy:** header row (title + trailing chevron, rotates) + collapsible body; divider between items; chevron up=expanded / down=collapsed.
+  - **States:** collapsed · expanded × disabled; single- or multi-open.
+  - **Sizing:** width fill; height hug (animates between collapsed/expanded).
+  - **Make hint:** map a UX list of expandable rows / FAQ here.

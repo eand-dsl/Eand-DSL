@@ -1,0 +1,5 @@
+  - **Type:** personalized offer/deal tile.
+  - **Anatomy:** image/brand + offer headline + sub/terms + Badge (expiring/limited) + CTA.
+  - **States:** default · expiring/limited (Badge) · redeemed/disabled.
+  - **Sizing:** fixed width (carousel item); height hug.
+  - **Make hint:** UX 'Deals for you' horizontal scroller → carousel Section of these.

@@ -1,0 +1,5 @@
+  - **Type:** add / plus trigger (entry to add an item).
+  - **Anatomy:** plus icon + label (e.g. 'Add line', 'Add card'); dashed/ghost container or inline link style.
+  - **States:** default · pressed · disabled.
+  - **Sizing:** width hug (or fill as a list row); height fixed.
+  - **Make hint:** UX 'add new …' affordance at the end of a list/form.
