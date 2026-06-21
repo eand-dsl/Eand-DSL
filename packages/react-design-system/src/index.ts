@@ -9,3 +9,7 @@ export type { ButtonProps, ButtonVariant, ButtonTone, ButtonSize } from './compo
 export * from './components/primitives';
 export * from './components/layout';
 export * from './components/navigation';
+export * from './components/controls';
+export * from './components/feedback';
+export * from './components/overlays';
+export * from './components/cards';
