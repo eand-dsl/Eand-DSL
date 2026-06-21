@@ -21,10 +21,8 @@ test('disabled blocks the click', async () => {
   expect(fn).not.toHaveBeenCalled();
 });
 
-test('primary/brand wires the brand surface token', () => {
+test('primary/brand renders the brand surface color inline', () => {
   render(<Button variant="primary" tone="brand">Buy</Button>);
-  const btn = screen.getByRole('button');
-  expect(btn.style.getPropertyValue('--btn-surface')).toBe(
-    'var(--eand-color-button-primary-surface-brand-default)',
-  );
+  // jsdom normalizes hex -> rgb
+  expect(screen.getByRole('button').style.background).toMatch(/#e00800|rgb\(224,\s*8,\s*0\)/i);
 });
