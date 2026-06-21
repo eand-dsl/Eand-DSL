@@ -1,0 +1,31 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--eand-spacing-2xs);
+  border: 2px solid var(--btn-border, transparent);
+  border-radius: var(--eand-border-radius-8);
+  background: var(--btn-surface);
+  color: var(--btn-text);
+  font-family: var(--eand-typography-button-md-font-family), -apple-system, system-ui, sans-serif;
+  font-weight: var(--eand-typography-button-md-font-weight);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+}
+.button:hover:not(:disabled) {
+  background: var(--btn-surface-focus);
+  color: var(--btn-text-focus);
+  border-color: var(--btn-border-focus, transparent);
+}
+.button:disabled {
+  background: var(--btn-surface-disabled);
+  color: var(--btn-text-disabled);
+  border-color: var(--btn-border-disabled, transparent);
+  cursor: not-allowed;
+}
+.sm { height: 32px; padding: 0 var(--eand-spacing-sm); font-size: var(--eand-typography-button-sm-font-size); }
+.md { height: 40px; padding: 0 var(--eand-spacing-lg); font-size: var(--eand-typography-button-md-font-size); }
+.lg { height: 48px; padding: 0 var(--eand-spacing-xl); font-size: var(--eand-typography-button-lg-font-size); }
+.block { width: 100%; }
+.icon { display: inline-flex; width: 20px; height: 20px; }
