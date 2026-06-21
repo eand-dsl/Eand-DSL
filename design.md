@@ -370,7 +370,7 @@
 
 
 #### e& Logo
-- **Figma:** [`27020-6155`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=27020-6155)
+- **Figma:** [`27020-6155`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=27020-6155)
 - **Role:** Brand logo lockups.
 - **Behavior:** slot `Primitive / brand` · width: hug · height: fixed (lockup sizes)
 - **States:** version: primary · monochrome · app-icon
@@ -382,7 +382,7 @@
   - **Figma node:** `27020:6155`
 
 #### Badges
-- **Figma:** [`22668-60275`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22668-60275)
+- **Figma:** [`22668-60275`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=22668-60275)
 - **Role:** Membership/status/promo badges.
 - **Behavior:** slot `Primitive / indicator (inline)` · width: hug · height: fixed (24; lg/md/sm)
 - **States:** type (tier: Gold/Silver/Platinum/Bronze/+ · promo: Best seller/Discount/New/Sold out/Limited… · status: positive/warning/danger/neutral/disabled) × size (lg/md/sm)
@@ -453,7 +453,7 @@
   - **Figma node:** `22668:60275`
 
 #### Icon size
-- **Figma:** [`25460-22589`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25460-22589)
+- **Figma:** [`25460-22589`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25460-22589)
 - **Role:** Icon sizing scale.
 - **Behavior:** slot `Primitive / token (sizing scale)` · width: n/a · height: fixed (xs8 sm12 md16 lg20 xl24 2xl32 3xl40 4xl48)
 - **States:** category: icon · 3d-icon · logo
@@ -476,7 +476,7 @@
   - **Figma node:** `25460:22589`
 
 #### Logo row
-- **Figma:** [`25996-32494`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25996-32494)
+- **Figma:** [`25996-32494`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25996-32494)
 - **Role:** Row of partner/product logos.
 - **Behavior:** slot `Primitive / media row` · width: fill · height: hug
 - **States:** —
@@ -504,7 +504,7 @@
   - **Make hint:** top-right of Sheets/Modals/Snackbars; trailing on removable Chips/Searchbar.
 
 #### Progress bar
-- **Figma:** [`26663-89882`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=26663-89882)
+- **Figma:** [`26663-89882`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=26663-89882)
 - **Role:** Linear progress indicator.
 - **Behavior:** slot `Primitive / status` · width: fill · height: fixed (thin track token)
 - **States:** determinate (0–100%) · indeterminate
@@ -528,7 +528,7 @@
   - **Make hint:** use inside Plan Usage Bar, onboarding/step flows, uploads.
 
 #### Add trigger
-- **Figma:** [`25752-11470`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25752-11470)
+- **Figma:** [`25752-11470`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25752-11470)
 - **Role:** Add / plus trigger control.
 - **Behavior:** slot `Primitive / control` · width: hug · height: fixed
 - **States:** default · pressed · disabled
@@ -633,7 +633,7 @@
   - **Make hint:** the media slot inside Product/Deals/New cards.
 
 #### Atom Surfaces
-- **Figma:** [`26729-91998`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=26729-91998)
+- **Figma:** [`26729-91998`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=26729-91998)
 - **Role:** Base container surfaces.
 - **Behavior:** slot `Primitive / surface` · width: fill · height: hug
 - **States:** surface levels (canvas/base/raised/sunken)
@@ -699,7 +699,7 @@
 
 
 #### Buttons
-- **Figma:** [`22542-13972`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22542-13972)
+- **Figma:** [`22542-13972`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=22542-13972)
 - **Role:** Primary/secondary/tertiary/link buttons.
 - **Behavior:** slot `Control / CTA` · width: fill (block CTA) or hug (inline) · height: fixed (lg48 / md40 / sm32)
 - **States:** type (primary/secondary/tertiary/link) × tone (brand/inverse/midnight/white) × state (default/focus/disabled)
@@ -795,7 +795,7 @@
   - **Figma:** variant symbols live under section `Buttons`; e.g. primary·md·brand·default = `25421:83005`, secondary·lg·brand·default = `25421:84746`.
 
 #### Input Field
-- **Figma:** [`22609-113539`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22609-113539)
+- **Figma:** [`22609-113539`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=22609-113539)
 - **Role:** Text input with label/helper/error.
 - **Behavior:** slot `Control / form` · width: fill · height: fixed (~52 + label/status)
 - **States:** style (Filled/Outlined) × state (Enabled/Hovered/Focused/Error/Disabled) × leading/trailing icon · types: text/comment/dropdown/otp/picker
@@ -849,7 +849,7 @@
   - **Figma:** component set under `Input` (e.g. Filled·Enabled·no-icons = `28817:43927`).
 
 #### Chips
-- **Figma:** [`28171-29640`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=28171-29640)
+- **Figma:** [`28171-29640`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=28171-29640)
 - **Role:** Selectable chips / tags.
 - **Behavior:** slot `Control / selection (inline)` · width: hug · height: fixed (40)
 - **States:** state (default/focus/disabled) × icon (on/off) · Loader
@@ -900,7 +900,7 @@
   - **Figma:** component set under `Chips` (`28472:2809`).
 
 #### Filter Pill
-- **Figma:** [`25581-9146`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25581-9146)
+- **Figma:** [`25581-9146`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25581-9146)
 - **Role:** Filter pills with chevron.
 - **Behavior:** slot `Control / filter (inline)` · width: hug · height: fixed (40)
 - **States:** state (default/focus/disabled) × color (default/inverse)
@@ -939,7 +939,7 @@
   - **Figma variants:** symbols under `filter-pill` — State=Default,Color=Default `26130:30745`; Focused `26151:392`; Disabled `26151:442`; Inverse set `26151:3656/3664/3672`.
 
 #### Checkbox
-- **Figma:** [`25394-83294`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25394-83294)
+- **Figma:** [`25394-83294`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25394-83294)
 - **Role:** Checkbox control.
 - **Behavior:** slot `Control / form` · width: fixed · height: fixed (lg24 / sm20)
 - **States:** selected (yes/no) × disabled × size
@@ -1030,7 +1030,7 @@
   - **Figma:** component set under `checkbox` (`29200:17377`).
 
 #### Switcher
-- **Figma:** [`25394-82591`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25394-82591)
+- **Figma:** [`25394-82591`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25394-82591)
 - **Role:** Toggle switch.
 - **Behavior:** slot `Control / form` · width: fixed (lg56 / sm48) · height: fixed (24 / 20)
 - **States:** state (on/off) × disabled × color-scheme (default/inverse) × size
@@ -1173,7 +1173,7 @@
   - **Figma:** component set under `switcher` (`26215:7141`); default·lg·On·enabled = `26215:7142`.
 
 #### Radio
-- **Figma:** [`25394-83997`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25394-83997)
+- **Figma:** [`25394-83997`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25394-83997)
 - **Role:** Radio control.
 - **Behavior:** slot `Control / form` · width: fixed · height: fixed (lg24 / sm20)
 - **States:** selected (yes/no) × disabled
@@ -1263,7 +1263,7 @@
   - **Figma:** component set under `radio-button` (`26369:775`).
 
 #### Searchbar
-- **Figma:** [`28114-62397`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=28114-62397)
+- **Figma:** [`28114-62397`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=28114-62397)
 - **Role:** Search input.
 - **Behavior:** slot `Control / search` · width: fill · height: fixed (52)
 - **States:** Default · Typing · Typed × surface (white/midnight)
@@ -1350,7 +1350,7 @@
   - **Figma:** section `Standard search` (`28114:62804`); example node `28114:62809`.
 
 #### AI Search
-- **Figma:** [`28189-33142`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=28189-33142)
+- **Figma:** [`28189-33142`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=28189-33142)
 - **Role:** AI / voice search entry.
 - **Behavior:** slot `Control / search` · width: fill · height: fixed
 - **States:** Default · Focus · Dictation started · Transcribing
@@ -1436,7 +1436,7 @@
   - **Make hint:** UX 'search with mic / ask AI' → this; otherwise use Searchbar.
 
 #### Selectors
-- **Figma:** [`28278-1530`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=28278-1530)
+- **Figma:** [`28278-1530`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=28278-1530)
 - **Role:** Segmented / option selectors.
 - **Behavior:** slot `Control / selection` · width: fill or hug · height: fixed
 - **States:** default · selected · disabled
@@ -1566,7 +1566,7 @@
 
 
 #### Top bar
-- **Figma:** [`22542-13963`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22542-13963)  ·  **key building block**
+- **Figma:** [`22542-13963`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=22542-13963)  ·  **key building block**
 - **Role:** App header bar.
 - **Behavior:** slot `Header (sticky top, respects top safe-area)` · width: fill · height: fixed (token)
 - **States:** default · with title · with back · with actions · transparent/scrolled
@@ -1661,7 +1661,7 @@
   - **Figma:** node `22542:13963` · Title+Action set `22563:20493` · Top-nav buttons `15069:1401` · Profile header `15483:931` · master `29547:11339`.
 
 #### Nav bar
-- **Figma:** [`22542-13964`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22542-13964)  ·  **key building block**
+- **Figma:** [`22542-13964`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=22542-13964)  ·  **key building block**
 - **Role:** Bottom navigation bar.
 - **Behavior:** slot `Bottom nav (sticky bottom, global, respects bottom safe-area)` · width: fill · height: fixed (token + inset)
 - **States:** per tab: active / inactive (color/navbar-tab)
@@ -1684,7 +1684,7 @@
   - **Make hint:** map any persistent UX bottom tab bar here; set the current screen's tab to active.
 
 #### Action bar
-- **Figma:** [`25519-15621`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25519-15621)
+- **Figma:** [`25519-15621`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25519-15621)
 - **Role:** Sticky action footer.
 - **Behavior:** slot `Footer (sticky, above Nav bar; optional)` · width: fill · height: fixed (hug button + padding)
 - **States:** 1-button · 2-button · with helper text
@@ -1816,7 +1816,7 @@
   - **Make hint:** when a UX screen has one persistent primary CTA at the bottom, use this (not an inline Button).
 
 #### Tabs
-- **Figma:** [`22542-13966`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22542-13966)
+- **Figma:** [`22542-13966`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=22542-13966)
 - **Role:** In-page tab switcher.
 - **Behavior:** slot `Body / in-page switcher` · width: fill · height: fixed (tabs token)
 - **States:** per tab: selected/default (color/tab) · scrollable if overflow
@@ -1844,15 +1844,16 @@
     - `md` → `40`
     - `sm` → `36`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** in-page tab switcher (segment the content of one screen).
-  - **Anatomy:** horizontal row of tab items (label, optional leading icon/badge) + active indicator (underline/pill); scrolls horizontally if items overflow.
-  - **States (per tab):** selected · default · disabled — `color/tab/*`; sizing from `size.tabs`.
-  - **Sizing:** width fill; height fixed (`tabs` token). Items hug or equal-distributed.
-  - **Make hint:** map a UX in-screen segmented control / tab strip here; place directly under Top bar or at a Section's top.
+- **Anatomy (Figma-verified):**
+  - **Type:** **Pill Tabs** — pill-shaped tab switcher. Two scopes: **Global** (top-level page tabs; focused = brand red) and **Local** (in-section tabs; focused = brand midnight).
+  - **States:** Default (unselected, neutral) · Focused/active (selected). Global vs Local differ only in the focus color.
+  - **Anatomy:** each tab = `tab-content` = optional icon (20) + label (single line, never wraps). A row of pills; scrolls horizontally on overflow.
+  - **Dimensions:** height **fixed 40px** (2.5rem) · width **hug content** (~110px, varies with label) · corner radius **1200 (pill)** · icon **20px**.
+  - **Tokens:** `color/tab/*`; sizing `size.tabs`.
+  - **Figma:** node `22542:13966` · component set `pill-tabs` `25502:12416`.
 
 #### Section link
-- **Figma:** [`25460-83978`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25460-83978)
+- **Figma:** [`25460-83978`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25460-83978)
 - **Role:** Section header + see-all.
 - **Behavior:** slot `Body / section header row` · width: fill · height: fixed (section-link token)
 - **States:** with/without action · with/without chevron
@@ -1903,7 +1904,7 @@
   - **Make hint:** add at the top of any titled Section; link to the full list/screen.
 
 #### Quick Action
-- **Figma:** [`25507-13670`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25507-13670)
+- **Figma:** [`25507-13670`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25507-13670)
 - **Role:** Quick-action shortcut grid.
 - **Behavior:** slot `Body / grid` · width: fill · height: hug
 - **States:** —
@@ -1993,7 +1994,7 @@
 
 
 #### Section
-- **Figma:** [`25519-12055`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25519-12055)  ·  **key building block**
+- **Figma:** [`25519-12055`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25519-12055)  ·  **key building block**
 - **Role:** Full-width content container.
 - **Behavior:** slot `Body / container (THE layout wrapper)` · width: fill (full screen width) · height: hug (content)
 - **States:** with/without header (Section link) · padded vs full-bleed body
@@ -2093,7 +2094,7 @@
   - **Make hint:** every distinct UX content block → one Section. Stack Sections vertically in the scroll body with the section-gap token.
 
 #### Accordion
-- **Figma:** [`27465-29326`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=27465-29326)
+- **Figma:** [`27465-29326`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=27465-29326)
 - **Role:** Expand/collapse container.
 - **Behavior:** slot `Body / container` · width: fill · height: hug (expands/collapses)
 - **States:** expanded · collapsed × disabled
@@ -2255,7 +2256,7 @@
 
 
 #### Plan Usage Bar
-- **Figma:** [`26663-89880`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=26663-89880)
+- **Figma:** [`26663-89880`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=26663-89880)
 - **Role:** Plan / data usage meter.
 - **Behavior:** slot `Body / status module` · width: fill · height: hug
 - **States:** usage level: normal / warning / danger (color/status)
@@ -2352,7 +2353,7 @@
   - **Make hint:** map a UX usage/quota meter; pick level color by remaining %.
 
 #### Snackbar & Alert msg
-- **Figma:** [`22574-22808`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=22574-22808)
+- **Figma:** [`22574-22808`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=22574-22808)
 - **Role:** Snackbars + inline alerts.
 - **Behavior:** slot `Overlay (transient, bottom) / inline alert` · width: fill (with side margin) · height: hug
 - **States:** info / positive / warning / danger (color/status) · with/without action · auto-dismiss
@@ -2449,7 +2450,7 @@
   - **Make hint:** transient feedback → snackbar overlay; persistent contextual message → inline alert inside the Section it relates to.
 
 #### Alert Modals
-- **Figma:** [`23201-17897`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=23201-17897)
+- **Figma:** [`23201-17897`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=23201-17897)
 - **Role:** Modal alerts / dialogs.
 - **Behavior:** slot `Overlay (centered modal + scrim)` · width: fill (with margin) / max width · height: hug
 - **States:** info / positive / warning / danger · 1–2 actions
@@ -2549,7 +2550,7 @@
 
 
 #### Tooltip
-- **Figma:** [`23201-15868`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=23201-15868)
+- **Figma:** [`23201-15868`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=23201-15868)
 - **Role:** Tooltip / coachmark.
 - **Behavior:** slot `Overlay (anchored)` · width: hug (max width) · height: hug
 - **States:** placement: top/bottom/left/right · with/without arrow/title
@@ -2636,7 +2637,7 @@
   - **Make hint:** attach to an icon/control that needs explanation; keep copy short.
 
 #### Bottom sheet
-- **Figma:** [`27907-11716`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=27907-11716)  ·  **key building block**
+- **Figma:** [`27907-11716`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=27907-11716)  ·  **key building block**
 - **Role:** Bottom sheet container.
 - **Behavior:** slot `Overlay (anchored bottom + scrim)` · width: fill · height: hug / variable (snap points, max ~90%)
 - **States:** snap sizes · with/without drag handle/header/footer
@@ -2726,7 +2727,7 @@
 
 
 #### General
-- **Figma:** [`26760-100129`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=26760-100129)
+- **Figma:** [`26760-100129`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=26760-100129)
 - **Role:** Generic content card.
 - **Behavior:** slot `Card (in a Section)` · width: fill (stacked)  · height: hug
 - **States:** with/without media · with/without action
@@ -2896,7 +2897,7 @@
   - **Make hint:** default choice for a vertical list of content blocks.
 
 #### Product
-- **Figma:** [`25701-12472`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25701-12472)
+- **Figma:** [`25701-12472`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25701-12472)
 - **Role:** Product card.
 - **Behavior:** slot `Card (carousel item, or stacked)` · width: fixed (carousel) / fill (stacked) · height: hug
 - **States:** default · with badge · out-of-stock/disabled
@@ -3066,7 +3067,7 @@
   - **Make hint:** UX 'swipeable product row' → carousel Section of these (fixed width).
 
 #### Deals for you
-- **Figma:** [`25717-33323`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25717-33323)
+- **Figma:** [`25717-33323`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25717-33323)
 - **Role:** Deal card.
 - **Behavior:** slot `Card (carousel item)` · width: fixed (carousel) · height: hug
 - **States:** default · expiring/limited (Badge)
@@ -3236,7 +3237,7 @@
   - **Make hint:** UX 'Deals for you' horizontal scroller → carousel Section of these.
 
 #### Plans
-- **Figma:** [`25915-74211`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25915-74211)
+- **Figma:** [`25915-74211`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25915-74211)
 - **Role:** Plan card.
 - **Behavior:** slot `Card (carousel or stacked)` · width: fixed (carousel) / fill (stacked) · height: hug
 - **States:** default · recommended/selected (Badge/border) · disabled
@@ -3406,7 +3407,7 @@
   - **Make hint:** UX plan picker → carousel or stacked Section of these; mark one 'recommended'.
 
 #### New on e&
-- **Figma:** [`25915-75766`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25915-75766)
+- **Figma:** [`25915-75766`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25915-75766)
 - **Role:** 'New on e&' card.
 - **Behavior:** slot `Card (carousel item)` · width: fixed (carousel) · height: hug
 - **States:** default
@@ -3746,7 +3747,7 @@
   - **Make hint:** UX 'Recommended for you' row → carousel Section.
 
 #### Service
-- **Figma:** [`26019-79144`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=26019-79144)
+- **Figma:** [`26019-79144`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=26019-79144)
 - **Role:** Service card.
 - **Behavior:** slot `Card (grid/list cell in a Section)` · width: grid cell / fill (row) · height: hug
 - **States:** default · disabled
@@ -3919,7 +3920,7 @@
 
 
 #### Highlight
-- **Figma:** [`25460-83982`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=25460-83982)
+- **Figma:** [`25460-83982`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25460-83982)
 - **Role:** Highlight / promo banner.
 - **Behavior:** slot `Banner (full-bleed, in body)` · width: fill (edge-to-edge) · height: hug / fixed aspect
 - **States:** default · with/without CTA · light/dark media
@@ -4086,7 +4087,7 @@
 
 
 #### Smiles Balance
-- **Figma:** [`26610-601`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=26610-601)
+- **Figma:** [`26610-601`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=26610-601)
 - **Role:** Smiles loyalty balance module.
 - **Behavior:** slot `Body module / header widget` · width: fill · height: hug
 - **States:** tier-themed (special palettes)
@@ -4243,7 +4244,7 @@
   - **Make hint:** UX loyalty/points widget on Home or rewards → this module near the top.
 
 #### Voucher
-- **Figma:** [`28278-13069`](https://www.figma.com/design/IoDxMEgOiOuwfIL5IbJzi5/e--Consumer-App-DSL-V1.0?node-id=28278-13069)
+- **Figma:** [`28278-13069`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=28278-13069)
 - **Role:** Voucher / coupon.
 - **Behavior:** slot `Card` · width: fill / fixed (carousel) · height: hug
 - **States:** active · redeemed · expired (status Badge)

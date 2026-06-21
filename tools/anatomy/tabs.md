@@ -1,5 +1,6 @@
-  - **Type:** in-page tab switcher (segment the content of one screen).
-  - **Anatomy:** horizontal row of tab items (label, optional leading icon/badge) + active indicator (underline/pill); scrolls horizontally if items overflow.
-  - **States (per tab):** selected · default · disabled — `color/tab/*`; sizing from `size.tabs`.
-  - **Sizing:** width fill; height fixed (`tabs` token). Items hug or equal-distributed.
-  - **Make hint:** map a UX in-screen segmented control / tab strip here; place directly under Top bar or at a Section's top.
+  - **Type:** **Pill Tabs** — pill-shaped tab switcher. Two scopes: **Global** (top-level page tabs; focused = brand red) and **Local** (in-section tabs; focused = brand midnight).
+  - **States:** Default (unselected, neutral) · Focused/active (selected). Global vs Local differ only in the focus color.
+  - **Anatomy:** each tab = `tab-content` = optional icon (20) + label (single line, never wraps). A row of pills; scrolls horizontally on overflow.
+  - **Dimensions:** height **fixed 40px** (2.5rem) · width **hug content** (~110px, varies with label) · corner radius **1200 (pill)** · icon **20px**.
+  - **Tokens:** `color/tab/*`; sizing `size.tabs`.
+  - **Figma:** node `22542:13966` · component set `pill-tabs` `25502:12416`.

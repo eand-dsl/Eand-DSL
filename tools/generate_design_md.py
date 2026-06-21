@@ -9,8 +9,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VARS = os.path.join(ROOT, "variables.json")
 OUT = os.path.join(ROOT, "design.md")
 ANATOMY = os.path.join(ROOT, "tools", "anatomy")
-FILE_KEY = "IoDxMEgOiOuwfIL5IbJzi5"
-FIG = f"https://www.figma.com/design/{FILE_KEY}/e--Consumer-App-DSL-V1.0?node-id="
+FILE_KEY = "pzm63BTLfPfT1stcF89ILQ"  # V1.1 (e& UAE Consumer org); node-ids preserved from V1.0
+FIG = f"https://www.figma.com/design/{FILE_KEY}/e--Consumer-App-DSL-V1.1?node-id="
 
 def slugify(name):
     s = name.lower().replace("&", "and")
@@ -56,7 +56,7 @@ WEIGHT_NUM = {"Thin":"100","Light":"300","Regular":"400","Book":"450","Medium":"
 # Slugs whose anatomy was pulled directly from Figma (verified). All others with an
 # anatomy file are token-model-derived (labeled accordingly, pending verification).
 VERIFIED = {"buttons","input-field","chips","filter-pill","switcher","checkbox","radio",
-            "searchbar","eand-logo","badges","icon-size","top-bar"}
+            "searchbar","eand-logo","badges","icon-size","top-bar","tabs"}
 
 # ---- component inventory: (name, node, role, color_groups, size_groups, typo_groups)
 SECTIONS = [
