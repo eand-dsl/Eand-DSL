@@ -1,5 +1,4 @@
-  - **Type:** expand/collapse disclosure container (FAQ, details).
-  - **Anatomy:** header row (title + trailing chevron, rotates) + collapsible body; divider between items; chevron up=expanded / down=collapsed.
-  - **States:** collapsed · expanded × disabled; single- or multi-open.
-  - **Sizing:** width fill; height hug (animates between collapsed/expanded).
-  - **Make hint:** map a UX list of expandable rows / FAQ here.
+  - **Variants:** `Chevron down` (off, on) × `Subtitle` (off, on) × `Left icon` (off, on) × `Right title` (off, on) × `Expanded` (No, Yes).
+  - **Dimensions:** 343×142 · 343×58.
+  - **Anatomy parts:** Content body text.
+  - **Figma node:** `27465:29326`

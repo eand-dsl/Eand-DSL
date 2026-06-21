@@ -1,5 +1,13 @@
-  - **Type:** small contextual hint / coachmark anchored to a control.
-  - **Anatomy:** container + text (optional title) + directional arrow pointing at the anchor; optional dismiss for coachmarks.
-  - **States (placement):** top · bottom · left · right (arrow follows); with/without title.
-  - **Sizing:** width hug (max width, wraps); height hug.
-  - **Make hint:** attach to an icon/control that needs explanation; keep copy short.
+  - **Variants:** `alignment` (center, left, right) × `tail-position` (bottom, top) × `surface` (default, inverse) × `Visible` (off, on) × `Size` (Large, Medium, Small) × `Direction` (Center, Left, Right) × `Caret direction` (Down, Lef, Left, Right, Up) × `Mode` (Dark, Light).
+  - **Dimensions:** 280×321 · 280×315 · 166×140 · 200×81 · 200×75 · 250×50.
+  - **Anatomy parts:** tooltip-rich-core · .tooltip-caret.
+  - **Specs (from Figma):**
+    - Width parameters:  Min-width set to 99px  Max-width set at 250px (250px in this example, varies with text length)
+    - Height parameters:  Height set to 54px (54px in this example, varies with text length) Max-height set to 88px
+    - Corner radius is set to 12px (0.75rem)
+    - Close icon size: 16px (1rem)
+    - Close Icon
+    - Tooltips are used as contextual guides, providing concise information or hints when users hover over or click elements like icons, buttons, or form fields.
+    - Icon (icon-size)
+    - Trigger element (icon); Container: Image (opt.); Title (opt.); Text; Actions: Slider (opt.); CTA. Pointer (arrow);
+  - **Figma node:** `23201:15868`

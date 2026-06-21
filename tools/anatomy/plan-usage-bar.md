@@ -1,5 +1,6 @@
-  - **Type:** consumption meter (data/minutes/quota vs plan).
-  - **Anatomy:** label + used/total values + **Progress bar** fill; optional status text/CTA ('Add data').
-  - **States (by level):** normal · warning (near limit) · danger (over/depleted) — `color/status/*`.
-  - **Sizing:** width fill; height hug.
-  - **Make hint:** map a UX usage/quota meter; pick level color by remaining %.
+  - **Variants:** `state` (Default, Filled, default, filled) × `Progress status` (Default, low data) × `plans` (2, 3, 4+, low data warning).
+  - **Dimensions:** 319×300 · 295×152 · 295×48 · 279×48 · 80×16 · 70×18.
+  - **Anatomy parts:** Plan · action-bar.
+  - **Specs (from Figma):**
+    - Plan-usage width is decided by the section container. should always be set to “Fill” inside a section
+  - **Figma node:** `26663:89880`

@@ -1,5 +1,5 @@
-  - **Type:** Smiles loyalty balance module.
-  - **Anatomy:** Smiles mark/icon + points balance (large number) + label + CTA ('Redeem'/'See rewards'); tier-themed background (special palettes: gold/silver/platinum/bronze).
-  - **States:** by tier (special palette); zero vs positive balance.
-  - **Sizing:** width fill; height hug.
-  - **Make hint:** UX loyalty/points widget on Home or rewards → this module near the top.
+  - **Variants:** `next-tier` (gold, plat, silver) × `states` (points-activated, points-not-active).
+  - **Dimensions:** 353×148 · 88×18 · 67×18 · 60×18.
+  - **Shape:** corner radius 16.
+  - **Anatomy parts:** header · footer.
+  - **Figma node:** `26610:601`

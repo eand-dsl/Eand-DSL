@@ -1,5 +1,4 @@
-  - **Type:** transient snackbar (floats, bottom) OR inline alert message (in a Section).
-  - **Anatomy:** status icon + message text + optional action link + optional dismiss (×). Single or two-line.
-  - **States:** info · positive · warning · danger (`color/status/*`); with/without action; auto-dismiss (snackbar) vs persistent (inline).
-  - **Sizing:** width fill (with side margin); height hug.
-  - **Make hint:** transient feedback → snackbar overlay; persistent contextual message → inline alert inside the Section it relates to.
+  - **Variants:** `Close button` (off, on) × `Action` (off, on) × `Subtitle` (off, on) × `Type` (Default, ⏳ Loading, 🔴 Error, 🟡 Warning, 🟢 Success) × `Property 1` (Default).
+  - **Dimensions:** 152×192 · 343×68 · 343×64 · 203×48 · 195×48 · 171×48.
+  - **Anatomy parts:** deals-card-core.
+  - **Figma node:** `22574:22808`

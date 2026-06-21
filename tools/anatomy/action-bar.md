@@ -1,5 +1,14 @@
-  - **Type:** sticky action footer pinned above the Nav bar (or to the bottom on flow screens).
-  - **Anatomy:** top divider/elevation + 1–2 Buttons (fill-width) + optional helper text/price above.
-  - **Variants:** single primary · primary + secondary (stacked or side-by-side) · with helper/summary row.
-  - **Sizing:** width fill; height hug (button height + `spacing` padding); respects bottom inset.
-  - **Make hint:** when a UX screen has one persistent primary CTA at the bottom, use this (not an inline Button).
+  - **Variants:** `color-scheme` (default, inverse) × `type` (icon, image, multiple, single) × `trigger` (button, chevron, switcher) × `surface-color` (default, glass, midnight-base, midnight-raised, midnight-transparent, subtle, sunken, white-transparent) × `Type` (Bill, Sub-text) × `State` (Compact, Expanded).
+  - **Dimensions:** 350×148 · 292×92 · 350×72 · 292×72 · 292×40 · 220×38.
+  - **Shape:** corner radius 20.
+  - **Anatomy parts:** bill-container.
+  - **Specs (from Figma):**
+    - Action bar is used as a container that pairs with banners and contains an action, title and icon/image to be used as context for action
+    - Icon ←→ Image
+    - Chevron The entire bar is the tap target; the chevron signals "tap to drill in." Use when the bar opens a destination, drawer, or detail view.
+    - Rule: Only one trailing action is permitted. Never combine a button and a chevron.
+    - By leading visual Icon — 40×40 brand mark or symbol Illustration — 40×40 decorative or branded image asset None — text content starts at the leading edge
+    - Chevron
+    - By leading visual (icon/image)
+    - Visual icon size: fixed dimensions (40×40px)
+  - **Figma node:** `25519:15621`

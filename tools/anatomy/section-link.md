@@ -1,5 +1,9 @@
-  - **Type:** Section header row (titles a Section, optional action).
-  - **Anatomy:** title (left) + optional 'see all' link / chevron (right). Optional leading icon or subtitle.
-  - **Variants:** title only · title + see-all · title + chevron · with subtitle.
-  - **Sizing:** width fill; height fixed (`size.section-link`).
-  - **Make hint:** add at the top of any titled Section; link to the full list/screen.
+  - **Variants:** `size` (lg) × `surface` (Inverse, default, glass, inverse) × `State` (default, disabled, focus).
+  - **Dimensions:** 40×40.
+  - **Shape:** corner radius 14.
+  - **Anatomy parts:** loader · icon-size.
+  - **Specs (from Figma):**
+    - icon-size
+    - The three sizes are Lg: 48x48px, Md: 36x36px, Sm: 32x32px.
+    - Padding : 8px for small & medium and 12px for large
+  - **Figma node:** `25460:83978`

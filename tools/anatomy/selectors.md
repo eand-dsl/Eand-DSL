@@ -1,5 +1,7 @@
-  - **Type:** option selectors (segmented control / option rows / quantity / dropdown trigger).
-  - **Anatomy:** group of options (segments or rows) with a selected indicator; or a value field + chevron that opens a Bottom sheet/menu.
-  - **States:** default · selected · disabled; single-select.
-  - **Sizing:** width fill or hug; height fixed.
-  - **Make hint:** UX 'pick one of a few' → segmented Selectors; 'pick from many' → Selector that opens a Bottom sheet.
+  - **Variants:** `Display` (Dark, Light) × `State` (Default, Disabled, Selected, Selected / Check).
+  - **Dimensions:** 98×72.
+  - **Shape:** corner radius 16.
+  - **Anatomy parts:** Content · Label.
+  - **Specs (from Figma):**
+    - Applied here corner smoothing to the overall component
+  - **Figma node:** `28278:1530`

@@ -1,5 +1,13 @@
-  - **Type:** the primary full-width body container — groups related content into a titled block.
-  - **Anatomy:** optional **Section link** header → body content (any of: card carousel, stacked cards, list rows, grid, controls). Vertical padding + inter-item gap from `size.section`.
-  - **Variants:** with/without header · padded body vs full-bleed body (carousels/banners bleed to edges) · light vs inverse surface.
-  - **Sizing:** width **fill** (full screen width); height **hug** content.
-  - **Make hint:** every distinct UX content block → one Section. Stack Sections vertically in the scroll body with the section-gap token.
+  - **Variants:** `surface-color` (ai-powered, brand, default, glass-midnight, glass-white, midnight-base, midnight-raised, raised) × `filter-pill` (off, on) × `context` (off, on) × `trigger` (off, on) × `Title line` (1-Line, 2-line) × `chevron button` (no, yes) × `size` (lg, md, sm, xl, xs) × `surface` (Default, inverse).
+  - **Dimensions:** 367×572 · 337×484 · 337×332 · 337×256 · 337×180 · 375×116.
+  - **Shape:** corner radius 24.
+  - **Anatomy parts:** header · body.
+  - **Specs (from Figma):**
+    - Without filter chip and without chevron
+    - Update: Title should be short  and fit in the same line as chip subtext fixed size - 291px
+    - Update: title and subtext should take full container width Title text can be up to 2 lines, subtitle text can be up to 2 lines
+    - Removed bottom padding from section header and added 16px top padding to section body
+    - Eight surface treatments. The surface drives both the body fill and the text/icon colors that read on top of it.
+    - Section gaps and padding remains same across sizes
+    - Context will be fixed to 260px and will not extend till below button
+  - **Figma node:** `25519:12055`

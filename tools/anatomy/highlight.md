@@ -1,5 +1,6 @@
-  - **Type:** promotional / announcement banner (full-bleed).
-  - **Anatomy:** background media/color + title + subtitle + CTA (Button) + optional logo/badge; can be a single banner or a swipeable carousel with dots.
-  - **States:** default · with/without CTA · light vs dark media (text/`button` tone adapts) · single vs carousel.
-  - **Sizing:** width fill **edge-to-edge** (bleeds past the screen gutter); height hug / fixed aspect.
-  - **Make hint:** UX hero/promo strip → place between Sections, full-bleed.
+  - **Variants:** `logo-row` (off, on) × `text-primary` (off, on) × `text-secondary` (off, on) × `type` (action, informational) × `carousel` (no, yes) × `size` (lg, xl).
+  - **Dimensions:** 335×452 · 316×452 · 313×452 · 335×300 · 313×300 · 292×228.
+  - **Anatomy parts:** .highlight-core.
+  - **Specs (from Figma):**
+    - The spacing between the banners in carousel is 8px
+  - **Figma node:** `25460:83982`

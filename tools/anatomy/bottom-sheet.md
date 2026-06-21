@@ -1,5 +1,9 @@
-  - **Type:** modal panel sliding up from the bottom over a scrim.
-  - **Anatomy:** drag handle (grabber) + optional header (title + dismiss) + scrollable content + optional sticky footer (Action bar).
-  - **States:** snap points (peek / half / full ~90%); with/without handle/header/footer; dismiss by drag-down or scrim tap.
-  - **Sizing:** width fill; height variable up to ~90% screen; content scrolls inside.
-  - **Make hint:** map UX 'slide-up panel / picker / detail drawer' here; put its primary CTA in the sheet's footer Action bar.
+  - **Variants:** `Grabber` (off, on) × `Display` (Bullet, Dark, Icon, Light, Tick) × `Left icon` (off, on) × `Right icon 1` (off, on) × `Right icon 2` (off, on) × `Image/Icon asset` (off, on) × `Description` (off, on) × `Size` (lg, md, sm, xs) × `Context` (off, on) × `Tertiary` (off, on) × `Secondary` (off, on) × `Link` (off, on) × `Type` (1 line, 2 lines, 3D icon, Amount, Bg & Icon, Chips, Default, Horizontal, Search bar, Stacked, Terms & Conditions) × `Title` (off, on) × `Gradient` (off, on).
+  - **Dimensions:** 375×758 · 375×405 · 375×212 · 375×210 · 375×196 · 375×186.
+  - **Shape:** radius 24/24/36/36.
+  - **Anatomy parts:** .section-surface-inverse · Grabber · Visual asset · Header · Subheader · Slot · Footer · Floating header · Sticky footer · Keyboard.
+  - **Specs (from Figma):**
+    - Header Grabber Icon left Title Icon right 1 Icon right 2 Floating Header
+    - Visual asset Image 3D composition Icon & Blur
+    - Visual asset Icon & Blur
+  - **Figma node:** `27907:11716`

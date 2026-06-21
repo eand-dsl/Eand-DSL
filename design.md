@@ -97,8 +97,8 @@
 
 ### Color — primitive ramps
 
-- **white**: `1000`=#ffffff, `a90`=rgba(255, 255, 255, 0.9), `a80`=rgba(255, 255, 255, 0.8), `a70`=rgba(255, 255, 255, 0.7), `a60`=rgba(255, 255, 255, 0.6), `a50`=rgba(255, 255, 255, 0.5), `a40`=rgba(255, 255, 255, 0.4), `a30`=rgba(255, 255, 255, 0.3), `a20`=rgba(255, 255, 255, 0.2), `a15`=rgba(255, 255, 255, 0.15), `a10`=rgba(255, 255, 255, 0.1), `a5`=rgba(255, 255, 255, 0.05)
-- **midnight**: `50`=#f7f7fa, `100`=#f0f0f5, `150`=#e4e3ea, `200`=#d8d7de, `300`=#c0bfc8, `400`=#a8a6b1, `500`=#908e9a, `600`=#797584, `700`=#615d6d, `750`=#575362, `800`=#494456, `900`=#312c40, `1000`=#191329, `1100`=#140f21, `a90`=rgba(25, 19, 41, 0.9), `a80`=rgba(25, 19, 41, 0.8), `a75`=rgba(25, 19, 41, 0.75), `a70`=rgba(25, 19, 41, 0.7), `a60`=rgba(25, 19, 41, 0.6), `a50`=rgba(25, 19, 41, 0.5), `a40`=rgba(25, 19, 41, 0.4), `a30`=rgba(25, 19, 41, 0.3), `a20`=rgba(25, 19, 41, 0.2), `a10`=rgba(25, 19, 41, 0.1), `a7`=rgba(25, 19, 41, 0.07)
+- **white**: `1000`=#ffffff, `a90`=rgba(255, 255, 255, 0.90), `a80`=rgba(255, 255, 255, 0.80), `a70`=rgba(255, 255, 255, 0.70), `a60`=rgba(255, 255, 255, 0.60), `a50`=rgba(255, 255, 255, 0.50), `a40`=rgba(255, 255, 255, 0.40), `a30`=rgba(255, 255, 255, 0.30), `a20`=rgba(255, 255, 255, 0.20), `a15`=rgba(255, 255, 255, 0.15), `a10`=rgba(255, 255, 255, 0.10), `a5`=rgba(255, 255, 255, 0.05)
+- **midnight**: `50`=#f7f7fa, `100`=#f0f0f5, `150`=#e4e3ea, `200`=#d8d7de, `300`=#c0bfc8, `400`=#a8a6b1, `500`=#908e9a, `600`=#797584, `700`=#615d6d, `750`=#575362, `800`=#494456, `900`=#312c40, `1000`=#191329, `1100`=#140f21, `a90`=rgba(25, 19, 41, 0.90), `a80`=rgba(25, 19, 41, 0.80), `a75`=rgba(25, 19, 41, 0.75), `a70`=rgba(25, 19, 41, 0.70), `a60`=rgba(25, 19, 41, 0.60), `a50`=rgba(25, 19, 41, 0.50), `a40`=rgba(25, 19, 41, 0.40), `a30`=rgba(25, 19, 41, 0.30), `a20`=rgba(25, 19, 41, 0.20), `a10`=rgba(25, 19, 41, 0.10), `a7`=rgba(25, 19, 41, 0.07)
 - **red**: `50`=#fff2f2, `100`=#fce6e6, `200`=#f9cecc, `300`=#f6b5b3, `400`=#f39c99, `500`=#f08480, `600`=#ed6b66, `700`=#e9524d, `800`=#e73933, `900`=#e3211a, `1000`=#e00800, `1100`=#bb0700, `1200`=#950500, `1300`=#700400, `1400`=#4b0300, `1500`=#2d0200
 - **green**: `50`=#f9fefb, `100`=#edfdf2, `200`=#dafbe3, `300`=#c1f7d0, `400`=#9ff3b7, `500`=#6ced90, `600`=#54bc72, `700`=#3b8b53, `800`=#27633b, `900`=#164025, `1000`=#0e2916
 - **orange**: `50`=#fff8f3, `100`=#ffeedd, `200`=#ffe0c4, `300`=#ffd1a8, `400`=#ffc28b, `450`=#ffb16f, `500`=#ff9f52, `600`=#e07830, `700`=#b85a1a, `800`=#8c3f0c, `900`=#612a05, `1000`=#3a1602
@@ -134,20 +134,20 @@
     - `brand-muted` → `#fff2f2`
     - `midnight` → `#312c40`
   - **overlay**
-    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `scrim` → `rgba(25, 19, 41, 0.50)`
     - `floating` → `#f7f7fa`
     - `floating-middleground` → `#908e9a`
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.3)`
-      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
-      - `xl` → `rgba(255, 255, 255, 0.4)`
-      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `xl` → `rgba(255, 255, 255, 0.40)`
+      - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
-      - `sm` → `rgba(255, 255, 255, 0.1)`
+      - `sm` → `rgba(255, 255, 255, 0.10)`
 
 **text**
   - **default**
@@ -156,9 +156,9 @@
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
@@ -213,26 +213,26 @@
       - `floating inverse` → `#ffffff`
     - **glass**
       - **default**
-        - `lg` → `rgba(255, 255, 255, 0.6)`
-        - `md` → `rgba(255, 255, 255, 0.7)`
-        - `sm` → `rgba(255, 255, 255, 0.8)`
+        - `lg` → `rgba(255, 255, 255, 0.60)`
+        - `md` → `rgba(255, 255, 255, 0.70)`
+        - `sm` → `rgba(255, 255, 255, 0.80)`
       - **inverse**
-        - `lg` → `rgba(255, 255, 255, 0.8)`
-        - `md` → `rgba(255, 255, 255, 0.9)`
+        - `lg` → `rgba(255, 255, 255, 0.80)`
+        - `md` → `rgba(255, 255, 255, 0.90)`
         - `sm` → `#ffffff`
   - **interactive**
     - **default**
-      - `default` → `rgba(25, 19, 41, 0.2)`
-      - `subtle` → `rgba(25, 19, 41, 0.1)`
-      - `strong` → `rgba(25, 19, 41, 0.5)`
+      - `default` → `rgba(25, 19, 41, 0.20)`
+      - `subtle` → `rgba(25, 19, 41, 0.10)`
+      - `strong` → `rgba(25, 19, 41, 0.50)`
       - `focus` → `#191329`
       - `disabled` → `rgba(25, 19, 41, 0.07)`
     - **inverse**
-      - `default` → `rgba(255, 255, 255, 0.6)`
-      - `subtle` → `rgba(255, 255, 255, 0.4)`
-      - `strong` → `rgba(255, 255, 255, 0.8)`
+      - `default` → `rgba(255, 255, 255, 0.60)`
+      - `subtle` → `rgba(255, 255, 255, 0.40)`
+      - `strong` → `rgba(255, 255, 255, 0.80)`
       - `focus` → `#ffffff`
-      - `disabled` → `rgba(255, 255, 255, 0.4)`
+      - `disabled` → `rgba(255, 255, 255, 0.40)`
     - **accent**
       - `default` → `#e00800`
       - `focus` → `#bb0700`
@@ -319,10 +319,8 @@
 | Badges | Primitive / indicator (inline) | hug | fixed (24; lg/md/sm) |
 | Icon size | Primitive / token (sizing scale) | n/a | fixed (xs8 sm12 md16 lg20 xl24 2xl32 3xl40 4xl48) |
 | Logo row | Primitive / media row | fill | hug |
-| Dismiss | Primitive / control (icon button) | fixed | fixed (≥24 glyph, ~40 tap target) |
 | Progress bar | Primitive / status | fill | fixed (thin track token) |
 | Add trigger | Primitive / control | hug | fixed |
-| Product assets | Primitive / media | varies (often fill or fixed tile) | hug (aspect-ratio) |
 | Atom Surfaces | Primitive / surface | fill | hug |
 | Buttons | Control / CTA | fill (block CTA) or hug (inline) | fixed (lg48 / md40 / sm32) |
 | Input Field | Control / form | fill | fixed (~52 + label/status) |
@@ -352,7 +350,6 @@
 | Deals for you | Card (carousel item) | fixed (carousel) | hug |
 | Plans | Card (carousel or stacked) | fixed (carousel) / fill (stacked) | hug |
 | New on e& | Card (carousel item) | fixed (carousel) | hug |
-| Recommendation | Card (carousel item) | fixed (carousel) | hug |
 | Service | Card (grid/list cell in a Section) | grid cell / fill (row) | hug |
 | Highlight | Banner (full-bleed, in body) | fill (edge-to-edge) | hug / fixed aspect |
 | Smiles Balance | Body module / header widget | fill | hug |
@@ -434,7 +431,7 @@
       - `best-seller` → `#ffffff`
       - `online-exclusive` → `#ffffff`
       - `exclusive-for-emirati` → `#ffffff`
-      - `sold-out` → `rgba(255, 255, 255, 0.7)`
+      - `sold-out` → `rgba(255, 255, 255, 0.70)`
     - **tiers**
       - `platinum-number` → `#191329`
       - `gold-number` → `#462f2d`
@@ -482,26 +479,14 @@
 - **States:** —
 - **Composition:** contains row of brand/partner logos · appears within Sections, Highlight
 - **Use case:** Display a set of partner/product logos.
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** row of partner/product logos.
-  - **Anatomy:** horizontal row (or wrap) of equal-height logo lockups with consistent gaps; optional 'as seen on / partners' label.
-  - **States:** default; scroll if overflow.
-  - **Sizing:** width fill; height hug (logos share a fixed height).
-  - **Make hint:** UX 'partners / works with' strip → this inside a Section.
-
-#### Dismiss
-- **Figma:** _node-id TBD_
-- **Role:** Close / clear affordance.
-- **Behavior:** slot `Primitive / control (icon button)` · width: fixed · height: fixed (≥24 glyph, ~40 tap target)
-- **States:** default · pressed · disabled
-- **Composition:** contains close/×/clear icon · appears within Bottom sheet, Alert modal, Snackbar, removable Chips, Searchbar
-- **Use case:** Close/clear/remove affordance.
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** close / clear / remove affordance. _(no node-id yet — send link to verify)_
-  - **Anatomy:** icon button (×, chevron-down, or clear) in a ≥40px tap target.
-  - **States:** default · pressed · disabled.
-  - **Sizing:** fixed (icon ~24, tap ~40).
-  - **Make hint:** top-right of Sheets/Modals/Snackbars; trailing on removable Chips/Searchbar.
+- **Anatomy (Figma-verified):**
+  - **Variants:** `logo-1` (off, on) × `logo-2` (off, on) × `logo-3` (off, on) × `logo-4` (off, on) × `logo-5` (off, on) × `+x-more` (off, on) × `size` (lg, md, sm) × `style` (Default, glass) × `type` (Default, glass-margin) × `surface` (default, inverse).
+  - **Dimensions:** 376×56 · 328×48 · 280×40 · 260×40 · 232×32 · 164×24.
+  - **Anatomy parts:** .logo-style · more-items.
+  - **Specs (from Figma):**
+    - icon-size
+    - 3 sizes to consider: Small – 24px (1.5rem) Medium – 32px (2rem) Large – 40px (2.5rem)
+  - **Figma node:** `25996:32494`
 
 #### Progress bar
 - **Figma:** [`26663-89882`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=26663-89882)
@@ -520,12 +505,13 @@
   - `danger` → `#b85a1a`
   - `warning` → `#aa913a`
   - `positive` → `#3b8b53`
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** linear progress / completion indicator.
-  - **Anatomy:** rounded track + fill; optional label/percentage; steps variant = segmented track.
-  - **States:** determinate (0–100%) · indeterminate (animated); status color via `color/status/*`.
-  - **Sizing:** width fill; height fixed (thin track token).
-  - **Make hint:** use inside Plan Usage Bar, onboarding/step flows, uploads.
+- **Anatomy (Figma-verified):**
+  - **Variants:** `Progress` (10, 100, 15, 20, 25, 30, 35, 40, 45, 5, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95).
+  - **Dimensions:** 300×4.
+  - **Anatomy parts:** bar.
+  - **Specs (from Figma):**
+    - icon-size
+  - **Figma node:** `26663:89882`
 
 #### Add trigger
 - **Figma:** [`25752-11470`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25752-11470)
@@ -549,7 +535,7 @@
       - **brand**
         - `default` → `#ffffff`
         - `focus` → `#ffffff`
-        - `disabled` → `rgba(255, 255, 255, 0.7)`
+        - `disabled` → `rgba(255, 255, 255, 0.70)`
       - **inverse**
         - `default` → `#e00800`
         - `focus` → `#bb0700`
@@ -568,7 +554,7 @@
       - **inverse**
         - `default` → `#ffffff`
         - `focus` → `#ffffff`
-        - `disabled` → `rgba(255, 255, 255, 0.7)`
+        - `disabled` → `rgba(255, 255, 255, 0.70)`
     - **border**
       - **brand**
         - `default` → `#e00800`
@@ -591,7 +577,7 @@
       - **inverse**
         - `default` → `#ffffff`
         - `focus` → `#bb0700`
-        - `disabled` → `rgba(255, 255, 255, 0.7)`
+        - `disabled` → `rgba(255, 255, 255, 0.70)`
   - **link**
     - **text**
       - **brand**
@@ -605,32 +591,27 @@
       - **inverse**
         - `default` → `#ffffff`
         - `focus` → `#bb0700`
-        - `disabled` → `rgba(255, 255, 255, 0.7)`
+        - `disabled` → `rgba(255, 255, 255, 0.70)`
   - **text**
     - **midnight**
       - `default` → `#191329`
       - `focus` → `#191329`
       - `disabled` → `#c0bfc8`
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** add / plus trigger (entry to add an item).
-  - **Anatomy:** plus icon + label (e.g. 'Add line', 'Add card'); dashed/ghost container or inline link style.
-  - **States:** default · pressed · disabled.
-  - **Sizing:** width hug (or fill as a list row); height fixed.
-  - **Make hint:** UX 'add new …' affordance at the end of a list/form.
-
-#### Product assets
-- **Figma:** _node-id TBD_
-- **Role:** Product imagery / illustration assets.
-- **Behavior:** slot `Primitive / media` · width: varies (often fill or fixed tile) · height: hug (aspect-ratio)
-- **States:** —
-- **Composition:** contains product image/illustration · appears within Product/Deals/New cards
-- **Use case:** Product imagery; respects aspect ratio.
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** product imagery / illustration assets. _(no node-id yet — send link to verify)_
-  - **Anatomy:** image asset rendered at a fixed aspect ratio; consistent background/padding within tiles.
-  - **States:** loaded · placeholder/skeleton.
-  - **Sizing:** fills its tile width or fixed tile size; height by aspect ratio.
-  - **Make hint:** the media slot inside Product/Deals/New cards.
+- **Anatomy (Figma-verified):**
+  - **Variants:** `surface` (default, inverse).
+  - **Dimensions:** 285×72.
+  - **Shape:** corner radius 16.
+  - **Anatomy parts:** button.
+  - **Specs (from Figma):**
+    - Updated according to VD comment:   • Changed surface colors  • Added brand-surface option • Now we use button inside instead of custom text + ’icon-size’
+    - Width: 285px
+    - Height: 52px
+    - Corner radius: 16px (1rem)
+    - Border: 1px inside dashed stroke
+    - Icon size: 20px (1.25rem)
+    - Icon
+    - icon-size
+  - **Figma node:** `25752:11470`
 
 #### Atom Surfaces
 - **Figma:** [`26729-91998`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=26729-91998)
@@ -674,26 +655,24 @@
     - `brand-muted` → `#fff2f2`
     - `midnight` → `#312c40`
   - **overlay**
-    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `scrim` → `rgba(25, 19, 41, 0.50)`
     - `floating` → `#f7f7fa`
     - `floating-middleground` → `#908e9a`
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.3)`
-      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
-      - `xl` → `rgba(255, 255, 255, 0.4)`
-      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `xl` → `rgba(255, 255, 255, 0.40)`
+      - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
-      - `sm` → `rgba(255, 255, 255, 0.1)`
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** base container surfaces (the building-block backgrounds for cards/sheets/sections).
-  - **Anatomy:** a filled rounded rectangle at an elevation level; everything else composes on top.
-  - **Levels:** canvas · base · raised · sunken (+ brand/midnight tints) — `color/atom-surfaces` / `color/surface/*`.
-  - **Sizing:** width fill; height hug.
-  - **Make hint:** not placed directly — it's the surface token applied to containers.
+      - `sm` → `rgba(255, 255, 255, 0.10)`
+- **Anatomy (Figma-verified):**
+  - **Variants:** `color` (blue, cyan, default, green, orange, red, violet, yellow).
+  - **Dimensions:** 224×272.
+  - **Figma node:** `26729:91998`
 
 ### 02 · Controls
 
@@ -720,7 +699,7 @@
       - **brand**
         - `default` → `#ffffff`
         - `focus` → `#ffffff`
-        - `disabled` → `rgba(255, 255, 255, 0.7)`
+        - `disabled` → `rgba(255, 255, 255, 0.70)`
       - **inverse**
         - `default` → `#e00800`
         - `focus` → `#bb0700`
@@ -739,7 +718,7 @@
       - **inverse**
         - `default` → `#ffffff`
         - `focus` → `#ffffff`
-        - `disabled` → `rgba(255, 255, 255, 0.7)`
+        - `disabled` → `rgba(255, 255, 255, 0.70)`
     - **border**
       - **brand**
         - `default` → `#e00800`
@@ -762,7 +741,7 @@
       - **inverse**
         - `default` → `#ffffff`
         - `focus` → `#bb0700`
-        - `disabled` → `rgba(255, 255, 255, 0.7)`
+        - `disabled` → `rgba(255, 255, 255, 0.70)`
   - **link**
     - **text**
       - **brand**
@@ -776,7 +755,7 @@
       - **inverse**
         - `default` → `#ffffff`
         - `focus` → `#bb0700`
-        - `disabled` → `rgba(255, 255, 255, 0.7)`
+        - `disabled` → `rgba(255, 255, 255, 0.70)`
   - **text**
     - **midnight**
       - `default` → `#191329`
@@ -804,7 +783,7 @@
 - **Color tokens — `color.input-field`:**
   - **surface**
     - **default**
-      - `default` → `#ffffff`
+      - `default` → `#f7f7fa`
       - `disabled` → `#f0f0f5`
     - **inverse**
       - `default` → `rgba(255, 255, 255, 0.15)`
@@ -819,7 +798,7 @@
     - **default**
       - `Color` → `#ffffff`
       - **label**
-        - `default` → `#908e9a`
+        - `default` → `#575362`
         - `disabled` → `#c0bfc8`
       - **value**
         - `active` → `#191329`
@@ -827,11 +806,11 @@
     - **inverse**
       - `Color` → `#ffffff`
       - **label**
-        - `default` → `rgba(255, 255, 255, 0.5)`
-        - `disabled` → `rgba(255, 255, 255, 0.3)`
+        - `default` → `rgba(255, 255, 255, 0.50)`
+        - `disabled` → `rgba(255, 255, 255, 0.30)`
       - **value**
         - `active` → `#ffffff`
-        - `disabled` → `rgba(255, 255, 255, 0.3)`
+        - `disabled` → `rgba(255, 255, 255, 0.30)`
 - **Size tokens — `border`:**
   - `xs` → `0.5`
   - `sm` → `1`
@@ -865,20 +844,20 @@
         - `focus` → `#ffffff`
         - `disabled` → `#c0bfc8`
       - **border**
-        - `default` → `rgba(25, 19, 41, 0.5)`
+        - `default` → `rgba(25, 19, 41, 0.50)`
         - `focus` → `#191329`
-        - `disabled` → `rgba(25, 19, 41, 0.2)`
+        - `disabled` → `rgba(25, 19, 41, 0.20)`
     - **inverse**
       - **surface**
         - `focus` → `#ffffff`
       - **text**
-        - `default` → `rgba(255, 255, 255, 0.7)`
+        - `default` → `rgba(255, 255, 255, 0.70)`
         - `focus` → `#191329`
-        - `disabled` → `rgba(255, 255, 255, 0.3)`
+        - `disabled` → `rgba(255, 255, 255, 0.30)`
       - **border**
-        - `default` → `rgba(255, 255, 255, 0.4)`
+        - `default` → `rgba(255, 255, 255, 0.40)`
         - `focus` → `#ffffff`
-        - `disabled` → `rgba(255, 255, 255, 0.4)`
+        - `disabled` → `rgba(255, 255, 255, 0.40)`
   - **suggestion**
     - **surface**
       - `default` → `#ffffff`
@@ -889,7 +868,7 @@
       - `focus` → `#191329`
       - `disabled` → `#908e9a`
     - **border**
-      - `focus` → `rgba(25, 19, 41, 0.5)`
+      - `focus` → `rgba(25, 19, 41, 0.50)`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
 - **Anatomy (Figma-verified):**
   - **Variants:** `state` (default, focus, disabled) × `Icon` (on, off); plus a **Loader** variant.
@@ -916,18 +895,18 @@
       - `focus` → `#191329`
       - `disabled` → `#c0bfc8`
     - **inverse**
-      - `default` → `rgba(255, 255, 255, 0.7)`
+      - `default` → `rgba(255, 255, 255, 0.70)`
       - `focus` → `#191329`
-      - `disabled` → `rgba(255, 255, 255, 0.3)`
+      - `disabled` → `rgba(255, 255, 255, 0.30)`
   - **border**
     - **default**
-      - `default` → `rgba(25, 19, 41, 0.5)`
+      - `default` → `rgba(25, 19, 41, 0.50)`
       - `focus` → `#191329`
       - `disabled` → `rgba(25, 19, 41, 0.07)`
     - **inverse**
-      - `default` → `rgba(255, 255, 255, 0.8)`
+      - `default` → `rgba(255, 255, 255, 0.80)`
       - `focus` → `#ffffff`
-      - `disabled` → `rgba(255, 255, 255, 0.4)`
+      - `disabled` → `rgba(255, 255, 255, 0.40)`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
 - **Anatomy (Figma-verified):**
   - **Variants:** `State` (default, focused, disabled) × `Color` (default, inverse). Default & Inverse share identical anatomy — only color tokens differ.
@@ -976,26 +955,26 @@
       - `floating inverse` → `#ffffff`
     - **glass**
       - **default**
-        - `lg` → `rgba(255, 255, 255, 0.6)`
-        - `md` → `rgba(255, 255, 255, 0.7)`
-        - `sm` → `rgba(255, 255, 255, 0.8)`
+        - `lg` → `rgba(255, 255, 255, 0.60)`
+        - `md` → `rgba(255, 255, 255, 0.70)`
+        - `sm` → `rgba(255, 255, 255, 0.80)`
       - **inverse**
-        - `lg` → `rgba(255, 255, 255, 0.8)`
-        - `md` → `rgba(255, 255, 255, 0.9)`
+        - `lg` → `rgba(255, 255, 255, 0.80)`
+        - `md` → `rgba(255, 255, 255, 0.90)`
         - `sm` → `#ffffff`
   - **interactive**
     - **default**
-      - `default` → `rgba(25, 19, 41, 0.2)`
-      - `subtle` → `rgba(25, 19, 41, 0.1)`
-      - `strong` → `rgba(25, 19, 41, 0.5)`
+      - `default` → `rgba(25, 19, 41, 0.20)`
+      - `subtle` → `rgba(25, 19, 41, 0.10)`
+      - `strong` → `rgba(25, 19, 41, 0.50)`
       - `focus` → `#191329`
       - `disabled` → `rgba(25, 19, 41, 0.07)`
     - **inverse**
-      - `default` → `rgba(255, 255, 255, 0.6)`
-      - `subtle` → `rgba(255, 255, 255, 0.4)`
-      - `strong` → `rgba(255, 255, 255, 0.8)`
+      - `default` → `rgba(255, 255, 255, 0.60)`
+      - `subtle` → `rgba(255, 255, 255, 0.40)`
+      - `strong` → `rgba(255, 255, 255, 0.80)`
       - `focus` → `#ffffff`
-      - `disabled` → `rgba(255, 255, 255, 0.4)`
+      - `disabled` → `rgba(255, 255, 255, 0.40)`
     - **accent**
       - `default` → `#e00800`
       - `focus` → `#bb0700`
@@ -1062,20 +1041,20 @@
     - `brand-muted` → `#fff2f2`
     - `midnight` → `#312c40`
   - **overlay**
-    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `scrim` → `rgba(25, 19, 41, 0.50)`
     - `floating` → `#f7f7fa`
     - `floating-middleground` → `#908e9a`
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.3)`
-      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
-      - `xl` → `rgba(255, 255, 255, 0.4)`
-      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `xl` → `rgba(255, 255, 255, 0.40)`
+      - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
-      - `sm` → `rgba(255, 255, 255, 0.1)`
+      - `sm` → `rgba(255, 255, 255, 0.10)`
 - **Color tokens — `color.border`:**
   - **surface-based**
     - **canvas**
@@ -1107,26 +1086,26 @@
       - `floating inverse` → `#ffffff`
     - **glass**
       - **default**
-        - `lg` → `rgba(255, 255, 255, 0.6)`
-        - `md` → `rgba(255, 255, 255, 0.7)`
-        - `sm` → `rgba(255, 255, 255, 0.8)`
+        - `lg` → `rgba(255, 255, 255, 0.60)`
+        - `md` → `rgba(255, 255, 255, 0.70)`
+        - `sm` → `rgba(255, 255, 255, 0.80)`
       - **inverse**
-        - `lg` → `rgba(255, 255, 255, 0.8)`
-        - `md` → `rgba(255, 255, 255, 0.9)`
+        - `lg` → `rgba(255, 255, 255, 0.80)`
+        - `md` → `rgba(255, 255, 255, 0.90)`
         - `sm` → `#ffffff`
   - **interactive**
     - **default**
-      - `default` → `rgba(25, 19, 41, 0.2)`
-      - `subtle` → `rgba(25, 19, 41, 0.1)`
-      - `strong` → `rgba(25, 19, 41, 0.5)`
+      - `default` → `rgba(25, 19, 41, 0.20)`
+      - `subtle` → `rgba(25, 19, 41, 0.10)`
+      - `strong` → `rgba(25, 19, 41, 0.50)`
       - `focus` → `#191329`
       - `disabled` → `rgba(25, 19, 41, 0.07)`
     - **inverse**
-      - `default` → `rgba(255, 255, 255, 0.6)`
-      - `subtle` → `rgba(255, 255, 255, 0.4)`
-      - `strong` → `rgba(255, 255, 255, 0.8)`
+      - `default` → `rgba(255, 255, 255, 0.60)`
+      - `subtle` → `rgba(255, 255, 255, 0.40)`
+      - `strong` → `rgba(255, 255, 255, 0.80)`
       - `focus` → `#ffffff`
-      - `disabled` → `rgba(255, 255, 255, 0.4)`
+      - `disabled` → `rgba(255, 255, 255, 0.40)`
     - **accent**
       - `default` → `#e00800`
       - `focus` → `#bb0700`
@@ -1210,26 +1189,26 @@
       - `floating inverse` → `#ffffff`
     - **glass**
       - **default**
-        - `lg` → `rgba(255, 255, 255, 0.6)`
-        - `md` → `rgba(255, 255, 255, 0.7)`
-        - `sm` → `rgba(255, 255, 255, 0.8)`
+        - `lg` → `rgba(255, 255, 255, 0.60)`
+        - `md` → `rgba(255, 255, 255, 0.70)`
+        - `sm` → `rgba(255, 255, 255, 0.80)`
       - **inverse**
-        - `lg` → `rgba(255, 255, 255, 0.8)`
-        - `md` → `rgba(255, 255, 255, 0.9)`
+        - `lg` → `rgba(255, 255, 255, 0.80)`
+        - `md` → `rgba(255, 255, 255, 0.90)`
         - `sm` → `#ffffff`
   - **interactive**
     - **default**
-      - `default` → `rgba(25, 19, 41, 0.2)`
-      - `subtle` → `rgba(25, 19, 41, 0.1)`
-      - `strong` → `rgba(25, 19, 41, 0.5)`
+      - `default` → `rgba(25, 19, 41, 0.20)`
+      - `subtle` → `rgba(25, 19, 41, 0.10)`
+      - `strong` → `rgba(25, 19, 41, 0.50)`
       - `focus` → `#191329`
       - `disabled` → `rgba(25, 19, 41, 0.07)`
     - **inverse**
-      - `default` → `rgba(255, 255, 255, 0.6)`
-      - `subtle` → `rgba(255, 255, 255, 0.4)`
-      - `strong` → `rgba(255, 255, 255, 0.8)`
+      - `default` → `rgba(255, 255, 255, 0.60)`
+      - `subtle` → `rgba(255, 255, 255, 0.40)`
+      - `strong` → `rgba(255, 255, 255, 0.80)`
       - `focus` → `#ffffff`
-      - `disabled` → `rgba(255, 255, 255, 0.4)`
+      - `disabled` → `rgba(255, 255, 255, 0.40)`
     - **accent**
       - `default` → `#e00800`
       - `focus` → `#bb0700`
@@ -1272,7 +1251,7 @@
 - **Color tokens — `color.input-field`:**
   - **surface**
     - **default**
-      - `default` → `#ffffff`
+      - `default` → `#f7f7fa`
       - `disabled` → `#f0f0f5`
     - **inverse**
       - `default` → `rgba(255, 255, 255, 0.15)`
@@ -1287,7 +1266,7 @@
     - **default**
       - `Color` → `#ffffff`
       - **label**
-        - `default` → `#908e9a`
+        - `default` → `#575362`
         - `disabled` → `#c0bfc8`
       - **value**
         - `active` → `#191329`
@@ -1295,11 +1274,11 @@
     - **inverse**
       - `Color` → `#ffffff`
       - **label**
-        - `default` → `rgba(255, 255, 255, 0.5)`
-        - `disabled` → `rgba(255, 255, 255, 0.3)`
+        - `default` → `rgba(255, 255, 255, 0.50)`
+        - `disabled` → `rgba(255, 255, 255, 0.30)`
       - **value**
         - `active` → `#ffffff`
-        - `disabled` → `rgba(255, 255, 255, 0.3)`
+        - `disabled` → `rgba(255, 255, 255, 0.30)`
 - **Color tokens — `color.surface`:**
   - **canvas**
     - `default` → `#ffffff`
@@ -1326,20 +1305,20 @@
     - `brand-muted` → `#fff2f2`
     - `midnight` → `#312c40`
   - **overlay**
-    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `scrim` → `rgba(25, 19, 41, 0.50)`
     - `floating` → `#f7f7fa`
     - `floating-middleground` → `#908e9a`
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.3)`
-      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
-      - `xl` → `rgba(255, 255, 255, 0.4)`
-      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `xl` → `rgba(255, 255, 255, 0.40)`
+      - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
-      - `sm` → `rgba(255, 255, 255, 0.1)`
+      - `sm` → `rgba(255, 255, 255, 0.10)`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
 - **Anatomy (Figma-verified):**
   - **States:** Default, Typing, Typed. **Surfaces:** white, midnight (two color schemes).
@@ -1359,7 +1338,7 @@
 - **Color tokens — `color.input-field`:**
   - **surface**
     - **default**
-      - `default` → `#ffffff`
+      - `default` → `#f7f7fa`
       - `disabled` → `#f0f0f5`
     - **inverse**
       - `default` → `rgba(255, 255, 255, 0.15)`
@@ -1374,7 +1353,7 @@
     - **default**
       - `Color` → `#ffffff`
       - **label**
-        - `default` → `#908e9a`
+        - `default` → `#575362`
         - `disabled` → `#c0bfc8`
       - **value**
         - `active` → `#191329`
@@ -1382,11 +1361,11 @@
     - **inverse**
       - `Color` → `#ffffff`
       - **label**
-        - `default` → `rgba(255, 255, 255, 0.5)`
-        - `disabled` → `rgba(255, 255, 255, 0.3)`
+        - `default` → `rgba(255, 255, 255, 0.50)`
+        - `disabled` → `rgba(255, 255, 255, 0.30)`
       - **value**
         - `active` → `#ffffff`
-        - `disabled` → `rgba(255, 255, 255, 0.3)`
+        - `disabled` → `rgba(255, 255, 255, 0.30)`
 - **Color tokens — `color.surface`:**
   - **canvas**
     - `default` → `#ffffff`
@@ -1413,27 +1392,29 @@
     - `brand-muted` → `#fff2f2`
     - `midnight` → `#312c40`
   - **overlay**
-    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `scrim` → `rgba(25, 19, 41, 0.50)`
     - `floating` → `#f7f7fa`
     - `floating-middleground` → `#908e9a`
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.3)`
-      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
-      - `xl` → `rgba(255, 255, 255, 0.4)`
-      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `xl` → `rgba(255, 255, 255, 0.40)`
+      - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
-      - `sm` → `rgba(255, 255, 255, 0.1)`
+      - `sm` → `rgba(255, 255, 255, 0.10)`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
 - **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** AI / voice-assisted search entry.
-  - **Anatomy:** search field + mic/AI affordance; expands into dictation/transcription UI (waveform + live transcript + stop).
-  - **States:** Default · Focus · Dictation started · Transcribing (→ user taps stop). _(states confirmed via REST)_
-  - **Sizing:** width fill; height fixed (collapsed); expands when dictating.
-  - **Make hint:** UX 'search with mic / ask AI' → this; otherwise use Searchbar.
+  - **Type:** AI / voice search — a search field that expands into a voice-dictation flow. (Built as a state layout, not a variant set.)
+  - **States:** Default · Focus · Dictation started · Transcribing (live transcript) · user taps stop. _(states from Figma; layout curated)_
+  - **Anatomy:** search field (leading search/AI icon + placeholder/value + trailing mic) → on mic tap expands to a dictation panel (listening/waveform indicator + live transcript + stop button).
+  - **Sizing:** width fill; height fixed when collapsed (~52); expands while dictating.
+  - **Tokens:** `color/input-field/*` + `color/surface/*`; text `typography/body/*`.
+  - **Make hint:** use for 'search with voice / ask AI'; otherwise use Searchbar (the file notes they combine).
+  - **Figma node:** `28189:33142`
 
 #### Selectors
 - **Figma:** [`28278-1530`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=28278-1530)
@@ -1468,20 +1449,20 @@
     - `brand-muted` → `#fff2f2`
     - `midnight` → `#312c40`
   - **overlay**
-    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `scrim` → `rgba(25, 19, 41, 0.50)`
     - `floating` → `#f7f7fa`
     - `floating-middleground` → `#908e9a`
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.3)`
-      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
-      - `xl` → `rgba(255, 255, 255, 0.4)`
-      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `xl` → `rgba(255, 255, 255, 0.40)`
+      - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
-      - `sm` → `rgba(255, 255, 255, 0.1)`
+      - `sm` → `rgba(255, 255, 255, 0.10)`
 - **Color tokens — `color.border`:**
   - **surface-based**
     - **canvas**
@@ -1513,26 +1494,26 @@
       - `floating inverse` → `#ffffff`
     - **glass**
       - **default**
-        - `lg` → `rgba(255, 255, 255, 0.6)`
-        - `md` → `rgba(255, 255, 255, 0.7)`
-        - `sm` → `rgba(255, 255, 255, 0.8)`
+        - `lg` → `rgba(255, 255, 255, 0.60)`
+        - `md` → `rgba(255, 255, 255, 0.70)`
+        - `sm` → `rgba(255, 255, 255, 0.80)`
       - **inverse**
-        - `lg` → `rgba(255, 255, 255, 0.8)`
-        - `md` → `rgba(255, 255, 255, 0.9)`
+        - `lg` → `rgba(255, 255, 255, 0.80)`
+        - `md` → `rgba(255, 255, 255, 0.90)`
         - `sm` → `#ffffff`
   - **interactive**
     - **default**
-      - `default` → `rgba(25, 19, 41, 0.2)`
-      - `subtle` → `rgba(25, 19, 41, 0.1)`
-      - `strong` → `rgba(25, 19, 41, 0.5)`
+      - `default` → `rgba(25, 19, 41, 0.20)`
+      - `subtle` → `rgba(25, 19, 41, 0.10)`
+      - `strong` → `rgba(25, 19, 41, 0.50)`
       - `focus` → `#191329`
       - `disabled` → `rgba(25, 19, 41, 0.07)`
     - **inverse**
-      - `default` → `rgba(255, 255, 255, 0.6)`
-      - `subtle` → `rgba(255, 255, 255, 0.4)`
-      - `strong` → `rgba(255, 255, 255, 0.8)`
+      - `default` → `rgba(255, 255, 255, 0.60)`
+      - `subtle` → `rgba(255, 255, 255, 0.40)`
+      - `strong` → `rgba(255, 255, 255, 0.80)`
       - `focus` → `#ffffff`
-      - `disabled` → `rgba(255, 255, 255, 0.4)`
+      - `disabled` → `rgba(255, 255, 255, 0.40)`
     - **accent**
       - `default` → `#e00800`
       - `focus` → `#bb0700`
@@ -1555,12 +1536,14 @@
       - `muted` → `#ffecab`
       - `disabled` → `#c0bfc8`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** option selectors (segmented control / option rows / quantity / dropdown trigger).
-  - **Anatomy:** group of options (segments or rows) with a selected indicator; or a value field + chevron that opens a Bottom sheet/menu.
-  - **States:** default · selected · disabled; single-select.
-  - **Sizing:** width fill or hug; height fixed.
-  - **Make hint:** UX 'pick one of a few' → segmented Selectors; 'pick from many' → Selector that opens a Bottom sheet.
+- **Anatomy (Figma-verified):**
+  - **Variants:** `Display` (Dark, Light) × `State` (Default, Disabled, Selected, Selected / Check).
+  - **Dimensions:** 98×72.
+  - **Shape:** corner radius 16.
+  - **Anatomy parts:** Content · Label.
+  - **Specs (from Figma):**
+    - Applied here corner smoothing to the overall component
+  - **Figma node:** `28278:1530`
 
 ### 03 · Navigation
 
@@ -1598,20 +1581,20 @@
     - `brand-muted` → `#fff2f2`
     - `midnight` → `#312c40`
   - **overlay**
-    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `scrim` → `rgba(25, 19, 41, 0.50)`
     - `floating` → `#f7f7fa`
     - `floating-middleground` → `#908e9a`
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.3)`
-      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
-      - `xl` → `rgba(255, 255, 255, 0.4)`
-      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `xl` → `rgba(255, 255, 255, 0.40)`
+      - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
-      - `sm` → `rgba(255, 255, 255, 0.1)`
+      - `sm` → `rgba(255, 255, 255, 0.10)`
 - **Color tokens — `color.text`:**
   - **default**
     - `default` → `#191329`
@@ -1619,9 +1602,9 @@
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
@@ -1676,12 +1659,11 @@
     - `focus` → `#e00800`
     - `focus-special` → `#ffffff`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** bottom tab bar — 3–5 destinations, sticky, respects bottom safe-area.
-  - **Item anatomy:** icon (24) over label (caption), centered; equal-width items. Optional badge dot/count on an item; optional center emphasized/FAB item.
-  - **States (per item):** active (icon + label use accent/brand) · inactive (muted) — `color/navbar-tab/*`.
-  - **Sizing:** width fill; height fixed (token) + bottom inset.
-  - **Make hint:** map any persistent UX bottom tab bar here; set the current screen's tab to active.
+- **Anatomy (Figma-verified):**
+  - **Variants:** `page` (Devices, Elife, Plans, home, profile, shop, support) × `active` (no, yes) × `special` (no, yes) × `page-1` (no, yes) × `page-2` (no, yes) × `page-3` (no, yes) × `page-4` (no, yes) × `gap` (left, right) × `logged-in` (no, yes).
+  - **Dimensions:** 370×114 · 338×64 · 64×64 · 56×56.
+  - **Anatomy parts:** wrapper · .Home Indicator.
+  - **Figma node:** `22542:13964`
 
 #### Action bar
 - **Figma:** [`25519-15621`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25519-15621)
@@ -1716,20 +1698,20 @@
     - `brand-muted` → `#fff2f2`
     - `midnight` → `#312c40`
   - **overlay**
-    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `scrim` → `rgba(25, 19, 41, 0.50)`
     - `floating` → `#f7f7fa`
     - `floating-middleground` → `#908e9a`
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.3)`
-      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
-      - `xl` → `rgba(255, 255, 255, 0.4)`
-      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `xl` → `rgba(255, 255, 255, 0.40)`
+      - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
-      - `sm` → `rgba(255, 255, 255, 0.1)`
+      - `sm` → `rgba(255, 255, 255, 0.10)`
 - **Color tokens — `color.button`:**
   - **primary**
     - **surface**
@@ -1745,7 +1727,7 @@
       - **brand**
         - `default` → `#ffffff`
         - `focus` → `#ffffff`
-        - `disabled` → `rgba(255, 255, 255, 0.7)`
+        - `disabled` → `rgba(255, 255, 255, 0.70)`
       - **inverse**
         - `default` → `#e00800`
         - `focus` → `#bb0700`
@@ -1764,7 +1746,7 @@
       - **inverse**
         - `default` → `#ffffff`
         - `focus` → `#ffffff`
-        - `disabled` → `rgba(255, 255, 255, 0.7)`
+        - `disabled` → `rgba(255, 255, 255, 0.70)`
     - **border**
       - **brand**
         - `default` → `#e00800`
@@ -1787,7 +1769,7 @@
       - **inverse**
         - `default` → `#ffffff`
         - `focus` → `#bb0700`
-        - `disabled` → `rgba(255, 255, 255, 0.7)`
+        - `disabled` → `rgba(255, 255, 255, 0.70)`
   - **link**
     - **text**
       - **brand**
@@ -1801,19 +1783,28 @@
       - **inverse**
         - `default` → `#ffffff`
         - `focus` → `#bb0700`
-        - `disabled` → `rgba(255, 255, 255, 0.7)`
+        - `disabled` → `rgba(255, 255, 255, 0.70)`
   - **text**
     - **midnight**
       - `default` → `#191329`
       - `focus` → `#191329`
       - `disabled` → `#c0bfc8`
 - **Typography:** `button.lg`(16/Semi bold), `button.md`(14/Medium), `button.sm`(12/Medium)
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** sticky action footer pinned above the Nav bar (or to the bottom on flow screens).
-  - **Anatomy:** top divider/elevation + 1–2 Buttons (fill-width) + optional helper text/price above.
-  - **Variants:** single primary · primary + secondary (stacked or side-by-side) · with helper/summary row.
-  - **Sizing:** width fill; height hug (button height + `spacing` padding); respects bottom inset.
-  - **Make hint:** when a UX screen has one persistent primary CTA at the bottom, use this (not an inline Button).
+- **Anatomy (Figma-verified):**
+  - **Variants:** `color-scheme` (default, inverse) × `type` (icon, image, multiple, single) × `trigger` (button, chevron, switcher) × `surface-color` (default, glass, midnight-base, midnight-raised, midnight-transparent, subtle, sunken, white-transparent) × `Type` (Bill, Sub-text) × `State` (Compact, Expanded).
+  - **Dimensions:** 350×148 · 292×92 · 350×72 · 292×72 · 292×40 · 220×38.
+  - **Shape:** corner radius 20.
+  - **Anatomy parts:** bill-container.
+  - **Specs (from Figma):**
+    - Action bar is used as a container that pairs with banners and contains an action, title and icon/image to be used as context for action
+    - Icon ←→ Image
+    - Chevron The entire bar is the tap target; the chevron signals "tap to drill in." Use when the bar opens a destination, drawer, or detail view.
+    - Rule: Only one trailing action is permitted. Never combine a button and a chevron.
+    - By leading visual Icon — 40×40 brand mark or symbol Illustration — 40×40 decorative or branded image asset None — text content starts at the leading edge
+    - Chevron
+    - By leading visual (icon/image)
+    - Visual icon size: fixed dimensions (40×40px)
+  - **Figma node:** `25519:15621`
 
 #### Tabs
 - **Figma:** [`22542-13966`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=22542-13966)
@@ -1838,7 +1829,7 @@
       - `active` → `#ffffff`
   - **border**
     - **local**
-      - `default` → `rgba(25, 19, 41, 0.5)`
+      - `default` → `rgba(25, 19, 41, 0.50)`
 - **Size tokens — `tabs`:**
   - **height**
     - `md` → `40`
@@ -1866,9 +1857,9 @@
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
@@ -1896,12 +1887,16 @@
   - `md` → `36`
   - `lg` → `40`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** Section header row (titles a Section, optional action).
-  - **Anatomy:** title (left) + optional 'see all' link / chevron (right). Optional leading icon or subtitle.
-  - **Variants:** title only · title + see-all · title + chevron · with subtitle.
-  - **Sizing:** width fill; height fixed (`size.section-link`).
-  - **Make hint:** add at the top of any titled Section; link to the full list/screen.
+- **Anatomy (Figma-verified):**
+  - **Variants:** `size` (lg) × `surface` (Inverse, default, glass, inverse) × `State` (default, disabled, focus).
+  - **Dimensions:** 40×40.
+  - **Shape:** corner radius 14.
+  - **Anatomy parts:** loader · icon-size.
+  - **Specs (from Figma):**
+    - icon-size
+    - The three sizes are Lg: 48x48px, Md: 36x36px, Sm: 32x32px.
+    - Padding : 8px for small & medium and 12px for large
+  - **Figma node:** `25460:83978`
 
 #### Quick Action
 - **Figma:** [`25507-13670`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25507-13670)
@@ -1936,20 +1931,20 @@
     - `brand-muted` → `#fff2f2`
     - `midnight` → `#312c40`
   - **overlay**
-    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `scrim` → `rgba(25, 19, 41, 0.50)`
     - `floating` → `#f7f7fa`
     - `floating-middleground` → `#908e9a`
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.3)`
-      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
-      - `xl` → `rgba(255, 255, 255, 0.4)`
-      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `xl` → `rgba(255, 255, 255, 0.40)`
+      - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
-      - `sm` → `rgba(255, 255, 255, 0.1)`
+      - `sm` → `rgba(255, 255, 255, 0.10)`
 - **Color tokens — `color.text`:**
   - **default**
     - `default` → `#191329`
@@ -1957,9 +1952,9 @@
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
@@ -1983,12 +1978,15 @@
     - `muted` → `#ffe68f`
     - `disabled` → `#c0bfc8`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** quick-action shortcut grid (top tasks on Home).
-  - **Anatomy:** grid (typically 4-up per row) of cells = circular/rounded icon tile + short label below; wraps to multiple rows.
-  - **States:** default · pressed · disabled (per cell); optional badge on a cell.
-  - **Sizing:** container width fill, height hug; cells equal-width (grid), fixed-height each.
-  - **Make hint:** map a UX grid of small icon+label shortcuts here.
+- **Anatomy (Figma-verified):**
+  - **Variants:** `Icon type` (addon-buy, all-services, contact-us, device-buy, devices, live-chat, mParking, order-track, plan-change, quick-pay, sim-activate, sim-replace, subscriptions) × `badge` (off, on) × `Quick-tasks Icons` (off, on) × `variant` (Carousel, Stack) × `type` (addon-buy, all-services, contact-us, device-buy, devices, live-chat, mParking, order-track, plan-change, quick-pay, sim-activate, sim-replace, subscriptions) × `Grid` (On, off) × `Carousel` (off, on) × `Row` (Single, Three, Two).
+  - **Dimensions:** 334×452 · 449×300 · 334×300 · 449×148 · 334×148 · 165×148.
+  - **Anatomy parts:** .quick-action-variants.
+  - **Specs (from Figma):**
+    - Quick task icons
+    - Status tags are live data badges. They reflect the user's real-time service state and sit in the top-right corner of the icon container.
+    - Icon container
+  - **Figma node:** `25507:13670`
 
 ### 04 · Layout
 
@@ -2026,20 +2024,20 @@
     - `brand-muted` → `#fff2f2`
     - `midnight` → `#312c40`
   - **overlay**
-    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `scrim` → `rgba(25, 19, 41, 0.50)`
     - `floating` → `#f7f7fa`
     - `floating-middleground` → `#908e9a`
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.3)`
-      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
-      - `xl` → `rgba(255, 255, 255, 0.4)`
-      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `xl` → `rgba(255, 255, 255, 0.40)`
+      - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
-      - `sm` → `rgba(255, 255, 255, 0.1)`
+      - `sm` → `rgba(255, 255, 255, 0.10)`
 - **Color tokens — `color.text`:**
   - **default**
     - `default` → `#191329`
@@ -2047,9 +2045,9 @@
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
@@ -2086,12 +2084,20 @@
       - `col-8` → `148`
       - `row-16` → `224`
 - **Typography:** `heading.xl`(32/Bold), `heading.lg`(28/Bold), `heading.md`(24/Bold), `heading.sm`(20/Bold), `heading.xs`(16/Bold), `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold)
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** the primary full-width body container — groups related content into a titled block.
-  - **Anatomy:** optional **Section link** header → body content (any of: card carousel, stacked cards, list rows, grid, controls). Vertical padding + inter-item gap from `size.section`.
-  - **Variants:** with/without header · padded body vs full-bleed body (carousels/banners bleed to edges) · light vs inverse surface.
-  - **Sizing:** width **fill** (full screen width); height **hug** content.
-  - **Make hint:** every distinct UX content block → one Section. Stack Sections vertically in the scroll body with the section-gap token.
+- **Anatomy (Figma-verified):**
+  - **Variants:** `surface-color` (ai-powered, brand, default, glass-midnight, glass-white, midnight-base, midnight-raised, raised) × `filter-pill` (off, on) × `context` (off, on) × `trigger` (off, on) × `Title line` (1-Line, 2-line) × `chevron button` (no, yes) × `size` (lg, md, sm, xl, xs) × `surface` (Default, inverse).
+  - **Dimensions:** 367×572 · 337×484 · 337×332 · 337×256 · 337×180 · 375×116.
+  - **Shape:** corner radius 24.
+  - **Anatomy parts:** header · body.
+  - **Specs (from Figma):**
+    - Without filter chip and without chevron
+    - Update: Title should be short  and fit in the same line as chip subtext fixed size - 291px
+    - Update: title and subtext should take full container width Title text can be up to 2 lines, subtitle text can be up to 2 lines
+    - Removed bottom padding from section header and added 16px top padding to section body
+    - Eight surface treatments. The surface drives both the body fill and the text/icon colors that read on top of it.
+    - Section gaps and padding remains same across sizes
+    - Context will be fixed to 260px and will not extend till below button
+  - **Figma node:** `25519:12055`
 
 #### Accordion
 - **Figma:** [`27465-29326`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=27465-29326)
@@ -2126,20 +2132,20 @@
     - `brand-muted` → `#fff2f2`
     - `midnight` → `#312c40`
   - **overlay**
-    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `scrim` → `rgba(25, 19, 41, 0.50)`
     - `floating` → `#f7f7fa`
     - `floating-middleground` → `#908e9a`
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.3)`
-      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
-      - `xl` → `rgba(255, 255, 255, 0.4)`
-      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `xl` → `rgba(255, 255, 255, 0.40)`
+      - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
-      - `sm` → `rgba(255, 255, 255, 0.1)`
+      - `sm` → `rgba(255, 255, 255, 0.10)`
 - **Color tokens — `color.text`:**
   - **default**
     - `default` → `#191329`
@@ -2147,9 +2153,9 @@
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
@@ -2203,26 +2209,26 @@
       - `floating inverse` → `#ffffff`
     - **glass**
       - **default**
-        - `lg` → `rgba(255, 255, 255, 0.6)`
-        - `md` → `rgba(255, 255, 255, 0.7)`
-        - `sm` → `rgba(255, 255, 255, 0.8)`
+        - `lg` → `rgba(255, 255, 255, 0.60)`
+        - `md` → `rgba(255, 255, 255, 0.70)`
+        - `sm` → `rgba(255, 255, 255, 0.80)`
       - **inverse**
-        - `lg` → `rgba(255, 255, 255, 0.8)`
-        - `md` → `rgba(255, 255, 255, 0.9)`
+        - `lg` → `rgba(255, 255, 255, 0.80)`
+        - `md` → `rgba(255, 255, 255, 0.90)`
         - `sm` → `#ffffff`
   - **interactive**
     - **default**
-      - `default` → `rgba(25, 19, 41, 0.2)`
-      - `subtle` → `rgba(25, 19, 41, 0.1)`
-      - `strong` → `rgba(25, 19, 41, 0.5)`
+      - `default` → `rgba(25, 19, 41, 0.20)`
+      - `subtle` → `rgba(25, 19, 41, 0.10)`
+      - `strong` → `rgba(25, 19, 41, 0.50)`
       - `focus` → `#191329`
       - `disabled` → `rgba(25, 19, 41, 0.07)`
     - **inverse**
-      - `default` → `rgba(255, 255, 255, 0.6)`
-      - `subtle` → `rgba(255, 255, 255, 0.4)`
-      - `strong` → `rgba(255, 255, 255, 0.8)`
+      - `default` → `rgba(255, 255, 255, 0.60)`
+      - `subtle` → `rgba(255, 255, 255, 0.40)`
+      - `strong` → `rgba(255, 255, 255, 0.80)`
       - `focus` → `#ffffff`
-      - `disabled` → `rgba(255, 255, 255, 0.4)`
+      - `disabled` → `rgba(255, 255, 255, 0.40)`
     - **accent**
       - `default` → `#e00800`
       - `focus` → `#bb0700`
@@ -2245,12 +2251,11 @@
       - `muted` → `#ffecab`
       - `disabled` → `#c0bfc8`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** expand/collapse disclosure container (FAQ, details).
-  - **Anatomy:** header row (title + trailing chevron, rotates) + collapsible body; divider between items; chevron up=expanded / down=collapsed.
-  - **States:** collapsed · expanded × disabled; single- or multi-open.
-  - **Sizing:** width fill; height hug (animates between collapsed/expanded).
-  - **Make hint:** map a UX list of expandable rows / FAQ here.
+- **Anatomy (Figma-verified):**
+  - **Variants:** `Chevron down` (off, on) × `Subtitle` (off, on) × `Left icon` (off, on) × `Right title` (off, on) × `Expanded` (No, Yes).
+  - **Dimensions:** 343×142 · 343×58.
+  - **Anatomy parts:** Content body text.
+  - **Figma node:** `27465:29326`
 
 ### 05 · Feedback & Status
 
@@ -2298,20 +2303,20 @@
     - `brand-muted` → `#fff2f2`
     - `midnight` → `#312c40`
   - **overlay**
-    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `scrim` → `rgba(25, 19, 41, 0.50)`
     - `floating` → `#f7f7fa`
     - `floating-middleground` → `#908e9a`
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.3)`
-      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
-      - `xl` → `rgba(255, 255, 255, 0.4)`
-      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `xl` → `rgba(255, 255, 255, 0.40)`
+      - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
-      - `sm` → `rgba(255, 255, 255, 0.1)`
+      - `sm` → `rgba(255, 255, 255, 0.10)`
 - **Color tokens — `color.text`:**
   - **default**
     - `default` → `#191329`
@@ -2319,9 +2324,9 @@
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
@@ -2345,12 +2350,13 @@
     - `muted` → `#ffe68f`
     - `disabled` → `#c0bfc8`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** consumption meter (data/minutes/quota vs plan).
-  - **Anatomy:** label + used/total values + **Progress bar** fill; optional status text/CTA ('Add data').
-  - **States (by level):** normal · warning (near limit) · danger (over/depleted) — `color/status/*`.
-  - **Sizing:** width fill; height hug.
-  - **Make hint:** map a UX usage/quota meter; pick level color by remaining %.
+- **Anatomy (Figma-verified):**
+  - **Variants:** `state` (Default, Filled, default, filled) × `Progress status` (Default, low data) × `plans` (2, 3, 4+, low data warning).
+  - **Dimensions:** 319×300 · 295×152 · 295×48 · 279×48 · 80×16 · 70×18.
+  - **Anatomy parts:** Plan · action-bar.
+  - **Specs (from Figma):**
+    - Plan-usage width is decided by the section container. should always be set to “Fill” inside a section
+  - **Figma node:** `26663:89880`
 
 #### Snackbar & Alert msg
 - **Figma:** [`22574-22808`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=22574-22808)
@@ -2395,20 +2401,20 @@
     - `brand-muted` → `#fff2f2`
     - `midnight` → `#312c40`
   - **overlay**
-    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `scrim` → `rgba(25, 19, 41, 0.50)`
     - `floating` → `#f7f7fa`
     - `floating-middleground` → `#908e9a`
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.3)`
-      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
-      - `xl` → `rgba(255, 255, 255, 0.4)`
-      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `xl` → `rgba(255, 255, 255, 0.40)`
+      - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
-      - `sm` → `rgba(255, 255, 255, 0.1)`
+      - `sm` → `rgba(255, 255, 255, 0.10)`
 - **Color tokens — `color.text`:**
   - **default**
     - `default` → `#191329`
@@ -2416,9 +2422,9 @@
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
@@ -2442,12 +2448,11 @@
     - `muted` → `#ffe68f`
     - `disabled` → `#c0bfc8`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** transient snackbar (floats, bottom) OR inline alert message (in a Section).
-  - **Anatomy:** status icon + message text + optional action link + optional dismiss (×). Single or two-line.
-  - **States:** info · positive · warning · danger (`color/status/*`); with/without action; auto-dismiss (snackbar) vs persistent (inline).
-  - **Sizing:** width fill (with side margin); height hug.
-  - **Make hint:** transient feedback → snackbar overlay; persistent contextual message → inline alert inside the Section it relates to.
+- **Anatomy (Figma-verified):**
+  - **Variants:** `Close button` (off, on) × `Action` (off, on) × `Subtitle` (off, on) × `Type` (Default, ⏳ Loading, 🔴 Error, 🟡 Warning, 🟢 Success) × `Property 1` (Default).
+  - **Dimensions:** 152×192 · 343×68 · 343×64 · 203×48 · 195×48 · 171×48.
+  - **Anatomy parts:** deals-card-core.
+  - **Figma node:** `22574:22808`
 
 #### Alert Modals
 - **Figma:** [`23201-17897`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=23201-17897)
@@ -2492,20 +2497,20 @@
     - `brand-muted` → `#fff2f2`
     - `midnight` → `#312c40`
   - **overlay**
-    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `scrim` → `rgba(25, 19, 41, 0.50)`
     - `floating` → `#f7f7fa`
     - `floating-middleground` → `#908e9a`
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.3)`
-      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
-      - `xl` → `rgba(255, 255, 255, 0.4)`
-      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `xl` → `rgba(255, 255, 255, 0.40)`
+      - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
-      - `sm` → `rgba(255, 255, 255, 0.1)`
+      - `sm` → `rgba(255, 255, 255, 0.10)`
 - **Color tokens — `color.text`:**
   - **default**
     - `default` → `#191329`
@@ -2513,9 +2518,9 @@
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
@@ -2539,12 +2544,13 @@
     - `muted` → `#ffe68f`
     - `disabled` → `#c0bfc8`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** centered modal dialog over a scrim (blocking decision).
-  - **Anatomy:** optional illustration/icon + title + body text + action Buttons (1–2, stacked or row) + optional dismiss (×).
-  - **States:** info · positive · warning · danger; 1-action (acknowledge) · 2-action (confirm/cancel).
-  - **Sizing:** width fill with side margin (max width); height hug; centered; scrim behind.
-  - **Make hint:** use for confirmations/irreversible actions; not for transient info (use snackbar).
+- **Anatomy (Figma-verified):**
+  - **Variants:** `state` (attention, empty, error, ewaiting, face ID, fingerprint, location, pay, repair, sim, success, transfer ownership, warning) × `type` (empty, fingerprint, fyi, help, id check, location, new owner, oops, payment card, sim card, success, wait, warning).
+  - **Dimensions:** 375×324 · 88×88 · 40×40.
+  - **Anatomy parts:** thumb up green 1 · Yaaay · Star 22 · Star 23.
+  - **Specs (from Figma):**
+    - 210 px
+  - **Figma node:** `23201:17897`
 
 ### 06 · Overlays
 
@@ -2582,20 +2588,20 @@
     - `brand-muted` → `#fff2f2`
     - `midnight` → `#312c40`
   - **overlay**
-    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `scrim` → `rgba(25, 19, 41, 0.50)`
     - `floating` → `#f7f7fa`
     - `floating-middleground` → `#908e9a`
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.3)`
-      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
-      - `xl` → `rgba(255, 255, 255, 0.4)`
-      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `xl` → `rgba(255, 255, 255, 0.40)`
+      - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
-      - `sm` → `rgba(255, 255, 255, 0.1)`
+      - `sm` → `rgba(255, 255, 255, 0.10)`
 - **Color tokens — `color.text`:**
   - **default**
     - `default` → `#191329`
@@ -2603,9 +2609,9 @@
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
@@ -2629,12 +2635,20 @@
     - `muted` → `#ffe68f`
     - `disabled` → `#c0bfc8`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** small contextual hint / coachmark anchored to a control.
-  - **Anatomy:** container + text (optional title) + directional arrow pointing at the anchor; optional dismiss for coachmarks.
-  - **States (placement):** top · bottom · left · right (arrow follows); with/without title.
-  - **Sizing:** width hug (max width, wraps); height hug.
-  - **Make hint:** attach to an icon/control that needs explanation; keep copy short.
+- **Anatomy (Figma-verified):**
+  - **Variants:** `alignment` (center, left, right) × `tail-position` (bottom, top) × `surface` (default, inverse) × `Visible` (off, on) × `Size` (Large, Medium, Small) × `Direction` (Center, Left, Right) × `Caret direction` (Down, Lef, Left, Right, Up) × `Mode` (Dark, Light).
+  - **Dimensions:** 280×321 · 280×315 · 166×140 · 200×81 · 200×75 · 250×50.
+  - **Anatomy parts:** tooltip-rich-core · .tooltip-caret.
+  - **Specs (from Figma):**
+    - Width parameters:  Min-width set to 99px  Max-width set at 250px (250px in this example, varies with text length)
+    - Height parameters:  Height set to 54px (54px in this example, varies with text length) Max-height set to 88px
+    - Corner radius is set to 12px (0.75rem)
+    - Close icon size: 16px (1rem)
+    - Close Icon
+    - Tooltips are used as contextual guides, providing concise information or hints when users hover over or click elements like icons, buttons, or form fields.
+    - Icon (icon-size)
+    - Trigger element (icon); Container: Image (opt.); Title (opt.); Text; Actions: Slider (opt.); CTA. Pointer (arrow);
+  - **Figma node:** `23201:15868`
 
 #### Bottom sheet
 - **Figma:** [`27907-11716`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=27907-11716)  ·  **key building block**
@@ -2669,20 +2683,20 @@
     - `brand-muted` → `#fff2f2`
     - `midnight` → `#312c40`
   - **overlay**
-    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `scrim` → `rgba(25, 19, 41, 0.50)`
     - `floating` → `#f7f7fa`
     - `floating-middleground` → `#908e9a`
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.3)`
-      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
-      - `xl` → `rgba(255, 255, 255, 0.4)`
-      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `xl` → `rgba(255, 255, 255, 0.40)`
+      - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
-      - `sm` → `rgba(255, 255, 255, 0.1)`
+      - `sm` → `rgba(255, 255, 255, 0.10)`
 - **Color tokens — `color.text`:**
   - **default**
     - `default` → `#191329`
@@ -2690,9 +2704,9 @@
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
@@ -2716,12 +2730,16 @@
     - `muted` → `#ffe68f`
     - `disabled` → `#c0bfc8`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** modal panel sliding up from the bottom over a scrim.
-  - **Anatomy:** drag handle (grabber) + optional header (title + dismiss) + scrollable content + optional sticky footer (Action bar).
-  - **States:** snap points (peek / half / full ~90%); with/without handle/header/footer; dismiss by drag-down or scrim tap.
-  - **Sizing:** width fill; height variable up to ~90% screen; content scrolls inside.
-  - **Make hint:** map UX 'slide-up panel / picker / detail drawer' here; put its primary CTA in the sheet's footer Action bar.
+- **Anatomy (Figma-verified):**
+  - **Variants:** `Grabber` (off, on) × `Display` (Bullet, Dark, Icon, Light, Tick) × `Left icon` (off, on) × `Right icon 1` (off, on) × `Right icon 2` (off, on) × `Image/Icon asset` (off, on) × `Description` (off, on) × `Size` (lg, md, sm, xs) × `Context` (off, on) × `Tertiary` (off, on) × `Secondary` (off, on) × `Link` (off, on) × `Type` (1 line, 2 lines, 3D icon, Amount, Bg & Icon, Chips, Default, Horizontal, Search bar, Stacked, Terms & Conditions) × `Title` (off, on) × `Gradient` (off, on).
+  - **Dimensions:** 375×758 · 375×405 · 375×212 · 375×210 · 375×196 · 375×186.
+  - **Shape:** radius 24/24/36/36.
+  - **Anatomy parts:** .section-surface-inverse · Grabber · Visual asset · Header · Subheader · Slot · Footer · Floating header · Sticky footer · Keyboard.
+  - **Specs (from Figma):**
+    - Header Grabber Icon left Title Icon right 1 Icon right 2 Floating Header
+    - Visual asset Image 3D composition Icon & Blur
+    - Visual asset Icon & Blur
+  - **Figma node:** `27907:11716`
 
 ### 07 · Cards
 
@@ -2759,20 +2777,20 @@
     - `brand-muted` → `#fff2f2`
     - `midnight` → `#312c40`
   - **overlay**
-    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `scrim` → `rgba(25, 19, 41, 0.50)`
     - `floating` → `#f7f7fa`
     - `floating-middleground` → `#908e9a`
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.3)`
-      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
-      - `xl` → `rgba(255, 255, 255, 0.4)`
-      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `xl` → `rgba(255, 255, 255, 0.40)`
+      - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
-      - `sm` → `rgba(255, 255, 255, 0.1)`
+      - `sm` → `rgba(255, 255, 255, 0.10)`
 - **Color tokens — `color.border`:**
   - **surface-based**
     - **canvas**
@@ -2804,26 +2822,26 @@
       - `floating inverse` → `#ffffff`
     - **glass**
       - **default**
-        - `lg` → `rgba(255, 255, 255, 0.6)`
-        - `md` → `rgba(255, 255, 255, 0.7)`
-        - `sm` → `rgba(255, 255, 255, 0.8)`
+        - `lg` → `rgba(255, 255, 255, 0.60)`
+        - `md` → `rgba(255, 255, 255, 0.70)`
+        - `sm` → `rgba(255, 255, 255, 0.80)`
       - **inverse**
-        - `lg` → `rgba(255, 255, 255, 0.8)`
-        - `md` → `rgba(255, 255, 255, 0.9)`
+        - `lg` → `rgba(255, 255, 255, 0.80)`
+        - `md` → `rgba(255, 255, 255, 0.90)`
         - `sm` → `#ffffff`
   - **interactive**
     - **default**
-      - `default` → `rgba(25, 19, 41, 0.2)`
-      - `subtle` → `rgba(25, 19, 41, 0.1)`
-      - `strong` → `rgba(25, 19, 41, 0.5)`
+      - `default` → `rgba(25, 19, 41, 0.20)`
+      - `subtle` → `rgba(25, 19, 41, 0.10)`
+      - `strong` → `rgba(25, 19, 41, 0.50)`
       - `focus` → `#191329`
       - `disabled` → `rgba(25, 19, 41, 0.07)`
     - **inverse**
-      - `default` → `rgba(255, 255, 255, 0.6)`
-      - `subtle` → `rgba(255, 255, 255, 0.4)`
-      - `strong` → `rgba(255, 255, 255, 0.8)`
+      - `default` → `rgba(255, 255, 255, 0.60)`
+      - `subtle` → `rgba(255, 255, 255, 0.40)`
+      - `strong` → `rgba(255, 255, 255, 0.80)`
       - `focus` → `#ffffff`
-      - `disabled` → `rgba(255, 255, 255, 0.4)`
+      - `disabled` → `rgba(255, 255, 255, 0.40)`
     - **accent**
       - `default` → `#e00800`
       - `focus` → `#bb0700`
@@ -2852,9 +2870,9 @@
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
@@ -2889,12 +2907,11 @@
     - `lg` → `224`
     - `xl` → `336`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** generic content card.
-  - **Anatomy:** optional media/icon (top or leading) + title + body text + optional Badge + optional action (Button/link). Rounded corners (`border-radius`), surface fill (`atom-surfaces`), `size.card` padding.
-  - **States:** default · pressed (if tappable) · with/without media · with/without action.
-  - **Sizing:** width fill when stacked in a Section; height hug.
-  - **Make hint:** default choice for a vertical list of content blocks.
+- **Anatomy (Figma-verified):**
+  - **Variants:** `surface-color` (default, glass-midnight, glass-white, midnight-base, midnight-raised, subtle, sunken) × `AlignmentTop<->Bottom` (On, off) × `Size` (Lg, Md, Sm) × `surface` (default, inverse) × `Carousel<->Grid` (No, yes) × `Rows` (1, 2) × `Grid<->Carousel` (no, yes).
+  - **Dimensions:** 336×452 · 336×224 · 166×224 · 165×224 · 147×224 · 84×84.
+  - **Anatomy parts:** .card-general.
+  - **Figma node:** `26760:100129`
 
 #### Product
 - **Figma:** [`25701-12472`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25701-12472)
@@ -2929,20 +2946,20 @@
     - `brand-muted` → `#fff2f2`
     - `midnight` → `#312c40`
   - **overlay**
-    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `scrim` → `rgba(25, 19, 41, 0.50)`
     - `floating` → `#f7f7fa`
     - `floating-middleground` → `#908e9a`
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.3)`
-      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
-      - `xl` → `rgba(255, 255, 255, 0.4)`
-      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `xl` → `rgba(255, 255, 255, 0.40)`
+      - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
-      - `sm` → `rgba(255, 255, 255, 0.1)`
+      - `sm` → `rgba(255, 255, 255, 0.10)`
 - **Color tokens — `color.border`:**
   - **surface-based**
     - **canvas**
@@ -2974,26 +2991,26 @@
       - `floating inverse` → `#ffffff`
     - **glass**
       - **default**
-        - `lg` → `rgba(255, 255, 255, 0.6)`
-        - `md` → `rgba(255, 255, 255, 0.7)`
-        - `sm` → `rgba(255, 255, 255, 0.8)`
+        - `lg` → `rgba(255, 255, 255, 0.60)`
+        - `md` → `rgba(255, 255, 255, 0.70)`
+        - `sm` → `rgba(255, 255, 255, 0.80)`
       - **inverse**
-        - `lg` → `rgba(255, 255, 255, 0.8)`
-        - `md` → `rgba(255, 255, 255, 0.9)`
+        - `lg` → `rgba(255, 255, 255, 0.80)`
+        - `md` → `rgba(255, 255, 255, 0.90)`
         - `sm` → `#ffffff`
   - **interactive**
     - **default**
-      - `default` → `rgba(25, 19, 41, 0.2)`
-      - `subtle` → `rgba(25, 19, 41, 0.1)`
-      - `strong` → `rgba(25, 19, 41, 0.5)`
+      - `default` → `rgba(25, 19, 41, 0.20)`
+      - `subtle` → `rgba(25, 19, 41, 0.10)`
+      - `strong` → `rgba(25, 19, 41, 0.50)`
       - `focus` → `#191329`
       - `disabled` → `rgba(25, 19, 41, 0.07)`
     - **inverse**
-      - `default` → `rgba(255, 255, 255, 0.6)`
-      - `subtle` → `rgba(255, 255, 255, 0.4)`
-      - `strong` → `rgba(255, 255, 255, 0.8)`
+      - `default` → `rgba(255, 255, 255, 0.60)`
+      - `subtle` → `rgba(255, 255, 255, 0.40)`
+      - `strong` → `rgba(255, 255, 255, 0.80)`
       - `focus` → `#ffffff`
-      - `disabled` → `rgba(255, 255, 255, 0.4)`
+      - `disabled` → `rgba(255, 255, 255, 0.40)`
     - **accent**
       - `default` → `#e00800`
       - `focus` → `#bb0700`
@@ -3022,9 +3039,9 @@
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
@@ -3059,12 +3076,14 @@
     - `lg` → `224`
     - `xl` → `336`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** product tile (device/accessory/plan add-on).
-  - **Anatomy:** product image + title + price (+ strikethrough/discount) + optional Badge (promo/new) + CTA (Add/Buy).
-  - **States:** default · discounted (Badge) · out-of-stock/disabled.
-  - **Sizing:** **fixed width** in a horizontal carousel; **fill width** if stacked. Height hug.
-  - **Make hint:** UX 'swipeable product row' → carousel Section of these (fixed width).
+- **Anatomy (Figma-verified):**
+  - **Variants:** `price-monthly` (off, on) × `type` (aed, smiles).
+  - **Dimensions:** 229×300 · 192×28.
+  - **Shape:** corner radius 20.
+  - **Anatomy parts:** header · footer.
+  - **Specs (from Figma):**
+    - Badge placement will always be aligned top-right with 16px padding from top and right
+  - **Figma node:** `25701:12472`
 
 #### Deals for you
 - **Figma:** [`25717-33323`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25717-33323)
@@ -3099,20 +3118,20 @@
     - `brand-muted` → `#fff2f2`
     - `midnight` → `#312c40`
   - **overlay**
-    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `scrim` → `rgba(25, 19, 41, 0.50)`
     - `floating` → `#f7f7fa`
     - `floating-middleground` → `#908e9a`
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.3)`
-      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
-      - `xl` → `rgba(255, 255, 255, 0.4)`
-      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `xl` → `rgba(255, 255, 255, 0.40)`
+      - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
-      - `sm` → `rgba(255, 255, 255, 0.1)`
+      - `sm` → `rgba(255, 255, 255, 0.10)`
 - **Color tokens — `color.border`:**
   - **surface-based**
     - **canvas**
@@ -3144,26 +3163,26 @@
       - `floating inverse` → `#ffffff`
     - **glass**
       - **default**
-        - `lg` → `rgba(255, 255, 255, 0.6)`
-        - `md` → `rgba(255, 255, 255, 0.7)`
-        - `sm` → `rgba(255, 255, 255, 0.8)`
+        - `lg` → `rgba(255, 255, 255, 0.60)`
+        - `md` → `rgba(255, 255, 255, 0.70)`
+        - `sm` → `rgba(255, 255, 255, 0.80)`
       - **inverse**
-        - `lg` → `rgba(255, 255, 255, 0.8)`
-        - `md` → `rgba(255, 255, 255, 0.9)`
+        - `lg` → `rgba(255, 255, 255, 0.80)`
+        - `md` → `rgba(255, 255, 255, 0.90)`
         - `sm` → `#ffffff`
   - **interactive**
     - **default**
-      - `default` → `rgba(25, 19, 41, 0.2)`
-      - `subtle` → `rgba(25, 19, 41, 0.1)`
-      - `strong` → `rgba(25, 19, 41, 0.5)`
+      - `default` → `rgba(25, 19, 41, 0.20)`
+      - `subtle` → `rgba(25, 19, 41, 0.10)`
+      - `strong` → `rgba(25, 19, 41, 0.50)`
       - `focus` → `#191329`
       - `disabled` → `rgba(25, 19, 41, 0.07)`
     - **inverse**
-      - `default` → `rgba(255, 255, 255, 0.6)`
-      - `subtle` → `rgba(255, 255, 255, 0.4)`
-      - `strong` → `rgba(255, 255, 255, 0.8)`
+      - `default` → `rgba(255, 255, 255, 0.60)`
+      - `subtle` → `rgba(255, 255, 255, 0.40)`
+      - `strong` → `rgba(255, 255, 255, 0.80)`
       - `focus` → `#ffffff`
-      - `disabled` → `rgba(255, 255, 255, 0.4)`
+      - `disabled` → `rgba(255, 255, 255, 0.40)`
     - **accent**
       - `default` → `#e00800`
       - `focus` → `#bb0700`
@@ -3192,9 +3211,9 @@
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
@@ -3229,12 +3248,14 @@
     - `lg` → `224`
     - `xl` → `336`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** personalized offer/deal tile.
-  - **Anatomy:** image/brand + offer headline + sub/terms + Badge (expiring/limited) + CTA.
-  - **States:** default · expiring/limited (Badge) · redeemed/disabled.
-  - **Sizing:** fixed width (carousel item); height hug.
-  - **Make hint:** UX 'Deals for you' horizontal scroller → carousel Section of these.
+- **Anatomy (Figma-verified):**
+  - **Dimensions:** 166×224 · 128×80 · 84×84.
+  - **Shape:** corner radius 16.
+  - **Anatomy parts:** .default-surface/default · .deals-card-core.
+  - **Specs (from Figma):**
+    - The banner size is 343x172px
+    - One logo should be always heighlighted and it’s size should be 72x72px.
+  - **Figma node:** `25717:33323`
 
 #### Plans
 - **Figma:** [`25915-74211`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25915-74211)
@@ -3269,20 +3290,20 @@
     - `brand-muted` → `#fff2f2`
     - `midnight` → `#312c40`
   - **overlay**
-    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `scrim` → `rgba(25, 19, 41, 0.50)`
     - `floating` → `#f7f7fa`
     - `floating-middleground` → `#908e9a`
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.3)`
-      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
-      - `xl` → `rgba(255, 255, 255, 0.4)`
-      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `xl` → `rgba(255, 255, 255, 0.40)`
+      - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
-      - `sm` → `rgba(255, 255, 255, 0.1)`
+      - `sm` → `rgba(255, 255, 255, 0.10)`
 - **Color tokens — `color.border`:**
   - **surface-based**
     - **canvas**
@@ -3314,26 +3335,26 @@
       - `floating inverse` → `#ffffff`
     - **glass**
       - **default**
-        - `lg` → `rgba(255, 255, 255, 0.6)`
-        - `md` → `rgba(255, 255, 255, 0.7)`
-        - `sm` → `rgba(255, 255, 255, 0.8)`
+        - `lg` → `rgba(255, 255, 255, 0.60)`
+        - `md` → `rgba(255, 255, 255, 0.70)`
+        - `sm` → `rgba(255, 255, 255, 0.80)`
       - **inverse**
-        - `lg` → `rgba(255, 255, 255, 0.8)`
-        - `md` → `rgba(255, 255, 255, 0.9)`
+        - `lg` → `rgba(255, 255, 255, 0.80)`
+        - `md` → `rgba(255, 255, 255, 0.90)`
         - `sm` → `#ffffff`
   - **interactive**
     - **default**
-      - `default` → `rgba(25, 19, 41, 0.2)`
-      - `subtle` → `rgba(25, 19, 41, 0.1)`
-      - `strong` → `rgba(25, 19, 41, 0.5)`
+      - `default` → `rgba(25, 19, 41, 0.20)`
+      - `subtle` → `rgba(25, 19, 41, 0.10)`
+      - `strong` → `rgba(25, 19, 41, 0.50)`
       - `focus` → `#191329`
       - `disabled` → `rgba(25, 19, 41, 0.07)`
     - **inverse**
-      - `default` → `rgba(255, 255, 255, 0.6)`
-      - `subtle` → `rgba(255, 255, 255, 0.4)`
-      - `strong` → `rgba(255, 255, 255, 0.8)`
+      - `default` → `rgba(255, 255, 255, 0.60)`
+      - `subtle` → `rgba(255, 255, 255, 0.40)`
+      - `strong` → `rgba(255, 255, 255, 0.80)`
       - `focus` → `#ffffff`
-      - `disabled` → `rgba(255, 255, 255, 0.4)`
+      - `disabled` → `rgba(255, 255, 255, 0.40)`
     - **accent**
       - `default` → `#e00800`
       - `focus` → `#bb0700`
@@ -3362,9 +3383,9 @@
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
@@ -3399,12 +3420,18 @@
     - `lg` → `224`
     - `xl` → `336`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** selectable plan card (tariff/bundle).
-  - **Anatomy:** plan name + price/period + feature list (data/mins/SMS) + Badge (recommended) + CTA (Choose); optional highlighted border when recommended/selected.
-  - **States:** default · recommended/selected (Badge + border) · disabled.
-  - **Sizing:** fixed width (carousel) or fill (stacked comparison); height hug.
-  - **Make hint:** UX plan picker → carousel or stacked Section of these; mark one 'recommended'.
+- **Anatomy (Figma-verified):**
+  - **Variants:** `surface-color` (brand, default, glass-midnight, glass-white, midnight-base, midnight-raised, subtle, sunken) × `color-scheme` (default, inverse) × `price-monthly` (off, on) × `type` (aed, smiles).
+  - **Dimensions:** 222×300 · 84×84 · 192×28.
+  - **Shape:** corner radius 16.
+  - **Anatomy parts:** header · footer.
+  - **Specs (from Figma):**
+    - Card padding: 16px all sides
+    - Badge: top-right, optional, hugs content
+    - Logos: max 3 visible + "+N" overflow indicator, 8px gap from title
+    - Logo size: 40x40px
+    - 8px
+  - **Figma node:** `25915:74211`
 
 #### New on e&
 - **Figma:** [`25915-75766`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25915-75766)
@@ -3439,20 +3466,20 @@
     - `brand-muted` → `#fff2f2`
     - `midnight` → `#312c40`
   - **overlay**
-    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `scrim` → `rgba(25, 19, 41, 0.50)`
     - `floating` → `#f7f7fa`
     - `floating-middleground` → `#908e9a`
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.3)`
-      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
-      - `xl` → `rgba(255, 255, 255, 0.4)`
-      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `xl` → `rgba(255, 255, 255, 0.40)`
+      - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
-      - `sm` → `rgba(255, 255, 255, 0.1)`
+      - `sm` → `rgba(255, 255, 255, 0.10)`
 - **Color tokens — `color.border`:**
   - **surface-based**
     - **canvas**
@@ -3484,26 +3511,26 @@
       - `floating inverse` → `#ffffff`
     - **glass**
       - **default**
-        - `lg` → `rgba(255, 255, 255, 0.6)`
-        - `md` → `rgba(255, 255, 255, 0.7)`
-        - `sm` → `rgba(255, 255, 255, 0.8)`
+        - `lg` → `rgba(255, 255, 255, 0.60)`
+        - `md` → `rgba(255, 255, 255, 0.70)`
+        - `sm` → `rgba(255, 255, 255, 0.80)`
       - **inverse**
-        - `lg` → `rgba(255, 255, 255, 0.8)`
-        - `md` → `rgba(255, 255, 255, 0.9)`
+        - `lg` → `rgba(255, 255, 255, 0.80)`
+        - `md` → `rgba(255, 255, 255, 0.90)`
         - `sm` → `#ffffff`
   - **interactive**
     - **default**
-      - `default` → `rgba(25, 19, 41, 0.2)`
-      - `subtle` → `rgba(25, 19, 41, 0.1)`
-      - `strong` → `rgba(25, 19, 41, 0.5)`
+      - `default` → `rgba(25, 19, 41, 0.20)`
+      - `subtle` → `rgba(25, 19, 41, 0.10)`
+      - `strong` → `rgba(25, 19, 41, 0.50)`
       - `focus` → `#191329`
       - `disabled` → `rgba(25, 19, 41, 0.07)`
     - **inverse**
-      - `default` → `rgba(255, 255, 255, 0.6)`
-      - `subtle` → `rgba(255, 255, 255, 0.4)`
-      - `strong` → `rgba(255, 255, 255, 0.8)`
+      - `default` → `rgba(255, 255, 255, 0.60)`
+      - `subtle` → `rgba(255, 255, 255, 0.40)`
+      - `strong` → `rgba(255, 255, 255, 0.80)`
       - `focus` → `#ffffff`
-      - `disabled` → `rgba(255, 255, 255, 0.4)`
+      - `disabled` → `rgba(255, 255, 255, 0.40)`
     - **accent**
       - `default` → `#e00800`
       - `focus` → `#bb0700`
@@ -3532,9 +3559,9 @@
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
@@ -3569,182 +3596,11 @@
     - `lg` → `224`
     - `xl` → `336`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** editorial 'newly launched' tile.
-  - **Anatomy:** media (image/illustration) + title + optional subtitle/CTA.
-  - **States:** default; optional 'New' Badge.
-  - **Sizing:** fixed width (carousel item); height hug.
-  - **Make hint:** UX 'New on e&' discovery row → carousel Section.
-
-#### Recommendation
-- **Figma:** _node-id TBD_
-- **Role:** Recommendation card.
-- **Behavior:** slot `Card (carousel item)` · width: fixed (carousel) · height: hug
-- **States:** default
-- **Composition:** contains media + title + CTA · appears within a recommendations carousel Section
-- **Use case:** Recommended item tile.
-- **Color tokens — `color.surface`:**
-  - **canvas**
-    - `default` → `#ffffff`
-    - `inverse` → `#f7f7fa`
-    - `brand` → `#e73933`
-    - `brand-muted` → `#fff2f2`
-    - `midnight` → `#140f21`
-  - **base**
-    - `default` → `#f0f0f5`
-    - `inverse` → `#ffffff`
-    - `brand` → `#e00800`
-    - `brand-muted` → `#fce6e6`
-    - `midnight` → `#191329`
-  - **sunken**
-    - `default` → `#e4e3ea`
-    - `inverse` → `#f7f7fa`
-    - `brand` → `#bb0700`
-    - `brand-muted` → `#f9cecc`
-    - `midnight` → `#140f21`
-  - **raised**
-    - `default` → `#ffffff`
-    - `inverse` → `#ffffff`
-    - `brand` → `#e73933`
-    - `brand-muted` → `#fff2f2`
-    - `midnight` → `#312c40`
-  - **overlay**
-    - `scrim` → `rgba(25, 19, 41, 0.5)`
-    - `floating` → `#f7f7fa`
-    - `floating-middleground` → `#908e9a`
-    - `floating-inverse` → `#191329`
-  - **glass**
-    - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.3)`
-      - `md` → `rgba(25, 19, 41, 0.2)`
-      - `sm` → `rgba(25, 19, 41, 0.07)`
-    - **white**
-      - `xl` → `rgba(255, 255, 255, 0.4)`
-      - `lg` → `rgba(255, 255, 255, 0.2)`
-      - `md` → `rgba(255, 255, 255, 0.15)`
-      - `sm` → `rgba(255, 255, 255, 0.1)`
-- **Color tokens — `color.border`:**
-  - **surface-based**
-    - **canvas**
-      - `default` → `#f0f0f5`
-      - `inverse` → `#d8d7de`
-      - `brand` → `#ed6b66`
-      - `brand-muted` → `#f9cecc`
-      - `midnight` → `#312c40`
-    - **base**
-      - `default` → `#d8d7de`
-      - `inverse` → `#f0f0f5`
-      - `brand` → `#e9524d`
-      - `brand-muted` → `#f6b5b3`
-      - `midnight` → `#312c40`
-    - **raised**
-      - `default` → `#f0f0f5`
-      - `inverse` → `#f0f0f5`
-      - `brand` → `#ed6b66`
-      - `brand-muted` → `#f9cecc`
-      - `midnight` → `#494456`
-    - **sunken**
-      - `default` → `#d8d7de`
-      - `inverse` → `#d8d7de`
-      - `brand` → `#e73933`
-      - `brand-muted` → `#f08480`
-      - `midnight` → `#312c40`
-    - **overlay**
-      - `floating` → `#d8d7de`
-      - `floating inverse` → `#ffffff`
-    - **glass**
-      - **default**
-        - `lg` → `rgba(255, 255, 255, 0.6)`
-        - `md` → `rgba(255, 255, 255, 0.7)`
-        - `sm` → `rgba(255, 255, 255, 0.8)`
-      - **inverse**
-        - `lg` → `rgba(255, 255, 255, 0.8)`
-        - `md` → `rgba(255, 255, 255, 0.9)`
-        - `sm` → `#ffffff`
-  - **interactive**
-    - **default**
-      - `default` → `rgba(25, 19, 41, 0.2)`
-      - `subtle` → `rgba(25, 19, 41, 0.1)`
-      - `strong` → `rgba(25, 19, 41, 0.5)`
-      - `focus` → `#191329`
-      - `disabled` → `rgba(25, 19, 41, 0.07)`
-    - **inverse**
-      - `default` → `rgba(255, 255, 255, 0.6)`
-      - `subtle` → `rgba(255, 255, 255, 0.4)`
-      - `strong` → `rgba(255, 255, 255, 0.8)`
-      - `focus` → `#ffffff`
-      - `disabled` → `rgba(255, 255, 255, 0.4)`
-    - **accent**
-      - `default` → `#e00800`
-      - `focus` → `#bb0700`
-      - `subtle` → `#e9524d`
-      - `muted` → `#f08480`
-      - `disabled` → `#a8a6b1`
-    - **positive**
-      - `default` → `#3b8b53`
-      - `subtle` → `#6ced90`
-      - `muted` → `#c1f7d0`
-      - `disabled` → `#c0bfc8`
-    - **danger**
-      - `default` → `#b85a1a`
-      - `subtle` → `#ff9f52`
-      - `muted` → `#ffd1a8`
-      - `disabled` → `#c0bfc8`
-    - **warning**
-      - `default` → `#aa913a`
-      - `subtle` → `#ffd957`
-      - `muted` → `#ffecab`
-      - `disabled` → `#c0bfc8`
-- **Color tokens — `color.text`:**
-  - **default**
-    - `default` → `#191329`
-    - `subtle` → `#575362`
-    - `muted` → `#908e9a`
-    - `disabled` → `#c0bfc8`
-    - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
-  - **brand**
-    - `default` → `#e00800`
-    - `subtle` → `#e73933`
-    - `muted` → `#ed6b66`
-    - `strong` → `#950500`
-    - `focus` → `#bb0700`
-    - `disabled` → `#a8a6b1`
-  - **positive**
-    - `default` → `#27633b`
-    - `subtle` → `#54bc72`
-    - `muted` → `#9ff3b7`
-    - `disabled` → `#c0bfc8`
-  - **danger**
-    - `default` → `#8c3f0c`
-    - `subtle` → `#e07830`
-    - `muted` → `#ffb16f`
-    - `disabled` → `#c0bfc8`
-  - **warning**
-    - `default` → `#806d2c`
-    - `subtle` → `#d5b549`
-    - `muted` → `#ffe68f`
-    - `disabled` → `#c0bfc8`
-- **Size tokens — `card`:**
-  - **height**
-    - `sm` → `96`
-    - `md` → `192`
-    - `lg` → `272`
-    - `xl` → `472`
-  - **width**
-    - `sm` → `88`
-    - `md` → `152`
-    - `lg` → `224`
-    - `xl` → `336`
-- **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** recommended item tile (cross-sell/upsell). _(no node-id yet — send link to verify)_
-  - **Anatomy:** media + title + short reason + CTA; optional Badge.
-  - **States:** default · disabled.
-  - **Sizing:** fixed width (carousel item); height hug.
-  - **Make hint:** UX 'Recommended for you' row → carousel Section.
+- **Anatomy (Figma-verified):**
+  - **Variants:** `selected` (no, yes).
+  - **Dimensions:** 170×300.
+  - **Anatomy parts:** .new-on-core.
+  - **Figma node:** `25915:75766`
 
 #### Service
 - **Figma:** [`26019-79144`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=26019-79144)
@@ -3779,20 +3635,20 @@
     - `brand-muted` → `#fff2f2`
     - `midnight` → `#312c40`
   - **overlay**
-    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `scrim` → `rgba(25, 19, 41, 0.50)`
     - `floating` → `#f7f7fa`
     - `floating-middleground` → `#908e9a`
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.3)`
-      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
-      - `xl` → `rgba(255, 255, 255, 0.4)`
-      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `xl` → `rgba(255, 255, 255, 0.40)`
+      - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
-      - `sm` → `rgba(255, 255, 255, 0.1)`
+      - `sm` → `rgba(255, 255, 255, 0.10)`
 - **Color tokens — `color.border`:**
   - **surface-based**
     - **canvas**
@@ -3824,26 +3680,26 @@
       - `floating inverse` → `#ffffff`
     - **glass**
       - **default**
-        - `lg` → `rgba(255, 255, 255, 0.6)`
-        - `md` → `rgba(255, 255, 255, 0.7)`
-        - `sm` → `rgba(255, 255, 255, 0.8)`
+        - `lg` → `rgba(255, 255, 255, 0.60)`
+        - `md` → `rgba(255, 255, 255, 0.70)`
+        - `sm` → `rgba(255, 255, 255, 0.80)`
       - **inverse**
-        - `lg` → `rgba(255, 255, 255, 0.8)`
-        - `md` → `rgba(255, 255, 255, 0.9)`
+        - `lg` → `rgba(255, 255, 255, 0.80)`
+        - `md` → `rgba(255, 255, 255, 0.90)`
         - `sm` → `#ffffff`
   - **interactive**
     - **default**
-      - `default` → `rgba(25, 19, 41, 0.2)`
-      - `subtle` → `rgba(25, 19, 41, 0.1)`
-      - `strong` → `rgba(25, 19, 41, 0.5)`
+      - `default` → `rgba(25, 19, 41, 0.20)`
+      - `subtle` → `rgba(25, 19, 41, 0.10)`
+      - `strong` → `rgba(25, 19, 41, 0.50)`
       - `focus` → `#191329`
       - `disabled` → `rgba(25, 19, 41, 0.07)`
     - **inverse**
-      - `default` → `rgba(255, 255, 255, 0.6)`
-      - `subtle` → `rgba(255, 255, 255, 0.4)`
-      - `strong` → `rgba(255, 255, 255, 0.8)`
+      - `default` → `rgba(255, 255, 255, 0.60)`
+      - `subtle` → `rgba(255, 255, 255, 0.40)`
+      - `strong` → `rgba(255, 255, 255, 0.80)`
       - `focus` → `#ffffff`
-      - `disabled` → `rgba(255, 255, 255, 0.4)`
+      - `disabled` → `rgba(255, 255, 255, 0.40)`
     - **accent**
       - `default` → `#e00800`
       - `focus` → `#bb0700`
@@ -3872,9 +3728,9 @@
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
@@ -3909,12 +3765,15 @@
     - `lg` → `224`
     - `xl` → `336`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** service/feature entry.
-  - **Anatomy:** icon (or small image) + label (+ optional sublabel/chevron). Grid cell or full-width list row.
-  - **States:** default · pressed · disabled; optional badge.
-  - **Sizing:** grid cell (equal width) or fill (row); height hug/fixed-row.
-  - **Make hint:** UX services grid/list → Section of these (grid for icon+label, rows for richer items).
+- **Anatomy (Figma-verified):**
+  - **Variants:** `size` (carousel, grid) × `Grid` (no, yes) × `Carousel` (no, yes) × `Rows` (Single, Three, Two) × `Layout` (1-row carousel, 1-row grid, 2-row carousel, 2-row grid, 3-row grid).
+  - **Dimensions:** 367×548 · 335×452 · 367×396 · 392×300 · 335×300 · 367×244.
+  - **Anatomy parts:** service-card-section.
+  - **Specs (from Figma):**
+    - Badge placement will always be aligned top-left with 8px padding from top and left
+    - Status tags are live data badges. They reflect the user's real-time service state and sit in the top-right corner of the icon container.
+    - Icon container
+  - **Figma node:** `26019:79144`
 
 ### 08 · Banners
 
@@ -3952,20 +3811,20 @@
     - `brand-muted` → `#fff2f2`
     - `midnight` → `#312c40`
   - **overlay**
-    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `scrim` → `rgba(25, 19, 41, 0.50)`
     - `floating` → `#f7f7fa`
     - `floating-middleground` → `#908e9a`
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.3)`
-      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
-      - `xl` → `rgba(255, 255, 255, 0.4)`
-      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `xl` → `rgba(255, 255, 255, 0.40)`
+      - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
-      - `sm` → `rgba(255, 255, 255, 0.1)`
+      - `sm` → `rgba(255, 255, 255, 0.10)`
 - **Color tokens — `color.text`:**
   - **default**
     - `default` → `#191329`
@@ -3973,9 +3832,9 @@
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
@@ -4013,7 +3872,7 @@
       - **brand**
         - `default` → `#ffffff`
         - `focus` → `#ffffff`
-        - `disabled` → `rgba(255, 255, 255, 0.7)`
+        - `disabled` → `rgba(255, 255, 255, 0.70)`
       - **inverse**
         - `default` → `#e00800`
         - `focus` → `#bb0700`
@@ -4032,7 +3891,7 @@
       - **inverse**
         - `default` → `#ffffff`
         - `focus` → `#ffffff`
-        - `disabled` → `rgba(255, 255, 255, 0.7)`
+        - `disabled` → `rgba(255, 255, 255, 0.70)`
     - **border**
       - **brand**
         - `default` → `#e00800`
@@ -4055,7 +3914,7 @@
       - **inverse**
         - `default` → `#ffffff`
         - `focus` → `#bb0700`
-        - `disabled` → `rgba(255, 255, 255, 0.7)`
+        - `disabled` → `rgba(255, 255, 255, 0.70)`
   - **link**
     - **text**
       - **brand**
@@ -4069,19 +3928,20 @@
       - **inverse**
         - `default` → `#ffffff`
         - `focus` → `#bb0700`
-        - `disabled` → `rgba(255, 255, 255, 0.7)`
+        - `disabled` → `rgba(255, 255, 255, 0.70)`
   - **text**
     - **midnight**
       - `default` → `#191329`
       - `focus` → `#191329`
       - `disabled` → `#c0bfc8`
 - **Typography:** `heading.xl`(32/Bold), `heading.lg`(28/Bold), `heading.md`(24/Bold), `heading.sm`(20/Bold), `heading.xs`(16/Bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** promotional / announcement banner (full-bleed).
-  - **Anatomy:** background media/color + title + subtitle + CTA (Button) + optional logo/badge; can be a single banner or a swipeable carousel with dots.
-  - **States:** default · with/without CTA · light vs dark media (text/`button` tone adapts) · single vs carousel.
-  - **Sizing:** width fill **edge-to-edge** (bleeds past the screen gutter); height hug / fixed aspect.
-  - **Make hint:** UX hero/promo strip → place between Sections, full-bleed.
+- **Anatomy (Figma-verified):**
+  - **Variants:** `logo-row` (off, on) × `text-primary` (off, on) × `text-secondary` (off, on) × `type` (action, informational) × `carousel` (no, yes) × `size` (lg, xl).
+  - **Dimensions:** 335×452 · 316×452 · 313×452 · 335×300 · 313×300 · 292×228.
+  - **Anatomy parts:** .highlight-core.
+  - **Specs (from Figma):**
+    - The spacing between the banners in carousel is 8px
+  - **Figma node:** `25460:83982`
 
 ### 09 · Product-Specific
 
@@ -4189,20 +4049,20 @@
     - `brand-muted` → `#fff2f2`
     - `midnight` → `#312c40`
   - **overlay**
-    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `scrim` → `rgba(25, 19, 41, 0.50)`
     - `floating` → `#f7f7fa`
     - `floating-middleground` → `#908e9a`
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.3)`
-      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
-      - `xl` → `rgba(255, 255, 255, 0.4)`
-      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `xl` → `rgba(255, 255, 255, 0.40)`
+      - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
-      - `sm` → `rgba(255, 255, 255, 0.1)`
+      - `sm` → `rgba(255, 255, 255, 0.10)`
 - **Color tokens — `color.text`:**
   - **default**
     - `default` → `#191329`
@@ -4210,9 +4070,9 @@
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
@@ -4236,12 +4096,12 @@
     - `muted` → `#ffe68f`
     - `disabled` → `#c0bfc8`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** Smiles loyalty balance module.
-  - **Anatomy:** Smiles mark/icon + points balance (large number) + label + CTA ('Redeem'/'See rewards'); tier-themed background (special palettes: gold/silver/platinum/bronze).
-  - **States:** by tier (special palette); zero vs positive balance.
-  - **Sizing:** width fill; height hug.
-  - **Make hint:** UX loyalty/points widget on Home or rewards → this module near the top.
+- **Anatomy (Figma-verified):**
+  - **Variants:** `next-tier` (gold, plat, silver) × `states` (points-activated, points-not-active).
+  - **Dimensions:** 353×148 · 88×18 · 67×18 · 60×18.
+  - **Shape:** corner radius 16.
+  - **Anatomy parts:** header · footer.
+  - **Figma node:** `26610:601`
 
 #### Voucher
 - **Figma:** [`28278-13069`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=28278-13069)
@@ -4346,20 +4206,20 @@
     - `brand-muted` → `#fff2f2`
     - `midnight` → `#312c40`
   - **overlay**
-    - `scrim` → `rgba(25, 19, 41, 0.5)`
+    - `scrim` → `rgba(25, 19, 41, 0.50)`
     - `floating` → `#f7f7fa`
     - `floating-middleground` → `#908e9a`
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.3)`
-      - `md` → `rgba(25, 19, 41, 0.2)`
+      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
-      - `xl` → `rgba(255, 255, 255, 0.4)`
-      - `lg` → `rgba(255, 255, 255, 0.2)`
+      - `xl` → `rgba(255, 255, 255, 0.40)`
+      - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
-      - `sm` → `rgba(255, 255, 255, 0.1)`
+      - `sm` → `rgba(255, 255, 255, 0.10)`
 - **Color tokens — `color.text`:**
   - **default**
     - `default` → `#191329`
@@ -4367,9 +4227,9 @@
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.7)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.5)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.3)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
@@ -4423,26 +4283,26 @@
       - `floating inverse` → `#ffffff`
     - **glass**
       - **default**
-        - `lg` → `rgba(255, 255, 255, 0.6)`
-        - `md` → `rgba(255, 255, 255, 0.7)`
-        - `sm` → `rgba(255, 255, 255, 0.8)`
+        - `lg` → `rgba(255, 255, 255, 0.60)`
+        - `md` → `rgba(255, 255, 255, 0.70)`
+        - `sm` → `rgba(255, 255, 255, 0.80)`
       - **inverse**
-        - `lg` → `rgba(255, 255, 255, 0.8)`
-        - `md` → `rgba(255, 255, 255, 0.9)`
+        - `lg` → `rgba(255, 255, 255, 0.80)`
+        - `md` → `rgba(255, 255, 255, 0.90)`
         - `sm` → `#ffffff`
   - **interactive**
     - **default**
-      - `default` → `rgba(25, 19, 41, 0.2)`
-      - `subtle` → `rgba(25, 19, 41, 0.1)`
-      - `strong` → `rgba(25, 19, 41, 0.5)`
+      - `default` → `rgba(25, 19, 41, 0.20)`
+      - `subtle` → `rgba(25, 19, 41, 0.10)`
+      - `strong` → `rgba(25, 19, 41, 0.50)`
       - `focus` → `#191329`
       - `disabled` → `rgba(25, 19, 41, 0.07)`
     - **inverse**
-      - `default` → `rgba(255, 255, 255, 0.6)`
-      - `subtle` → `rgba(255, 255, 255, 0.4)`
-      - `strong` → `rgba(255, 255, 255, 0.8)`
+      - `default` → `rgba(255, 255, 255, 0.60)`
+      - `subtle` → `rgba(255, 255, 255, 0.40)`
+      - `strong` → `rgba(255, 255, 255, 0.80)`
       - `focus` → `#ffffff`
-      - `disabled` → `rgba(255, 255, 255, 0.4)`
+      - `disabled` → `rgba(255, 255, 255, 0.40)`
     - **accent**
       - `default` → `#e00800`
       - `focus` → `#bb0700`
@@ -4465,12 +4325,12 @@
       - `muted` → `#ffecab`
       - `disabled` → `#c0bfc8`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- **Anatomy (derived from token model — Figma verification pending):**
-  - **Type:** voucher / coupon.
-  - **Anatomy:** value/offer + code (with copy affordance) + validity/expiry + status Badge; often a ticket shape (notch/perforation).
-  - **States:** active · redeemed · expired (status Badge + dimming).
-  - **Sizing:** width fill (stacked) or fixed (carousel); height hug.
-  - **Make hint:** UX coupons/rewards list → Section of these; reflect status via Badge.
+- **Anatomy (Figma-verified):**
+  - **Variants:** `Display` (Dark, Light) × `State` (Applied, Default).
+  - **Dimensions:** 144×144.
+  - **Shape:** corner radius 16.
+  - **Anatomy parts:** Shape · Content · Button.
+  - **Figma node:** `28278:13069`
 
 
 ---

@@ -1,5 +1,8 @@
-  - **Type:** quick-action shortcut grid (top tasks on Home).
-  - **Anatomy:** grid (typically 4-up per row) of cells = circular/rounded icon tile + short label below; wraps to multiple rows.
-  - **States:** default · pressed · disabled (per cell); optional badge on a cell.
-  - **Sizing:** container width fill, height hug; cells equal-width (grid), fixed-height each.
-  - **Make hint:** map a UX grid of small icon+label shortcuts here.
+  - **Variants:** `Icon type` (addon-buy, all-services, contact-us, device-buy, devices, live-chat, mParking, order-track, plan-change, quick-pay, sim-activate, sim-replace, subscriptions) × `badge` (off, on) × `Quick-tasks Icons` (off, on) × `variant` (Carousel, Stack) × `type` (addon-buy, all-services, contact-us, device-buy, devices, live-chat, mParking, order-track, plan-change, quick-pay, sim-activate, sim-replace, subscriptions) × `Grid` (On, off) × `Carousel` (off, on) × `Row` (Single, Three, Two).
+  - **Dimensions:** 334×452 · 449×300 · 334×300 · 449×148 · 334×148 · 165×148.
+  - **Anatomy parts:** .quick-action-variants.
+  - **Specs (from Figma):**
+    - Quick task icons
+    - Status tags are live data badges. They reflect the user's real-time service state and sit in the top-right corner of the icon container.
+    - Icon container
+  - **Figma node:** `25507:13670`

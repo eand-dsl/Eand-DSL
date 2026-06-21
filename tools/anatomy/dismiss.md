@@ -1,5 +1,0 @@
-  - **Type:** close / clear / remove affordance. _(no node-id yet — send link to verify)_
-  - **Anatomy:** icon button (×, chevron-down, or clear) in a ≥40px tap target.
-  - **States:** default · pressed · disabled.
-  - **Sizing:** fixed (icon ~24, tap ~40).
-  - **Make hint:** top-right of Sheets/Modals/Snackbars; trailing on removable Chips/Searchbar.

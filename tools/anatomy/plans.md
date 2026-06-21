@@ -1,5 +1,11 @@
-  - **Type:** selectable plan card (tariff/bundle).
-  - **Anatomy:** plan name + price/period + feature list (data/mins/SMS) + Badge (recommended) + CTA (Choose); optional highlighted border when recommended/selected.
-  - **States:** default · recommended/selected (Badge + border) · disabled.
-  - **Sizing:** fixed width (carousel) or fill (stacked comparison); height hug.
-  - **Make hint:** UX plan picker → carousel or stacked Section of these; mark one 'recommended'.
+  - **Variants:** `surface-color` (brand, default, glass-midnight, glass-white, midnight-base, midnight-raised, subtle, sunken) × `color-scheme` (default, inverse) × `price-monthly` (off, on) × `type` (aed, smiles).
+  - **Dimensions:** 222×300 · 84×84 · 192×28.
+  - **Shape:** corner radius 16.
+  - **Anatomy parts:** header · footer.
+  - **Specs (from Figma):**
+    - Card padding: 16px all sides
+    - Badge: top-right, optional, hugs content
+    - Logos: max 3 visible + "+N" overflow indicator, 8px gap from title
+    - Logo size: 40x40px
+    - 8px
+  - **Figma node:** `25915:74211`

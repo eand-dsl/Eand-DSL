@@ -1,5 +1,6 @@
-  - **Type:** linear progress / completion indicator.
-  - **Anatomy:** rounded track + fill; optional label/percentage; steps variant = segmented track.
-  - **States:** determinate (0–100%) · indeterminate (animated); status color via `color/status/*`.
-  - **Sizing:** width fill; height fixed (thin track token).
-  - **Make hint:** use inside Plan Usage Bar, onboarding/step flows, uploads.
+  - **Variants:** `Progress` (10, 100, 15, 20, 25, 30, 35, 40, 45, 5, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95).
+  - **Dimensions:** 300×4.
+  - **Anatomy parts:** bar.
+  - **Specs (from Figma):**
+    - icon-size
+  - **Figma node:** `26663:89882`

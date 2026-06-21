@@ -1,5 +1,8 @@
-  - **Type:** service/feature entry.
-  - **Anatomy:** icon (or small image) + label (+ optional sublabel/chevron). Grid cell or full-width list row.
-  - **States:** default · pressed · disabled; optional badge.
-  - **Sizing:** grid cell (equal width) or fill (row); height hug/fixed-row.
-  - **Make hint:** UX services grid/list → Section of these (grid for icon+label, rows for richer items).
+  - **Variants:** `size` (carousel, grid) × `Grid` (no, yes) × `Carousel` (no, yes) × `Rows` (Single, Three, Two) × `Layout` (1-row carousel, 1-row grid, 2-row carousel, 2-row grid, 3-row grid).
+  - **Dimensions:** 367×548 · 335×452 · 367×396 · 392×300 · 335×300 · 367×244.
+  - **Anatomy parts:** service-card-section.
+  - **Specs (from Figma):**
+    - Badge placement will always be aligned top-left with 8px padding from top and left
+    - Status tags are live data badges. They reflect the user's real-time service state and sit in the top-right corner of the icon container.
+    - Icon container
+  - **Figma node:** `26019:79144`

@@ -1,5 +1,7 @@
-  - **Type:** product tile (device/accessory/plan add-on).
-  - **Anatomy:** product image + title + price (+ strikethrough/discount) + optional Badge (promo/new) + CTA (Add/Buy).
-  - **States:** default · discounted (Badge) · out-of-stock/disabled.
-  - **Sizing:** **fixed width** in a horizontal carousel; **fill width** if stacked. Height hug.
-  - **Make hint:** UX 'swipeable product row' → carousel Section of these (fixed width).
+  - **Variants:** `price-monthly` (off, on) × `type` (aed, smiles).
+  - **Dimensions:** 229×300 · 192×28.
+  - **Shape:** corner radius 20.
+  - **Anatomy parts:** header · footer.
+  - **Specs (from Figma):**
+    - Badge placement will always be aligned top-right with 16px padding from top and right
+  - **Figma node:** `25701:12472`

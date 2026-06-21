@@ -1,5 +1,6 @@
-  - **Type:** centered modal dialog over a scrim (blocking decision).
-  - **Anatomy:** optional illustration/icon + title + body text + action Buttons (1–2, stacked or row) + optional dismiss (×).
-  - **States:** info · positive · warning · danger; 1-action (acknowledge) · 2-action (confirm/cancel).
-  - **Sizing:** width fill with side margin (max width); height hug; centered; scrim behind.
-  - **Make hint:** use for confirmations/irreversible actions; not for transient info (use snackbar).
+  - **Variants:** `state` (attention, empty, error, ewaiting, face ID, fingerprint, location, pay, repair, sim, success, transfer ownership, warning) × `type` (empty, fingerprint, fyi, help, id check, location, new owner, oops, payment card, sim card, success, wait, warning).
+  - **Dimensions:** 375×324 · 88×88 · 40×40.
+  - **Anatomy parts:** thumb up green 1 · Yaaay · Star 22 · Star 23.
+  - **Specs (from Figma):**
+    - 210 px
+  - **Figma node:** `23201:17897`

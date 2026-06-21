@@ -1,5 +1,7 @@
-  - **Type:** personalized offer/deal tile.
-  - **Anatomy:** image/brand + offer headline + sub/terms + Badge (expiring/limited) + CTA.
-  - **States:** default · expiring/limited (Badge) · redeemed/disabled.
-  - **Sizing:** fixed width (carousel item); height hug.
-  - **Make hint:** UX 'Deals for you' horizontal scroller → carousel Section of these.
+  - **Dimensions:** 166×224 · 128×80 · 84×84.
+  - **Shape:** corner radius 16.
+  - **Anatomy parts:** .default-surface/default · .deals-card-core.
+  - **Specs (from Figma):**
+    - The banner size is 343x172px
+    - One logo should be always heighlighted and it’s size should be 72x72px.
+  - **Figma node:** `25717:33323`

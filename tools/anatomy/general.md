@@ -1,5 +1,4 @@
-  - **Type:** generic content card.
-  - **Anatomy:** optional media/icon (top or leading) + title + body text + optional Badge + optional action (Button/link). Rounded corners (`border-radius`), surface fill (`atom-surfaces`), `size.card` padding.
-  - **States:** default · pressed (if tappable) · with/without media · with/without action.
-  - **Sizing:** width fill when stacked in a Section; height hug.
-  - **Make hint:** default choice for a vertical list of content blocks.
+  - **Variants:** `surface-color` (default, glass-midnight, glass-white, midnight-base, midnight-raised, subtle, sunken) × `AlignmentTop<->Bottom` (On, off) × `Size` (Lg, Md, Sm) × `surface` (default, inverse) × `Carousel<->Grid` (No, yes) × `Rows` (1, 2) × `Grid<->Carousel` (no, yes).
+  - **Dimensions:** 336×452 · 336×224 · 166×224 · 165×224 · 147×224 · 84×84.
+  - **Anatomy parts:** .card-general.
+  - **Figma node:** `26760:100129`

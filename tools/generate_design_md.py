@@ -34,11 +34,16 @@ def lookup(tree, dotpath):
     return node if is_leaf(node) else None
 def resolve(tree, leaf, seen=None):
     seen = seen or set(); v = leaf["$value"]
-    if isinstance(v, str) and v.startswith("{") and v.endswith("}"):
-        ref = v[1:-1]
-        if ref in seen: return v
-        seen.add(ref); tgt = lookup(tree, ref)
-        return resolve(tree, tgt, seen) if tgt else v
+    if isinstance(v, str):
+        ref = None
+        if v.startswith("{") and v.endswith("}"):
+            ref = v[1:-1]                       # V1.0 alias: {color.red.1000}
+        elif v.startswith("$."):
+            ref = ".".join(v[2:].split(".")[2:])  # V1.1 alias: $.<collection>.value.<path>
+        if ref:
+            if ref in seen: return v
+            seen.add(ref); tgt = lookup(tree, ref)
+            return resolve(tree, tgt, seen) if tgt else v
     return v
 def resolved_tree(tree):
     def walk(n): return resolve(tree, n) if is_leaf(n) else {k: walk(v) for k, v in n.items()}
@@ -56,7 +61,12 @@ WEIGHT_NUM = {"Thin":"100","Light":"300","Regular":"400","Book":"450","Medium":"
 # Slugs whose anatomy was pulled directly from Figma (verified). All others with an
 # anatomy file are token-model-derived (labeled accordingly, pending verification).
 VERIFIED = {"buttons","input-field","chips","filter-pill","switcher","checkbox","radio",
-            "searchbar","eand-logo","badges","icon-size","top-bar","tabs"}
+            "searchbar","eand-logo","badges","icon-size","top-bar","tabs",
+            "nav-bar","action-bar","section-link","quick-action","section","accordion",
+            "plan-usage-bar","snackbar-and-alert-msg","alert-modals","tooltip","bottom-sheet",
+            "general","product","deals-for-you","plans","new-on-eand","service","highlight",
+            "smiles-balance","voucher","selectors","progress-bar","add-trigger","atom-surfaces",
+            "logo-row"}
 
 # ---- component inventory: (name, node, role, color_groups, size_groups, typo_groups)
 SECTIONS = [
@@ -65,10 +75,8 @@ SECTIONS = [
    ("Badges","22668-60275","Membership/status/promo badges.",["badge"],[],["badge"]),
    ("Icon size","25460-22589","Icon sizing scale.",[],["icon"],[]),
    ("Logo row","25996-32494","Row of partner/product logos.",[],[],[]),
-   ("Dismiss","","Close / clear affordance.",[],[],[]),
    ("Progress bar","26663-89882","Linear progress indicator.",["status"],[],[]),
    ("Add trigger","25752-11470","Add / plus trigger control.",["button"],[],[]),
-   ("Product assets","","Product imagery / illustration assets.",[],[],[]),
    ("Atom Surfaces","26729-91998","Base container surfaces.",["atom-surfaces","surface"],[],[]),
  ]),
  ("02 · Controls", [
@@ -110,7 +118,6 @@ SECTIONS = [
    ("Deals for you","25717-33323","Deal card.",["surface","border","text"],["card"],["title","body"]),
    ("Plans","25915-74211","Plan card.",["surface","border","text"],["card"],["title","body"]),
    ("New on e&","25915-75766","'New on e&' card.",["surface","border","text"],["card"],["title","body"]),
-   ("Recommendation","","Recommendation card.",["surface","border","text"],["card"],["title","body"]),
    ("Service","26019-79144","Service card.",["surface","border","text"],["card"],["title","body"]),
  ]),
  ("08 · Banners", [

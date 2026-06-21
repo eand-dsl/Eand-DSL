@@ -1,5 +1,7 @@
-  - **Type:** row of partner/product logos.
-  - **Anatomy:** horizontal row (or wrap) of equal-height logo lockups with consistent gaps; optional 'as seen on / partners' label.
-  - **States:** default; scroll if overflow.
-  - **Sizing:** width fill; height hug (logos share a fixed height).
-  - **Make hint:** UX 'partners / works with' strip → this inside a Section.
+  - **Variants:** `logo-1` (off, on) × `logo-2` (off, on) × `logo-3` (off, on) × `logo-4` (off, on) × `logo-5` (off, on) × `+x-more` (off, on) × `size` (lg, md, sm) × `style` (Default, glass) × `type` (Default, glass-margin) × `surface` (default, inverse).
+  - **Dimensions:** 376×56 · 328×48 · 280×40 · 260×40 · 232×32 · 164×24.
+  - **Anatomy parts:** .logo-style · more-items.
+  - **Specs (from Figma):**
+    - icon-size
+    - 3 sizes to consider: Small – 24px (1.5rem) Medium – 32px (2rem) Large – 40px (2.5rem)
+  - **Figma node:** `25996:32494`

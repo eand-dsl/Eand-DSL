@@ -1,5 +1,7 @@
-  - **Type:** AI / voice-assisted search entry.
-  - **Anatomy:** search field + mic/AI affordance; expands into dictation/transcription UI (waveform + live transcript + stop).
-  - **States:** Default · Focus · Dictation started · Transcribing (→ user taps stop). _(states confirmed via REST)_
-  - **Sizing:** width fill; height fixed (collapsed); expands when dictating.
-  - **Make hint:** UX 'search with mic / ask AI' → this; otherwise use Searchbar.
+  - **Type:** AI / voice search — a search field that expands into a voice-dictation flow. (Built as a state layout, not a variant set.)
+  - **States:** Default · Focus · Dictation started · Transcribing (live transcript) · user taps stop. _(states from Figma; layout curated)_
+  - **Anatomy:** search field (leading search/AI icon + placeholder/value + trailing mic) → on mic tap expands to a dictation panel (listening/waveform indicator + live transcript + stop button).
+  - **Sizing:** width fill; height fixed when collapsed (~52); expands while dictating.
+  - **Tokens:** `color/input-field/*` + `color/surface/*`; text `typography/body/*`.
+  - **Make hint:** use for 'search with voice / ask AI'; otherwise use Searchbar (the file notes they combine).
+  - **Figma node:** `28189:33142`

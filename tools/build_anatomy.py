@@ -17,6 +17,10 @@ def walk(node, fn, depth=0):
 def strip_id(s):  # "Size#12:3" -> "Size"
     return s.split("#")[0].strip()
 
+def clean_name(s):  # drop emoji/non-ascii + tidy: "🎨 surface" -> "surface"
+    s = re.sub(r"[^\x00-\x7F]+", "", strip_id(s))
+    return re.sub(r"\s+", " ", s).strip(" -")
+
 def analyze(slug, path):
     d = json.load(open(path))
     nodes = d.get("nodes", {})
@@ -51,11 +55,15 @@ def analyze(slug, path):
     axes = {}  # name -> set(values)
     for cs in comp_sets:
         for pname, pdef in (cs.get("componentPropertyDefinitions") or {}).items():
-            name = strip_id(pname)
-            if pdef.get("type") == "VARIANT":
+            name = clean_name(pname)
+            if not name:
+                continue
+            t = pdef.get("type")
+            if t == "VARIANT":
                 axes.setdefault(name, set()).update(pdef.get("variantOptions") or [])
-            else:
-                axes.setdefault(name, set()).add(pdef.get("type", "").lower())
+            elif t == "BOOLEAN":
+                axes.setdefault(name, set()).update({"on", "off"})
+            # skip TEXT and INSTANCE_SWAP props (content/icon-swap, not meaningful states)
     # fallback: parse component names "a=b, c=d"
     if not axes:
         for c in comps:

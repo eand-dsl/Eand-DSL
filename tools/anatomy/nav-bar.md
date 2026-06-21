@@ -1,5 +1,4 @@
-  - **Type:** bottom tab bar — 3–5 destinations, sticky, respects bottom safe-area.
-  - **Item anatomy:** icon (24) over label (caption), centered; equal-width items. Optional badge dot/count on an item; optional center emphasized/FAB item.
-  - **States (per item):** active (icon + label use accent/brand) · inactive (muted) — `color/navbar-tab/*`.
-  - **Sizing:** width fill; height fixed (token) + bottom inset.
-  - **Make hint:** map any persistent UX bottom tab bar here; set the current screen's tab to active.
+  - **Variants:** `page` (Devices, Elife, Plans, home, profile, shop, support) × `active` (no, yes) × `special` (no, yes) × `page-1` (no, yes) × `page-2` (no, yes) × `page-3` (no, yes) × `page-4` (no, yes) × `gap` (left, right) × `logged-in` (no, yes).
+  - **Dimensions:** 370×114 · 338×64 · 64×64 · 56×56.
+  - **Anatomy parts:** wrapper · .Home Indicator.
+  - **Figma node:** `22542:13964`

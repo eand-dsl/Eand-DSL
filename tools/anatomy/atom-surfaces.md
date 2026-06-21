@@ -1,5 +1,3 @@
-  - **Type:** base container surfaces (the building-block backgrounds for cards/sheets/sections).
-  - **Anatomy:** a filled rounded rectangle at an elevation level; everything else composes on top.
-  - **Levels:** canvas · base · raised · sunken (+ brand/midnight tints) — `color/atom-surfaces` / `color/surface/*`.
-  - **Sizing:** width fill; height hug.
-  - **Make hint:** not placed directly — it's the surface token applied to containers.
+  - **Variants:** `color` (blue, cyan, default, green, orange, red, violet, yellow).
+  - **Dimensions:** 224×272.
+  - **Figma node:** `26729:91998`
