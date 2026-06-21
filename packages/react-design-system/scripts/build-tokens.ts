@@ -63,7 +63,8 @@ const walkCss = (node: any, path: string[]) => {
     let val: string | number = conv(resolved);
     // quote font-family names (they contain spaces/apostrophes -> invalid CSS unquoted)
     if (typeof val === 'string' && path.some((p) => p.includes('family'))) val = `"${val}"`;
-    cssLines.push(`  --eand-${path.join('-')}: ${val};`);
+    const name = path.map((s) => s.replace(/[^a-zA-Z0-9]+/g, '-')).join('-'); // valid custom-property name
+    cssLines.push(`  --eand-${name}: ${val};`);
     return;
   }
   for (const [k, v] of Object.entries(node)) walkCss(v, [...path, k]);

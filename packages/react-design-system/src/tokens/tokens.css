@@ -373,7 +373,7 @@
   --eand-color-border-surface-based-sunken-brand-muted: #f08480;
   --eand-color-border-surface-based-sunken-midnight: #312c40;
   --eand-color-border-surface-based-overlay-floating: #d8d7de;
-  --eand-color-border-surface-based-overlay-floating inverse: #ffffff;
+  --eand-color-border-surface-based-overlay-floating-inverse: #ffffff;
   --eand-color-border-surface-based-glass-default-lg: rgba(255, 255, 255, 0.60);
   --eand-color-border-surface-based-glass-default-md: rgba(255, 255, 255, 0.70);
   --eand-color-border-surface-based-glass-default-sm: rgba(255, 255, 255, 0.80);
@@ -496,7 +496,7 @@
   --eand-color-badge-surface-offers-mega-deals: #e00800;
   --eand-color-badge-surface-offers-green-friday: #e00800;
   --eand-color-badge-surface-offers-discount: #e00800;
-  --eand-color-badge-surface-offers-limited stock: #ffd957;
+  --eand-color-badge-surface-offers-limited-stock: #ffd957;
   --eand-color-badge-surface-offers-validity: #ffd957;
   --eand-color-badge-surface-offers-limited-time: #ffd957;
   --eand-color-badge-surface-offers-best-seller: #bb2d81;
