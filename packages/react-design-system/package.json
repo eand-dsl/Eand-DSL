@@ -7,11 +7,21 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js", "require": "./dist/index.cjs" },
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
     "./styles.css": "./dist/styles.css"
   },
-  "files": ["dist"],
-  "sideEffects": ["**/*.css"],
+  "files": [
+    "dist",
+    "MAKE_KIT_GUIDELINES.md",
+    "MAKE_KIT_README.md"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
   "scripts": {
     "build:tokens": "tsx scripts/build-tokens.ts",
     "build": "npm run build:tokens && vite build && tsc --emitDeclarationOnly --outDir dist",
@@ -19,7 +29,10 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   },
-  "peerDependencies": { "react": "^18.0.0", "react-dom": "^18.0.0" },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.0",
     "@testing-library/react": "^16.0.0",
