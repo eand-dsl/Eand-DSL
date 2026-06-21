@@ -57,7 +57,10 @@ const tree = loadMerged(raw);
 const cssLines: string[] = [];
 const walkCss = (node: any, path: string[]) => {
   if (isLeaf(node)) {
-    let val: string | number = conv(resolveVal(tree, node));
+    const resolved = resolveVal(tree, node);
+    // skip non-CSS-able values: empty (gradients/placeholders) and composite Font(...) tokens
+    if (resolved === '' || resolved == null || (typeof resolved === 'string' && resolved.startsWith('Font('))) return;
+    let val: string | number = conv(resolved);
     // quote font-family names (they contain spaces/apostrophes -> invalid CSS unquoted)
     if (typeof val === 'string' && path.some((p) => p.includes('family'))) val = `"${val}"`;
     cssLines.push(`  --eand-${path.join('-')}: ${val};`);
