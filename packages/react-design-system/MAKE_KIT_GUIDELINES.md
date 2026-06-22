@@ -19,7 +19,7 @@ import { TopBar, Section, NavBar, Button, /* …39 more */ } from '@eand/react-d
 - `TopBar({ leading, title, trailing })` — app header. `leading`=`<Logo/>` or back; `trailing`=icon buttons.
 - `NavBar({ items: {label, icon, active, onClick}[] })` — 3–5 bottom tabs; mark current `active`.
 - `ActionBar({ helper })` + children — sticky footer for the primary `Button`(s).
-- `Section({ title?, action?, surface?, carousel? })` — the body building block. `surface`: default|inverse|brand|midnight. `carousel` = horizontal scroll of cards.
+- `Section({ title, context?, filterPill?, surface?, onSeeAll?, carousel? })` — **grey rounded container** (the body building block) with a white circle chevron. `surface`: default(grey)|brand(red)|midnight. `context` = subtext under title. `carousel` = horizontal scroll of fixed-width cards.
 - `SectionLink({ title, link, onLinkClick })` — standalone section header + "See all".
 - `Accordion({ title, defaultOpen })` — expand/collapse.
 - `Card({ media, title, body, action, width? })` — generic content card.
@@ -32,15 +32,17 @@ import { TopBar, Section, NavBar, Button, /* …39 more */ } from '@eand/react-d
 
 **Primitives**
 - `Text({ variant: "body.md"|"title.sm"|"heading.lg"|…, as, color })`; `Icon({ size: xs|sm|md|lg|xl })`; `Logo`.
-- `Badge({ tone: neutral|accent|positive|warning|danger|gold|silver|platinum|bronze, size })`; `ProgressBar({ value, tone })`; `AddTrigger({ label })`; `LogoRow({ logos })`.
+- `Badge({ offer?, status?, size })` — **offer**: new-card/new-plan (green) · mega-deals/green-friday/discount (red) · limited-stock/validity/limited-time (yellow) · best-seller (magenta) · online-exclusive/exclusive-for-emirati (burgundy) · sold-out (grey). **status**: neutral/positive/warning/danger/brand. `SmilesRow({ count, plus })` (overlapping smiles avatars); `ProgressBar({ value, tone })`; `AddTrigger({ label })`; `LogoRow({ logos })`.
 
 **Feedback / overlays**
 - `PlanUsageBar({ label, used, total, unit })`; `Snackbar({ tone, message, action, onDismiss })`; `AlertModal({ open, tone, title, body, actions })`.
 - `Tooltip({ content, visible, placement })`; `BottomSheet({ open, title, footer })`.
 
 **Cards / product**
-- `ProductCard({ image, title, price, badge, cta })`; `DealCard({ image, title, subtitle, badge })`; `PlanCard({ name, price, features, recommended, cta })`; `NewCard({ image, title })`; `ServiceCard({ icon, label })`.
-- `Highlight({ title, subtitle, cta, background })` (full-bleed banner); `SmilesBalance({ points, cta })`; `Voucher({ value, code, validity, status })`.
+- `PlanCard({ variant: default|brand|midnight, category, name, price, period, discount, smiles })` — Plans-mini: Postpaid eyebrow + Discount badge + title + smiles row + "from AED…/mo".
+- `ProductCard({ eyebrow?, title, image?, discount?, price, period, pts?, tint? })` — card-features (product/addon/category). `pts` = Smiles pricing (😊 PTS); `tint` = category card bg.
+- `DealCard({ image, title, subtitle, badge })`; `NewCard({ image, title })`; `ServiceCard({ icon, label, badge? })` (badge e.g. `<Badge offer="new-plan">New</Badge>`).
+- `Highlight({ title, subtitle?, image?, action?: { title, subtitle, cta } })` — dark image banner + smiles row; `action` adds a Play-now action bar. `SmilesBalance({ points, cta })`; `Voucher({ value, code, validity, status })`.
 
 ## UX → UI assembly (turn a wireframe into a screen)
 | UX pattern | Use |
@@ -63,17 +65,33 @@ import { TopBar, Section, NavBar, Button, /* …39 more */ } from '@eand/react-d
 ```tsx
 <>
   <TopBar leading={<Logo/>} trailing={<><Icon>🔍</Icon><Icon>🔔</Icon></>} />
-  <Section><SmilesBalance points="12,450 Smiles" cta="Redeem" /></Section>
-  <Section title="Quick actions"><QuickAction items={[{label:'Recharge',icon:'⚡'}, /*…*/]} /></Section>
-  <Section title="Deals for you" action="See all" carousel>
-    <DealCard title="50% off eLife" subtitle="Home broadband" badge="Limited" />
-    {/* … */}
+  <SmilesBalance points="12,450 Smiles" />
+
+  <Section title="Quick actions" context="Top things to do" onSeeAll={()=>{}}>
+    <QuickAction columns={3} items={[
+      { label:'Quick Pay & Recharge', icon:'💳', badge:<Badge status="positive" size="sm">Active</Badge> },
+      { label:'Track Your Order', icon:'🚚' }, { label:'mParking', icon:'🚗' },
+    ]}/>
   </Section>
-  <Section><Highlight title="Upgrade to 5G" subtitle="Unlimited data." cta="Explore plans" /></Section>
-  <Section title="Recommended plans" action="See all" carousel>
-    <PlanCard name="Plus" price="AED 125" features={['120 GB','Unlimited mins','5G']} recommended />
+
+  <Section title="Plans" context="Cover these with your Smiles Points" carousel onSeeAll={()=>{}}>
+    <PlanCard variant="default"/><PlanCard variant="brand"/><PlanCard variant="midnight"/>
   </Section>
-  <NavBar items={[{label:'Home',icon:'🏠',active:true}, {label:'Shop',icon:'🛍️'}, /*…*/]} />
+
+  <Section title="Deals for you" context="Cover these with your Smiles Points" carousel onSeeAll={()=>{}}>
+    <ProductCard eyebrow="Data" title="New Freedom Unlimited Data Plan 500 Local" discount="20% off" price="200" pts/>
+    <ProductCard image="📱" title="iPhone Clear Case For Safe Use" discount="20% off" price="AED 200"/>
+  </Section>
+
+  <Highlight title="For Travellers" subtitle="Stay connected, even when you're away"
+    action={{ title:'Smiles Unlimited', subtitle:'Exclusive venue deals', cta:'Play now' }}/>
+
+  <Section title="Services" context="Explore everything e&" onSeeAll={()=>{}}>
+    {/* grid of */}
+    <ServiceCard icon="📱" label="Mobile Plans" badge={<Badge offer="new-plan" size="sm">New</Badge>}/>
+  </Section>
+
+  <NavBar items={[{label:'Shop',icon:'🛍️'},{label:'Plans',icon:'📄',active:true},{label:'Devices',icon:'📱'},{label:'eLife',icon:'📺'}]}/>
 </>
 ```
-See `demo/home-screen.png` for the rendered result.
+See `demo/home-screen.png` for the rendered result. **Tip for Make:** put each content block in its own `Section` (grey container), use `carousel` for horizontal card rows, and reach for the specific card (`PlanCard`/`ProductCard`/`DealCard`) rather than a generic `Card`.
