@@ -28,33 +28,52 @@ export function Icon({ size = 'md', style, children, ...rest }: IconProps) {
   );
 }
 
-/* ---------------- Badge ---------------- */
-export type BadgeTone = 'neutral' | 'positive' | 'warning' | 'danger' | 'accent' | 'gold' | 'silver' | 'platinum' | 'bronze';
+/* ---------------- Badge ----------------
+   Offer badges (New=green, deals/Discount=red, Limited=yellow, Best seller=magenta,
+   Exclusive=burgundy, Sold out=grey) + status badges, using the exact badge tokens. */
+export type BadgeOffer =
+  | 'new-card' | 'new-plan' | 'mega-deals' | 'green-friday' | 'discount'
+  | 'limited-stock' | 'validity' | 'limited-time' | 'best-seller'
+  | 'online-exclusive' | 'exclusive-for-emirati' | 'sold-out';
+export type BadgeStatus = 'neutral' | 'positive' | 'warning' | 'danger' | 'brand';
 export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
-  tone?: BadgeTone;
+  offer?: BadgeOffer;
+  status?: BadgeStatus;
   size?: 'sm' | 'md' | 'lg';
 }
-const BADGE_BG: Record<BadgeTone, string> = {
-  neutral: color('surface.sunken.default'), accent: color('surface.base.brand'),
-  positive: T.color.green?.['600'] ?? '#54bc72', warning: T.color.yellow?.['600'] ?? '#d5b549',
-  danger: color('surface.base.brand'), gold: T.color.special?.gold?.['600'] ?? '#e2c668',
-  silver: T.color.special?.silver?.['1000'] ?? '#e8e7ea', platinum: T.color.special?.['blue-platinum']?.['300'] ?? '#c2c1e7',
-  bronze: T.color.special?.bronze?.['1000'] ?? '#9f5739',
-};
-export function Badge({ tone = 'neutral', size = 'md', style, children, ...rest }: BadgeProps) {
-  const pad = size === 'lg' ? space('sm') : space('xs');
-  const dark = tone === 'accent' || tone === 'danger' || tone === 'bronze';
+export function Badge({ offer, status = 'neutral', size = 'md', style, children, ...rest }: BadgeProps) {
+  const key = offer ? `offers.${offer}` : `status.${status}`;
+  const padY = size === 'lg' ? 4 : size === 'sm' ? 1 : 2;
   return (
     <span
       style={{
         display: 'inline-flex', alignItems: 'center', gap: space('2xs'),
-        padding: `2px ${pad}`, borderRadius: PILL, background: BADGE_BG[tone],
-        color: dark ? '#fff' : color('text.default.default'),
+        padding: `${padY}px ${size === 'lg' ? space('sm') : space('xs')}`, borderRadius: 8,
+        background: color(`badge.surface.${key}`), color: color(`badge.text.${key}`),
         ...ty(`badge.${size}`), whiteSpace: 'nowrap', ...style,
       }}
       {...rest}
     >
       {children}
+    </span>
+  );
+}
+
+/* ---------------- Smiles avatars (used on plan/highlight cards) ---------------- */
+export function SmilesAvatar({ size = 28, label = 'smiles', bg = '#6C3FD6' }: { size?: number; label?: string; bg?: string }) {
+  return (
+    <span style={{ width: size, height: size, borderRadius: '50%', background: bg, color: '#fff', fontSize: Math.max(7, size * 0.3), fontWeight: 700, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', border: '1.5px solid #fff', boxSizing: 'border-box' }}>{label}</span>
+  );
+}
+export function SmilesRow({ count = 2, plus = 4, size = 28 }: { count?: number; plus?: number; size?: number }) {
+  return (
+    <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+      {Array.from({ length: count }).map((_, i) => (
+        <span key={i} style={{ marginLeft: i ? -8 : 0 }}><SmilesAvatar size={size} /></span>
+      ))}
+      {plus ? (
+        <span style={{ marginLeft: -8, width: size, height: size, borderRadius: '50%', background: '#c0bfc8', color: '#fff', fontSize: 11, fontWeight: 600, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', border: '1.5px solid #fff', boxSizing: 'border-box' }}>+{plus}</span>
+      ) : null}
     </span>
   );
 }

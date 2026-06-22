@@ -1,64 +1,59 @@
 import { createRoot } from 'react-dom/client';
 import {
-  TopBar, NavBar, Section, SectionLink, QuickAction, Highlight, SmilesBalance,
-  ProductCard, DealCard, PlanCard, ServiceCard, Icon, Logo, Badge, Button,
+  TopBar, NavBar, Section, QuickAction, Highlight, SmilesBalance,
+  PlanCard, ProductCard, ServiceCard, Badge, Icon, Logo,
 } from '../src';
 
 function Home() {
   return (
     <>
-      <TopBar
-        leading={<Logo />}
-        title=""
-        trailing={<><Icon size="md">🔍</Icon><Icon size="md">🔔</Icon><Icon size="md">👤</Icon></>}
-      />
+      <TopBar leading={<Logo />} title="" trailing={<><Icon size="md">🔍</Icon><Icon size="md">🔔</Icon><Icon size="md">👤</Icon></>} />
       <div className="scroll">
-        <Section>
-          <SmilesBalance points="12,450 Smiles" cta="Redeem" />
-        </Section>
+        <div style={{ padding: '0 8px' }}><SmilesBalance points="12,450 Smiles" /></div>
 
-        <Section title="Quick actions">
-          <QuickAction items={[
-            { label: 'Recharge', icon: '⚡' }, { label: 'Pay bill', icon: '🧾' },
-            { label: 'Add data', icon: '📶' }, { label: 'Support', icon: '💬' },
+        <Section title="Quick actions" context="Top things to do" onSeeAll={() => {}}>
+          <QuickAction columns={3} items={[
+            { label: 'Quick Pay & Recharge', icon: '💳', badge: <Badge status="positive" size="sm">Active</Badge> },
+            { label: 'Track Your Order', icon: '🚚' },
+            { label: 'mParking', icon: '🚗' },
           ]} />
         </Section>
 
-        <Section title="Deals for you" action="See all" carousel>
-          <DealCard title="50% off eLife" subtitle="Home broadband" badge="Limited" />
-          <DealCard title="Double data" subtitle="Postpaid plans" badge="New" />
-          <DealCard title="Free roaming" subtitle="Travel pack" badge="48h" />
+        <Section title="Plans" context="Cover these with your Smiles Points" carousel onSeeAll={() => {}}>
+          <PlanCard variant="default" />
+          <PlanCard variant="brand" />
+          <PlanCard variant="midnight" />
         </Section>
 
-        <Section>
-          <Highlight title="Upgrade to 5G" subtitle="Unlimited data, zero throttling." cta="Explore plans" />
+        <Section title="Deals for you" context="Cover these with your Smiles Points" carousel onSeeAll={() => {}}>
+          <ProductCard eyebrow="Data" title="New Freedom Unlimited Data Plan 500 Local" discount="20% off" price="200" pts />
+          <ProductCard image="📱" title="iPhone Clear Case For Safe Use" discount="20% off" price="AED 200" />
+          <ProductCard eyebrow="Top-line" title="Category" image="📱" discount="20% off" price="AED 200" tint="#fdf3ec" />
         </Section>
 
-        <Section title="Recommended plans" action="See all" carousel>
-          <PlanCard name="Plus" price="AED 125" features={['120 GB data', 'Unlimited mins', '5G']} recommended />
-          <PlanCard name="Basic" price="AED 80" features={['40 GB data', '500 mins']} />
-        </Section>
+        <div style={{ padding: '0 8px' }}>
+          <Highlight
+            title="For Travellers"
+            subtitle="Stay connected, even when you're away"
+            action={{ title: 'Smiles Unlimited', subtitle: 'Exclusive venue deals', cta: 'Play now' }}
+          />
+        </div>
 
-        <Section title="Shop" action="See all" carousel>
-          <ProductCard title="iPhone 16 Pro" price="AED 4,799" badge="New" />
-          <ProductCard title="Galaxy S25" price="AED 3,299" />
-        </Section>
-
-        <Section title="Services">
+        <Section title="Services" context="Explore everything e&" onSeeAll={() => {}}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 8 }}>
-            <ServiceCard icon="📱" label="My number" />
-            <ServiceCard icon="🏠" label="eLife" />
-            <ServiceCard icon="🎁" label="Smiles" />
-            <ServiceCard icon="🌍" label="Roaming" />
+            <ServiceCard icon="📱" label="Mobile Plans" badge={<Badge offer="new-plan" size="sm">New</Badge>} />
+            <ServiceCard icon="⌚" label="Devices" />
+            <ServiceCard icon="📶" label="TV & Internet" />
+            <ServiceCard icon="🏪" label="EASE" />
             <ServiceCard icon="🛡️" label="Insurance" />
-            <ServiceCard icon="➕" label="More" />
+            <ServiceCard icon="🏠" label="Smart Living" />
           </div>
         </Section>
       </div>
 
       <NavBar items={[
-        { label: 'Home', icon: '🏠', active: true }, { label: 'Shop', icon: '🛍️' },
-        { label: 'Services', icon: '⚙️' }, { label: 'Smiles', icon: '🎁' }, { label: 'More', icon: '☰' },
+        { label: 'Shop', icon: '🛍️' }, { label: 'Plans', icon: '📄', active: true },
+        { label: 'Devices', icon: '📱' }, { label: 'eLife', icon: '📺' },
       ]} />
     </>
   );

@@ -28,23 +28,23 @@ export interface NavItem { label: string; icon?: ReactNode; active?: boolean; on
 export interface NavBarProps extends HTMLAttributes<HTMLElement> {
   items: NavItem[];
 }
+/** Floating frosted pill nav. Active item is a red pill (icon + label). */
 export function NavBar({ items, style, ...rest }: NavBarProps) {
   return (
-    <nav style={{
-      position: 'sticky', bottom: 0, zIndex: 10, width: '100%', boxSizing: 'border-box', height: 64,
-      display: 'flex', background: color('surface.canvas.default'),
-      borderTop: `1px solid ${color('border.solid.subtle')}`, ...style,
-    }} {...rest}>
-      {items.map((it, i) => {
-        const c = it.active ? color('text.brand.default') : color('text.default.muted');
-        return (
-          <button key={i} onClick={it.onClick}
-            style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2, background: 'transparent', border: 0, cursor: 'pointer', color: c }}>
-            <Icon size="md">{it.icon ?? '●'}</Icon>
-            <Text variant="body.xs" color={c}>{it.label}</Text>
-          </button>
-        );
-      })}
+    <nav style={{ position: 'sticky', bottom: 0, zIndex: 10, width: '100%', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, padding: `${space('sm')} ${space('lg')} ${space('xs')}`, background: 'transparent', ...style }} {...rest}>
+      <div style={{ display: 'inline-flex', alignItems: 'center', gap: 4, padding: 6, borderRadius: 9999, background: 'rgba(57,53,62,0.92)', backdropFilter: 'blur(12px)', boxShadow: '0 8px 24px rgba(25,19,41,0.28)' }}>
+        {items.map((it, i) => {
+          const on = it.active;
+          return (
+            <button key={i} onClick={it.onClick}
+              style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: 2, padding: on ? '8px 18px' : '8px 12px', borderRadius: 9999, border: 0, cursor: 'pointer', background: on ? color('surface.base.brand') : 'transparent', color: on ? '#fff' : 'rgba(255,255,255,0.82)' }}>
+              <Icon size="sm">{it.icon ?? '●'}</Icon>
+              <span style={{ fontSize: 10, fontWeight: 600 }}>{it.label}</span>
+            </button>
+          );
+        })}
+      </div>
+      <span style={{ width: 134, height: 5, borderRadius: 9999, background: 'rgba(25,19,41,0.85)' }} />
     </nav>
   );
 }
@@ -85,21 +85,23 @@ export function SectionLink({ title, link = 'See all', onLinkClick, style, ...re
 }
 
 /* ---------------- QuickAction (shortcut grid) ---------------- */
-export interface QuickActionItem { label: string; icon?: ReactNode; onClick?: () => void; }
+export interface QuickActionItem { label: string; icon?: ReactNode; badge?: ReactNode; onClick?: () => void; }
 export interface QuickActionProps extends HTMLAttributes<HTMLDivElement> {
   items: QuickActionItem[];
   columns?: number;
 }
-export function QuickAction({ items, columns = 4, style, ...rest }: QuickActionProps) {
+/** Grid of white shortcut cards: icon in a grey square (top-left), label bottom-left, optional badge. */
+export function QuickAction({ items, columns = 3, style, ...rest }: QuickActionProps) {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, gap: space('md'), width: '100%', ...style }} {...rest}>
+    <div style={{ display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, gap: space('sm'), width: '100%', ...style }} {...rest}>
       {items.map((it, i) => (
         <button key={i} onClick={it.onClick}
-          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: space('xs'), background: 'transparent', border: 0, cursor: 'pointer' }}>
-          <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 56, height: 56, borderRadius: 16, background: color('surface.base.default') }}>
-            <Icon size="lg">{it.icon ?? '●'}</Icon>
+          style={{ position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: 104, padding: space('md'), borderRadius: 16, border: `1px solid ${color('border.solid.subtle')}`, background: color('surface.canvas.default'), cursor: 'pointer', textAlign: 'left' }}>
+          <span style={{ width: 40, height: 40, borderRadius: 12, background: color('surface.base.default'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Icon size="md">{it.icon ?? '●'}</Icon>
           </span>
-          <Text variant="body.sm" style={{ textAlign: 'center' }}>{it.label}</Text>
+          {it.badge ? <span style={{ position: 'absolute', top: 10, right: 10 }}>{it.badge}</span> : null}
+          <Text variant="title.xs">{it.label}</Text>
         </button>
       ))}
     </div>
