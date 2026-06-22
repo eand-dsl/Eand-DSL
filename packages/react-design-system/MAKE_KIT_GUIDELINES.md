@@ -9,17 +9,18 @@ import { TopBar, Section, NavBar, Button, /* …39 more */ } from '@eand/react-d
 ```
 
 ## Golden rules (always apply)
-- **Build screens, not loose mockups.** A screen = `TopBar` (sticky header) → a vertical scroll body of full-width `Section`s → `NavBar` (sticky bottom). Overlays (`BottomSheet`, `AlertModal`, `Snackbar`, `Tooltip`) float above. A persistent primary CTA → `ActionBar` (sticky, above NavBar).
+- **Build screens, not loose mockups.** An e& screen = **red account `TopBar`** (`variant="brand"`: greeting + masked number + circle icons) → optional **global `Tabs`** row (For you / Account / Loyalty) → a vertical scroll body of full-width grey **`Section`s** (wrapping cards / `ListRow`s / `QuickAction` grids / carousels) → floating **`NavBar`** (Home · Support · Profile · Shop, active = red pill). Overlays (`BottomSheet`, `AlertModal`, `Snackbar`, `Tooltip`) float above; a persistent primary CTA → `ActionBar` above the nav. Detail/pushed pages use the default white `TopBar` with a back chevron.
 - **Sizing:** controls (`Button`, `Input`, `Chip`, `FilterPill`, `Checkbox`, `Radio`, `Switcher`, `Searchbar`, `Tabs`) are fixed-height; in a form they fill width, inline (chips/pills/badges) they hug. Containers (`Section`, all cards, `Accordion`, `BottomSheet`) are full-width + hug content. Cards in a **carousel** are fixed-width; **stacked** they fill width.
 - **Sections** are full bleed to the screen width; padded content insets automatically. Put a carousel of cards in `<Section carousel>`.
 - Use the brand: primary actions = `<Button>` (brand red). e& red is the accent; "midnight" is the neutral ink; gold/silver/etc. are Smiles tiers.
 
 ## Component reference (props that matter)
 **Chrome / layout**
-- `TopBar({ leading, title, trailing })` — app header. `leading`=`<Logo/>` or back; `trailing`=icon buttons.
+- `TopBar({ variant: default|brand, leading, title, greeting?, actions?, actionBar?, trailing })` — **brand** = red account header (greeting "Hi, Ahmed" + masked number + circle `actions` + optional `actionBar`={title,subtitle,cta}); **default** = white header (leading `<Logo/>`/back + title + actions).
+- `ListRow({ icon?, label, sublabel?, value?, chevron })` — white rounded row for settings / contact / overview / label↔value (e.g. "2 GB left" → "Local Data"). Stack inside a Section.
 - `NavBar({ items: {label, icon, active, onClick}[] })` — 3–5 bottom tabs; mark current `active`.
 - `ActionBar({ helper })` + children — sticky footer for the primary `Button`(s).
-- `Section({ title, context?, filterPill?, surface?, onSeeAll?, carousel? })` — **grey rounded container** (the body building block) with a white circle chevron. `surface`: default(grey)|brand(red)|midnight. `context` = subtext under title. `carousel` = horizontal scroll of fixed-width cards.
+- `Section({ title, context?, filterPill?, surface?, onSeeAll?, carousel? })` — **grey rounded container** (the body building block) with a white circle chevron. `surface`: default(grey)|brand(red)|**brand-muted(pink, for "Jump to…"/"FAQs")**|midnight. `context` = subtext; `filterPill` can also hold a text link like "Manage". `carousel` = horizontal scroll of fixed-width cards.
 - `SectionLink({ title, link, onLinkClick })` — standalone section header + "See all".
 - `Accordion({ title, defaultOpen })` — expand/collapse.
 - `Card({ media, title, body, action, width? })` — generic content card.
@@ -27,7 +28,7 @@ import { TopBar, Section, NavBar, Button, /* …39 more */ } from '@eand/react-d
 **Controls**
 - `Button({ variant: primary|secondary, tone: brand|inverse, size: sm|md|lg, block, leadingIcon, trailingIcon })`.
 - `Input({ label, helper, error, variant: outlined|filled, leadingIcon, trailingIcon })`; `Searchbar({ onMic })`; `AISearch`.
-- `Chip({ selected, leadingIcon })`; `FilterPill({ selected })` (filter row); `Tabs({ tabs, value, scope: global|local })`; `Selectors({ options, value })`.
+- `Chip({ selected, leadingIcon })`; `FilterPill({ selected })` (filter row); `Tabs({ tabs, value, scope })` — `scope="global"` page tabs (active = **tinted-red** pill) vs `scope="local"` in-section tabs (active = **midnight** pill); `Selectors({ options, value })`.
 - `Checkbox({ label, checked })`; `Radio({ label })`; `Switcher({ checked, size: sm|lg })`.
 
 **Primitives**
@@ -47,14 +48,17 @@ import { TopBar, Section, NavBar, Button, /* …39 more */ } from '@eand/react-d
 ## UX → UI assembly (turn a wireframe into a screen)
 | UX pattern | Use |
 |---|---|
-| Header | `TopBar` (logo/back leading, action icons trailing) |
-| Bottom tab bar | `NavBar` (mark current tab active) |
-| Each content block | a full-width `Section` (add `title`+`action` for a header) |
+| Greeting / account header | `TopBar variant="brand"` (greeting + masked number + circle actions) |
+| Bottom tab bar | `NavBar` — Home · Support · Profile · Shop (mark current `active`) |
+| Top-level page tabs | `Tabs scope="global"` (For you / Account / Loyalty) |
+| In-section tabs (All/Data/Calls) | `Tabs scope="local"` |
+| Each content block | a full-width `Section` (`title` + `context` + chevron) |
 | Horizontal row of tiles | `<Section carousel>` of `ProductCard`/`DealCard`/`PlanCard`/`NewCard` |
-| Vertical list | stacked `Card`s |
-| Icon shortcut grid | `QuickAction` (or `ServiceCard` grid) |
+| Settings / contact / "X ›" / label↔value rows | `ListRow` stacked in a Section |
+| Account-hub / quick-links grid | `QuickAction` cells with a count `badge` (`<Badge status="positive">3 active</Badge>`) |
+| Icon shortcut grid | `QuickAction` (or `ServiceCard` grid with New badge) |
+| "Jump to…" chips block | `Chip`s in a `surface="brand-muted"` Section |
 | Filter/sort row | `FilterPill`/`Chip` row |
-| In-screen tabs | `Tabs` |
 | Form | `Input`/`Searchbar`/`Checkbox`/`Radio`/`Switcher`/`Selectors` |
 | Promo strip | `Highlight` (full-bleed) |
 | Usage meter | `PlanUsageBar` · Loyalty → `SmilesBalance` · Coupon → `Voucher` |
