@@ -441,13 +441,13 @@
       - `bronze-number` → `#ffffff`
 - **Typography:** `badge.lg`(14/Book), `badge.md`(12/Book), `badge.sm`(10/Book)
 - **Anatomy (Figma-verified):**
-  - **Variants:** `size` (lg, md, sm) × `type` (Best seller, Bronze number, Discount, Exclusive for Emirati, Gold number, Gold+ number, Green friday, Limited stock, Limited time offer, Mega deals, New card, New plan, Online exclusive, Platinum number, Silver number, Silver+ number, Sold out, Valid for 2 days, danger, disabled, neutral, positive, warning).
-  - **Dimensions:** 147×24 · 131×24 · 128×24 · 123×24 · 122×24 · 116×24.
-  - **Shape:** corner radius 8.
-  - **Anatomy parts:** label.
-  - **Specs (from Figma):**
-    - For desktop minimum label size is 52px, both for small and medium label and 54px for the large label.
-  - **Figma node:** `22668:60275`
+  - **Sizes:** sm · md · lg.
+  - **Offer badges (bg / text):** New card · New plan = dark green `#0e2916` / white · Mega deals · Green friday · Discount · 20% off = brand red `#e00800` / white · Limited stock · Valid for 2 days · Limited time offer = yellow `#ffd957` / midnight · Best seller = magenta `#bb2d81` / white · Online exclusive · Exclusive for Emirati = burgundy `#7c0124` / white · Sold out = grey `#797584` / white-70.
+  - **Status badges:** neutral · positive · warning · danger · brand (`color/badge/status/*`).
+  - **Tier badges:** Gold · Silver · Platinum · Bronze (+ "+" variants) — membership tiers.
+  - **Shape:** rounded rect (~8px), hug width, fixed height; label only.
+  - **Tokens:** `color/badge/surface/{offers|status}/*` + `color/badge/text/*`; type `typography/badge/<size>`.
+  - **Figma:** node `22668-60275`.
 
 #### Icon size
 - **Figma:** [`25460-22589`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25460-22589)
@@ -1660,10 +1660,12 @@
     - `focus-special` → `#ffffff`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
 - **Anatomy (Figma-verified):**
-  - **Variants:** `page` (Devices, Elife, Plans, home, profile, shop, support) × `active` (no, yes) × `special` (no, yes) × `page-1` (no, yes) × `page-2` (no, yes) × `page-3` (no, yes) × `page-4` (no, yes) × `gap` (left, right) × `logged-in` (no, yes).
-  - **Dimensions:** 370×114 · 338×64 · 64×64 · 56×56.
-  - **Anatomy parts:** wrapper · .Home Indicator.
-  - **Figma node:** `22542:13964`
+  - **Type:** **floating** bottom navigation — a frosted dark rounded pill (not full-bleed), centered, with a home-indicator line below.
+  - **Items:** 3–5 destinations (icon + small label). **Active item = solid red pill** (white icon+label); inactive = muted white on the frosted bar.
+  - **Destinations seen:** Shop · Plans · Devices · eLife / Home · Support · Profile · Shop. Types: Guest vs Logged-in.
+  - **Tokens:** `color/navbar-tab/*`; active surface = brand red.
+  - **Sizing:** sticky bottom; respects bottom safe-area.
+  - **Figma:** node `22542-13964`.
 
 #### Action bar
 - **Figma:** [`25519-15621`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25519-15621)
@@ -1979,14 +1981,11 @@
     - `disabled` → `#c0bfc8`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
 - **Anatomy (Figma-verified):**
-  - **Variants:** `Icon type` (addon-buy, all-services, contact-us, device-buy, devices, live-chat, mParking, order-track, plan-change, quick-pay, sim-activate, sim-replace, subscriptions) × `badge` (off, on) × `Quick-tasks Icons` (off, on) × `variant` (Carousel, Stack) × `type` (addon-buy, all-services, contact-us, device-buy, devices, live-chat, mParking, order-track, plan-change, quick-pay, sim-activate, sim-replace, subscriptions) × `Grid` (On, off) × `Carousel` (off, on) × `Row` (Single, Three, Two).
-  - **Dimensions:** 334×452 · 449×300 · 334×300 · 449×148 · 334×148 · 165×148.
-  - **Anatomy parts:** .quick-action-variants.
-  - **Specs (from Figma):**
-    - Quick task icons
-    - Status tags are live data badges. They reflect the user's real-time service state and sit in the top-right corner of the icon container.
-    - Icon container
-  - **Figma node:** `25507:13670`
+  - **Type:** quick-action shortcut grid — white cards (rounded 16, subtle border).
+  - **Cell:** icon in a **grey rounded square** (top-left) + **left-aligned bold label** (bottom) + optional **Active** (green) / **New** badge top-right.
+  - **Examples:** Quick Pay & Recharge · Track Your Order · mParking · Subscriptions · Replace SIM · My Devices · All Services.
+  - **Sizing:** 3-up (or 2-up) grid; equal-width cells, fixed height.
+  - **Figma:** node `25507-13670`.
 
 ### 04 · Layout
 
@@ -2085,19 +2084,12 @@
       - `row-16` → `224`
 - **Typography:** `heading.xl`(32/Bold), `heading.lg`(28/Bold), `heading.md`(24/Bold), `heading.sm`(20/Bold), `heading.xs`(16/Bold), `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold)
 - **Anatomy (Figma-verified):**
-  - **Variants:** `surface-color` (ai-powered, brand, default, glass-midnight, glass-white, midnight-base, midnight-raised, raised) × `filter-pill` (off, on) × `context` (off, on) × `trigger` (off, on) × `Title line` (1-Line, 2-line) × `chevron button` (no, yes) × `size` (lg, md, sm, xl, xs) × `surface` (Default, inverse).
-  - **Dimensions:** 367×572 · 337×484 · 337×332 · 337×256 · 337×180 · 375×116.
-  - **Shape:** corner radius 24.
-  - **Anatomy parts:** header · body.
-  - **Specs (from Figma):**
-    - Without filter chip and without chevron
-    - Update: Title should be short  and fit in the same line as chip subtext fixed size - 291px
-    - Update: title and subtext should take full container width Title text can be up to 2 lines, subtitle text can be up to 2 lines
-    - Removed bottom padding from section header and added 16px top padding to section body
-    - Eight surface treatments. The surface drives both the body fill and the text/icon colors that read on top of it.
-    - Section gaps and padding remains same across sizes
-    - Context will be fixed to 260px and will not extend till below button
-  - **Figma node:** `25519:12055`
+  - **Type:** the full-width body **container** — a light-grey rounded card (radius 24) that groups content.
+  - **Header:** bold "Section" title + optional **context** subtext ("Cover these with your Smiles Points") + optional **Filter pill** (Category dropdown) + a **white circle chevron** (›) link, top-right.
+  - **Surfaces:** default (grey `surface/base/default`) · brand (red) · midnight (dark); on brand/midnight the title/context/chevron go inverse.
+  - **Body (Slot):** stacked cards/lists/controls, OR a horizontal **carousel** of fixed-width cards that bleeds to the edges. Padding 16, top 24, 16 gap to body (`size/section`).
+  - **Sizing:** width fill (full screen width); height hug.
+  - **Figma:** node `25519-12055`.
 
 #### Accordion
 - **Figma:** [`27465-29326`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=27465-29326)
@@ -3077,13 +3069,12 @@
     - `xl` → `336`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
 - **Anatomy (Figma-verified):**
-  - **Variants:** `price-monthly` (off, on) × `type` (aed, smiles).
-  - **Dimensions:** 229×300 · 192×28.
-  - **Shape:** corner radius 20.
-  - **Anatomy parts:** header · footer.
-  - **Specs (from Figma):**
-    - Badge placement will always be aligned top-right with 16px padding from top and right
-  - **Figma node:** `25701:12472`
+  - **Type:** card-features — content card family: **product · addon · category**. Shared `.features-price` atom shows **AED or Smiles (😊 PTS)**.
+  - **addon:** eyebrow ("Data") + **offer badge** ("20% off", red) top-right + bold title + "from AED/PTS".
+  - **product:** product image (offer badge over it) + bold title + "from AED/mo".
+  - **category:** tinted card bg (`.card-bg-color`: cream/peach/green/blue/indigo/purple tints) + "Top-line" eyebrow + "Category" + image + price.
+  - **Sizing:** fixed width (carousel); rounded 16.
+  - **Figma:** node `25701-12472`.
 
 #### Deals for you
 - **Figma:** [`25717-33323`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25717-33323)
@@ -3421,17 +3412,11 @@
     - `xl` → `336`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
 - **Anatomy (Figma-verified):**
-  - **Variants:** `surface-color` (brand, default, glass-midnight, glass-white, midnight-base, midnight-raised, subtle, sunken) × `color-scheme` (default, inverse) × `price-monthly` (off, on) × `type` (aed, smiles).
-  - **Dimensions:** 222×300 · 84×84 · 192×28.
-  - **Shape:** corner radius 16.
-  - **Anatomy parts:** header · footer.
-  - **Specs (from Figma):**
-    - Card padding: 16px all sides
-    - Badge: top-right, optional, hugs content
-    - Logos: max 3 visible + "+N" overflow indicator, 8px gap from title
-    - Logo size: 40x40px
-    - 8px
-  - **Figma node:** `25915:74211`
+  - **Type:** Plans-mini card (focuses on main details); carousel item.
+  - **Anatomy (top → bottom):** "Postpaid" eyebrow (muted) + **Discount badge** (red on white; white-with-red-text on colored cards) top-right → bold 2-line title ("Entertainment plans") → **smiles avatar row** (two purple "smiles" circles + grey "+4") → "from" (muted) + "AED 1250/mo" (bold).
+  - **Variants:** default (white) · brand (red bg, white text) · midnight (dark navy bg, white text).
+  - **Sizing:** fixed width (carousel) ~210; rounded 16; default has a subtle border.
+  - **Figma:** node `25915-74211`.
 
 #### New on e&
 - **Figma:** [`25915-75766`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25915-75766)
@@ -3766,14 +3751,11 @@
     - `xl` → `336`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
 - **Anatomy (Figma-verified):**
-  - **Variants:** `size` (carousel, grid) × `Grid` (no, yes) × `Carousel` (no, yes) × `Rows` (Single, Three, Two) × `Layout` (1-row carousel, 1-row grid, 2-row carousel, 2-row grid, 3-row grid).
-  - **Dimensions:** 367×548 · 335×452 · 367×396 · 392×300 · 335×300 · 367×244.
-  - **Anatomy parts:** service-card-section.
-  - **Specs (from Figma):**
-    - Badge placement will always be aligned top-left with 8px padding from top and left
-    - Status tags are live data badges. They reflect the user's real-time service state and sit in the top-right corner of the icon container.
-    - Icon container
-  - **Figma node:** `26019:79144`
+  - **Type:** service-card — white card (rounded 16), used in grids.
+  - **Cell:** **3D illustration icon** (centered) + centered bold label + optional **New** badge (dark green) top-left.
+  - **Examples:** Mobile Plans · Devices · TV & Internet · EASE · Insurance · Smart Living · Add-ons · Accessories · Rewards exchange.
+  - **Sizing:** grid cell (equal width), fixed height.
+  - **Figma:** node `26019-79144`.
 
 ### 08 · Banners
 
@@ -3936,12 +3918,11 @@
       - `disabled` → `#c0bfc8`
 - **Typography:** `heading.xl`(32/Bold), `heading.lg`(28/Bold), `heading.md`(24/Bold), `heading.sm`(20/Bold), `heading.xs`(16/Bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
 - **Anatomy (Figma-verified):**
-  - **Variants:** `logo-row` (off, on) × `text-primary` (off, on) × `text-secondary` (off, on) × `type` (action, informational) × `carousel` (no, yes) × `size` (lg, xl).
-  - **Dimensions:** 335×452 · 316×452 · 313×452 · 335×300 · 313×300 · 292×228.
-  - **Anatomy parts:** .highlight-core.
-  - **Specs (from Figma):**
-    - The spacing between the banners in carousel is 8px
-  - **Figma node:** `25460:83982`
+  - **Type:** promotional banner — dark/photo **image background**, rounded 20.
+  - **Anatomy (bottom-anchored):** tier-badge row (smiles / stars-play / owl-tv circles) → bold **2-line title** ("Primary Text 2-lines max") → subtext.
+  - **Variants:** **Informational** (no action) vs **Action** (adds an **Action bar**: title + subtitle + red "Play now" button) × size XL/L × Single-line/Carousel.
+  - **Sizing:** full-bleed width; carousel items fixed width.
+  - **Figma:** node `25460-83982`.
 
 ### 09 · Product-Specific
 

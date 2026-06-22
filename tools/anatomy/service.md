@@ -1,8 +1,5 @@
-  - **Variants:** `size` (carousel, grid) × `Grid` (no, yes) × `Carousel` (no, yes) × `Rows` (Single, Three, Two) × `Layout` (1-row carousel, 1-row grid, 2-row carousel, 2-row grid, 3-row grid).
-  - **Dimensions:** 367×548 · 335×452 · 367×396 · 392×300 · 335×300 · 367×244.
-  - **Anatomy parts:** service-card-section.
-  - **Specs (from Figma):**
-    - Badge placement will always be aligned top-left with 8px padding from top and left
-    - Status tags are live data badges. They reflect the user's real-time service state and sit in the top-right corner of the icon container.
-    - Icon container
-  - **Figma node:** `26019:79144`
+  - **Type:** service-card — white card (rounded 16), used in grids.
+  - **Cell:** **3D illustration icon** (centered) + centered bold label + optional **New** badge (dark green) top-left.
+  - **Examples:** Mobile Plans · Devices · TV & Internet · EASE · Insurance · Smart Living · Add-ons · Accessories · Rewards exchange.
+  - **Sizing:** grid cell (equal width), fixed height.
+  - **Figma:** node `26019-79144`.

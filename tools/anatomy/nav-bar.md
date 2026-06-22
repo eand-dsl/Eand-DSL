@@ -1,4 +1,6 @@
-  - **Variants:** `page` (Devices, Elife, Plans, home, profile, shop, support) × `active` (no, yes) × `special` (no, yes) × `page-1` (no, yes) × `page-2` (no, yes) × `page-3` (no, yes) × `page-4` (no, yes) × `gap` (left, right) × `logged-in` (no, yes).
-  - **Dimensions:** 370×114 · 338×64 · 64×64 · 56×56.
-  - **Anatomy parts:** wrapper · .Home Indicator.
-  - **Figma node:** `22542:13964`
+  - **Type:** **floating** bottom navigation — a frosted dark rounded pill (not full-bleed), centered, with a home-indicator line below.
+  - **Items:** 3–5 destinations (icon + small label). **Active item = solid red pill** (white icon+label); inactive = muted white on the frosted bar.
+  - **Destinations seen:** Shop · Plans · Devices · eLife / Home · Support · Profile · Shop. Types: Guest vs Logged-in.
+  - **Tokens:** `color/navbar-tab/*`; active surface = brand red.
+  - **Sizing:** sticky bottom; respects bottom safe-area.
+  - **Figma:** node `22542-13964`.

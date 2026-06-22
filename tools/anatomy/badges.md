@@ -1,7 +1,7 @@
-  - **Variants:** `size` (lg, md, sm) × `type` (Best seller, Bronze number, Discount, Exclusive for Emirati, Gold number, Gold+ number, Green friday, Limited stock, Limited time offer, Mega deals, New card, New plan, Online exclusive, Platinum number, Silver number, Silver+ number, Sold out, Valid for 2 days, danger, disabled, neutral, positive, warning).
-  - **Dimensions:** 147×24 · 131×24 · 128×24 · 123×24 · 122×24 · 116×24.
-  - **Shape:** corner radius 8.
-  - **Anatomy parts:** label.
-  - **Specs (from Figma):**
-    - For desktop minimum label size is 52px, both for small and medium label and 54px for the large label.
-  - **Figma node:** `22668:60275`
+  - **Sizes:** sm · md · lg.
+  - **Offer badges (bg / text):** New card · New plan = dark green `#0e2916` / white · Mega deals · Green friday · Discount · 20% off = brand red `#e00800` / white · Limited stock · Valid for 2 days · Limited time offer = yellow `#ffd957` / midnight · Best seller = magenta `#bb2d81` / white · Online exclusive · Exclusive for Emirati = burgundy `#7c0124` / white · Sold out = grey `#797584` / white-70.
+  - **Status badges:** neutral · positive · warning · danger · brand (`color/badge/status/*`).
+  - **Tier badges:** Gold · Silver · Platinum · Bronze (+ "+" variants) — membership tiers.
+  - **Shape:** rounded rect (~8px), hug width, fixed height; label only.
+  - **Tokens:** `color/badge/surface/{offers|status}/*` + `color/badge/text/*`; type `typography/badge/<size>`.
+  - **Figma:** node `22668-60275`.

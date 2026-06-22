@@ -1,6 +1,5 @@
-  - **Variants:** `logo-row` (off, on) × `text-primary` (off, on) × `text-secondary` (off, on) × `type` (action, informational) × `carousel` (no, yes) × `size` (lg, xl).
-  - **Dimensions:** 335×452 · 316×452 · 313×452 · 335×300 · 313×300 · 292×228.
-  - **Anatomy parts:** .highlight-core.
-  - **Specs (from Figma):**
-    - The spacing between the banners in carousel is 8px
-  - **Figma node:** `25460:83982`
+  - **Type:** promotional banner — dark/photo **image background**, rounded 20.
+  - **Anatomy (bottom-anchored):** tier-badge row (smiles / stars-play / owl-tv circles) → bold **2-line title** ("Primary Text 2-lines max") → subtext.
+  - **Variants:** **Informational** (no action) vs **Action** (adds an **Action bar**: title + subtitle + red "Play now" button) × size XL/L × Single-line/Carousel.
+  - **Sizing:** full-bleed width; carousel items fixed width.
+  - **Figma:** node `25460-83982`.

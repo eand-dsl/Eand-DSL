@@ -1,7 +1,6 @@
-  - **Variants:** `price-monthly` (off, on) × `type` (aed, smiles).
-  - **Dimensions:** 229×300 · 192×28.
-  - **Shape:** corner radius 20.
-  - **Anatomy parts:** header · footer.
-  - **Specs (from Figma):**
-    - Badge placement will always be aligned top-right with 16px padding from top and right
-  - **Figma node:** `25701:12472`
+  - **Type:** card-features — content card family: **product · addon · category**. Shared `.features-price` atom shows **AED or Smiles (😊 PTS)**.
+  - **addon:** eyebrow ("Data") + **offer badge** ("20% off", red) top-right + bold title + "from AED/PTS".
+  - **product:** product image (offer badge over it) + bold title + "from AED/mo".
+  - **category:** tinted card bg (`.card-bg-color`: cream/peach/green/blue/indigo/purple tints) + "Top-line" eyebrow + "Category" + image + price.
+  - **Sizing:** fixed width (carousel); rounded 16.
+  - **Figma:** node `25701-12472`.

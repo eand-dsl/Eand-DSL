@@ -1,11 +1,5 @@
-  - **Variants:** `surface-color` (brand, default, glass-midnight, glass-white, midnight-base, midnight-raised, subtle, sunken) × `color-scheme` (default, inverse) × `price-monthly` (off, on) × `type` (aed, smiles).
-  - **Dimensions:** 222×300 · 84×84 · 192×28.
-  - **Shape:** corner radius 16.
-  - **Anatomy parts:** header · footer.
-  - **Specs (from Figma):**
-    - Card padding: 16px all sides
-    - Badge: top-right, optional, hugs content
-    - Logos: max 3 visible + "+N" overflow indicator, 8px gap from title
-    - Logo size: 40x40px
-    - 8px
-  - **Figma node:** `25915:74211`
+  - **Type:** Plans-mini card (focuses on main details); carousel item.
+  - **Anatomy (top → bottom):** "Postpaid" eyebrow (muted) + **Discount badge** (red on white; white-with-red-text on colored cards) top-right → bold 2-line title ("Entertainment plans") → **smiles avatar row** (two purple "smiles" circles + grey "+4") → "from" (muted) + "AED 1250/mo" (bold).
+  - **Variants:** default (white) · brand (red bg, white text) · midnight (dark navy bg, white text).
+  - **Sizing:** fixed width (carousel) ~210; rounded 16; default has a subtle border.
+  - **Figma:** node `25915-74211`.

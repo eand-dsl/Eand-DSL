@@ -1,8 +1,5 @@
-  - **Variants:** `Icon type` (addon-buy, all-services, contact-us, device-buy, devices, live-chat, mParking, order-track, plan-change, quick-pay, sim-activate, sim-replace, subscriptions) × `badge` (off, on) × `Quick-tasks Icons` (off, on) × `variant` (Carousel, Stack) × `type` (addon-buy, all-services, contact-us, device-buy, devices, live-chat, mParking, order-track, plan-change, quick-pay, sim-activate, sim-replace, subscriptions) × `Grid` (On, off) × `Carousel` (off, on) × `Row` (Single, Three, Two).
-  - **Dimensions:** 334×452 · 449×300 · 334×300 · 449×148 · 334×148 · 165×148.
-  - **Anatomy parts:** .quick-action-variants.
-  - **Specs (from Figma):**
-    - Quick task icons
-    - Status tags are live data badges. They reflect the user's real-time service state and sit in the top-right corner of the icon container.
-    - Icon container
-  - **Figma node:** `25507:13670`
+  - **Type:** quick-action shortcut grid — white cards (rounded 16, subtle border).
+  - **Cell:** icon in a **grey rounded square** (top-left) + **left-aligned bold label** (bottom) + optional **Active** (green) / **New** badge top-right.
+  - **Examples:** Quick Pay & Recharge · Track Your Order · mParking · Subscriptions · Replace SIM · My Devices · All Services.
+  - **Sizing:** 3-up (or 2-up) grid; equal-width cells, fixed height.
+  - **Figma:** node `25507-13670`.
