@@ -1,62 +1,58 @@
 import { createRoot } from 'react-dom/client';
 import {
-  TopBar, NavBar, Section, QuickAction, Highlight, SmilesBalance,
-  PlanCard, ProductCard, ServiceCard, Badge, Icon, Logo,
+  TopBar, NavBar, Section, Tabs, ListRow, QuickAction, Chip, Searchbar, Badge, Icon, Button,
 } from '../src';
 
-function Home() {
+function Account() {
   return (
     <>
-      <TopBar leading={<Logo />} title="" trailing={<><Icon size="md">🔍</Icon><Icon size="md">🔔</Icon><Icon size="md">👤</Icon></>} />
-      <div className="scroll">
-        <div style={{ padding: '0 8px' }}><SmilesBalance points="12,450 Smiles" /></div>
+      <TopBar variant="brand" greeting="Hi, Ahmed" title="050 123 4567"
+        actions={[<span key="a">✦</span>, <span key="b">🔔</span>]} />
 
-        <Section title="Quick actions" context="Top things to do" onSeeAll={() => {}}>
-          <QuickAction columns={3} items={[
-            { label: 'Quick Pay & Recharge', icon: '💳', badge: <Badge status="positive" size="sm">Active</Badge> },
-            { label: 'Track Your Order', icon: '🚚' },
+      <div className="scroll">
+        <div style={{ padding: '8px 8px 0' }}>
+          <Tabs scope="global" tabs={['For you', 'Account', 'Loyalty']} defaultValue={1} />
+        </div>
+
+        <Section title="My Plan" context="Freedom Live Plan 200" hideChevron
+          filterPill={<span style={{ color: '#e00800', fontWeight: 600, fontSize: 13 }}>Manage</span>}>
+          <Tabs scope="local" tabs={['All', 'Data', 'Calls']} />
+          <ListRow label="2 GB left" value="Local Data" chevron={false} />
+          <ListRow label="200 min left" value="Minutes" chevron={false} />
+          <ListRow label="250 SMS left" value="Local SMS" chevron={false} />
+          <ListRow label="600 MB left" value="Roaming Data" chevron={false} />
+        </Section>
+
+        <Section title="My Bill" onSeeAll={() => {}}>
+          <ListRow label="Total: AED 500" sublabel="Monthly bill: AED 480 · Extras: AED 20"
+            value={<Button size="sm" variant="secondary">Overview</Button>} chevron={false} />
+        </Section>
+
+        <Section title="My Account Hub" onSeeAll={() => {}}>
+          <QuickAction columns={2} items={[
+            { label: 'Add-ons', icon: '🧩', badge: <Badge status="positive" size="sm">3 active</Badge> },
+            { label: 'Subscriptions', icon: '🔁', badge: <Badge status="neutral" size="sm">0</Badge> },
+            { label: 'My Devices', icon: '📱', badge: <Badge status="warning" size="sm">Active</Badge> },
+            { label: 'My SIM Cards', icon: '💳', badge: <Badge status="positive" size="sm">2 cards</Badge> },
             { label: 'mParking', icon: '🚗' },
+            { label: 'All Services', icon: '⋯' },
           ]} />
         </Section>
 
-        <Section title="Plans" context="Cover these with your Smiles Points" carousel onSeeAll={() => {}}>
-          <PlanCard variant="default" />
-          <PlanCard variant="brand" />
-          <PlanCard variant="midnight" />
-        </Section>
-
-        <Section title="Deals for you" context="Cover these with your Smiles Points" carousel onSeeAll={() => {}}>
-          <ProductCard eyebrow="Data" title="New Freedom Unlimited Data Plan 500 Local" discount="20% off" price="200" pts />
-          <ProductCard image="📱" title="iPhone Clear Case For Safe Use" discount="20% off" price="AED 200" />
-          <ProductCard eyebrow="Top-line" title="Category" image="📱" discount="20% off" price="AED 200" tint="#fdf3ec" />
-        </Section>
-
-        <div style={{ padding: '0 8px' }}>
-          <Highlight
-            title="For Travellers"
-            subtitle="Stay connected, even when you're away"
-            action={{ title: 'Smiles Unlimited', subtitle: 'Exclusive venue deals', cta: 'Play now' }}
-          />
-        </div>
-
-        <Section title="Services" context="Explore everything e&" onSeeAll={() => {}}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 8 }}>
-            <ServiceCard icon="📱" label="Mobile Plans" badge={<Badge offer="new-plan" size="sm">New</Badge>} />
-            <ServiceCard icon="⌚" label="Devices" />
-            <ServiceCard icon="📶" label="TV & Internet" />
-            <ServiceCard icon="🏪" label="EASE" />
-            <ServiceCard icon="🛡️" label="Insurance" />
-            <ServiceCard icon="🏠" label="Smart Living" />
+        <Section title="Jump to..." surface="brand-muted" onSeeAll={() => {}}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+            {['Manage my Plan', 'Change Plan', 'My limits', 'Family Plan', 'Buy Add-on', 'Replace SIM', 'Manage Add-on', 'Switch to Postpaid'].map((c) => <Chip key={c}>{c}</Chip>)}
           </div>
+          <Searchbar placeholder="Search for feature" />
         </Section>
       </div>
 
       <NavBar items={[
-        { label: 'Shop', icon: '🛍️' }, { label: 'Plans', icon: '📄', active: true },
-        { label: 'Devices', icon: '📱' }, { label: 'eLife', icon: '📺' },
+        { label: 'Home', icon: '🏠', active: true }, { label: 'Support', icon: '🎧' },
+        { label: 'Profile', icon: '👤' }, { label: 'Shop', icon: '🛍️' },
       ]} />
     </>
   );
 }
 
-createRoot(document.getElementById('root')!).render(<Home />);
+createRoot(document.getElementById('root')!).render(<Account />);

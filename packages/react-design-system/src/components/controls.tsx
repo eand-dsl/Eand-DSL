@@ -1,4 +1,4 @@
-import { useState, type HTMLAttributes, type InputHTMLAttributes, type ReactNode } from 'react';
+import { useState, type CSSProperties, type HTMLAttributes, type InputHTMLAttributes, type ReactNode } from 'react';
 import { color, space, ty, PILL } from '../system';
 import { Text, Icon } from './primitives';
 
@@ -152,17 +152,24 @@ export interface TabsProps {
 export function Tabs({ tabs, value, defaultValue = 0, scope = 'global', onChange }: TabsProps) {
   const [internal, setInternal] = useState(defaultValue);
   const active = value ?? internal;
-  const activeColor = scope === 'global' ? color('surface.base.brand') : color('surface.base.midnight');
   return (
     <div role="tablist" style={{ display: 'flex', gap: space('sm'), overflowX: 'auto' }}>
       {tabs.map((t, i) => {
         const on = i === active;
+        let s: CSSProperties;
+        if (scope === 'global') {
+          s = on
+            ? { background: color('surface.canvas.brand-muted'), color: color('text.brand.default'), border: '1px solid transparent' }
+            : { background: color('surface.base.default'), color: color('text.default.muted'), border: '1px solid transparent' };
+        } else {
+          s = on
+            ? { background: color('surface.base.midnight'), color: '#fff', border: '1px solid transparent' }
+            : { background: color('surface.canvas.default'), color: color('text.default.default'), border: `1px solid ${color('border.solid.default')}` };
+        }
         return (
           <button key={i} role="tab" aria-selected={on}
             onClick={() => { setInternal(i); onChange?.(i); }}
-            style={{ height: 40, padding: `0 ${space('md')}`, borderRadius: PILL, cursor: 'pointer', whiteSpace: 'nowrap',
-              border: `1px solid ${on ? activeColor : color('border.solid.default')}`,
-              background: on ? activeColor : 'transparent', color: on ? '#fff' : color('text.default.default'), ...ty('button.sm') }}>
+            style={{ height: 40, padding: `0 ${space('md')}`, borderRadius: PILL, cursor: 'pointer', whiteSpace: 'nowrap', ...ty('button.sm'), ...s }}>
             {t}
           </button>
         );

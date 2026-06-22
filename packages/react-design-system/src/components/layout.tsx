@@ -7,17 +7,18 @@ export interface SectionProps extends Omit<HTMLAttributes<HTMLElement>, 'title'>
   title?: ReactNode;
   context?: ReactNode;     // subtext under the title (e.g. "Cover these with your Smiles Points")
   filterPill?: ReactNode;  // optional Category filter pill in the header
-  surface?: 'default' | 'brand' | 'midnight';
+  surface?: 'default' | 'brand' | 'brand-muted' | 'midnight';
   hideChevron?: boolean;
   onSeeAll?: () => void;
   /** body scrolls horizontally and bleeds to the edges (carousels) */
   carousel?: boolean;
 }
 const SECTION_BG: Record<string, string> = {
-  default: color('surface.base.default'), brand: color('surface.base.brand'), midnight: color('surface.base.midnight'),
+  default: color('surface.base.default'), brand: color('surface.base.brand'),
+  'brand-muted': color('surface.canvas.brand-muted'), midnight: color('surface.base.midnight'),
 };
 export function Section({ title = 'Section', context, filterPill, surface = 'default', hideChevron, onSeeAll, carousel, style, children, ...rest }: SectionProps) {
-  const onDark = surface !== 'default';
+  const onDark = surface === 'brand' || surface === 'midnight';
   const text = onDark ? color('text.default.inverse') : color('text.default.default');
   const sub = onDark ? 'rgba(255,255,255,0.72)' : color('text.default.muted');
   return (

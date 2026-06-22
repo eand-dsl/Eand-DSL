@@ -3,23 +3,77 @@ import { space, color, icon } from '../system';
 import { Text, Icon } from './primitives';
 
 /* ---------------- TopBar (header) ---------------- */
+export interface TopBarAction { title?: ReactNode; subtitle?: ReactNode; cta?: ReactNode; }
 export interface TopBarProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
+  variant?: 'default' | 'brand';
   leading?: ReactNode;
   title?: ReactNode;
+  greeting?: ReactNode;       // brand header: "Hi, Ahmed" above the title (masked number)
   trailing?: ReactNode;
+  actions?: ReactNode[];      // circle icon buttons on the right (brand header)
+  actionBar?: TopBarAction;   // optional darker-red sub-card (e.g. "Complete your profile")
+  statusBar?: boolean;        // faux iOS status row (default true on brand)
 }
-export function TopBar({ leading, title, trailing, style, ...rest }: TopBarProps) {
+function CircleBtn({ children, dark }: { children: ReactNode; dark?: boolean }) {
+  return <span style={{ width: 40, height: 40, borderRadius: '50%', background: dark ? 'rgba(255,255,255,0.18)' : color('surface.base.default'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: dark ? '#fff' : color('text.default.default') }}>{children}</span>;
+}
+export function TopBar({ variant = 'default', leading, title, greeting, trailing, actions, actionBar, statusBar, style, ...rest }: TopBarProps) {
+  if (variant === 'brand') {
+    return (
+      <header style={{ position: 'sticky', top: 0, zIndex: 10, width: '100%', boxSizing: 'border-box', background: color('surface.base.brand'), color: '#fff', borderBottomLeftRadius: 20, borderBottomRightRadius: 20, padding: `0 ${space('lg')} ${space('lg')}`, ...style }} {...rest}>
+        {statusBar !== false && (
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: 44, fontSize: 14, fontWeight: 600 }}><span>9:41</span><span style={{ letterSpacing: 2 }}>▂▄▆ 📶 🔋</span></div>
+        )}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: space('md') }}>
+          <div style={{ minWidth: 0 }}>
+            {greeting ? <Text variant="body.sm" color="rgba(255,255,255,0.85)" as="div">{greeting}</Text> : null}
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}><Text variant="title.md" color="#fff">{title}</Text><Icon size="xs">⌄</Icon></span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: space('sm') }}>
+            {(actions ?? []).map((a, i) => <CircleBtn key={i} dark>{a}</CircleBtn>)}
+            {trailing}
+          </div>
+        </div>
+        {actionBar ? (
+          <div style={{ marginTop: space('md'), display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: space('sm'), background: 'rgba(0,0,0,0.18)', borderRadius: 14, padding: space('md') }}>
+            <div style={{ minWidth: 0 }}>
+              <Text variant="title.sm" color="#fff" as="div">{actionBar.title}</Text>
+              {actionBar.subtitle ? <Text variant="body.sm" color="rgba(255,255,255,0.8)">{actionBar.subtitle}</Text> : null}
+            </div>
+            <span style={{ background: '#fff', color: color('text.brand.default'), borderRadius: 9999, padding: `8px ${space('lg')}`, fontWeight: 600, fontSize: 14, whiteSpace: 'nowrap' }}>{actionBar.cta ?? 'Start'}</span>
+          </div>
+        ) : null}
+      </header>
+    );
+  }
   return (
-    <header style={{
-      position: 'sticky', top: 0, zIndex: 10, width: '100%', boxSizing: 'border-box',
-      height: 56, display: 'flex', alignItems: 'center', gap: space('md'),
-      padding: `0 ${space('lg')}`, background: color('surface.canvas.default'),
-      borderBottom: `1px solid ${color('border.solid.subtle')}`, ...style,
-    }} {...rest}>
+    <header style={{ position: 'sticky', top: 0, zIndex: 10, width: '100%', boxSizing: 'border-box', height: 56, display: 'flex', alignItems: 'center', gap: space('md'), padding: `0 ${space('lg')}`, background: color('surface.canvas.default'), borderBottom: `1px solid ${color('border.solid.subtle')}`, ...style }} {...rest}>
       <div style={{ display: 'flex', alignItems: 'center', gap: space('sm') }}>{leading}</div>
       <div style={{ flex: 1, minWidth: 0 }}><Text variant="title.md" style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{title}</Text></div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: space('sm') }}>{trailing}</div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: space('sm') }}>{(actions ?? []).map((a, i) => <CircleBtn key={i}>{a}</CircleBtn>)}{trailing}</div>
     </header>
+  );
+}
+
+/* ---------------- ListRow (settings / contact / list items) ---------------- */
+export interface ListRowProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'title'> {
+  icon?: ReactNode;
+  label: ReactNode;
+  sublabel?: ReactNode;
+  value?: ReactNode;
+  chevron?: boolean;
+}
+export function ListRow({ icon, label, sublabel, value, chevron = true, style, ...rest }: ListRowProps) {
+  return (
+    <button style={{ width: '100%', boxSizing: 'border-box', display: 'flex', alignItems: 'center', gap: space('md'), padding: space('lg'), borderRadius: 16, background: color('surface.raised.default'), border: 0, cursor: 'pointer', textAlign: 'left', ...style }} {...rest}>
+      {icon ? <span style={{ width: 40, height: 40, borderRadius: 12, background: color('surface.base.default'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flex: '0 0 auto' }}><Icon size="md">{icon}</Icon></span> : null}
+      <span style={{ flex: 1, minWidth: 0 }}>
+        <Text variant="title.sm" as="div">{label}</Text>
+        {sublabel ? <Text variant="body.sm" color={color('text.default.muted')}>{sublabel}</Text> : null}
+      </span>
+      {value ? <Text variant="body.md" color={color('text.default.muted')}>{value}</Text> : null}
+      {chevron ? <Icon size="sm" style={{ color: color('text.default.muted') }}>›</Icon> : null}
+    </button>
   );
 }
 

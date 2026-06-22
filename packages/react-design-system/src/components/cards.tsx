@@ -124,10 +124,16 @@ export interface HighlightAction { title?: ReactNode; subtitle?: ReactNode; cta?
 export interface HighlightProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   title?: ReactNode; subtitle?: ReactNode; image?: string; cta?: ReactNode;
   action?: HighlightAction; width?: number | string;
+  tone?: 'image' | 'brand' | 'purple'; background?: string;
 }
-export function Highlight({ title = 'Primary Text 2-lines max', subtitle, image, cta, action, width, style, ...rest }: HighlightProps) {
+export function Highlight({ title = 'Primary Text 2-lines max', subtitle, image, cta, action, width, tone = 'image', background, style, ...rest }: HighlightProps) {
+  const bg = background
+    ?? (tone === 'brand' ? color('surface.base.brand')
+      : tone === 'purple' ? 'linear-gradient(150deg,#7C4DD6,#3A1B6B)'
+      : image ? `center/cover no-repeat url(${image})`
+      : 'linear-gradient(160deg,#3a3340,#191329)');
   return (
-    <div style={{ width: width ?? '100%', flex: width ? '0 0 auto' : undefined, boxSizing: 'border-box', position: 'relative', minHeight: 340, borderRadius: 20, overflow: 'hidden', background: image ? `center/cover no-repeat url(${image})` : 'linear-gradient(160deg,#3a3340,#191329)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', ...style }} {...rest}>
+    <div style={{ width: width ?? '100%', flex: width ? '0 0 auto' : undefined, boxSizing: 'border-box', position: 'relative', minHeight: tone === 'image' ? 340 : 200, borderRadius: 20, overflow: 'hidden', background: bg, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', ...style }} {...rest}>
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(20,15,33,0) 35%, rgba(20,15,33,0.78))' }} />
       <div style={{ position: 'relative', padding: space('lg'), display: 'flex', flexDirection: 'column', gap: space('sm') }}>
         <SmilesRow count={3} plus={0} size={32} />
