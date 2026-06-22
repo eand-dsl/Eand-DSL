@@ -1,13 +1,6 @@
-  - **Type:** collapsing app header ("Master menu") with scroll states **Small · Middle · Full (before scroll)** — shrinks as the page scrolls.
-  - **Composable slots:**
-    - **Left:** Chevron (back) · Chevron+Text · Avatar+Text · Text · None
-    - **Middle:** Title · Title+Subtitle · Logo · None
-    - **Right:** 1 icon button · 2 icon buttons · Link · Button · None
-    - **Bottom (optional):** AI Search · Searchbar · Tabs · Chips · OTP · steps · Banner · Carousel
-  - **Title presets:** Default · e& · Account · Subtitle · No title.
-  - **Top-nav buttons (48×48):** Image · Avatar · Avatar Group · Search · Notifications (notification supports a Badge).
-  - **Profile header variant:** state (Default / Scrolling) × type (Multiple accounts / Single number).
-  - **Heights:** title bar 52 · inner-page 114 · main-page 214 · large scrolling title taller, collapses to ~52 on scroll. Width fill; respects status bar + top safe-area.
-  - **Big title:** eyebrow on/off × subtext on/off.
-  - **Tokens:** `color/surface` + `color/text` + `color/icon`; title type `typography/heading|title/*`.
-  - **Figma:** node `22542:13963` · Title+Action set `22563:20493` · Top-nav buttons `15069:1401` · Profile header `15483:931` · master `29547:11339`.
+  - **Type:** app header. Two looks: **default** (white; leading/title/trailing) and **brand** (red account header).
+  - **Brand account header:** red surface, rounded bottom corners. Status bar → **greeting** ("Hi, Ahmed", muted white) + **masked number** ("050 123 4567 ⌄", bold) on the left, **circle icon buttons** (AI sparkle, notifications) on the right → optional **action bar** (darker-red card: title + subtitle + white pill CTA, e.g. "Complete your profile · 4 of 6 · Start").
+  - **Collapsing variants (full app):** Small / Middle / Full (large title); supports back chevron, search, tabs, banner slots.
+  - **Sizing:** width fill; sticky top; respects status bar / safe-area.
+  - **Tokens:** `color/surface/base/brand` (red) + white text/icons.
+  - **Figma:** node `22542-13963`.

@@ -1,6 +1,6 @@
-  - **Type:** the full-width body **container** — a light-grey rounded card (radius 24) that groups content.
-  - **Header:** bold "Section" title + optional **context** subtext ("Cover these with your Smiles Points") + optional **Filter pill** (Category dropdown) + a **white circle chevron** (›) link, top-right.
-  - **Surfaces:** default (grey `surface/base/default`) · brand (red) · midnight (dark); on brand/midnight the title/context/chevron go inverse.
-  - **Body (Slot):** stacked cards/lists/controls, OR a horizontal **carousel** of fixed-width cards that bleeds to the edges. Padding 16, top 24, 16 gap to body (`size/section`).
-  - **Sizing:** width fill (full screen width); height hug.
+  - **Type:** the full-width body **container** — light-grey rounded card (radius 24) grouping content.
+  - **Header:** bold title + optional **context** subtext + optional **Filter pill** (Category) or a text link ("Manage") + a **white circle chevron** (›) top-right.
+  - **Surfaces:** default (grey) · brand (red) · **brand-muted (light pink — "Jump to…" / "FAQs")** · midnight (dark). On brand/midnight the header goes inverse.
+  - **Body (Slot):** stacked cards / ListRows / controls, OR a horizontal **carousel** of fixed-width cards that bleeds to the edges. Padding 16 / top 24 / 16 gap (`size/section`).
+  - **Sizing:** width fill; height hug.
   - **Figma:** node `25519-12055`.

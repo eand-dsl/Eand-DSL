@@ -1,5 +1,5 @@
-  - **Type:** promotional banner — dark/photo **image background**, rounded 20.
-  - **Anatomy (bottom-anchored):** tier-badge row (smiles / stars-play / owl-tv circles) → bold **2-line title** ("Primary Text 2-lines max") → subtext.
-  - **Variants:** **Informational** (no action) vs **Action** (adds an **Action bar**: title + subtitle + red "Play now" button) × size XL/L × Single-line/Carousel.
+  - **Type:** promotional banner — rounded 20. **Tones:** image (photo/dark + scrim) · brand (red) · purple (Smiles gradient).
+  - **Anatomy (bottom-anchored):** tier-badge row (smiles / stars-play / owl-tv) → bold **2-line title** → subtext.
+  - **Variants:** Informational (no action) vs **Action** (adds an action bar: title + subtitle + red "Play now"/"Watch now"/"Activate now") × size XL/L × Single/Carousel. Seen red ("How-to videos", "Play and win") and purple ("Discover Smiles", "Explore Smiles app").
   - **Sizing:** full-bleed width; carousel items fixed width.
   - **Figma:** node `25460-83982`.

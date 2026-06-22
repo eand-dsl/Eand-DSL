@@ -102,6 +102,7 @@ SECTIONS = [
  ("04 · Layout", [
    ("Section","25519-12055","Full-width content container.",["surface","text"],["section"],["heading","title"]),
    ("Accordion","27465-29326","Expand/collapse container.",["surface","text","border","icon"],[],["title","body"]),
+   ("List row","","Settings / contact / overview / usage row.",["surface","text"],[],["title","body"]),
  ]),
  ("05 · Feedback & Status", [
    ("Plan Usage Bar","26663-89880","Plan / data usage meter.",["status","surface","text"],[],["body"]),
@@ -225,6 +226,11 @@ B = {
    contains="optional Section link header + body (Cards / lists / controls / carousels)",
    within="the vertical scroll stack between Top bar and Nav bar",
    use="Group related content into a titled, full-width block. The primary building block of a screen.", key=True),
+ "list-row": dict(slot="Body / list item", w="fill", h="hug",
+   states="with/without leading icon · with value · with chevron · pressed",
+   contains="leading icon (grey square) + label (+ sublabel) + value/Button + chevron",
+   within="a Section (Settings, Contact us, Profile overview, plan-usage lists)",
+   use="A tappable row: navigate to a setting/section, or show a label↔value pair."),
  "accordion": dict(slot="Body / container", w="fill", h="hug (expands/collapses)",
    states="expanded · collapsed × disabled", contains="header row (title + chevron) + collapsible body",
    within="a Section (FAQ/details)", use="Progressive disclosure of grouped content."),
@@ -304,9 +310,10 @@ ASSEMBLY = """\
 Use this to turn a UX wireframe into a UI screen built from e& components.
 
 ### Step 1 — Frame the screen
-- Screen width = device width (e.g. 375). Apply **Top bar** to the header region (sticky, top safe-area).
-- If the UX shows a persistent bottom tab bar → **Nav bar** (sticky, bottom safe-area). The area between Top bar and Nav bar is the **vertical scroll body**.
-- If the UX has one persistent primary CTA pinned at the bottom → **Action bar** (sticky, sits above Nav bar).
+- Screen width = device width (e.g. 390). For e& main tabs, use the **red account header** (`<TopBar variant="brand" greeting="Hi, Ahmed" title="050 123 4567" actions={[…]} />`); for pushed/detail pages use the default white `TopBar` with a back chevron. A red **action bar** inside the header (e.g. "Complete your profile · Start") is optional.
+- If the screen has top-level page tabs (e.g. For you / Account / Loyalty), add a **global `Tabs`** row right under the header.
+- Persistent bottom nav → floating **`NavBar`** (Home · Support · Profile · Shop; mark the current tab `active`). The area between is the **vertical scroll body**.
+- One persistent primary CTA pinned at the bottom → **Action bar** (sticky, above Nav bar).
 
 ### Step 2 — Split the body into Sections
 - Every distinct UX content block becomes a full-width **Section** (`width: fill`, `height: hug`).
@@ -317,10 +324,14 @@ Use this to turn a UX wireframe into a UI screen built from e& components.
 | UX pattern in the wireframe | e& component(s) to use |
 |---|---|
 | Horizontal row of tiles / "cards you swipe" | carousel of **Product / Deals for you / New on e& / Recommendation / Plans** cards (`width: fixed`) |
-| Vertical list of content blocks | **General** cards or list rows (`width: fill`) |
-| Grid of icon+label shortcuts | **Quick Action** (or **Service** cells) |
+| Vertical list of content blocks | **General** cards (`width: fill`) |
+| Settings / contact / "X ›" / label↔value rows | **ListRow** stacked in a Section |
+| Account-hub / quick-links grid (icon + label + count badge) | **QuickAction** cells with a `badge` (e.g. `<Badge status="positive">3 active</Badge>`) |
+| Icon+label shortcuts grid | **QuickAction** (or **Service** cells with a New badge) |
+| "Jump to…" / quick chips block | **Chips** inside a `surface="brand-muted"` (pink) Section |
 | Row of filter/sort chips | **Filter Pill** / **Chips** (`width: hug`, horizontal scroll) |
-| Tab switcher inside the screen | **Tabs** |
+| Top-level page tabs (For you/Account/Loyalty) | **Tabs** `scope="global"` (tinted-red active) |
+| In-section tab switcher (All/Data/Calls) | **Tabs** `scope="local"` (midnight active) |
 | Form (text, choices, toggles) | **Input Field, Searchbar, Checkbox, Radio, Switcher, Selectors** |
 | Promo / announcement strip | **Highlight** banner (full-bleed) |
 | Usage / quota meter | **Plan Usage Bar** |
@@ -368,9 +379,12 @@ def main():
 
     # ---------------- Layout system ----------------
     w("\n---\n\n## Layout system & screen composition\n")
-    w("**Screen archetype:** `OS status bar` → **Top bar** (sticky header) → **scroll body** = a vertical "
-      "stack of full-width **Sections** → **Nav bar** (sticky bottom). Optional **Action bar** sticks above "
-      "the Nav bar. Overlays (**Bottom sheet, Alert modal, Snackbar, Tooltip**) float above everything.\n")
+    w("**Screen archetype (e&):** **Top bar** — usually the **red account header** (`variant=\"brand\"`: greeting "
+      "\"Hi, Ahmed\" + masked number + circle icons; optional red action bar like \"Complete your profile\") → "
+      "optional **global Pill Tabs** row (For you / Account / Loyalty) → **scroll body** = a vertical stack of "
+      "full-width grey **Sections** (each wrapping cards / ListRows / QuickAction grids / carousels) → floating "
+      "**Nav bar** (Home · Support · Profile · Shop; active = red pill). Optional **Action bar** above the nav; "
+      "overlays (**Bottom sheet, Alert modal, Snackbar, Tooltip**) float above everything.\n")
     w("**Sizing rules (apply to every component):**")
     w("- **Controls** (Button, Input, Chip, Filter pill, Checkbox, Radio, Switcher, Searchbar, Tabs): "
       "`width: fill` (or `hug` for inline chips/pills/badges) + **fixed** height from tokens.")

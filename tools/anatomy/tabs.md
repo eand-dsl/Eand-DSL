@@ -1,6 +1,5 @@
-  - **Type:** **Pill Tabs** — pill-shaped tab switcher. Two scopes: **Global** (top-level page tabs; focused = brand red) and **Local** (in-section tabs; focused = brand midnight).
-  - **States:** Default (unselected, neutral) · Focused/active (selected). Global vs Local differ only in the focus color.
-  - **Anatomy:** each tab = `tab-content` = optional icon (20) + label (single line, never wraps). A row of pills; scrolls horizontally on overflow.
-  - **Dimensions:** height **fixed 40px** (2.5rem) · width **hug content** (~110px, varies with label) · corner radius **1200 (pill)** · icon **20px**.
-  - **Tokens:** `color/tab/*`; sizing `size.tabs`.
-  - **Figma:** node `22542:13966` · component set `pill-tabs` `25502:12416`.
+  - **Type:** Pill Tabs — pill tab switcher. Scopes: **Global** (page-level) and **Local** (in-section).
+  - **States:** Global — default = grey pill + muted label (optional leading icon); **focused = tinted-red pill (`surface/canvas/brand-muted`) + red label/icon**. Local — default = white pill + 1px border; **focused = solid midnight pill + white label**.
+  - **Dimensions:** height 40 · hug width · pill radius · icon 20 · single-line label.
+  - **Tokens:** `color/tab/*`; sizing `size/tabs`.
+  - **Figma:** node `22542-13966` · set `pill-tabs` `25502-12416`.

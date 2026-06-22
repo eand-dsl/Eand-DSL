@@ -14,7 +14,7 @@
 
 ## Layout system & screen composition
 
-**Screen archetype:** `OS status bar` → **Top bar** (sticky header) → **scroll body** = a vertical stack of full-width **Sections** → **Nav bar** (sticky bottom). Optional **Action bar** sticks above the Nav bar. Overlays (**Bottom sheet, Alert modal, Snackbar, Tooltip**) float above everything.
+**Screen archetype (e&):** **Top bar** — usually the **red account header** (`variant="brand"`: greeting "Hi, Ahmed" + masked number + circle icons; optional red action bar like "Complete your profile") → optional **global Pill Tabs** row (For you / Account / Loyalty) → **scroll body** = a vertical stack of full-width grey **Sections** (each wrapping cards / ListRows / QuickAction grids / carousels) → floating **Nav bar** (Home · Support · Profile · Shop; active = red pill). Optional **Action bar** above the nav; overlays (**Bottom sheet, Alert modal, Snackbar, Tooltip**) float above everything.
 
 **Sizing rules (apply to every component):**
 - **Controls** (Button, Input, Chip, Filter pill, Checkbox, Radio, Switcher, Searchbar, Tabs): `width: fill` (or `hug` for inline chips/pills/badges) + **fixed** height from tokens.
@@ -340,6 +340,7 @@
 | Quick Action | Body / grid | fill | hug |
 | Section | Body / container (THE layout wrapper) | fill (full screen width) | hug (content) |
 | Accordion | Body / container | fill | hug (expands/collapses) |
+| List row | Body / list item | fill | hug |
 | Plan Usage Bar | Body / status module | fill | hug |
 | Snackbar & Alert msg | Overlay (transient, bottom) / inline alert | fill (with side margin) | hug |
 | Alert Modals | Overlay (centered modal + scrim) | fill (with margin) / max width | hug |
@@ -1629,19 +1630,12 @@
     - `disabled` → `#c0bfc8`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `heading.xl`(32/Bold), `heading.lg`(28/Bold), `heading.md`(24/Bold), `heading.sm`(20/Bold), `heading.xs`(16/Bold)
 - **Anatomy (Figma-verified):**
-  - **Type:** collapsing app header ("Master menu") with scroll states **Small · Middle · Full (before scroll)** — shrinks as the page scrolls.
-  - **Composable slots:**
-    - **Left:** Chevron (back) · Chevron+Text · Avatar+Text · Text · None
-    - **Middle:** Title · Title+Subtitle · Logo · None
-    - **Right:** 1 icon button · 2 icon buttons · Link · Button · None
-    - **Bottom (optional):** AI Search · Searchbar · Tabs · Chips · OTP · steps · Banner · Carousel
-  - **Title presets:** Default · e& · Account · Subtitle · No title.
-  - **Top-nav buttons (48×48):** Image · Avatar · Avatar Group · Search · Notifications (notification supports a Badge).
-  - **Profile header variant:** state (Default / Scrolling) × type (Multiple accounts / Single number).
-  - **Heights:** title bar 52 · inner-page 114 · main-page 214 · large scrolling title taller, collapses to ~52 on scroll. Width fill; respects status bar + top safe-area.
-  - **Big title:** eyebrow on/off × subtext on/off.
-  - **Tokens:** `color/surface` + `color/text` + `color/icon`; title type `typography/heading|title/*`.
-  - **Figma:** node `22542:13963` · Title+Action set `22563:20493` · Top-nav buttons `15069:1401` · Profile header `15483:931` · master `29547:11339`.
+  - **Type:** app header. Two looks: **default** (white; leading/title/trailing) and **brand** (red account header).
+  - **Brand account header:** red surface, rounded bottom corners. Status bar → **greeting** ("Hi, Ahmed", muted white) + **masked number** ("050 123 4567 ⌄", bold) on the left, **circle icon buttons** (AI sparkle, notifications) on the right → optional **action bar** (darker-red card: title + subtitle + white pill CTA, e.g. "Complete your profile · 4 of 6 · Start").
+  - **Collapsing variants (full app):** Small / Middle / Full (large title); supports back chevron, search, tabs, banner slots.
+  - **Sizing:** width fill; sticky top; respects status bar / safe-area.
+  - **Tokens:** `color/surface/base/brand` (red) + white text/icons.
+  - **Figma:** node `22542-13963`.
 
 #### Nav bar
 - **Figma:** [`22542-13964`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=22542-13964)  ·  **key building block**
@@ -1838,12 +1832,11 @@
     - `sm` → `36`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
 - **Anatomy (Figma-verified):**
-  - **Type:** **Pill Tabs** — pill-shaped tab switcher. Two scopes: **Global** (top-level page tabs; focused = brand red) and **Local** (in-section tabs; focused = brand midnight).
-  - **States:** Default (unselected, neutral) · Focused/active (selected). Global vs Local differ only in the focus color.
-  - **Anatomy:** each tab = `tab-content` = optional icon (20) + label (single line, never wraps). A row of pills; scrolls horizontally on overflow.
-  - **Dimensions:** height **fixed 40px** (2.5rem) · width **hug content** (~110px, varies with label) · corner radius **1200 (pill)** · icon **20px**.
-  - **Tokens:** `color/tab/*`; sizing `size.tabs`.
-  - **Figma:** node `22542:13966` · component set `pill-tabs` `25502:12416`.
+  - **Type:** Pill Tabs — pill tab switcher. Scopes: **Global** (page-level) and **Local** (in-section).
+  - **States:** Global — default = grey pill + muted label (optional leading icon); **focused = tinted-red pill (`surface/canvas/brand-muted`) + red label/icon**. Local — default = white pill + 1px border; **focused = solid midnight pill + white label**.
+  - **Dimensions:** height 40 · hug width · pill radius · icon 20 · single-line label.
+  - **Tokens:** `color/tab/*`; sizing `size/tabs`.
+  - **Figma:** node `22542-13966` · set `pill-tabs` `25502-12416`.
 
 #### Section link
 - **Figma:** [`25460-83978`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25460-83978)
@@ -2084,11 +2077,11 @@
       - `row-16` → `224`
 - **Typography:** `heading.xl`(32/Bold), `heading.lg`(28/Bold), `heading.md`(24/Bold), `heading.sm`(20/Bold), `heading.xs`(16/Bold), `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold)
 - **Anatomy (Figma-verified):**
-  - **Type:** the full-width body **container** — a light-grey rounded card (radius 24) that groups content.
-  - **Header:** bold "Section" title + optional **context** subtext ("Cover these with your Smiles Points") + optional **Filter pill** (Category dropdown) + a **white circle chevron** (›) link, top-right.
-  - **Surfaces:** default (grey `surface/base/default`) · brand (red) · midnight (dark); on brand/midnight the title/context/chevron go inverse.
-  - **Body (Slot):** stacked cards/lists/controls, OR a horizontal **carousel** of fixed-width cards that bleeds to the edges. Padding 16, top 24, 16 gap to body (`size/section`).
-  - **Sizing:** width fill (full screen width); height hug.
+  - **Type:** the full-width body **container** — light-grey rounded card (radius 24) grouping content.
+  - **Header:** bold title + optional **context** subtext + optional **Filter pill** (Category) or a text link ("Manage") + a **white circle chevron** (›) top-right.
+  - **Surfaces:** default (grey) · brand (red) · **brand-muted (light pink — "Jump to…" / "FAQs")** · midnight (dark). On brand/midnight the header goes inverse.
+  - **Body (Slot):** stacked cards / ListRows / controls, OR a horizontal **carousel** of fixed-width cards that bleeds to the edges. Padding 16 / top 24 / 16 gap (`size/section`).
+  - **Sizing:** width fill; height hug.
   - **Figma:** node `25519-12055`.
 
 #### Accordion
@@ -2248,6 +2241,93 @@
   - **Dimensions:** 343×142 · 343×58.
   - **Anatomy parts:** Content body text.
   - **Figma node:** `27465:29326`
+
+#### List row
+- **Figma:** _node-id TBD_
+- **Role:** Settings / contact / overview / usage row.
+- **Behavior:** slot `Body / list item` · width: fill · height: hug
+- **States:** with/without leading icon · with value · with chevron · pressed
+- **Composition:** contains leading icon (grey square) + label (+ sublabel) + value/Button + chevron · appears within a Section (Settings, Contact us, Profile overview, plan-usage lists)
+- **Use case:** A tappable row: navigate to a setting/section, or show a label↔value pair.
+- **Color tokens — `color.surface`:**
+  - **canvas**
+    - `default` → `#ffffff`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#140f21`
+  - **base**
+    - `default` → `#f0f0f5`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e00800`
+    - `brand-muted` → `#fce6e6`
+    - `midnight` → `#191329`
+  - **sunken**
+    - `default` → `#e4e3ea`
+    - `inverse` → `#f7f7fa`
+    - `brand` → `#bb0700`
+    - `brand-muted` → `#f9cecc`
+    - `midnight` → `#140f21`
+  - **raised**
+    - `default` → `#ffffff`
+    - `inverse` → `#ffffff`
+    - `brand` → `#e73933`
+    - `brand-muted` → `#fff2f2`
+    - `midnight` → `#312c40`
+  - **overlay**
+    - `scrim` → `rgba(25, 19, 41, 0.50)`
+    - `floating` → `#f7f7fa`
+    - `floating-middleground` → `#908e9a`
+    - `floating-inverse` → `#191329`
+  - **glass**
+    - **midnight**
+      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `md` → `rgba(25, 19, 41, 0.20)`
+      - `sm` → `rgba(25, 19, 41, 0.07)`
+    - **white**
+      - `xl` → `rgba(255, 255, 255, 0.40)`
+      - `lg` → `rgba(255, 255, 255, 0.20)`
+      - `md` → `rgba(255, 255, 255, 0.15)`
+      - `sm` → `rgba(255, 255, 255, 0.10)`
+- **Color tokens — `color.text`:**
+  - **default**
+    - `default` → `#191329`
+    - `subtle` → `#575362`
+    - `muted` → `#908e9a`
+    - `disabled` → `#c0bfc8`
+    - `inverse` → `#ffffff`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
+  - **brand**
+    - `default` → `#e00800`
+    - `subtle` → `#e73933`
+    - `muted` → `#ed6b66`
+    - `strong` → `#950500`
+    - `focus` → `#bb0700`
+    - `disabled` → `#a8a6b1`
+  - **positive**
+    - `default` → `#27633b`
+    - `subtle` → `#54bc72`
+    - `muted` → `#9ff3b7`
+    - `disabled` → `#c0bfc8`
+  - **danger**
+    - `default` → `#8c3f0c`
+    - `subtle` → `#e07830`
+    - `muted` → `#ffb16f`
+    - `disabled` → `#c0bfc8`
+  - **warning**
+    - `default` → `#806d2c`
+    - `subtle` → `#d5b549`
+    - `muted` → `#ffe68f`
+    - `disabled` → `#c0bfc8`
+- **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
+- **Anatomy (derived from token model — Figma verification pending):**
+  - **Type:** list row — white rounded row used in settings, contact lists, account overview, and plan-usage lists.
+  - **Anatomy:** optional **leading icon** (grey rounded square) + **label** (+ optional **sublabel**) + optional right **value** (text or a small Button) + optional trailing **chevron** (›).
+  - **Examples:** Settings ("Your Accounts ›"), Contact ("Live Chat in App ›"), Profile overview ("Smiles Points: 15,000 / Silver ›"), plan usage ("2 GB left … Local Data").
+  - **Sizing:** width fill; hug height; rounded 16; stack with a small gap inside a Section.
+  - **Figma:** composed (appears across screens; no single node).
 
 ### 05 · Feedback & Status
 
@@ -3918,9 +3998,9 @@
       - `disabled` → `#c0bfc8`
 - **Typography:** `heading.xl`(32/Bold), `heading.lg`(28/Bold), `heading.md`(24/Bold), `heading.sm`(20/Bold), `heading.xs`(16/Bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
 - **Anatomy (Figma-verified):**
-  - **Type:** promotional banner — dark/photo **image background**, rounded 20.
-  - **Anatomy (bottom-anchored):** tier-badge row (smiles / stars-play / owl-tv circles) → bold **2-line title** ("Primary Text 2-lines max") → subtext.
-  - **Variants:** **Informational** (no action) vs **Action** (adds an **Action bar**: title + subtitle + red "Play now" button) × size XL/L × Single-line/Carousel.
+  - **Type:** promotional banner — rounded 20. **Tones:** image (photo/dark + scrim) · brand (red) · purple (Smiles gradient).
+  - **Anatomy (bottom-anchored):** tier-badge row (smiles / stars-play / owl-tv) → bold **2-line title** → subtext.
+  - **Variants:** Informational (no action) vs **Action** (adds an action bar: title + subtitle + red "Play now"/"Watch now"/"Activate now") × size XL/L × Single/Carousel. Seen red ("How-to videos", "Play and win") and purple ("Discover Smiles", "Explore Smiles app").
   - **Sizing:** full-bleed width; carousel items fixed width.
   - **Figma:** node `25460-83982`.
 
@@ -4321,9 +4401,10 @@
 Use this to turn a UX wireframe into a UI screen built from e& components.
 
 ### Step 1 — Frame the screen
-- Screen width = device width (e.g. 375). Apply **Top bar** to the header region (sticky, top safe-area).
-- If the UX shows a persistent bottom tab bar → **Nav bar** (sticky, bottom safe-area). The area between Top bar and Nav bar is the **vertical scroll body**.
-- If the UX has one persistent primary CTA pinned at the bottom → **Action bar** (sticky, sits above Nav bar).
+- Screen width = device width (e.g. 390). For e& main tabs, use the **red account header** (`<TopBar variant="brand" greeting="Hi, Ahmed" title="050 123 4567" actions={[…]} />`); for pushed/detail pages use the default white `TopBar` with a back chevron. A red **action bar** inside the header (e.g. "Complete your profile · Start") is optional.
+- If the screen has top-level page tabs (e.g. For you / Account / Loyalty), add a **global `Tabs`** row right under the header.
+- Persistent bottom nav → floating **`NavBar`** (Home · Support · Profile · Shop; mark the current tab `active`). The area between is the **vertical scroll body**.
+- One persistent primary CTA pinned at the bottom → **Action bar** (sticky, above Nav bar).
 
 ### Step 2 — Split the body into Sections
 - Every distinct UX content block becomes a full-width **Section** (`width: fill`, `height: hug`).
@@ -4334,10 +4415,14 @@ Use this to turn a UX wireframe into a UI screen built from e& components.
 | UX pattern in the wireframe | e& component(s) to use |
 |---|---|
 | Horizontal row of tiles / "cards you swipe" | carousel of **Product / Deals for you / New on e& / Recommendation / Plans** cards (`width: fixed`) |
-| Vertical list of content blocks | **General** cards or list rows (`width: fill`) |
-| Grid of icon+label shortcuts | **Quick Action** (or **Service** cells) |
+| Vertical list of content blocks | **General** cards (`width: fill`) |
+| Settings / contact / "X ›" / label↔value rows | **ListRow** stacked in a Section |
+| Account-hub / quick-links grid (icon + label + count badge) | **QuickAction** cells with a `badge` (e.g. `<Badge status="positive">3 active</Badge>`) |
+| Icon+label shortcuts grid | **QuickAction** (or **Service** cells with a New badge) |
+| "Jump to…" / quick chips block | **Chips** inside a `surface="brand-muted"` (pink) Section |
 | Row of filter/sort chips | **Filter Pill** / **Chips** (`width: hug`, horizontal scroll) |
-| Tab switcher inside the screen | **Tabs** |
+| Top-level page tabs (For you/Account/Loyalty) | **Tabs** `scope="global"` (tinted-red active) |
+| In-section tab switcher (All/Data/Calls) | **Tabs** `scope="local"` (midnight active) |
 | Form (text, choices, toggles) | **Input Field, Searchbar, Checkbox, Radio, Switcher, Selectors** |
 | Promo / announcement strip | **Highlight** banner (full-bleed) |
 | Usage / quota meter | **Plan Usage Bar** |

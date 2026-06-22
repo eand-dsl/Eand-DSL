@@ -1,0 +1,5 @@
+  - **Type:** list row — white rounded row used in settings, contact lists, account overview, and plan-usage lists.
+  - **Anatomy:** optional **leading icon** (grey rounded square) + **label** (+ optional **sublabel**) + optional right **value** (text or a small Button) + optional trailing **chevron** (›).
+  - **Examples:** Settings ("Your Accounts ›"), Contact ("Live Chat in App ›"), Profile overview ("Smiles Points: 15,000 / Silver ›"), plan usage ("2 GB left … Local Data").
+  - **Sizing:** width fill; hug height; rounded 16; stack with a small gap inside a Section.
+  - **Figma:** composed (appears across screens; no single node).
