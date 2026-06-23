@@ -108,7 +108,7 @@ export function NavBar({ items, style, ...rest }: NavBarProps) {
                 borderRadius: 9999, border: 0, cursor: 'pointer', color: c,
                 background: on ? '#fff' : 'transparent',
               }}>
-              <Icon size="sm">{it.icon ?? '●'}</Icon>
+              <span style={{ display: 'inline-flex', width: 24, height: 24, alignItems: 'center', justifyContent: 'center' }}>{it.icon ?? '●'}</span>
               <span style={{ fontSize: 11, fontWeight: 600 }}>{it.label}</span>
             </button>
           );
@@ -167,8 +167,8 @@ export function QuickAction({ items, columns = 3, style, ...rest }: QuickActionP
       {items.map((it, i) => (
         <button key={i} onClick={it.onClick}
           style={{ position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: 104, padding: space('md'), borderRadius: 16, border: `1px solid ${color('border.solid.subtle')}`, background: color('surface.canvas.default'), cursor: 'pointer', textAlign: 'left' }}>
-          <span style={{ width: 40, height: 40, borderRadius: 12, background: color('surface.base.default'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Icon size="md">{it.icon ?? '●'}</Icon>
+          <span style={{ width: 40, height: 40, borderRadius: 12, background: color('surface.base.default'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: color('text.default.default') }}>
+            {it.icon ?? '●'}
           </span>
           {it.badge ? <span style={{ position: 'absolute', top: 10, right: 10 }}>{it.badge}</span> : null}
           <Text variant="title.xs">{it.label}</Text>

@@ -1,0 +1,23 @@
+{
+  "name": "@eand/icons",
+  "version": "0.0.0",
+  "description": "e& App Icons — curated icon set (separate from the UI library to keep it lean)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "files": ["dist"],
+  "sideEffects": false,
+  "scripts": {
+    "build:icons": "python3 tools/build-icons.py",
+    "build": "npm run build:icons && tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": { "react": "^18.0.0" },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "react": "^18.3.1",
+    "typescript": "^5.4.5"
+  }
+}

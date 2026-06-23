@@ -1,13 +1,16 @@
 import { createRoot } from 'react-dom/client';
 import {
-  TopBar, NavBar, Section, Tabs, ListRow, QuickAction, Chip, Searchbar, Badge, Icon, Button,
+  TopBar, NavBar, Section, Tabs, ListRow, QuickAction, Chip, Searchbar, Badge, Button,
 } from '../src';
+import { Icon as EaIcon } from '../../icons/src';
+
+const ic = (name: string, size = 24, color?: string) => <EaIcon name={name} size={size} color={color} />;
 
 function Account() {
   return (
     <>
       <TopBar variant="brand" greeting="Hi, Ahmed" title="050 123 4567"
-        actions={[<span key="a">✦</span>, <span key="b">🔔</span>]} />
+        actions={[ic('sparkle', 22, '#fff'), ic('notification', 22, '#fff')]} />
 
       <div className="scroll">
         <div style={{ padding: '8px 8px 0' }}>
@@ -30,26 +33,26 @@ function Account() {
 
         <Section title="My Account Hub" onSeeAll={() => {}}>
           <QuickAction columns={2} items={[
-            { label: 'Add-ons', icon: '🧩', badge: <Badge status="positive" size="sm">3 active</Badge> },
-            { label: 'Subscriptions', icon: '🔁', badge: <Badge status="neutral" size="sm">0</Badge> },
-            { label: 'My Devices', icon: '📱', badge: <Badge status="warning" size="sm">Active</Badge> },
-            { label: 'My SIM Cards', icon: '💳', badge: <Badge status="positive" size="sm">2 cards</Badge> },
-            { label: 'mParking', icon: '🚗' },
-            { label: 'All Services', icon: '⋯' },
+            { label: 'Add-ons', icon: ic('plus'), badge: <Badge status="positive" size="sm">3 active</Badge> },
+            { label: 'Subscriptions', icon: ic('wifi'), badge: <Badge status="neutral" size="sm">0</Badge> },
+            { label: 'My Devices', icon: ic('mobile'), badge: <Badge status="warning" size="sm">Active</Badge> },
+            { label: 'My SIM Cards', icon: ic('wallet'), badge: <Badge status="positive" size="sm">2 cards</Badge> },
+            { label: 'mParking', icon: ic('truck') },
+            { label: 'All Services', icon: ic('grid') },
           ]} />
         </Section>
 
         <Section title="Jump to..." surface="brand-muted" onSeeAll={() => {}}>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-            {['Manage my Plan', 'Change Plan', 'My limits', 'Family Plan', 'Buy Add-on', 'Replace SIM', 'Manage Add-on', 'Switch to Postpaid'].map((c) => <Chip key={c}>{c}</Chip>)}
+            {['Manage my Plan', 'Change Plan', 'My limits', 'Family Plan', 'Buy Add-on', 'Replace SIM', 'Switch to Postpaid'].map((c) => <Chip key={c}>{c}</Chip>)}
           </div>
           <Searchbar placeholder="Search for feature" />
         </Section>
       </div>
 
       <NavBar items={[
-        { label: 'Home', icon: '🏠', active: true }, { label: 'Support', icon: '🎧' },
-        { label: 'Profile', icon: '👤' }, { label: 'Shop', icon: '🛍️' },
+        { label: 'Home', icon: ic('home'), active: true }, { label: 'Support', icon: ic('support') },
+        { label: 'Profile', icon: ic('profile') }, { label: 'Shop', icon: ic('shop') },
       ]} />
     </>
   );
