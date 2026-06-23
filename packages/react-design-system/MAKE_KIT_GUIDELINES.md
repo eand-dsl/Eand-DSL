@@ -18,7 +18,7 @@ import { TopBar, Section, NavBar, Button, /* …39 more */ } from '@eand/react-d
 **Chrome / layout**
 - `TopBar({ variant: default|brand, leading, title, greeting?, actions?, actionBar?, trailing })` — **brand** = red account header (greeting "Hi, Ahmed" + masked number + circle `actions` + optional `actionBar`={title,subtitle,cta}); **default** = white header (leading `<Logo/>`/back + title + actions).
 - `ListRow({ icon?, label, sublabel?, value?, chevron })` — white rounded row for settings / contact / overview / label↔value (e.g. "2 GB left" → "Local Data"). Stack inside a Section.
-- `NavBar({ items: {label, icon, active, onClick}[] })` — 3–5 bottom tabs; mark current `active`.
+- `NavBar({ items: {label, icon, active, onClick}[] })` — **floating glass** bottom nav: frosted white-15% + blur pill over a midnight scrim; **active tab = solid white pill with red icon+label**, inactive = white; white home indicator. 3–5 tabs (Home·Support·Profile·Shop); mark current `active`.
 - `ActionBar({ helper })` + children — sticky footer for the primary `Button`(s).
 - `Section({ title, context?, filterPill?, surface?, onSeeAll?, carousel? })` — **grey rounded container** (the body building block) with a white circle chevron. `surface`: default(grey)|brand(red)|**brand-muted(pink, for "Jump to…"/"FAQs")**|midnight. `context` = subtext; `filterPill` can also hold a text link like "Manage". `carousel` = horizontal scroll of fixed-width cards.
 - `SectionLink({ title, link, onLinkClick })` — standalone section header + "See all".

@@ -1,6 +1,7 @@
-  - **Type:** **floating** bottom navigation — a frosted dark rounded pill (not full-bleed), centered, with a home-indicator line below.
-  - **Items:** 3–5 destinations (icon + small label). **Active item = solid red pill** (white icon+label); inactive = muted white on the frosted bar.
-  - **Destinations seen:** Shop · Plans · Devices · eLife / Home · Support · Profile · Shop. Types: Guest vs Logged-in.
-  - **Tokens:** `color/navbar-tab/*`; active surface = brand red.
-  - **Sizing:** sticky bottom; respects bottom safe-area.
-  - **Figma:** node `22542-13964`.
+  - **Type:** **floating glass** bottom navigation — a frosted **white-15% + backdrop-blur** pill over a **midnight scrim gradient** (top→bottom: `#191329` 0α → 0.4 → 0.7).
+  - **Items:** 3–5 destinations (icon 24 + label 13). **Active = solid WHITE pill** with **red `#e00800`** icon + label; inactive = white icon + label.
+  - **Home indicator:** white 144×5 pill below the bar.
+  - **Destinations:** Home · Support · Profile · Shop (or mShop · Plans · Devices · eLife). Types: Guest / Logged-in.
+  - **Sizing:** bar 338×64, pill radius (1200); sticky bottom; respects bottom safe-area.
+  - **Icons:** Microsoft **Fluent 2** glyphs (see Icon notes).
+  - **Figma:** node `29528-9868` (V1.1).
