@@ -15,9 +15,9 @@ def normalize(svg):
     vb = m.group(1) if m else "0 0 24 24"
     inner = re.sub(r"^.*?<svg[^>]*>", "", svg, flags=re.S)
     inner = re.sub(r"</svg>\s*$", "", inner, flags=re.S).strip()
-    # hard-coded colors -> currentColor (keep fill="none")
-    inner = re.sub(r'(stroke|fill)="#[0-9a-fA-F]{3,8}"', r'\1="currentColor"', inner)
-    inner = inner.replace('fill="currentColor"' , 'fill="currentColor"')  # no-op clarity
+    # any hard-coded color (hex OR named like white/black) -> currentColor.
+    # keep fill="none" (transparent) and already-currentColor untouched.
+    inner = re.sub(r'(stroke|fill)="(?!none\b)(?!currentColor\b)[^"]+"', r'\1="currentColor"', inner)
     return vb, re.sub(r"\s+", " ", inner).strip()
 
 icons = {}
