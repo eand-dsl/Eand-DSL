@@ -82,23 +82,39 @@ export interface NavItem { label: string; icon?: ReactNode; active?: boolean; on
 export interface NavBarProps extends HTMLAttributes<HTMLElement> {
   items: NavItem[];
 }
-/** Floating frosted pill nav. Active item is a red pill (icon + label). */
+/** Floating glass nav: a frosted white pill over a midnight scrim. Active tab = a
+ *  solid WHITE pill with red icon + label; inactive tabs are white on the glass. */
 export function NavBar({ items, style, ...rest }: NavBarProps) {
   return (
-    <nav style={{ position: 'sticky', bottom: 0, zIndex: 10, width: '100%', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, padding: `${space('sm')} ${space('lg')} ${space('xs')}`, background: 'transparent', ...style }} {...rest}>
-      <div style={{ display: 'inline-flex', alignItems: 'center', gap: 4, padding: 6, borderRadius: 9999, background: 'rgba(57,53,62,0.92)', backdropFilter: 'blur(12px)', boxShadow: '0 8px 24px rgba(25,19,41,0.28)' }}>
+    <nav style={{
+      position: 'sticky', bottom: 0, zIndex: 10, width: '100%', boxSizing: 'border-box',
+      display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: 44,
+      background: 'linear-gradient(to bottom, rgba(25,19,41,0) 0%, rgba(25,19,41,0.4) 48%, rgba(25,19,41,0.7) 100%)',
+      ...style,
+    }} {...rest}>
+      <div style={{
+        display: 'inline-flex', alignItems: 'center', height: 64, borderRadius: 9999,
+        background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)',
+        border: '1px solid rgba(255,255,255,0.22)', padding: '0 4px',
+      }}>
         {items.map((it, i) => {
           const on = it.active;
+          const c = on ? color('text.brand.default') : '#fff';
           return (
             <button key={i} onClick={it.onClick}
-              style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: 2, padding: on ? '8px 18px' : '8px 12px', borderRadius: 9999, border: 0, cursor: 'pointer', background: on ? color('surface.base.brand') : 'transparent', color: on ? '#fff' : 'rgba(255,255,255,0.82)' }}>
+              style={{
+                display: 'inline-flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 3,
+                height: on ? 56 : 64, margin: on ? '0 2px' : 0, padding: on ? '0 18px' : '0 14px',
+                borderRadius: 9999, border: 0, cursor: 'pointer', color: c,
+                background: on ? '#fff' : 'transparent',
+              }}>
               <Icon size="sm">{it.icon ?? '●'}</Icon>
-              <span style={{ fontSize: 10, fontWeight: 600 }}>{it.label}</span>
+              <span style={{ fontSize: 11, fontWeight: 600 }}>{it.label}</span>
             </button>
           );
         })}
       </div>
-      <span style={{ width: 134, height: 5, borderRadius: 9999, background: 'rgba(25,19,41,0.85)' }} />
+      <span style={{ width: 144, height: 5, borderRadius: 9999, background: 'rgba(255,255,255,0.9)', margin: '10px 0 8px' }} />
     </nav>
   );
 }
