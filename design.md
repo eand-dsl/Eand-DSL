@@ -308,6 +308,13 @@
 
 `xs`=8, `sm`=12, `md`=16, `lg`=20, `xl`=24, `2xl`=32, `3xl`=40, `4xl`=48
 
+### Icons — separate `@eand/icons` package
+
+Icons are **not** part of this UI library. They live in their own package `@eand/icons`, mirroring the **e& App Icons** Figma library (`9Q64oRPBkm3Sla5HMP4LJA`, MS-Fluent-2 line set + 13 Core Service Icons) — kept separate so the UI library stays light. Render `<Icon name="…" />` from `@eand/icons` into any `icon`/`leadingIcon`/`actions` slot; icons are stroked with `currentColor` so they inherit the slot color (red on an active `NavBar` tab, white on the brand `TopBar`, dark in a `QuickAction`/`ListRow` square).
+
+> **Never generate, draw, or emoji-substitute an icon.** If a screen needs a glyph that isn't in `@eand/icons` yet, request it be added to the package (exported from the e& App Icons library) rather than inventing one.
+
+
 
 ---
 

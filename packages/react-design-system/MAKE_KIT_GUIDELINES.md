@@ -6,7 +6,19 @@ These guidelines teach Figma Make how to build e& Consumer App screens with
 
 ```tsx
 import { TopBar, Section, NavBar, Button, /* …39 more */ } from '@eand/react-design-system';
+import { Icon } from '@eand/icons';   // real e& icons — see "Icons" below
 ```
+
+## Icons — never invent them
+Icons live in a **separate package, `@eand/icons`** (mirrors the e& App Icons Figma
+library; kept separate so the UI lib stays light). **Do not generate, draw, or use
+emoji/SVG of your own** — always render `<Icon name="..." />` from `@eand/icons` and
+pass it into a component's `icon`/`leadingIcon`/`actions` slot. It tints via CSS
+`color`, so it inherits the slot's color (red on an active nav tab, white on the red
+header, dark in a grey square). Available names: `home`, `support`, `profile`, `shop`,
+`search`, `notification`, `sparkle` (AI), `wallet`, `truck`, `grid`, `mobile`, `tv`,
+`wifi`, `gift`, `plus`, `mic`, `shield`, `chevron-right`. Need one that isn't listed?
+Ask for it to be added to `@eand/icons` — don't substitute a placeholder.
 
 ## Golden rules (always apply)
 - **Build screens, not loose mockups.** An e& screen = **red account `TopBar`** (`variant="brand"`: greeting + masked number + circle icons) → optional **global `Tabs`** row (For you / Account / Loyalty) → a vertical scroll body of full-width grey **`Section`s** (wrapping cards / `ListRow`s / `QuickAction` grids / carousels) → floating **`NavBar`** (Home · Support · Profile · Shop, active = red pill). Overlays (`BottomSheet`, `AlertModal`, `Snackbar`, `Tooltip`) float above; a persistent primary CTA → `ActionBar` above the nav. Detail/pushed pages use the default white `TopBar` with a back chevron.
@@ -32,7 +44,7 @@ import { TopBar, Section, NavBar, Button, /* …39 more */ } from '@eand/react-d
 - `Checkbox({ label, checked })`; `Radio({ label })`; `Switcher({ checked, size: sm|lg })`.
 
 **Primitives**
-- `Text({ variant: "body.md"|"title.sm"|"heading.lg"|…, as, color })`; `Icon({ size: xs|sm|md|lg|xl })`; `Logo`.
+- `Text({ variant: "body.md"|"title.sm"|"heading.lg"|…, as, color })`; `Logo`. For glyphs use `<Icon name="…" />` from **`@eand/icons`** (see "Icons" above) — never emoji.
 - `Badge({ offer?, status?, size })` — **offer**: new-card/new-plan (green) · mega-deals/green-friday/discount (red) · limited-stock/validity/limited-time (yellow) · best-seller (magenta) · online-exclusive/exclusive-for-emirati (burgundy) · sold-out (grey). **status**: neutral/positive/warning/danger/brand. `SmilesRow({ count, plus })` (overlapping smiles avatars); `ProgressBar({ value, tone })`; `AddTrigger({ label })`; `LogoRow({ logos })`.
 
 **Feedback / overlays**
@@ -68,13 +80,13 @@ import { TopBar, Section, NavBar, Button, /* …39 more */ } from '@eand/react-d
 ## Worked example — Home screen
 ```tsx
 <>
-  <TopBar leading={<Logo/>} trailing={<><Icon>🔍</Icon><Icon>🔔</Icon></>} />
+  <TopBar leading={<Logo/>} trailing={<><Icon name="search"/><Icon name="notification"/></>} />
   <SmilesBalance points="12,450 Smiles" />
 
   <Section title="Quick actions" context="Top things to do" onSeeAll={()=>{}}>
     <QuickAction columns={3} items={[
-      { label:'Quick Pay & Recharge', icon:'💳', badge:<Badge status="positive" size="sm">Active</Badge> },
-      { label:'Track Your Order', icon:'🚚' }, { label:'mParking', icon:'🚗' },
+      { label:'Quick Pay & Recharge', icon:<Icon name="wallet"/>, badge:<Badge status="positive" size="sm">Active</Badge> },
+      { label:'Track Your Order', icon:<Icon name="truck"/> }, { label:'mParking', icon:<Icon name="grid"/> },
     ]}/>
   </Section>
 
@@ -84,7 +96,7 @@ import { TopBar, Section, NavBar, Button, /* …39 more */ } from '@eand/react-d
 
   <Section title="Deals for you" context="Cover these with your Smiles Points" carousel onSeeAll={()=>{}}>
     <ProductCard eyebrow="Data" title="New Freedom Unlimited Data Plan 500 Local" discount="20% off" price="200" pts/>
-    <ProductCard image="📱" title="iPhone Clear Case For Safe Use" discount="20% off" price="AED 200"/>
+    <ProductCard image={<Icon name="mobile"/>} title="iPhone Clear Case For Safe Use" discount="20% off" price="AED 200"/>
   </Section>
 
   <Highlight title="For Travellers" subtitle="Stay connected, even when you're away"
@@ -92,10 +104,13 @@ import { TopBar, Section, NavBar, Button, /* …39 more */ } from '@eand/react-d
 
   <Section title="Services" context="Explore everything e&" onSeeAll={()=>{}}>
     {/* grid of */}
-    <ServiceCard icon="📱" label="Mobile Plans" badge={<Badge offer="new-plan" size="sm">New</Badge>}/>
+    <ServiceCard icon={<Icon name="mobile"/>} label="Mobile Plans" badge={<Badge offer="new-plan" size="sm">New</Badge>}/>
   </Section>
 
-  <NavBar items={[{label:'Shop',icon:'🛍️'},{label:'Plans',icon:'📄',active:true},{label:'Devices',icon:'📱'},{label:'eLife',icon:'📺'}]}/>
+  <NavBar items={[
+    {label:'Home',icon:<Icon name="home"/>,active:true},{label:'Support',icon:<Icon name="support"/>},
+    {label:'Profile',icon:<Icon name="profile"/>},{label:'Shop',icon:<Icon name="shop"/>},
+  ]}/>
 </>
 ```
 See `demo/home-screen.png` for the rendered result. **Tip for Make:** put each content block in its own `Section` (grey container), use `carousel` for horizontal card rows, and reach for the specific card (`PlanCard`/`ProductCard`/`DealCard`) rather than a generic `Card`.
