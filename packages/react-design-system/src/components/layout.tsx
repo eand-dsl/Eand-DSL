@@ -41,9 +41,10 @@ export function Section({ title = 'Section', context, filterPill, surface = 'def
           )}
         </div>
       </header>
+      {/* slot components inside a Section share a tight 4px gap (carousel keeps card breathing room) */}
       <div style={carousel
         ? { display: 'flex', gap: space('md'), overflowX: 'auto', scrollbarWidth: 'none', margin: `0 -${space('lg')}`, padding: `0 ${space('lg')}` }
-        : { display: 'flex', flexDirection: 'column', gap: space('md') }}>
+        : { display: 'flex', flexDirection: 'column', gap: 4 }}>
         {children}
       </div>
     </section>

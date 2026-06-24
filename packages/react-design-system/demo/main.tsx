@@ -33,11 +33,11 @@ function Account() {
 
         <Section title="My Account Hub" onSeeAll={() => {}}>
           <QuickAction columns={2} items={[
-            { label: 'Add-ons', icon: ic('plus'), badge: <Badge status="positive" size="sm">3 active</Badge> },
-            { label: 'Subscriptions', icon: ic('wifi'), badge: <Badge status="neutral" size="sm">0</Badge> },
+            { label: 'Add-ons', icon: ic('puzzle'), badge: <Badge status="positive" size="sm">3 active</Badge> },
+            { label: 'Subscriptions', icon: ic('subscriptions'), badge: <Badge status="neutral" size="sm">0</Badge> },
             { label: 'My Devices', icon: ic('mobile'), badge: <Badge status="warning" size="sm">Active</Badge> },
-            { label: 'My SIM Cards', icon: ic('wallet'), badge: <Badge status="positive" size="sm">2 cards</Badge> },
-            { label: 'mParking', icon: ic('truck') },
+            { label: 'My SIM Cards', icon: ic('sim'), badge: <Badge status="positive" size="sm">2 cards</Badge> },
+            { label: 'mParking', icon: ic('car') },
             { label: 'All Services', icon: ic('grid') },
           ]} />
         </Section>
