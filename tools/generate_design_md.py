@@ -218,12 +218,13 @@ B = {
    states="with/without action · with/without chevron", contains="title + 'see all' link/chevron",
    within="top of a Section", use="Title a Section and link to its full view."),
  "quick-action": dict(slot="Body / grid", w="fill", h="hug",
-   states="—", contains="grid of icon + label shortcuts", within="a Section near top of Home",
-   use="Compact grid of top tasks."),
+   states="—", contains="grid of borderless white cards (radius 20, 4px cell gap) — each a grey radius-12 icon square (filled e& icon) + label + optional count badge",
+   within="a Section near top of Home",
+   use="Compact grid of top tasks. Cards have NO border (white on the grey Section)."),
 
  "section": dict(slot="Body / container (THE layout wrapper)", w="fill (full screen width)", h="hug (content)",
    states="with/without header (Section link) · padded vs full-bleed body",
-   contains="optional Section link header + body (Cards / lists / controls / carousels)",
+   contains="optional Section link header + body (Cards / lists / controls / carousels). Stacked slot components share a tight 4px gap; carousels keep card spacing.",
    within="the vertical scroll stack between Top bar and Nav bar",
    use="Group related content into a titled, full-width block. The primary building block of a screen.", key=True),
  "list-row": dict(slot="Body / list item", w="fill", h="hug",
@@ -435,7 +436,13 @@ def main():
       "separate so the UI library stays light. Render `<Icon name=\"…\" />` from "
       "`@eand/icons` into any `icon`/`leadingIcon`/`actions` slot; icons are stroked with "
       "`currentColor` so they inherit the slot color (red on an active `NavBar` tab, white "
-      "on the brand `TopBar`, dark in a `QuickAction`/`ListRow` square).\n")
+      "on the brand `TopBar`, dark in a `QuickAction`/`ListRow` square). Prominent slots use "
+      "the **filled** house style (variant `filled:on, stroke:2, radius:2`); these are exported "
+      "exactly from the live screens, not the generic line set.\n")
+    w("Available names: `home`, `support`, `profile`, `shop`, `mshop` (the detached special "
+      "nav button), `search`, `notification`, `sparkle` (AI), `puzzle` (Add-ons), "
+      "`subscriptions`, `mobile`, `sim`, `wallet`, `car` (mParking), `truck`, `grid` "
+      "(All Services), `tv`, `wifi`, `gift`, `plus`, `mic`, `shield`, `chevron-right`.\n")
     w("> **Never generate, draw, or emoji-substitute an icon.** If a screen needs a glyph "
       "that isn't in `@eand/icons` yet, request it be added to the package (exported from "
       "the e& App Icons library) rather than inventing one.\n")

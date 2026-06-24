@@ -310,7 +310,9 @@
 
 ### Icons — separate `@eand/icons` package
 
-Icons are **not** part of this UI library. They live in their own package `@eand/icons`, mirroring the **e& App Icons** Figma library (`9Q64oRPBkm3Sla5HMP4LJA`, MS-Fluent-2 line set + 13 Core Service Icons) — kept separate so the UI library stays light. Render `<Icon name="…" />` from `@eand/icons` into any `icon`/`leadingIcon`/`actions` slot; icons are stroked with `currentColor` so they inherit the slot color (red on an active `NavBar` tab, white on the brand `TopBar`, dark in a `QuickAction`/`ListRow` square).
+Icons are **not** part of this UI library. They live in their own package `@eand/icons`, mirroring the **e& App Icons** Figma library (`9Q64oRPBkm3Sla5HMP4LJA`, MS-Fluent-2 line set + 13 Core Service Icons) — kept separate so the UI library stays light. Render `<Icon name="…" />` from `@eand/icons` into any `icon`/`leadingIcon`/`actions` slot; icons are stroked with `currentColor` so they inherit the slot color (red on an active `NavBar` tab, white on the brand `TopBar`, dark in a `QuickAction`/`ListRow` square). Prominent slots use the **filled** house style (variant `filled:on, stroke:2, radius:2`); these are exported exactly from the live screens, not the generic line set.
+
+Available names: `home`, `support`, `profile`, `shop`, `mshop` (the detached special nav button), `search`, `notification`, `sparkle` (AI), `puzzle` (Add-ons), `subscriptions`, `mobile`, `sim`, `wallet`, `car` (mParking), `truck`, `grid` (All Services), `tv`, `wifi`, `gift`, `plus`, `mic`, `shield`, `chevron-right`.
 
 > **Never generate, draw, or emoji-substitute an icon.** If a screen needs a glyph that isn't in `@eand/icons` yet, request it be added to the package (exported from the e& App Icons library) rather than inventing one.
 
@@ -1906,8 +1908,8 @@ Icons are **not** part of this UI library. They live in their own package `@eand
 - **Role:** Quick-action shortcut grid.
 - **Behavior:** slot `Body / grid` · width: fill · height: hug
 - **States:** —
-- **Composition:** contains grid of icon + label shortcuts · appears within a Section near top of Home
-- **Use case:** Compact grid of top tasks.
+- **Composition:** contains grid of borderless white cards (radius 20, 4px cell gap) — each a grey radius-12 icon square (filled e& icon) + label + optional count badge · appears within a Section near top of Home
+- **Use case:** Compact grid of top tasks. Cards have NO border (white on the grey Section).
 - **Color tokens — `color.surface`:**
   - **canvas**
     - `default` → `#ffffff`
@@ -1996,7 +1998,7 @@ Icons are **not** part of this UI library. They live in their own package `@eand
 - **Role:** Full-width content container.
 - **Behavior:** slot `Body / container (THE layout wrapper)` · width: fill (full screen width) · height: hug (content)
 - **States:** with/without header (Section link) · padded vs full-bleed body
-- **Composition:** contains optional Section link header + body (Cards / lists / controls / carousels) · appears within the vertical scroll stack between Top bar and Nav bar
+- **Composition:** contains optional Section link header + body (Cards / lists / controls / carousels). Stacked slot components share a tight 4px gap; carousels keep card spacing. · appears within the vertical scroll stack between Top bar and Nav bar
 - **Use case:** Group related content into a titled, full-width block. The primary building block of a screen.
 - **Color tokens — `color.surface`:**
   - **canvas**

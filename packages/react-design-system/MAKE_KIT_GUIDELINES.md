@@ -15,10 +15,14 @@ library; kept separate so the UI lib stays light). **Do not generate, draw, or u
 emoji/SVG of your own** — always render `<Icon name="..." />` from `@eand/icons` and
 pass it into a component's `icon`/`leadingIcon`/`actions` slot. It tints via CSS
 `color`, so it inherits the slot's color (red on an active nav tab, white on the red
-header, dark in a grey square). Available names: `home`, `support`, `profile`, `shop`,
-`search`, `notification`, `sparkle` (AI), `wallet`, `truck`, `grid`, `mobile`, `tv`,
-`wifi`, `gift`, `plus`, `mic`, `shield`, `chevron-right`. Need one that isn't listed?
-Ask for it to be added to `@eand/icons` — don't substitute a placeholder.
+header, dark in a grey square). Prominent slots use the **filled** house style
+(`filled:on, stroke:2, radius:2`), exported exactly from the live screens — not the
+generic line set. Available names: `home`, `support`, `profile`, `shop`, `mshop`
+(detached special nav button), `search`, `notification`, `sparkle` (AI), `puzzle`
+(Add-ons), `subscriptions`, `mobile`, `sim`, `wallet`, `car` (mParking), `truck`,
+`grid` (All Services), `tv`, `wifi`, `gift`, `plus`, `mic`, `shield`, `chevron-right`.
+Need one that isn't listed? Ask for it to be added to `@eand/icons` — don't substitute
+a placeholder.
 
 ## Golden rules (always apply)
 - **Build screens, not loose mockups.** An e& screen = **red account `TopBar`** (`variant="brand"`: greeting + masked number + circle icons) → optional **global `Tabs`** row (For you / Account / Loyalty) → a vertical scroll body of full-width grey **`Section`s** (wrapping cards / `ListRow`s / `QuickAction` grids / carousels) → floating **`NavBar`** (Home · Support · Profile · Shop, active = red pill). Overlays (`BottomSheet`, `AlertModal`, `Snackbar`, `Tooltip`) float above; a persistent primary CTA → `ActionBar` above the nav. Detail/pushed pages use the default white `TopBar` with a back chevron.
@@ -30,9 +34,10 @@ Ask for it to be added to `@eand/icons` — don't substitute a placeholder.
 **Chrome / layout**
 - `TopBar({ variant: default|brand, leading, title, greeting?, actions?, actionBar?, trailing })` — **brand** = red account header (greeting "Hi, Ahmed" + masked number + circle `actions` + optional `actionBar`={title,subtitle,cta}); **default** = white header (leading `<Logo/>`/back + title + actions).
 - `ListRow({ icon?, label, sublabel?, value?, chevron })` — white rounded row for settings / contact / overview / label↔value (e.g. "2 GB left" → "Local Data"). Stack inside a Section.
-- `NavBar({ items: {label, icon, active, onClick}[] })` — **floating glass** bottom nav: frosted white-15% + blur pill over a midnight scrim; **active tab = solid white pill with red icon+label**, inactive = white; white home indicator. 3–5 tabs (Home·Support·Profile·Shop); mark current `active`.
+- `QuickAction({ items: {label, icon, badge?, onClick}[], columns })` — Account-hub grid of **borderless** white cards (radius 20, 4px gap) — each a grey radius-12 square holding a filled `<Icon/>`, label below, optional count `badge` top-right. No card border.
+- `NavBar({ items: {label, icon, active, special?, onClick}[] })` — **floating glass** bottom nav: frosted white-15% + blur pill over a midnight scrim; **active tab = solid white pill with red icon+label**, inactive = white; white home indicator. 3–5 tabs (Home·Support·Profile·Shop); mark current `active`. A `special:true` item (the **mShop** button) renders as its own detached glass circle left of the pill — use `icon={<Icon name="mshop"/>}`.
 - `ActionBar({ helper })` + children — sticky footer for the primary `Button`(s).
-- `Section({ title, context?, filterPill?, surface?, onSeeAll?, carousel? })` — **grey rounded container** (the body building block) with a white circle chevron. `surface`: default(grey)|brand(red)|**brand-muted(pink, for "Jump to…"/"FAQs")**|midnight. `context` = subtext; `filterPill` can also hold a text link like "Manage". `carousel` = horizontal scroll of fixed-width cards.
+- `Section({ title, context?, filterPill?, surface?, onSeeAll?, carousel? })` — **grey rounded container** (the body building block) with a white circle chevron. Stacked slot children share a tight **4px gap**; carousels keep card spacing. `surface`: default(grey)|brand(red)|**brand-muted(pink, for "Jump to…"/"FAQs")**|midnight. `context` = subtext; `filterPill` can also hold a text link like "Manage". `carousel` = horizontal scroll of fixed-width cards.
 - `SectionLink({ title, link, onLinkClick })` — standalone section header + "See all".
 - `Accordion({ title, defaultOpen })` — expand/collapse.
 - `Card({ media, title, body, action, width? })` — generic content card.
@@ -86,7 +91,7 @@ Ask for it to be added to `@eand/icons` — don't substitute a placeholder.
   <Section title="Quick actions" context="Top things to do" onSeeAll={()=>{}}>
     <QuickAction columns={3} items={[
       { label:'Quick Pay & Recharge', icon:<Icon name="wallet"/>, badge:<Badge status="positive" size="sm">Active</Badge> },
-      { label:'Track Your Order', icon:<Icon name="truck"/> }, { label:'mParking', icon:<Icon name="grid"/> },
+      { label:'Track Your Order', icon:<Icon name="truck"/> }, { label:'mParking', icon:<Icon name="car"/> },
     ]}/>
   </Section>
 
@@ -108,6 +113,7 @@ Ask for it to be added to `@eand/icons` — don't substitute a placeholder.
   </Section>
 
   <NavBar items={[
+    {label:'mShop',icon:<Icon name="mshop"/>,special:true},
     {label:'Home',icon:<Icon name="home"/>,active:true},{label:'Support',icon:<Icon name="support"/>},
     {label:'Profile',icon:<Icon name="profile"/>},{label:'Shop',icon:<Icon name="shop"/>},
   ]}/>
