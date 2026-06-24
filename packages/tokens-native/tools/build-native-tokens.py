@@ -67,6 +67,11 @@ def camel(parts):
 def snake(parts):
     s = "_".join(parts)
     return re.sub(r"[^a-zA-Z0-9]+", "_", s).strip("_").lower()
+def member(enum, parts):
+    """Swift/Kotlin member name; prefix with the group when it would start with a digit
+    (identifiers can't start with a number, e.g. border-radius.3, spacing.2xs)."""
+    name = camel(parts)
+    return name if not name[:1].isdigit() else enum.lower() + name[0].upper() + name[1:]
 
 # ---------------- color parsing -> (r,g,b,a) floats 0..1 ----------------
 def parse_color(v):
@@ -184,7 +189,7 @@ def swift():
     for enum, items in dims.items():
         L.append(f"public enum Eand{enum} {{")
         for parts, v in items:
-            L.append(f"    public static let {camel(parts)}: CGFloat = {fmt(v)}")
+            L.append(f"    public static let {member(enum, parts)}: CGFloat = {fmt(v)}")
         L.append("}"); L.append("")
     L.append("public enum EandTypography {")
     for parts, size, w, lh, fam in typo:
@@ -214,7 +219,7 @@ def kotlin():
     for enum, items in dims.items():
         L.append(f"object Eand{enum} {{")
         for parts, v in items:
-            L.append(f"    val {camel(parts)} = {fmt(v)}.dp")
+            L.append(f"    val {member(enum, parts)} = {fmt(v)}.dp")
         L.append("}"); L.append("")
     L.append("object EandTypography {")
     for parts, size, w, lh, fam in typo:

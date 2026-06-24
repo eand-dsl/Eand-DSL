@@ -476,30 +476,30 @@ public enum EandColor {
 }
 
 public enum EandSpacing {
-    public static let 2xs: CGFloat = 2
+    public static let spacing2xs: CGFloat = 2
     public static let xs: CGFloat = 4
     public static let sm: CGFloat = 8
     public static let md: CGFloat = 12
     public static let lg: CGFloat = 16
     public static let xl: CGFloat = 20
-    public static let 2xl: CGFloat = 24
-    public static let 3xl: CGFloat = 32
-    public static let 4xl: CGFloat = 40
-    public static let 5xl: CGFloat = 48
-    public static let 6xl: CGFloat = 56
-    public static let 7xl: CGFloat = 64
-    public static let 8xl: CGFloat = 72
+    public static let spacing2xl: CGFloat = 24
+    public static let spacing3xl: CGFloat = 32
+    public static let spacing4xl: CGFloat = 40
+    public static let spacing5xl: CGFloat = 48
+    public static let spacing6xl: CGFloat = 56
+    public static let spacing7xl: CGFloat = 64
+    public static let spacing8xl: CGFloat = 72
 }
 
 public enum EandRadius {
-    public static let 1: CGFloat = 4
-    public static let 2: CGFloat = 8
-    public static let 3: CGFloat = 12
-    public static let 4: CGFloat = 14
-    public static let 5: CGFloat = 16
-    public static let 6: CGFloat = 20
-    public static let 7: CGFloat = 24
-    public static let 8: CGFloat = 1200
+    public static let radius1: CGFloat = 4
+    public static let radius2: CGFloat = 8
+    public static let radius3: CGFloat = 12
+    public static let radius4: CGFloat = 14
+    public static let radius5: CGFloat = 16
+    public static let radius6: CGFloat = 20
+    public static let radius7: CGFloat = 24
+    public static let radius8: CGFloat = 1200
 }
 
 public enum EandIcon {
@@ -508,9 +508,9 @@ public enum EandIcon {
     public static let md: CGFloat = 16
     public static let lg: CGFloat = 20
     public static let xl: CGFloat = 24
-    public static let 2xl: CGFloat = 32
-    public static let 3xl: CGFloat = 40
-    public static let 4xl: CGFloat = 48
+    public static let icon2xl: CGFloat = 32
+    public static let icon3xl: CGFloat = 40
+    public static let icon4xl: CGFloat = 48
 }
 
 public enum EandBorder {
@@ -522,27 +522,27 @@ public enum EandBorder {
 }
 
 public enum EandScale {
-    public static let 2: CGFloat = 2
-    public static let 4: CGFloat = 4
-    public static let 8: CGFloat = 8
-    public static let 12: CGFloat = 12
-    public static let 16: CGFloat = 16
-    public static let 20: CGFloat = 20
-    public static let 24: CGFloat = 24
-    public static let 32: CGFloat = 32
-    public static let 40: CGFloat = 40
-    public static let 48: CGFloat = 48
-    public static let 56: CGFloat = 56
-    public static let 64: CGFloat = 64
-    public static let 72: CGFloat = 72
-    public static let 80: CGFloat = 80
-    public static let 96: CGFloat = 96
-    public static let 112: CGFloat = 112
-    public static let 128: CGFloat = 128
-    public static let 144: CGFloat = 144
-    public static let 160: CGFloat = 160
-    public static let 176: CGFloat = 176
-    public static let 192: CGFloat = 192
+    public static let scale2: CGFloat = 2
+    public static let scale4: CGFloat = 4
+    public static let scale8: CGFloat = 8
+    public static let scale12: CGFloat = 12
+    public static let scale16: CGFloat = 16
+    public static let scale20: CGFloat = 20
+    public static let scale24: CGFloat = 24
+    public static let scale32: CGFloat = 32
+    public static let scale40: CGFloat = 40
+    public static let scale48: CGFloat = 48
+    public static let scale56: CGFloat = 56
+    public static let scale64: CGFloat = 64
+    public static let scale72: CGFloat = 72
+    public static let scale80: CGFloat = 80
+    public static let scale96: CGFloat = 96
+    public static let scale112: CGFloat = 112
+    public static let scale128: CGFloat = 128
+    public static let scale144: CGFloat = 144
+    public static let scale160: CGFloat = 160
+    public static let scale176: CGFloat = 176
+    public static let scale192: CGFloat = 192
 }
 
 public enum EandSectionLink {
@@ -602,65 +602,65 @@ public enum EandRadio {
 }
 
 public enum EandRem {
-    public static let 1: CGFloat = 16
-    public static let 2: CGFloat = 32
-    public static let 3: CGFloat = 48
-    public static let 4: CGFloat = 64
-    public static let 5: CGFloat = 80
-    public static let 6: CGFloat = 96
-    public static let 7: CGFloat = 112
-    public static let 8: CGFloat = 128
-    public static let 9: CGFloat = 144
-    public static let 10: CGFloat = 160
-    public static let 11: CGFloat = 176
-    public static let 12: CGFloat = 192
-    public static let 13: CGFloat = 208
-    public static let 14: CGFloat = 224
-    public static let 15: CGFloat = 240
-    public static let 16: CGFloat = 256
-    public static let 17: CGFloat = 272
-    public static let 18: CGFloat = 288
-    public static let 19: CGFloat = 304
-    public static let 20: CGFloat = 320
-    public static let 21: CGFloat = 336
-    public static let 22: CGFloat = 352
-    public static let 25: CGFloat = 400
-    public static let 28: CGFloat = 448
-    public static let 30: CGFloat = 480
-    public static let 35: CGFloat = 560
-    public static let 47: CGFloat = 752
-    public static let 75: CGFloat = 1200
-    public static let 0125: CGFloat = 2
-    public static let 025: CGFloat = 4
-    public static let 05: CGFloat = 8
-    public static let 0625: CGFloat = 10
-    public static let 075: CGFloat = 12
-    public static let 0875: CGFloat = 14
-    public static let 125: CGFloat = 20
-    public static let 15: CGFloat = 24
-    public static let 175: CGFloat = 28
-    public static let 225: CGFloat = 36
-    public static let 25: CGFloat = 40
-    public static let 35: CGFloat = 56
-    public static let 45: CGFloat = 72
-    public static let 55: CGFloat = 88
-    public static let 625: CGFloat = 100
-    public static let 75: CGFloat = 120
-    public static let 925: CGFloat = 148
-    public static let 95: CGFloat = 152
-    public static let 105: CGFloat = 168
-    public static let 115: CGFloat = 184
-    public static let 135: CGFloat = 216
-    public static let 155: CGFloat = 248
-    public static let 165: CGFloat = 264
-    public static let 175: CGFloat = 280
-    public static let 185: CGFloat = 296
-    public static let 1875: CGFloat = 300
-    public static let 225: CGFloat = 360
-    public static let 235: CGFloat = 376
-    public static let 2825: CGFloat = 452
-    public static let 295: CGFloat = 472
-    public static let 345: CGFloat = 552
+    public static let rem1: CGFloat = 16
+    public static let rem2: CGFloat = 32
+    public static let rem3: CGFloat = 48
+    public static let rem4: CGFloat = 64
+    public static let rem5: CGFloat = 80
+    public static let rem6: CGFloat = 96
+    public static let rem7: CGFloat = 112
+    public static let rem8: CGFloat = 128
+    public static let rem9: CGFloat = 144
+    public static let rem10: CGFloat = 160
+    public static let rem11: CGFloat = 176
+    public static let rem12: CGFloat = 192
+    public static let rem13: CGFloat = 208
+    public static let rem14: CGFloat = 224
+    public static let rem15: CGFloat = 240
+    public static let rem16: CGFloat = 256
+    public static let rem17: CGFloat = 272
+    public static let rem18: CGFloat = 288
+    public static let rem19: CGFloat = 304
+    public static let rem20: CGFloat = 320
+    public static let rem21: CGFloat = 336
+    public static let rem22: CGFloat = 352
+    public static let rem25: CGFloat = 400
+    public static let rem28: CGFloat = 448
+    public static let rem30: CGFloat = 480
+    public static let rem35: CGFloat = 560
+    public static let rem47: CGFloat = 752
+    public static let rem75: CGFloat = 1200
+    public static let rem0125: CGFloat = 2
+    public static let rem025: CGFloat = 4
+    public static let rem05: CGFloat = 8
+    public static let rem0625: CGFloat = 10
+    public static let rem075: CGFloat = 12
+    public static let rem0875: CGFloat = 14
+    public static let rem125: CGFloat = 20
+    public static let rem15: CGFloat = 24
+    public static let rem175: CGFloat = 28
+    public static let rem225: CGFloat = 36
+    public static let rem25: CGFloat = 40
+    public static let rem35: CGFloat = 56
+    public static let rem45: CGFloat = 72
+    public static let rem55: CGFloat = 88
+    public static let rem625: CGFloat = 100
+    public static let rem75: CGFloat = 120
+    public static let rem925: CGFloat = 148
+    public static let rem95: CGFloat = 152
+    public static let rem105: CGFloat = 168
+    public static let rem115: CGFloat = 184
+    public static let rem135: CGFloat = 216
+    public static let rem155: CGFloat = 248
+    public static let rem165: CGFloat = 264
+    public static let rem175: CGFloat = 280
+    public static let rem185: CGFloat = 296
+    public static let rem1875: CGFloat = 300
+    public static let rem225: CGFloat = 360
+    public static let rem235: CGFloat = 376
+    public static let rem2825: CGFloat = 452
+    public static let rem295: CGFloat = 472
+    public static let rem345: CGFloat = 552
 }
 
 public enum EandTypography {

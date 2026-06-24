@@ -475,30 +475,30 @@ object EandColor {
 }
 
 object EandSpacing {
-    val 2xs = 2.dp
+    val spacing2xs = 2.dp
     val xs = 4.dp
     val sm = 8.dp
     val md = 12.dp
     val lg = 16.dp
     val xl = 20.dp
-    val 2xl = 24.dp
-    val 3xl = 32.dp
-    val 4xl = 40.dp
-    val 5xl = 48.dp
-    val 6xl = 56.dp
-    val 7xl = 64.dp
-    val 8xl = 72.dp
+    val spacing2xl = 24.dp
+    val spacing3xl = 32.dp
+    val spacing4xl = 40.dp
+    val spacing5xl = 48.dp
+    val spacing6xl = 56.dp
+    val spacing7xl = 64.dp
+    val spacing8xl = 72.dp
 }
 
 object EandRadius {
-    val 1 = 4.dp
-    val 2 = 8.dp
-    val 3 = 12.dp
-    val 4 = 14.dp
-    val 5 = 16.dp
-    val 6 = 20.dp
-    val 7 = 24.dp
-    val 8 = 1200.dp
+    val radius1 = 4.dp
+    val radius2 = 8.dp
+    val radius3 = 12.dp
+    val radius4 = 14.dp
+    val radius5 = 16.dp
+    val radius6 = 20.dp
+    val radius7 = 24.dp
+    val radius8 = 1200.dp
 }
 
 object EandIcon {
@@ -507,9 +507,9 @@ object EandIcon {
     val md = 16.dp
     val lg = 20.dp
     val xl = 24.dp
-    val 2xl = 32.dp
-    val 3xl = 40.dp
-    val 4xl = 48.dp
+    val icon2xl = 32.dp
+    val icon3xl = 40.dp
+    val icon4xl = 48.dp
 }
 
 object EandBorder {
@@ -521,27 +521,27 @@ object EandBorder {
 }
 
 object EandScale {
-    val 2 = 2.dp
-    val 4 = 4.dp
-    val 8 = 8.dp
-    val 12 = 12.dp
-    val 16 = 16.dp
-    val 20 = 20.dp
-    val 24 = 24.dp
-    val 32 = 32.dp
-    val 40 = 40.dp
-    val 48 = 48.dp
-    val 56 = 56.dp
-    val 64 = 64.dp
-    val 72 = 72.dp
-    val 80 = 80.dp
-    val 96 = 96.dp
-    val 112 = 112.dp
-    val 128 = 128.dp
-    val 144 = 144.dp
-    val 160 = 160.dp
-    val 176 = 176.dp
-    val 192 = 192.dp
+    val scale2 = 2.dp
+    val scale4 = 4.dp
+    val scale8 = 8.dp
+    val scale12 = 12.dp
+    val scale16 = 16.dp
+    val scale20 = 20.dp
+    val scale24 = 24.dp
+    val scale32 = 32.dp
+    val scale40 = 40.dp
+    val scale48 = 48.dp
+    val scale56 = 56.dp
+    val scale64 = 64.dp
+    val scale72 = 72.dp
+    val scale80 = 80.dp
+    val scale96 = 96.dp
+    val scale112 = 112.dp
+    val scale128 = 128.dp
+    val scale144 = 144.dp
+    val scale160 = 160.dp
+    val scale176 = 176.dp
+    val scale192 = 192.dp
 }
 
 object EandSectionLink {
@@ -601,65 +601,65 @@ object EandRadio {
 }
 
 object EandRem {
-    val 1 = 16.dp
-    val 2 = 32.dp
-    val 3 = 48.dp
-    val 4 = 64.dp
-    val 5 = 80.dp
-    val 6 = 96.dp
-    val 7 = 112.dp
-    val 8 = 128.dp
-    val 9 = 144.dp
-    val 10 = 160.dp
-    val 11 = 176.dp
-    val 12 = 192.dp
-    val 13 = 208.dp
-    val 14 = 224.dp
-    val 15 = 240.dp
-    val 16 = 256.dp
-    val 17 = 272.dp
-    val 18 = 288.dp
-    val 19 = 304.dp
-    val 20 = 320.dp
-    val 21 = 336.dp
-    val 22 = 352.dp
-    val 25 = 400.dp
-    val 28 = 448.dp
-    val 30 = 480.dp
-    val 35 = 560.dp
-    val 47 = 752.dp
-    val 75 = 1200.dp
-    val 0125 = 2.dp
-    val 025 = 4.dp
-    val 05 = 8.dp
-    val 0625 = 10.dp
-    val 075 = 12.dp
-    val 0875 = 14.dp
-    val 125 = 20.dp
-    val 15 = 24.dp
-    val 175 = 28.dp
-    val 225 = 36.dp
-    val 25 = 40.dp
-    val 35 = 56.dp
-    val 45 = 72.dp
-    val 55 = 88.dp
-    val 625 = 100.dp
-    val 75 = 120.dp
-    val 925 = 148.dp
-    val 95 = 152.dp
-    val 105 = 168.dp
-    val 115 = 184.dp
-    val 135 = 216.dp
-    val 155 = 248.dp
-    val 165 = 264.dp
-    val 175 = 280.dp
-    val 185 = 296.dp
-    val 1875 = 300.dp
-    val 225 = 360.dp
-    val 235 = 376.dp
-    val 2825 = 452.dp
-    val 295 = 472.dp
-    val 345 = 552.dp
+    val rem1 = 16.dp
+    val rem2 = 32.dp
+    val rem3 = 48.dp
+    val rem4 = 64.dp
+    val rem5 = 80.dp
+    val rem6 = 96.dp
+    val rem7 = 112.dp
+    val rem8 = 128.dp
+    val rem9 = 144.dp
+    val rem10 = 160.dp
+    val rem11 = 176.dp
+    val rem12 = 192.dp
+    val rem13 = 208.dp
+    val rem14 = 224.dp
+    val rem15 = 240.dp
+    val rem16 = 256.dp
+    val rem17 = 272.dp
+    val rem18 = 288.dp
+    val rem19 = 304.dp
+    val rem20 = 320.dp
+    val rem21 = 336.dp
+    val rem22 = 352.dp
+    val rem25 = 400.dp
+    val rem28 = 448.dp
+    val rem30 = 480.dp
+    val rem35 = 560.dp
+    val rem47 = 752.dp
+    val rem75 = 1200.dp
+    val rem0125 = 2.dp
+    val rem025 = 4.dp
+    val rem05 = 8.dp
+    val rem0625 = 10.dp
+    val rem075 = 12.dp
+    val rem0875 = 14.dp
+    val rem125 = 20.dp
+    val rem15 = 24.dp
+    val rem175 = 28.dp
+    val rem225 = 36.dp
+    val rem25 = 40.dp
+    val rem35 = 56.dp
+    val rem45 = 72.dp
+    val rem55 = 88.dp
+    val rem625 = 100.dp
+    val rem75 = 120.dp
+    val rem925 = 148.dp
+    val rem95 = 152.dp
+    val rem105 = 168.dp
+    val rem115 = 184.dp
+    val rem135 = 216.dp
+    val rem155 = 248.dp
+    val rem165 = 264.dp
+    val rem175 = 280.dp
+    val rem185 = 296.dp
+    val rem1875 = 300.dp
+    val rem225 = 360.dp
+    val rem235 = 376.dp
+    val rem2825 = 452.dp
+    val rem295 = 472.dp
+    val rem345 = 552.dp
 }
 
 object EandTypography {
