@@ -78,13 +78,32 @@ export function ListRow({ icon, label, sublabel, value, chevron = true, style, .
 }
 
 /* ---------------- NavBar (bottom nav) ---------------- */
-export interface NavItem { label: string; icon?: ReactNode; active?: boolean; onClick?: () => void; }
+export interface NavItem { label: string; icon?: ReactNode; active?: boolean; special?: boolean; onClick?: () => void; }
 export interface NavBarProps extends HTMLAttributes<HTMLElement> {
   items: NavItem[];
 }
+const GLASS = { background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)', border: '1px solid rgba(255,255,255,0.22)' } as const;
+function NavTab({ it }: { it: NavItem }) {
+  const on = it.active;
+  return (
+    <button onClick={it.onClick}
+      style={{
+        display: 'inline-flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 3,
+        height: on ? 56 : 64, margin: on ? '0 2px' : 0, padding: on ? '0 18px' : '0 14px',
+        borderRadius: 9999, border: 0, cursor: 'pointer', color: on ? color('text.brand.default') : '#fff',
+        background: on ? '#fff' : 'transparent',
+      }}>
+      <span style={{ display: 'inline-flex', width: 24, height: 24, alignItems: 'center', justifyContent: 'center' }}>{it.icon ?? '●'}</span>
+      <span style={{ fontSize: 11, fontWeight: 600 }}>{it.label}</span>
+    </button>
+  );
+}
 /** Floating glass nav: a frosted white pill over a midnight scrim. Active tab = a
- *  solid WHITE pill with red icon + label; inactive tabs are white on the glass. */
+ *  solid WHITE pill with red icon + label; inactive tabs are white on the glass.
+ *  A `special` item (e.g. mShop) renders as a detached glass circle left of the pill. */
 export function NavBar({ items, style, ...rest }: NavBarProps) {
+  const special = items.filter((i) => i.special);
+  const tabs = items.filter((i) => !i.special);
   return (
     <nav style={{
       position: 'sticky', bottom: 0, zIndex: 10, width: '100%', boxSizing: 'border-box',
@@ -92,27 +111,15 @@ export function NavBar({ items, style, ...rest }: NavBarProps) {
       background: 'linear-gradient(to bottom, rgba(25,19,41,0) 0%, rgba(25,19,41,0.4) 48%, rgba(25,19,41,0.7) 100%)',
       ...style,
     }} {...rest}>
-      <div style={{
-        display: 'inline-flex', alignItems: 'center', height: 64, borderRadius: 9999,
-        background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)',
-        border: '1px solid rgba(255,255,255,0.22)', padding: '0 4px',
-      }}>
-        {items.map((it, i) => {
-          const on = it.active;
-          const c = on ? color('text.brand.default') : '#fff';
-          return (
-            <button key={i} onClick={it.onClick}
-              style={{
-                display: 'inline-flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 3,
-                height: on ? 56 : 64, margin: on ? '0 2px' : 0, padding: on ? '0 18px' : '0 14px',
-                borderRadius: 9999, border: 0, cursor: 'pointer', color: c,
-                background: on ? '#fff' : 'transparent',
-              }}>
-              <span style={{ display: 'inline-flex', width: 24, height: 24, alignItems: 'center', justifyContent: 'center' }}>{it.icon ?? '●'}</span>
-              <span style={{ fontSize: 11, fontWeight: 600 }}>{it.label}</span>
-            </button>
-          );
-        })}
+      <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+        {special.map((it, i) => (
+          <span key={`s${i}`} style={{ ...GLASS, width: 64, height: 64, borderRadius: '50%', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flex: '0 0 auto' }}>
+            <NavTab it={it} />
+          </span>
+        ))}
+        <div style={{ ...GLASS, display: 'inline-flex', alignItems: 'center', height: 64, borderRadius: 9999, padding: '0 4px' }}>
+          {tabs.map((it, i) => <NavTab key={i} it={it} />)}
+        </div>
       </div>
       <span style={{ width: 144, height: 5, borderRadius: 9999, background: 'rgba(255,255,255,0.9)', margin: '10px 0 8px' }} />
     </nav>

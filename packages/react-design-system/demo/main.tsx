@@ -51,6 +51,7 @@ function Account() {
       </div>
 
       <NavBar items={[
+        { label: 'mShop', icon: ic('mshop'), special: true },
         { label: 'Home', icon: ic('home'), active: true }, { label: 'Support', icon: ic('support') },
         { label: 'Profile', icon: ic('profile') }, { label: 'Shop', icon: ic('shop') },
       ]} />
