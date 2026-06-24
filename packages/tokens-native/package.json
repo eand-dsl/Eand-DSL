@@ -1,0 +1,10 @@
+{
+  "name": "@eand/tokens-native",
+  "version": "0.0.0",
+  "private": true,
+  "description": "e& design tokens for native platforms (SwiftUI + Jetpack Compose + Android XML), generated from variables.json.",
+  "scripts": {
+    "build": "python3 tools/build-native-tokens.py"
+  },
+  "files": ["ios", "android", "Package.swift"]
+}
