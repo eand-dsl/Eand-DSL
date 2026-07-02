@@ -2,23 +2,35 @@ import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { PAGES, type Page } from './catalog';
 import { CodeTabs } from './code-tabs';
+import { Controls, controlDefaults } from './controls-panel';
 
 const GROUPS = ['Foundations', 'Components'];
 
 function Stage({ page }: { page: Page }) {
-  if (page.frame === 'full') return <div style={{ marginTop: 28 }}>{page.render()}</div>;
-  if (page.frame === 'phone') {
-    return (
-      <>
-        <div className="stage-label">Live preview</div>
-        <div className="stage phone"><div className="frame">{page.render()}</div></div>
-      </>
-    );
-  }
+  const [vals, setVals] = useState(() => controlDefaults(page.controls));
+  const set = (prop: string, value: string | number | boolean) => setVals((p) => ({ ...p, [prop]: value }));
+  const preview = page.render(vals);
+
+  const stage = page.frame === 'full'
+    ? <div style={{ marginTop: 28 }}>{preview}</div>
+    : page.frame === 'phone'
+      ? (
+        <>
+          <div className="stage-label">Live preview</div>
+          <div className="stage phone"><div className="frame">{preview}</div></div>
+        </>
+      )
+      : (
+        <>
+          <div className="stage-label">Live preview</div>
+          <div className="stage pad"><div>{preview}</div></div>
+        </>
+      );
+
   return (
     <>
-      <div className="stage-label">Live preview</div>
-      <div className="stage pad"><div>{page.render()}</div></div>
+      {stage}
+      {page.controls?.length ? <Controls controls={page.controls} values={vals} onChange={set} /> : null}
     </>
   );
 }
@@ -64,7 +76,7 @@ function App() {
           <div className="eyebrow">{page.group}</div>
           <h1>{page.title}</h1>
           <p className="lede">{page.blurb}</p>
-          <Stage page={page} />
+          <Stage key={page.id} page={page} />
           {page.code ? <CodeTabs code={page.code} /> : null}
         </div>
       </main>
