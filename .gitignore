@@ -12,3 +12,4 @@ coverage/
 .expo/
 .turbo/
 .gstack/
+__pycache__/
