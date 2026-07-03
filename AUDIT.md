@@ -1,5 +1,9 @@
 # e& Consumer App DSL — Full Audit
 
+> ⚠️ **DEPRECATED (2026-07-02):** this audit targets the old **V1.0** file (`IoDxMEgOiOuwfIL5IbJzi5`).
+> Current audit: [`AUDIT-V1.1.md`](./AUDIT-V1.1.md) against `e& Consumer App DSL V1.1` (`pzm63BTLfPfT1stcF89ILQ`).
+> Kept as historical record.
+
 > Source of truth for building the React Native UI package (working name `@eand/ds`).
 > Figma: `e& Consumer App DSL V1.0` (fileKey `IoDxMEgOiOuwfIL5IbJzi5`).
 > Token export: `./variables.json` (Figma Variables, DTCG/W3C format).
