@@ -1,0 +1,17 @@
+{
+  "title": "Components",
+  "pages": [
+    "button",
+    "badge",
+    "chip",
+    "tabs",
+    "snackbar",
+    "alert",
+    "topbar",
+    "section",
+    "listrow",
+    "quickaction",
+    "navbar",
+    "plancard"
+  ]
+}

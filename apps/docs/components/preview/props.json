@@ -1,0 +1,1084 @@
+{
+  "PlanCard": [
+    {
+      "name": "category",
+      "type": "ReactNode",
+      "required": false,
+      "default": "Postpaid",
+      "description": ""
+    },
+    {
+      "name": "discount",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "description": ""
+    },
+    {
+      "name": "name",
+      "type": "ReactNode",
+      "required": false,
+      "default": "Entertainment plans",
+      "description": ""
+    },
+    {
+      "name": "period",
+      "type": "ReactNode",
+      "required": false,
+      "default": "/mo",
+      "description": ""
+    },
+    {
+      "name": "price",
+      "type": "ReactNode",
+      "required": false,
+      "default": "AED 1250",
+      "description": ""
+    },
+    {
+      "name": "smiles",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "description": ""
+    },
+    {
+      "name": "variant",
+      "type": "enum",
+      "required": false,
+      "default": "default",
+      "description": ""
+    },
+    {
+      "name": "width",
+      "type": "string | number",
+      "required": false,
+      "default": "210",
+      "description": ""
+    }
+  ],
+  "ProductCard": [
+    {
+      "name": "discount",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "eyebrow",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "image",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "period",
+      "type": "ReactNode",
+      "required": false,
+      "default": "/mo",
+      "description": ""
+    },
+    {
+      "name": "price",
+      "type": "ReactNode",
+      "required": false,
+      "default": "AED 200",
+      "description": ""
+    },
+    {
+      "name": "pts",
+      "type": "boolean",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "tint",
+      "type": "string",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "title",
+      "type": "ReactNode",
+      "required": false,
+      "default": "iPhone Clear Case For Safe Use",
+      "description": ""
+    },
+    {
+      "name": "width",
+      "type": "string | number",
+      "required": false,
+      "default": "200",
+      "description": ""
+    }
+  ],
+  "DealCard": [
+    {
+      "name": "badge",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "image",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "subtitle",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "title",
+      "type": "ReactNode",
+      "required": false,
+      "default": "Deal title",
+      "description": ""
+    },
+    {
+      "name": "width",
+      "type": "string | number",
+      "required": false,
+      "default": "240",
+      "description": ""
+    }
+  ],
+  "NewCard": [
+    {
+      "name": "image",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "title",
+      "type": "ReactNode",
+      "required": false,
+      "default": "New on e&",
+      "description": ""
+    },
+    {
+      "name": "width",
+      "type": "string | number",
+      "required": false,
+      "default": "200",
+      "description": ""
+    }
+  ],
+  "ServiceCard": [
+    {
+      "name": "label",
+      "type": "ReactNode",
+      "required": true,
+      "description": ""
+    },
+    {
+      "name": "badge",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "icon",
+      "type": "ReactNode",
+      "required": false,
+      "default": "◍",
+      "description": ""
+    }
+  ],
+  "Highlight": [
+    {
+      "name": "action",
+      "type": "HighlightAction",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "background",
+      "type": "string",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "cta",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "image",
+      "type": "string",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "subtitle",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "title",
+      "type": "ReactNode",
+      "required": false,
+      "default": "Primary Text 2-lines max",
+      "description": ""
+    },
+    {
+      "name": "tone",
+      "type": "enum",
+      "required": false,
+      "default": "image",
+      "description": ""
+    },
+    {
+      "name": "width",
+      "type": "string | number",
+      "required": false,
+      "description": ""
+    }
+  ],
+  "SmilesBalance": [
+    {
+      "name": "cta",
+      "type": "ReactNode",
+      "required": false,
+      "default": "Redeem",
+      "description": ""
+    },
+    {
+      "name": "points",
+      "type": "ReactNode",
+      "required": false,
+      "default": "12,450 Smiles",
+      "description": ""
+    }
+  ],
+  "Voucher": [
+    {
+      "name": "code",
+      "type": "ReactNode",
+      "required": false,
+      "default": "EAND50",
+      "description": ""
+    },
+    {
+      "name": "status",
+      "type": "enum",
+      "required": false,
+      "default": "active",
+      "description": ""
+    },
+    {
+      "name": "validity",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "value",
+      "type": "ReactNode",
+      "required": false,
+      "default": "AED 50 off",
+      "description": ""
+    }
+  ],
+  "Input": [
+    {
+      "name": "error",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "helper",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "label",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "leadingIcon",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "trailingIcon",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "variant",
+      "type": "enum",
+      "required": false,
+      "default": "outlined",
+      "description": ""
+    }
+  ],
+  "Chip": [
+    {
+      "name": "leadingIcon",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "onClick",
+      "type": "(() => void)",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "selected",
+      "type": "boolean",
+      "required": false,
+      "description": ""
+    }
+  ],
+  "FilterPill": [
+    {
+      "name": "onClick",
+      "type": "(() => void)",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "selected",
+      "type": "boolean",
+      "required": false,
+      "description": ""
+    }
+  ],
+  "Checkbox": [
+    {
+      "name": "label",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    }
+  ],
+  "Radio": [
+    {
+      "name": "label",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    }
+  ],
+  "Switcher": [
+    {
+      "name": "checked",
+      "type": "boolean",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "defaultChecked",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": ""
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "onChange",
+      "type": "((checked: boolean) => void)",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "size",
+      "type": "enum",
+      "required": false,
+      "default": "lg",
+      "description": ""
+    }
+  ],
+  "Searchbar": [
+    {
+      "name": "onMic",
+      "type": "(() => void)",
+      "required": false,
+      "description": ""
+    }
+  ],
+  "AISearch": [
+    {
+      "name": "onMic",
+      "type": "(() => void)",
+      "required": false,
+      "description": ""
+    }
+  ],
+  "Tabs": [
+    {
+      "name": "tabs",
+      "type": "string[]",
+      "required": true,
+      "description": ""
+    },
+    {
+      "name": "defaultValue",
+      "type": "number",
+      "required": false,
+      "default": "0",
+      "description": ""
+    },
+    {
+      "name": "onChange",
+      "type": "((index: number) => void)",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "scope",
+      "type": "enum",
+      "required": false,
+      "default": "global",
+      "description": ""
+    },
+    {
+      "name": "value",
+      "type": "number",
+      "required": false,
+      "description": ""
+    }
+  ],
+  "Selectors": [
+    {
+      "name": "options",
+      "type": "string[]",
+      "required": true,
+      "description": ""
+    },
+    {
+      "name": "defaultValue",
+      "type": "number",
+      "required": false,
+      "default": "0",
+      "description": ""
+    },
+    {
+      "name": "onChange",
+      "type": "((index: number) => void)",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "value",
+      "type": "number",
+      "required": false,
+      "description": ""
+    }
+  ],
+  "PlanUsageBar": [
+    {
+      "name": "total",
+      "type": "number",
+      "required": true,
+      "description": ""
+    },
+    {
+      "name": "used",
+      "type": "number",
+      "required": true,
+      "description": ""
+    },
+    {
+      "name": "label",
+      "type": "ReactNode",
+      "required": false,
+      "default": "Data",
+      "description": ""
+    },
+    {
+      "name": "unit",
+      "type": "string",
+      "required": false,
+      "default": "GB",
+      "description": ""
+    }
+  ],
+  "Snackbar": [
+    {
+      "name": "message",
+      "type": "ReactNode",
+      "required": true,
+      "description": ""
+    },
+    {
+      "name": "action",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "onAction",
+      "type": "(() => void)",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "onDismiss",
+      "type": "(() => void)",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "tone",
+      "type": "enum",
+      "required": false,
+      "default": "default",
+      "description": ""
+    }
+  ],
+  "Alert": [
+    {
+      "name": "action",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "onAction",
+      "type": "(() => void)",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "title",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "tone",
+      "type": "enum",
+      "required": false,
+      "default": "default",
+      "description": ""
+    }
+  ],
+  "AlertModal": [
+    {
+      "name": "actions",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "body",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "onDismiss",
+      "type": "(() => void)",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "open",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "description": ""
+    },
+    {
+      "name": "title",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "tone",
+      "type": "enum",
+      "required": false,
+      "default": "info",
+      "description": ""
+    }
+  ],
+  "Section": [
+    {
+      "name": "carousel",
+      "type": "boolean",
+      "required": false,
+      "description": "body scrolls horizontally and bleeds to the edges (carousels)"
+    },
+    {
+      "name": "context",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "filterPill",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "hideChevron",
+      "type": "boolean",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "onSeeAll",
+      "type": "(() => void)",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "surface",
+      "type": "enum",
+      "required": false,
+      "default": "default",
+      "description": ""
+    },
+    {
+      "name": "title",
+      "type": "ReactNode",
+      "required": false,
+      "default": "Section",
+      "description": ""
+    }
+  ],
+  "Card": [
+    {
+      "name": "action",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "body",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "media",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "title",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "width",
+      "type": "string | number",
+      "required": false,
+      "description": "fixed width for use inside a carousel"
+    }
+  ],
+  "Accordion": [
+    {
+      "name": "defaultOpen",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": ""
+    },
+    {
+      "name": "title",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    }
+  ],
+  "TopBar": [
+    {
+      "name": "actionBar",
+      "type": "TopBarAction",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "actions",
+      "type": "ReactNode[]",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "greeting",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "leading",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "statusBar",
+      "type": "boolean",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "title",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "trailing",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "variant",
+      "type": "enum",
+      "required": false,
+      "default": "default",
+      "description": ""
+    }
+  ],
+  "ListRow": [
+    {
+      "name": "label",
+      "type": "ReactNode",
+      "required": true,
+      "description": ""
+    },
+    {
+      "name": "chevron",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "description": ""
+    },
+    {
+      "name": "icon",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "sublabel",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "value",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    }
+  ],
+  "NavBar": [
+    {
+      "name": "items",
+      "type": "NavItem[]",
+      "required": true,
+      "description": ""
+    }
+  ],
+  "ActionBar": [
+    {
+      "name": "helper",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    }
+  ],
+  "SectionLink": [
+    {
+      "name": "link",
+      "type": "ReactNode",
+      "required": false,
+      "default": "See all",
+      "description": ""
+    },
+    {
+      "name": "onLinkClick",
+      "type": "(() => void)",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "title",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    }
+  ],
+  "QuickAction": [
+    {
+      "name": "items",
+      "type": "QuickActionItem[]",
+      "required": true,
+      "description": ""
+    },
+    {
+      "name": "columns",
+      "type": "number",
+      "required": false,
+      "default": "3",
+      "description": ""
+    }
+  ],
+  "Tooltip": [
+    {
+      "name": "content",
+      "type": "ReactNode",
+      "required": true,
+      "description": ""
+    },
+    {
+      "name": "placement",
+      "type": "enum",
+      "required": false,
+      "default": "top",
+      "description": ""
+    },
+    {
+      "name": "visible",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": ""
+    }
+  ],
+  "BottomSheet": [
+    {
+      "name": "footer",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "onDismiss",
+      "type": "(() => void)",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "open",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "description": ""
+    },
+    {
+      "name": "title",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    }
+  ],
+  "Text": [
+    {
+      "name": "as",
+      "type": "ElementType",
+      "required": false,
+      "default": "span",
+      "description": ""
+    },
+    {
+      "name": "color",
+      "type": "string",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "variant",
+      "type": "string",
+      "required": false,
+      "default": "body.md",
+      "description": ""
+    }
+  ],
+  "Icon": [
+    {
+      "name": "size",
+      "type": "string",
+      "required": false,
+      "default": "md",
+      "description": ""
+    }
+  ],
+  "Badge": [
+    {
+      "name": "offer",
+      "type": "enum",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "size",
+      "type": "enum",
+      "required": false,
+      "default": "md",
+      "description": ""
+    },
+    {
+      "name": "status",
+      "type": "enum",
+      "required": false,
+      "default": "neutral",
+      "description": ""
+    }
+  ],
+  "SmilesAvatar": [
+    {
+      "name": "bg",
+      "type": "string",
+      "required": false,
+      "default": "#6C3FD6",
+      "description": ""
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "smiles",
+      "description": ""
+    },
+    {
+      "name": "size",
+      "type": "number",
+      "required": false,
+      "default": "28",
+      "description": ""
+    }
+  ],
+  "SmilesRow": [
+    {
+      "name": "count",
+      "type": "number",
+      "required": false,
+      "default": "2",
+      "description": ""
+    },
+    {
+      "name": "plus",
+      "type": "number",
+      "required": false,
+      "default": "4",
+      "description": ""
+    },
+    {
+      "name": "size",
+      "type": "number",
+      "required": false,
+      "default": "28",
+      "description": ""
+    }
+  ],
+  "ProgressBar": [
+    {
+      "name": "tone",
+      "type": "enum",
+      "required": false,
+      "default": "accent",
+      "description": ""
+    },
+    {
+      "name": "value",
+      "type": "number",
+      "required": false,
+      "default": "50",
+      "description": ""
+    }
+  ],
+  "AddTrigger": [
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "Add",
+      "description": ""
+    }
+  ],
+  "LogoRow": [
+    {
+      "name": "logos",
+      "type": "ReactNode[]",
+      "required": false,
+      "default": "[]",
+      "description": ""
+    }
+  ],
+  "AtomSurface": [
+    {
+      "name": "level",
+      "type": "enum",
+      "required": false,
+      "default": "base",
+      "description": ""
+    }
+  ],
+  "Logo": [],
+  "Button": [
+    {
+      "name": "block",
+      "type": "boolean",
+      "required": false,
+      "description": "Stretch to fill the container width (block CTA)."
+    },
+    {
+      "name": "leadingIcon",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "size",
+      "type": "enum",
+      "required": false,
+      "default": "md",
+      "description": ""
+    },
+    {
+      "name": "tone",
+      "type": "enum",
+      "required": false,
+      "default": "brand",
+      "description": ""
+    },
+    {
+      "name": "trailingIcon",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "variant",
+      "type": "enum",
+      "required": false,
+      "default": "primary",
+      "description": ""
+    }
+  ]
+}

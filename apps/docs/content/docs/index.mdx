@@ -1,0 +1,61 @@
+---
+title: Get started
+description: Install the e& design system packages and build your first screen.
+---
+
+The e& Consumer App design system ships as two npm packages built from a single
+token source (`variables.json`, exported from the Figma DSL V1.1 library) — the
+same source that generates the SwiftUI and Compose tokens, so values never drift
+between platforms.
+
+## Install
+
+```bash
+npm install @eand/react-design-system @eand/icons
+```
+
+Import the stylesheet once — it carries every `--eand-*` design token:
+
+```tsx
+import '@eand/react-design-system/styles.css';
+```
+
+## First screen
+
+```tsx
+import { TopBar, Section, ListRow, Button } from '@eand/react-design-system';
+import { Icon } from '@eand/icons';
+
+export function Account() {
+  return (
+    <>
+      <TopBar variant="brand" greeting="Hi, Ahmed" title="050 123 4567" />
+      <Section title="My Plan" context="Freedom Live Plan 200">
+        <ListRow label="2 GB left" value="Local Data" chevron={false} />
+        <ListRow label="200 min left" value="Minutes" chevron={false} />
+      </Section>
+      <Button variant="primary" block>Make your own deal</Button>
+    </>
+  );
+}
+```
+
+## Typography
+
+The ramp is designed for **Suisse Int'l** (Latin) with a parallel `aed/*` ramp for
+Arabic. The font is licensed — load it in your app yourself. Until it's present the
+components fall back to `"Helvetica Neue", Inter, system-ui`.
+
+## Figma Make
+
+`@eand/react-design-system` doubles as a **Figma Make kit**: register the package in
+Make and it assembles e& screens from these exact components. See
+`MAKE_KIT_GUIDELINES.md` in the package for the component and icon rules.
+
+## Icons
+
+Icons come from `@eand/icons` only — never generate or inline ad-hoc SVGs:
+
+```tsx
+<Icon name="home" size={24} />
+```
