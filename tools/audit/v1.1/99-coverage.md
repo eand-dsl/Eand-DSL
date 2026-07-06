@@ -182,4 +182,45 @@
 
 ## Unaudited surface
 
-*(pending)*
+*Classification added 2026-07-06.* Method: `search_design_system` by exact name against this library. Same access limits as the harvest apply — search returns componentKeys only (no node-ids), and MCP page enumeration returns only the Cover page, so items below could not be opened node-by-node; classifications marked *(probable)* are based on name/family/timestamp signals and need node-level confirmation when their section is next touched. `updatedAt 2026-07-02` is the bulk-republish timestamp and does not imply active work; the `2026-04-28` cluster is the V1.0 import batch.
+
+Buckets: **NEW-UNAUDITED** (real V1.1 surface no audit section covers) · **ATOM** (piece of an already-audited component) · **SCRATCH / foreign-import** (auto-named, stale-iteration, or imported from another kit).
+
+### Banner family (beyond audited Highlight, 08)
+
+None of these live on the audited Highlight page (08 enumerated it fully); all are separate published banner assets.
+
+| Asset | Type / updated | Classification | Recommendation |
+|---|---|---|---|
+| Banner 1 | set · 07-02 | SCRATCH *(probable)* — Figma auto-name ("Banner 1") signals an unnamed set published by accident | Ask design to rename or unpublish; audit under an 08 extension only if it turns out to be a real component |
+| Gifts Included Banner | component · 04-28 | NEW-UNAUDITED — V1.0-import purchase-flow strip ("gifts included"), single component, never restyled | Confirm V1.1 intent with design; fold into an 08 extension if kept, else deprecate |
+| Info Banner | component · 04-28 | NEW-UNAUDITED — inline informational strip, likely superseded by 05 Alert Message | Confirm-and-deprecate against Alert Message; no new section |
+| Mshop banner (small) | set · 04-28 | NEW-UNAUDITED — Mshop (marketplace) vertical asset | Ignore for DSL core; audit only if the Mshop surface enters scope (then merge with "Mshop banners") |
+| Mshop banners | set · 07-02 | NEW-UNAUDITED — Mshop vertical asset, duplicate sizing of the above | Same as above; consolidate small/large into one set |
+| Notification banner | component · 04-28 | NEW-UNAUDITED — overlaps audited Snackbar / Alert Message (05) | Confirm-and-deprecate; no new section |
+| Offer Banner | set · 07-02 | NEW-UNAUDITED — promotional offer banner, republished current | Strongest candidate for a new **08-extension audit** together with Promo banner |
+| Promo banner (×2 sets) | 2 sets · 07-02 | NEW-UNAUDITED — two distinct published sets with the same name | 08-extension audit after design merges the duplicate sets |
+
+Remaining banner-candidate orphans from the matrix (Text banner, Simple promo banner, Switch to e& banner, Whats new banner) follow the same pattern: 04-28 singles → confirm-and-deprecate; 07-02 sets → sweep into the same 08-extension audit.
+
+### Slider family — **missed by the 163-asset harvest** (caught by this follow-up sweep; matrix above intentionally left unaltered)
+
+| Asset | Type / updated | Classification | Recommendation |
+|---|---|---|---|
+| Slider (×2 sets) | sets · 06-01 + 04-28 | NEW-UNAUDITED — genuine control family absent from 02 Controls; 04-28 set is the stale duplicate | New audit item: fold a **Slider audit into section 02 Controls**; deprecate the 04-28 duplicate |
+| interactive slider (×2 sets) | sets · 06-01 + 04-28 | NEW-UNAUDITED — interactive variant of the same family; old duplicate again | Audit together with Slider in the 02 extension; dedupe |
+| Slider indicator | set · 06-01 | ATOM *(probable)* of Slider (value indicator/bubble; published in the same 06-01 batch) | Cover inside the Slider audit; no section of its own |
+| jump to (×2 sets) | sets · 06-01 + 04-28 | NEW-UNAUDITED — small jump-to-top/section utility (pairs with icon "align top, arrow"); old duplicate | Fold into section 03 Navigation on next touch; dedupe the 04-28 set |
+| settings slider hor · Data distribution slider | set · 07-02 / set · 04-28 | NEW-UNAUDITED — product-specific slider variants surfaced by the same sweep | Audit with the Slider family in the 02 extension (Data distribution likely deprecable V1.0 import) |
+
+### Other substantial orphans
+
+| Asset | Type / updated | Classification | Recommendation |
+|---|---|---|---|
+| Footer / footer / Sticky footer / .footer/Default | set + 2 components + dot-atom · 07-02 | NEW-UNAUDITED — coherent layout family (Footer set, Sticky footer, `.footer/Default` core atom) | New audit item: **fold a Footer entry into section 04 Layout** covering all four assets |
+| Visual asset | set · 07-02 | NEW-UNAUDITED *(probable)* — name pattern suggests an illustration/media slot primitive with size/ratio variants | Verify contents, then fold into section 01 Primitives |
+| Profile header - NEW (×2 sets) | 2 sets · 07-02 | NEW-UNAUDITED — profile-screen header; "- NEW" suffix + duplicate sets = unconsolidated iteration | Audit under section 03 Navigation (header family) once design merges the two sets and drops the suffix |
+| Billing info | set · 07-02 | ATOM *(probable)* of Bill action card (03 Navigation, audited) — billing summary block; siblings are the V1.0 "Usage/ payment…" imports | Verify during the next 03 touch-up; no new section |
+| State | set · 07-02 | ATOM *(probable)* of Status screens (05 Feedback, audited "Status" set) — per-state atom; related orphans "States" (07-02) and "State indicator text" (04-28) likely same family | Verify during the next 05 refresh; no new section |
+
+**Net-new audit work recommended:** 08-extension (Offer/Promo/Mshop banners after design dedupe) · Slider family folded into 02 Controls · Footer folded into 04 Layout · Visual asset folded into 01 Primitives · Profile header - NEW folded into 03 Navigation. Everything else is atom-verification or confirm-and-deprecate — no standalone sections.
