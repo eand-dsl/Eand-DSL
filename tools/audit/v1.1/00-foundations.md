@@ -16,8 +16,8 @@
 | Color semantics — chips | same doc frame | — | family renamed `color/chips/default/**outline**/*` (7 tokens) and `inverse/text/focus` re-pointed to #575362 | export has old name `color/chips/default/**default**/*` and inverse/text/focus #191329 | TOKEN-DRIFT (rename + 1 value) | Re-export; update any hardcoded chip token paths |
 | Color semantics — input-field | same doc frame | — | 6 new state tokens: `text/default/value/{filled, error-filled, error-empty}`, `surface/default/{active, filled, error}` | absent from variables.json / tokens.css (export has leftover `text/default/Color`, `text/inverse/Color` placeholders instead) | TOKEN-DRIFT (6 missing) | Re-export |
 | Color — alert-message family (NEW) | alert-message set 30969:1112 (Feedback page; cross-ref 05-feedback.md) | 🔵 page | **new family `color/alert-message/surface/*` + `/text/*`**: success #c1f7d0/#164025 · alert #ffecab/#55481d · warning #ffc28b/#612a05 · info #e4e3ea/#191329 | **absent** from variables.json, tokens.ts, tokens.css (grep = 0 hits) | TOKEN-DRIFT / MISSING-IN-CODE (8 tokens) — primary stale-export evidence | Re-export, then migrate `Alert` per 05-feedback |
-| Typography ramp | page 25460:22587 (Typo Doc 26366:104 + Typography/* frames) | — | (see §Typography detail) | tokens.ts `typography` object (40 styles) + variables.json typography group (200 entries) | (see detail) | (see detail) |
-| Spacing scale | page 25460:22590 (Size Doc 25541:61357) | — | (see §Spacing detail) | tokens.ts `spacing` 2xs→8xl (2→72px), `scale` 2→192 | (see detail) | (see detail) |
+| Typography ramp | page 25460:22587 (Typo Doc 26366:104 + Typography/* frames) | — | 40 styles, Suisse Int'l only: display 2 · heading 5 · title 5 · body 5 · button 3 · badge 3 + aed mirror 17; sizes 10–48 from 12-step size ramp (10→64), weights Regular/Book/Medium/Semi bold/Bold, line-height relaxed 120% everywhere, letter-spacing 0 / −0.35 / −0.65 | tokens.ts `typography` (40 styles, byte-identical values) + variables.json `tokens/typography/*` (200 entries) — every sampled live binding matches | **OK** (0 drift; doc-panel label errors + 4 misnamed frames are Figma hygiene, not code drift) | Figma hygiene only: fix Height/Char-spacing doc panels, rename 4 `Typography/badge` frames, delete stray `typography/button/da` |
+| Spacing scale | page 25460:22590 (Size Doc 25541:61357) | — | live **variables**: 13-step spacing 2px→72px + rem primitive ladder (live-sampled `spacing/lg`=16, `spacing/xl`=20, `rem/1`=16, `rem/0-625`=10, `rem/2-5`=40); the **doc tables** on the page use a divergent `4xs…6xl` naming (doc `sm`=16, `lg`=24) | tokens.ts `spacing` 2xs→8xl = 2,4,8,12,16,20,24,32,40,48,56,64,72 + `scale` 2→192 — identical px set, identical names to live variables | **OK** on tokens (0 value drift, 0 name drift vs variables) / **STALE-ANATOMY** on the Size Doc page itself (its tables contradict the live variable names) | Code: none. Figma hygiene: rewrite Size Doc tables from the real collections |
 | Grid | page 25460:22591 (sections `Section grid` 27367:39360, `Page layout` 30687:111163, `Grid` 30687:111316) | — | (see §Grid detail) | no grid tokens in pipeline | (see detail) | (see detail) |
 
 *(table rows for Typography / Spacing / Grid finalized in their sections below — audit in progress, written incrementally)*
@@ -68,4 +68,52 @@ Sampled on the big `Colours` frame 25541:33328, which retains deprecated section
 #### D. Confirmed non-drift
 Everything else in the 293-token semantic sample matches the export exactly, including: full `surface/*` (canvas/base/sunken/raised/overlay/glass), `text/*` (default/brand/positive/danger/warning), `border/interactive/*`, `button/{primary, secondary, tertiary, link, text-midnight}`, `tab/*`, `filter-pill/*`, `status/*`, `badge/*` (incl. tiers), `mark/*`, `atom-surfaces/*`, `navbar-tab/*`. Known Figma naming quirks that survive round-trip: `color/badge/surface/offers/limited stock` (space) and `color/border/surface-based/overlay/floating inverse` (space) — build-tokens normalizes both to dashes in CSS, but `tokens.ts` still carries the `"limited stock"` key bug (see 01-primitives.md).
 
-*(sections below to be completed)*
+### Typography — page `25460:22587`
+Page structure: `Typo Doc` **26366:104** (2400×4189, attribute ramps + nomenclature) then one specimen frame per family: `Typography/display` 26330:25105, `/heading` 26334:25155, `/title` 26334:25394, `/body` 26343:25228, `/button` 26343:25423, `/badge` 26377:104 — plus **four frames all misnamed `Typography/badge`** (26413:231, 26548:32349, 26548:32824, 26548:33221) which screenshots confirm are actually the **AED set** (AED Display / Heading / Title / Body — dirham-symbol variants, `typography-fontfamily-aed` chips).
+
+**Method:** `get_variable_defs` on every family frame (10 frames) + screenshots of Typo Doc 26366:104 and AED Display 26413:231. Compared against `variables.json` `tokens/value/typography/*` (200 entries = 40 styles × 5 props) and the generated `tokens.ts` `typography` object (40 styles) + `font.{family,size,weight,lineHeight,letterSpacing}` primitives.
+
+**Result: 40/40 styles match — zero drift.** Live bindings sampled per family:
+
+| Family (live frame) | Sizes px | Weight | letter-spacing | vs export |
+|---|---|---|---|---|
+| display lg/md | 48 / 40 | Bold | −0.65 | ✓ exact |
+| heading xl/lg/md/sm/xs | 32 / 28 / 24 / 20 / 16 | Bold | −0.65 / −0.65 / −0.35 / −0.35 / 0 | ✓ exact |
+| title xl/lg/md/sm/xs | 28 / 24 / 20 / 16 / 14 | Semi bold | −0.35 ×3, 0 ×2 | ✓ exact |
+| body xl/lg/md/sm/xs | 20 / 16 / 14 / 12 / 10 | Regular | 0 | ✓ exact |
+| button lg/md/sm | 16 / 14 / 12 | Semi bold / Medium / Medium | 0 | ✓ exact |
+| badge lg/md/sm | 14 / 12 / 10 | Book | 0 | ✓ exact |
+| aed/* (17 styles) | mirror of the 4 base families | Bold/Semi bold/**Book** (aed body = Book, base body = Regular) | same | ✓ exact — chips confirm `fontsize-10`, `fontweight-bold`, `lineheight-relaxed`, `charspacing-tight` for aed/display/lg |
+
+- **Family:** Suisse Int'l is the only family, both `font/family/default` and `/aed` (commercial font, not bundled — names/values checked only, per audit scope). ✓
+- **Size ramp:** doc shows 12 steps 10→64 px (rem 0.625→4); export `primitives/font/size/1–12` identical; tokens.ts `font.size` identical. Styles only consume steps 1–10 (10–48); 56/64 are unused headroom. ✓
+- **Weights:** ramp 200 Thin → 800 Black (8 steps); styles use only Regular/Book/Medium/Semi bold/Bold. ✓
+- **Line-height:** every one of the 40 styles uses `line-height/relaxed` = **120%** — live chips, doc example, and export all agree. ✓
+
+**Doc-panel errors on Typo Doc (Figma doc content wrong vs its own variables — NOT code drift):**
+1. *Height panel* reads `None 105% · Tight 110% · Snug 110% · Normal 115% · Relaxed 120% · Loose 125%` — the variables are `none=100% · tight=105% · snug=110% · …`. First two labels shifted one step; 100% missing from the panel.
+2. *Character-spacing panel* reads `0 None · −0.35 Tight · −0.5 Snug` — variables are `none=0 · snug=−0.35 · tight=−0.65`. Tight/Snug labels swapped AND `−0.5` doesn't exist anywhere in the variable set.
+3. Stray junk variable `typography/button/da` = **#ffffff** (a COLOR parked inside the typography group) is referenced on the page — flag for deletion.
+4. The 4 AED doc frames are misnamed `Typography/badge` (copy-paste artifact); should be `Typography/aed-*`.
+
+**Code-side generator quirks (pre-existing, in tokens.ts not Figma):** `font.weight` maps key `"200"` → value `"100"` (Thin emitted as numeric 100 under the 200 key); the `lineHeight` `*-1` duplicate ratios get a bogus `px` suffix (`"tight-1": "1.0499…px"`). Neither affects the 40 composed styles, which are all correct.
+
+**Verdict: OK.**
+
+### Spacing — page `25460:22590`
+Page structure: `Size Doc` **25541:61357** (3393×3135) — six doc tables (Values / Spacing / Scale / Border radius / Card height / Width) — plus 6 pasted app screenshots (2026-05-08) used as reference imagery.
+
+**Method:** `get_metadata` (recurse) text extraction of all 264 table cells + full-frame screenshot + `get_variable_defs` on the frame. Note: the doc tables are **plain text, not variable-bound** (frame defs surfaced only rem/1=16, rem/0-625=10, rem/2-5=40 — all matching export). Live variable truth was sampled via bindings on other pages: `spacing/lg`=**16** and `spacing/xl`=**20** (surfaced live on the Typography frames) — i.e. the live collection uses the **export's** names and values.
+
+**A. Tokens: zero drift.** The 13 spacing px values in Figma (2, 4, 8, 12, 16, 20, 24, 32, 40, 48, 56, 64, 72) = tokens.ts `spacing` exactly; live-sampled bindings confirm export naming (`2xs…8xl`) is still in force. The doc's `Values` ladder (size-0…size-27: 0–1200px) is a 28-step subset of the export's 59-step `primitives/value/rem/*` ladder — every doc value exists in the export (0 is implicit). `scale` (2→192, 21 numeric steps) matches export byte-for-byte.
+
+**B. The Size Doc page itself is stale/self-inconsistent (doc content vs its own variables — NOT code drift):**
+1. *Spacing table* names the 13 steps **4xs, 3xs, 2xs, xs, sm, md, lg, xl, 2xl…6xl** → doc says `sm`=16, `md`=20, `lg`=24, `xl`=32. The live variables (and export/tokens.ts) say `sm`=8, `md`=12, `lg`=16, `xl`=20 (`2xs…8xl`). Same px ladder, every name shifted two steps. Since live bindings prove the variables kept the `2xs…8xl` scheme, the doc table is either an abandoned rename proposal or a drafting error. **Either way anyone reading the page will pick the wrong token** (`spacing/lg` in code = 16, doc claims lg = 24).
+2. *Scale table* is a copy-paste duplicate of the Spacing table (same 4xs–6xl rows). The real `scale` collection is numeric 2→192 (21 steps); its upper half (80–192) is documented nowhere on the page.
+3. *Border radius table* shows named steps xs=4, sm=8, md=16, lg=24, xl=32, xxl=1200 — the actual collection is numeric `border-radius/1–8` = 4, 8, 12, 14, 16, 20, 24, 1200. Doc's **32 doesn't exist** as a radius variable; real steps 12, 14, 20 are undocumented.
+4. *Card height table* (xs=48, sm=96, md=480, lg=560) contradicts the export's `card/height` (sm=96, md=192, lg=272, xl=472). 480/560 do exist as rem primitives, so the doc may describe a different (sheet-height?) concept — **cross-check when auditing Cards (07)**.
+5. *Width table* (2-col=109, 3-col=167.5, 6-col=343) is layout data, not spacing — assessed in §Grid below.
+
+**Verdict: OK** (spacing/scale token pipeline) — with the Size Doc page flagged **STALE-ANATOMY** as design-file hygiene.
+
+*(Grid section below — audit in progress, written incrementally)*
