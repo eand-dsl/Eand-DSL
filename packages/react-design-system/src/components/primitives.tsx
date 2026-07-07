@@ -88,14 +88,19 @@ export function SmilesRow({ count = 2, plus = 4, size = 28 }: { count?: number; 
 /* ---------------- ProgressBar ---------------- */
 export interface ProgressBarProps extends HTMLAttributes<HTMLDivElement> {
   value?: number; // 0-100
+  /** Optional fill override; omit for the Figma V1.1 default (text.positive.subtle green). */
   tone?: 'accent' | 'positive' | 'warning' | 'danger';
 }
-export function ProgressBar({ value = 50, tone = 'accent', style, ...rest }: ProgressBarProps) {
-  const fill = tone === 'positive' ? color('status.positive') : tone === 'warning' ? color('status.warning')
-    : tone === 'danger' ? color('status.danger') : color('status.accent');
+export function ProgressBar({ value = 50, tone, style, ...rest }: ProgressBarProps) {
+  // Figma V1.1 progress-bar-core: 300x4, fill color/text/positive/subtle.
+  const fill = tone === 'accent' ? color('status.accent')
+    : tone === 'positive' ? color('status.positive')
+    : tone === 'warning' ? color('status.warning')
+    : tone === 'danger' ? color('status.danger')
+    : color('text.positive.subtle');
   return (
     <div role="progressbar" aria-valuenow={value} aria-valuemin={0} aria-valuemax={100}
-      style={{ width: '100%', height: 8, borderRadius: PILL, background: color('surface.sunken.default'), overflow: 'hidden', ...style }} {...rest}>
+      style={{ width: '100%', height: 4, borderRadius: PILL, background: color('surface.sunken.default'), overflow: 'hidden', ...style }} {...rest}>
       <div style={{ width: `${Math.max(0, Math.min(100, value))}%`, height: '100%', background: fill, borderRadius: PILL }} />
     </div>
   );
