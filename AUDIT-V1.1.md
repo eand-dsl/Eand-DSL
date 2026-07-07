@@ -22,6 +22,7 @@
 | 08 Banners | [08-banners.md](tools/audit/v1.1/08-banners.md) | 1 | 0 | 1 | 1 | 1 | 0 | 1 | 1 | Highlight: Figma dropped brand/purple tones + bare-CTA (confirm w/ design) |
 | 09 Product-specific | [09-product-specific.md](tools/audit/v1.1/09-product-specific.md) | 2 | 0 | 2 | 2 | 2 | 0 | 0 | 0 | SmilesBalance + Voucher both need **full rebuilds** (V1.0-shaped code) |
 | 99 Coverage sweep | [99-coverage.md](tools/audit/v1.1/99-coverage.md) | 163 assets | — | — | — | — | — | — | — | 107 mapped / 56 orphans; NEW-UNAUDITED families below |
+| 10 Extensions | [10-extensions.md](tools/audit/v1.1/10-extensions.md) | 6 families | 0 | 2 | 2 | 2 | 10 | 0 | 1 | **ActionBar RELOCATED to Footer family** (not removed); **Profile header - NEW = live TopBar brand successor**; Slider family fully specced for future DsSlider |
 
 **Component totals (01–09, 44 entries):** OK **3** · VARIANT-DRIFT **33** · VISUAL-DRIFT **21** · TOKEN-DRIFT **21** · MISSING-IN-CODE **11** · REMOVED-IN-FIGMA **6** · STALE-ANATOMY **19** · UNVERIFIED **1**.
 
@@ -31,7 +32,7 @@
 
 ## P1 — drift fixes on existing components (Phase B, proceed on approval)
 
-Rebuilds (V1.1 shape differs fundamentally): **SmilesBalance · Voucher · PlanUsageBar · AddTrigger · ActionBar** (inline-row model; current sticky-footer code has no Figma home) · **Logo** (real lockup SVGs, 4 versions).
+Rebuilds (V1.1 shape differs fundamentally): **SmilesBalance · Voucher · PlanUsageBar · AddTrigger · Logo** (real lockup SVGs, 4 versions) · **ActionBar** — CORRECTED by 10-extensions: the sticky-footer model was RELOCATED to Figma's `Footer`/`Sticky footer` sets (27907:20590 / 29415:15592), not removed; align code to them (shadow not top-border, padding 20, type variants, safe-area) AND separately consider the new inline `action-bar` row from 03 as its own component. **TopBar brand variant** similarly maps to `Profile header - NEW` (drifted: 48px@10% circle buttons, 14-Bold number, action-card carousel) — two duplicate Figma sets need a design merge first.
 Variant/size fixes: Button (tertiary/link + 4 surfaces + focus) · Badge (disabled, neutral-inverse, tiers; drop `brand`) · Checkbox (20/16px sizes, radio-mode, inverse) · Radio (sm, inverse) · Switcher (**needs designer ruling**: published symbols 40×24/32×20 vs page docs 56×24/48×20 — code matches docs) · Chip (inverse, loader) · FilterPill (inverse, disabled) · Tabs/SectionLink/QuickAction/TopBar per 03 · Section/Accordion per 04 (Accordion blocked on 🔴) · Snackbar (subtitle, tone-matched action) · Alert (new alert-message token family once re-exported) · Tooltip/BottomSheet per 06 (pages 🟡) · all cards per 07 · Highlight per 08 · ProgressBar (h4, green default) · Input (drop Filled/Outlined, type axis) · Searchbar (midnight, clear-x, submit arrow).
 
 ## P2 — new builds (scope-gated 🟣, need explicit approval)
