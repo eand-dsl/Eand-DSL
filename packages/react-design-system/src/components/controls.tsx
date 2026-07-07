@@ -110,11 +110,26 @@ export function Checkbox({ label, checked, defaultChecked, disabled, onChange, s
 /* ---------------- Radio ---------------- */
 export interface RadioProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'type'> {
   label?: ReactNode;
+  /** Control size — `lg` 24×24 (default) or `sm` 20×20 (Figma V1.1 `small` axis). */
+  size?: 'sm' | 'lg';
+  /** Inverse color scheme for dark (midnight/brand) surfaces (Figma `color-scheme=inverse`). */
+  inverse?: boolean;
 }
-export function Radio({ label, disabled, style, ...rest }: RadioProps) {
+export function Radio({ label, checked, defaultChecked, disabled, onChange, size = 'lg', inverse, style, ...rest }: RadioProps) {
+  const [internal, setInternal] = useState(defaultChecked ?? false);
+  const on = checked ?? internal;
+  const dim = size === 'sm' ? T.radio.sm : T.radio.md; // Figma lg 24×24 maps to token radio.md
+  const ring = on
+    ? color(inverse ? 'border.interactive.inverse.focus' : 'border.interactive.accent.default')
+    : color(inverse ? 'border.interactive.inverse.default' : 'border.interactive.default.default');
   return (
     <label style={{ display: 'inline-flex', alignItems: 'center', gap: space('sm'), cursor: disabled ? 'not-allowed' : 'pointer', opacity: disabled ? 0.5 : 1, ...style }}>
-      <input type="radio" disabled={disabled} style={{ width: 24, height: 24, accentColor: color('surface.base.brand') }} {...rest} />
+      <span style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: dim, height: dim, borderRadius: '50%', boxSizing: 'border-box', flex: 'none', border: `1px solid ${ring}`, background: 'transparent' }}>
+        <input type="radio" checked={checked} defaultChecked={defaultChecked} disabled={disabled}
+          onChange={(e) => { setInternal(e.currentTarget.checked); onChange?.(e); }}
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', margin: 0, opacity: 0, cursor: 'inherit' }} {...rest} />
+        {on ? <span style={{ width: '50%', height: '50%', borderRadius: '50%', background: inverse ? color('surface.base.inverse') : color('surface.base.brand') }} /> : null}
+      </span>
       {label ? <Text variant="body.md">{label}</Text> : null}
     </label>
   );

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Checkbox } from './controls';
+import { Checkbox, Radio } from './controls';
 
 /* ---------------- Checkbox ---------------- */
 
@@ -45,4 +45,44 @@ test('Checkbox inverse checked fills the inverse (white) surface', () => {
   render(<Checkbox label="inv" inverse defaultChecked />);
   const control = screen.getByRole('checkbox').parentElement!;
   expect(control.style.background).toMatch(/#ffffff|rgb\(255,\s*255,\s*255\)/i);
+});
+
+/* ---------------- Radio ---------------- */
+
+test('Radio selects on click and fires onChange', async () => {
+  const fn = vi.fn();
+  render(<Radio label="Option A" onChange={fn} />);
+  const input = screen.getByRole('radio');
+  await userEvent.click(input);
+  expect(fn).toHaveBeenCalledTimes(1);
+  expect(input).toBeChecked();
+});
+
+test('Radio lg (default) renders a 24×24 styled control', () => {
+  render(<Radio label="lg" />);
+  const control = screen.getByRole('radio').parentElement!;
+  expect(control.style.width).toBe('24px');
+  expect(control.style.height).toBe('24px');
+});
+
+test('Radio sm renders a 20×20 styled control', () => {
+  render(<Radio label="sm" size="sm" />);
+  const control = screen.getByRole('radio').parentElement!;
+  expect(control.style.width).toBe('20px');
+  expect(control.style.height).toBe('20px');
+});
+
+test('Radio selected shows a brand dot on the default scheme', () => {
+  render(<Radio label="on" defaultChecked />);
+  const control = screen.getByRole('radio').parentElement!;
+  const dot = control.querySelector('span')!;
+  expect(dot.style.background).toMatch(/#e00800|rgb\(224,\s*8,\s*0\)/i);
+});
+
+test('Radio inverse selected shows a white dot and white ring', () => {
+  render(<Radio label="inv" inverse defaultChecked />);
+  const control = screen.getByRole('radio').parentElement!;
+  expect(control.style.border).toMatch(/#ffffff|rgb\(255,\s*255,\s*255\)/i);
+  const dot = control.querySelector('span')!;
+  expect(dot.style.background).toMatch(/#ffffff|rgb\(255,\s*255,\s*255\)/i);
 });
