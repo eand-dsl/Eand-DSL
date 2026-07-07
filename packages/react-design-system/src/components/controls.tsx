@@ -1,5 +1,5 @@
 import { useState, type CSSProperties, type HTMLAttributes, type InputHTMLAttributes, type ReactNode } from 'react';
-import { color, space, ty, PILL } from '../system';
+import { color, space, ty, radius, PILL, T } from '../system';
 import { Text, Icon } from './primitives';
 
 /* ---------------- Input ---------------- */
@@ -76,12 +76,32 @@ export function FilterPill({ selected, style, children, onClick, ...rest }: Filt
 /* ---------------- Checkbox ---------------- */
 export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'type'> {
   label?: ReactNode;
+  /** Control size — `md` 20×20 (default) or `sm` 16×16 (Figma V1.1 `size` axis). */
+  size?: 'sm' | 'md';
+  /** Inverse color scheme for dark (midnight/brand) surfaces (Figma `color-scheme=inverse`). */
+  inverse?: boolean;
 }
-export function Checkbox({ label, checked, defaultChecked, disabled, onChange, style, ...rest }: CheckboxProps) {
+export function Checkbox({ label, checked, defaultChecked, disabled, onChange, size = 'md', inverse, style, ...rest }: CheckboxProps) {
+  const [internal, setInternal] = useState(defaultChecked ?? false);
+  const on = checked ?? internal;
+  const dim = T.checkbox[size];
+  const box: CSSProperties = on
+    ? { border: '1px solid transparent', background: inverse ? color('surface.base.inverse') : color('surface.base.brand') }
+    : { border: `1px solid ${color(inverse ? 'border.interactive.inverse.default' : 'border.interactive.default.default')}`, background: 'transparent' };
   return (
     <label style={{ display: 'inline-flex', alignItems: 'center', gap: space('sm'), cursor: disabled ? 'not-allowed' : 'pointer', opacity: disabled ? 0.5 : 1, ...style }}>
-      <input type="checkbox" checked={checked} defaultChecked={defaultChecked} disabled={disabled} onChange={onChange}
-        style={{ width: 24, height: 24, accentColor: color('surface.base.brand') }} {...rest} />
+      <span style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: dim, height: dim, borderRadius: radius('1'), boxSizing: 'border-box', flex: 'none', ...box }}>
+        <input type="checkbox" checked={checked} defaultChecked={defaultChecked} disabled={disabled}
+          onChange={(e) => { setInternal(e.currentTarget.checked); onChange?.(e); }}
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', margin: 0, opacity: 0, cursor: 'inherit' }} {...rest} />
+        {on ? (
+          <svg aria-hidden viewBox="0 0 12 10" style={{ width: '70%', height: '70%', display: 'block' }}>
+            <polyline points="1,5 4.5,8.5 11,1.5" fill="none"
+              stroke={inverse ? color('text.default.default') : color('text.default.inverse')}
+              strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        ) : null}
+      </span>
       {label ? <Text variant="body.md">{label}</Text> : null}
     </label>
   );
