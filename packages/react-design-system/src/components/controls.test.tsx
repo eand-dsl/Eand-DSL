@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Checkbox, Radio, Chip } from './controls';
+import { Checkbox, Radio, Chip, FilterPill } from './controls';
 
 /* ---------------- Checkbox ---------------- */
 
@@ -111,4 +111,45 @@ test('Chip inverse selected fills white with midnight text', () => {
   const chip = screen.getByRole('button', { name: 'Data' });
   expect(chip.style.background).toMatch(/#ffffff|rgb\(255,\s*255,\s*255\)/i);
   expect(chip.style.color).toMatch(/#191329|rgb\(25,\s*19,\s*41\)/i);
+});
+
+/* ---------------- FilterPill ---------------- */
+
+test('FilterPill fires onClick when enabled', async () => {
+  const fn = vi.fn();
+  render(<FilterPill onClick={fn}>Price</FilterPill>);
+  await userEvent.click(screen.getByRole('button'));
+  expect(fn).toHaveBeenCalledTimes(1);
+});
+
+test('FilterPill disabled blocks the click and styles with disabled tokens', async () => {
+  const fn = vi.fn();
+  render(<FilterPill disabled onClick={fn}>Price</FilterPill>);
+  const pill = screen.getByRole('button');
+  await userEvent.click(pill);
+  expect(fn).not.toHaveBeenCalled();
+  expect(pill).toBeDisabled();
+  expect(pill.style.color).toMatch(/#c0bfc8|rgb\(192,\s*191,\s*200\)/i);
+});
+
+test('FilterPill selected (Figma State=Focused) uses the focus border on the default scheme', () => {
+  render(<FilterPill selected>Price</FilterPill>);
+  const pill = screen.getByRole('button');
+  expect(pill).toHaveAttribute('aria-pressed', 'true');
+  expect(pill.style.border).toMatch(/#191329|rgb\(25,\s*19,\s*41\)/i);
+});
+
+test('FilterPill inverse (unselected) uses inverse text and border on a transparent surface', () => {
+  render(<FilterPill inverse>Price</FilterPill>);
+  const pill = screen.getByRole('button');
+  expect(pill.style.background).toBe('transparent');
+  expect(pill.style.color).toMatch(/rgba\(255,\s*255,\s*255,\s*0?\.7\d*\)/i);
+  expect(pill.style.border).toMatch(/rgba\(255,\s*255,\s*255,\s*0?\.8\d*\)/i);
+});
+
+test('FilterPill inverse selected fills the inverse focus surface with midnight text', () => {
+  render(<FilterPill inverse selected>Price</FilterPill>);
+  const pill = screen.getByRole('button');
+  expect(pill.style.background).toMatch(/#f0f0f5|rgb\(240,\s*240,\s*245\)/i);
+  expect(pill.style.color).toMatch(/#191329|rgb\(25,\s*19,\s*41\)/i);
 });

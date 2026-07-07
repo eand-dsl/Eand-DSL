@@ -66,18 +66,27 @@ export function Chip({ selected, inverse, leadingIcon, style, children, onClick,
 
 /* ---------------- FilterPill ---------------- */
 export interface FilterPillProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onClick'> {
+  /** Maps to Figma `State=Focused` (V1.1 `filter-pill` set 26151:391) — the pressed/active pill state. */
   selected?: boolean;
+  /** Inverse color scheme for dark (midnight/brand) surfaces (Figma `Color=Inverse`). */
+  inverse?: boolean;
+  disabled?: boolean;
   onClick?: () => void;
 }
-export function FilterPill({ selected, style, children, onClick, ...rest }: FilterPillProps) {
+export function FilterPill({ selected, inverse, disabled, style, children, onClick, ...rest }: FilterPillProps) {
+  const scheme = inverse ? 'inverse' : 'default';
+  const state = disabled ? 'disabled' : selected ? 'focus' : 'default';
+  const background = selected && !disabled
+    ? color(inverse ? 'filterPill.surface.inverse.focus' : 'surface.base.default')
+    : inverse ? 'transparent' : color('surface.canvas.default');
   return (
-    <button onClick={onClick} aria-pressed={selected}
+    <button onClick={onClick} aria-pressed={selected} disabled={disabled}
       style={{
         display: 'inline-flex', alignItems: 'center', gap: space('xs'), height: 40, padding: `0 ${space('md')}`,
-        borderRadius: PILL, cursor: 'pointer', whiteSpace: 'nowrap',
-        border: `1px solid ${selected ? color('border.focus') : color('border.solid.default')}`,
-        background: selected ? color('surface.base.default') : color('surface.canvas.default'),
-        color: color('text.default.default'), ...ty('body.md'), ...style,
+        borderRadius: PILL, cursor: disabled ? 'not-allowed' : 'pointer', whiteSpace: 'nowrap',
+        border: `1px solid ${color(`filterPill.border.${scheme}.${state}`)}`,
+        background,
+        color: color(`filterPill.text.${scheme}.${state}`), ...ty('body.md'), ...style,
       }} {...rest}>
       {children}<Icon size="xs">⌄</Icon>
     </button>
