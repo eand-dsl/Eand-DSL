@@ -35,7 +35,10 @@ export type BadgeOffer =
   | 'new-card' | 'new-plan' | 'mega-deals' | 'green-friday' | 'discount'
   | 'limited-stock' | 'validity' | 'limited-time' | 'best-seller'
   | 'online-exclusive' | 'exclusive-for-emirati' | 'sold-out';
-export type BadgeStatus = 'neutral' | 'positive' | 'warning' | 'danger' | 'brand';
+export type BadgeStatus =
+  | 'neutral' | 'neutral-inverse' | 'disabled' | 'positive' | 'warning' | 'danger'
+  /** `brand` is absent from Figma V1.1 — kept pending design confirmation before removal. */
+  | 'brand';
 export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   offer?: BadgeOffer;
   status?: BadgeStatus;
@@ -43,12 +46,16 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
 }
 export function Badge({ offer, status = 'neutral', size = 'md', style, children, ...rest }: BadgeProps) {
   const key = offer ? `offers.${offer}` : `status.${status}`;
-  const padY = size === 'lg' ? 4 : size === 'sm' ? 1 : 2;
+  // Figma V1.1: fixed heights 16/20/24; md = px8 py4, min-width 56; radius 8.
+  const height = size === 'lg' ? 24 : size === 'sm' ? 16 : 20;
+  const padY = size === 'sm' ? 2 : 4;
+  const padX = size === 'sm' ? space('xs') : space('sm');
   return (
     <span
       style={{
-        display: 'inline-flex', alignItems: 'center', gap: space('2xs'),
-        padding: `${padY}px ${size === 'lg' ? space('sm') : space('xs')}`, borderRadius: 8,
+        display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: space('2xs'),
+        boxSizing: 'border-box', height, minWidth: size === 'md' ? 56 : undefined,
+        padding: `${padY}px ${padX}`, borderRadius: 8,
         background: color(`badge.surface.${key}`), color: color(`badge.text.${key}`),
         ...ty(`badge.${size}`), whiteSpace: 'nowrap', ...style,
       }}
