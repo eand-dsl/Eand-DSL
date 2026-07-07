@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Checkbox, Radio } from './controls';
+import { Checkbox, Radio, Chip } from './controls';
 
 /* ---------------- Checkbox ---------------- */
 
@@ -85,4 +85,30 @@ test('Radio inverse selected shows a white dot and white ring', () => {
   expect(control.style.border).toMatch(/#ffffff|rgb\(255,\s*255,\s*255\)/i);
   const dot = control.querySelector('span')!;
   expect(dot.style.background).toMatch(/#ffffff|rgb\(255,\s*255,\s*255\)/i);
+});
+
+/* ---------------- Chip ---------------- */
+
+test('Chip fires onClick and reflects selected via aria-pressed', async () => {
+  const fn = vi.fn();
+  render(<Chip selected onClick={fn}>5G</Chip>);
+  const chip = screen.getByRole('button', { name: '5G' });
+  expect(chip).toHaveAttribute('aria-pressed', 'true');
+  await userEvent.click(chip);
+  expect(fn).toHaveBeenCalledTimes(1);
+});
+
+test('Chip inverse (unselected) uses inverse text and border on a transparent surface', () => {
+  render(<Chip inverse>Data</Chip>);
+  const chip = screen.getByRole('button', { name: 'Data' });
+  expect(chip.style.background).toBe('transparent');
+  expect(chip.style.color).toMatch(/rgba\(255,\s*255,\s*255,\s*0?\.7\d*\)/i);
+  expect(chip.style.border).toMatch(/rgba\(255,\s*255,\s*255,\s*0?\.4\d*\)/i);
+});
+
+test('Chip inverse selected fills white with midnight text', () => {
+  render(<Chip inverse selected>Data</Chip>);
+  const chip = screen.getByRole('button', { name: 'Data' });
+  expect(chip.style.background).toMatch(/#ffffff|rgb\(255,\s*255,\s*255\)/i);
+  expect(chip.style.color).toMatch(/#191329|rgb\(25,\s*19,\s*41\)/i);
 });

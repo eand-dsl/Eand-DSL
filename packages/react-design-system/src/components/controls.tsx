@@ -35,18 +35,29 @@ export function Input({ label, helper, error, variant = 'outlined', leadingIcon,
 /* ---------------- Chip ---------------- */
 export interface ChipProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onClick'> {
   selected?: boolean;
+  /** Inverse surface for dark (midnight/brand) backgrounds (Figma `surface=inverse`). */
+  inverse?: boolean;
   leadingIcon?: ReactNode;
   onClick?: () => void;
 }
-export function Chip({ selected, leadingIcon, style, children, onClick, ...rest }: ChipProps) {
+export function Chip({ selected, inverse, leadingIcon, style, children, onClick, ...rest }: ChipProps) {
+  const scheme: CSSProperties = inverse
+    ? {
+        border: `1px solid ${color(selected ? 'chips.default.inverse.border.focus' : 'chips.default.inverse.border.default')}`,
+        background: selected ? color('chips.default.inverse.surface.focus') : 'transparent',
+        color: color(selected ? 'chips.default.inverse.text.focus' : 'chips.default.inverse.text.default'),
+      }
+    : {
+        border: `1px solid ${selected ? color('border.focus') : color('border.solid.default')}`,
+        background: selected ? color('surface.base.brand') : color('surface.canvas.default'),
+        color: selected ? color('text.default.inverse') : color('text.default.default'),
+      };
   return (
     <button onClick={onClick} aria-pressed={selected}
       style={{
         display: 'inline-flex', alignItems: 'center', gap: space('xs'), height: 40, padding: `0 ${space('md')}`,
         borderRadius: PILL, cursor: 'pointer', whiteSpace: 'nowrap',
-        border: `1px solid ${selected ? color('border.focus') : color('border.solid.default')}`,
-        background: selected ? color('surface.base.brand') : color('surface.canvas.default'),
-        color: selected ? '#fff' : color('text.default.default'), ...ty('body.md'), ...style,
+        ...scheme, ...ty('body.md'), ...style,
       }} {...rest}>
       {leadingIcon ? <Icon size="sm">{leadingIcon}</Icon> : null}{children}
     </button>
