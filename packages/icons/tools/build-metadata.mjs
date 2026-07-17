@@ -43,6 +43,7 @@ const meta = {};
 const blank = [];
 for (const { name, description } of raw) {
   let key = slugify(name);
+  // NOTE: which duplicate gets the plain name vs the -2 suffix depends on Figma dump order — after a re-sync, sanity-check add/add-2, copy/copy-2, grid/grid-2 descriptions.
   if (key in meta) {
     const dupeKey = `${key}-2`;
     if (dupeKey in meta) {

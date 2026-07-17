@@ -8,7 +8,7 @@ const EMPTY_META = { description: '', aliases: [] as string[] };
 
 const segWrap: CSSProperties = {
   display: 'flex',
-  border: '1px solid var(--ea-border, #e5e4ea)',
+  border: '1px solid var(--line, #e6e5ec)',
   borderRadius: 999,
   overflow: 'hidden',
   fontSize: 10,
@@ -19,7 +19,7 @@ function segBtn(on: boolean): CSSProperties {
     padding: '3px 10px',
     border: 'none',
     cursor: 'pointer',
-    background: on ? '#e00800' : 'transparent',
+    background: on ? 'var(--red, #e00800)' : 'transparent',
     color: on ? '#fff' : 'inherit',
     opacity: on ? 1 : 0.6,
     fontSize: 10,
@@ -46,7 +46,7 @@ function IconTile({
     <div
       style={{
         display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
-        padding: '16px 12px', border: '1px solid var(--ea-border, #e5e4ea)',
+        padding: '16px 12px', border: '1px solid var(--line, #e6e5ec)',
         borderRadius: 12, minWidth: 0,
       }}
     >
@@ -67,7 +67,7 @@ function IconTile({
           border: 'none', background: 'transparent', cursor: 'pointer', padding: 0,
           fontSize: 11, lineHeight: 1.3, textAlign: 'center', width: '100%',
           overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-          opacity: justCopied ? 1 : 0.75, color: justCopied ? '#e00800' : 'inherit',
+          opacity: justCopied ? 1 : 0.75, color: justCopied ? 'var(--red, #e00800)' : 'inherit',
         }}
       >
         {justCopied ? 'copied!' : key}
