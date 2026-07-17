@@ -1,0 +1,25 @@
+---
+title: Icons
+description: The e& App Icons set, synced from the Figma icon library.
+---
+
+Icons come from the **`@eand/icons`** package — synced from the
+[e& App Icons](https://www.figma.com/design/9Q64oRPBkm3Sla5HMP4LJA/e--App-Icons?node-id=7-118)
+Figma library. Every icon is a 24×24 glyph whose colours resolve to
+`currentColor`, so it tints with the surrounding text `color`.
+
+Each icon ships in two variants: **outline** (`bookmark`) and **filled**
+(`bookmark-filled`). Use the toggle on a tile to preview either variant —
+clicking the name copies the key for whichever variant is selected.
+
+```tsx
+import { Icon } from '@eand/icons';
+
+<Icon name="wallet" size={24} />
+<Icon name="wallet-filled" size={24} />
+```
+
+Descriptions and search aliases are synced from the icon library in Figma —
+searching below matches names, descriptions, and aliases (try `flag`).
+
+<IconGallery />
