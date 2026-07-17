@@ -15,8 +15,14 @@
 //     occurrence of any slugified name is stored under `<name>-2`; a third
 //     occurrence would warn and be skipped rather than silently overwriting.
 //   - Descriptions may contain HTML-escaped entities (e.g. "e&amp;"); these
-//     are unescaped (&amp; -> &) before splitting off the
-//     "Also searchable as:" tail.
+//     are unescaped (&amp; -> &) before parsing.
+//
+// Description format: an alias marker appears as either "Searchable as:" or
+// "Also searchable as:" (case-insensitive). The alias list is only the text
+// from the marker up to the FIRST period (or end of string); anything after
+// that period is guidance text (e.g. "Not for X (use Y).") and is kept in
+// the description, joined after the pre-marker text. Entries with no marker
+// keep the whole text as the description with no aliases.
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 
 const rawPath = process.argv[2];
@@ -46,12 +52,24 @@ for (const { name, description } of raw) {
     key = dupeKey;
   }
   const unescaped = String(description ?? '').replace(/&amp;/g, '&');
-  const [head, tail = ''] = unescaped.split(/also searchable as:/i);
-  const desc = head.trim();
-  const aliases = tail
-    .split(',')
-    .map((a) => a.trim().toLowerCase().replace(/[.…]+$/, '').trim())
-    .filter(Boolean);
+  const marker = unescaped.match(/(?:also\s+)?searchable\s+as:/i);
+  let desc;
+  let aliases;
+  if (marker) {
+    const head = unescaped.slice(0, marker.index);
+    const rest = unescaped.slice(marker.index + marker[0].length);
+    const dot = rest.indexOf('.');
+    const aliasStr = dot === -1 ? rest : rest.slice(0, dot);
+    const tailAfter = dot === -1 ? '' : rest.slice(dot + 1);
+    aliases = aliasStr
+      .split(',')
+      .map((a) => a.trim().toLowerCase().replace(/[.…]+$/, '').trim())
+      .filter(Boolean);
+    desc = `${head.trim()} ${tailAfter.trim()}`.trim();
+  } else {
+    desc = unescaped.trim();
+    aliases = [];
+  }
   if (!desc) blank.push(key);
   meta[key] = { description: desc, aliases };
 }
