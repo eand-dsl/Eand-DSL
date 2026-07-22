@@ -162,7 +162,7 @@ fun AccountHeader() {
     react: `import { TopBar, Icon } from '@eand/react-design-system';
 
 <TopBar variant="brand" greeting="Hi, Ahmed" title="050 123 4567"
-  actions={[<Icon name="sparkle"/>, <Icon name="notification"/>]} />`,
+  actions={[<Icon name="magic-wand"/>, <Icon name="notification"/>]} />`,
   },
 
   section: {
@@ -330,10 +330,10 @@ fun NavTab(title: String, icon: Painter, active: Boolean) {
     react: `import { NavBar, Icon } from '@eand/react-design-system';
 
 <NavBar items={[
-  { label: 'mShop', icon: <Icon name="mshop"/>, special: true },
+  { label: 'mShop', icon: <Icon name="store"/>, special: true },
   { label: 'Home', icon: <Icon name="home"/>, active: true },
   { label: 'Support', icon: <Icon name="support"/> },
-  { label: 'Profile', icon: <Icon name="profile"/> },
+  { label: 'Profile', icon: <Icon name="user"/> },
   { label: 'Shop', icon: <Icon name="shop"/> },
 ]} />`,
   },

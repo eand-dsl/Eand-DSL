@@ -1,58 +1,137 @@
 import type { HTMLAttributes, ReactNode } from 'react';
-import { space, color, icon } from '../system';
+import { space, color, icon, radius } from '../system';
 import { Text, Icon } from './primitives';
 
-/* ---------------- TopBar (header) ---------------- */
+/* ---------------- TopBar (header) ----------------
+   Figma V1.1 Top bar (page 22542:13963): a slot-based header. A top row
+   (left-part · middle · right-part) over a brand or default surface, with an
+   optional big-title block (eyebrow · large title · subtext) or account display,
+   and a bottom slot for search / tabs / chips / stepper / action cards. */
+export type TopBarSurface = 'brand' | 'default';
+/** @deprecated V1.0 action-bar sub-card — pass the card via `children` instead. */
 export interface TopBarAction { title?: ReactNode; subtitle?: ReactNode; cta?: ReactNode; }
+export interface TopBarAccount { greeting?: ReactNode; name?: ReactNode; }
 export interface TopBarProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
-  variant?: 'default' | 'brand';
+  surface?: TopBarSurface;
+  /** @deprecated Use `surface`. */
+  variant?: TopBarSurface;
+  /** Faux iOS status row (default on brand). */
+  statusBar?: boolean;
+  /** Left-part: back chevron, avatar+text, etc. */
   leading?: ReactNode;
+  /** Middle: the centered e& logo (`true`) or a custom node. */
+  logo?: boolean | ReactNode;
+  /** Middle: page name (used when there's no logo/account/big-title). */
   title?: ReactNode;
-  greeting?: ReactNode;       // brand header: "Hi, Ahmed" above the title (masked number)
+  /** Middle: account display — greeting over a masked name with a chevron. */
+  account?: TopBarAccount;
+  /** @deprecated Use `account={{ greeting }}`. Renders the account display. */
+  greeting?: ReactNode;
+  /** Right-part: circular icon buttons. */
+  actions?: ReactNode[];
+  /** Right-part: a link or button after the icon buttons. */
   trailing?: ReactNode;
-  actions?: ReactNode[];      // circle icon buttons on the right (brand header)
-  actionBar?: TopBarAction;   // optional darker-red sub-card (e.g. "Complete your profile")
-  statusBar?: boolean;        // faux iOS status row (default true on brand)
+  /** Big-title block: small overline above the large title. */
+  eyebrow?: ReactNode;
+  /** Big-title block: the large title (`heading.lg`). */
+  bigTitle?: ReactNode;
+  /** Big-title block: supporting line under the title. */
+  subtext?: ReactNode;
+  /** Trailing chevron on the big title / account name. */
+  chevron?: boolean;
+  /** @deprecated V1.0 sub-card — pass a card via `children` instead. */
+  actionBar?: TopBarAction;
+  /** Bottom slot: search, tabs, chips, stepper, action cards… */
+  children?: ReactNode;
+  /** Rounded bottom corners (defaults on brand). */
+  rounded?: boolean;
 }
 function CircleBtn({ children, dark }: { children: ReactNode; dark?: boolean }) {
-  return <span style={{ width: 40, height: 40, borderRadius: '50%', background: dark ? 'rgba(255,255,255,0.18)' : color('surface.base.default'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: dark ? '#fff' : color('text.default.default') }}>{children}</span>;
+  return <span style={{ width: 40, height: 40, borderRadius: '50%', flex: 'none', background: dark ? color('surface.glass.white.md') : color('surface.base.default'), backdropFilter: dark ? 'blur(20px)' : undefined, WebkitBackdropFilter: dark ? 'blur(20px)' : undefined, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: dark ? '#fff' : color('text.default.default') }}>{children}</span>;
 }
-export function TopBar({ variant = 'default', leading, title, greeting, trailing, actions, actionBar, statusBar, style, ...rest }: TopBarProps) {
-  if (variant === 'brand') {
+function Chevron({ size = 20, color: c }: { size?: number; color?: string }) {
+  return (
+    <svg aria-hidden width={size} height={size} viewBox="0 0 24 24" fill="none" style={{ flex: 'none', color: c }}>
+      <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+export function TopBar({
+  surface, variant, statusBar, leading, logo, title, account, greeting, actions, trailing,
+  eyebrow, bigTitle, subtext, chevron, actionBar, rounded, style, children, ...rest
+}: TopBarProps) {
+  const acct = account ?? (greeting != null ? { greeting } : undefined);
+  const surf: TopBarSurface = surface ?? variant ?? (bigTitle != null || acct != null ? 'brand' : 'default');
+  const onDark = surf === 'brand';
+  const text = onDark ? color('text.default.inverse') : color('text.default.default');
+  const sub = onDark ? color('text.default.inverse-subtle') : color('text.default.muted');
+  const round = rounded ?? onDark;
+  const hero = onDark || bigTitle != null || acct != null || children != null;
+  const clamp = { whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' } as const;
+
+  // Compact default header — single 56px row, no hero content.
+  if (!hero) {
     return (
-      <header style={{ position: 'sticky', top: 0, zIndex: 10, width: '100%', boxSizing: 'border-box', background: color('surface.base.brand'), color: '#fff', borderBottomLeftRadius: 20, borderBottomRightRadius: 20, padding: `0 ${space('lg')} ${space('lg')}`, ...style }} {...rest}>
-        {statusBar !== false && (
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: 44, fontSize: 14, fontWeight: 600 }}><span>9:41</span><span style={{ letterSpacing: 2 }}>▂▄▆ 📶 🔋</span></div>
-        )}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: space('md') }}>
-          <div style={{ minWidth: 0 }}>
-            {greeting ? <Text variant="body.sm" color="rgba(255,255,255,0.85)" as="div">{greeting}</Text> : null}
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}><Text variant="title.md" color="#fff">{title}</Text><Icon size="xs">⌄</Icon></span>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: space('sm') }}>
-            {(actions ?? []).map((a, i) => <CircleBtn key={i} dark>{a}</CircleBtn>)}
-            {trailing}
-          </div>
-        </div>
-        {actionBar ? (
-          <div style={{ marginTop: space('md'), display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: space('sm'), background: 'rgba(0,0,0,0.18)', borderRadius: 14, padding: space('md') }}>
-            <div style={{ minWidth: 0 }}>
-              <Text variant="title.sm" color="#fff" as="div">{actionBar.title}</Text>
-              {actionBar.subtitle ? <Text variant="body.sm" color="rgba(255,255,255,0.8)">{actionBar.subtitle}</Text> : null}
-            </div>
-            <span style={{ background: '#fff', color: color('text.brand.default'), borderRadius: 9999, padding: `8px ${space('lg')}`, fontWeight: 600, fontSize: 14, whiteSpace: 'nowrap' }}>{actionBar.cta ?? 'Start'}</span>
-          </div>
-        ) : null}
+      <header style={{ position: 'sticky', top: 0, zIndex: 10, width: '100%', boxSizing: 'border-box', height: 56, display: 'flex', alignItems: 'center', gap: space('md'), padding: `0 ${space('lg')}`, background: color('surface.canvas.default'), borderBottom: `1px solid ${color('border.solid.subtle')}`, ...style }} {...rest}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: space('sm') }}>{leading}</div>
+        {logo ? <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>{logo === true ? <LogoMark /> : logo}</div>
+          : <div style={{ flex: 1, minWidth: 0 }}><Text variant="title.md" style={clamp}>{title}</Text></div>}
+        <div style={{ display: 'flex', alignItems: 'center', gap: space('sm') }}>{(actions ?? []).map((a, i) => <CircleBtn key={i}>{a}</CircleBtn>)}{trailing}</div>
       </header>
     );
   }
+
   return (
-    <header style={{ position: 'sticky', top: 0, zIndex: 10, width: '100%', boxSizing: 'border-box', height: 56, display: 'flex', alignItems: 'center', gap: space('md'), padding: `0 ${space('lg')}`, background: color('surface.canvas.default'), borderBottom: `1px solid ${color('border.solid.subtle')}`, ...style }} {...rest}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: space('sm') }}>{leading}</div>
-      <div style={{ flex: 1, minWidth: 0 }}><Text variant="title.md" style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{title}</Text></div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: space('sm') }}>{(actions ?? []).map((a, i) => <CircleBtn key={i}>{a}</CircleBtn>)}{trailing}</div>
+    <header style={{ position: 'sticky', top: 0, zIndex: 10, width: '100%', boxSizing: 'border-box', background: onDark ? color('surface.base.brand') : color('surface.canvas.default'), color: text, borderBottomLeftRadius: round ? radius('6') : 0, borderBottomRightRadius: round ? radius('6') : 0, padding: `0 ${space('lg')} ${space('lg')}`, display: 'flex', flexDirection: 'column', gap: space('md'), ...style }} {...rest}>
+      {statusBar !== false && (
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: 44, fontSize: 14, fontWeight: 600, color: text }}><span>9:41</span><span style={{ letterSpacing: 2 }}>▂▄▆ 📶 🔋</span></div>
+      )}
+      {/* header top row: left-part · middle (logo) · right-part */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: space('md'), minHeight: 40 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: space('sm') }}>{leading}</div>
+        {logo ? <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>{logo === true ? <LogoMark onDark={onDark} /> : logo}</div> : <div style={{ flex: 1 }} />}
+        <div style={{ display: 'flex', alignItems: 'center', gap: space('sm') }}>{(actions ?? []).map((a, i) => <CircleBtn key={i} dark={onDark}>{a}</CircleBtn>)}{trailing}</div>
+      </div>
+
+      {/* account display — greeting over masked name */}
+      {acct ? (
+        <div style={{ minWidth: 0 }}>
+          {acct.greeting != null ? <Text variant="body.md" color={sub} as="div">{acct.greeting}</Text> : null}
+          {acct.name != null ? <span style={{ display: 'inline-flex', alignItems: 'center', gap: space('2xs') }}><Text variant="title.md" color={text}>{acct.name}</Text>{chevron !== false ? <Chevron size={16} color={text} /> : null}</span> : null}
+        </div>
+      ) : null}
+
+      {/* big-title block: eyebrow · large title · subtext */}
+      {bigTitle != null ? (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: space('2xs') }}>
+          {eyebrow != null ? <Text variant="title.xs" color={text} as="div">{eyebrow}</Text> : null}
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: space('sm') }}>
+            <Text variant="heading.lg" color={text}>{bigTitle}</Text>
+            {chevron ? <Chevron size={24} color={text} /> : null}
+          </span>
+          {subtext != null ? <Text variant="body.lg" color={sub}>{subtext}</Text> : null}
+        </div>
+      ) : null}
+
+      {/* deprecated action-bar sub-card */}
+      {actionBar ? (
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: space('sm'), background: 'rgba(0,0,0,0.18)', borderRadius: radius('3'), padding: space('md') }}>
+          <div style={{ minWidth: 0 }}>
+            <Text variant="title.sm" color="#fff" as="div">{actionBar.title}</Text>
+            {actionBar.subtitle ? <Text variant="body.sm" color="rgba(255,255,255,0.8)">{actionBar.subtitle}</Text> : null}
+          </div>
+          <span style={{ background: '#fff', color: color('text.brand.default'), borderRadius: 9999, padding: `8px ${space('lg')}`, fontWeight: 600, fontSize: 14, whiteSpace: 'nowrap' }}>{actionBar.cta ?? 'Start'}</span>
+        </div>
+      ) : null}
+
+      {/* bottom slot: search / tabs / chips / stepper / cards */}
+      {children != null ? <div style={{ display: 'flex', flexDirection: 'column', gap: space('sm') }}>{children}</div> : null}
     </header>
   );
+}
+/** White e& wordmark for the header centre on brand; ink on light surfaces. */
+function LogoMark({ onDark }: { onDark?: boolean }) {
+  return <span style={{ fontWeight: 700, fontSize: 22, letterSpacing: '-0.02em', color: onDark ? '#fff' : color('text.brand.default') }}>e&amp;</span>;
 }
 
 /* ---------------- ListRow (settings / contact / list items) ---------------- */
@@ -81,30 +160,40 @@ export function ListRow({ icon, label, sublabel, value, chevron = true, style, .
 export interface NavItem { label: string; icon?: ReactNode; avatar?: ReactNode; active?: boolean; special?: boolean; onClick?: () => void; }
 export interface NavBarProps extends HTMLAttributes<HTMLElement> {
   items: NavItem[];
+  /** Figma `.navbar-scroll` axis. `down` collapses to icons only (scrolled down);
+   *  `up` (default) shows icon + label. Transitions are animated. */
+  scrollDirection?: 'up' | 'down';
 }
 const GLASS = { background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(19px)', WebkitBackdropFilter: 'blur(19px)', border: '1px solid rgba(255,255,255,0.22)' } as const;
-/** One equal-width tab. Active = white pill; the icon + label pick up red via
- *  currentColor. Inactive = transparent with white content. */
-function NavTab({ it }: { it: NavItem }) {
+/** One tab. Active = white pill; the icon + label pick up red via currentColor.
+ *  When `collapsed`, labels animate away and the active pill widens (icons only). */
+function NavTab({ it, collapsed }: { it: NavItem; collapsed?: boolean }) {
   const on = it.active;
   return (
     <button onClick={it.onClick} aria-current={on ? 'page' : undefined}
       style={{
-        flex: '1 0 0', minWidth: 0, display: 'inline-flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-        gap: 2, padding: '6px 4px 4px', borderRadius: 9999, border: 0, cursor: 'pointer',
+        flexGrow: collapsed ? (on ? 3 : 1) : 1, flexShrink: 1, flexBasis: 0, minWidth: 0,
+        display: 'inline-flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+        gap: 2, padding: collapsed ? '8px 4px' : '6px 4px 4px', borderRadius: 9999, border: 0, cursor: 'pointer',
         background: on ? '#fff' : 'transparent', color: on ? color('text.brand.default') : '#fff',
+        transition: 'flex-grow 280ms ease, padding 220ms ease, background 200ms ease',
       }}>
-      <span style={{ display: 'inline-flex', width: 32, height: 32, alignItems: 'center', justifyContent: 'center', color: 'inherit' }}>
+      <span style={{ display: 'inline-flex', width: 32, height: 32, alignItems: 'center', justifyContent: 'center', color: 'inherit', flex: 'none' }}>
         {it.avatar ?? it.icon ?? '●'}
       </span>
-      <span style={{ fontSize: 10, lineHeight: 1.4, fontWeight: on ? 700 : 400, color: 'inherit' }}>{it.label}</span>
+      <span aria-hidden={collapsed || undefined} style={{
+        fontSize: 10, lineHeight: 1.4, fontWeight: on ? 700 : 400, color: 'inherit', whiteSpace: 'nowrap',
+        maxHeight: collapsed ? 0 : 16, opacity: collapsed ? 0 : 1, overflow: 'hidden',
+        transition: 'max-height 260ms ease, opacity 180ms ease',
+      }}>{it.label}</span>
     </button>
   );
 }
-/** Floating glass nav over a midnight scrim: one frosted pill of equal-width tabs.
+/** Floating glass nav over a midnight scrim: one frosted pill of tabs.
  *  Active tab = a solid WHITE pill with red icon + label; inactive tabs are white on
- *  the glass. (mShop is now a regular tab — no detached circle.) */
-export function NavBar({ items, style, ...rest }: NavBarProps) {
+ *  the glass. Collapses to icons only when scrolled down (Figma `scroll-direction`). */
+export function NavBar({ items, scrollDirection = 'up', style, ...rest }: NavBarProps) {
+  const collapsed = scrollDirection === 'down';
   return (
     <nav style={{
       position: 'sticky', bottom: 0, zIndex: 10, width: '100%', boxSizing: 'border-box',
@@ -114,7 +203,7 @@ export function NavBar({ items, style, ...rest }: NavBarProps) {
     }} {...rest}>
       <div style={{ padding: `0 ${space('lg')}` }}>
         <div style={{ ...GLASS, display: 'flex', alignItems: 'center', gap: space('sm'), padding: 4, borderRadius: 9999 }}>
-          {items.map((it, i) => <NavTab key={i} it={it} />)}
+          {items.map((it, i) => <NavTab key={i} it={it} collapsed={collapsed} />)}
         </div>
       </div>
       <span style={{ width: 144, height: 5, borderRadius: 9999, background: 'rgba(255,255,255,0.9)', margin: '10px auto 8px' }} />
@@ -122,19 +211,93 @@ export function NavBar({ items, style, ...rest }: NavBarProps) {
   );
 }
 
-/* ---------------- ActionBar (sticky footer) ---------------- */
-export interface ActionBarProps extends HTMLAttributes<HTMLDivElement> {
-  helper?: ReactNode;
+/* ---------------- ActionBar ---------------- */
+/** Backing surface (Figma `surface-color`). Two families: light (dark text) and
+ *  dark/inverse (white text). Maps to `surface.*` tokens. */
+export type ActionBarSurface =
+  | 'default' | 'subtle' | 'sunken' | 'white-transparent'
+  | 'glass' | 'midnight-base' | 'midnight-raised' | 'midnight-transparent';
+const AB_SURFACE: Record<ActionBarSurface, { bg: string; inverse: boolean; blur: boolean }> = {
+  default:                { bg: 'surface.base.inverse',      inverse: false, blur: false }, // #ffffff
+  subtle:                 { bg: 'surface.base.default',      inverse: false, blur: false }, // #f0f0f5
+  sunken:                 { bg: 'surface.sunken.default',    inverse: false, blur: false }, // #e4e3ea
+  'white-transparent':    { bg: 'surface.glass.midnight.sm', inverse: false, blur: true  }, // rgba(25,19,41,.07)
+  glass:                  { bg: 'surface.glass.white.md',    inverse: true,  blur: true  }, // rgba(255,255,255,.15)
+  'midnight-base':        { bg: 'surface.base.midnight',     inverse: true,  blur: false }, // #191329
+  'midnight-raised':      { bg: 'surface.raised.midnight',   inverse: true,  blur: false }, // #312c40
+  'midnight-transparent': { bg: 'surface.glass.midnight.md', inverse: true,  blur: true  }, // rgba(25,19,41,.20)
+};
+
+export interface ActionBarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'action'> {
+  /** Primary line — `title.xs` (Figma limit ~18 chars). */
+  title?: ReactNode;
+  /** Secondary line — `body.md`, truncates with ellipsis (Figma limit ~21 chars). */
+  subtitle?: ReactNode;
+  /** Leading visual (icon or image) shown in a 40×40 tile. Omit for text at the leading edge. */
+  icon?: ReactNode;
+  /** Trailing action — typically a `<Button>`. Only one trailing action; do not combine with `chevron`. */
+  action?: ReactNode;
+  /** Show a trailing chevron instead of a button — the whole bar becomes the tap target. */
+  chevron?: boolean;
+  /** Backing surface. Light family: `default`·`subtle`·`sunken`·`white-transparent`;
+   *  dark family: `glass`·`midnight-base`·`midnight-raised`·`midnight-transparent`. */
+  surface?: ActionBarSurface;
+  /** @deprecated Use `surface="glass"`. Kept as a back-compat alias for the inverse scheme. */
+  inverse?: boolean;
+  /** Multiple-stack — layered "stacked cards" look. Inverse/dark surfaces only (Figma). */
+  stack?: boolean;
 }
-export function ActionBar({ helper, style, children, ...rest }: ActionBarProps) {
+export function ActionBar({ title, subtitle, icon: leading, action, chevron, surface, inverse, stack, onClick, style, ...rest }: ActionBarProps) {
+  const key: ActionBarSurface = surface ?? (inverse ? 'glass' : 'default');
+  const s = AB_SURFACE[key];
+  const tappable = chevron || !!onClick;
+  const titleColor = s.inverse ? color('text.default.inverse') : color('text.default.default');
+  const subtitleColor = s.inverse ? color('text.default.inverse-subtle') : color('text.default.subtle');
+  const tileBg = s.inverse ? color('surface.glass.white.md') : color('surface.base.default');
+  const glass = s.blur ? { backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' } as const : {};
+  const clamp = { display: 'block', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' } as const;
+  const showStack = !!stack && s.inverse; // multiple-stack is inverse/glass only
+
+  const bar = (
+    <div onClick={onClick} style={{
+      position: 'relative', display: 'flex', alignItems: 'center', gap: space('md'),
+      height: 72, padding: `0 ${space('lg')}`, width: '100%', boxSizing: 'border-box',
+      borderRadius: radius('6'), overflow: 'hidden', background: color(s.bg), ...glass,
+      cursor: tappable ? 'pointer' : undefined, ...(showStack ? {} : style),
+    }} {...(showStack ? {} : rest)}>
+      {leading != null ? (
+        <span style={{
+          flex: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+          width: 40, height: 40, borderRadius: radius('3'), background: tileBg, color: titleColor,
+          overflow: 'hidden', // clip a full-bleed image leading (`.image-asset type=image`)
+        }}>{leading}</span>
+      ) : null}
+      <span style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        {title != null ? <Text variant="title.xs" color={titleColor} style={clamp}>{title}</Text> : null}
+        {subtitle != null ? <Text variant="body.md" color={subtitleColor} style={clamp}>{subtitle}</Text> : null}
+      </span>
+      {chevron
+        ? <svg aria-hidden width={24} height={24} viewBox="0 0 24 24" fill="none" style={{ flex: 'none', color: titleColor }}>
+            <path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        : action != null ? <span style={{ flex: 'none', display: 'inline-flex' }}>{action}</span> : null}
+    </div>
+  );
+
+  if (!showStack) return bar;
+  // Stacked-card layers peeking out below the bar (same surface, narrower + offset down).
+  const ghost = (top: number, inset: number, opacity: number) => (
+    <div aria-hidden style={{
+      position: 'absolute', top, left: inset, right: inset, height: 72,
+      borderRadius: radius('6'), background: color(s.bg), ...glass, opacity,
+      border: `1px solid ${color('surface.glass.white.md')}`,
+    }} />
+  );
   return (
-    <div style={{
-      position: 'sticky', bottom: 0, width: '100%', boxSizing: 'border-box',
-      display: 'flex', flexDirection: 'column', gap: space('xs'), padding: space('lg'),
-      background: color('surface.canvas.default'), borderTop: `1px solid ${color('border.solid.subtle')}`, ...style,
-    }} {...rest}>
-      {helper ? <Text variant="body.sm" color={color('text.default.muted')}>{helper}</Text> : null}
-      <div style={{ display: 'flex', gap: space('md') }}>{children}</div>
+    <div style={{ position: 'relative', width: '100%', paddingBottom: 12, ...style }} {...rest}>
+      {ghost(12, 16, 0.6)}
+      {ghost(6, 8, 0.85)}
+      <div style={{ position: 'relative' }}>{bar}</div>
     </div>
   );
 }
@@ -151,7 +314,7 @@ export function SectionLink({ title, link = 'See all', onLinkClick, style, ...re
       <Text variant="heading.xs">{title}</Text>
       <button onClick={onLinkClick} style={{ display: 'inline-flex', alignItems: 'center', gap: 2, background: 'transparent', border: 0, cursor: 'pointer', color: color('text.brand.default') }}>
         <Text variant="button.sm" color={color('text.brand.default')}>{link}</Text>
-        <Icon size="xs">›</Icon>
+        <Icon size="md">›</Icon>
       </button>
     </div>
   );

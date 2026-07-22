@@ -13,3 +13,4 @@ export * from './components/controls';
 export * from './components/feedback';
 export * from './components/overlays';
 export * from './components/cards';
+export * from './components/ctabar';

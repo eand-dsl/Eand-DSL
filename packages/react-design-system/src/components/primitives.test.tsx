@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import { Badge, ProgressBar } from './primitives';
+import userEvent from '@testing-library/user-event';
+import { Badge, ProgressBar, Stepper, Dismiss } from './primitives';
 
 /* ---------------- Badge ---------------- */
 
@@ -90,4 +91,61 @@ test('ProgressBar clamps value into 0-100', () => {
   render(<ProgressBar value={140} />);
   const fill = screen.getByRole('progressbar').firstChild as HTMLElement;
   expect(fill.style.width).toBe('100%');
+});
+
+/* ---------------- Stepper (Figma 31614:11244) ---------------- */
+
+
+test('Stepper renders one segment per step with progress filled', () => {
+  const { container } = render(<Stepper steps={5} progress={2} />);
+  const bar = screen.getByRole('progressbar');
+  expect(bar).toHaveAttribute('aria-valuemax', '5');
+  expect(bar).toHaveAttribute('aria-valuenow', '2');
+  const segments = Array.from(container.querySelectorAll('span'));
+  expect(segments).toHaveLength(5);
+  // active = #e73933, inactive = #e4e3ea (jsdom normalizes to rgb)
+  expect(segments.slice(0, 2).every((s) => s.style.background === 'rgb(231, 57, 51)')).toBe(true);
+  expect(segments.slice(2).every((s) => s.style.background === 'rgb(228, 227, 234)')).toBe(true);
+});
+
+test('Stepper inverse scheme uses white segments', () => {
+  const { container } = render(<Stepper steps={3} progress={1} inverse />);
+  const segments = Array.from(container.querySelectorAll('span'));
+  expect(segments[0].style.background).toBe('rgb(255, 255, 255)');
+  expect(segments[1].style.background).toBe('rgba(255, 255, 255, 0.4)');
+});
+
+test('Stepper clamps steps to the Figma 2-8 range and progress to steps', () => {
+  const { container } = render(<Stepper steps={12} progress={99} />);
+  const bar = screen.getByRole('progressbar');
+  expect(bar).toHaveAttribute('aria-valuemax', '8');
+  expect(bar).toHaveAttribute('aria-valuenow', '8');
+  expect(container.querySelectorAll('span')).toHaveLength(8);
+});
+
+/* ---------------- Dismiss (Figma 28961:16066) ---------------- */
+
+
+test('Dismiss renders a labelled circular close button and fires onClick', async () => {
+  const fn = vi.fn();
+  const { container } = render(<Dismiss onClick={fn} />);
+  const btn = screen.getByRole('button', { name: 'Dismiss' });
+  expect(btn.style.borderRadius).toBe('50%');
+  expect(container.querySelector('svg')).toBeInTheDocument();
+  await userEvent.click(btn);
+  expect(fn).toHaveBeenCalledTimes(1);
+});
+
+test('Dismiss md is 24px and sm is 20px', () => {
+  const { rerender } = render(<Dismiss />);
+  expect(screen.getByRole('button').style.width).toBe('24px');
+  rerender(<Dismiss size="sm" />);
+  expect(screen.getByRole('button').style.width).toBe('20px');
+});
+
+test('Dismiss surface picks the default vs inverse fill', () => {
+  const { rerender } = render(<Dismiss />);
+  expect(screen.getByRole('button').style.background).toBe('rgb(144, 142, 154)'); // #908e9a
+  rerender(<Dismiss surface="inverse" />);
+  expect(screen.getByRole('button').style.background).toBe('rgb(192, 191, 200)'); // #c0bfc8
 });

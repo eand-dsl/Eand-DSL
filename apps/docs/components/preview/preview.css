@@ -15,10 +15,13 @@
 }
 .eapg-missing { color: #b00; font-family: monospace; }
 
-/* preview stage */
+/* preview stage — the .stage-slot reserves the tallest-variant height (set inline by
+ * the demo harness) and centres content, so toggling variants never shifts the box. */
 .eapg .stage { background: radial-gradient(circle at 50% 0%, #ecebf2, #e2e1ea); border: 1px solid var(--line); border-radius: 24px; padding: 36px; display: flex; justify-content: center; }
+.eapg .stage-slot { display: flex; align-items: center; justify-content: center; width: 100%; }
+.eapg .stage-content { display: flex; justify-content: center; }
 .eapg .stage.phone .frame { width: 390px; max-width: 100%; background: #fff; border-radius: 28px; overflow: hidden; box-shadow: 0 24px 60px -20px rgba(25,19,41,.35); display: flex; flex-direction: column; }
-.eapg .stage.pad > div { width: 100%; max-width: 460px; display: flex; justify-content: center; }
+.eapg .stage.pad .stage-content { width: 100%; max-width: 460px; }
 
 /* code tabs */
 .eapg .code { margin-top: 16px; border-radius: 16px; overflow: hidden; background: var(--code-bg); border: 1px solid #20192f; }

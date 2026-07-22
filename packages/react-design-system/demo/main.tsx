@@ -10,7 +10,7 @@ function Account() {
   return (
     <>
       <TopBar variant="brand" greeting="Hi, Ahmed" title="050 123 4567"
-        actions={[ic('sparkle', 22, '#fff'), ic('notification', 22, '#fff')]} />
+        actions={[ic('magic-wand', 22, '#fff'), ic('notification', 22, '#fff')]} />
 
       <div className="scroll">
         <div style={{ padding: '8px 8px 0' }}>
@@ -34,8 +34,8 @@ function Account() {
         <Section title="My Account Hub" onSeeAll={() => {}}>
           <QuickAction columns={2} items={[
             { label: 'Add-ons', icon: ic('puzzle'), badge: <Badge status="positive" size="sm">3 active</Badge> },
-            { label: 'Subscriptions', icon: ic('subscriptions'), badge: <Badge status="neutral" size="sm">0</Badge> },
-            { label: 'My Devices', icon: ic('mobile'), badge: <Badge status="warning" size="sm">Active</Badge> },
+            { label: 'Subscriptions', icon: ic('sync'), badge: <Badge status="neutral" size="sm">0</Badge> },
+            { label: 'My Devices', icon: ic('phone-device'), badge: <Badge status="warning" size="sm">Active</Badge> },
             { label: 'My SIM Cards', icon: ic('sim'), badge: <Badge status="positive" size="sm">2 cards</Badge> },
             { label: 'mParking', icon: ic('car') },
             { label: 'All Services', icon: ic('grid') },
@@ -51,9 +51,9 @@ function Account() {
       </div>
 
       <NavBar items={[
-        { label: 'mShop', icon: ic('mshop'), special: true },
+        { label: 'mShop', icon: ic('store'), special: true },
         { label: 'Home', icon: ic('home'), active: true }, { label: 'Support', icon: ic('support') },
-        { label: 'Profile', icon: ic('profile') }, { label: 'Shop', icon: ic('shop') },
+        { label: 'Profile', icon: ic('user') }, { label: 'Shop', icon: ic('shop') },
       ]} />
     </>
   );

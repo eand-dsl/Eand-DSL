@@ -13,3 +13,8 @@ coverage/
 .turbo/
 .gstack/
 __pycache__/
+
+# claude / skill tooling artifacts (not part of the design system)
+.agents/
+skills-lock.json
+ui-ux-pro-max-skill/

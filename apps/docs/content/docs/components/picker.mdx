@@ -1,0 +1,29 @@
+---
+title: Picker
+description: Selectable option tiles (value + caption + status badge) across default, light, inverse, and glass surfaces.
+---
+
+<ComponentDemo id="picker" />
+
+## Anatomy
+
+Each tile shows a **value** (`title.sm`), an optional **caption** (`body.xs`, subtle), and an
+optional **status badge**. Selecting a tile adds a red accent border and a check indicator;
+`Picker` manages single selection across the set, and `PickerOption` is the standalone tile.
+
+## Props
+
+<PropsTable name="Picker" />
+<PropsTable name="PickerOption" />
+
+## Design
+
+Figma source: [Picker — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=28278-1530)
+
+Notes from the Figma spec:
+
+- 16px radius, ~72px tall; surface axis **default** (sunken grey) · **light** (white) ·
+  **inverse** (midnight) · **glass** (frosted white-20% with a backdrop blur).
+- Selected uses the `border/interactive/accent/default` red (`#e00800`); the tile always
+  renders a same-width transparent border so selecting doesn't shift layout.
+- Disabled dims the tile and blocks selection.

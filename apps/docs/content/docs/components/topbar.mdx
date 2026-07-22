@@ -1,20 +1,28 @@
 ---
 title: TopBar
-description: Screen header. Brand variant is the red account header.
+description: Slot-based screen header — top row, big-title block or account display, and a bottom slot for search, chips, and tabs.
 ---
 
 <ComponentDemo id="topbar" />
+
+## Anatomy
+
+`TopBar` composes the Figma master's slots:
+
+- **Top row** — `leading` (back / avatar), `logo` or `title` in the middle, and `actions` + `trailing` on the right (circular glass buttons on brand).
+- **Big-title block** — `eyebrow` (overline) · `bigTitle` (`heading.lg`) · `subtext`, with an optional `chevron`.
+- **Account display** — `account={{ greeting, name }}` for the masked-number home header.
+- **Bottom slot** — anything passed as `children`: a `Searchbar`, `Chip` row, `Tabs`, `Stepper`, or action cards.
+
+`surface` is `brand` (red hero, rounded bottom, `statusBar` on by default) or `default` (compact 56px light bar).
 
 ## Props
 
 <PropsTable name="TopBar" />
 
-## Try it
-
-Edit the code — the preview updates live. Every design-system export plus `Icon` is in scope.
-
-<Playground code={`<TopBar variant="brand" greeting="Hi, Ahmed" title="050 123 4567" />`} />
-
 ## Design
 
 Figma source: [TopBar — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=22542-13963)
+
+The old `variant` / `greeting` / `actionBar` props still work as back-compat aliases
+(`variant` → `surface`, `greeting` → `account.greeting`); prefer the slot props above.

@@ -35,8 +35,8 @@ function ChipRow({ items }: { items: string[] }) {
 /** Bottom nav with a live-selectable active tab. Tab set switches by variant.
  *  (Remounted per variant via key, so the default active tab resets correctly.) */
 const NAV_SETS: Record<string, [string, string][]> = {
-  'logged-in': [['Home', 'home'], ['Support', 'support'], ['Profile', 'profile'], ['mShop', 'mshop']],
-  'logged-out': [['mShop', 'mshop'], ['Plans', 'grid'], ['Devices', 'mobile'], ['eLife', 'tv']],
+  'logged-in': [['Home', 'home'], ['Support', 'support'], ['Profile', 'user'], ['mShop', 'store']],
+  'logged-out': [['mShop', 'store'], ['Plans', 'grid'], ['Devices', 'phone-device'], ['eLife', 'tv']],
 };
 function NavBarDemo({ variant }: { variant: string }) {
   const set = NAV_SETS[variant] ?? NAV_SETS['logged-in'];
@@ -149,7 +149,7 @@ export const PAGES: Page[] = [
     render: (v) => {
       const brand = p(v, 'variant') === 'brand';
       return <TopBar variant={p(v, 'variant')} greeting={brand ? 'Hi, Ahmed' : undefined} title={brand ? '050 123 4567' : 'Account'}
-        actions={[ic('sparkle', brand ? '#fff' : undefined), ic('notification', brand ? '#fff' : undefined)]} />;
+        actions={[ic('magic-wand', brand ? '#fff' : undefined), ic('notification', brand ? '#fff' : undefined)]} />;
     }, code: snippets.topbar },
 
   { id: 'section', group: 'Components', title: 'Section', frame: 'phone',
@@ -179,8 +179,8 @@ export const PAGES: Page[] = [
       <div style={{ padding: 12, background: '#e4e3ea' }}>
         <QuickAction columns={2} items={[
           { label: 'Add-ons', icon: ic('puzzle'), badge: <Badge status="positive" size="sm">3 active</Badge> },
-          { label: 'Subscriptions', icon: ic('subscriptions') },
-          { label: 'My Devices', icon: ic('mobile') },
+          { label: 'Subscriptions', icon: ic('sync') },
+          { label: 'My Devices', icon: ic('phone-device') },
           { label: 'mParking', icon: ic('car') },
         ]} />
       </div>

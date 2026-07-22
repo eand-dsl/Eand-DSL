@@ -1,0 +1,35 @@
+---
+title: CTA Bar
+description: Sticky bottom call-to-action footer with status ribbon, price, terms, payment method, and button group.
+---
+
+<ComponentDemo id="ctabar" />
+
+## Anatomy
+
+`CtaFooter` stacks its slots top-to-bottom, matching the Figma CTA-bar page:
+
+1. **`ribbon`** — a full-bleed `StatusRibbon` (success / alert / warning / info)
+2. **`price`** — total row: label left, price + note right
+3. **`terms`** — checkbox row (pass your own `<Checkbox/>` so state stays with you)
+4. **`payment` + `actions`** — a `PaymentRow` beside the confirm button, or a full-width `ButtonGroup`
+5. **`homeIndicator`** — iOS home-indicator strip
+
+## Props
+
+<PropsTable name="CtaFooter" />
+<PropsTable name="StatusRibbon" />
+<PropsTable name="ButtonGroup" />
+<PropsTable name="PaymentRow" />
+
+## Design
+
+Figma source: [CTA-bar — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=31501-35139)
+
+Notes from the Figma spec:
+
+- 20px side padding; 12px gap between buttons; buttons are 48px (`lg`).
+- The status ribbon is 40px tall and uses the `color/alert-message/*` variables — these are
+  not yet in the exported `variables.json`, so the component carries the live Figma values.
+- Horizontal button groups place **secondary left, primary right**; tertiary/link actions
+  always sit on their own centered row.

@@ -14,8 +14,8 @@ const TABS: { id: Lang; label: string; badge: string }[] = [
 const RE = new RegExp([
   /(\/\/[^\n]*)/.source,
   /("[^"]*"|'[^']*')/.source,
-  /\b(import|struct|class|object|fun|func|val|var|let|public|private|static|return|some|export|function|const|from|enum|in)\b/.source,
-  /\b(Eand[A-Za-z]+|Color|Text|Button|VStack|HStack|Capsule|Modifier|TextStyle|FontWeight|Composable|CGFloat|View|Badge|Section|NavBar|TopBar|Chip|Tabs|ListRow|QuickAction|PlanCard|Icon)\b/.source,
+  /\b(import|struct|class|object|fun|func|val|var|let|public|private|static|return|some|export|function|const|from|enum|in|by|remember|repeat|if|else|when)\b/.source,
+  /\b(Eand[A-Za-z]+|Color|Text|Button|VStack|HStack|ZStack|Column|Row|Box|Spacer|Divider|Capsule|Circle|Rectangle|RoundedRectangle|RoundedCornerShape|CircleShape|Brush|LinearGradient|Image|Painter|Icon|Icons|Modifier|Arrangement|Alignment|TextAlign|FontWeight|TextStyle|Composable|CGFloat|Dp|View|Badge|Section|NavBar|TopBar|Chip|Tabs|ListRow|QuickAction|PlanCard|Input|OtpInput|Switch|Switcher|Radio|RadioButton|Checkbox|Snackbar|Alert|AlertModal|Tooltip|BottomSheet|ModalBottomSheet|Card|Accordion|ActionBar|SectionLink|PlanUsageBar|ProductCard|DealCard|NewCard|ServiceCard|Highlight|SmilesBalance|SmilesRow|Voucher|Stepper|ProgressBar|AddTrigger|AtomSurface|Logo|LogoRow|Searchbar|AISearch|Selectors|FilterPill|StatusRibbon|ButtonGroup|PaymentRow|CtaFooter|PillTab)\b/.source,
 ].join('|'), 'g');
 
 function highlight(code: string): string {

@@ -147,3 +147,46 @@ test('caller onFocus/onBlur handlers still fire', async () => {
   await userEvent.tab();
   expect(onBlur).toHaveBeenCalledTimes(1);
 });
+
+/* ---------------- Glass variant (Figma 31511:8011) ---------------- */
+
+test('glass renders the frosted white-15% surface with white text', () => {
+  render(<Button variant="glass">Glass</Button>);
+  const btn = screen.getByRole('button');
+  expect(btn.style.background).toBe('rgba(255, 255, 255, 0.15)');
+  expect(btn.style.color).toBe('rgb(255, 255, 255)');
+  expect(btn.style.backdropFilter).toBe('blur(20px)');
+});
+
+test('glass disabled dims surface and text per Figma', () => {
+  render(<Button variant="glass" disabled>Glass</Button>);
+  const btn = screen.getByRole('button');
+  expect(btn.style.background).toBe('rgba(255, 255, 255, 0.1)');
+  expect(btn.style.color).toBe('rgba(255, 255, 255, 0.5)');
+});
+
+/* ---------------- Loading state (Figma Loader <-> Icon=on) ---------------- */
+
+test('loading shows a spinner, sets aria-busy, and suppresses clicks', async () => {
+  const fn = vi.fn();
+  const { container } = render(<Button loading onClick={fn}>Save</Button>);
+  const btn = screen.getByRole('button');
+  expect(btn).toHaveAttribute('aria-busy', 'true');
+  expect(container.querySelector('svg')).toBeInTheDocument();
+  await userEvent.click(btn);
+  expect(fn).not.toHaveBeenCalled();
+});
+
+test('loading keeps the default palette (not the disabled look)', () => {
+  render(<Button loading>Save</Button>);
+  const btn = screen.getByRole('button');
+  expect(btn.style.background).toBe('rgb(224, 8, 0)'); // primary brand default
+  expect(btn).not.toBeDisabled();
+});
+
+test('loading replaces the leading icon but keeps the trailing icon', () => {
+  const { container } = render(<Button loading leadingIcon={<i data-testid="lead" />} trailingIcon={<i data-testid="trail" />}>Go</Button>);
+  expect(container.querySelector('[data-testid="lead"]')).toBeNull();
+  expect(container.querySelector('[data-testid="trail"]')).toBeInTheDocument();
+  expect(container.querySelector('svg')).toBeInTheDocument();
+});

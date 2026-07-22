@@ -293,10 +293,16 @@
   ],
   "Input": [
     {
+      "name": "clearable",
+      "type": "boolean",
+      "required": false,
+      "description": "Show the 24px erase button when the field has a value."
+    },
+    {
       "name": "error",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "Error hint below the field (Figma status=error); drives the error border."
     },
     {
       "name": "helper",
@@ -305,16 +311,40 @@
       "description": ""
     },
     {
+      "name": "htmlType",
+      "type": "HTMLInputTypeAttribute",
+      "required": false,
+      "description": "Underlying HTML input type (password, email, …) for type=\"text\"."
+    },
+    {
+      "name": "inverse",
+      "type": "boolean",
+      "required": false,
+      "description": "Inverse scheme for dark (midnight/brand) surfaces."
+    },
+    {
       "name": "label",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "Floating label inside the field."
     },
     {
       "name": "leadingIcon",
       "type": "ReactNode",
       "required": false,
       "description": ""
+    },
+    {
+      "name": "onClear",
+      "type": "(() => void)",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "success",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Success hint below the field (Figma status=Success)."
     },
     {
       "name": "trailingIcon",
@@ -323,14 +353,90 @@
       "description": ""
     },
     {
+      "name": "type",
+      "type": "enum",
+      "required": false,
+      "default": "text",
+      "description": "Figma `type` axis. dropdown/picker render read-only with a trailing chevron."
+    },
+    {
       "name": "variant",
       "type": "enum",
       "required": false,
-      "default": "outlined",
+      "description": "@deprecated V1.0 axis — V1.1 has a single filled style; ignored."
+    }
+  ],
+  "OtpInput": [
+    {
+      "name": "defaultValue",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": ""
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "error",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "inverse",
+      "type": "boolean",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "length",
+      "type": "number",
+      "required": false,
+      "default": "4",
+      "description": ""
+    },
+    {
+      "name": "masked",
+      "type": "boolean",
+      "required": false,
+      "description": "Render entered characters as dots."
+    },
+    {
+      "name": "onValueChange",
+      "type": "((value: string) => void)",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "required": false,
       "description": ""
     }
   ],
   "Chip": [
+    {
+      "name": "check",
+      "type": "boolean",
+      "required": false,
+      "description": "Show a check mark as the leading icon while selected (Figma content `type=check`)."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "inverse",
+      "type": "boolean",
+      "required": false,
+      "description": "@deprecated Alias for `type=\"inverse\"`."
+    },
     {
       "name": "leadingIcon",
       "type": "ReactNode",
@@ -338,6 +444,12 @@
       "description": ""
     },
     {
+      "name": "loading",
+      "type": "boolean",
+      "required": false,
+      "description": "Spinner replaces the leading icon (Figma `Loader <-> Icon=on`); clicks suppressed."
+    },
+    {
       "name": "onClick",
       "type": "(() => void)",
       "required": false,
@@ -347,11 +459,29 @@
       "name": "selected",
       "type": "boolean",
       "required": false,
-      "description": ""
+      "description": "Figma state=focus (the pressed/active chip)."
+    },
+    {
+      "name": "type",
+      "type": "enum",
+      "required": false,
+      "description": "Figma `type` axis."
     }
   ],
   "FilterPill": [
     {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "inverse",
+      "type": "boolean",
+      "required": false,
+      "description": "Inverse color scheme for dark (midnight/brand) surfaces (Figma `Color=Inverse`)."
+    },
+    {
       "name": "onClick",
       "type": "(() => void)",
       "required": false,
@@ -361,23 +491,55 @@
       "name": "selected",
       "type": "boolean",
       "required": false,
-      "description": ""
+      "description": "Maps to Figma `State=Focused` (V1.1 `filter-pill` set 26151:391) — the pressed/active pill state."
     }
   ],
   "Checkbox": [
     {
-      "name": "label",
-      "type": "ReactNode",
+      "name": "inverse",
+      "type": "boolean",
       "required": false,
-      "description": ""
-    }
-  ],
-  "Radio": [
+      "description": "Inverse color scheme for dark (midnight/brand) surfaces (Figma `color-scheme=inverse`)."
+    },
     {
       "name": "label",
       "type": "ReactNode",
       "required": false,
       "description": ""
+    },
+    {
+      "name": "radio",
+      "type": "boolean",
+      "required": false,
+      "description": "Render as a radio (single-selection) — a circle instead of a square. Same mark,\ncolors and states (Figma `radio (single selection)=yes`, node 27685:5017)."
+    },
+    {
+      "name": "size",
+      "type": "enum",
+      "required": false,
+      "default": "md",
+      "description": "Control size — `md` 20×20 (default) or `sm` 16×16 (Figma V1.1 `size` axis)."
+    }
+  ],
+  "Radio": [
+    {
+      "name": "inverse",
+      "type": "boolean",
+      "required": false,
+      "description": "Inverse color scheme for dark (midnight/brand) surfaces (Figma `color-scheme=inverse`)."
+    },
+    {
+      "name": "label",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "size",
+      "type": "enum",
+      "required": false,
+      "default": "lg",
+      "description": "Control size — `lg` 24×24 (default) or `sm` 20×20 (Figma V1.1 `small` axis)."
     }
   ],
   "Switcher": [
@@ -464,6 +626,84 @@
       "description": ""
     }
   ],
+  "PickerOption": [
+    {
+      "name": "badge",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Status badge slot rendered at the bottom of the tile."
+    },
+    {
+      "name": "caption",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Secondary line under the value (body.xs, subtle) — e.g. a unit."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "onClick",
+      "type": "(() => void)",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "selected",
+      "type": "boolean",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "surface",
+      "type": "enum",
+      "required": false,
+      "default": "default",
+      "description": ""
+    },
+    {
+      "name": "value",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Primary text (title.sm)."
+    }
+  ],
+  "Picker": [
+    {
+      "name": "options",
+      "type": "PickerOptionData[]",
+      "required": true,
+      "description": ""
+    },
+    {
+      "name": "defaultValue",
+      "type": "number",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "onChange",
+      "type": "((index: number) => void)",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "surface",
+      "type": "enum",
+      "required": false,
+      "default": "default",
+      "description": ""
+    },
+    {
+      "name": "value",
+      "type": "number",
+      "required": false,
+      "description": "Selected index (controlled)."
+    }
+  ],
   "Selectors": [
     {
       "name": "options",
@@ -489,6 +729,137 @@
       "type": "number",
       "required": false,
       "description": ""
+    }
+  ],
+  "StatusRibbon": [
+    {
+      "name": "action",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Trailing action label (tap target spans the label + icon)."
+    },
+    {
+      "name": "leadingIcon",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "onAction",
+      "type": "(() => void)",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "status",
+      "type": "enum",
+      "required": false,
+      "default": "info",
+      "description": ""
+    },
+    {
+      "name": "trailingIcon",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    }
+  ],
+  "ButtonGroup": [
+    {
+      "name": "primary",
+      "type": "ReactNode",
+      "required": true,
+      "description": ""
+    },
+    {
+      "name": "orientation",
+      "type": "enum",
+      "required": false,
+      "default": "vertical",
+      "description": "`vertical` stacks the buttons; `horizontal` puts secondary+primary side by side\n(Figma `button-stack` vertical<->horizontal axis, 31617:1409)."
+    },
+    {
+      "name": "secondary",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "tertiary",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Tertiary/link action — always renders on its own centered row."
+    }
+  ],
+  "PaymentRow": [
+    {
+      "name": "label",
+      "type": "ReactNode",
+      "required": true,
+      "description": "Masked identifier, e.g. \"•••• 4326\"."
+    },
+    {
+      "name": "actionLabel",
+      "type": "ReactNode",
+      "required": false,
+      "default": "Change",
+      "description": ""
+    },
+    {
+      "name": "icon",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Payment method tile (logo/image); clipped to a 40x40 rounded square."
+    },
+    {
+      "name": "onAction",
+      "type": "(() => void)",
+      "required": false,
+      "description": ""
+    }
+  ],
+  "CtaFooter": [
+    {
+      "name": "actions",
+      "type": "ReactNode",
+      "required": true,
+      "description": "CTA buttons (use <ButtonGroup/> or a block <Button/>)."
+    },
+    {
+      "name": "homeIndicator",
+      "type": "boolean",
+      "required": false,
+      "description": "iOS home-indicator strip below the actions (Figma footer variants include it)."
+    },
+    {
+      "name": "payment",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Payment-method summary (use <PaymentRow/>); renders beside the actions."
+    },
+    {
+      "name": "price",
+      "type": "CtaFooterPrice",
+      "required": false,
+      "description": "Total row: label left, price right (Figma `price` atom)."
+    },
+    {
+      "name": "ribbon",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Status strip across the very top (use <StatusRibbon/>)."
+    },
+    {
+      "name": "rounded",
+      "type": "boolean",
+      "required": false,
+      "description": "Round the top corners (when the footer floats over page content)."
+    },
+    {
+      "name": "terms",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Terms row content rendered beside a checkbox slot — pass the checkbox+label\nyourself (e.g. <Checkbox label={...}/>) so state stays with the caller."
     }
   ],
   "PlanUsageBar": [
@@ -624,31 +995,56 @@
       "name": "carousel",
       "type": "boolean",
       "required": false,
-      "description": "body scrolls horizontally and bleeds to the edges (carousels)"
+      "description": "Body scrolls horizontally and bleeds to the edges (carousels)."
     },
     {
       "name": "context",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "Subtext under the title (`body.md`, subtle)."
     },
     {
       "name": "filterPill",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "Optional filter pill in the header, before the trigger."
+    },
+    {
+      "name": "gradient",
+      "type": "boolean",
+      "required": false,
+      "description": "Bottom-biased dark gradient over the body (for highlight-style content)."
     },
     {
       "name": "hideChevron",
       "type": "boolean",
       "required": false,
-      "description": ""
+      "description": "@deprecated Use `trigger=\"none\"`."
     },
     {
       "name": "onSeeAll",
       "type": "(() => void)",
       "required": false,
+      "description": "@deprecated Use `onTrigger`."
+    },
+    {
+      "name": "onTrigger",
+      "type": "(() => void)",
+      "required": false,
       "description": ""
+    },
+    {
+      "name": "showHeader",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "description": "Hide the whole header (Figma `Show header`)."
+    },
+    {
+      "name": "size",
+      "type": "enum",
+      "required": false,
+      "description": "Body slot size — reserves the row height for the card type it holds."
     },
     {
       "name": "surface",
@@ -663,6 +1059,26 @@
       "required": false,
       "default": "Section",
       "description": ""
+    },
+    {
+      "name": "titleLine",
+      "type": "enum",
+      "required": false,
+      "default": "1",
+      "description": "Clamp the title to one or two lines (Figma `Title line`)."
+    },
+    {
+      "name": "trigger",
+      "type": "enum",
+      "required": false,
+      "description": "Header trigger: a chevron circle, a text button, or none (Figma `chevron ↔ button`)."
+    },
+    {
+      "name": "triggerLabel",
+      "type": "ReactNode",
+      "required": false,
+      "default": "See all",
+      "description": "Label for the button trigger."
     }
   ],
   "Card": [
@@ -714,32 +1130,86 @@
   ],
   "TopBar": [
     {
+      "name": "account",
+      "type": "TopBarAccount",
+      "required": false,
+      "description": "Middle: account display — greeting over a masked name with a chevron."
+    },
+    {
       "name": "actionBar",
       "type": "TopBarAction",
       "required": false,
-      "description": ""
+      "description": "@deprecated V1.0 sub-card — pass a card via `children` instead."
     },
     {
       "name": "actions",
       "type": "ReactNode[]",
       "required": false,
-      "description": ""
+      "description": "Right-part: circular icon buttons."
+    },
+    {
+      "name": "bigTitle",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Big-title block: the large title (`heading.lg`)."
+    },
+    {
+      "name": "chevron",
+      "type": "boolean",
+      "required": false,
+      "description": "Trailing chevron on the big title / account name."
+    },
+    {
+      "name": "children",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Bottom slot: search, tabs, chips, stepper, action cards…"
+    },
+    {
+      "name": "eyebrow",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Big-title block: small overline above the large title."
     },
     {
       "name": "greeting",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "@deprecated Use `account={{ greeting }}`. Renders the account display."
     },
     {
       "name": "leading",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "Left-part: back chevron, avatar+text, etc."
+    },
+    {
+      "name": "logo",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Middle: the centered e& logo (`true`) or a custom node."
+    },
+    {
+      "name": "rounded",
+      "type": "boolean",
+      "required": false,
+      "description": "Rounded bottom corners (defaults on brand)."
     },
     {
       "name": "statusBar",
       "type": "boolean",
+      "required": false,
+      "description": "Faux iOS status row (default on brand)."
+    },
+    {
+      "name": "subtext",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Big-title block: supporting line under the title."
+    },
+    {
+      "name": "surface",
+      "type": "enum",
       "required": false,
       "description": ""
     },
@@ -747,20 +1217,19 @@
       "name": "title",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "Middle: page name (used when there's no logo/account/big-title)."
     },
     {
       "name": "trailing",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "Right-part: a link or button after the icon buttons."
     },
     {
       "name": "variant",
       "type": "enum",
       "required": false,
-      "default": "default",
-      "description": ""
+      "description": "@deprecated Use `surface`."
     }
   ],
   "ListRow": [
@@ -802,14 +1271,63 @@
       "type": "NavItem[]",
       "required": true,
       "description": ""
+    },
+    {
+      "name": "scrollDirection",
+      "type": "enum",
+      "required": false,
+      "default": "up",
+      "description": "Figma `.navbar-scroll` axis. `down` collapses to icons only (scrolled down);\n`up` (default) shows icon + label. Transitions are animated."
     }
   ],
   "ActionBar": [
     {
-      "name": "helper",
+      "name": "action",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "Trailing action — typically a `<Button>`. Only one trailing action; do not combine with `chevron`."
+    },
+    {
+      "name": "chevron",
+      "type": "boolean",
+      "required": false,
+      "description": "Show a trailing chevron instead of a button — the whole bar becomes the tap target."
+    },
+    {
+      "name": "icon",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Leading visual (icon or image) shown in a 40×40 tile. Omit for text at the leading edge."
+    },
+    {
+      "name": "inverse",
+      "type": "boolean",
+      "required": false,
+      "description": "@deprecated Use `surface=\"glass\"`. Kept as a back-compat alias for the inverse scheme."
+    },
+    {
+      "name": "stack",
+      "type": "boolean",
+      "required": false,
+      "description": "Multiple-stack — layered \"stacked cards\" look. Inverse/dark surfaces only (Figma)."
+    },
+    {
+      "name": "subtitle",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Secondary line — `body.md`, truncates with ellipsis (Figma limit ~21 chars)."
+    },
+    {
+      "name": "surface",
+      "type": "enum",
+      "required": false,
+      "description": "Backing surface. Light family: `default`·`subtle`·`sunken`·`white-transparent`;\ndark family: `glass`·`midnight-base`·`midnight-raised`·`midnight-transparent`."
+    },
+    {
+      "name": "title",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Primary line — `title.xs` (Figma limit ~18 chars)."
     }
   ],
   "SectionLink": [
@@ -1001,8 +1519,7 @@
       "name": "tone",
       "type": "enum",
       "required": false,
-      "default": "accent",
-      "description": ""
+      "description": "Optional fill override; omit for the Figma V1.1 default (text.positive.subtle green)."
     },
     {
       "name": "value",
@@ -1012,12 +1529,56 @@
       "description": ""
     }
   ],
+  "Stepper": [
+    {
+      "name": "inverse",
+      "type": "boolean",
+      "required": false,
+      "description": "Inverse color scheme for dark (midnight/brand) surfaces."
+    },
+    {
+      "name": "progress",
+      "type": "number",
+      "required": false,
+      "default": "0",
+      "description": "Completed segments, 0..steps."
+    },
+    {
+      "name": "steps",
+      "type": "number",
+      "required": false,
+      "default": "4",
+      "description": "Total segments — Figma defines 2–8."
+    }
+  ],
   "AddTrigger": [
     {
       "name": "label",
       "type": "string",
       "required": false,
       "default": "Add",
+      "description": ""
+    }
+  ],
+  "Dismiss": [
+    {
+      "name": "onClick",
+      "type": "(() => void)",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "size",
+      "type": "enum",
+      "required": false,
+      "default": "md",
+      "description": ""
+    },
+    {
+      "name": "surface",
+      "type": "enum",
+      "required": false,
+      "default": "default",
       "description": ""
     }
   ],
@@ -1054,6 +1615,12 @@
       "description": ""
     },
     {
+      "name": "loading",
+      "type": "boolean",
+      "required": false,
+      "description": "Show a spinner in the leading-icon slot and suppress clicks (Figma `Loader <-> Icon=on`).\nKeeps the default palette — loading is not the disabled state."
+    },
+    {
       "name": "size",
       "type": "enum",
       "required": false,
@@ -1061,11 +1628,16 @@
       "description": ""
     },
     {
+      "name": "surface",
+      "type": "enum",
+      "required": false,
+      "description": "Surface axis per Figma V1.1. Takes precedence over `tone` when both are set."
+    },
+    {
       "name": "tone",
       "type": "enum",
       "required": false,
-      "default": "brand",
-      "description": ""
+      "description": "@deprecated Use `surface` instead. Kept as a back-compat alias."
     },
     {
       "name": "trailingIcon",

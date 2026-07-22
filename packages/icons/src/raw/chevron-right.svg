@@ -1,3 +1,5 @@
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M14 16L10 12L14 8" stroke="#191329" stroke-width="2" stroke-linecap="square"/>
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="chevron-right">
+<path id="vector" d="M7.93957 2.9396C8.52536 2.35386 9.47489 2.35383 10.0607 2.9396L15.9396 8.8185C17.6963 10.5758 17.6965 13.4246 15.9396 15.1818L10.0607 21.0607C9.47495 21.6464 8.52537 21.6462 7.93957 21.0607C7.35378 20.4749 7.35378 19.5254 7.93957 18.9396L13.8185 13.0607C14.3672 12.5117 14.401 11.6429 13.921 11.0539L13.8185 10.9396L7.93957 5.06069C7.35378 4.4749 7.35378 3.52538 7.93957 2.9396Z" fill="var(--fill-0, #191329)"/>
+</g>
 </svg>

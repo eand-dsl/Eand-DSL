@@ -1,0 +1,22 @@
+---
+title: Stepper
+description: Segmented step progress — 2–8 pill segments, completed ones filled, with an inverse scheme for dark surfaces.
+---
+
+<ComponentDemo id="stepper" />
+
+## Props
+
+<PropsTable name="Stepper" />
+
+## Design
+
+Figma source: [Stepper — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=31614-11244)
+
+Notes from the Figma spec:
+
+- 6px-tall track, equal-width pill segments, 8px gap; steps range 2–8 (the component clamps).
+- Colors are the `color/stepper/{scheme}/{state}` variables — default: `#e4e3ea` → `#e73933`
+  active; inverse: 40% white → solid white. These are not yet in the exported `variables.json`,
+  so the component carries the live Figma values.
+- Also used as the top bar's `.topbar-stepper` bottom element (`Type=steps`).

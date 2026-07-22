@@ -1,23 +1,36 @@
 ---
 title: Section
-description: Full-width grey rounded container — the body building block.
+description: The body container — a rounded surface with a header and a body slot sized to fit a given card type.
 ---
 
 <ComponentDemo id="section" />
+
+## Anatomy
+
+- **Header** — `title` (`heading.lg`), optional `context` line (`body.md`, subtle), an optional
+  `filterPill`, and a `trigger` (a `chevron` circle, a text `button`, or `none`). Toggle the whole
+  header off with `showHeader={false}`.
+- **Body slot** — `children` sit in a 16px-padded slot. The **`size`** axis reserves the row height
+  so the card type fits:
+
+  | size | slot height | fits |
+  |------|-------------|------|
+  | `xs` | 72px | list rows, action bars |
+  | `sm` | 148px | quick-action tiles |
+  | `md` | 224px | deal / new-on cards |
+  | `lg` | 300px | plan / product cards |
+  | `xl` | 452px | highlight banners |
+
+- **`surface`** is `default` (grey `#f0f0f5`) or `inverse` (brand red, white text). Set `carousel`
+  for a horizontal-scrolling body and `gradient` for a bottom scrim over highlight-style content.
 
 ## Props
 
 <PropsTable name="Section" />
 
-## Try it
-
-Edit the code — the preview updates live. Every design-system export plus `Icon` is in scope.
-
-<Playground code={`<Section title="My Plan" context="Freedom Live Plan 200" hideChevron>
-  <ListRow label="2 GB left" value="Local Data" chevron={false} />
-  <ListRow label="200 min left" value="Minutes" chevron={false} />
-</Section>`} />
-
 ## Design
 
-Figma source: [Section — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25519-12055)
+Figma source: [Section — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25519-12055) · [Slot templates](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=29394-16374)
+
+The old `hideChevron` / `onSeeAll` props still work (`hideChevron` → `trigger="none"`,
+`onSeeAll` → `onTrigger`).

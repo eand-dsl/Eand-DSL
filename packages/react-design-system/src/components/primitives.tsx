@@ -106,6 +106,38 @@ export function ProgressBar({ value = 50, tone, style, ...rest }: ProgressBarPro
   );
 }
 
+/* ---------------- Stepper ----------------
+   Segmented step progress (Figma V1.1 Stepper, page 31614:11244): a 6px-tall row of
+   equal pill segments, 2–8 steps, completed segments filled. Also used as the
+   top-bar `.topbar-stepper` bottom element. */
+// Figma vars color/stepper/{scheme}/{state} — not yet in the generated tokens.ts
+// (variables.json export predates the stepper group), values from live Figma.
+const STEPPER = {
+  default: { inactive: '#e4e3ea', active: '#e73933' },
+  inverse: { inactive: '#ffffff66', active: '#ffffff' },
+} as const;
+export interface StepperProps extends HTMLAttributes<HTMLDivElement> {
+  /** Total segments — Figma defines 2–8. */
+  steps?: number;
+  /** Completed segments, 0..steps. */
+  progress?: number;
+  /** Inverse color scheme for dark (midnight/brand) surfaces. */
+  inverse?: boolean;
+}
+export function Stepper({ steps = 4, progress = 0, inverse, style, ...rest }: StepperProps) {
+  const n = Math.max(2, Math.min(8, Math.round(steps)));
+  const done = Math.max(0, Math.min(n, Math.round(progress)));
+  const scheme = STEPPER[inverse ? 'inverse' : 'default'];
+  return (
+    <div role="progressbar" aria-valuemin={0} aria-valuemax={n} aria-valuenow={done}
+      style={{ display: 'flex', gap: space('sm'), width: '100%', height: 6, ...style }} {...rest}>
+      {Array.from({ length: n }).map((_, i) => (
+        <span key={i} style={{ flex: 1, borderRadius: PILL, background: i < done ? scheme.active : scheme.inactive }} />
+      ))}
+    </div>
+  );
+}
+
 /* ---------------- AddTrigger ---------------- */
 export interface AddTriggerProps extends HTMLAttributes<HTMLButtonElement> {
   label?: string;
@@ -116,7 +148,33 @@ export function AddTrigger({ label = 'Add', style, onClick, ...rest }: AddTrigge
       style={{ display: 'inline-flex', alignItems: 'center', gap: space('xs'), height: 40, padding: `0 ${space('lg')}`,
         borderRadius: PILL, border: `1px dashed ${color('border.default')}`, background: 'transparent',
         color: color('text.brand.default'), cursor: 'pointer', ...ty('button.md'), ...style }} {...rest}>
-      <Icon size="sm">＋</Icon>{label}
+      <Icon size="lg">＋</Icon>{label}
+    </button>
+  );
+}
+
+/* ---------------- Dismiss ----------------
+   Figma V1.1 Dismiss (page 28961:16066): a circular close button — a filled circle
+   in the dismiss colour with a white X. surface default | inverse × size md(24) | sm(20). */
+// color/dismiss/{default,inverse} — not in the generated tokens.ts; values from live Figma.
+const DISMISS_BG = { default: '#908e9a', inverse: '#c0bfc8' } as const;
+export interface DismissProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onClick'> {
+  surface?: 'default' | 'inverse';
+  size?: 'md' | 'sm';
+  onClick?: () => void;
+}
+export function Dismiss({ surface = 'default', size = 'md', style, onClick, ...rest }: DismissProps) {
+  const dim = size === 'sm' ? 20 : 24;
+  return (
+    <button type="button" aria-label="Dismiss" onClick={onClick}
+      style={{
+        width: dim, height: dim, flex: 'none', border: 0, borderRadius: '50%', padding: space('2xs'),
+        background: DISMISS_BG[surface], color: '#ffffff', cursor: 'pointer', boxSizing: 'border-box',
+        display: 'inline-flex', alignItems: 'center', justifyContent: 'center', ...style,
+      }} {...rest}>
+      <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" aria-hidden>
+        <path d="M7 7l10 10M17 7L7 17" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" />
+      </svg>
     </button>
   );
 }
