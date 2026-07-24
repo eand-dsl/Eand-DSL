@@ -2,7 +2,7 @@
 
 import { LiveProvider, LiveEditor, LivePreview, LiveError } from 'react-live';
 import * as DS from '@eand/react-design-system';
-import { Icon } from '@eand/icons';
+import { Icon } from '@eand/react-design-system';
 import './preview.css';
 
 const scope = { ...DS, Icon };

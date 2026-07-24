@@ -1,6 +1,6 @@
 import { type CSSProperties, type HTMLAttributes, type ReactNode, useState } from 'react';
 import { T, space, color, ty, radius } from '../system';
-import { Text, Icon } from './primitives';
+import { Text, IconBox } from './primitives';
 
 /* ---------------- Section: the full-width body container ----------------
    Figma V1.1 Section (page 25519:12055, final 32899:266508): a rounded container
@@ -101,7 +101,7 @@ export function Section({
               </button>
             ) : trig === 'button' ? (
               <button onClick={fire} style={{ display: 'inline-flex', alignItems: 'center', gap: 2, border: 0, background: 'transparent', cursor: 'pointer', padding: `0 ${space('xs')}`, color: onDark ? text : color('text.brand.default'), ...ty('button.sm') }}>
-                {triggerLabel}<Icon size="md">›</Icon>
+                {triggerLabel}<IconBox size="md">›</IconBox>
               </button>
             ) : null}
           </div>
@@ -163,7 +163,7 @@ export function Accordion({ title, defaultOpen = false, style, children, ...rest
       <button onClick={() => setOpen((o) => !o)} aria-expanded={open}
         style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: space('md'), padding: `${space('md')} 0`, background: 'transparent', border: 0, cursor: 'pointer' }}>
         <Text variant="title.sm">{title}</Text>
-        <Icon size="sm" style={{ transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 150ms' }}>⌄</Icon>
+        <IconBox size="sm" style={{ transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 150ms' }}>⌄</IconBox>
       </button>
       {open ? <div style={{ paddingBottom: space('md') }}>{children}</div> : null}
     </div>

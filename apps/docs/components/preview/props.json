@@ -447,7 +447,7 @@
       "name": "loading",
       "type": "boolean",
       "required": false,
-      "description": "Spinner replaces the leading icon (Figma `Loader <-> Icon=on`); clicks suppressed."
+      "description": "Spinner replaces the leading icon (Figma `Loader <-> IconBox=on`); clicks suppressed."
     },
     {
       "name": "onClick",
@@ -1437,7 +1437,7 @@
       "description": ""
     }
   ],
-  "Icon": [
+  "IconBox": [
     {
       "name": "size",
       "type": "string",

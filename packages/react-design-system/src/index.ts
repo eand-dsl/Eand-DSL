@@ -14,3 +14,7 @@ export * from './components/feedback';
 export * from './components/overlays';
 export * from './components/cards';
 export * from './components/ctabar';
+
+// e& App Icons — folded in (name-based <Icon name="…" />, named *Icon components,
+// the ICONS registry, and ICON_META descriptions/aliases).
+export * from './icons';

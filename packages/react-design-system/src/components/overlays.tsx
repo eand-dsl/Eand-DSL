@@ -1,6 +1,6 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 import { color, space } from '../system';
-import { Text, Icon } from './primitives';
+import { Text, IconBox } from './primitives';
 
 /* ---------------- Tooltip ---------------- */
 export interface TooltipProps {
@@ -48,7 +48,7 @@ export function BottomSheet({ open = true, title, footer, onDismiss, style, chil
         {(title || onDismiss) && (
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: `0 ${space('lg')} ${space('sm')}` }}>
             <Text variant="heading.xs">{title}</Text>
-            {onDismiss ? <button onClick={onDismiss} aria-label="Close" style={{ border: 0, background: 'transparent', cursor: 'pointer' }}><Icon size="sm">✕</Icon></button> : null}
+            {onDismiss ? <button onClick={onDismiss} aria-label="Close" style={{ border: 0, background: 'transparent', cursor: 'pointer' }}><IconBox size="sm">✕</IconBox></button> : null}
           </div>
         )}
         <div style={{ overflowY: 'auto', padding: `0 ${space('lg')} ${space('lg')}` }}>{children}</div>

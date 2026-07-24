@@ -1,6 +1,6 @@
 import type { CSSProperties, HTMLAttributes, ReactNode } from 'react';
 import { color, space, ty, radius, T, PILL } from '../system';
-import { Text, Icon } from './primitives';
+import { Text, IconBox } from './primitives';
 
 /* ---------------- StatusRibbon ----------------
    Full-width status strip shown above a CTA footer (Figma V1.1 `status-ribbon`,
@@ -29,11 +29,11 @@ export function StatusRibbon({ status = 'info', leadingIcon, action, trailingIco
       display: 'flex', alignItems: 'center', gap: space('sm'), width: '100%', boxSizing: 'border-box',
       height: T.scale?.['40'] ?? 40, padding: `0 ${space('lg')}`, background: c.bg, color: c.fg, ...style,
     }} {...rest}>
-      {leadingIcon ? <Icon size="lg" style={{ color: c.fg }}>{leadingIcon}</Icon> : null}
+      {leadingIcon ? <IconBox size="lg" style={{ color: c.fg }}>{leadingIcon}</IconBox> : null}
       <Text variant="title.xs" color={c.fg} style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{children}</Text>
       {action != null ? (
         <button onClick={onAction} style={{ display: 'inline-flex', alignItems: 'center', gap: space('xs'), border: 0, background: 'transparent', cursor: 'pointer', padding: 0, color: c.fg, ...ty('body.md') }}>
-          {action}{trailingIcon ? <Icon size="lg">{trailingIcon}</Icon> : null}
+          {action}{trailingIcon ? <IconBox size="lg">{trailingIcon}</IconBox> : null}
         </button>
       ) : null}
     </div>

@@ -1,6 +1,6 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 import { color, space, ty } from '../system';
-import { Text, Icon, ProgressBar } from './primitives';
+import { Text, IconBox, ProgressBar } from './primitives';
 
 export type StatusTone = 'info' | 'positive' | 'warning' | 'danger';
 const TONE_COLOR: Record<StatusTone, string> = {
@@ -58,9 +58,9 @@ function StatusMark({ bg, glyph, fg, shape, size = 22 }: { bg: string; glyph: st
 /* ---------------- Snackbar (transient dark pill) ---------------- */
 export type SnackbarTone = 'positive' | 'danger' | 'warning' | 'loading' | 'default';
 const SNACK_MARK: Record<'positive' | 'danger' | 'warning', { bg: string; glyph: string; fg: string; shape: 'circle' | 'triangle' }> = {
-  positive: { bg: '#47cb6c', glyph: '✓', fg: '#ffffff', shape: 'circle' },   // Component/Icon/Positive
-  danger:   { bg: '#d05d0a', glyph: '✕', fg: '#ffffff', shape: 'circle' },   // Component/Icon/Negative
-  warning:  { bg: '#d5b549', glyph: '!', fg: '#191329', shape: 'triangle' }, // Component/Icon/Warning
+  positive: { bg: '#47cb6c', glyph: '✓', fg: '#ffffff', shape: 'circle' },   // Component/IconBox/Positive
+  danger:   { bg: '#d05d0a', glyph: '✕', fg: '#ffffff', shape: 'circle' },   // Component/IconBox/Negative
+  warning:  { bg: '#d5b549', glyph: '!', fg: '#191329', shape: 'triangle' }, // Component/IconBox/Warning
 };
 export interface SnackbarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   tone?: SnackbarTone;
@@ -83,7 +83,7 @@ export function Snackbar({ tone = 'default', message, action, onAction, onDismis
       {mark}
       <Text variant="body.md" color="#ffffff" style={{ flex: bare ? '0 1 auto' : 1, fontWeight: 600, textAlign: bare ? 'center' : 'left' }}>{message}</Text>
       {action ? <button onClick={onAction} style={{ border: 0, background: 'transparent', cursor: 'pointer', padding: 0, ...ty('button.sm'), color: color('text.brand.subtle'), fontWeight: 700 }}>{action}</button> : null}
-      {onDismiss ? <button onClick={onDismiss} aria-label="Dismiss" style={{ border: 0, background: 'transparent', cursor: 'pointer', color: 'inherit', padding: 0, opacity: 0.7 }}><Icon size="sm">✕</Icon></button> : null}
+      {onDismiss ? <button onClick={onDismiss} aria-label="Dismiss" style={{ border: 0, background: 'transparent', cursor: 'pointer', color: 'inherit', padding: 0, opacity: 0.7 }}><IconBox size="sm">✕</IconBox></button> : null}
     </div>
   );
 }
@@ -136,7 +136,7 @@ export function AlertModal({ open = true, tone = 'info', title, body, actions, o
     <div role="dialog" aria-modal="true" onClick={onDismiss}
       style={{ position: 'fixed', inset: 0, background: color('surface.overlay.scrim'), display: 'flex', alignItems: 'center', justifyContent: 'center', padding: space('lg'), zIndex: 1000 }}>
       <div onClick={(e) => e.stopPropagation()} style={{ width: '100%', maxWidth: 360, background: color('surface.raised.default'), borderRadius: 20, padding: space('xl'), display: 'flex', flexDirection: 'column', gap: space('md') }}>
-        <span style={{ color: TONE_COLOR[tone] }}><Icon size="xl">{TONE_ICON[tone]}</Icon></span>
+        <span style={{ color: TONE_COLOR[tone] }}><IconBox size="xl">{TONE_ICON[tone]}</IconBox></span>
         {title ? <Text variant="heading.sm">{title}</Text> : null}
         {body ? <Text variant="body.md" color={color('text.default.subtle')}>{body}</Text> : null}
         <div style={{ display: 'flex', flexDirection: 'column', gap: space('sm'), marginTop: space('sm') }}>{actions}</div>

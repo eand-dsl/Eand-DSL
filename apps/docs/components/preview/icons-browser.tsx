@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState, type CSSProperties } from 'react';
-import { ICONS, ICON_META, Icon } from '@eand/icons';
+import { ICONS, ICON_META, Icon } from '@eand/react-design-system';
 import './preview.css';
 
 const EMPTY_META = { description: '', aliases: [] as string[] };
@@ -88,7 +88,7 @@ function IconTile({
 }
 
 /**
- * Searchable gallery of every icon concept in @eand/icons (outline + filled pair
+ * Searchable gallery of every icon concept in @eand/react-design-system (outline + filled pair
  * per tile). Search matches names, descriptions, and Figma "also searchable as"
  * aliases. Click a name to copy the currently-toggled variant's key.
  */

@@ -1,6 +1,6 @@
 import { useRef, useState, type CSSProperties, type HTMLAttributes, type InputHTMLAttributes, type ReactNode } from 'react';
 import { color, space, ty, radius, PILL, T } from '../system';
-import { Text, Icon } from './primitives';
+import { Text, IconBox } from './primitives';
 
 /* ---------------- Input ----------------
    Figma V1.1 input-field (page 22609:113539): a single filled style — 56px field,
@@ -63,7 +63,7 @@ export function Input({
         }}
       >
         {(leadingIcon ?? (type === 'picker' ? '▢' : null)) != null
-          ? <Icon size="lg" style={{ color: valueColor }}>{leadingIcon ?? '▢'}</Icon> : null}
+          ? <IconBox size="lg" style={{ color: valueColor }}>{leadingIcon ?? '▢'}</IconBox> : null}
         <span style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: space('2xs'), padding: `${space('sm')} 0` }}>
           {label ? (
             <span style={{ color: labelColor, transition: 'font-size 120ms ease, line-height 120ms ease', ...ty(floated ? 'body.sm' : 'body.lg') } as CSSProperties}>{label}</span>
@@ -100,13 +100,13 @@ export function Input({
             style={{ width: 24, height: 24, flex: 'none', border: 0, borderRadius: '50%', background: '#908e9a', color: '#ffffff', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, lineHeight: 1 }}
           >✕</button>
         ) : null}
-        {readOnly ? <Icon size="md" style={{ color: labelColor }}>⌄</Icon>
-          : trailingIcon ? <Icon size="lg" style={{ color: valueColor }}>{trailingIcon}</Icon> : null}
+        {readOnly ? <IconBox size="md" style={{ color: labelColor }}>⌄</IconBox>
+          : trailingIcon ? <IconBox size="lg" style={{ color: valueColor }}>{trailingIcon}</IconBox> : null}
       </div>
       {(error || success || helper) ? (
         <span style={{ display: 'inline-flex', alignItems: 'center', gap: space('xs') }}>
-          {error ? <Icon size="sm" style={{ color: color('text.danger.subtle') }}>ⓘ</Icon>
-            : success ? <Icon size="sm" style={{ color: color('text.positive.subtle') }}>✓</Icon> : null}
+          {error ? <IconBox size="sm" style={{ color: color('text.danger.subtle') }}>ⓘ</IconBox>
+            : success ? <IconBox size="sm" style={{ color: color('text.positive.subtle') }}>✓</IconBox> : null}
           <Text variant="body.sm" color={error ? color('text.danger.subtle') : success ? color('text.positive.subtle') : color('text.default.muted')}>
             {error ?? success ?? helper}
           </Text>
@@ -173,7 +173,7 @@ export function OtpInput({ length = 4, value, defaultValue = '', onValueChange, 
       </div>
       {error ? (
         <span style={{ display: 'inline-flex', alignItems: 'center', gap: space('xs') }}>
-          <Icon size="sm" style={{ color: color('text.danger.subtle') }}>ⓘ</Icon>
+          <IconBox size="sm" style={{ color: color('text.danger.subtle') }}>ⓘ</IconBox>
           <Text variant="body.sm" color={color('text.danger.subtle')}>{error}</Text>
         </span>
       ) : null}
@@ -185,7 +185,7 @@ export function OtpInput({ length = 4, value, defaultValue = '', onValueChange, 
    Figma V1.1 chips (page 28171:29640, set 31539:8725): type = outline | filled |
    glass | inverse × state default/focus/disabled. 40px pill, 1px border (outline
    & inverse), 16px leading icon; content `type=check` swaps in a check mark when
-   selected; `Loader <-> Icon=on` swaps it for a spinner. */
+   selected; `Loader <-> IconBox=on` swaps it for a spinner. */
 export type ChipType = 'outline' | 'filled' | 'glass' | 'inverse';
 type ChipState = 'default' | 'focus' | 'disabled';
 // filled & glass values from live Figma `color/chips/default/{filled,glass}/*` — absent
@@ -234,7 +234,7 @@ export interface ChipProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onCl
   leadingIcon?: ReactNode;
   /** Show a check mark as the leading icon while selected (Figma content `type=check`). */
   check?: boolean;
-  /** Spinner replaces the leading icon (Figma `Loader <-> Icon=on`); clicks suppressed. */
+  /** Spinner replaces the leading icon (Figma `Loader <-> IconBox=on`); clicks suppressed. */
   loading?: boolean;
   onClick?: () => void;
 }
@@ -251,7 +251,7 @@ export function Chip({ type, selected, disabled, inverse, leadingIcon, check, lo
         borderRadius: PILL, cursor: disabled ? 'not-allowed' : loading ? 'progress' : 'pointer', whiteSpace: 'nowrap',
         ...CHIP_STYLE[t][state], ...ty('body.md'), ...style,
       }} {...rest}>
-      {lead != null ? <Icon size="md">{lead}</Icon> : null}{children}
+      {lead != null ? <IconBox size="md">{lead}</IconBox> : null}{children}
     </button>
   );
 }
@@ -280,7 +280,7 @@ export function FilterPill({ selected, inverse, disabled, style, children, onCli
         background,
         color: color(`filterPill.text.${scheme}.${state}`), ...ty('body.md'), ...style,
       }} {...rest}>
-      {children}<Icon size="md">⌄</Icon>
+      {children}<IconBox size="md">⌄</IconBox>
     </button>
   );
 }
@@ -388,9 +388,9 @@ export interface SearchbarProps extends Omit<InputHTMLAttributes<HTMLInputElemen
 export function Searchbar({ placeholder = 'Search', onMic, style, ...rest }: SearchbarProps) {
   return (
     <span style={{ display: 'flex', alignItems: 'center', gap: space('sm'), height: 52, padding: `0 ${space('lg')}`, borderRadius: 16, background: color('surface.base.default'), width: '100%', boxSizing: 'border-box', ...style }}>
-      <Icon size="lg">⌕</Icon>
+      <IconBox size="lg">⌕</IconBox>
       <input placeholder={placeholder} style={{ flex: 1, minWidth: 0, border: 0, outline: 'none', background: 'transparent', ...ty('body.md') }} {...rest} />
-      <button onClick={onMic} aria-label="Voice search" style={{ border: 0, background: 'transparent', cursor: 'pointer', color: color('text.default.muted') }}><Icon size="lg">🎤</Icon></button>
+      <button onClick={onMic} aria-label="Voice search" style={{ border: 0, background: 'transparent', cursor: 'pointer', color: color('text.default.muted') }}><IconBox size="lg">🎤</IconBox></button>
     </span>
   );
 }

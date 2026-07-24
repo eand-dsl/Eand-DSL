@@ -4,8 +4,8 @@ library. Normalizes hard-coded colors to currentColor so icons tint via CSS `col
 import os, re, json, glob
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-RAW = os.path.join(HERE, "src", "raw")
-OUT = os.path.join(HERE, "src", "icons.tsx")
+RAW = os.path.join(HERE, "src", "icons", "raw")
+OUT = os.path.join(HERE, "src", "icons", "icons.tsx")
 
 def pascal(name):
     return "".join(p.capitalize() for p in re.split(r"[^a-z0-9]+", name.lower()) if p) + "Icon"

@@ -11,7 +11,7 @@ import {
   StatusRibbon, ButtonGroup, PaymentRow, CtaFooter,
   Text,
 } from '@eand/react-design-system';
-import { Icon as EaIcon } from '@eand/icons';
+import { Icon as EaIcon } from '@eand/react-design-system';
 import type { Snippet } from './code-tabs';
 import type { Control, ControlValues } from './controls-panel';
 import { snippets } from './snippets';

@@ -1,6 +1,6 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 import { space, color, icon, radius } from '../system';
-import { Text, Icon } from './primitives';
+import { Text, IconBox } from './primitives';
 
 /* ---------------- TopBar (header) ----------------
    Figma V1.1 Top bar (page 22542:13963): a slot-based header. A top row
@@ -145,13 +145,13 @@ export interface ListRowProps extends Omit<HTMLAttributes<HTMLButtonElement>, 't
 export function ListRow({ icon, label, sublabel, value, chevron = true, style, ...rest }: ListRowProps) {
   return (
     <button style={{ width: '100%', boxSizing: 'border-box', display: 'flex', alignItems: 'center', gap: space('md'), padding: space('lg'), borderRadius: 16, background: color('surface.raised.default'), border: 0, cursor: 'pointer', textAlign: 'left', ...style }} {...rest}>
-      {icon ? <span style={{ width: 40, height: 40, borderRadius: 12, background: color('surface.base.default'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flex: '0 0 auto' }}><Icon size="md">{icon}</Icon></span> : null}
+      {icon ? <span style={{ width: 40, height: 40, borderRadius: 12, background: color('surface.base.default'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flex: '0 0 auto' }}><IconBox size="md">{icon}</IconBox></span> : null}
       <span style={{ flex: 1, minWidth: 0 }}>
         <Text variant="title.sm" as="div">{label}</Text>
         {sublabel ? <Text variant="body.sm" color={color('text.default.muted')}>{sublabel}</Text> : null}
       </span>
       {value ? <Text variant="body.md" color={color('text.default.muted')}>{value}</Text> : null}
-      {chevron ? <Icon size="sm" style={{ color: color('text.default.muted') }}>›</Icon> : null}
+      {chevron ? <IconBox size="sm" style={{ color: color('text.default.muted') }}>›</IconBox> : null}
     </button>
   );
 }
@@ -314,7 +314,7 @@ export function SectionLink({ title, link = 'See all', onLinkClick, style, ...re
       <Text variant="heading.xs">{title}</Text>
       <button onClick={onLinkClick} style={{ display: 'inline-flex', alignItems: 'center', gap: 2, background: 'transparent', border: 0, cursor: 'pointer', color: color('text.brand.default') }}>
         <Text variant="button.sm" color={color('text.brand.default')}>{link}</Text>
-        <Icon size="md">›</Icon>
+        <IconBox size="md">›</IconBox>
       </button>
     </div>
   );

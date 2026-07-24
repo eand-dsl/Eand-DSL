@@ -15,11 +15,11 @@ export function Text({ variant = 'body.md', as: As = 'span', color: c, style, ch
   );
 }
 
-/* ---------------- Icon ---------------- */
-export interface IconProps extends HTMLAttributes<HTMLSpanElement> {
+/* ---------------- IconBox ---------------- */
+export interface IconBoxProps extends HTMLAttributes<HTMLSpanElement> {
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | string;
 }
-export function Icon({ size = 'md', style, children, ...rest }: IconProps) {
+export function IconBox({ size = 'md', style, children, ...rest }: IconBoxProps) {
   const d = icon(size);
   return (
     <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: d, height: d, flex: '0 0 auto', ...style }} {...rest}>
@@ -148,7 +148,7 @@ export function AddTrigger({ label = 'Add', style, onClick, ...rest }: AddTrigge
       style={{ display: 'inline-flex', alignItems: 'center', gap: space('xs'), height: 40, padding: `0 ${space('lg')}`,
         borderRadius: PILL, border: `1px dashed ${color('border.default')}`, background: 'transparent',
         color: color('text.brand.default'), cursor: 'pointer', ...ty('button.md'), ...style }} {...rest}>
-      <Icon size="lg">＋</Icon>{label}
+      <IconBox size="lg">＋</IconBox>{label}
     </button>
   );
 }
