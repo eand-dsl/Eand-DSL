@@ -1,9 +1,10 @@
 # dependencies
 node_modules/
 
-# build output
-lib/
+# build output (scope to package build dirs; apps/docs/lib is fumadocs SOURCE, not output)
+packages/*/lib/
 dist/
+.next/
 
 # misc
 .DS_Store
