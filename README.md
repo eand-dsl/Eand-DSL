@@ -59,8 +59,30 @@ The docs are a static-prerendered Next.js app. To host on Vercel's free tier:
 > ToS-clean company deploy, either move to Vercel Pro or host the static export
 > (this app prerenders fully) on Cloudflare Pages / GitHub Pages.
 
+## Figma Code Connect
+
+Figma **Code Connect** mappings live in
+`packages/react-design-system/code-connect/*.figma.tsx` — each maps a published
+Figma component to its React component here (exact node IDs + variant→prop
+mappings). Config: `packages/react-design-system/figma.config.json` (rewrites the
+displayed import to `@eand/react-design-system` via `importPaths`).
+
+```bash
+cd packages/react-design-system
+npm install                                   # installs @figma/code-connect
+export FIGMA_ACCESS_TOKEN=<token>             # Figma token with Code Connect write
+npm run codeconnect:check                     # dry-run validation
+npm run codeconnect:publish                   # publish to the Figma library
+```
+
+Requires an **Organization/Enterprise** Figma plan and the components published to
+a team library. Mapped so far: Button, Chip, FilterPill, Checkbox, Radio,
+Switcher, Dismiss, Stepper, Badge (status + offers), Logo. Add more by dropping a
+new `Component.figma.tsx` next to the others (same pattern).
+
 ## Figma Make
 
 The library is published as a single package (`@eand/react-design-system`) that
-exports every component **and** the icons, so it can back a Figma Make kit from
-this repo without a second dependency.
+exports every component **and** the icons, so it — together with the Code Connect
+mappings above — can back a Figma Make kit from this repo without a second
+dependency.

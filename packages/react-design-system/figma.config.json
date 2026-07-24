@@ -1,0 +1,9 @@
+{
+  "codeConnect": {
+    "parser": "react",
+    "include": ["code-connect/**/*.figma.tsx"],
+    "importPaths": {
+      "src/**/*.{ts,tsx}": "@eand/react-design-system"
+    }
+  }
+}
