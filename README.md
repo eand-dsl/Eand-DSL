@@ -77,8 +77,14 @@ npm run codeconnect:publish                   # publish to the Figma library
 
 Requires an **Organization/Enterprise** Figma plan and the components published to
 a team library. Mapped so far: Button, Chip, FilterPill, Checkbox, Radio,
-Switcher, Dismiss, Stepper, Badge (status + offers), Logo. Add more by dropping a
-new `Component.figma.tsx` next to the others (same pattern).
+Switcher, Dismiss, Stepper, Badge (status + offers), Logo, PlanCard, DealCard,
+ServiceCard, Highlight. Add more by dropping a new `Component.figma.tsx` next to
+the others (same pattern).
+
+Three card mappings carry a `NOT MAPPED` comment naming a Figma variant that has
+no code counterpart yet (`DealCard.surface`, `Highlight.size`, and the
+`ServiceCard` icon set) — each needs a component change before it can be mapped,
+so the comments are the todo list.
 
 ## Figma Make
 
