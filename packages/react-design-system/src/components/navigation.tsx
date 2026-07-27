@@ -332,7 +332,7 @@ export function QuickAction({ items, columns = 3, style, ...rest }: QuickActionP
     <div style={{ display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, gap: 4, width: '100%', ...style }} {...rest}>
       {items.map((it, i) => (
         <button key={i} onClick={it.onClick}
-          style={{ position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: 104, padding: space('md'), borderRadius: 20, border: 0, background: color('surface.canvas.default'), cursor: 'pointer', textAlign: 'left' }}>
+          style={{ position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: 148, padding: space('md'), borderRadius: 20, border: 0, background: color('surface.canvas.default'), cursor: 'pointer', textAlign: 'left' }}>
           <span style={{ width: 40, height: 40, borderRadius: 12, background: color('surface.base.default'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: color('text.default.default') }}>
             {it.icon ?? '●'}
           </span>
