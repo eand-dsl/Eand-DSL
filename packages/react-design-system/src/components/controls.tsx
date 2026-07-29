@@ -243,7 +243,7 @@ export function Chip({ type, selected, disabled, inverse, leadingIcon, check, lo
   const t: ChipType = type ?? (inverse ? 'inverse' : 'outline');
   const state: ChipState = disabled ? 'disabled' : selected ? 'focus' : 'default';
   const lead = loading ? <ChipSpinner />
-    : check && selected ? '✓'
+    : check && selected ? <Icon name="check" size={16} />
     : leadingIcon;
   return (
     <button onClick={loading ? undefined : onClick} aria-pressed={selected} disabled={disabled} aria-busy={loading || undefined}

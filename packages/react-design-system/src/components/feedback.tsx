@@ -1,5 +1,6 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 import { color, space, ty, radius } from '../system';
+import { Icon } from '../icons';
 import { Text, IconBox, ProgressBar } from './primitives';
 
 export type StatusTone = 'info' | 'positive' | 'warning' | 'danger';
@@ -7,7 +8,8 @@ const TONE_COLOR: Record<StatusTone, string> = {
   info: color('status.default'), positive: color('status.positive'),
   warning: color('status.warning'), danger: color('status.danger'),
 };
-const TONE_ICON: Record<StatusTone, string> = { info: 'ℹ', positive: '✓', warning: '!', danger: '✕' };
+// Icon-set names, not glyphs — see src/icons.
+const TONE_ICON: Record<StatusTone, string> = { info: 'info', positive: 'check', warning: 'warning', danger: 'close' };
 
 /* ---------------- PlanUsageBar ---------------- */
 export interface PlanUsageBarProps extends HTMLAttributes<HTMLDivElement> {
@@ -42,25 +44,25 @@ function Spinner({ size = 22, stroke = '#ffffff' }: { size?: number; stroke?: st
     </svg>
   );
 }
-/** Filled circle (or triangle) badge with a white glyph — the Figma status icon. */
-function StatusMark({ bg, glyph, fg, shape, size = 22 }: { bg: string; glyph: string; fg: string; shape: 'circle' | 'triangle'; size?: number }) {
+/** Coloured circle/triangle badge with an icon-set glyph inside (`icon` is an icon name). */
+function StatusMark({ bg, icon, fg, shape, size = 22 }: { bg: string; icon: string; fg: string; shape: 'circle' | 'triangle'; size?: number }) {
   return (
     <span aria-hidden style={{
       width: size, height: size, flex: '0 0 auto', display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-      background: bg, color: fg, fontSize: Math.round(size * 0.56), fontWeight: 800, lineHeight: 1,
+      background: bg, color: fg, lineHeight: 0,
       ...(shape === 'triangle'
         ? { clipPath: 'polygon(50% 3%, 97% 95%, 3% 95%)', paddingTop: Math.round(size * 0.16) }
         : { borderRadius: '50%' }),
-    }}>{glyph}</span>
+    }}><Icon name={icon} size={Math.round(size * 0.62)} /></span>
   );
 }
 
 /* ---------------- Snackbar (transient dark pill) ---------------- */
 export type SnackbarTone = 'positive' | 'danger' | 'warning' | 'loading' | 'default';
-const SNACK_MARK: Record<'positive' | 'danger' | 'warning', { bg: string; glyph: string; fg: string; shape: 'circle' | 'triangle' }> = {
-  positive: { bg: '#47cb6c', glyph: '✓', fg: '#ffffff', shape: 'circle' },   // Component/IconBox/Positive
-  danger:   { bg: '#d05d0a', glyph: '✕', fg: '#ffffff', shape: 'circle' },   // Component/IconBox/Negative
-  warning:  { bg: '#d5b549', glyph: '!', fg: '#191329', shape: 'triangle' }, // Component/IconBox/Warning
+const SNACK_MARK: Record<'positive' | 'danger' | 'warning', { bg: string; icon: string; fg: string; shape: 'circle' | 'triangle' }> = {
+  positive: { bg: '#47cb6c', icon: 'check', fg: '#ffffff', shape: 'circle' },   // Component/IconBox/Positive
+  danger:   { bg: '#d05d0a', icon: 'close', fg: '#ffffff', shape: 'circle' },   // Component/IconBox/Negative
+  warning:  { bg: '#d5b549', icon: 'warning', fg: '#191329', shape: 'triangle' }, // Component/IconBox/Warning
 };
 export interface SnackbarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   tone?: SnackbarTone;
@@ -83,7 +85,7 @@ export function Snackbar({ tone = 'default', message, action, onAction, onDismis
       {mark}
       <Text variant="body.md" color="#ffffff" style={{ flex: bare ? '0 1 auto' : 1, fontWeight: 600, textAlign: bare ? 'center' : 'left' }}>{message}</Text>
       {action ? <button onClick={onAction} style={{ border: 0, background: 'transparent', cursor: 'pointer', padding: 0, ...ty('button.sm'), color: color('text.brand.subtle'), fontWeight: 700 }}>{action}</button> : null}
-      {onDismiss ? <button onClick={onDismiss} aria-label="Dismiss" style={{ border: 0, background: 'transparent', cursor: 'pointer', color: 'inherit', padding: 0, opacity: 0.7 }}><IconBox size="sm">✕</IconBox></button> : null}
+      {onDismiss ? <button onClick={onDismiss} aria-label="Dismiss" style={{ border: 0, background: 'transparent', cursor: 'pointer', color: 'inherit', padding: 0, opacity: 0.7 }}><IconBox size="sm"><Icon name="close" size={12} /></IconBox></button> : null}
     </div>
   );
 }
@@ -115,11 +117,11 @@ export type AlertTone = 'positive' | 'warning' | 'danger' | 'default';
 const TONE_TO_STATUS: Record<AlertTone, AlertStatus> = {
   positive: 'success', warning: 'alert', danger: 'warning', default: 'info',
 };
-const ALERT_STATUS: Record<AlertStatus, { bg: string; strong: string; mark: string; glyph: string; shape: 'circle' | 'triangle'; action: string }> = {
-  success: { bg: '#c1f7d0', strong: '#164025', mark: '#164025', glyph: '✓', shape: 'circle',   action: '#164025' },
-  alert:   { bg: '#ffecab', strong: '#55481d', mark: '#55481d', glyph: '!', shape: 'triangle', action: '#55481d' },
-  warning: { bg: '#ffc28b', strong: '#612a05', mark: '#612a05', glyph: '✕', shape: 'circle',   action: '#612a05' },
-  info:    { bg: '#e4e3ea', strong: '#191329', mark: '#191329', glyph: 'i', shape: 'circle',   action: color('text.brand.default') },
+const ALERT_STATUS: Record<AlertStatus, { bg: string; strong: string; mark: string; icon: string; shape: 'circle' | 'triangle'; action: string }> = {
+  success: { bg: '#c1f7d0', strong: '#164025', mark: '#164025', icon: 'check', shape: 'circle',   action: '#164025' },
+  alert:   { bg: '#ffecab', strong: '#55481d', mark: '#55481d', icon: 'warning', shape: 'triangle', action: '#55481d' },
+  warning: { bg: '#ffc28b', strong: '#612a05', mark: '#612a05', icon: 'close', shape: 'circle',   action: '#612a05' },
+  info:    { bg: '#e4e3ea', strong: '#191329', mark: '#191329', icon: 'info', shape: 'circle',   action: color('text.brand.default') },
 };
 export interface AlertProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   /** Figma `Staus` axis. Takes precedence over `tone`. */
@@ -138,7 +140,7 @@ export function Alert({ status, tone, title, action, onAction, children, style, 
       display: 'flex', alignItems: 'flex-start', gap: space('md'), width: '100%', boxSizing: 'border-box',
       padding: space('lg'), borderRadius: radius('6'), background: t.bg, ...style,
     }} {...rest}>
-      <StatusMark bg={t.mark} glyph={t.glyph} fg="#ffffff" shape={t.shape} size={24} />
+      <StatusMark bg={t.mark} icon={t.icon} fg="#ffffff" shape={t.shape} size={24} />
       <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: space('2xs') }}>
         {title ? <Text variant="title.sm" color={t.strong} as="div" style={{ fontWeight: 700 }}>{title}</Text> : null}
         {children ? <Text variant="body.sm" color={t.strong} style={{ opacity: 0.85 }}>{children}</Text> : null}
@@ -163,7 +165,7 @@ export function AlertModal({ open = true, tone = 'info', title, body, actions, o
     <div role="dialog" aria-modal="true" onClick={onDismiss}
       style={{ position: 'fixed', inset: 0, background: color('surface.overlay.scrim'), display: 'flex', alignItems: 'center', justifyContent: 'center', padding: space('lg'), zIndex: 1000 }}>
       <div onClick={(e) => e.stopPropagation()} style={{ width: '100%', maxWidth: 360, background: color('surface.raised.default'), borderRadius: radius('6'), padding: space('xl'), display: 'flex', flexDirection: 'column', gap: space('md') }}>
-        <span style={{ color: TONE_COLOR[tone] }}><IconBox size="xl">{TONE_ICON[tone]}</IconBox></span>
+        <span style={{ color: TONE_COLOR[tone] }}><IconBox size="xl"><Icon name={TONE_ICON[tone]} size={24} /></IconBox></span>
         {title ? <Text variant="heading.sm">{title}</Text> : null}
         {body ? <Text variant="body.md" color={color('text.default.subtle')}>{body}</Text> : null}
         <div style={{ display: 'flex', flexDirection: 'column', gap: space('sm'), marginTop: space('sm') }}>{actions}</div>

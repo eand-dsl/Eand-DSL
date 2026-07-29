@@ -1,5 +1,6 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 import { color, space, radius, scale, PILL } from '../system';
+import { Icon } from '../icons';
 import { Text, IconBox } from './primitives';
 
 /* ---------------- Tooltip ----------------
@@ -142,7 +143,7 @@ export function BottomSheet({
         {(title || onDismiss) && (
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: space('md'), padding: `0 ${space('lg')} ${space('sm')}` }}>
             <Text variant="heading.md" color={ink}>{title}</Text>
-            {onDismiss ? <button onClick={onDismiss} aria-label="Close" style={{ border: 0, background: 'transparent', cursor: 'pointer', color: ink }}><IconBox size="sm">✕</IconBox></button> : null}
+            {onDismiss ? <button onClick={onDismiss} aria-label="Close" style={{ border: 0, background: 'transparent', cursor: 'pointer', color: ink }}><IconBox size="sm"><Icon name="close" size={12} /></IconBox></button> : null}
           </div>
         )}
         {subheader ? <div style={{ padding: `0 ${space('lg')} ${space('sm')}` }}>{subheader}</div> : null}

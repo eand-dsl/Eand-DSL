@@ -8,6 +8,12 @@
       "description": ""
     },
     {
+      "name": "colorScheme",
+      "type": "enum",
+      "required": false,
+      "description": "Figma `color-scheme` axis. Takes precedence over `variant`."
+    },
+    {
       "name": "discount",
       "type": "boolean",
       "required": false,
@@ -46,14 +52,13 @@
       "name": "variant",
       "type": "enum",
       "required": false,
-      "default": "default",
-      "description": ""
+      "description": "@deprecated Use `colorScheme`."
     },
     {
       "name": "width",
       "type": "string | number",
       "required": false,
-      "default": "210",
+      "default": "222",
       "description": ""
     }
   ],
@@ -98,9 +103,9 @@
     },
     {
       "name": "tint",
-      "type": "string",
+      "type": "(string & {}) | CardBgTint",
       "required": false,
-      "description": ""
+      "description": "A `.card-bg-color` tint name (Figma 25710:20065). A raw CSS colour still works."
     },
     {
       "name": "title",
@@ -108,6 +113,12 @@
       "required": false,
       "default": "iPhone Clear Case For Safe Use",
       "description": ""
+    },
+    {
+      "name": "type",
+      "type": "enum",
+      "required": false,
+      "description": "Which card-features sibling this is."
     },
     {
       "name": "width",
@@ -159,6 +170,12 @@
       "description": ""
     },
     {
+      "name": "selected",
+      "type": "boolean",
+      "required": false,
+      "description": "Figma `selected` axis — the gradient ring plus the New-card badge."
+    },
+    {
       "name": "title",
       "type": "ReactNode",
       "required": false,
@@ -190,8 +207,14 @@
       "name": "icon",
       "type": "ReactNode",
       "required": false,
-      "default": "◍",
+      "default": "<Icon name=\"placeholder\" size={34} />",
       "description": ""
+    },
+    {
+      "name": "size",
+      "type": "enum",
+      "required": false,
+      "description": "Figma `size` axis; omit to let the cell fill its grid track."
     }
   ],
   "Highlight": [
@@ -937,6 +960,12 @@
       "description": ""
     },
     {
+      "name": "status",
+      "type": "enum",
+      "required": false,
+      "description": "Figma `Staus` axis. Takes precedence over `tone`."
+    },
+    {
       "name": "title",
       "type": "ReactNode",
       "required": false,
@@ -946,8 +975,7 @@
       "name": "tone",
       "type": "enum",
       "required": false,
-      "default": "default",
-      "description": ""
+      "description": "@deprecated Use `status`; `warning` maps to `alert` and `danger` to `warning`."
     }
   ],
   "AlertModal": [
@@ -1099,6 +1127,13 @@
       "type": "ReactNode",
       "required": false,
       "description": ""
+    },
+    {
+      "name": "surface",
+      "type": "enum",
+      "required": false,
+      "default": "default",
+      "description": "Figma `.card-general` 26825:101736 `surface` axis."
     },
     {
       "name": "title",
@@ -1374,11 +1409,49 @@
       "description": ""
     },
     {
+      "name": "action",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Rich only — action row (`.tooltip-icon-button` / a Button)."
+    },
+    {
+      "name": "media",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Rich only — `.tooltip-media-image`."
+    },
+    {
       "name": "placement",
       "type": "enum",
       "required": false,
       "default": "top",
       "description": ""
+    },
+    {
+      "name": "size",
+      "type": "enum",
+      "required": false,
+      "default": "standard",
+      "description": ""
+    },
+    {
+      "name": "steps",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Rich only — `.tooltip-steps`, e.g. \"1 of 3\"."
+    },
+    {
+      "name": "surface",
+      "type": "enum",
+      "required": false,
+      "default": "default",
+      "description": ""
+    },
+    {
+      "name": "title",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Rich only — `.tooltip-text-title`."
     },
     {
       "name": "visible",
@@ -1390,10 +1463,24 @@
   ],
   "BottomSheet": [
     {
+      "name": "display",
+      "type": "enum",
+      "required": false,
+      "default": "light",
+      "description": "Figma `Display` axis — the sheet surface."
+    },
+    {
       "name": "footer",
       "type": "ReactNode",
       "required": false,
       "description": ""
+    },
+    {
+      "name": "grabber",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "description": "Figma `Grabber` boolean."
     },
     {
       "name": "onDismiss",
@@ -1409,10 +1496,22 @@
       "description": ""
     },
     {
+      "name": "subheader",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Figma Subheader 27928:11034 — search / filters under the title."
+    },
+    {
       "name": "title",
       "type": "ReactNode",
       "required": false,
       "description": ""
+    },
+    {
+      "name": "visual",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Figma Visual asset 29355:9189 — media strip above the header."
     }
   ],
   "Text": [
@@ -1596,11 +1695,32 @@
       "name": "level",
       "type": "enum",
       "required": false,
-      "default": "base",
-      "description": ""
+      "description": "@deprecated V1.0 elevation axis with no Figma counterpart; use `surfaceColor`.\nRetained so existing call sites keep their current fill."
+    },
+    {
+      "name": "surfaceColor",
+      "type": "enum",
+      "required": false,
+      "description": "Figma `surface-color` axis — all seven values across both surface atoms."
+    }
+  ],
+  "CardBgColor": [
+    {
+      "name": "fixedSize",
+      "type": "boolean",
+      "required": false,
+      "description": "Render at the Figma swatch footprint (card/width/lg x card/height/lg)."
+    },
+    {
+      "name": "tint",
+      "type": "enum",
+      "required": false,
+      "default": "default",
+      "description": "Figma `color` axis."
     }
   ],
   "Logo": [],
+  "CARD_BG_TINTS": [],
   "Button": [
     {
       "name": "block",

@@ -1,5 +1,6 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 import { space, color, icon, radius, rowHeight, PILL } from '../system';
+import { Icon } from '../icons';
 import { Text, IconBox } from './primitives';
 
 /* ---------------- TopBar (header) ----------------
@@ -179,7 +180,7 @@ function NavTab({ it, collapsed }: { it: NavItem; collapsed?: boolean }) {
         transition: 'flex-grow 280ms ease, padding 220ms ease, background 200ms ease',
       }}>
       <span style={{ display: 'inline-flex', width: 32, height: 32, alignItems: 'center', justifyContent: 'center', color: 'inherit', flex: 'none' }}>
-        {it.avatar ?? it.icon ?? '●'}
+        {it.avatar ?? it.icon ?? <Icon name="placeholder" size={24} />}
       </span>
       <span aria-hidden={collapsed || undefined} style={{
         fontSize: 10, lineHeight: 1.4, fontWeight: on ? 700 : 400, color: 'inherit', whiteSpace: 'nowrap',
@@ -335,7 +336,7 @@ export function QuickAction({ items, columns = 3, style, ...rest }: QuickActionP
         <button key={i} onClick={it.onClick}
           style={{ position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: rowHeight('row-2'), padding: space('md'), borderRadius: radius('6'), border: 0, background: color('surface.raised.default'), cursor: 'pointer', textAlign: 'left' }}>
           <span style={{ width: 40, height: 40, borderRadius: radius('3'), background: color('surface.base.default'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: color('text.default.default') }}>
-            {it.icon ?? '●'}
+            {it.icon ?? <Icon name="placeholder" size={24} />}
           </span>
           {it.badge ? <span style={{ position: 'absolute', top: 10, right: 10 }}>{it.badge}</span> : null}
           <Text variant="title.xs">{it.label}</Text>

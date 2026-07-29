@@ -1,5 +1,6 @@
 import type { CSSProperties, ElementType, HTMLAttributes, ReactNode } from 'react';
 import { T, ty, space, icon, color, radius, scale, PILL } from '../system';
+import { Icon } from '../icons';
 
 /* ---------------- Text ---------------- */
 export interface TextProps extends HTMLAttributes<HTMLElement> {
@@ -23,7 +24,7 @@ export function IconBox({ size = 'md', style, children, ...rest }: IconBoxProps)
   const d = icon(size);
   return (
     <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: d, height: d, flex: '0 0 auto', ...style }} {...rest}>
-      {children ?? '◍'}
+      {children ?? <Icon name="placeholder" size={parseInt(d, 10) || 16} />}
     </span>
   );
 }
@@ -149,7 +150,7 @@ export function AddTrigger({ label = 'Add', style, onClick, ...rest }: AddTrigge
       style={{ display: 'inline-flex', alignItems: 'center', gap: space('xs'), height: 40, padding: `0 ${space('lg')}`,
         borderRadius: PILL, border: `1px dashed ${color('border.default')}`, background: 'transparent',
         color: color('text.brand.default'), cursor: 'pointer', ...ty('button.md'), ...style }} {...rest}>
-      <IconBox size="lg">＋</IconBox>{label}
+      <IconBox size="lg"><Icon name="add" size={20} /></IconBox>{label}
     </button>
   );
 }

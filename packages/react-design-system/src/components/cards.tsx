@@ -1,12 +1,13 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 import { color, space, radius, rowHeight } from '../system';
 import { Text, Badge, SmilesRow, cardBgTint } from './primitives';
+import { Icon } from '../icons';
 import type { CardBgTint } from './primitives';
 import { Button } from './Button';
 
 const mutedOn = (onDark: boolean) => (onDark ? 'rgba(255,255,255,0.72)' : color('text.default.muted'));
 const imageBox = (h: number, node?: ReactNode) => (
-  <div style={{ width: '100%', height: h, borderRadius: radius('3'), overflow: 'hidden', background: color('surface.base.default'), display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 40 }}>{node ?? '📦'}</div>
+  <div style={{ width: '100%', height: h, borderRadius: radius('3'), overflow: 'hidden', background: color('surface.base.default'), display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 40 }}>{node ?? <Icon name="image" size={40} />}</div>
 );
 
 /* ---------------- PlanCard (plans-mini) ----------------
@@ -107,7 +108,9 @@ export function ProductCard({ eyebrow, title = 'iPhone Clear Case For Safe Use',
       </div>
       <div>
         <Text variant="body.sm" color={color('text.default.muted')} as="div">from</Text>
-        <Text variant="title.sm">{pts ? `😊 ${price} PTS` : price}{period}</Text>
+        <Text variant="title.sm">
+          {pts ? <><Icon name="smiley" size={16} /> {price} PTS</> : price}{period}
+        </Text>
       </div>
     </div>
   );
@@ -122,7 +125,7 @@ export function DealCard({ image, title = 'Deal title', subtitle, badge, width =
     <div style={{ width, flex: '0 0 auto', boxSizing: 'border-box', minHeight: rowHeight('row-3'), background: color('surface.raised.default'), border: `1px solid ${color('border.solid.subtle')}`, borderRadius: radius('5'), overflow: 'hidden', display: 'flex', flexDirection: 'column', ...style }} {...rest}>
       {/* image fills the remaining height (Figma .card-general: 224 tall, image inset-0, title pinned bottom) */}
       <div style={{ position: 'relative', flex: 1, display: 'flex', padding: space('sm') }}>
-        <div style={{ flex: 1, borderRadius: radius('3'), overflow: 'hidden', background: color('surface.base.default'), display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 40 }}>{image ?? '📦'}</div>
+        <div style={{ flex: 1, borderRadius: radius('3'), overflow: 'hidden', background: color('surface.base.default'), display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 40 }}>{image ?? <Icon name="image" size={40} />}</div>
         {badge ? <span style={{ position: 'absolute', top: 14, left: 14 }}>{badge}</span> : null}
       </div>
       <div style={{ padding: `0 ${space('lg')} ${space('lg')}`, display: 'flex', flexDirection: 'column', gap: 2 }}>
@@ -181,7 +184,7 @@ export interface ServiceCardProps extends HTMLAttributes<HTMLButtonElement> {
   /** Figma `size` axis; omit to let the cell fill its grid track. */
   size?: ServiceCardSize;
 }
-export function ServiceCard({ icon = '◍', label, badge, size, style, ...rest }: ServiceCardProps) {
+export function ServiceCard({ icon = <Icon name="placeholder" size={34} />, label, badge, size, style, ...rest }: ServiceCardProps) {
   return (
     <button style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: space('sm'), padding: space('md'), width: size ? SERVICE_CARD_WIDTH[size] : undefined, minHeight: rowHeight('row-2'), borderRadius: radius('6'), border: 0, background: color('surface.canvas.default'), cursor: 'pointer', ...style }} {...rest}>
       {badge ? <span style={{ position: 'absolute', top: 8, left: 8 }}>{badge}</span> : null}

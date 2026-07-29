@@ -300,10 +300,11 @@ test('Chip disabled blocks clicks and uses disabled colors', async () => {
 });
 
 test('Chip check shows a check mark only while selected', () => {
-  const { rerender } = render(<Chip check>C</Chip>);
-  expect(screen.queryByText('✓')).toBeNull();
+  // The mark is the `check` icon from the icon set, not a ✓ glyph.
+  const { container, rerender } = render(<Chip check>C</Chip>);
+  expect(container.querySelector('[aria-label="check"]')).toBeNull();
   rerender(<Chip check selected>C</Chip>);
-  expect(screen.getByText('✓')).toBeInTheDocument();
+  expect(container.querySelector('[aria-label="check"]')).toBeInTheDocument();
 });
 
 test('Chip loading shows a spinner and suppresses clicks', async () => {
