@@ -98,6 +98,42 @@ axis the way `Tooltip` did; **the verdict alone does not say which axis**:
    had no test files at all. All three now do; the flat Tooltip radius, the invisible
    grabber and the wrong Alert palette all lived in untested files.
 
+## Defects found in inherited Code Connect mappings
+
+Surfaced by reading every mapped node's real axes (Phase 4). All three parsed and
+published cleanly while describing something that does not exist:
+
+1. **`Button.surface` resolved to nothing.** The mapping read `figma.enum('🎨 surface', …)`
+   with values `🔴 brand` / `⚪️ white`. The real axis is **`🎨 scheme`** with
+   `🔴 default | ⚫️ midnight | ⚪️ inverse | ⚪️🔴 inverse-brand` — wrong key *and* wrong
+   values, on the most-used component in the system. Corrected.
+2. **`DealCard` pointed at `.card-general`** (26825:101736) — the General card's cell.
+   Now mapped to `deals-card` 25973:22611; the node belongs to `Card`.
+3. **`PlanCard` pointed at `card-features-addon`** (25893:54098) — ProductCard's node. Its
+   property names lined up well enough to look verified. Now `plans-mini` 26003:40647.
+
+Related gaps worth a design decision:
+
+- **`Switcher.color-scheme`** exists in Figma but is absent from both the mapping and
+  `SwitcherProps` — the inverse scheme is unreachable from code.
+- **`Logo.version`** (default|white|midnight|red) has no React counterpart; all four
+  collapse to one output.
+- **`FilterPill.selected`** is mapped in code but is not an axis on that set.
+- **Naming inconsistency across sibling controls:** Checkbox uses `inverse`/`size`;
+  Radio uses `color-scheme`/`small` for the same two concepts. Checkbox mixes casing
+  within one set (`selected`, `size`, but `Disabled`).
+- **Figma value typo:** badges-status exposes `neutra-inverse` (missing the "l").
+- **Token key typo:** `color/badge/surface/offers/limited stock` uses a space where every
+  sibling uses a hyphen.
+
+## Figma annotations (Phase 4)
+
+23 nodes annotated in the copy under the **Development** category, each carrying the React
+component + import, the axis→prop mapping, the atom tree with node IDs, the verified token
+spec, and any caveat above. Live `width`/`height` properties are attached so Dev Mode shows
+measurements alongside. Annotations were written to the **copy only** — porting them to the
+published original is a separate, explicitly-approved step.
+
 ## Caveats
 
 - **Layer names differ between the two files.** `.card-general-core` (original) is
