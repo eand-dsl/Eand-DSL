@@ -1,5 +1,6 @@
 import { type CSSProperties, type HTMLAttributes, type ReactNode, useState } from 'react';
 import { T, space, color, ty, radius } from '../system';
+import { Icon } from '../icons';
 import { Text, IconBox } from './primitives';
 
 /* ---------------- Section: the full-width body container ----------------
@@ -101,7 +102,7 @@ export function Section({
               </button>
             ) : trig === 'button' ? (
               <button onClick={fire} style={{ display: 'inline-flex', alignItems: 'center', gap: 2, border: 0, background: 'transparent', cursor: 'pointer', padding: `0 ${space('xs')}`, color: onDark ? text : color('text.brand.default'), ...ty('button.sm') }}>
-                {triggerLabel}<IconBox size="md">›</IconBox>
+                {triggerLabel}<IconBox size="md"><Icon name="chevron-right-sm" size={16} /></IconBox>
               </button>
             ) : null}
           </div>
@@ -173,7 +174,7 @@ export function Accordion({ title, defaultOpen = false, style, children, ...rest
       <button onClick={() => setOpen((o) => !o)} aria-expanded={open}
         style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: space('md'), padding: `${space('md')} 0`, background: 'transparent', border: 0, cursor: 'pointer' }}>
         <Text variant="title.sm">{title}</Text>
-        <IconBox size="sm" style={{ transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 150ms' }}>⌄</IconBox>
+        <IconBox size="sm" style={{ transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 150ms' }}><Icon name="chevron-down-sm" size={16} /></IconBox>
       </button>
       {open ? <div style={{ paddingBottom: space('md') }}>{children}</div> : null}
     </div>

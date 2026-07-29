@@ -169,10 +169,12 @@ test('Searchbar renders 20px (lg) search and mic icons per Figma', () => {
   expect(icons.length).toBeGreaterThanOrEqual(2);
 });
 
-test('FilterPill chevron is 16px (md) per Figma anatomy', () => {
+test('FilterPill chevron is the chevron-down-sm icon in a 16px (md) box', () => {
   const { container } = render(<FilterPill>Category</FilterPill>);
-  const chevron = Array.from(container.querySelectorAll('span')).find((s) => s.textContent === '⌄')!;
-  expect(chevron.style.width).toBe('16px');
+  // Icon renders <span role="img" aria-label={name}>; its IconBox parent carries the size.
+  const icon = container.querySelector('[aria-label="chevron-down-sm"]')!;
+  expect(icon).toBeInTheDocument();
+  expect((icon.parentElement as HTMLElement).style.width).toBe('16px');
 });
 
 test('Chip leading icon is 16px (md) per Figma chips-core', () => {
@@ -216,7 +218,7 @@ test('Input border reflects state: default, active, error, disabled', async () =
 test('Input dropdown type is read-only with a trailing chevron', () => {
   const { container } = render(<Input label="Plan" type="dropdown" />);
   expect(screen.getByRole('textbox')).toHaveAttribute('readonly');
-  expect(Array.from(container.querySelectorAll('span')).some((s) => s.textContent === '⌄')).toBe(true);
+  expect(container.querySelector('[aria-label="chevron-down-sm"]')).toBeInTheDocument();
 });
 
 test('Input comment type renders a textarea', () => {

@@ -1,5 +1,6 @@
 import { useRef, useState, type CSSProperties, type HTMLAttributes, type InputHTMLAttributes, type ReactNode } from 'react';
 import { color, space, ty, radius, PILL, T } from '../system';
+import { Icon } from '../icons';
 import { Text, IconBox } from './primitives';
 
 /* ---------------- Input ----------------
@@ -62,8 +63,8 @@ export function Input({
           cursor: disabled ? 'not-allowed' : readOnly ? 'pointer' : 'text',
         }}
       >
-        {(leadingIcon ?? (type === 'picker' ? '▢' : null)) != null
-          ? <IconBox size="lg" style={{ color: valueColor }}>{leadingIcon ?? '▢'}</IconBox> : null}
+        {(leadingIcon ?? (type === 'picker' ? <Icon name="placeholder" size={20} /> : null)) != null
+          ? <IconBox size="lg" style={{ color: valueColor }}>{leadingIcon ?? <Icon name="placeholder" size={20} />}</IconBox> : null}
         <span style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: space('2xs'), padding: `${space('sm')} 0` }}>
           {label ? (
             <span style={{ color: labelColor, transition: 'font-size 120ms ease, line-height 120ms ease', ...ty(floated ? 'body.sm' : 'body.lg') } as CSSProperties}>{label}</span>
@@ -98,15 +99,15 @@ export function Input({
             }}
             // 24px erase button, Figma `color/dismiss/default` (#908e9a) — no dismiss token group yet
             style={{ width: 24, height: 24, flex: 'none', border: 0, borderRadius: '50%', background: '#908e9a', color: '#ffffff', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, lineHeight: 1 }}
-          >✕</button>
+          ><Icon name="close" size={12} /></button>
         ) : null}
-        {readOnly ? <IconBox size="md" style={{ color: labelColor }}>⌄</IconBox>
+        {readOnly ? <IconBox size="md" style={{ color: labelColor }}><Icon name="chevron-down-sm" size={16} /></IconBox>
           : trailingIcon ? <IconBox size="lg" style={{ color: valueColor }}>{trailingIcon}</IconBox> : null}
       </div>
       {(error || success || helper) ? (
         <span style={{ display: 'inline-flex', alignItems: 'center', gap: space('xs') }}>
-          {error ? <IconBox size="sm" style={{ color: color('text.danger.subtle') }}>ⓘ</IconBox>
-            : success ? <IconBox size="sm" style={{ color: color('text.positive.subtle') }}>✓</IconBox> : null}
+          {error ? <IconBox size="sm" style={{ color: color('text.danger.subtle') }}><Icon name="info" size={12} /></IconBox>
+            : success ? <IconBox size="sm" style={{ color: color('text.positive.subtle') }}><Icon name="check" size={12} /></IconBox> : null}
           <Text variant="body.sm" color={error ? color('text.danger.subtle') : success ? color('text.positive.subtle') : color('text.default.muted')}>
             {error ?? success ?? helper}
           </Text>
@@ -173,7 +174,7 @@ export function OtpInput({ length = 4, value, defaultValue = '', onValueChange, 
       </div>
       {error ? (
         <span style={{ display: 'inline-flex', alignItems: 'center', gap: space('xs') }}>
-          <IconBox size="sm" style={{ color: color('text.danger.subtle') }}>ⓘ</IconBox>
+          <IconBox size="sm" style={{ color: color('text.danger.subtle') }}><Icon name="info" size={12} /></IconBox>
           <Text variant="body.sm" color={color('text.danger.subtle')}>{error}</Text>
         </span>
       ) : null}
@@ -280,7 +281,7 @@ export function FilterPill({ selected, inverse, disabled, style, children, onCli
         background,
         color: color(`filterPill.text.${scheme}.${state}`), ...ty('body.md'), ...style,
       }} {...rest}>
-      {children}<IconBox size="md">⌄</IconBox>
+      {children}<IconBox size="md"><Icon name="chevron-down-sm" size={16} /></IconBox>
     </button>
   );
 }
@@ -388,9 +389,9 @@ export interface SearchbarProps extends Omit<InputHTMLAttributes<HTMLInputElemen
 export function Searchbar({ placeholder = 'Search', onMic, style, ...rest }: SearchbarProps) {
   return (
     <span style={{ display: 'flex', alignItems: 'center', gap: space('sm'), height: 52, padding: `0 ${space('lg')}`, borderRadius: radius('5'), background: color('surface.base.default'), width: '100%', boxSizing: 'border-box', ...style }}>
-      <IconBox size="lg">⌕</IconBox>
+      <IconBox size="lg"><Icon name="search" size={24} /></IconBox>
       <input placeholder={placeholder} style={{ flex: 1, minWidth: 0, border: 0, outline: 'none', background: 'transparent', ...ty('body.md') }} {...rest} />
-      <button onClick={onMic} aria-label="Voice search" style={{ border: 0, background: 'transparent', cursor: 'pointer', color: color('text.default.muted') }}><IconBox size="lg">🎤</IconBox></button>
+      <button onClick={onMic} aria-label="Voice search" style={{ border: 0, background: 'transparent', cursor: 'pointer', color: color('text.default.muted') }}><IconBox size="lg"><Icon name="mic" size={24} /></IconBox></button>
     </span>
   );
 }
