@@ -1,5 +1,5 @@
 import type { CSSProperties, ElementType, HTMLAttributes, ReactNode } from 'react';
-import { ty, space, icon, color, radius, scale, PILL } from '../system';
+import { T, ty, space, icon, color, radius, scale, PILL } from '../system';
 
 /* ---------------- Text ---------------- */
 export interface TextProps extends HTMLAttributes<HTMLElement> {
@@ -234,6 +234,60 @@ export function AtomSurface({ surfaceColor, level, style, children, ...rest }: A
     : color(`surface.${level ?? 'base'}.default`);
   return (
     <div style={{ background: bg, borderRadius: radius('5'), ...style }} {...rest}>
+      {children}
+    </div>
+  );
+}
+
+/* ---------------- CardBgColor ----------------
+   Figma final component `.card-bg-color` 25710:20065 — the tint panel that backs the
+   card-features media area. One `color` axis, eight values, each 224x272
+   (card/width/lg x card/height/lg) at radius border-radius/5 = 16.
+
+   The prop is named `tint` rather than `color` so it does not shadow the `color()`
+   token helper used throughout this file.
+
+   Figma's variant labels are shifted against its own token names for two entries:
+   variant `cyan` binds atom-surfaces/blue and variant `blue` binds
+   atom-surfaces/purple. There is no atom-surfaces/cyan token, and no variant named
+   purple. The labels below follow Figma (what a designer picks); each was read off its
+   own variant node. */
+export type CardBgTint =
+  | 'default' | 'red' | 'orange' | 'yellow' | 'green' | 'cyan' | 'blue' | 'violet';
+
+const CARD_BG_TINT: Record<CardBgTint, string> = {
+  default: 'atom-surfaces.default', // 26522:14527  #e4e3ea
+  red: 'atom-surfaces.red',         // 25710:20060  #fcebeb
+  orange: 'atom-surfaces.orange',   // 25710:20063  #fcf3eb
+  yellow: 'atom-surfaces.yellow',   // 25710:20059  #fcfceb
+  green: 'atom-surfaces.green',     // 25710:20058  #ecfce8
+  cyan: 'atom-surfaces.blue',       // 25710:20064  #ebf7fc  <- label/token shift
+  blue: 'atom-surfaces.purple',     // 25710:20061  #ebebfc  <- label/token shift
+  violet: 'atom-surfaces.violet',   // 25710:20062  #f9ebfc
+};
+
+/** Resolve a Figma card-bg-color variant name to its fill. */
+export const cardBgTint = (tint: CardBgTint): string => color(CARD_BG_TINT[tint]);
+/** Every tint a designer can pick, in Figma's own order. */
+export const CARD_BG_TINTS = Object.keys(CARD_BG_TINT) as CardBgTint[];
+
+export interface CardBgColorProps extends HTMLAttributes<HTMLDivElement> {
+  /** Figma `color` axis. */
+  tint?: CardBgTint;
+  /** Render at the Figma swatch footprint (card/width/lg x card/height/lg). */
+  fixedSize?: boolean;
+}
+export function CardBgColor({ tint = 'default', fixedSize, style, children, ...rest }: CardBgColorProps) {
+  return (
+    <div
+      style={{
+        background: cardBgTint(tint), borderRadius: radius('5'), boxSizing: 'border-box',
+        width: fixedSize ? T.card?.width?.lg : undefined,
+        height: fixedSize ? T.card?.height?.lg : undefined,
+        ...style,
+      }}
+      {...rest}
+    >
       {children}
     </div>
   );

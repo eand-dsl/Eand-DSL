@@ -1,6 +1,7 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 import { color, space, radius, rowHeight } from '../system';
-import { Text, Badge, SmilesRow } from './primitives';
+import { Text, Badge, SmilesRow, cardBgTint } from './primitives';
+import type { CardBgTint } from './primitives';
 import { Button } from './Button';
 
 const mutedOn = (onDark: boolean) => (onDark ? 'rgba(255,255,255,0.72)' : color('text.default.muted'));
@@ -46,12 +47,19 @@ export function PlanCard({ name = 'Entertainment plans', category = 'Postpaid', 
 /* ---------------- ProductCard / card-features (product · addon · category) ---------------- */
 export interface ProductCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   eyebrow?: ReactNode; title?: ReactNode; image?: ReactNode; discount?: ReactNode;
-  price?: ReactNode; period?: ReactNode; pts?: boolean; tint?: string; width?: number | string;
+  price?: ReactNode; period?: ReactNode; pts?: boolean;
+  /** A `.card-bg-color` tint name (Figma 25710:20065). A raw CSS colour still works. */
+  tint?: CardBgTint | (string & {});
+  width?: number | string;
 }
+const isTintName = (t: string): t is CardBgTint =>
+  ['default', 'red', 'orange', 'yellow', 'green', 'cyan', 'blue', 'violet'].includes(t);
 export function ProductCard({ eyebrow, title = 'iPhone Clear Case For Safe Use', image, discount, price = 'AED 200', period = '/mo', pts, tint, width = 200, style, ...rest }: ProductCardProps) {
+  const bg = tint == null ? color('surface.raised.default')
+    : isTintName(tint) ? cardBgTint(tint) : tint;
   return (
     /* Figma card-features (25893:54098): radius border-radius/6 = 20, no resting border. */
-    <div style={{ width, flex: '0 0 auto', boxSizing: 'border-box', background: tint ?? color('surface.raised.default'), borderRadius: radius('6'), padding: space('lg'), minHeight: image ? 280 : 200, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: space('md'), ...style }} {...rest}>
+    <div style={{ width, flex: '0 0 auto', boxSizing: 'border-box', background: bg, borderRadius: radius('6'), padding: space('lg'), minHeight: image ? 280 : 200, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: space('md'), ...style }} {...rest}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: space('sm') }}>
         {(eyebrow || (discount && !image)) && (
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: space('sm') }}>

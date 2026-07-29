@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Badge, ProgressBar, Stepper, Dismiss, AtomSurface } from './primitives';
+import { Badge, ProgressBar, Stepper, Dismiss, AtomSurface, CardBgColor, CARD_BG_TINTS } from './primitives';
 
 /* ---------------- Badge ---------------- */
 
@@ -179,4 +179,46 @@ test('AtomSurface keeps the deprecated level axis rendering as before', () => {
 test('AtomSurface defaults to surface.base.default when neither axis is given', () => {
   const { container } = render(<AtomSurface />);
   expect((container.firstElementChild as HTMLElement).style.background).toBe('rgb(240, 240, 245)');
+});
+
+/* ---------------- CardBgColor (Figma .card-bg-color 25710:20065) ----------------
+   Eight tints on one `color` axis. Each expected fill was read off its own variant
+   node; `cyan` and `blue` are deliberately shifted against the token names. */
+test.each([
+  ['default', 'rgb(228, 227, 234)'],  // 26522:14527 atom-surfaces/default
+  ['red', 'rgb(252, 235, 235)'],      // 25710:20060 atom-surfaces/red
+  ['orange', 'rgb(252, 243, 235)'],   // 25710:20063 atom-surfaces/orange
+  ['yellow', 'rgb(252, 252, 235)'],   // 25710:20059 atom-surfaces/yellow
+  ['green', 'rgb(236, 252, 232)'],    // 25710:20058 atom-surfaces/green
+  ['cyan', 'rgb(235, 247, 252)'],     // 25710:20064 atom-surfaces/BLUE  (shift)
+  ['blue', 'rgb(235, 235, 252)'],     // 25710:20061 atom-surfaces/PURPLE (shift)
+  ['violet', 'rgb(249, 235, 252)'],   // 25710:20062 atom-surfaces/violet
+] as const)('CardBgColor tint=%s fills with %s', (tint, bg) => {
+  const { container } = render(<CardBgColor tint={tint} />);
+  expect((container.firstElementChild as HTMLElement).style.background).toBe(bg);
+});
+
+test('CardBgColor cyan and blue resolve to different fills (the label shift is real)', () => {
+  const { container: a } = render(<CardBgColor tint="cyan" />);
+  const { container: b } = render(<CardBgColor tint="blue" />);
+  const fill = (c: Element) => (c.firstElementChild as HTMLElement).style.background;
+  expect(fill(a)).not.toBe(fill(b));
+});
+
+test('CardBgColor defaults to the default tint at radius 16', () => {
+  const { container } = render(<CardBgColor />);
+  const el = container.firstElementChild as HTMLElement;
+  expect(el.style.background).toBe('rgb(228, 227, 234)');
+  expect(el.style.borderRadius).toBe('16px');
+});
+
+test('CardBgColor fixedSize uses the Figma card/width|height/lg footprint', () => {
+  const { container } = render(<CardBgColor fixedSize />);
+  const el = container.firstElementChild as HTMLElement;
+  expect(el.style.width).toBe('224px');
+  expect(el.style.height).toBe('272px');
+});
+
+test('CARD_BG_TINTS exposes all eight Figma variants', () => {
+  expect(CARD_BG_TINTS).toEqual(['default', 'red', 'orange', 'yellow', 'green', 'cyan', 'blue', 'violet']);
 });
