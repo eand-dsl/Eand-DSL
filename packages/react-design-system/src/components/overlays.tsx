@@ -1,5 +1,5 @@
 import type { HTMLAttributes, ReactNode } from 'react';
-import { color, space } from '../system';
+import { color, space, radius, PILL } from '../system';
 import { Text, IconBox } from './primitives';
 
 /* ---------------- Tooltip ---------------- */
@@ -18,7 +18,8 @@ export function Tooltip({ content, visible = false, placement = 'top', children 
           position: 'absolute', left: '50%', transform: 'translateX(-50%)',
           [placement === 'top' ? 'bottom' : 'top']: 'calc(100% + 8px)',
           background: color('surface.overlay.floating-inverse'), color: color('text.default.inverse'),
-          padding: `${space('xs')} ${space('sm')}`, borderRadius: 8, whiteSpace: 'nowrap', zIndex: 50,
+          // Figma Tooltip (30643:2117): radius border-radius/3 = 12 (was 8).
+          padding: `${space('xs')} ${space('sm')}`, borderRadius: radius('3'), whiteSpace: 'nowrap', zIndex: 50,
         } as any}>
           <Text variant="body.sm" color={color('text.default.inverse')}>{content}</Text>
         </span>
@@ -43,7 +44,7 @@ export function BottomSheet({ open = true, title, footer, onDismiss, style, chil
         borderTopLeftRadius: 24, borderTopRightRadius: 24, display: 'flex', flexDirection: 'column', ...style,
       }} {...rest}>
         <div style={{ display: 'flex', justifyContent: 'center', padding: `${space('sm')} 0` }}>
-          <span style={{ width: 40, height: 4, borderRadius: 999, background: color('border.solid.strong') }} />
+          <span style={{ width: 40, height: 4, borderRadius: PILL, background: color('border.solid.strong') }} />
         </div>
         {(title || onDismiss) && (
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: `0 ${space('lg')} ${space('sm')}` }}>

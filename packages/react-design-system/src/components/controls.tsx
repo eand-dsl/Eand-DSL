@@ -387,7 +387,7 @@ export interface SearchbarProps extends Omit<InputHTMLAttributes<HTMLInputElemen
 }
 export function Searchbar({ placeholder = 'Search', onMic, style, ...rest }: SearchbarProps) {
   return (
-    <span style={{ display: 'flex', alignItems: 'center', gap: space('sm'), height: 52, padding: `0 ${space('lg')}`, borderRadius: 16, background: color('surface.base.default'), width: '100%', boxSizing: 'border-box', ...style }}>
+    <span style={{ display: 'flex', alignItems: 'center', gap: space('sm'), height: 52, padding: `0 ${space('lg')}`, borderRadius: radius('5'), background: color('surface.base.default'), width: '100%', boxSizing: 'border-box', ...style }}>
       <IconBox size="lg">⌕</IconBox>
       <input placeholder={placeholder} style={{ flex: 1, minWidth: 0, border: 0, outline: 'none', background: 'transparent', ...ty('body.md') }} {...rest} />
       <button onClick={onMic} aria-label="Voice search" style={{ border: 0, background: 'transparent', cursor: 'pointer', color: color('text.default.muted') }}><IconBox size="lg">🎤</IconBox></button>

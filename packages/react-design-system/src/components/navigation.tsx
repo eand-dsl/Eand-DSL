@@ -144,8 +144,8 @@ export interface ListRowProps extends Omit<HTMLAttributes<HTMLButtonElement>, 't
 }
 export function ListRow({ icon, label, sublabel, value, chevron = true, style, ...rest }: ListRowProps) {
   return (
-    <button style={{ width: '100%', boxSizing: 'border-box', display: 'flex', alignItems: 'center', gap: space('md'), padding: space('lg'), borderRadius: 16, background: color('surface.raised.default'), border: 0, cursor: 'pointer', textAlign: 'left', ...style }} {...rest}>
-      {icon ? <span style={{ width: 40, height: 40, borderRadius: 12, background: color('surface.base.default'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flex: '0 0 auto' }}><IconBox size="md">{icon}</IconBox></span> : null}
+    <button style={{ width: '100%', boxSizing: 'border-box', display: 'flex', alignItems: 'center', gap: space('md'), padding: space('lg'), borderRadius: radius('5'), background: color('surface.raised.default'), border: 0, cursor: 'pointer', textAlign: 'left', ...style }} {...rest}>
+      {icon ? <span style={{ width: 40, height: 40, borderRadius: radius('3'), background: color('surface.base.default'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flex: '0 0 auto' }}><IconBox size="md">{icon}</IconBox></span> : null}
       <span style={{ flex: 1, minWidth: 0 }}>
         <Text variant="title.sm" as="div">{label}</Text>
         {sublabel ? <Text variant="body.sm" color={color('text.default.muted')}>{sublabel}</Text> : null}
@@ -331,9 +331,10 @@ export function QuickAction({ items, columns = 3, style, ...rest }: QuickActionP
   return (
     <div style={{ display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, gap: 4, width: '100%', ...style }} {...rest}>
       {items.map((it, i) => (
+        // Figma .quick-task-core (27962:37103): radius border-radius/6 = 20, bg surface/raised/default.
         <button key={i} onClick={it.onClick}
-          style={{ position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: 148, padding: space('md'), borderRadius: 20, border: 0, background: color('surface.canvas.default'), cursor: 'pointer', textAlign: 'left' }}>
-          <span style={{ width: 40, height: 40, borderRadius: 12, background: color('surface.base.default'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: color('text.default.default') }}>
+          style={{ position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: 148, padding: space('md'), borderRadius: radius('6'), border: 0, background: color('surface.raised.default'), cursor: 'pointer', textAlign: 'left' }}>
+          <span style={{ width: 40, height: 40, borderRadius: radius('3'), background: color('surface.base.default'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: color('text.default.default') }}>
             {it.icon ?? '●'}
           </span>
           {it.badge ? <span style={{ position: 'absolute', top: 10, right: 10 }}>{it.badge}</span> : null}

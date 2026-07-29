@@ -1,5 +1,5 @@
 import type { CSSProperties, ElementType, HTMLAttributes, ReactNode } from 'react';
-import { T, ty, space, icon, color, PILL } from '../system';
+import { T, ty, space, icon, color, radius, scale, PILL } from '../system';
 
 /* ---------------- Text ---------------- */
 export interface TextProps extends HTMLAttributes<HTMLElement> {
@@ -46,16 +46,17 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
 }
 export function Badge({ offer, status = 'neutral', size = 'md', style, children, ...rest }: BadgeProps) {
   const key = offer ? `offers.${offer}` : `status.${status}`;
-  // Figma V1.1: fixed heights 16/20/24; md = px8 py4, min-width 56; radius 8.
-  const height = size === 'lg' ? 24 : size === 'sm' ? 16 : 20;
-  const padY = size === 'sm' ? 2 : 4;
+  // Figma V1.1 (12934:864): heights scale/16|20|24; md = px spacing/sm, py spacing/xs,
+  // min-width scale/56; radius border-radius/2. Same values as before — token-bound only.
+  const height = size === 'lg' ? scale('24') : size === 'sm' ? scale('16') : scale('20');
+  const padY = size === 'sm' ? space('2xs') : space('xs');
   const padX = size === 'sm' ? space('xs') : space('sm');
   return (
     <span
       style={{
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: space('2xs'),
-        boxSizing: 'border-box', height, minWidth: size === 'md' ? 56 : undefined,
-        padding: `${padY}px ${padX}`, borderRadius: 8,
+        boxSizing: 'border-box', height, minWidth: size === 'md' ? scale('56') : undefined,
+        padding: `${padY} ${padX}`, borderRadius: radius('2'),
         background: color(`badge.surface.${key}`), color: color(`badge.text.${key}`),
         ...ty(`badge.${size}`), whiteSpace: 'nowrap', ...style,
       }}
@@ -92,7 +93,7 @@ export interface ProgressBarProps extends HTMLAttributes<HTMLDivElement> {
   tone?: 'accent' | 'positive' | 'warning' | 'danger';
 }
 export function ProgressBar({ value = 50, tone, style, ...rest }: ProgressBarProps) {
-  // Figma V1.1 progress-bar-core: 300x4, fill color/text/positive/subtle.
+  // Figma V1.1 progress-bar-core (26437:43709): h scale/4, fill color/text/positive/subtle.
   const fill = tone === 'accent' ? color('status.accent')
     : tone === 'positive' ? color('status.positive')
     : tone === 'warning' ? color('status.warning')
@@ -100,7 +101,7 @@ export function ProgressBar({ value = 50, tone, style, ...rest }: ProgressBarPro
     : color('text.positive.subtle');
   return (
     <div role="progressbar" aria-valuenow={value} aria-valuemin={0} aria-valuemax={100}
-      style={{ width: '100%', height: 4, borderRadius: PILL, background: color('surface.sunken.default'), overflow: 'hidden', ...style }} {...rest}>
+      style={{ width: '100%', height: scale('4'), borderRadius: PILL, background: color('surface.sunken.default'), overflow: 'hidden', ...style }} {...rest}>
       <div style={{ width: `${Math.max(0, Math.min(100, value))}%`, height: '100%', background: fill, borderRadius: PILL }} />
     </div>
   );
@@ -186,7 +187,8 @@ export interface LogoRowProps extends HTMLAttributes<HTMLDivElement> {
 export function LogoRow({ logos = [], style, ...rest }: LogoRowProps) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: space('lg'), flexWrap: 'wrap', ...style }} {...rest}>
-      {logos.map((l, i) => <span key={i} style={{ height: 32, display: 'inline-flex', alignItems: 'center' }}>{l}</span>)}
+      {/* Figma logo-row (25997:32516): logo box scale/32 (= icon/2xl). */}
+      {logos.map((l, i) => <span key={i} style={{ height: scale('32'), display: 'inline-flex', alignItems: 'center' }}>{l}</span>)}
     </div>
   );
 }

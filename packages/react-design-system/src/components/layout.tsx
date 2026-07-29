@@ -137,7 +137,8 @@ export function Card({ media, title, body, action, width, style, children, ...re
     <div style={{
       boxSizing: 'border-box', width: width ?? '100%', flex: width ? '0 0 auto' : undefined,
       background: color('surface.raised.default'), border: `1px solid ${color('border.solid.subtle')}`,
-      borderRadius: T.borderRadius?.['5'] ?? '16px', overflow: 'hidden',
+      // Figma General-card (28463:12391): radius border-radius/6 = 20 (was 16).
+      borderRadius: radius('6'), overflow: 'hidden',
       display: 'flex', flexDirection: 'column', ...style,
     }} {...rest}>
       {media ? <div style={{ width: '100%' }}>{media}</div> : null}

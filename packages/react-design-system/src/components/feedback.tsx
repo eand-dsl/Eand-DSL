@@ -1,5 +1,5 @@
 import type { HTMLAttributes, ReactNode } from 'react';
-import { color, space, ty } from '../system';
+import { color, space, ty, radius } from '../system';
 import { Text, IconBox, ProgressBar } from './primitives';
 
 export type StatusTone = 'info' | 'positive' | 'warning' | 'danger';
@@ -77,7 +77,7 @@ export function Snackbar({ tone = 'default', message, action, onAction, onDismis
   return (
     <div role="status" style={{
       display: 'flex', alignItems: 'center', gap: space('md'), width: '100%', boxSizing: 'border-box',
-      padding: `${space('md')} ${space('lg')}`, borderRadius: 24, background: color('surface.overlay.floating-inverse'),
+      padding: `${space('md')} ${space('lg')}`, borderRadius: radius('7'), background: color('surface.overlay.floating-inverse'),
       color: '#ffffff', justifyContent: bare ? 'center' : 'flex-start', ...style,
     }} {...rest}>
       {mark}
@@ -109,7 +109,7 @@ export function Alert({ tone = 'default', title, action, onAction, children, sty
   return (
     <div role="status" style={{
       display: 'flex', alignItems: 'flex-start', gap: space('md'), width: '100%', boxSizing: 'border-box',
-      padding: space('lg'), borderRadius: 20, background: t.bg, ...style,
+      padding: space('lg'), borderRadius: radius('6'), background: t.bg, ...style,
     }} {...rest}>
       <StatusMark bg={t.mark} glyph={t.glyph} fg="#ffffff" shape={t.shape} size={24} />
       <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: space('2xs') }}>
@@ -135,7 +135,7 @@ export function AlertModal({ open = true, tone = 'info', title, body, actions, o
   return (
     <div role="dialog" aria-modal="true" onClick={onDismiss}
       style={{ position: 'fixed', inset: 0, background: color('surface.overlay.scrim'), display: 'flex', alignItems: 'center', justifyContent: 'center', padding: space('lg'), zIndex: 1000 }}>
-      <div onClick={(e) => e.stopPropagation()} style={{ width: '100%', maxWidth: 360, background: color('surface.raised.default'), borderRadius: 20, padding: space('xl'), display: 'flex', flexDirection: 'column', gap: space('md') }}>
+      <div onClick={(e) => e.stopPropagation()} style={{ width: '100%', maxWidth: 360, background: color('surface.raised.default'), borderRadius: radius('6'), padding: space('xl'), display: 'flex', flexDirection: 'column', gap: space('md') }}>
         <span style={{ color: TONE_COLOR[tone] }}><IconBox size="xl">{TONE_ICON[tone]}</IconBox></span>
         {title ? <Text variant="heading.sm">{title}</Text> : null}
         {body ? <Text variant="body.md" color={color('text.default.subtle')}>{body}</Text> : null}
