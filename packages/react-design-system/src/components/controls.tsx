@@ -424,7 +424,7 @@ export function Tabs({ tabs, value, defaultValue = 0, scope = 'global', onChange
         } else {
           s = on
             ? { background: color('surface.base.midnight'), color: '#fff', border: '1px solid transparent' }
-            : { background: color('surface.canvas.default'), color: color('text.default.default'), border: `1px solid ${color('border.solid.default')}` };
+            : { background: color('surface.canvas.default'), color: color('text.default.default'), border: `1px solid ${color('border.surface-based.canvas.default')}` };
         }
         return (
           <button key={i} role="tab" aria-selected={on}

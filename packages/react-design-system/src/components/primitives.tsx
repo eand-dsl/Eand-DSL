@@ -148,7 +148,7 @@ export function AddTrigger({ label = 'Add', style, onClick, ...rest }: AddTrigge
   return (
     <button onClick={onClick}
       style={{ display: 'inline-flex', alignItems: 'center', gap: space('xs'), height: 40, padding: `0 ${space('lg')}`,
-        borderRadius: PILL, border: `1px dashed ${color('border.default')}`, background: 'transparent',
+        borderRadius: PILL, border: `1px dashed ${color('border.surface-based.base.default')}`, background: 'transparent',
         color: color('text.brand.default'), cursor: 'pointer', ...ty('button.md'), ...style }} {...rest}>
       <IconBox size="lg"><Icon name="add" size={20} /></IconBox>{label}
     </button>

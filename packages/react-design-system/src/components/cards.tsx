@@ -122,7 +122,7 @@ export interface DealCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'tit
 }
 export function DealCard({ image, title = 'Deal title', subtitle, badge, width = 240, style, ...rest }: DealCardProps) {
   return (
-    <div style={{ width, flex: '0 0 auto', boxSizing: 'border-box', minHeight: rowHeight('row-3'), background: color('surface.raised.default'), border: `1px solid ${color('border.solid.subtle')}`, borderRadius: radius('5'), overflow: 'hidden', display: 'flex', flexDirection: 'column', ...style }} {...rest}>
+    <div style={{ width, flex: '0 0 auto', boxSizing: 'border-box', minHeight: rowHeight('row-3'), background: color('surface.raised.default'), border: `1px solid ${color('border.surface-based.raised.default')}`, borderRadius: radius('5'), overflow: 'hidden', display: 'flex', flexDirection: 'column', ...style }} {...rest}>
       {/* image fills the remaining height (Figma .card-general: 224 tall, image inset-0, title pinned bottom) */}
       <div style={{ position: 'relative', flex: 1, display: 'flex', padding: space('sm') }}>
         <div style={{ flex: 1, borderRadius: radius('3'), overflow: 'hidden', background: color('surface.base.default'), display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 40 }}>{image ?? <Icon name="image" size={40} />}</div>
@@ -251,7 +251,7 @@ export interface VoucherProps extends HTMLAttributes<HTMLDivElement> {
 export function Voucher({ value = 'AED 50 off', code = 'EAND50', validity, status = 'active', style, ...rest }: VoucherProps) {
   const s = status === 'active' ? 'positive' : status === 'expired' ? 'danger' : 'neutral';
   return (
-    <div style={{ width: '100%', boxSizing: 'border-box', background: color('surface.raised.default'), border: `1px dashed ${color('border.solid.default')}`, borderRadius: radius('5'), padding: space('lg'), display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: space('md'), opacity: status === 'expired' ? 0.6 : 1, ...style }} {...rest}>
+    <div style={{ width: '100%', boxSizing: 'border-box', background: color('surface.raised.default'), border: `1px dashed ${color('border.surface-based.raised.default')}`, borderRadius: radius('5'), padding: space('lg'), display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: space('md'), opacity: status === 'expired' ? 0.6 : 1, ...style }} {...rest}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
         <Text variant="heading.xs">{value}</Text>
         <Text variant="body.sm" color={color('text.default.muted')}>Code: {code}{validity ? ` · ${validity}` : ''}</Text>

@@ -73,7 +73,7 @@ export function TopBar({
   // Compact default header — single 56px row, no hero content.
   if (!hero) {
     return (
-      <header style={{ position: 'sticky', top: 0, zIndex: 10, width: '100%', boxSizing: 'border-box', height: 56, display: 'flex', alignItems: 'center', gap: space('md'), padding: `0 ${space('lg')}`, background: color('surface.canvas.default'), borderBottom: `1px solid ${color('border.solid.subtle')}`, ...style }} {...rest}>
+      <header style={{ position: 'sticky', top: 0, zIndex: 10, width: '100%', boxSizing: 'border-box', height: 56, display: 'flex', alignItems: 'center', gap: space('md'), padding: `0 ${space('lg')}`, background: color('surface.canvas.default'), borderBottom: `1px solid ${color('border.surface-based.canvas.default')}`, ...style }} {...rest}>
         <div style={{ display: 'flex', alignItems: 'center', gap: space('sm') }}>{leading}</div>
         {logo ? <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>{logo === true ? <LogoMark /> : logo}</div>
           : <div style={{ flex: 1, minWidth: 0 }}><Text variant="title.md" style={clamp}>{title}</Text></div>}

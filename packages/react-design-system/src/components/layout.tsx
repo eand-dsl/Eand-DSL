@@ -170,7 +170,7 @@ export interface AccordionProps extends Omit<HTMLAttributes<HTMLDivElement>, 'ti
 export function Accordion({ title, defaultOpen = false, style, children, ...rest }: AccordionProps) {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div style={{ width: '100%', borderBottom: `1px solid ${color('border.solid.subtle')}`, ...style }} {...rest}>
+    <div style={{ width: '100%', borderBottom: `1px solid ${color('border.surface-based.raised.default')}`, ...style }} {...rest}>
       <button onClick={() => setOpen((o) => !o)} aria-expanded={open}
         style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: space('md'), padding: `${space('md')} 0`, background: 'transparent', border: 0, cursor: 'pointer' }}>
         <Text variant="title.sm">{title}</Text>
