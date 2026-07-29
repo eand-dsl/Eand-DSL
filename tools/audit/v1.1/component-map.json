@@ -1,0 +1,2357 @@
+{
+  "generatedBy": "tools/audit/build-component-map.py",
+  "figmaFile": {
+    "original": "pzm63BTLfPfT1stcF89ILQ",
+    "cleanNameCopy": "m8r6Q0MSCDxtSn8vF3u0xw",
+    "note": "Code Connect targets `original`; layer names there are dot-prefixed. `cleanNameCopy` is a read-only lens and is NOT published as a library."
+  },
+  "counts": {
+    "auditedRows": 63,
+    "reactExports": 52,
+    "exportsWithAuditRow": 39,
+    "exportsWithoutAuditRow": 13,
+    "exportsWithCodeConnect": 14
+  },
+  "audited": [
+    {
+      "section": "01-primitives",
+      "component": "e& Logo",
+      "figmaNode": "27032:50455",
+      "atoms": [
+        {
+          "name": "e&-logo",
+          "node": "27032:50455"
+        },
+        {
+          "name": ".e&-logo-core",
+          "node": "27032:50443"
+        }
+      ],
+      "allNodes": [
+        "27032:50443",
+        "27032:50455"
+      ],
+      "flag": null,
+      "reactExport": "Logo",
+      "verdicts": [
+        "VISUAL-DRIFT",
+        "VARIANT-DRIFT"
+      ],
+      "anatomyFile": "`eand-logo.md` \u2014 current (variants + dims match V1.1)",
+      "action": "Replace text placeholder with real lockup SVGs; add `version` prop (4 values)",
+      "sourceFile": "packages/react-design-system/src/components/primitives.tsx",
+      "exportExists": true,
+      "codeConnect": "packages/react-design-system/code-connect/Logo.figma.tsx",
+      "codeConnectNodes": [
+        "27032:50455"
+      ]
+    },
+    {
+      "section": "01-primitives",
+      "component": "Badges",
+      "figmaNode": "12934:864",
+      "atoms": [],
+      "allNodes": [
+        "12934:864",
+        "25694:12036",
+        "26045:553",
+        "26109:21649",
+        "26501:2009",
+        "26501:2010"
+      ],
+      "flag": null,
+      "reactExport": "Badge",
+      "verdicts": [
+        "VARIANT-DRIFT",
+        "TOKEN-DRIFT"
+      ],
+      "anatomyFile": "`badges.md` \u2014 mostly current; lists tiers code never had",
+      "action": "Add `disabled` + `neutral-inverse` statuses, drop/confirm `brand`, add tier variants; fix h/pad/min-w; fix `\"limited stock\"` token key (see notes)",
+      "sourceFile": "packages/react-design-system/src/components/primitives.tsx",
+      "exportExists": true,
+      "codeConnect": "packages/react-design-system/code-connect/Badge.figma.tsx",
+      "codeConnectNodes": [
+        "12934:864",
+        "25694:12036"
+      ]
+    },
+    {
+      "section": "01-primitives",
+      "component": "Icons (NEW page)",
+      "figmaNode": "31135:12366",
+      "atoms": [],
+      "allNodes": [
+        "31135:12366"
+      ],
+      "flag": "NEW",
+      "reactExport": null,
+      "verdicts": [
+        "VARIANT-DRIFT",
+        "MISSING-IN-CODE"
+      ],
+      "anatomyFile": "\u2014 (no anatomy file)",
+      "action": "Regenerate icon package from V1.1 page; normalize to 24\u00d724; decide on variant-axis support; see full diff below",
+      "sourceFile": null,
+      "exportExists": false,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "01-primitives",
+      "component": "Icon-size",
+      "figmaNode": "25408:1190",
+      "atoms": [
+        {
+          "name": "icon-size",
+          "node": "25408:1190"
+        }
+      ],
+      "allNodes": [
+        "25408:1190"
+      ],
+      "flag": null,
+      "reactExport": "Icon",
+      "verdicts": [
+        "STALE-ANATOMY",
+        "OK"
+      ],
+      "anatomyFile": "`icon-size.md` \u2014 dims list omits 12\u00d712 and 8\u00d78",
+      "action": "Append 12/8 dims to anatomy file",
+      "sourceFile": null,
+      "exportExists": false,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "01-primitives",
+      "component": "Logo-row",
+      "figmaNode": "25997:32516",
+      "atoms": [
+        {
+          "name": "logo-row",
+          "node": "25997:32516"
+        },
+        {
+          "name": ".logo-style",
+          "node": "26556:17510"
+        },
+        {
+          "name": "more-items",
+          "node": "28892:13176"
+        }
+      ],
+      "allNodes": [
+        "25997:32516",
+        "26556:17510",
+        "28892:13176"
+      ],
+      "flag": null,
+      "reactExport": "LogoRow",
+      "verdicts": [
+        "VARIANT-DRIFT",
+        "TOKEN-DRIFT"
+      ],
+      "anatomyFile": "`logo-row.md` \u2014 dims current; V1.0 top-level axes (logo-1..5, +x-more, type, surface) no longer variant symbols (likely converted to booleans/atoms \u2014 verify)",
+      "action": "Merge LogoRow/SmilesRow into one tokenized logo-row (size \u00d7 style, more-items surface); replace hardcoded colors",
+      "sourceFile": "packages/react-design-system/src/components/primitives.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "01-primitives",
+      "component": "Dismiss (NEW)",
+      "figmaNode": "28961:19838",
+      "atoms": [
+        {
+          "name": "dismiss",
+          "node": "28961:19839"
+        },
+        {
+          "name": ".dismiss-core",
+          "node": "28961:19833"
+        }
+      ],
+      "allNodes": [
+        "28961:19833",
+        "28961:19838",
+        "28961:19839",
+        "28961:19840"
+      ],
+      "flag": "NEW",
+      "reactExport": null,
+      "verdicts": [
+        "MISSING-IN-CODE"
+      ],
+      "anatomyFile": "\u2014 no anatomy file",
+      "action": "Add `Dismiss` primitive (2 surfaces) + anatomy file",
+      "sourceFile": null,
+      "exportExists": false,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "01-primitives",
+      "component": "Progress-bar",
+      "figmaNode": "26437:43709",
+      "atoms": [
+        {
+          "name": "progress-bar-core",
+          "node": "26437:43709"
+        }
+      ],
+      "allNodes": [
+        "26437:43709"
+      ],
+      "flag": null,
+      "reactExport": "ProgressBar",
+      "verdicts": [
+        "VISUAL-DRIFT",
+        "TOKEN-DRIFT"
+      ],
+      "anatomyFile": "`progress-bar.md` \u2014 current (300\u00d74, Progress axis)",
+      "action": "Set h4; default fill positive/subtle green; re-evaluate tone prop + visible track vs Figma",
+      "sourceFile": "packages/react-design-system/src/components/primitives.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "01-primitives",
+      "component": "Add-trigger",
+      "figmaNode": "25752:11486",
+      "atoms": [
+        {
+          "name": "add-trigger",
+          "node": "25973:25405"
+        }
+      ],
+      "allNodes": [
+        "25752:11486",
+        "25973:25405",
+        "28917:4269"
+      ],
+      "flag": null,
+      "reactExport": "AddTrigger",
+      "verdicts": [
+        "VISUAL-DRIFT",
+        "VARIANT-DRIFT"
+      ],
+      "anatomyFile": "`add-trigger.md` \u2014 285\u00d772 + surface axis current, but spec bullets (H52, dashed, icon 20) copied from Figma's own stale statesheet",
+      "action": "Rebuild to V1.1 render (glass bg, r16, h72, button-inside); add surface=inverse; flag stale Figma statesheet to design",
+      "sourceFile": "packages/react-design-system/src/components/primitives.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "01-primitives",
+      "component": "Product-assets \ud83d\udfe1",
+      "figmaNode": "29067:12921",
+      "atoms": [
+        {
+          "name": "Devices small cards",
+          "node": "28919:19889"
+        }
+      ],
+      "allNodes": [
+        "28919:19889",
+        "29067:12921"
+      ],
+      "flag": "WIP",
+      "reactExport": null,
+      "verdicts": [
+        "MISSING-IN-CODE"
+      ],
+      "anatomyFile": "\u2014 none",
+      "action": "No action until page loses \ud83d\udfe1; re-audit next pass",
+      "sourceFile": null,
+      "exportExists": false,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "01-primitives",
+      "component": "Atom-Surfaces",
+      "figmaNode": "30420:25249",
+      "atoms": [
+        {
+          "name": ".card-bg-color",
+          "node": "25710:20065"
+        }
+      ],
+      "allNodes": [
+        "25710:20065",
+        "30420:25249"
+      ],
+      "flag": null,
+      "reactExport": "AtomSurface",
+      "verdicts": [
+        "VARIANT-DRIFT",
+        "TOKEN-DRIFT"
+      ],
+      "anatomyFile": "`atom-surfaces.md` \u2014 current (matches V1.1 axes/dims)",
+      "action": "Re-point AtomSurface to `atomSurfaces` color axis (or split into CardBg primitive); reconcile cyan/blue/purple naming",
+      "sourceFile": "packages/react-design-system/src/components/primitives.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "02-controls",
+      "component": "Button",
+      "figmaNode": "25394:85067",
+      "atoms": [
+        {
+          "name": "button",
+          "node": "25394:85067"
+        },
+        {
+          "name": "Buttons",
+          "node": "25824:75936"
+        }
+      ],
+      "allNodes": [
+        "25394:85067",
+        "25824:75936"
+      ],
+      "flag": "\u2014",
+      "reactExport": "Button",
+      "verdicts": [
+        "VARIANT-DRIFT"
+      ],
+      "anatomyFile": "`buttons.md` \u2014 axes current, sample node-ids valid",
+      "action": "Add `tertiary` + `link` variants, expand tone\u2192surface (4 values), add focus state",
+      "sourceFile": null,
+      "exportExists": false,
+      "codeConnect": "packages/react-design-system/code-connect/Button.figma.tsx",
+      "codeConnectNodes": [
+        "25394:85067"
+      ]
+    },
+    {
+      "section": "02-controls",
+      "component": "Input Field",
+      "figmaNode": "29010:3152",
+      "atoms": [
+        {
+          "name": "input-field",
+          "node": "29010:3152"
+        }
+      ],
+      "allNodes": [
+        "29010:3152"
+      ],
+      "flag": "\ud83d\udfe1",
+      "reactExport": "Input",
+      "verdicts": [
+        "VARIANT-DRIFT",
+        "STALE-ANATOMY"
+      ],
+      "anatomyFile": "`input-field.md` \u2014 cites \"Style Filled/Outlined \u00d7 Enabled/Hovered/Focused\" + node 28817:43927 (that range is now the Standard-search section)",
+      "action": "Replace outlined/filled axis (not in V1.1 \u2014 \"filled\" = has-value state); add type variants + inverse + addon; refresh anatomy node-ids",
+      "sourceFile": "packages/react-design-system/src/components/controls.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "02-controls",
+      "component": "Chip",
+      "figmaNode": "28472:2809",
+      "atoms": [
+        {
+          "name": "Chips",
+          "node": "28472:2809"
+        }
+      ],
+      "allNodes": [
+        "28472:2809"
+      ],
+      "flag": "\u2014",
+      "reactExport": "Chip",
+      "verdicts": [
+        "VARIANT-DRIFT"
+      ],
+      "anatomyFile": "`chips.md` \u2014 node valid; missing surface axis",
+      "action": "Add surface=inverse + disabled/focus states; `selected` is not a Figma axis \u2014 reconcile",
+      "sourceFile": "packages/react-design-system/src/components/controls.tsx",
+      "exportExists": true,
+      "codeConnect": "packages/react-design-system/code-connect/Chip.figma.tsx",
+      "codeConnectNodes": [
+        "31539:8725"
+      ]
+    },
+    {
+      "section": "02-controls",
+      "component": "Suggestion Chips",
+      "figmaNode": "28556:5954",
+      "atoms": [
+        {
+          "name": "suggestion-chips",
+          "node": "28556:5954"
+        }
+      ],
+      "allNodes": [
+        "28556:5954"
+      ],
+      "flag": "NEW",
+      "reactExport": null,
+      "verdicts": [
+        "MISSING-IN-CODE"
+      ],
+      "anatomyFile": "\u2014 none",
+      "action": "New V1.1 component set; add export + anatomy file",
+      "sourceFile": null,
+      "exportExists": false,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "02-controls",
+      "component": "FilterPill",
+      "figmaNode": "26151:391",
+      "atoms": [
+        {
+          "name": "filter-pill",
+          "node": "26151:391"
+        }
+      ],
+      "allNodes": [
+        "26151:391"
+      ],
+      "flag": "\u2014",
+      "reactExport": "FilterPill",
+      "verdicts": [
+        "VARIANT-DRIFT"
+      ],
+      "anatomyFile": "`filter-pill.md` \u2014 matches V1.1, node-ids valid (26130:30745 etc.)",
+      "action": "Add Color=Inverse + disabled; map `selected`\u2192State=Focused explicitly",
+      "sourceFile": "packages/react-design-system/src/components/controls.tsx",
+      "exportExists": true,
+      "codeConnect": "packages/react-design-system/code-connect/FilterPill.figma.tsx",
+      "codeConnectNodes": [
+        "26151:391"
+      ]
+    },
+    {
+      "section": "02-controls",
+      "component": "Checkbox",
+      "figmaNode": "27685:5017",
+      "atoms": [
+        {
+          "name": "checkbox",
+          "node": "27685:5017"
+        }
+      ],
+      "allNodes": [
+        "27679:2624",
+        "27685:5017"
+      ],
+      "flag": "\u2014",
+      "reactExport": "Checkbox",
+      "verdicts": [
+        "VISUAL-DRIFT",
+        "VARIANT-DRIFT",
+        "STALE-ANATOMY"
+      ],
+      "anatomyFile": "`checkbox.md` \u2014 cites sizes lg/md/sm + node 29200:17377",
+      "action": "Resize to 20/16, add sm + inverse; fix anatomy node \u2192 27685:5017; note design.md says lg24/sm20 (stale)",
+      "sourceFile": "packages/react-design-system/src/components/controls.tsx",
+      "exportExists": true,
+      "codeConnect": "packages/react-design-system/code-connect/Checkbox.figma.tsx",
+      "codeConnectNodes": [
+        "27685:5017"
+      ]
+    },
+    {
+      "section": "02-controls",
+      "component": "Switcher",
+      "figmaNode": "26215:7141",
+      "atoms": [
+        {
+          "name": "switcher",
+          "node": "26215:7141"
+        }
+      ],
+      "allNodes": [
+        "26215:7141"
+      ],
+      "flag": "\u26a0",
+      "reactExport": "Switcher",
+      "verdicts": [
+        "VISUAL-DRIFT"
+      ],
+      "anatomyFile": "`switcher.md` \u2014 node 26215:7141 \u2713, axes current",
+      "action": "Confirm with design: published symbols (40\u00d724/32\u00d720) vs doc annotation (56\u00d724/48\u00d720, which code matches); add inverse scheme",
+      "sourceFile": "packages/react-design-system/src/components/controls.tsx",
+      "exportExists": true,
+      "codeConnect": "packages/react-design-system/code-connect/Switcher.figma.tsx",
+      "codeConnectNodes": [
+        "26215:7141"
+      ]
+    },
+    {
+      "section": "02-controls",
+      "component": "Radio",
+      "figmaNode": "26369:775",
+      "atoms": [
+        {
+          "name": "radio-button",
+          "node": "26369:775"
+        }
+      ],
+      "allNodes": [
+        "26369:775"
+      ],
+      "flag": "\u2014",
+      "reactExport": "Radio",
+      "verdicts": [
+        "VARIANT-DRIFT"
+      ],
+      "anatomyFile": "`radio.md` \u2014 node \u2713; variants line omits color-scheme",
+      "action": "Add sm (20\u00d720) + inverse",
+      "sourceFile": "packages/react-design-system/src/components/controls.tsx",
+      "exportExists": true,
+      "codeConnect": "packages/react-design-system/code-connect/Radio.figma.tsx",
+      "codeConnectNodes": [
+        "26369:775"
+      ]
+    },
+    {
+      "section": "02-controls",
+      "component": "Searchbar",
+      "figmaNode": "28114:62804",
+      "atoms": [
+        {
+          "name": "Standard search",
+          "node": "28114:62804"
+        }
+      ],
+      "allNodes": [
+        "28114:62397",
+        "28114:62804"
+      ],
+      "flag": "\ud83d\udd35",
+      "reactExport": "Searchbar",
+      "verdicts": [
+        "VISUAL-DRIFT",
+        "OK"
+      ],
+      "anatomyFile": "`searchbar.md` \u2014 nodes 28114:62804/62809 \u2713 current",
+      "action": "Watch page (\ud83d\udd35 WIP); add midnight surface, typed/clear state, submit-arrow trailing option when set is published",
+      "sourceFile": "packages/react-design-system/src/components/controls.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "02-controls",
+      "component": "AISearch",
+      "figmaNode": "30635:82333",
+      "atoms": [
+        {
+          "name": "AI Search component",
+          "node": "30635:82333"
+        }
+      ],
+      "allNodes": [
+        "30635:82333"
+      ],
+      "flag": "MOVED",
+      "reactExport": "AISearch",
+      "verdicts": [
+        "VARIANT-DRIFT",
+        "STALE-ANATOMY"
+      ],
+      "anatomyFile": "`ai-search.md` \u2014 node **28189:33142 is V1.0-era/dead**",
+      "action": "Update anatomy + design.md node \u2192 30635:82333; implement dictation/transcribing states (or explicitly defer)",
+      "sourceFile": "packages/react-design-system/src/components/controls.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "02-controls",
+      "component": "Selectors",
+      "figmaNode": "28278:1530",
+      "atoms": [
+        {
+          "name": "Pickers",
+          "node": "28278:1530"
+        },
+        {
+          "name": "pickers",
+          "node": "31358:139406"
+        },
+        {
+          "name": "picker",
+          "node": "31358:141899"
+        }
+      ],
+      "allNodes": [
+        "28278:1530",
+        "31358:139406",
+        "31358:141899"
+      ],
+      "flag": "RENAMED",
+      "reactExport": "Selectors",
+      "verdicts": [
+        "STALE-ANATOMY",
+        "MISSING-IN-CODE",
+        "REMOVED-IN-FIGMA"
+      ],
+      "anatomyFile": "`selectors.md` \u2014 \"Display Dark/Light \u00d7 State\" axes are V1.0-era",
+      "action": "Rename/replace: build `Picker` card component; decide fate of segmented `Selectors` (no V1.1 home; \"selectors\" name reserved by design for a future component); rename anatomy file \u2192 pickers.md",
+      "sourceFile": "packages/react-design-system/src/components/controls.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "03-navigation",
+      "component": "Top bar",
+      "figmaNode": "29547:11510",
+      "atoms": [
+        {
+          "name": "Master menu component",
+          "node": "29547:11510"
+        },
+        {
+          "name": "Profile header - NEW",
+          "node": "15483:931"
+        }
+      ],
+      "allNodes": [
+        "15483:931",
+        "22542:13963",
+        "29547:11510"
+      ],
+      "flag": "\ud83d\udfe1",
+      "reactExport": "TopBar",
+      "verdicts": [
+        "VISUAL-DRIFT",
+        "VARIANT-DRIFT",
+        "TOKEN-DRIFT"
+      ],
+      "anatomyFile": "`top-bar.md` \u2014 brand header current; collapsing Small/Middle/Full noted; misses Master-menu set + atoms",
+      "action": "Model `Large title` + `Bottom element` slots; fix circle btn 48/10%, actionBar radius 20 + card tokens, number type 14 Bold; add avatar/tier; page is \ud83d\udfe1 \u2014 re-verify before build",
+      "sourceFile": "packages/react-design-system/src/components/navigation.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "03-navigation",
+      "component": "Nav bar",
+      "figmaNode": "29317:6983",
+      "atoms": [
+        {
+          "name": "navbar",
+          "node": "29317:6983"
+        },
+        {
+          "name": ".navbar-tab",
+          "node": "26593:20395"
+        },
+        {
+          "name": ".navbar-tab-state",
+          "node": "26593:20631"
+        },
+        {
+          "name": "navbar-tabs",
+          "node": "29372:4769"
+        },
+        {
+          "name": ".navbar-bg",
+          "node": "29372:4986"
+        },
+        {
+          "name": ".navbar-profile",
+          "node": "29372:17589"
+        },
+        {
+          "name": ".navbar-scroll",
+          "node": "31239:84320"
+        }
+      ],
+      "allNodes": [
+        "22542:13964",
+        "26593:20395",
+        "26593:20631",
+        "29317:6983",
+        "29372:17589",
+        "29372:4769",
+        "29372:4986",
+        "31239:84320"
+      ],
+      "flag": "\u2014",
+      "reactExport": "NavBar",
+      "verdicts": [
+        "VARIANT-DRIFT",
+        "STALE-ANATOMY",
+        "OK"
+      ],
+      "anatomyFile": "`nav-bar.md` \u2014 visuals/dims current; **cites dead node `29528-9868`** (not in file; live = 29317:6983)",
+      "action": "Add scroll-direction collapse (or defer); drop vestigial `special` prop + `focus-special` tokens (removed in Figma); fix anatomy node-id \u2192 29317:6983",
+      "sourceFile": "packages/react-design-system/src/components/navigation.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "03-navigation",
+      "component": "Action bar",
+      "figmaNode": "25627:23258",
+      "atoms": [
+        {
+          "name": "action-bar",
+          "node": "25627:23258"
+        },
+        {
+          "name": ".action-bar-core",
+          "node": "25627:23696"
+        },
+        {
+          "name": ".image-asset",
+          "node": "26563:32026"
+        },
+        {
+          "name": ".action-bar-trigger",
+          "node": "26714:1810"
+        },
+        {
+          "name": ".surface-default/-inverse",
+          "node": "26714:1802"
+        }
+      ],
+      "allNodes": [
+        "25519:15621",
+        "25627:23258",
+        "25627:23259",
+        "25627:23696",
+        "26163:72076",
+        "26563:32026",
+        "26714:1802",
+        "26714:1810"
+      ],
+      "flag": "\u2014",
+      "reactExport": "ActionBar",
+      "verdicts": [
+        "VISUAL-DRIFT",
+        "VARIANT-DRIFT",
+        "MISSING-IN-CODE"
+      ],
+      "anatomyFile": "`action-bar.md` \u2014 current (axes/dims/rules match V1.1 exactly, incl. \"only one trailing action\" rule)",
+      "action": "Rebuild ActionBar as the inline row (leading visual + text + single trigger); `bill action card` = closest analogue to the current footer \u2014 document only (scope-gated); fix design.md Role line (\"Sticky action footer\" is stale V1.0)",
+      "sourceFile": "packages/react-design-system/src/components/navigation.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "03-navigation",
+      "component": "Tabs",
+      "figmaNode": "25502:12416",
+      "atoms": [
+        {
+          "name": "pill-tabs",
+          "node": "25502:12416"
+        },
+        {
+          "name": "\ud83d\udca1 State=default, Active=no",
+          "node": "25502:12417"
+        },
+        {
+          "name": "\ud83d\udca1 State=active, Active=yes",
+          "node": "25502:17555"
+        },
+        {
+          "name": "tab-content",
+          "node": "25502:15320"
+        }
+      ],
+      "allNodes": [
+        "22542:13966",
+        "25502:12416",
+        "25502:12417",
+        "25502:15320",
+        "25502:17555"
+      ],
+      "flag": "\u2014",
+      "reactExport": "Tabs",
+      "verdicts": [
+        "VISUAL-DRIFT",
+        "TOKEN-DRIFT"
+      ],
+      "anatomyFile": "`tabs.md` \u2014 scopes/states/dims current; says \"focused = tinted-red (`surface/canvas/brand-muted`)\" \u2014 wrong token name (actual = `tab/surface/global/active` #fce6e6 \u2248 base/brand-muted)",
+      "action": "Re-point Tabs to `color.tab.*` tokens (already in tokens.ts); label \u2192 title.xs 14 SB; px8 + min-w 72; add optional leading icon; fix tabs.md token name; watch 48px exploration frame",
+      "sourceFile": "packages/react-design-system/src/components/controls.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "03-navigation",
+      "component": "Section link",
+      "figmaNode": "25440:14243",
+      "atoms": [
+        {
+          "name": "section-link",
+          "node": "25440:14243"
+        },
+        {
+          "name": "Top-bar link",
+          "node": "31511:33083"
+        },
+        {
+          "name": "section-link",
+          "node": "31511:33442"
+        }
+      ],
+      "allNodes": [
+        "25440:14243",
+        "25460:83978",
+        "31511:33083",
+        "31511:33442"
+      ],
+      "flag": "\u2014",
+      "reactExport": "SectionLink",
+      "verdicts": [
+        "VISUAL-DRIFT",
+        "VARIANT-DRIFT",
+        "MISSING-IN-CODE"
+      ],
+      "anatomyFile": "`section-link.md` \u2014 axes/dims/radius current; but \"loader\" atom doesn't exist (page atoms = icon-size only), sizes bullet repeats the conflicting Lg-48 statesheet text, misses Top-bar link section",
+      "action": "Decide naming: keep composed-row `SectionLink` (rename?) and add the icon-button component; get designer ruling on 48-vs-40 statesheet conflict; add Top-bar link atom (or fold into TopBar); fix anatomy loader/size bullets; design.md describes the composed row, not the component",
+      "sourceFile": "packages/react-design-system/src/components/navigation.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "03-navigation",
+      "component": "Quick Action",
+      "figmaNode": "27962:37107",
+      "atoms": [
+        {
+          "name": "quick-action",
+          "node": "27962:37107"
+        },
+        {
+          "name": ".quick-action-core",
+          "node": "28365:37221"
+        },
+        {
+          "name": ".quick-action-variants",
+          "node": "27917:8012"
+        },
+        {
+          "name": ".quick-action-icons",
+          "node": "27915:4453"
+        }
+      ],
+      "allNodes": [
+        "25507:13670",
+        "27915:4453",
+        "27917:8012",
+        "27962:37107",
+        "28365:37221"
+      ],
+      "flag": "\u2014",
+      "reactExport": "QuickAction",
+      "verdicts": [
+        "VISUAL-DRIFT",
+        "VARIANT-DRIFT",
+        "TOKEN-DRIFT",
+        "STALE-ANATOMY"
+      ],
+      "anatomyFile": "`quick-action.md` \u2014 icon-square/label/badge anatomy + examples current; but \"rounded **16**, subtle **border**\" wrong (Figma r20 borderless) and \"3-up (or 2-up)\" stale (grid is 2-up; 3-visible = carousel)",
+      "action": "Add carousel mode + default columns\u21922; fix cell h148, label title.sm 16, bg\u2192raised token; move badge into header flow; fix anatomy r16/border/3-up bullets",
+      "sourceFile": "packages/react-design-system/src/components/navigation.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "03-navigation",
+      "component": "List Row",
+      "figmaNode": "27465:30135",
+      "atoms": [],
+      "allNodes": [
+        "27465:30135"
+      ],
+      "flag": "\u2014",
+      "reactExport": "ListRow",
+      "verdicts": [
+        "STALE-ANATOMY",
+        "REMOVED-IN-FIGMA"
+      ],
+      "anatomyFile": "`list-row.md` \u2014 \"Figma: composed (appears across screens; no single node)\" \u2014 now **false**: V1.1 published a component set; design.md `#### List row` still \"_node-id TBD_\"",
+      "action": "Get the set's node-id (Figma UI copy-link, or renewed REST PAT \u2192 `GET /v1/files/:key/components`), then run the deferred spec diff; update list-row.md + design.md node-id lines",
+      "sourceFile": "packages/react-design-system/src/components/navigation.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "04-layout",
+      "component": "Section",
+      "figmaNode": "26423:42129",
+      "atoms": [
+        {
+          "name": "section",
+          "node": "26423:42129"
+        },
+        {
+          "name": ".section-header",
+          "node": "29389:3807"
+        },
+        {
+          "name": ".section-trigger",
+          "node": "27110:68969"
+        },
+        {
+          "name": ".section-body",
+          "node": "26423:41850"
+        },
+        {
+          "name": ".section-core",
+          "node": "25463:73512"
+        }
+      ],
+      "allNodes": [
+        "25463:73512",
+        "26423:41850",
+        "26423:42128",
+        "26423:42129",
+        "26423:42154",
+        "27110:68969",
+        "29389:3807"
+      ],
+      "flag": "\u2014",
+      "reactExport": "Section",
+      "verdicts": [
+        "VISUAL-DRIFT",
+        "VARIANT-DRIFT",
+        "TOKEN-DRIFT",
+        "STALE-ANATOMY",
+        "REMOVED-IN-FIGMA"
+      ],
+      "anatomyFile": "`section.md` \u2014 padding 16/top 24, radius 24, fill+hug, filter-pill/context/chevron all current; surface list (brand-muted pink \"Jump to\u2026\"/\"FAQs\") is V1.0-era vs V1.1's 8 named treatments; no size axis or header-variant list",
+      "action": "Realign surface axis to V1.1 (Default/inverse set + statesheet treatments); fix title\u2192`heading.lg`, context\u2192`body.md`/subtle, header pt 24; rebuild trigger as 40\u00d740 r14 `section-link` with real chevron icon + `Manage`-link variant; confirm `brand-muted` fate with design",
+      "sourceFile": "packages/react-design-system/src/components/layout.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "04-layout",
+      "component": "Accordion",
+      "figmaNode": "27465:30105",
+      "atoms": [
+        {
+          "name": "Accordion header",
+          "node": "27465:30105"
+        }
+      ],
+      "allNodes": [
+        "27465:30103",
+        "27465:30105",
+        "27465:30106",
+        "27465:30115"
+      ],
+      "flag": "\ud83d\udd34",
+      "reactExport": "Accordion",
+      "verdicts": [
+        "VISUAL-DRIFT",
+        "VARIANT-DRIFT"
+      ],
+      "anatomyFile": "`accordion.md` \u2014 variants + dims match the live set exactly (current); does not record the \ud83d\udd34 do-not-use status",
+      "action": "HOLD code changes \u2014 page flagged \"do not use, development not started\"; log \ud83d\udd34 in anatomy + design.md; when design re-cuts it on V1.1 tokens, add subtitle/left-icon/right-title bools, 20px chevron icon, h58 row",
+      "sourceFile": "packages/react-design-system/src/components/layout.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "05-feedback",
+      "component": "Plan Usage Bar (core)",
+      "figmaNode": "28927:23669",
+      "atoms": [
+        {
+          "name": ".plan-usage-bar",
+          "node": "28927:23669"
+        },
+        {
+          "name": ".progress-bar-status",
+          "node": "28927:22814"
+        },
+        {
+          "name": ".plan-usage/value",
+          "node": "26437:43875"
+        },
+        {
+          "name": ".plan-usage/label",
+          "node": "26437:43902"
+        },
+        {
+          "name": ".plan-usage/content",
+          "node": "28429:50789"
+        }
+      ],
+      "allNodes": [
+        "26437:43875",
+        "26437:43902",
+        "28429:50789",
+        "28927:22813",
+        "28927:22814",
+        "28927:22815",
+        "28927:23669"
+      ],
+      "flag": "\u2014",
+      "reactExport": "PlanUsageBar",
+      "verdicts": [
+        "VISUAL-DRIFT",
+        "VARIANT-DRIFT",
+        "TOKEN-DRIFT"
+      ],
+      "anatomyFile": "`plan-usage-bar.md` \u2014 current (axes state \u00d7 Progress status \u00d7 plans, dims 295\u00d748/279\u00d748/295\u00d7152/319\u00d7300 all verified)",
+      "action": "Rebuild as 48px filled block bar (value = data *remaining*); 2 statuses only (green/orange); drop 3-tone threshold logic; bind #f7f7fa / #54bc72 / #ff9f52",
+      "sourceFile": "packages/react-design-system/src/components/feedback.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "05-feedback",
+      "component": "Usage bar set + Plan usage template",
+      "figmaNode": "29277:2351",
+      "atoms": [
+        {
+          "name": ".usage-bar-set",
+          "node": "29277:2351"
+        },
+        {
+          "name": "Plan usage",
+          "node": "29222:13753"
+        }
+      ],
+      "allNodes": [
+        "29222:13753",
+        "29277:2347",
+        "29277:2348",
+        "29277:2349",
+        "29277:2350",
+        "29277:2351"
+      ],
+      "flag": "\u2014",
+      "reactExport": null,
+      "verdicts": [
+        "MISSING-IN-CODE"
+      ],
+      "anatomyFile": "`plan-usage-bar.md` \u2014 lists `plans` axis + action-bar part \u2713",
+      "action": "Document only (scope-gated)",
+      "sourceFile": null,
+      "exportExists": false,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "05-feedback",
+      "component": "Snackbar",
+      "figmaNode": "23011:7020",
+      "atoms": [
+        {
+          "name": "Snackbar",
+          "node": "23011:7020"
+        }
+      ],
+      "allNodes": [
+        "23011:7020",
+        "23011:7021",
+        "23011:7024",
+        "23011:7027",
+        "23011:7031",
+        "23011:7035"
+      ],
+      "flag": "\ud83d\udd35",
+      "reactExport": "Snackbar",
+      "verdicts": [
+        "VARIANT-DRIFT",
+        "TOKEN-DRIFT",
+        "STALE-ANATOMY"
+      ],
+      "anatomyFile": "`snackbar-and-alert-msg.md` \u2014 axes/dims current for this set, but \"Anatomy parts: deals-card-core\" is wrong and the new V1.1 sets are absent",
+      "action": "Add `subtitle` slot; fix title to 16 Bold; underline + tone-match action colors; px 12/gap 8; center loading; watch \ud83d\udd35 \"Snackbar - new\"",
+      "sourceFile": "packages/react-design-system/src/components/feedback.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "05-feedback",
+      "component": "Snackbar \u2014 new direction",
+      "figmaNode": "29938:15024",
+      "atoms": [
+        {
+          "name": "Snackbar - new",
+          "node": "29938:15024"
+        }
+      ],
+      "allNodes": [
+        "29938:15024",
+        "29938:15042"
+      ],
+      "flag": "\ud83d\udd35 NEW",
+      "reactExport": null,
+      "verdicts": [
+        "MISSING-IN-CODE"
+      ],
+      "anatomyFile": "\u2014 not captured",
+      "action": "No action until published; supersedes pill anatomy (r24\u219216, glyph\u2192asset tile)",
+      "sourceFile": null,
+      "exportExists": false,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "05-feedback",
+      "component": "Alert message",
+      "figmaNode": "30969:1112",
+      "atoms": [
+        {
+          "name": "alert-message",
+          "node": "30969:1112"
+        },
+        {
+          "name": ".icon-status",
+          "node": "30969:1138"
+        },
+        {
+          "name": ".text-block",
+          "node": "30967:947"
+        },
+        {
+          "name": ".alert-action",
+          "node": "30967:950"
+        },
+        {
+          "name": ".alert-message-container",
+          "node": "30969:982"
+        },
+        {
+          "name": "Alert Message",
+          "node": "23201:17898"
+        }
+      ],
+      "allNodes": [
+        "23201:17898",
+        "29485:8418",
+        "30967:947",
+        "30967:950",
+        "30969:1111",
+        "30969:1112",
+        "30969:1113",
+        "30969:1138",
+        "30969:982",
+        "30971:1160",
+        "30971:1182"
+      ],
+      "flag": "\ud83d\udd35",
+      "reactExport": "Alert",
+      "verdicts": [
+        "VARIANT-DRIFT",
+        "TOKEN-DRIFT",
+        "STALE-ANATOMY"
+      ],
+      "anatomyFile": "`snackbar-and-alert-msg.md` \u2014 documents old Type axis only; no `Staus`, no alert-message atoms",
+      "action": "Re-point to `alert-message` set: rename axis (danger\u2192Warning, warning\u2192Alert, default\u2192Info, +no red tone), adopt `color/alert-message/*` tokens, 32px icon, plain action; flag \"Staus\" typo to design",
+      "sourceFile": "packages/react-design-system/src/components/feedback.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "05-feedback",
+      "component": "Action-bar (explorations)",
+      "figmaNode": "28189:45983",
+      "atoms": [],
+      "allNodes": [
+        "28189:45983",
+        "30888:830"
+      ],
+      "flag": "\ud83d\udd35",
+      "reactExport": "Alert",
+      "verdicts": [
+        "MISSING-IN-CODE"
+      ],
+      "anatomyFile": "\u2014 no anatomy file",
+      "action": "No action until published; flag \"surface-dedault\" typo to design",
+      "sourceFile": "packages/react-design-system/src/components/feedback.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "05-feedback",
+      "component": "Alert Modals \u2192 Status screens",
+      "figmaNode": "27970:9618",
+      "atoms": [
+        {
+          "name": "Status",
+          "node": "28032:9869"
+        },
+        {
+          "name": "State",
+          "node": "28128:12178"
+        }
+      ],
+      "allNodes": [
+        "27970:9618",
+        "28032:9869",
+        "28128:12178",
+        "28140:14471",
+        "28967:48904",
+        "30305:15810",
+        "30305:18735"
+      ],
+      "flag": "\ud83d\udd35 \u2b50\ufe0f",
+      "reactExport": "AlertModal",
+      "verdicts": [
+        "STALE-ANATOMY",
+        "MISSING-IN-CODE",
+        "REMOVED-IN-FIGMA"
+      ],
+      "anatomyFile": "`alert-modals.md` \u2014 state \u00d7 type axes + dims 375\u00d7324/88\u00d788/40\u00d740 still valid for Style 1 sets, but silent on \u2b50\ufe0f Style 2 pivot; design.md role \"Overlay (centered modal + scrim)\" is stale",
+      "action": "Keep `AlertModal` only if product needs a web dialog (no V1.1 home); plan a `StatusScreen` pattern once \u2b50\ufe0f Style 2 is componentized; refresh design.md role line",
+      "sourceFile": "packages/react-design-system/src/components/feedback.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "06-overlays",
+      "component": "Tooltip",
+      "figmaNode": "30643:2117",
+      "atoms": [
+        {
+          "name": "tooltip",
+          "node": "30643:2117"
+        },
+        {
+          "name": "tooltip-rich-core",
+          "node": "29981:4922"
+        },
+        {
+          "name": "tooltip-standard-core",
+          "node": "30345:3346"
+        },
+        {
+          "name": "tooltip-simple-core",
+          "node": "30291:1054"
+        },
+        {
+          "name": ".tooltip-caret",
+          "node": "29972:2741"
+        },
+        {
+          "name": ".tooltip-iconbutton-close",
+          "node": "29972:2759"
+        },
+        {
+          "name": ".tooltip-core",
+          "node": "27162:4307"
+        }
+      ],
+      "allNodes": [
+        "27162:4307",
+        "29972:2741",
+        "29972:2759",
+        "29981:4922",
+        "30049:794",
+        "30291:1054",
+        "30345:3346",
+        "30559:1429",
+        "30643:2114",
+        "30643:2115",
+        "30643:2116",
+        "30643:2117"
+      ],
+      "flag": "\ud83d\udfe1",
+      "reactExport": "Tooltip",
+      "verdicts": [
+        "VARIANT-DRIFT",
+        "TOKEN-DRIFT",
+        "MISSING-IN-CODE"
+      ],
+      "anatomyFile": "`tooltip.md` \u2014 merged V1.0+V1.1 dump; axes/dims/specs match live sets (even the \"Lef\" typo) but misses the new top-level `Type` set 30643:2117",
+      "action": "Document only (page \ud83d\udfe1). When stable: re-model as `type` simple|standard|rich \u00d7 `mode` light|dark \u00d7 caret direction; fix radius 8\u219212, pad md/sm, type body.md, wrap 1\u20134 lines w/ min/max box; add close btn + rich anatomy; add Type set to anatomy",
+      "sourceFile": "packages/react-design-system/src/components/overlays.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "06-overlays",
+      "component": "Bottom sheet",
+      "figmaNode": "29355:6240",
+      "atoms": [
+        {
+          "name": "Bottom sheet",
+          "node": "29355:6240"
+        },
+        {
+          "name": ".iOS system bar",
+          "node": "27928:11214"
+        }
+      ],
+      "allNodes": [
+        "27907:11750",
+        "27907:16040",
+        "27907:16054",
+        "27907:18124",
+        "27907:20590",
+        "27928:11034",
+        "27928:11214",
+        "28447:3584",
+        "28980:6141",
+        "29228:4289",
+        "29297:19665",
+        "29355:6240",
+        "29415:15592",
+        "29415:16720",
+        "29415:19762",
+        "29463:13797",
+        "31524:4849"
+      ],
+      "flag": "\ud83d\udfe1",
+      "reactExport": "BottomSheet",
+      "verdicts": [
+        "VARIANT-DRIFT",
+        "TOKEN-DRIFT"
+      ],
+      "anatomyFile": "`bottom-sheet.md` \u2014 variants/dims/parts all match live V1.1 symbols (incl. Size=xs, Type=Amount); misses new `Header - iFrame` symbol",
+      "action": "Document only (page \ud83d\udfe1). When stable: add subheader/visual-asset/sticky-footer/keyboard/floating-header slots + footer types; bg \u2192 base grey + glass layer, grabber \u2192 glass/midnight/md, title \u2192 heading.md 24 with 40\u00d740 icon tiles, drop footer border; append Header-iFrame to anatomy",
+      "sourceFile": "packages/react-design-system/src/components/overlays.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "07-cards",
+      "component": "General card",
+      "figmaNode": "28463:12391",
+      "atoms": [
+        {
+          "name": "General-card",
+          "node": "28463:12391"
+        },
+        {
+          "name": ".card-general",
+          "node": "26825:101736"
+        },
+        {
+          "name": ".card-general-core",
+          "node": "28379:3531"
+        },
+        {
+          "name": ".default-surface",
+          "node": "26770:100166"
+        },
+        {
+          "name": ".inverse-surface",
+          "node": "26770:100161"
+        }
+      ],
+      "allNodes": [
+        "26770:100161",
+        "26770:100166",
+        "26825:101736",
+        "28379:3531",
+        "28463:12391"
+      ],
+      "flag": "\u2014",
+      "reactExport": "Card",
+      "verdicts": [
+        "VISUAL-DRIFT",
+        "VARIANT-DRIFT",
+        "TOKEN-DRIFT"
+      ],
+      "anatomyFile": "`general.md` \u2014 axes + dims all match V1.1 (current)",
+      "action": "Rebuild Card anatomy (centered title-over-media tile, align top/bottom, media Sm/Md/Lg); add surface=inverse + 7 surface-colors; radius 16\u219220; add Rows/Carousel arrangement (or delegate to Section)",
+      "sourceFile": "packages/react-design-system/src/components/layout.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "07-cards",
+      "component": "Product (card-features)",
+      "figmaNode": "25893:54098",
+      "atoms": [
+        {
+          "name": "card-features-addon",
+          "node": "25893:54098"
+        },
+        {
+          "name": "-product",
+          "node": "26522:14492"
+        },
+        {
+          "name": "-category",
+          "node": "26521:1397"
+        },
+        {
+          "name": "card feature",
+          "node": "28906:1765"
+        },
+        {
+          "name": "Product-card",
+          "node": "27032:46756"
+        },
+        {
+          "name": ".features-price",
+          "node": "26549:1110"
+        }
+      ],
+      "allNodes": [
+        "25893:54098",
+        "26521:1397",
+        "26522:14492",
+        "26549:1110",
+        "27032:46756",
+        "28906:1765"
+      ],
+      "flag": "\u2014",
+      "reactExport": "ProductCard",
+      "verdicts": [
+        "VISUAL-DRIFT",
+        "VARIANT-DRIFT",
+        "TOKEN-DRIFT"
+      ],
+      "anatomyFile": "`product.md` \u2014 3 types + `.features-price` + AED/PTS current; \"rounded 16\" stale (Figma 20); dims absent",
+      "action": "Split into 3 explicit types (or `type` prop); fix dims 229\u00d7300, radius 20/24, drop border; price atom (smiles/aed, body.xl, real Smiles asset); badge \u2192 lg @16px inset; bind tint to `atom-surfaces.*`; fix anatomy radius",
+      "sourceFile": "packages/react-design-system/src/components/cards.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "07-cards",
+      "component": "Deals for you",
+      "figmaNode": "25973:22611",
+      "atoms": [
+        {
+          "name": "deals-card",
+          "node": "25973:22611"
+        },
+        {
+          "name": "Deals for you",
+          "node": "30420:34446"
+        },
+        {
+          "name": ".deals-card-core",
+          "node": "25721:35140"
+        },
+        {
+          "name": ".default-surface/default",
+          "node": "25973:18329"
+        },
+        {
+          "name": ".footer/Default",
+          "node": "25928:216907"
+        }
+      ],
+      "allNodes": [
+        "25721:35140",
+        "25928:216907",
+        "25973:18329",
+        "25973:22611",
+        "30420:34446"
+      ],
+      "flag": "\ud83d\udfe1",
+      "reactExport": "DealCard",
+      "verdicts": [
+        "VISUAL-DRIFT",
+        "VARIANT-DRIFT"
+      ],
+      "anatomyFile": "`deals-for-you.md` \u2014 dims 166\u00d7224/128\u00d780/84\u00d784 + banner specs + radius 16 current; atom list omits `.footer/Default` + logo-row",
+      "action": "Rebuild DealCard to V1.1 anatomy (top-line/title/logo-row/discount-price/feedback); drop image/subtitle slots or confirm w/ design; deals **banner** (343\u00d7172) has no code export \u2014 document only; re-audit when \ud83d\udfe1 drops",
+      "sourceFile": "packages/react-design-system/src/components/cards.tsx",
+      "exportExists": true,
+      "codeConnect": "packages/react-design-system/code-connect/DealCard.figma.tsx",
+      "codeConnectNodes": [
+        "26825:101736"
+      ]
+    },
+    {
+      "section": "07-cards",
+      "component": "Plans (plans-mini)",
+      "figmaNode": "26003:40647",
+      "atoms": [
+        {
+          "name": "plans-mini",
+          "node": "26003:40647"
+        },
+        {
+          "name": "plans-mini-core",
+          "node": "26003:40543"
+        },
+        {
+          "name": ".surface-default",
+          "node": "25973:27598"
+        },
+        {
+          "name": ".surface-inverse",
+          "node": "25973:27593"
+        }
+      ],
+      "allNodes": [
+        "25973:27593",
+        "25973:27598",
+        "26003:40543",
+        "26003:40646",
+        "26003:40647",
+        "26003:40648"
+      ],
+      "flag": "\u26a0",
+      "reactExport": "PlanCard",
+      "verdicts": [
+        "VARIANT-DRIFT",
+        "TOKEN-DRIFT",
+        "STALE-ANATOMY"
+      ],
+      "anatomyFile": "`plans.md` \u2014 describes the code-era card (~210, subtle border, default/brand/midnight variants) not V1.1 axes/dims",
+      "action": "Re-model variant \u2192 color-scheme \u00d7 surface-color; fix 222\u00d7300, drop border, badge\u2192lg, title\u2192heading.md, price\u2192title.md 20, logos\u219232 (confirm 32 vs 40 with design); refresh plans.md",
+      "sourceFile": "packages/react-design-system/src/components/cards.tsx",
+      "exportExists": true,
+      "codeConnect": "packages/react-design-system/code-connect/PlanCard.figma.tsx",
+      "codeConnectNodes": [
+        "25893:54098"
+      ]
+    },
+    {
+      "section": "07-cards",
+      "component": "New on e&",
+      "figmaNode": "26523:22852",
+      "atoms": [
+        {
+          "name": "new-on",
+          "node": "26523:22852"
+        },
+        {
+          "name": ".new-on-core",
+          "node": "26523:22827"
+        }
+      ],
+      "allNodes": [
+        "26523:22827",
+        "26523:22851",
+        "26523:22852",
+        "26523:22853"
+      ],
+      "flag": "\u2014",
+      "reactExport": "NewCard",
+      "verdicts": [
+        "VISUAL-DRIFT",
+        "VARIANT-DRIFT",
+        "TOKEN-DRIFT"
+      ],
+      "anatomyFile": "`new-on-eand.md` \u2014 variants (selected no/yes), dims 170\u00d7300, `.new-on-core` all current",
+      "action": "Rebuild as story tile (no surface, image r24, centered `body.md` caption); add `selected` outline + New-card badge; fix 170\u00d7300; encode last-card/3-day rules as docs",
+      "sourceFile": "packages/react-design-system/src/components/cards.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "07-cards",
+      "component": "Service",
+      "figmaNode": "26592:14455",
+      "atoms": [
+        {
+          "name": ".service-card-core",
+          "node": "26592:14455"
+        },
+        {
+          "name": ".service-card-sizes",
+          "node": "27216:41370"
+        },
+        {
+          "name": "size=grid",
+          "node": "27216:41369"
+        },
+        {
+          "name": "size=carousel",
+          "node": "27216:41368"
+        },
+        {
+          "name": "service-card",
+          "node": "28165:35653"
+        },
+        {
+          "name": "service-card-section",
+          "node": "27474:94804"
+        },
+        {
+          "name": "Service Card",
+          "node": "27474:45670"
+        }
+      ],
+      "allNodes": [
+        "26592:14455",
+        "27216:41368",
+        "27216:41369",
+        "27216:41370",
+        "27474:45670",
+        "27474:94804",
+        "28165:35653"
+      ],
+      "flag": "\ud83d\udfe1",
+      "reactExport": "ServiceCard",
+      "verdicts": [
+        "VISUAL-DRIFT",
+        "VARIANT-DRIFT",
+        "TOKEN-DRIFT",
+        "STALE-ANATOMY"
+      ],
+      "anatomyFile": "`service.md` \u2014 cell anatomy (3D icon centered + centered bold label + New badge dark-green top-left) current; **\"rounded 16\" stale** (Figma 20); no dims, no size axis, no arranger/section sets",
+      "action": "Radius 16\u219220, drop border, fix h148 + `size` grid109|carousel128, p 8/8/16; real 3d-icon slot (48 circular) \u2014 no glyph placeholder; label \u2192 `title.xs` 14 centered 2-line; badge \u2192 Offers md live-data statuses (\u00d712); add rows/section arrangement (or delegate to Section); fix `service.md` radius; re-audit when \ud83d\udfe1 drops",
+      "sourceFile": "packages/react-design-system/src/components/cards.tsx",
+      "exportExists": true,
+      "codeConnect": "packages/react-design-system/code-connect/ServiceCard.figma.tsx",
+      "codeConnectNodes": [
+        "27917:8012"
+      ]
+    },
+    {
+      "section": "07-cards",
+      "component": "Recommendation",
+      "figmaNode": null,
+      "atoms": [],
+      "allNodes": [],
+      "flag": "TBD",
+      "reactExport": null,
+      "verdicts": [],
+      "anatomyFile": "\u2014 none",
+      "action": "No action; **never build speculatively**; watch for a future \"Recommendation\" page drop (or ask design whether it was folded into Deals-for-you/Action card); keep AUDIT.md row as TBD",
+      "sourceFile": null,
+      "exportExists": false,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "08-banners",
+      "component": "Highlight",
+      "figmaNode": "28382:19131",
+      "atoms": [
+        {
+          "name": "highlight-banner",
+          "node": "28382:19131"
+        },
+        {
+          "name": "carousel=no,size=xl",
+          "node": "28382:19130"
+        },
+        {
+          "name": "no,lg",
+          "node": "28382:19230"
+        },
+        {
+          "name": "yes,xl",
+          "node": "28382:19129"
+        },
+        {
+          "name": "yes,lg",
+          "node": "28382:19232"
+        },
+        {
+          "name": ".highlight-content",
+          "node": "28382:14364"
+        },
+        {
+          "name": ".highlight-core",
+          "node": "25461:61744"
+        },
+        {
+          "name": "action-bar",
+          "node": "26163:72077"
+        }
+      ],
+      "allNodes": [
+        "25461:61744",
+        "26163:72077",
+        "28382:14363",
+        "28382:14364",
+        "28382:14471",
+        "28382:19129",
+        "28382:19130",
+        "28382:19131",
+        "28382:19230",
+        "28382:19232"
+      ],
+      "flag": null,
+      "reactExport": "Highlight",
+      "verdicts": [
+        "VISUAL-DRIFT",
+        "VARIANT-DRIFT",
+        "TOKEN-DRIFT",
+        "STALE-ANATOMY",
+        "REMOVED-IN-FIGMA"
+      ],
+      "anatomyFile": "`highlight.md` \u2014 Informational/Action \u00d7 XL/L \u00d7 Single/Carousel \u2713, bottom-anchored 2-line title \u2713, carousel fixed width \u2713; stale: \"rounded 20\" (now 24), tones \"image \u00b7 brand (red) \u00b7 purple (Smiles gradient)\" + red/purple examples (no tone axis in V1.1), \"tier-badge row\" naming (now logo strip w/ 3 treatments)",
+      "action": "Retokenize (r24, heading/xl, body/md, px24/pb32, 3-stop midnight scrim, glass action-bar h72/r20); swap SmilesRow \u2192 glass logo-row; add `size` xl/lg + `carousel` fixed 313; model `type` informational/action; confirm tone brand/purple + `cta` removal with design; refresh anatomy (radius, tones, logo treatments)",
+      "sourceFile": "packages/react-design-system/src/components/cards.tsx",
+      "exportExists": true,
+      "codeConnect": "packages/react-design-system/code-connect/Highlight.figma.tsx",
+      "codeConnectNodes": [
+        "28382:19131"
+      ]
+    },
+    {
+      "section": "09-product-specific",
+      "component": "Smiles Balance",
+      "figmaNode": "27131:101113",
+      "atoms": [
+        {
+          "name": "smiles-balance-card",
+          "node": "27131:101113"
+        },
+        {
+          "name": "states=points-activated",
+          "node": "27131:101112"
+        },
+        {
+          "name": "states=points-not-active",
+          "node": "27131:101114"
+        },
+        {
+          "name": ".smiles-balance-card-core",
+          "node": "26610:3492"
+        },
+        {
+          "name": ".next-tier",
+          "node": "26663:89987"
+        }
+      ],
+      "allNodes": [
+        "26610:3492",
+        "26663:89986",
+        "26663:89987",
+        "26663:89988",
+        "26663:89990",
+        "27131:101087",
+        "27131:101112",
+        "27131:101113",
+        "27131:101114"
+      ],
+      "flag": "\ud83d\udfe3 page",
+      "reactExport": "SmilesBalance",
+      "verdicts": [
+        "VISUAL-DRIFT",
+        "VARIANT-DRIFT",
+        "TOKEN-DRIFT"
+      ],
+      "anatomyFile": "`smiles-balance.md` \u2014 variants `next-tier`(gold/plat/silver) \u00d7 `states`(points-activated/not-active) \u2713, 353\u00d7148 + atom dims \u2713, r16 \u2713, header \u00b7 footer \u2713 (matches V1.1)",
+      "action": "Rebuild `SmilesBalance` as white V1.1 card: r16 surface-inverse, `heading/lg` 28 points block, tier pill (medallion + 12px label), h12 progress bar (sunken track / positive-subtle fill), `body/md` footer line + gradient `next-tier` text (gold/silver/plat); add `states` axis; drop in-card `cta` \u2014 CTA is the shared action-bar below the card (extract with 08's action-bar item); update design.md \u00a7Smiles Balance (drop \"tier-themed palettes\" + in-card CTA)",
+      "sourceFile": "packages/react-design-system/src/components/cards.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "09-product-specific",
+      "component": "Voucher",
+      "figmaNode": "28278:13817",
+      "atoms": [
+        {
+          "name": "Voucher",
+          "node": "28278:13817"
+        },
+        {
+          "name": "Display=Light,State=Default",
+          "node": "28278:13818"
+        },
+        {
+          "name": "Light,Applied",
+          "node": "28278:13827"
+        },
+        {
+          "name": "Dark,Default",
+          "node": "28278:13836"
+        },
+        {
+          "name": "Dark,Applied",
+          "node": "28278:13845"
+        },
+        {
+          "name": "Voucher/State3",
+          "node": "28278:13787"
+        },
+        {
+          "name": "State4",
+          "node": "28278:13778"
+        },
+        {
+          "name": "Selectors (OLD)",
+          "node": "29158:17350"
+        }
+      ],
+      "allNodes": [
+        "28278:13777",
+        "28278:13778",
+        "28278:13787",
+        "28278:13796",
+        "28278:13816",
+        "28278:13817",
+        "28278:13818",
+        "28278:13827",
+        "28278:13836",
+        "28278:13845",
+        "29158:17350"
+      ],
+      "flag": "\ud83d\udd35 page",
+      "reactExport": "Voucher",
+      "verdicts": [
+        "VISUAL-DRIFT",
+        "VARIANT-DRIFT",
+        "TOKEN-DRIFT"
+      ],
+      "anatomyFile": "`voucher.md` \u2014 `Display`(Dark/Light) \u00d7 `State`(Applied/Default) \u2713, 144\u00d7144 \u2713, r16 \u2713, Shape \u00b7 Content \u00b7 Button \u2713 (matches V1.1)",
+      "action": "Rebuild `Voucher` as fixed 144\u00d7144 ticket tile: notched shape + dashed perforation (SVG/mask, not dashed border), centered `title/xs`+`body/md` content, `button/lg` tertiary Apply w/ 24px icon; replace `status` with `state` Default/Applied + add `display` light/dark; carousel sizing (fixed 144) per design.md slot; confirm redeemed/expired handling with design (no V1.1 equivalent); update design.md \u00a7Voucher (states + composition)",
+      "sourceFile": "packages/react-design-system/src/components/cards.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "10-extensions",
+      "component": "Slider",
+      "figmaNode": null,
+      "atoms": [],
+      "allNodes": [],
+      "flag": "\u26a0 canvas-unreachable, dup",
+      "reactExport": null,
+      "verdicts": [
+        "MISSING-IN-CODE"
+      ],
+      "anatomyFile": "\u2014 none (only a passing \"Actions: Slider (opt.)\" line in `tooltip.md`)",
+      "action": "Future `DsSlider` in 02 Controls; spec from the 06-01 set once node access returns; deprecate the 04-28 key",
+      "sourceFile": null,
+      "exportExists": false,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "10-extensions",
+      "component": "interactive slider",
+      "figmaNode": null,
+      "atoms": [],
+      "allNodes": [],
+      "flag": "\u26a0 canvas-unreachable, dup",
+      "reactExport": null,
+      "verdicts": [
+        "MISSING-IN-CODE"
+      ],
+      "anatomyFile": "\u2014 none",
+      "action": "Audit with Slider; likely collapses into `DsSlider` as an `interactive` bool/state; dedupe 04-28",
+      "sourceFile": null,
+      "exportExists": false,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "10-extensions",
+      "component": "Slider indicator",
+      "figmaNode": null,
+      "atoms": [],
+      "allNodes": [],
+      "flag": "\u26a0 canvas-unreachable",
+      "reactExport": null,
+      "verdicts": [
+        "MISSING-IN-CODE"
+      ],
+      "anatomyFile": "\u2014 none",
+      "action": "Cover inside the Slider audit; no export of its own",
+      "sourceFile": null,
+      "exportExists": false,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "10-extensions",
+      "component": "settings slider hor",
+      "figmaNode": null,
+      "atoms": [],
+      "allNodes": [],
+      "flag": "\u26a0 canvas-unreachable",
+      "reactExport": null,
+      "verdicts": [
+        "MISSING-IN-CODE"
+      ],
+      "anatomyFile": "\u2014 none",
+      "action": "Audit as the settings-row composition of DsSlider; confirm axes at node level",
+      "sourceFile": null,
+      "exportExists": false,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "10-extensions",
+      "component": "Data distribution slider",
+      "figmaNode": null,
+      "atoms": [],
+      "allNodes": [],
+      "flag": "\u26a0 canvas-unreachable",
+      "reactExport": null,
+      "verdicts": [
+        "MISSING-IN-CODE"
+      ],
+      "anatomyFile": "\u2014 none",
+      "action": "Confirm-and-deprecate with design before speccing",
+      "sourceFile": null,
+      "exportExists": false,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "10-extensions",
+      "component": "jump to",
+      "figmaNode": null,
+      "atoms": [],
+      "allNodes": [],
+      "flag": "\u26a0 canvas-unreachable, dup",
+      "reactExport": null,
+      "verdicts": [
+        "MISSING-IN-CODE"
+      ],
+      "anatomyFile": "\u2014 none",
+      "action": "Fold into 03 Navigation on next touch; dedupe the 04-28 `Jump to`; spec at node level when access returns",
+      "sourceFile": null,
+      "exportExists": false,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "10-extensions",
+      "component": "Footer",
+      "figmaNode": "27907:20590",
+      "atoms": [
+        {
+          "name": "Footer",
+          "node": "27907:20590"
+        },
+        {
+          "name": "type=Default",
+          "node": "27923:10055"
+        },
+        {
+          "name": "Stacked",
+          "node": "27907:20589"
+        },
+        {
+          "name": "Horizontal",
+          "node": "27907:20591"
+        },
+        {
+          "name": "Terms & Conditions",
+          "node": "27923:10495"
+        },
+        {
+          "name": "Amount",
+          "node": "29415:16720"
+        }
+      ],
+      "allNodes": [
+        "27907:20589",
+        "27907:20590",
+        "27907:20591",
+        "27923:10055",
+        "27923:10495",
+        "29415:16720"
+      ],
+      "flag": null,
+      "reactExport": "ActionBar",
+      "verdicts": [
+        "VISUAL-DRIFT",
+        "VARIANT-DRIFT",
+        "TOKEN-DRIFT"
+      ],
+      "anatomyFile": "\u2014 none (bottom-sheet.md lists Footer as a sheet part; axes/dims current incl. Type=Amount)",
+      "action": "Rebuild the sticky-footer code against this family (see notes \u2014 this IS the ActionBar concept's V1.1 home); model `type` + 4 bools; drop the top border",
+      "sourceFile": "packages/react-design-system/src/components/navigation.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "10-extensions",
+      "component": "Sticky footer",
+      "figmaNode": "29415:15592",
+      "atoms": [
+        {
+          "name": "Sticky footer",
+          "node": "29415:15592"
+        }
+      ],
+      "allNodes": [
+        "29415:15592"
+      ],
+      "flag": null,
+      "reactExport": "ActionBar",
+      "verdicts": [
+        "VISUAL-DRIFT",
+        "TOKEN-DRIFT"
+      ],
+      "anatomyFile": "\u2014 none",
+      "action": "Same rebuild: top radius 24 + midnight 15% blur-44 shadow, remove border",
+      "sourceFile": "packages/react-design-system/src/components/navigation.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "10-extensions",
+      "component": "footer (atom) / .footer/Default (atom)",
+      "figmaNode": null,
+      "atoms": [],
+      "allNodes": [],
+      "flag": "\u26a0 canvas-unreachable",
+      "reactExport": null,
+      "verdicts": [],
+      "anatomyFile": "\u2014",
+      "action": "Cover inside the Footer audit when node access returns; no section of their own",
+      "sourceFile": null,
+      "exportExists": false,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "10-extensions",
+      "component": "Visual asset",
+      "figmaNode": "29297:19665",
+      "atoms": [
+        {
+          "name": "Visual asset",
+          "node": "29297:19665"
+        }
+      ],
+      "allNodes": [
+        "29297:19664",
+        "29297:19665",
+        "29297:19666",
+        "29297:20065"
+      ],
+      "flag": "(parent Bottom sheet page \ud83d\udfe1)",
+      "reactExport": "BottomSheet",
+      "verdicts": [
+        "STALE-ANATOMY",
+        "MISSING-IN-CODE"
+      ],
+      "anatomyFile": "`bottom-sheet.md` lists Visual asset as a sheet part (Default/3D icon/Bg & Icon + dims) \u2014 current, but **misses the `gradient` bool**",
+      "action": "Media-slot primitive for the future BottomSheet slot expansion (06 action list); add `gradient` to `bottom-sheet.md`; primitive home = 01",
+      "sourceFile": "packages/react-design-system/src/components/overlays.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "10-extensions",
+      "component": "Profile header - NEW",
+      "figmaNode": "15483:931",
+      "atoms": [
+        {
+          "name": " (both updated 07-02, 2 min apart); set node ",
+          "node": "15483:931"
+        }
+      ],
+      "allNodes": [
+        "15483:931"
+      ],
+      "flag": "\ud83d\udfe1 dup",
+      "reactExport": null,
+      "verdicts": [
+        "VISUAL-DRIFT",
+        "VARIANT-DRIFT",
+        "TOKEN-DRIFT"
+      ],
+      "anatomyFile": "`top-bar.md` \u2014 brand-header bullets current per 03",
+      "action": "Treat as the brand-TopBar successor (see notes); fix 48/10%, 14-Bold number, carousel action cards r20/h36; add avatar/tier/Link; ask design to merge the 2 sets + drop \"- NEW\"",
+      "sourceFile": null,
+      "exportExists": false,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "10-extensions",
+      "component": "Offer Banner",
+      "figmaNode": null,
+      "atoms": [],
+      "allNodes": [],
+      "flag": "\u26a0 canvas-unreachable",
+      "reactExport": "Highlight",
+      "verdicts": [
+        "MISSING-IN-CODE"
+      ],
+      "anatomyFile": "\u2014 none (`highlight.md` covers Highlight only)",
+      "action": "Prime candidate for the 08-extension audit; spec at node level when access returns",
+      "sourceFile": "packages/react-design-system/src/components/cards.tsx",
+      "exportExists": true,
+      "codeConnect": "packages/react-design-system/code-connect/Highlight.figma.tsx",
+      "codeConnectNodes": [
+        "28382:19131"
+      ]
+    },
+    {
+      "section": "10-extensions",
+      "component": "Promo banner",
+      "figmaNode": null,
+      "atoms": [],
+      "allNodes": [],
+      "flag": "\u26a0 canvas-unreachable, dup",
+      "reactExport": null,
+      "verdicts": [
+        "MISSING-IN-CODE"
+      ],
+      "anatomyFile": "\u2014 none",
+      "action": "Design must merge the two sets before code work; then audit under 08",
+      "sourceFile": null,
+      "exportExists": false,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": "10-extensions",
+      "component": "Text banner",
+      "figmaNode": null,
+      "atoms": [],
+      "allNodes": [],
+      "flag": "\u26a0 canvas-unreachable",
+      "reactExport": null,
+      "verdicts": [
+        "MISSING-IN-CODE"
+      ],
+      "anatomyFile": "\u2014 none",
+      "action": "Audit under 08 with the other two; likely the media-free tier of one banner family",
+      "sourceFile": null,
+      "exportExists": false,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    }
+  ],
+  "unaudited": [
+    {
+      "section": null,
+      "component": "ButtonGroup",
+      "figmaNode": null,
+      "atoms": [],
+      "allNodes": [],
+      "flag": null,
+      "reactExport": "ButtonGroup",
+      "verdicts": [],
+      "anatomyFile": null,
+      "action": null,
+      "sourceFile": "packages/react-design-system/src/components/ctabar.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": null,
+      "component": "CtaFooter",
+      "figmaNode": null,
+      "atoms": [],
+      "allNodes": [],
+      "flag": null,
+      "reactExport": "CtaFooter",
+      "verdicts": [],
+      "anatomyFile": null,
+      "action": null,
+      "sourceFile": "packages/react-design-system/src/components/ctabar.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": null,
+      "component": "Dismiss",
+      "figmaNode": null,
+      "atoms": [],
+      "allNodes": [],
+      "flag": null,
+      "reactExport": "Dismiss",
+      "verdicts": [],
+      "anatomyFile": null,
+      "action": null,
+      "sourceFile": "packages/react-design-system/src/components/primitives.tsx",
+      "exportExists": true,
+      "codeConnect": "packages/react-design-system/code-connect/Dismiss.figma.tsx",
+      "codeConnectNodes": [
+        "28961:19839"
+      ]
+    },
+    {
+      "section": null,
+      "component": "IconBox",
+      "figmaNode": null,
+      "atoms": [],
+      "allNodes": [],
+      "flag": null,
+      "reactExport": "IconBox",
+      "verdicts": [],
+      "anatomyFile": null,
+      "action": null,
+      "sourceFile": "packages/react-design-system/src/components/primitives.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": null,
+      "component": "OtpInput",
+      "figmaNode": null,
+      "atoms": [],
+      "allNodes": [],
+      "flag": null,
+      "reactExport": "OtpInput",
+      "verdicts": [],
+      "anatomyFile": null,
+      "action": null,
+      "sourceFile": "packages/react-design-system/src/components/controls.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": null,
+      "component": "PaymentRow",
+      "figmaNode": null,
+      "atoms": [],
+      "allNodes": [],
+      "flag": null,
+      "reactExport": "PaymentRow",
+      "verdicts": [],
+      "anatomyFile": null,
+      "action": null,
+      "sourceFile": "packages/react-design-system/src/components/ctabar.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": null,
+      "component": "Picker",
+      "figmaNode": null,
+      "atoms": [],
+      "allNodes": [],
+      "flag": null,
+      "reactExport": "Picker",
+      "verdicts": [],
+      "anatomyFile": null,
+      "action": null,
+      "sourceFile": "packages/react-design-system/src/components/controls.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": null,
+      "component": "PickerOption",
+      "figmaNode": null,
+      "atoms": [],
+      "allNodes": [],
+      "flag": null,
+      "reactExport": "PickerOption",
+      "verdicts": [],
+      "anatomyFile": null,
+      "action": null,
+      "sourceFile": "packages/react-design-system/src/components/controls.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": null,
+      "component": "SmilesAvatar",
+      "figmaNode": null,
+      "atoms": [],
+      "allNodes": [],
+      "flag": null,
+      "reactExport": "SmilesAvatar",
+      "verdicts": [],
+      "anatomyFile": null,
+      "action": null,
+      "sourceFile": "packages/react-design-system/src/components/primitives.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": null,
+      "component": "SmilesRow",
+      "figmaNode": null,
+      "atoms": [],
+      "allNodes": [],
+      "flag": null,
+      "reactExport": "SmilesRow",
+      "verdicts": [],
+      "anatomyFile": null,
+      "action": null,
+      "sourceFile": "packages/react-design-system/src/components/primitives.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": null,
+      "component": "StatusRibbon",
+      "figmaNode": null,
+      "atoms": [],
+      "allNodes": [],
+      "flag": null,
+      "reactExport": "StatusRibbon",
+      "verdicts": [],
+      "anatomyFile": null,
+      "action": null,
+      "sourceFile": "packages/react-design-system/src/components/ctabar.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    },
+    {
+      "section": null,
+      "component": "Stepper",
+      "figmaNode": null,
+      "atoms": [],
+      "allNodes": [],
+      "flag": null,
+      "reactExport": "Stepper",
+      "verdicts": [],
+      "anatomyFile": null,
+      "action": null,
+      "sourceFile": "packages/react-design-system/src/components/primitives.tsx",
+      "exportExists": true,
+      "codeConnect": "packages/react-design-system/code-connect/Stepper.figma.tsx",
+      "codeConnectNodes": [
+        "32960:73561"
+      ]
+    },
+    {
+      "section": null,
+      "component": "Text",
+      "figmaNode": null,
+      "atoms": [],
+      "allNodes": [],
+      "flag": null,
+      "reactExport": "Text",
+      "verdicts": [],
+      "anatomyFile": null,
+      "action": null,
+      "sourceFile": "packages/react-design-system/src/components/primitives.tsx",
+      "exportExists": true,
+      "codeConnect": null,
+      "codeConnectNodes": []
+    }
+  ]
+}
