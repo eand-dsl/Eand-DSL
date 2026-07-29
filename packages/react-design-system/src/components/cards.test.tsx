@@ -1,5 +1,5 @@
-import { render } from '@testing-library/react';
-import { ProductCard, PlanCard, DealCard, ServiceCard, Highlight } from './cards';
+import { render, screen } from '@testing-library/react';
+import { ProductCard, PlanCard, DealCard, NewCard, ServiceCard, Highlight } from './cards';
 
 const root = (c: HTMLElement) => c.firstElementChild as HTMLElement;
 
@@ -43,4 +43,77 @@ test('ProductCard uses radius 20 and drops the resting border', () => {
   const el = root(container);
   expect(el.style.borderRadius).toBe('20px');
   expect(el.style.border).toBe('');
+});
+
+/* ---------------- Card variant axes (Figma) ---------------- */
+
+/* PlanCard: plans-mini 26003:40647 color-scheme = default | inverse */
+test.each([
+  ['default', 'rgb(255, 255, 255)'],   // 26003:40646 surface/base/inverse (stale alias -> opaque)
+  ['inverse', 'rgb(25, 19, 41)'],      // 26003:40648 surface/base/midnight
+] as const)('PlanCard colorScheme=%s fills with %s', (colorScheme, bg) => {
+  const { container } = render(<PlanCard colorScheme={colorScheme} />);
+  expect(root(container).style.background).toBe(bg);
+});
+
+test('PlanCard deprecated variant=midnight equals colorScheme=inverse', () => {
+  const { container: a } = render(<PlanCard variant="midnight" />);
+  const { container: b } = render(<PlanCard colorScheme="inverse" />);
+  expect(root(a).style.background).toBe(root(b).style.background);
+});
+
+test('PlanCard colorScheme wins over variant, and width is the Figma 222', () => {
+  const { container } = render(<PlanCard colorScheme="default" variant="midnight" />);
+  expect(root(container).style.background).toBe('rgb(255, 255, 255)');
+  expect(root(container).style.width).toBe('222px');
+});
+
+/* ServiceCard: service-card-sizes 27216:41370 grid 109 / carousel 128, both h148 */
+test.each([
+  ['grid', '109px'],
+  ['carousel', '128px'],
+] as const)('ServiceCard size=%s is %s wide at h148', (size, w) => {
+  const { container } = render(<ServiceCard label="l" size={size} />);
+  expect(root(container).style.width).toBe(w);
+  expect(root(container).style.minHeight).toBe('148px');
+});
+
+test('ServiceCard with no size fills its grid track', () => {
+  const { container } = render(<ServiceCard label="l" />);
+  expect(root(container).style.width).toBe('');
+});
+
+/* NewCard: new-on 26523:22852 selected = yes | no */
+test('NewCard selected draws the 2px ring and the New-card badge', () => {
+  const { container } = render(<NewCard selected />);
+  const el = root(container);
+  expect(el.style.border).toContain('2px');
+  expect(el.style.backgroundImage).toContain('#47cb6c');
+  expect(screen.getByText('New card')).toBeInTheDocument();
+});
+
+test('NewCard unselected has no ring or badge, and binds row-3', () => {
+  const { container } = render(<NewCard />);
+  expect(root(container).style.backgroundImage).toBe('');
+  expect(root(container).style.minHeight).toBe('224px');
+  expect(screen.queryByText('New card')).not.toBeInTheDocument();
+});
+
+/* ProductCard: three card-features siblings, all row-4 = 300 */
+test.each(['addon', 'product', 'category'] as const)('ProductCard type=%s is row-4 tall', (type) => {
+  const { container } = render(<ProductCard type={type} />);
+  expect(root(container).getAttribute('data-card-type')).toBe(type);
+  expect(root(container).style.minHeight).toBe('300px');
+});
+
+test('ProductCard infers its type from image for pre-`type` callers', () => {
+  const { container: withImg } = render(<ProductCard image={<i>i</i>} />);
+  const { container: without } = render(<ProductCard />);
+  expect(root(withImg).getAttribute('data-card-type')).toBe('product');
+  expect(root(without).getAttribute('data-card-type')).toBe('addon');
+});
+
+test('ProductCard type=category tints the whole card', () => {
+  const { container } = render(<ProductCard type="category" />);
+  expect(root(container).style.background).toBe('rgb(252, 243, 235)'); // atom-surfaces/orange
 });

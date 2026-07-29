@@ -131,20 +131,29 @@ export interface CardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'>
   action?: ReactNode;
   /** fixed width for use inside a carousel */
   width?: number | string;
+  /** Figma `.card-general` 26825:101736 `surface` axis. */
+  surface?: CardSurface;
 }
-export function Card({ media, title, body, action, width, style, children, ...rest }: CardProps) {
+/* Figma `.card-general` 26825:101736 exposes surface (default | inverse) x
+   Carousel<->Grid (No | yes); the parent set `General-card` 28463:12391 arranges rows.
+   inverse takes surface/raised/midnight #312c40 with inverse ink. The Carousel<->Grid
+   axis is expressed here through `width` (fixed for carousel, fill for grid). */
+export type CardSurface = 'default' | 'inverse';
+export function Card({ media, title, body, action, width, surface = 'default', style, children, ...rest }: CardProps) {
+  const onDark = surface === 'inverse';
   return (
     <div style={{
       boxSizing: 'border-box', width: width ?? '100%', flex: width ? '0 0 auto' : undefined,
-      background: color('surface.raised.default'), border: `1px solid ${color('border.solid.subtle')}`,
+      background: onDark ? color('surface.raised.midnight') : color('surface.raised.default'),
+      color: onDark ? color('text.default.inverse') : undefined,
       // Figma General-card (28463:12391): radius border-radius/6 = 20 (was 16).
       borderRadius: radius('6'), overflow: 'hidden',
       display: 'flex', flexDirection: 'column', ...style,
     }} {...rest}>
       {media ? <div style={{ width: '100%' }}>{media}</div> : null}
       <div style={{ display: 'flex', flexDirection: 'column', gap: space('xs'), padding: space('lg') }}>
-        {title ? <Text variant="title.sm">{title}</Text> : null}
-        {body ? <Text variant="body.md" color={color('text.default.subtle')}>{body}</Text> : null}
+        {title ? <Text variant="title.sm" color={onDark ? color('text.default.inverse') : undefined}>{title}</Text> : null}
+        {body ? <Text variant="body.md" color={onDark ? color('text.default.inverse-subtle') : color('text.default.subtle')}>{body}</Text> : null}
         {children}
         {action ? <div style={{ marginTop: space('sm') }}>{action}</div> : null}
       </div>

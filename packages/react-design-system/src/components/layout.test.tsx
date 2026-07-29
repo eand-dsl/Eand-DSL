@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Section } from './layout';
+import { Section, Card } from './layout';
 
 /* ---------------- Section V1.1 (Figma 25519:12055 / 32899:266508) ---------------- */
 
@@ -59,4 +59,26 @@ test('Section back-compat: hideChevron + onSeeAll still work', async () => {
   rerender(<Section title="S" onSeeAll={fn} />);
   await userEvent.click(screen.getByRole('button', { name: 'See all' }));
   expect(fn).toHaveBeenCalledTimes(1);
+});
+
+/* ---------------- Card surface axis (Figma .card-general 26825:101736) ---------------- */
+
+test.each([
+  ['default', 'rgb(255, 255, 255)'],  // surface/raised/default
+  ['inverse', 'rgb(49, 44, 64)'],     // surface/raised/midnight
+] as const)('Card surface=%s fills with %s', (surface, bg) => {
+  const { container } = render(<Card surface={surface} title="t" />);
+  expect((container.firstElementChild as HTMLElement).style.background).toBe(bg);
+});
+
+test('Card inverse flips the ink to the inverse token', () => {
+  const { container } = render(<Card surface="inverse" title="t" />);
+  expect((container.firstElementChild as HTMLElement).style.color).toBe('rgb(255, 255, 255)');
+});
+
+test('Card radius binds border-radius/6 = 20 with no resting border', () => {
+  const { container } = render(<Card title="t" />);
+  const el = container.firstElementChild as HTMLElement;
+  expect(el.style.borderRadius).toBe('20px');
+  expect(el.style.border).toBe('');
 });

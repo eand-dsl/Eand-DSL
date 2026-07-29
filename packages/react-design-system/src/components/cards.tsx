@@ -9,21 +9,37 @@ const imageBox = (h: number, node?: ReactNode) => (
   <div style={{ width: '100%', height: h, borderRadius: radius('3'), overflow: 'hidden', background: color('surface.base.default'), display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 40 }}>{node ?? '📦'}</div>
 );
 
-/* ---------------- PlanCard (Plans-mini) ---------------- */
+/* ---------------- PlanCard (plans-mini) ----------------
+   Figma `plans-mini` 26003:40647 — one axis, `color-scheme`, two values, both 222x300
+   (section/body/height/row-4) at border-radius/5 = 16:
+     color-scheme=default 26003:40646  surface/base/inverse   ink text/default/default
+     color-scheme=inverse 26003:40648  surface/base/midnight  ink text/default/inverse
+   The V1.0 `variant` axis had three values; `brand` has no Figma counterpart and
+   `midnight` is Figma's `inverse`. */
+export type PlanColorScheme = 'default' | 'inverse';
+/** @deprecated Use `colorScheme`. `midnight` is `inverse`; `brand` has no Figma counterpart. */
 export type PlanVariant = 'default' | 'brand' | 'midnight';
 export interface PlanCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   name?: ReactNode; category?: ReactNode; price?: ReactNode; period?: ReactNode;
-  discount?: boolean; variant?: PlanVariant; smiles?: boolean; width?: number | string;
+  discount?: boolean;
+  /** Figma `color-scheme` axis. Takes precedence over `variant`. */
+  colorScheme?: PlanColorScheme;
+  /** @deprecated Use `colorScheme`. */
+  variant?: PlanVariant;
+  smiles?: boolean; width?: number | string;
 }
 const PLAN_BG: Record<PlanVariant, string> = {
-  default: color('surface.raised.default'), brand: color('surface.base.brand'), midnight: color('surface.base.midnight'),
+  // Figma default binds surface/base/inverse (currently opaque via the stale export alias).
+  default: color('surface.base.inverse'), brand: color('surface.base.brand'), midnight: color('surface.base.midnight'),
 };
-export function PlanCard({ name = 'Entertainment plans', category = 'Postpaid', price = 'AED 1250', period = '/mo', discount = true, variant = 'default', smiles = true, width = 210, style, ...rest }: PlanCardProps) {
-  const onDark = variant !== 'default';
+const SCHEME_TO_VARIANT: Record<PlanColorScheme, PlanVariant> = { default: 'default', inverse: 'midnight' };
+export function PlanCard({ name = 'Entertainment plans', category = 'Postpaid', price = 'AED 1250', period = '/mo', discount = true, colorScheme, variant, smiles = true, width = 222, style, ...rest }: PlanCardProps) {
+  const v: PlanVariant = colorScheme ? SCHEME_TO_VARIANT[colorScheme] : (variant ?? 'default');
+  const onDark = v !== 'default';
   const text = onDark ? '#fff' : color('text.default.default');
   return (
     /* Figma plans-mini (26003:40647): radius 16, p16, no border on either scheme. */
-    <div style={{ width, flex: '0 0 auto', boxSizing: 'border-box', background: PLAN_BG[variant], borderRadius: radius('5'), padding: space('lg'), minHeight: rowHeight('row-4'), display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: space('lg'), ...style }} {...rest}>
+    <div style={{ width, flex: '0 0 auto', boxSizing: 'border-box', background: PLAN_BG[v], borderRadius: radius('5'), padding: space('lg'), minHeight: rowHeight('row-4'), display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: space('lg'), ...style }} {...rest}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: space('sm') }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: space('sm') }}>
           <Text variant="body.sm" color={mutedOn(onDark)}>{category}</Text>
@@ -44,22 +60,36 @@ export function PlanCard({ name = 'Entertainment plans', category = 'Postpaid', 
   );
 }
 
-/* ---------------- ProductCard / card-features (product · addon · category) ---------------- */
+/* ---------------- ProductCard / card-features (addon · product · category) ----------------
+   Figma publishes three sibling components rather than one variant set, each 229x300
+   (section/body/height/row-4) at border-radius/6 = 20 with no resting border:
+     card-features-addon    25893:54098  no image; content fills; Smiles pricing
+     card-features-product  26522:14492  media panel on top, name below
+     card-features-category 26521:1397   full-card tint, category label, centred image
+   `type` selects between them; the shared shell is identical. */
+export type ProductCardType = 'addon' | 'product' | 'category';
 export interface ProductCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   eyebrow?: ReactNode; title?: ReactNode; image?: ReactNode; discount?: ReactNode;
   price?: ReactNode; period?: ReactNode; pts?: boolean;
+  /** Which card-features sibling this is. */
+  type?: ProductCardType;
   /** A `.card-bg-color` tint name (Figma 25710:20065). A raw CSS colour still works. */
   tint?: CardBgTint | (string & {});
   width?: number | string;
 }
 const isTintName = (t: string): t is CardBgTint =>
   ['default', 'red', 'orange', 'yellow', 'green', 'cyan', 'blue', 'violet'].includes(t);
-export function ProductCard({ eyebrow, title = 'iPhone Clear Case For Safe Use', image, discount, price = 'AED 200', period = '/mo', pts, tint, width = 200, style, ...rest }: ProductCardProps) {
-  const bg = tint == null ? color('surface.raised.default')
-    : isTintName(tint) ? cardBgTint(tint) : tint;
+export function ProductCard({ eyebrow, title = 'iPhone Clear Case For Safe Use', image, discount, price = 'AED 200', period = '/mo', pts, type, tint, width = 200, style, ...rest }: ProductCardProps) {
+  // Back-compat: callers that predate `type` are inferred from whether they pass an image.
+  const kind: ProductCardType = type ?? (image ? 'product' : 'addon');
+  // category tints the whole card; the other two sit on the raised surface unless tinted.
+  const bg = tint != null ? (isTintName(tint) ? cardBgTint(tint) : tint)
+    : kind === 'category' ? cardBgTint('orange')
+    : color('surface.raised.default');
   return (
-    /* Figma card-features (25893:54098): radius border-radius/6 = 20, no resting border. */
-    <div style={{ width, flex: '0 0 auto', boxSizing: 'border-box', background: bg, borderRadius: radius('6'), padding: space('lg'), minHeight: image ? 280 : 200, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: space('md'), ...style }} {...rest}>
+    /* Figma card-features (25893:54098): radius border-radius/6 = 20, no resting border,
+       height section/body/height/row-4 = 300 across all three siblings. */
+    <div data-card-type={kind} style={{ width, flex: '0 0 auto', boxSizing: 'border-box', background: bg, borderRadius: radius('6'), padding: space('lg'), minHeight: rowHeight('row-4'), display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: space('md'), ...style }} {...rest}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: space('sm') }}>
         {(eyebrow || (discount && !image)) && (
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: space('sm') }}>
@@ -103,14 +133,39 @@ export function DealCard({ image, title = 'Deal title', subtitle, badge, width =
   );
 }
 
-/* ---------------- NewCard ---------------- */
+/* ---------------- NewCard ----------------
+   Figma `new-on` 26523:22852 — one axis, `selected`, two values, both h 224
+   (section/body/height/row-3):
+     selected=yes 26523:22851   2px (border/lg) red->green ring + New-card badge
+     selected=no  26523:22853   plain tile
+   The ring runs Red/100 #e00800 -> Light Green/Base #47cb6c; per the V1.1 rules it
+   appears only on the last carousel card, for three days. */
 export interface NewCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   image?: ReactNode; title?: ReactNode; width?: number | string;
+  /** Figma `selected` axis — the gradient ring plus the New-card badge. */
+  selected?: boolean;
 }
-export function NewCard({ image, title = 'New on e&', width = 200, style, ...rest }: NewCardProps) {
+export function NewCard({ image, title = 'New on e&', width = 200, selected, style, ...rest }: NewCardProps) {
   return (
     /* Figma new-on (26523:22852): story tile — no card surface border. */
-    <div style={{ width, flex: '0 0 auto', boxSizing: 'border-box', background: color('surface.raised.default'), borderRadius: radius('5'), overflow: 'hidden', ...style }} {...rest}>
+    <div style={{
+      position: 'relative', width, flex: '0 0 auto', boxSizing: 'border-box',
+      background: color('surface.raised.default'), borderRadius: radius('5'),
+      minHeight: rowHeight('row-3'), overflow: 'hidden',
+      ...(selected ? {
+        // border/lg = 2; ring drawn as a gradient border via padding + background-clip.
+        border: '2px solid transparent',
+        backgroundImage: `linear-gradient(${color('surface.raised.default')}, ${color('surface.raised.default')}), linear-gradient(135deg, #e00800, #47cb6c)`,
+        backgroundOrigin: 'border-box',
+        backgroundClip: 'padding-box, border-box',
+      } : null),
+      ...style,
+    }} {...rest}>
+      {selected ? (
+        <span style={{ position: 'absolute', top: space('sm'), left: space('sm'), zIndex: 1 }}>
+          <Badge offer="new-card" size="md">New card</Badge>
+        </span>
+      ) : null}
       {imageBox(140, image)}
       <div style={{ padding: space('md') }}><Text variant="title.sm">{title}</Text></div>
     </div>
@@ -118,12 +173,17 @@ export function NewCard({ image, title = 'New on e&', width = 200, style, ...res
 }
 
 /* ---------------- ServiceCard ---------------- */
+/** Figma `service-card-sizes` 27216:41370 — grid 109x148, carousel 128x148. */
+export type ServiceCardSize = 'grid' | 'carousel';
+const SERVICE_CARD_WIDTH: Record<ServiceCardSize, number> = { grid: 109, carousel: 128 };
 export interface ServiceCardProps extends HTMLAttributes<HTMLButtonElement> {
   icon?: ReactNode; label: ReactNode; badge?: ReactNode;
+  /** Figma `size` axis; omit to let the cell fill its grid track. */
+  size?: ServiceCardSize;
 }
-export function ServiceCard({ icon = '◍', label, badge, style, ...rest }: ServiceCardProps) {
+export function ServiceCard({ icon = '◍', label, badge, size, style, ...rest }: ServiceCardProps) {
   return (
-    <button style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: space('sm'), padding: space('md'), minHeight: rowHeight('row-2'), borderRadius: radius('6'), border: 0, background: color('surface.canvas.default'), cursor: 'pointer', ...style }} {...rest}>
+    <button style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: space('sm'), padding: space('md'), width: size ? SERVICE_CARD_WIDTH[size] : undefined, minHeight: rowHeight('row-2'), borderRadius: radius('6'), border: 0, background: color('surface.canvas.default'), cursor: 'pointer', ...style }} {...rest}>
       {badge ? <span style={{ position: 'absolute', top: 8, left: 8 }}>{badge}</span> : null}
       <span style={{ fontSize: 34, lineHeight: 1 }}>{icon}</span>
       <Text variant="body.sm" style={{ textAlign: 'center' }}>{label}</Text>
