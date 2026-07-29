@@ -28,7 +28,7 @@
     "dev": "vite",
     "playground": "vite --config playground/vite.config.ts",
     "build:playground": "vite build --config playground/vite.config.ts",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit -p tsconfig.code-connect.json",
     "test": "vitest run",
     "codeconnect:check": "figma connect publish --dry-run",
     "codeconnect:publish": "figma connect publish"
