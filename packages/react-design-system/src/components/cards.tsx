@@ -1,5 +1,5 @@
 import type { HTMLAttributes, ReactNode } from 'react';
-import { color, space, radius } from '../system';
+import { color, space, radius, rowHeight } from '../system';
 import { Text, Badge, SmilesRow } from './primitives';
 import { Button } from './Button';
 
@@ -22,7 +22,7 @@ export function PlanCard({ name = 'Entertainment plans', category = 'Postpaid', 
   const text = onDark ? '#fff' : color('text.default.default');
   return (
     /* Figma plans-mini (26003:40647): radius 16, p16, no border on either scheme. */
-    <div style={{ width, flex: '0 0 auto', boxSizing: 'border-box', background: PLAN_BG[variant], borderRadius: radius('5'), padding: space('lg'), minHeight: 300, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: space('lg'), ...style }} {...rest}>
+    <div style={{ width, flex: '0 0 auto', boxSizing: 'border-box', background: PLAN_BG[variant], borderRadius: radius('5'), padding: space('lg'), minHeight: rowHeight('row-4'), display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: space('lg'), ...style }} {...rest}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: space('sm') }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: space('sm') }}>
           <Text variant="body.sm" color={mutedOn(onDark)}>{category}</Text>
@@ -81,7 +81,7 @@ export interface DealCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'tit
 }
 export function DealCard({ image, title = 'Deal title', subtitle, badge, width = 240, style, ...rest }: DealCardProps) {
   return (
-    <div style={{ width, flex: '0 0 auto', boxSizing: 'border-box', minHeight: 224, background: color('surface.raised.default'), border: `1px solid ${color('border.solid.subtle')}`, borderRadius: radius('5'), overflow: 'hidden', display: 'flex', flexDirection: 'column', ...style }} {...rest}>
+    <div style={{ width, flex: '0 0 auto', boxSizing: 'border-box', minHeight: rowHeight('row-3'), background: color('surface.raised.default'), border: `1px solid ${color('border.solid.subtle')}`, borderRadius: radius('5'), overflow: 'hidden', display: 'flex', flexDirection: 'column', ...style }} {...rest}>
       {/* image fills the remaining height (Figma .card-general: 224 tall, image inset-0, title pinned bottom) */}
       <div style={{ position: 'relative', flex: 1, display: 'flex', padding: space('sm') }}>
         <div style={{ flex: 1, borderRadius: radius('3'), overflow: 'hidden', background: color('surface.base.default'), display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 40 }}>{image ?? '📦'}</div>
@@ -115,7 +115,7 @@ export interface ServiceCardProps extends HTMLAttributes<HTMLButtonElement> {
 }
 export function ServiceCard({ icon = '◍', label, badge, style, ...rest }: ServiceCardProps) {
   return (
-    <button style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: space('sm'), padding: space('md'), minHeight: 148, borderRadius: radius('6'), border: 0, background: color('surface.canvas.default'), cursor: 'pointer', ...style }} {...rest}>
+    <button style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: space('sm'), padding: space('md'), minHeight: rowHeight('row-2'), borderRadius: radius('6'), border: 0, background: color('surface.canvas.default'), cursor: 'pointer', ...style }} {...rest}>
       {badge ? <span style={{ position: 'absolute', top: 8, left: 8 }}>{badge}</span> : null}
       <span style={{ fontSize: 34, lineHeight: 1 }}>{icon}</span>
       <Text variant="body.sm" style={{ textAlign: 'center' }}>{label}</Text>
@@ -137,7 +137,7 @@ export function Highlight({ title = 'Primary Text 2-lines max', subtitle, image,
       : image ? `center/cover no-repeat url(${image})`
       : 'linear-gradient(160deg,#3a3340,#191329)');
   return (
-    <div style={{ width: width ?? '100%', flex: width ? '0 0 auto' : undefined, boxSizing: 'border-box', position: 'relative', minHeight: tone === 'image' ? 452 : 200, borderRadius: radius('7'), overflow: 'hidden', background: bg, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', ...style }} {...rest}>
+    <div style={{ width: width ?? '100%', flex: width ? '0 0 auto' : undefined, boxSizing: 'border-box', position: 'relative', minHeight: tone === 'image' ? rowHeight('row-6') : 200, borderRadius: radius('7'), overflow: 'hidden', background: bg, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', ...style }} {...rest}>
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(20,15,33,0) 35%, rgba(20,15,33,0.78))' }} />
       <div style={{ position: 'relative', padding: space('lg'), display: 'flex', flexDirection: 'column', gap: space('sm') }}>
         <SmilesRow count={3} plus={0} size={32} />

@@ -1,5 +1,5 @@
 import type { HTMLAttributes, ReactNode } from 'react';
-import { space, color, icon, radius } from '../system';
+import { space, color, icon, radius, rowHeight, PILL } from '../system';
 import { Text, IconBox } from './primitives';
 
 /* ---------------- TopBar (header) ----------------
@@ -120,7 +120,7 @@ export function TopBar({
             <Text variant="title.sm" color="#fff" as="div">{actionBar.title}</Text>
             {actionBar.subtitle ? <Text variant="body.sm" color="rgba(255,255,255,0.8)">{actionBar.subtitle}</Text> : null}
           </div>
-          <span style={{ background: '#fff', color: color('text.brand.default'), borderRadius: 9999, padding: `8px ${space('lg')}`, fontWeight: 600, fontSize: 14, whiteSpace: 'nowrap' }}>{actionBar.cta ?? 'Start'}</span>
+          <span style={{ background: '#fff', color: color('text.brand.default'), borderRadius: PILL, padding: `8px ${space('lg')}`, fontWeight: 600, fontSize: 14, whiteSpace: 'nowrap' }}>{actionBar.cta ?? 'Start'}</span>
         </div>
       ) : null}
 
@@ -174,7 +174,7 @@ function NavTab({ it, collapsed }: { it: NavItem; collapsed?: boolean }) {
       style={{
         flexGrow: collapsed ? (on ? 3 : 1) : 1, flexShrink: 1, flexBasis: 0, minWidth: 0,
         display: 'inline-flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-        gap: 2, padding: collapsed ? '8px 4px' : '6px 4px 4px', borderRadius: 9999, border: 0, cursor: 'pointer',
+        gap: 2, padding: collapsed ? '8px 4px' : '6px 4px 4px', borderRadius: PILL, border: 0, cursor: 'pointer',
         background: on ? '#fff' : 'transparent', color: on ? color('text.brand.default') : '#fff',
         transition: 'flex-grow 280ms ease, padding 220ms ease, background 200ms ease',
       }}>
@@ -202,11 +202,11 @@ export function NavBar({ items, scrollDirection = 'up', style, ...rest }: NavBar
       ...style,
     }} {...rest}>
       <div style={{ padding: `0 ${space('lg')}` }}>
-        <div style={{ ...GLASS, display: 'flex', alignItems: 'center', gap: space('sm'), padding: 4, borderRadius: 9999 }}>
+        <div style={{ ...GLASS, display: 'flex', alignItems: 'center', gap: space('sm'), padding: 4, borderRadius: PILL }}>
           {items.map((it, i) => <NavTab key={i} it={it} collapsed={collapsed} />)}
         </div>
       </div>
-      <span style={{ width: 144, height: 5, borderRadius: 9999, background: 'rgba(255,255,255,0.9)', margin: '10px auto 8px' }} />
+      <span style={{ width: 144, height: 5, borderRadius: PILL, background: 'rgba(255,255,255,0.9)', margin: '10px auto 8px' }} />
     </nav>
   );
 }
@@ -333,7 +333,7 @@ export function QuickAction({ items, columns = 3, style, ...rest }: QuickActionP
       {items.map((it, i) => (
         // Figma .quick-task-core (27962:37103): radius border-radius/6 = 20, bg surface/raised/default.
         <button key={i} onClick={it.onClick}
-          style={{ position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: 148, padding: space('md'), borderRadius: radius('6'), border: 0, background: color('surface.raised.default'), cursor: 'pointer', textAlign: 'left' }}>
+          style={{ position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: rowHeight('row-2'), padding: space('md'), borderRadius: radius('6'), border: 0, background: color('surface.raised.default'), cursor: 'pointer', textAlign: 'left' }}>
           <span style={{ width: 40, height: 40, borderRadius: radius('3'), background: color('surface.base.default'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: color('text.default.default') }}>
             {it.icon ?? '●'}
           </span>

@@ -22,6 +22,9 @@ export const radius = (k: string): string => T['borderRadius']?.[k] ?? k;
 export const icon = (k: string): string => T.icon?.[k] ?? k;
 /** Raw size step from the Figma `scale/*` collection, e.g. scale("24") -> "24px". */
 export const scale = (k: string): string => T.scale?.[k] ?? k;
+/** Card/section row height from Figma `section/body/height/*`, e.g. rowHeight("row-2") -> "148px".
+ *  Card box heights bind to these rows in Figma, not to raw `scale/*` steps. */
+export const rowHeight = (k: string): string => T.section?.body?.height?.[k] ?? k;
 
 /* KNOWN BROKEN TOKEN PATHS — `color()` falls back to returning the path string when a
  * path does not resolve, which yields invalid CSS that browsers drop silently. These
