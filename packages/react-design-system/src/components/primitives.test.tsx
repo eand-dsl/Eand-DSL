@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Badge, ProgressBar, Stepper, Dismiss } from './primitives';
+import { Badge, ProgressBar, Stepper, Dismiss, AtomSurface } from './primitives';
 
 /* ---------------- Badge ---------------- */
 
@@ -148,4 +148,35 @@ test('Dismiss surface picks the default vs inverse fill', () => {
   expect(screen.getByRole('button').style.background).toBe('rgb(144, 142, 154)'); // #908e9a
   rerender(<Dismiss surface="inverse" />);
   expect(screen.getByRole('button').style.background).toBe('rgb(192, 191, 200)'); // #c0bfc8
+});
+
+/* ---------------- AtomSurface surface-color axis ----------------
+   default-surface 26770:100166 (3) + inverse-surface 26770:100161 (4).
+   Each expected fill was read off its own Figma variant node. */
+test.each([
+  ['subtle', 'rgb(240, 240, 245)'],              // 26770:100167 surface/base/default
+  // KNOWN TOKEN DRIFT — asserts what the stale token currently produces, not Figma.
+  // Figma reports surface/base/inverse = #ffffff99 (60% white), but variables.json still
+  // aliases it to primitives color.white.1000 (opaque). The correct alias is white.a60,
+  // which already exists in the export. Re-export variables.json from Figma (or retarget
+  // that one alias) and this expectation becomes 'rgba(255, 255, 255, 0.6)'.
+  ['default', 'rgb(255, 255, 255)'],             // 26770:100168 surface/base/inverse
+  ['sunken', 'rgb(228, 227, 234)'],              // 26770:100169 surface/sunken/default
+  ['midnight-base', 'rgb(25, 19, 41)'],          // 26770:100162 surface/base/midnight
+  ['midnight-raised', 'rgb(49, 44, 64)'],        // 26770:100163 surface/raised/midnight
+  ['glass-midnight', 'rgba(25, 19, 41, 0.2)'],   // 26770:100164 surface/glass/midnight/md
+  ['glass-white', 'rgba(255, 255, 255, 0.2)'],   // 26770:100165 surface/glass/white/lg
+] as const)('AtomSurface surfaceColor=%s fills with %s', (surfaceColor, bg) => {
+  const { container } = render(<AtomSurface surfaceColor={surfaceColor} />);
+  expect((container.firstElementChild as HTMLElement).style.background).toBe(bg);
+});
+
+test('AtomSurface keeps the deprecated level axis rendering as before', () => {
+  const { container } = render(<AtomSurface level="sunken" />);
+  expect((container.firstElementChild as HTMLElement).style.background).toBe('rgb(228, 227, 234)');
+});
+
+test('AtomSurface defaults to surface.base.default when neither axis is given', () => {
+  const { container } = render(<AtomSurface />);
+  expect((container.firstElementChild as HTMLElement).style.background).toBe('rgb(240, 240, 245)');
 });

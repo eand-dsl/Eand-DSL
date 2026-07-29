@@ -1,5 +1,5 @@
 import type { CSSProperties, ElementType, HTMLAttributes, ReactNode } from 'react';
-import { T, ty, space, icon, color, radius, scale, PILL } from '../system';
+import { ty, space, icon, color, radius, scale, PILL } from '../system';
 
 /* ---------------- Text ---------------- */
 export interface TextProps extends HTMLAttributes<HTMLElement> {
@@ -193,13 +193,47 @@ export function LogoRow({ logos = [], style, ...rest }: LogoRowProps) {
   );
 }
 
-/* ---------------- AtomSurface ---------------- */
+/* ---------------- AtomSurface ----------------
+   The Figma surface-color atoms: `default-surface` 26770:100166 (default | subtle |
+   sunken) and `inverse-surface` 26770:100161 (midnight-base | midnight-raised |
+   glass-midnight | glass-white). Both expose one axis named `surface-color`, so they
+   are one component here — seven values, the way a designer picks them.
+
+   The previous `level` axis (canvas|base|raised|sunken) matched none of these names and
+   offered none of the four inverse/glass values.
+
+   Figma's variant labels do NOT match its own token names — `surface-color=subtle`
+   binds color/surface/base/default, and `surface-color=default` binds
+   color/surface/base/inverse. Labels below follow Figma (that is what designers see);
+   each maps to the token verified per variant node. */
+export type SurfaceColor =
+  | 'default' | 'subtle' | 'sunken'
+  | 'midnight-base' | 'midnight-raised' | 'glass-midnight' | 'glass-white';
+
+/** surface-color -> token path, verified one variant node at a time. */
+const SURFACE_COLOR: Record<SurfaceColor, string> = {
+  subtle: 'surface.base.default',            // 26770:100167  #f0f0f5
+  default: 'surface.base.inverse',           // 26770:100168  #ffffff99
+  sunken: 'surface.sunken.default',          // 26770:100169  #e4e3ea
+  'midnight-base': 'surface.base.midnight',  // 26770:100162  #191329
+  'midnight-raised': 'surface.raised.midnight', // 26770:100163  #312c40
+  'glass-midnight': 'surface.glass.midnight.md', // 26770:100164  rgba(25,19,41,.20)
+  'glass-white': 'surface.glass.white.lg',   // 26770:100165  rgba(255,255,255,.20)
+};
+
 export interface AtomSurfaceProps extends HTMLAttributes<HTMLDivElement> {
+  /** Figma `surface-color` axis — all seven values across both surface atoms. */
+  surfaceColor?: SurfaceColor;
+  /** @deprecated V1.0 elevation axis with no Figma counterpart; use `surfaceColor`.
+   *  Retained so existing call sites keep their current fill. */
   level?: 'canvas' | 'base' | 'raised' | 'sunken';
 }
-export function AtomSurface({ level = 'base', style, children, ...rest }: AtomSurfaceProps) {
+export function AtomSurface({ surfaceColor, level, style, children, ...rest }: AtomSurfaceProps) {
+  const bg = surfaceColor
+    ? color(SURFACE_COLOR[surfaceColor])
+    : color(`surface.${level ?? 'base'}.default`);
   return (
-    <div style={{ background: color(`surface.${level}.default`), borderRadius: T.borderRadius?.['5'] ?? '16px', ...style }} {...rest}>
+    <div style={{ background: bg, borderRadius: radius('5'), ...style }} {...rest}>
       {children}
     </div>
   );
