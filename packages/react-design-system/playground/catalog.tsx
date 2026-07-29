@@ -128,16 +128,16 @@ export const PAGES: Page[] = [
     ) },
 
   { id: 'alert', group: 'Components', title: 'Alert', frame: 'pad',
-    blurb: 'Inline banner for contextual status. Soft-tinted by tone with a title, message, and optional action link.',
+    blurb: 'Inline banner for contextual status. Soft-tinted by status (Figma alert-message: Success | Alert | Warning | Info) with a title, message, and optional action link.',
     controls: [
-      { kind: 'select', prop: 'tone', label: 'Tone', options: ['positive', 'warning', 'danger', 'default'], def: 'positive' },
+      { kind: 'select', prop: 'status', label: 'Status', options: ['success', 'alert', 'warning', 'info'], def: 'success' },
       { kind: 'text', prop: 'title', label: 'Title', def: 'You’re all set!' },
       { kind: 'text', prop: 'body', label: 'Message', def: 'Your request was completed successfully and everything is updated.' },
       { kind: 'text', prop: 'action', label: 'Action', def: 'Done' },
     ],
     render: (v) => (
       <div style={{ width: 360, maxWidth: '100%' }}>
-        <Alert tone={p(v, 'tone')} title={p(v, 'title')} action={p(v, 'action') || undefined}>{p(v, 'body')}</Alert>
+        <Alert status={p(v, 'status')} title={p(v, 'title')} action={p(v, 'action') || undefined}>{p(v, 'body')}</Alert>
       </div>
     ) },
 

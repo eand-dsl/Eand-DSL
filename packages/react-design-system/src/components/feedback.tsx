@@ -88,24 +88,51 @@ export function Snackbar({ tone = 'default', message, action, onAction, onDismis
   );
 }
 
-/* ---------------- Alert (inline tinted banner) ---------------- */
+/* ---------------- Alert (inline tinted banner) ----------------
+   Figma `alert-message` 30969:1112, built from alert-message-container -> icon-status +
+   text-block + alert-action. The axis is `Staus` (Figma's own typo, kept here only as a
+   note — Code Connect mappings must use that exact key) with four values:
+
+     Staus=Success 30969:1111   surface #c1f7d0  text #164025
+     Staus=Alert   30969:1113   surface #ffecab  text #55481d
+     Staus=Warning 30971:1160   surface #ffc28b  text #612a05
+     Staus=Info    30971:1182   surface #e4e3ea  text #191329
+
+   The V1.0 `tone` names map onto these, and the middle two SWAP meaning:
+     positive -> success | warning -> ALERT | danger -> WARNING | default -> info
+   Figma's `Alert` is the amber step and its `Warning` is the orange one, which is why
+   `tone="warning"` resolves to status `alert`. Every previous colour also differed from
+   Figma, so all four surfaces/inks move here.
+
+   Values are inlined because color/alert-message/* exists in Figma but is absent from
+   variables.json (zero matches), so tokens.ts has no alertMessage group. Same situation
+   and same treatment as STEPPER in primitives.tsx; swap these for color() calls once the
+   export carries the group. */
+export type AlertStatus = 'success' | 'alert' | 'warning' | 'info';
+/** @deprecated V1.0 names. Use `status`; note warning->alert and danger->warning. */
 export type AlertTone = 'positive' | 'warning' | 'danger' | 'default';
-// Figma vars: BG/Alert/*/Softer, Text/Alert/*/Strong (default = BG/Component/Light Gray, 12% midnight).
-const ALERT_TONE: Record<AlertTone, { bg: string; strong: string; mark: string; glyph: string; shape: 'circle' | 'triangle'; action: string }> = {
-  positive: { bg: '#effff4', strong: '#246636', mark: '#246636', glyph: '✓', shape: 'circle',   action: '#246636' },
-  warning:  { bg: '#fff7dd', strong: '#806d2c', mark: '#806d2c', glyph: '!', shape: 'triangle', action: '#806d2c' },
-  danger:   { bg: '#ffecdf', strong: '#a74b08', mark: '#a74b08', glyph: '✕', shape: 'circle',   action: '#a74b08' },
-  default:  { bg: '#19132912', strong: '#191329', mark: '#191329', glyph: 'i', shape: 'circle',  action: color('text.brand.default') },
+
+const TONE_TO_STATUS: Record<AlertTone, AlertStatus> = {
+  positive: 'success', warning: 'alert', danger: 'warning', default: 'info',
+};
+const ALERT_STATUS: Record<AlertStatus, { bg: string; strong: string; mark: string; glyph: string; shape: 'circle' | 'triangle'; action: string }> = {
+  success: { bg: '#c1f7d0', strong: '#164025', mark: '#164025', glyph: '✓', shape: 'circle',   action: '#164025' },
+  alert:   { bg: '#ffecab', strong: '#55481d', mark: '#55481d', glyph: '!', shape: 'triangle', action: '#55481d' },
+  warning: { bg: '#ffc28b', strong: '#612a05', mark: '#612a05', glyph: '✕', shape: 'circle',   action: '#612a05' },
+  info:    { bg: '#e4e3ea', strong: '#191329', mark: '#191329', glyph: 'i', shape: 'circle',   action: color('text.brand.default') },
 };
 export interface AlertProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
+  /** Figma `Staus` axis. Takes precedence over `tone`. */
+  status?: AlertStatus;
+  /** @deprecated Use `status`; `warning` maps to `alert` and `danger` to `warning`. */
   tone?: AlertTone;
   title?: ReactNode;
   action?: ReactNode;
   onAction?: () => void;
   children?: ReactNode;
 }
-export function Alert({ tone = 'default', title, action, onAction, children, style, ...rest }: AlertProps) {
-  const t = ALERT_TONE[tone];
+export function Alert({ status, tone, title, action, onAction, children, style, ...rest }: AlertProps) {
+  const t = ALERT_STATUS[status ?? (tone ? TONE_TO_STATUS[tone] : 'info')];
   return (
     <div role="status" style={{
       display: 'flex', alignItems: 'flex-start', gap: space('md'), width: '100%', boxSizing: 'border-box',
