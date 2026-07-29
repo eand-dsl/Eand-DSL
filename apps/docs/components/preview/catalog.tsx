@@ -159,10 +159,16 @@ function RadioGroupDemo({ items, size }: { items: string[]; size: 'sm' | 'lg' })
 }
 
 /** Tooltip is always-visible here so the bubble is legible in the docs frame. */
-function TooltipDemo({ placement }: { placement: 'top' | 'bottom' }) {
+function TooltipDemo({ placement, size, surface }: { placement: 'top' | 'bottom' | 'left' | 'right'; size: 'simple' | 'standard' | 'rich'; surface: 'default' | 'dark' }) {
   return (
-    <div style={{ padding: '48px 0' }}>
-      <Tooltip content="Uses your Smiles Points" placement={placement} visible>
+    <div style={{ padding: '64px 0' }}>
+      <Tooltip
+        content="Uses your Smiles Points"
+        title={size === 'rich' ? 'Smiles Points' : undefined}
+        steps={size === 'rich' ? '1 of 3' : undefined}
+        action={size === 'rich' ? <Button size="sm">Next</Button> : undefined}
+        placement={placement} size={size} surface={surface} visible
+      >
         <Button size="sm" variant="secondary">Hover target</Button>
       </Tooltip>
     </div>
@@ -170,12 +176,12 @@ function TooltipDemo({ placement }: { placement: 'top' | 'bottom' }) {
 }
 
 /** Trigger-driven overlay demos — a button opens the fixed-position surface. */
-function BottomSheetDemo() {
+function BottomSheetDemo({ display, grabber }: { display: 'light' | 'dark'; grabber: boolean }) {
   const [open, setOpen] = useState(false);
   return (
     <>
       <Button onClick={() => setOpen(true)}>Open bottom sheet</Button>
-      <BottomSheet open={open} title="Choose a plan" onDismiss={() => setOpen(false)}
+      <BottomSheet open={open} title="Choose a plan" display={display} grabber={grabber} onDismiss={() => setOpen(false)}
         footer={<Button block onClick={() => setOpen(false)}>Confirm</Button>}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
           <ListRow label="Freedom Live 200" value="AED 200/mo" />
@@ -451,13 +457,13 @@ export const PAGES: Page[] = [
     code: snippets.navbar },
 
   { id: 'plancard', group: 'Components', title: 'PlanCard', frame: 'phone',
-    blurb: 'Plans-mini card: eyebrow, name, smiles, “from AED…/mo”. Switch the variant below.',
+    blurb: 'Plans-mini card: eyebrow, name, smiles, “from AED…/mo”. Figma `color-scheme` axis (default | inverse).',
     controls: [
-      { kind: 'select', prop: 'variant', label: 'Variant', options: ['default', 'brand', 'midnight'], def: 'brand' },
+      { kind: 'select', prop: 'colorScheme', label: 'Color scheme', options: ['default', 'inverse'], def: 'inverse' },
     ],
     render: (v) => (
       <div style={{ padding: 12, background: '#e4e3ea', display: 'flex', justifyContent: 'center' }}>
-        <PlanCard variant={p(v, 'variant')} category="Postpaid" name="Freedom Live 200" price="200" period="/mo" />
+        <PlanCard colorScheme={p(v, 'colorScheme')} category="Postpaid" name="Freedom Live 200" price="200" period="/mo" />
       </div>
     ), code: snippets.plancard },
 
@@ -701,13 +707,19 @@ export const PAGES: Page[] = [
   { id: 'tooltip', group: 'Overlays', title: 'Tooltip', frame: 'pad',
     blurb: 'Small dark bubble anchored to a target. Placement flips it above or below.',
     controls: [
-      { kind: 'select', prop: 'placement', label: 'Placement', options: ['top', 'bottom'] },
+      { kind: 'select', prop: 'size', label: 'Size', options: ['simple', 'standard', 'rich'], def: 'standard' },
+      { kind: 'select', prop: 'surface', label: 'Surface', options: ['default', 'dark'], def: 'default' },
+      { kind: 'select', prop: 'placement', label: 'Placement', options: ['top', 'bottom', 'left', 'right'], def: 'top' },
     ],
-    render: (v) => <TooltipDemo placement={p(v, 'placement')} /> },
+    render: (v) => <TooltipDemo placement={p(v, 'placement')} size={p(v, 'size')} surface={p(v, 'surface')} /> },
 
   { id: 'bottomsheet', group: 'Overlays', title: 'BottomSheet', frame: 'pad',
     blurb: 'Modal sheet that slides up from the bottom with a grab handle, title and footer. Tap to open.',
-    render: () => <BottomSheetDemo /> },
+    controls: [
+      { kind: 'select', prop: 'display', label: 'Display', options: ['light', 'dark'], def: 'light' },
+      { kind: 'toggle', prop: 'grabber', label: 'Grabber', def: true },
+    ],
+    render: (v) => <BottomSheetDemo display={p(v, 'display')} grabber={p(v, 'grabber')} /> },
 
   /* ---------------- Cards ---------------- */
   { id: 'productcard', group: 'Cards', title: 'ProductCard', frame: 'phone',

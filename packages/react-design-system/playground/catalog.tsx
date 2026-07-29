@@ -195,13 +195,13 @@ export const PAGES: Page[] = [
     code: snippets.navbar },
 
   { id: 'plancard', group: 'Components', title: 'PlanCard', frame: 'phone',
-    blurb: 'Plans-mini card: eyebrow, name, smiles, “from AED…/mo”. Switch the variant below.',
+    blurb: 'Plans-mini card: eyebrow, name, smiles, “from AED…/mo”. Figma `color-scheme` axis (default | inverse).',
     controls: [
-      { kind: 'select', prop: 'variant', label: 'Variant', options: ['default', 'brand', 'midnight'], def: 'brand' },
+      { kind: 'select', prop: 'colorScheme', label: 'Color scheme', options: ['default', 'inverse'], def: 'inverse' },
     ],
     render: (v) => (
       <div style={{ padding: 12, background: '#e4e3ea', display: 'flex', justifyContent: 'center' }}>
-        <PlanCard variant={p(v, 'variant')} category="Postpaid" name="Freedom Live 200" price="200" period="/mo" />
+        <PlanCard colorScheme={p(v, 'colorScheme')} category="Postpaid" name="Freedom Live 200" price="200" period="/mo" />
       </div>
     ), code: snippets.plancard },
 ];
