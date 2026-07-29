@@ -1,5 +1,5 @@
 import type { HTMLAttributes, ReactNode } from 'react';
-import { color, space, radius, PILL } from '../system';
+import { color, space, radius, scale, PILL } from '../system';
 import { Text, IconBox } from './primitives';
 
 /* ---------------- Tooltip ----------------
@@ -89,31 +89,65 @@ export function Tooltip({
 }
 
 /* ---------------- BottomSheet ---------------- */
+/* Figma `Bottom sheet` 29355:6240, assembled from Grabber 27907:16040, Header
+   27907:16054 (Title 28980:6141), Subheader 27928:11034, a Slot, and Footer 27907:20590.
+
+   The sheet carries a `Display` axis (Light | Dark), verified on the Grabber's own
+   variant nodes — the fill flips, it is not one colour:
+     Display=Light 27907:15999  surface/glass/midnight/md  rgba(25,19,41,.20)
+     Display=Dark  27907:16041  surface/glass/white/xl     rgba(255,255,255,.40)
+   Both 40x4 (scale/40 x scale/4) at border-radius/8 (pill).
+
+   Sheet corners bind border-radius/7 = 24; the title is heading/md 24 Bold
+   (was heading.xs); Figma has no divider above the footer. */
+export type BottomSheetDisplay = 'light' | 'dark';
+
 export interface BottomSheetProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   open?: boolean;
+  /** Figma `Display` axis — the sheet surface. */
+  display?: BottomSheetDisplay;
+  /** Figma `Grabber` boolean. */
+  grabber?: boolean;
   title?: ReactNode;
+  /** Figma Subheader 27928:11034 — search / filters under the title. */
+  subheader?: ReactNode;
+  /** Figma Visual asset 29355:9189 — media strip above the header. */
+  visual?: ReactNode;
   footer?: ReactNode;
   onDismiss?: () => void;
 }
-export function BottomSheet({ open = true, title, footer, onDismiss, style, children, ...rest }: BottomSheetProps) {
+export function BottomSheet({
+  open = true, display = 'light', grabber = true, title, subheader, visual,
+  footer, onDismiss, style, children, ...rest
+}: BottomSheetProps) {
   if (!open) return null;
+  const onDark = display === 'dark';
+  const sheetBg = onDark ? color('surface.canvas.midnight') : color('surface.raised.default');
+  const ink = onDark ? color('text.default.inverse') : color('text.default.default');
+  // Light sheet takes the midnight grabber; dark sheet takes the white one.
+  const grabberBg = onDark ? color('surface.glass.white.xl') : color('surface.glass.midnight.md');
   return (
     <div onClick={onDismiss} style={{ position: 'fixed', inset: 0, background: color('surface.overlay.scrim'), display: 'flex', alignItems: 'flex-end', zIndex: 1000 }}>
-      <div onClick={(e) => e.stopPropagation()} style={{
-        width: '100%', maxHeight: '90%', boxSizing: 'border-box', background: color('surface.raised.default'),
-        borderTopLeftRadius: 24, borderTopRightRadius: 24, display: 'flex', flexDirection: 'column', ...style,
+      <div role="dialog" aria-modal="true" onClick={(e) => e.stopPropagation()} style={{
+        width: '100%', maxHeight: '90%', boxSizing: 'border-box', background: sheetBg, color: ink,
+        borderTopLeftRadius: radius('7'), borderTopRightRadius: radius('7'),
+        display: 'flex', flexDirection: 'column', overflow: 'hidden', ...style,
       }} {...rest}>
-        <div style={{ display: 'flex', justifyContent: 'center', padding: `${space('sm')} 0` }}>
-          <span style={{ width: 40, height: 4, borderRadius: PILL, background: color('border.solid.strong') }} />
-        </div>
+        {grabber ? (
+          <div style={{ display: 'flex', justifyContent: 'center', padding: `${space('xs')} 0` }}>
+            <span data-testid="grabber" style={{ width: scale('40'), height: scale('4'), borderRadius: PILL, background: grabberBg }} />
+          </div>
+        ) : null}
+        {visual ? <div>{visual}</div> : null}
         {(title || onDismiss) && (
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: `0 ${space('lg')} ${space('sm')}` }}>
-            <Text variant="heading.xs">{title}</Text>
-            {onDismiss ? <button onClick={onDismiss} aria-label="Close" style={{ border: 0, background: 'transparent', cursor: 'pointer' }}><IconBox size="sm">✕</IconBox></button> : null}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: space('md'), padding: `0 ${space('lg')} ${space('sm')}` }}>
+            <Text variant="heading.md" color={ink}>{title}</Text>
+            {onDismiss ? <button onClick={onDismiss} aria-label="Close" style={{ border: 0, background: 'transparent', cursor: 'pointer', color: ink }}><IconBox size="sm">✕</IconBox></button> : null}
           </div>
         )}
+        {subheader ? <div style={{ padding: `0 ${space('lg')} ${space('sm')}` }}>{subheader}</div> : null}
         <div style={{ overflowY: 'auto', padding: `0 ${space('lg')} ${space('lg')}` }}>{children}</div>
-        {footer ? <div style={{ padding: space('lg'), borderTop: `1px solid ${color('border.solid.subtle')}` }}>{footer}</div> : null}
+        {footer ? <div style={{ padding: space('lg') }}>{footer}</div> : null}
       </div>
     </div>
   );
