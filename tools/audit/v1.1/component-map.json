@@ -7,10 +7,10 @@
   },
   "counts": {
     "auditedRows": 63,
-    "reactExports": 52,
+    "reactExports": 53,
     "exportsWithAuditRow": 39,
-    "exportsWithoutAuditRow": 13,
-    "exportsWithCodeConnect": 14
+    "exportsWithoutAuditRow": 14,
+    "exportsWithCodeConnect": 19
   },
   "audited": [
     {
@@ -294,8 +294,11 @@
       "action": "Re-point AtomSurface to `atomSurfaces` color axis (or split into CardBg primitive); reconcile cyan/blue/purple naming",
       "sourceFile": "packages/react-design-system/src/components/primitives.tsx",
       "exportExists": true,
-      "codeConnect": null,
-      "codeConnectNodes": []
+      "codeConnect": "packages/react-design-system/code-connect/AtomSurface.figma.tsx",
+      "codeConnectNodes": [
+        "26770:100161",
+        "26770:100166"
+      ]
     },
     {
       "section": "02-controls",
@@ -1169,8 +1172,10 @@
       "action": "Re-point to `alert-message` set: rename axis (danger\u2192Warning, warning\u2192Alert, default\u2192Info, +no red tone), adopt `color/alert-message/*` tokens, 32px icon, plain action; flag \"Staus\" typo to design",
       "sourceFile": "packages/react-design-system/src/components/feedback.tsx",
       "exportExists": true,
-      "codeConnect": null,
-      "codeConnectNodes": []
+      "codeConnect": "packages/react-design-system/code-connect/Alert.figma.tsx",
+      "codeConnectNodes": [
+        "30969:1112"
+      ]
     },
     {
       "section": "05-feedback",
@@ -1190,8 +1195,10 @@
       "action": "No action until published; flag \"surface-dedault\" typo to design",
       "sourceFile": "packages/react-design-system/src/components/feedback.tsx",
       "exportExists": true,
-      "codeConnect": null,
-      "codeConnectNodes": []
+      "codeConnect": "packages/react-design-system/code-connect/Alert.figma.tsx",
+      "codeConnectNodes": [
+        "30969:1112"
+      ]
     },
     {
       "section": "05-feedback",
@@ -1382,8 +1389,10 @@
       "action": "Rebuild Card anatomy (centered title-over-media tile, align top/bottom, media Sm/Md/Lg); add surface=inverse + 7 surface-colors; radius 16\u219220; add Rows/Carousel arrangement (or delegate to Section)",
       "sourceFile": "packages/react-design-system/src/components/layout.tsx",
       "exportExists": true,
-      "codeConnect": null,
-      "codeConnectNodes": []
+      "codeConnect": "packages/react-design-system/code-connect/Card.figma.tsx",
+      "codeConnectNodes": [
+        "26825:101736"
+      ]
     },
     {
       "section": "07-cards",
@@ -1434,8 +1443,12 @@
       "action": "Split into 3 explicit types (or `type` prop); fix dims 229\u00d7300, radius 20/24, drop border; price atom (smiles/aed, body.xl, real Smiles asset); badge \u2192 lg @16px inset; bind tint to `atom-surfaces.*`; fix anatomy radius",
       "sourceFile": "packages/react-design-system/src/components/cards.tsx",
       "exportExists": true,
-      "codeConnect": null,
-      "codeConnectNodes": []
+      "codeConnect": "packages/react-design-system/code-connect/ProductCard.figma.tsx",
+      "codeConnectNodes": [
+        "25893:54098",
+        "26521:1397",
+        "26522:14492"
+      ]
     },
     {
       "section": "07-cards",
@@ -1482,7 +1495,7 @@
       "exportExists": true,
       "codeConnect": "packages/react-design-system/code-connect/DealCard.figma.tsx",
       "codeConnectNodes": [
-        "26825:101736"
+        "25973:22611"
       ]
     },
     {
@@ -1528,7 +1541,7 @@
       "exportExists": true,
       "codeConnect": "packages/react-design-system/code-connect/PlanCard.figma.tsx",
       "codeConnectNodes": [
-        "25893:54098"
+        "26003:40647"
       ]
     },
     {
@@ -2156,6 +2169,24 @@
       "exportExists": true,
       "codeConnect": null,
       "codeConnectNodes": []
+    },
+    {
+      "section": null,
+      "component": "CardBgColor",
+      "figmaNode": null,
+      "atoms": [],
+      "allNodes": [],
+      "flag": null,
+      "reactExport": "CardBgColor",
+      "verdicts": [],
+      "anatomyFile": null,
+      "action": null,
+      "sourceFile": "packages/react-design-system/src/components/primitives.tsx",
+      "exportExists": true,
+      "codeConnect": "packages/react-design-system/code-connect/CardBgColor.figma.tsx",
+      "codeConnectNodes": [
+        "25710:20065"
+      ]
     },
     {
       "section": null,

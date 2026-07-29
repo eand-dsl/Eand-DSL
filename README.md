@@ -76,15 +76,21 @@ npm run codeconnect:publish                   # publish to the Figma library
 ```
 
 Requires an **Organization/Enterprise** Figma plan and the components published to
-a team library. Mapped so far: Button, Chip, FilterPill, Checkbox, Radio,
-Switcher, Dismiss, Stepper, Badge (status + offers), Logo, PlanCard, DealCard,
-ServiceCard, Highlight. Add more by dropping a new `Component.figma.tsx` next to
-the others (same pattern).
+a team library. 23 mappings across 19 components: Button, Chip, FilterPill,
+Checkbox, Radio, Switcher, Dismiss, Stepper, Badge (status + offers), Logo,
+Card, PlanCard, ProductCard (×3 siblings), DealCard, ServiceCard, NewCard,
+Highlight, Alert, AtomSurface (×2), CardBgColor. Add more by dropping a new
+`Component.figma.tsx` next to the others (same pattern).
 
-Three card mappings carry a `NOT MAPPED` comment naming a Figma variant that has
-no code counterpart yet (`DealCard.surface`, `Highlight.size`, and the
-`ServiceCard` icon set) — each needs a component change before it can be mapped,
-so the comments are the todo list.
+Mappings target the **published original** (`pzm63BTLfPfT1stcF89ILQ`). Node IDs are
+identical in the de-dotted copy, but **layer names are not** — `nestedProps()` matches
+on layer name and fails soft (empty prop, no error), so always use the original's
+names. `npm run typecheck` now covers `code-connect/`.
+
+Several mappings carry a `NOT MAPPED` comment naming a Figma property with no code
+counterpart — those comments are the todo list. See
+`tools/audit/v1.1/atom-gap-report.md` for the full reconciliation status, and
+`component-map.json` for the machine-readable inventory.
 
 ## Figma Make
 

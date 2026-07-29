@@ -1,18 +1,25 @@
 import figma from '@figma/code-connect';
 import { DealCard } from '../src';
 
-// e& Consumer App DSL V1.1 — .card-general (node 26825:101736)
-// The title is a plain text layer inside the nested `.card-general-core` instance (it is not
-// exposed as a TEXT property), so it is read with textContent scoped to that layer.
-// `Carousel<->Grid` drives the width: carousel cells are fixed-width, grid cells fill.
-// NOT MAPPED — the `surface` variant (default | inverse): DealCard has no inverse/on-dark
-// treatment in code, so mapping it would mean inventing a prop. Needs a component change first.
-figma.connect(DealCard, 'https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=26825-101736', {
+// e& Consumer App DSL V1.1 — deals-card (node 25973:22611)
+//
+// CORRECTED TARGET. This previously pointed at 26825:101736, which is `.card-general` —
+// the General card's cell atom, now mapped by Card.figma.tsx. deals-card is the real
+// Deals-for-you card: a single symbol 166x224 with NO variant axis, composed of
+// `.default-surface/default` + `.deals-card-core` + `.footer/Default`.
+//
+// Layer names are the ORIGINAL file's (dotted).
+//
+// NOT MAPPED — `.footer/Default` (discount / discounted-string / price-string) and the
+// nested logo-row. DealCard is still the V1.0 image-led card and has no props for a
+// struck-through price, logo row or feedback pill; the audit calls for an anatomy rebuild
+// before those can map. Mapping them now would mean inventing props.
+figma.connect(DealCard, 'https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25973-22611', {
   props: {
-    core: figma.nestedProps('.card-general-core', {
-      title: figma.textContent('Title'),
+    core: figma.nestedProps('.deals-card-core', {
+      subtitle: figma.string('top-line-string'),
+      title: figma.string('item-name-string'),
     }),
-    width: figma.enum('Carousel<->Grid', { yes: 240, No: '100%' }),
   },
-  example: (p) => <DealCard title={p.core.title} width={p.width} />,
+  example: (p) => <DealCard title={p.core.title} subtitle={p.core.subtitle} />,
 });
