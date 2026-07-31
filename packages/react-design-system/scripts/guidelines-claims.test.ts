@@ -44,4 +44,35 @@ describe('parseClaims', () => {
   it('returns empty structures for empty input', () => {
     expect(parseClaims('')).toEqual({ imports: [], components: {}, iconNames: [] });
   });
+
+  // Regression: fix round 1, Finding 1 — LITERAL_UNION rejected quoted string-literal unions,
+  // so a prop documented with quoted values (e.g. Text's variant) was silently recorded as [].
+  it('accepts a quoted string literal union and strips the quotes', () => {
+    const md = '- `Text({ variant: "body.md"|"title.sm"|"heading.lg", as, color })`';
+    expect(parseClaims(md).components.Text.variant).toEqual(['body.md', 'title.sm', 'heading.lg']);
+  });
+
+  it('accepts a union mixing quoted and bare identifiers', () => {
+    const md = '- `Foo({ kind: primary|"custom-value" })`';
+    expect(parseClaims(md).components.Foo.kind).toEqual(['primary', 'custom-value']);
+  });
+
+  // Regression: fix round 1, Finding 2 — a union of bare TS primitive/builtin type names
+  // (e.g. `string|number`) satisfied the old literal-union grammar and was wrongly captured
+  // as a value claim, producing a false positive in the Task 3 checker.
+  it('treats a union of primitive type names as a type annotation, not a value claim', () => {
+    const md = '- `Field({ value: string|number, label })`';
+    expect(parseClaims(md).components.Field).toEqual({ value: [], label: [] });
+  });
+
+  // Regression: fix round 1, Finding 3 — `<Icon name="..." />` used as an explanatory-prose
+  // placeholder was captured as a literal icon name because the usage regex accepted any
+  // non-quote characters. Only kebab-case names are real icon names.
+  it('ignores a non-kebab-case Icon name placeholder like an ellipsis', () => {
+    const md = [
+      "Render `<Icon name=\"...\" />` and pass it into a component's slot.",
+      '<Icon name="wallet" />',
+    ].join('\n');
+    expect(parseClaims(md).iconNames).toEqual(['wallet']);
+  });
 });
