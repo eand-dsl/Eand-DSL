@@ -1215,7 +1215,7 @@ git push
 Verify each before calling the work done:
 
 1. `npm run guidelines:check` exits 0 — Task 4 Step 4.
-2. The checker fails on the pre-rewrite guidelines and names the 8 phantom icons and the phantom package — Task 3 Steps 4–5, evidence in the Task 4 commit message.
+2. The checker fails on the pre-rewrite guidelines and names the phantom package plus the 4 reachable phantom icons (`mobile`, `mshop`, `profile`, `truck`) — Task 3 Steps 5–6, evidence in the Task 4 commit message. *Amended 2026-08-02: originally demanded all 8; the other 4 appear only in undelimited prose the parser does not read by design. See the spec's acceptance criterion 2 for the full rationale.*
 3. All 54 exported components appear in the guidelines — enforced by `undocumented-component`.
 4. All 198 base icon names documented; every icon name resolves — enforced by `unlisted-icon` and `phantom-icon`.
 5. The worked example type-checks against the built package — Task 5 Step 5.

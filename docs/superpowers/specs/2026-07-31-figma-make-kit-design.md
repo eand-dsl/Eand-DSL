@@ -148,10 +148,20 @@ src/icons/ (ICONS, ICON_META) ──────────┘                 
 ## Acceptance criteria
 
 1. `npm run guidelines:check` exits 0.
-2. The same command, run against the pre-rewrite guidelines, exits nonzero and names the 8
-   phantom icons and the phantom package. The pre-rewrite file is recoverable from git
-   (`git show main:packages/react-design-system/MAKE_KIT_GUIDELINES.md`); the failing
-   output is captured in the implementation's commit message or PR body as evidence.
+2. The same command, run against the pre-rewrite guidelines, exits nonzero and names the
+   phantom package and every phantom icon the parser can reach. The pre-rewrite document is
+   frozen at `scripts/__fixtures__/guidelines-original.md`, and the failing output is
+   captured in the implementation's commit message as evidence.
+
+   **Amended 2026-08-02.** This criterion originally demanded all 8 phantom icon names.
+   Only 4 (`mobile`, `mshop`, `profile`, `truck`) are reachable: they appear in
+   `<Icon name="…">` usages. The other 4 (`sparkle`, `subscriptions`, `plus`, `shield`)
+   exist only in an undelimited prose list in the original document, and the parser
+   deliberately reads icon names only from `<Icon>` usages and the `<!-- icons:begin -->`
+   block — parsing loose prose would make every backticked word a candidate icon. The
+   detection gap is by design, not defect. Actual result: 212 problems, including the
+   phantom package, 4 phantom icons, 14 undocumented components, and 2 phantom props
+   (`ActionBar.helper`, `Checkbox.checked`) that the original audit missed.
 3. All 54 exported components appear in the guidelines.
 4. All 198 base icon names are documented; every icon name in the document resolves.
 5. The worked example type-checks against the built package.
