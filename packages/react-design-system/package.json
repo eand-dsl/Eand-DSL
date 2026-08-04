@@ -1,6 +1,6 @@
 {
   "name": "@eand/react-design-system",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "e& Consumer App design system — web React components for Figma Make",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -34,7 +34,8 @@
     "codeconnect:publish": "figma connect publish",
     "guidelines:facts": "tsx scripts/guidelines-facts.ts",
     "guidelines:check": "tsx scripts/check-guidelines.ts",
-    "guidelines:example": "tsx scripts/check-example.ts"
+    "guidelines:example": "tsx scripts/check-example.ts",
+    "smoke": "node scripts/smoke-esm.mjs"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",

@@ -1106,14 +1106,21 @@ git commit -m "test(guidelines): type-check the worked example against dist"
 
 Create `scripts/smoke-esm.mjs`. This imports the built ESM the way esm.sh serves it, so a broken or missing export fails loudly rather than at Make runtime:
 
+*Amended 2026-08-04: the export check originally read `typeof DS[n] !== 'function'`, which fails on a healthy build — `Button` is a `forwardRef`, so it is an object, not a function. Replaced with an `isComponent` predicate that also accepts `forwardRef`/`memo`.*
+
 ```js
 // Proves dist/index.js is importable and renders. Run after `npm run build`.
 import { renderToString } from 'react-dom/server';
 import { createElement as h } from 'react';
 import * as DS from '../dist/index.js';
 
+// forwardRef/memo components are objects, not functions, so a typeof check
+// would report Button — which is a forwardRef — as missing.
+const isComponent = (v) =>
+  typeof v === 'function' || (typeof v === 'object' && v !== null && '$$typeof' in v);
+
 const required = ['Button', 'Icon', 'TopBar', 'NavBar', 'Section', 'Picker', 'CtaFooter'];
-const missing = required.filter((n) => typeof DS[n] !== 'function');
+const missing = required.filter((n) => !isComponent(DS[n]));
 if (missing.length) {
   console.error(`✗ missing exports: ${missing.join(', ')}`);
   process.exit(1);
