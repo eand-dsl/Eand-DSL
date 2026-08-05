@@ -189,27 +189,34 @@ export function OtpInput({ length = 4, value, defaultValue = '', onValueChange, 
    selected; `Loader <-> IconBox=on` swaps it for a spinner. */
 export type ChipType = 'outline' | 'filled' | 'glass' | 'inverse';
 type ChipState = 'default' | 'focus' | 'disabled';
-// filled & glass values from live Figma `color/chips/default/{filled,glass}/*` — absent
-// from the generated tokens.ts; inverse focus text is #575362 live (tokens.ts is stale there).
+// All four types read from `color/chips/default/*`. The filled and glass values used to be
+// hardcoded hex "from live Figma, absent from the generated tokens.ts" — they were absent
+// because the token export was six weeks stale, not because Figma lacked them. Figma also
+// renamed the `default` type to `outline`, which is why the old `chips.default.default.*`
+// paths stopped resolving once the export was refreshed.
+const GLASS_BLUR = { backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' } as const;
 const CHIP_STYLE: Record<ChipType, Record<ChipState, CSSProperties>> = {
   outline: {
-    default:  { background: 'transparent', color: color('chips.default.default.text.default'), border: `1px solid ${color('chips.default.default.border.default')}` },
-    focus:    { background: color('chips.default.default.surface.focus'), color: color('chips.default.default.text.focus'), border: `1px solid ${color('chips.default.default.border.focus')}` },
-    disabled: { background: 'transparent', color: color('chips.default.default.text.disabled'), border: `1px solid ${color('chips.default.default.border.disabled')}` },
+    default:  { background: 'transparent', color: color('chips.default.outline.text.default'), border: `1px solid ${color('chips.default.outline.border.default')}` },
+    focus:    { background: color('chips.default.outline.surface.focus'), color: color('chips.default.outline.text.focus'), border: `1px solid ${color('chips.default.outline.border.focus')}` },
+    disabled: { background: 'transparent', color: color('chips.default.outline.text.disabled'), border: `1px solid ${color('chips.default.outline.border.disabled')}` },
   },
   filled: {
-    default:  { background: '#ffffff', color: '#575362', border: '1px solid transparent' },
-    focus:    { background: '#140f21', color: '#ffffff', border: '1px solid transparent' },
-    disabled: { background: '#19132912', color: '#908e9a', border: '1px solid transparent' },
+    default:  { background: color('chips.default.filled.surface.default'), color: color('chips.default.filled.text.default'), border: '1px solid transparent' },
+    focus:    { background: color('chips.default.filled.surface.focus'), color: color('chips.default.filled.text.focus'), border: '1px solid transparent' },
+    // `sisabled` is a typo in the Figma variable name itself
+    // (color/chips/default/filled/surface/sisabled). Mirrored deliberately — "correcting" it
+    // here would simply stop resolving on the next export.
+    disabled: { background: color('chips.default.filled.surface.sisabled'), color: color('chips.default.filled.text.disabled'), border: '1px solid transparent' },
   },
   glass: {
-    default:  { background: '#ffffff26', color: '#ffffff', border: '1px solid transparent', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' },
-    focus:    { background: '#ffffff', color: '#191329', border: '1px solid transparent', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' },
-    disabled: { background: '#ffffff1a', color: '#ffffff4d', border: '1px solid transparent', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' },
+    default:  { background: color('chips.default.glass.surface.default'), color: color('chips.default.glass.text.default'), border: '1px solid transparent', ...GLASS_BLUR },
+    focus:    { background: color('chips.default.glass.surface.focus'), color: color('chips.default.glass.text.focus'), border: '1px solid transparent', ...GLASS_BLUR },
+    disabled: { background: color('chips.default.glass.surface.disabled'), color: color('chips.default.glass.text.disabled'), border: '1px solid transparent', ...GLASS_BLUR },
   },
   inverse: {
-    default:  { background: 'transparent', color: '#ffffffbf', border: `1px solid ${color('chips.default.inverse.border.default')}` }, // live Figma #ffffffbf; tokens.ts stale (0.70)
-    focus:    { background: color('chips.default.inverse.surface.focus'), color: '#575362', border: `1px solid ${color('chips.default.inverse.border.focus')}` },
+    default:  { background: 'transparent', color: color('chips.default.inverse.text.default'), border: `1px solid ${color('chips.default.inverse.border.default')}` },
+    focus:    { background: color('chips.default.inverse.surface.focus'), color: color('chips.default.inverse.text.focus'), border: `1px solid ${color('chips.default.inverse.border.focus')}` },
     disabled: { background: 'transparent', color: color('chips.default.inverse.text.disabled'), border: `1px solid ${color('chips.default.inverse.border.disabled')}` },
   },
 };

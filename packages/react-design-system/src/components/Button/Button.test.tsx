@@ -65,11 +65,16 @@ test('link is underlined text with brand color', () => {
 
 // --- surface axis --------------------------------------------------------------
 
-test('primary on inverse-brand surface renders white fill with brand text', () => {
+// The label used to be brand red here. Figma re-pointed
+// `color/button/primary/text/inverse/default` from `text/brand/default` to
+// `text/default/default`, so a white button on a red surface now reads midnight. Picked up
+// when the stale token export was refreshed (830 -> 944 tokens); the component follows the
+// token, only this expectation was pinned to the old value.
+test('primary on inverse-brand surface renders white fill with midnight text', () => {
   render(<Button variant="primary" surface="inverse-brand">Buy</Button>);
   const el = screen.getByRole('button');
   expect(el.style.background).toMatch(WHITE);
-  expect(el.style.color).toMatch(BRAND);
+  expect(el.style.color).toMatch(MIDNIGHT);
 });
 
 test('secondary on white surface renders white border and text', () => {

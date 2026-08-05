@@ -51,9 +51,19 @@ const { meta } = (await res.json()) as {
   meta: { variables: Record<string, RestVariable>; variableCollections: Record<string, RestCollection> };
 };
 
-const hex = (c: { r: number; g: number; b: number; a?: number }) => {
-  const h = (v: number) => Math.round(v * 255).toString(16).padStart(2, '0');
-  return '#' + h(c.r) + h(c.g) + h(c.b) + (c.a != null && c.a < 1 ? h(c.a) : '');
+/**
+ * Opaque colours are `#rrggbb`; translucent ones are `rgba(r, g, b, a)`.
+ *
+ * The alpha form matters. Encoding it as 8-digit hex quantises the channel to 1/255
+ * (`0.07` becomes `18/255` = `0.0706`) and rewrites ~50 tokens that did not actually
+ * change — which buries the genuine drift in a diff nobody can review.
+ */
+const colour = (c: { r: number; g: number; b: number; a?: number }) => {
+  const ch = (v: number) => Math.round(v * 255);
+  const h = (v: number) => ch(v).toString(16).padStart(2, '0');
+  return c.a != null && c.a < 1
+    ? `rgba(${ch(c.r)}, ${ch(c.g)}, ${ch(c.b)}, ${c.a.toFixed(2)})`
+    : '#' + h(c.r) + h(c.g) + h(c.b);
 };
 // A dot inside a name segment becomes a hyphen, in both nested keys and alias paths:
 // `rem/0.125` -> rem > "0-125", referenced as `$.primitives.value.rem.0-125`.
@@ -85,7 +95,7 @@ for (const col of Object.values(meta.variableCollections)) {
         $value = null;
       }
     } else if (v.resolvedType === 'COLOR') {
-      $value = hex(raw);
+      $value = colour(raw);
     } else {
       $value = raw;
     }
