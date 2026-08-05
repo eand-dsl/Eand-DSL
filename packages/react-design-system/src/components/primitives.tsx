@@ -158,8 +158,9 @@ export function AddTrigger({ label = 'Add', style, onClick, ...rest }: AddTrigge
 /* ---------------- Dismiss ----------------
    Figma V1.1 Dismiss (page 28961:16066): a circular close button — a filled circle
    in the dismiss colour with a white X. surface default | inverse × size md(24) | sm(20). */
-// color/dismiss/{default,inverse} — not in the generated tokens.ts; values from live Figma.
-const DISMISS_BG = { default: '#908e9a', inverse: '#c0bfc8' } as const;
+// color/dismiss/{default,inverse}. Hardcoded while the variables.json export predated the
+// dismiss group; bound now, to the same values.
+const DISMISS_BG = { default: color('dismiss.default'), inverse: color('dismiss.inverse') } as const;
 export interface DismissProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onClick'> {
   surface?: 'default' | 'inverse';
   size?: 'md' | 'sm';

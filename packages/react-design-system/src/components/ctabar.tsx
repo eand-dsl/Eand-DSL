@@ -6,13 +6,13 @@ import { Text, IconBox } from './primitives';
    Full-width status strip shown above a CTA footer (Figma V1.1 `status-ribbon`,
    set 31577:2612). 40px tall, message left, optional action right. */
 export type StatusRibbonStatus = 'success' | 'alert' | 'warning' | 'info';
-// Figma vars color/alert-message/{surface,text}/<status> — not yet in the generated
-// tokens.ts (variables.json export predates the alert-message group), values from live Figma.
+// Figma vars color/alert-message/{surface,text}/<status>. These were hardcoded while the
+// variables.json export predated that family; it is in the export now, so they are bound.
 const RIBBON: Record<StatusRibbonStatus, { bg: string; fg: string }> = {
-  success: { bg: '#c1f7d0', fg: '#164025' },
-  alert:   { bg: '#ffecab', fg: '#55481d' },
-  warning: { bg: '#ffc28b', fg: '#612a05' },
-  info:    { bg: '#e4e3ea', fg: '#191329' },
+  success: { bg: color('alert-message.surface.success'), fg: color('alert-message.text.success') },
+  alert:   { bg: color('alert-message.surface.alert'), fg: color('alert-message.text.alert') },
+  warning: { bg: color('alert-message.surface.warning'), fg: color('alert-message.text.warning') },
+  info:    { bg: color('alert-message.surface.info'), fg: color('alert-message.text.info') },
 };
 export interface StatusRibbonProps extends HTMLAttributes<HTMLDivElement> {
   status?: StatusRibbonStatus;

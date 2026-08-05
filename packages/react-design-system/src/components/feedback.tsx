@@ -171,11 +171,14 @@ export type AlertTone = 'positive' | 'warning' | 'danger' | 'default';
 const TONE_TO_STATUS: Record<AlertTone, AlertStatus> = {
   positive: 'success', warning: 'alert', danger: 'warning', default: 'info',
 };
+// Bound to Figma's `color/alert-message/{surface,text}/<status>`. These were hardcoded hex
+// because the token export predated that family, not because Figma lacked it; the values
+// below resolve to exactly what the hardcodes were, so this is a rebind, not a restyle.
 const ALERT_STATUS: Record<AlertStatus, { bg: string; strong: string; mark: string; icon: string; shape: 'circle' | 'triangle'; action: string }> = {
-  success: { bg: '#c1f7d0', strong: '#164025', mark: '#164025', icon: 'check', shape: 'circle',   action: '#164025' },
-  alert:   { bg: '#ffecab', strong: '#55481d', mark: '#55481d', icon: 'warning', shape: 'triangle', action: '#55481d' },
-  warning: { bg: '#ffc28b', strong: '#612a05', mark: '#612a05', icon: 'close', shape: 'circle',   action: '#612a05' },
-  info:    { bg: '#e4e3ea', strong: '#191329', mark: '#191329', icon: 'info', shape: 'circle',   action: color('text.brand.default') },
+  success: { bg: color('alert-message.surface.success'), strong: color('alert-message.text.success'), mark: color('alert-message.text.success'), icon: 'check', shape: 'circle', action: color('alert-message.text.success') },
+  alert:   { bg: color('alert-message.surface.alert'), strong: color('alert-message.text.alert'), mark: color('alert-message.text.alert'), icon: 'warning', shape: 'triangle', action: color('alert-message.text.alert') },
+  warning: { bg: color('alert-message.surface.warning'), strong: color('alert-message.text.warning'), mark: color('alert-message.text.warning'), icon: 'close', shape: 'circle', action: color('alert-message.text.warning') },
+  info:    { bg: color('alert-message.surface.info'), strong: color('alert-message.text.info'), mark: color('alert-message.text.info'), icon: 'info', shape: 'circle', action: color('text.brand.default') },
 };
 export interface AlertProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   /** Figma `Staus` axis. Takes precedence over `tone`. */

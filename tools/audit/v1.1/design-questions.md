@@ -84,6 +84,37 @@ shrinks and the Make-kit guidelines change with it.
 
 ---
 
+## 6. Snackbar status marks are built from deprecated colour *styles*
+
+`SNACK_MARK` in `src/components/feedback.tsx` carries three hardcoded values, commented as
+coming from `Component/IconBox/{Positive,Negative,Warning}` — Figma colour **styles**, not
+variables. `AUDIT.md` §2 records that the legacy colour styles are deprecated and that the
+library should build from the `tokens`/`primitives` variable collections instead.
+
+Two of the three match no variable in the refreshed 944-token export:
+
+| Mark | Hardcoded | Nearest variable |
+| --- | --- | --- |
+| positive | `#47cb6c` | **no match** — `status/positive` is `green/700` `#3b8b53` |
+| danger | `#d05d0a` | **no match** — `status/danger` is `orange/700` `#b85a1a` |
+| warning | `#d5b549` | matches `yellow/600` (= `status/warning` is `yellow/700`, so still not exact) |
+
+**Need:** what should the Snackbar mark bind to — `color/status/*`, the new
+`color/alert-message/*` family, or something on the WIP "Snackbar-new" page? The audit
+already flags that page 🟡 for re-audit, so this is likely blocked on it landing.
+
+Not guessed at: picking a nearest-match variable would silently change three shipped
+colours on the strength of a hunch.
+
+## 7. SmilesAvatar purple is outside the token system
+
+`primitives.tsx` defaults `SmilesAvatar` to `bg = '#6C3FD6'`, which matches no variable in
+the export. Smiles is a partner brand, so a colour outside the e& DSL may well be correct —
+but it is currently un-tokenised and undocumented.
+
+**Need:** confirm whether Smiles brand colours belong in the DSL (as a `special/*` group,
+alongside gold/silver/bronze) or stay app-level.
+
 ## Also worth a design decision, found while reconciling tokens
 
 **`color/green/550` is a deleted variable that is still bound.** `.plan-usage-bar`'s fill

@@ -167,7 +167,10 @@ test('glass disabled dims surface and text per Figma', () => {
   render(<Button variant="glass" disabled>Glass</Button>);
   const btn = screen.getByRole('button');
   expect(btn.style.background).toBe('rgba(255, 255, 255, 0.1)');
-  expect(btn.style.color).toBe('rgba(255, 255, 255, 0.5)');
+  // 0.5 -> 0.6: the label binds to color/button/glass/text/disabled, which aliases
+  // text/default/inverse-muted, and Figma moved that from 50% to 60% white. Surfaced when
+  // the glass hardcodes were replaced with the tokens they were standing in for.
+  expect(btn.style.color).toBe('rgba(255, 255, 255, 0.6)');
 });
 
 /* ---------------- Loading state (Figma Loader <-> Icon=on) ---------------- */

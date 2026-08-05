@@ -43,12 +43,13 @@ const TOKEN_KEY: Record<ButtonSurface, TokenKey> = {
 };
 
 // Figma vars color/button/glass/{surface,text}/{state} — V1.1 glass button (31511:8011),
-// brand surface only. Not yet in the generated tokens.ts (variables.json export predates
-// the glass group), values from live Figma; frosted look via a 20px backdrop blur.
+// brand surface only; frosted look via a 20px backdrop blur. These were hardcoded while the
+// variables.json export predated the glass group. Now bound — which also picks up Figma
+// moving the disabled label from 50% to 60% white (text/default/inverse-muted).
 const GLASS: Record<ButtonState, { bg: string; fg: string }> = {
-  default:  { bg: '#ffffff26', fg: '#ffffff' },
-  focus:    { bg: '#bb0700',   fg: '#ffffff' },
-  disabled: { bg: '#ffffff1a', fg: '#ffffff80' },
+  default:  { bg: color('button.glass.surface.default'), fg: color('button.glass.text.default') },
+  focus:    { bg: color('button.glass.surface.focus'), fg: color('button.glass.text.focus') },
+  disabled: { bg: color('button.glass.surface.disabled'), fg: color('button.glass.text.disabled') },
 };
 
 function palette(variant: ButtonVariant, key: TokenKey, state: ButtonState): CSSProperties {
