@@ -47,16 +47,17 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
 }
 export function Badge({ offer, status = 'neutral', size = 'md', style, children, ...rest }: BadgeProps) {
   const key = offer ? `offers.${offer}` : `status.${status}`;
-  // Figma V1.1 (12934:864): heights scale/16|20|24; md = px spacing/sm, py spacing/xs,
-  // min-width scale/56; radius border-radius/2. Same values as before — token-bound only.
+  // Figma V1.1 (12934:864): heights scale/16|20|24, radius border-radius/2.
+  // Min-widths: md scale/56 (new-on badge), lg scale/64 (plans-mini badge). lg had none.
   const height = size === 'lg' ? scale('24') : size === 'sm' ? scale('16') : scale('20');
+  const minWidth = size === 'lg' ? scale('64') : size === 'md' ? scale('56') : undefined;
   const padY = size === 'sm' ? space('2xs') : space('xs');
   const padX = size === 'sm' ? space('xs') : space('sm');
   return (
     <span
       style={{
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: space('2xs'),
-        boxSizing: 'border-box', height, minWidth: size === 'md' ? scale('56') : undefined,
+        boxSizing: 'border-box', height, minWidth,
         padding: `${padY} ${padX}`, borderRadius: radius('2'),
         background: color(`badge.surface.${key}`), color: color(`badge.text.${key}`),
         ...ty(`badge.${size}`), whiteSpace: 'nowrap', ...style,

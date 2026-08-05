@@ -43,18 +43,20 @@ export function PlanCard({ name = 'Entertainment plans', category = 'Postpaid', 
     <div style={{ width, flex: '0 0 auto', boxSizing: 'border-box', background: PLAN_BG[v], borderRadius: radius('5'), padding: space('lg'), minHeight: rowHeight('row-4'), display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: space('lg'), ...style }} {...rest}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: space('sm') }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: space('sm') }}>
-          <Text variant="body.sm" color={mutedOn(onDark)}>{category}</Text>
+          {/* `.header > wrapper`: body/md in text/default/subtle, with the lg offers badge. */}
+          <Text variant="body.md" color={onDark ? mutedOn(onDark) : color('text.default.subtle')}>{category}</Text>
           {discount ? (onDark
-            ? <span style={{ background: '#fff', color: color('text.brand.default'), padding: `${space('2xs')} ${space('xs')}`, borderRadius: radius('2'), fontWeight: 600, fontSize: 12 }}>Discount</span>
-            : <Badge offer="discount" size="sm">Discount</Badge>) : null}
+            ? <span style={{ background: '#fff', color: color('text.brand.default'), padding: `${space('xs')} ${space('sm')}`, borderRadius: radius('2'), fontWeight: 600, fontSize: 14, minWidth: 64, height: 24, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', boxSizing: 'border-box' }}>Discount</span>
+            : <Badge offer="discount" size="lg">Discount</Badge>) : null}
         </div>
-        <Text variant="heading.sm" color={text}>{name}</Text>
+        <Text variant="heading.md" color={text}>{name}</Text>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: space('sm') }}>
+        {/* logo-row logos are 32x24 pills in V1.1, not 24-square. */}
         {smiles ? <SmilesRow count={2} plus={4} size={24} /> : null}
         <div>
-          <Text variant="body.sm" color={mutedOn(onDark)} as="div">from</Text>
-          <Text variant="title.sm" color={text}>{price}{period}</Text>
+          <Text variant="body.md" color={onDark ? mutedOn(onDark) : color('text.default.subtle')} as="div">from</Text>
+          <Text variant="title.md" color={text}>{price}{period}</Text>
         </div>
       </div>
     </div>

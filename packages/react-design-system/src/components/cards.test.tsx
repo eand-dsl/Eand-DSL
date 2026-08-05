@@ -154,3 +154,31 @@ test('NewCard shows the New-card badge only when selected', () => {
   rerender(<NewCard title="T" selected />);
   expect(screen.getByText('New card')).toBeInTheDocument();
 });
+
+/* ---------------- PlanCard vs Figma `plans-mini` 26003:40646 ----------------
+   Width, radius, padding and the missing border were already right; the type ramp and
+   badge size were still a step down from V1.1. */
+
+test('PlanCard title is heading/md 24, not heading/sm', () => {
+  render(<PlanCard name="Entertainment plans" />);
+  expect(screen.getByText('Entertainment plans').style.fontSize).toBe('24px');
+});
+
+test('PlanCard price is title/md 20, not title/sm', () => {
+  render(<PlanCard price="AED 1250" period="/mo" />);
+  expect(screen.getByText(/AED 1250/).style.fontSize).toBe('20px');
+});
+
+test('PlanCard category and "from" are body/md 14 in text/default/subtle', () => {
+  render(<PlanCard category="Postpaid" />);
+  const cat = screen.getByText('Postpaid');
+  expect(cat.style.fontSize).toBe('14px');
+  expect(cat.style.color).toBe('rgb(87, 83, 98)');            // text/default/subtle #575362
+  expect(screen.getByText('from').style.fontSize).toBe('14px');
+});
+
+test('PlanCard discount badge is the lg size', () => {
+  render(<PlanCard discount />);
+  // badges-offers on plans-mini is h24 min-w64 — the lg step, not sm.
+  expect(screen.getByText('Discount').closest('span')!.style.minWidth).toBe('64px');
+});
