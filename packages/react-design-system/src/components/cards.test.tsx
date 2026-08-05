@@ -86,7 +86,8 @@ test('ServiceCard with no size fills its grid track', () => {
 /* NewCard: new-on 26523:22852 selected = yes | no */
 test('NewCard selected draws the 2px ring and the New-card badge', () => {
   const { container } = render(<NewCard selected />);
-  const el = root(container);
+  // The ring is on the picture frame — the tile itself has no border in V1.1.
+  const el = container.querySelector<HTMLElement>('[data-part="frame"]')!;
   expect(el.style.border).toContain('2px');
   expect(el.style.backgroundImage).toContain('#47cb6c');
   expect(screen.getByText('New card')).toBeInTheDocument();
@@ -94,8 +95,10 @@ test('NewCard selected draws the 2px ring and the New-card badge', () => {
 
 test('NewCard unselected has no ring or badge, and binds row-3', () => {
   const { container } = render(<NewCard />);
-  expect(root(container).style.backgroundImage).toBe('');
-  expect(root(container).style.minHeight).toBe('224px');
+  // The ring lives on the picture frame now, not the tile.
+  expect(container.querySelector<HTMLElement>('[data-part="frame"]')!.style.backgroundImage).toBe('');
+  // Figma sets a fixed h-[section/body/height/row-3], not a minimum.
+  expect(root(container).style.height).toBe('224px');
   expect(screen.queryByText('New card')).not.toBeInTheDocument();
 });
 
@@ -116,4 +119,38 @@ test('ProductCard infers its type from image for pre-`type` callers', () => {
 test('ProductCard type=category tints the whole card', () => {
   const { container } = render(<ProductCard type="category" />);
   expect(root(container).style.background).toBe('rgb(252, 243, 235)'); // atom-surfaces/orange
+});
+
+/* ---------------- NewCard vs Figma `new-on` 26523:22852 ----------------
+   The V1.1 tile is a *story*, not a boxed card: no card surface, no card radius. The
+   picture frame carries border-radius/7 (24) with 4px padding, its inner container
+   border-radius/6 (20), and the caption is centered body/md — not a left-aligned title. */
+
+test('NewCard has no card surface or card border', () => {
+  const { container } = render(<NewCard title="Discover Smart Home Add-ons" />);
+  const root = container.firstElementChild as HTMLElement;
+  expect(root.style.background).toBe('');
+  expect(root.style.border).toBe('');
+});
+
+test('NewCard picture frame is radius 24 with a 4px inset, inner radius 20', () => {
+  const { container } = render(<NewCard title="T" />);
+  const frame = container.querySelector<HTMLElement>('[data-part="frame"]')!;
+  expect(frame.style.borderRadius).toBe('24px');
+  expect(frame.style.padding).toBe('4px');
+  expect((frame.firstElementChild as HTMLElement).style.borderRadius).toBe('20px');
+});
+
+test('NewCard caption is centered body/md, not a left-aligned title', () => {
+  render(<NewCard title="Discover Smart Home Add-ons" />);
+  const cap = screen.getByText('Discover Smart Home Add-ons');
+  expect(cap.style.textAlign).toBe('center');
+  expect(cap.style.fontSize).toBe('14px');
+});
+
+test('NewCard shows the New-card badge only when selected', () => {
+  const { rerender } = render(<NewCard title="T" />);
+  expect(screen.queryByText('New card')).not.toBeInTheDocument();
+  rerender(<NewCard title="T" selected />);
+  expect(screen.getByText('New card')).toBeInTheDocument();
 });

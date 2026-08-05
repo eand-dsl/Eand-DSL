@@ -1,5 +1,5 @@
 import type { HTMLAttributes, ReactNode } from 'react';
-import { color, space, radius, rowHeight } from '../system';
+import { color, space, radius, rowHeight, T } from '../system';
 import { Text, Badge, SmilesRow, cardBgTint } from './primitives';
 import { Icon } from '../icons';
 import type { CardBgTint } from './primitives';
@@ -148,29 +148,44 @@ export interface NewCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'titl
   /** Figma `selected` axis — the gradient ring plus the New-card badge. */
   selected?: boolean;
 }
-export function NewCard({ image, title = 'New on e&', width = 200, selected, style, ...rest }: NewCardProps) {
+export function NewCard({ image, title = 'New on e&', width = 137, selected, style, ...rest }: NewCardProps) {
   return (
-    /* Figma new-on (26523:22852): story tile — no card surface border. */
+    /* `.new-on-core` 26523:22827 — a Story column, not a card: the tile itself has no
+       surface, no border and no radius. Only the picture frame is rounded. */
     <div style={{
-      position: 'relative', width, flex: '0 0 auto', boxSizing: 'border-box',
-      background: color('surface.raised.default'), borderRadius: radius('5'),
-      minHeight: rowHeight('row-3'), overflow: 'hidden',
-      ...(selected ? {
-        // border/lg = 2; ring drawn as a gradient border via padding + background-clip.
-        border: '2px solid transparent',
-        backgroundImage: `linear-gradient(${color('surface.raised.default')}, ${color('surface.raised.default')}), linear-gradient(135deg, #e00800, #47cb6c)`,
-        backgroundOrigin: 'border-box',
-        backgroundClip: 'padding-box, border-box',
-      } : null),
-      ...style,
+      display: 'flex', flexDirection: 'column', alignItems: 'center', gap: space('md'),
+      width, flex: '0 0 auto', boxSizing: 'border-box', height: rowHeight('row-3'), ...style,
     }} {...rest}>
-      {selected ? (
-        <span style={{ position: 'absolute', top: space('sm'), left: space('sm'), zIndex: 1 }}>
-          <Badge offer="new-card" size="md">New card</Badge>
-        </span>
-      ) : null}
-      {imageBox(140, image)}
-      <div style={{ padding: space('md') }}><Text variant="title.sm">{title}</Text></div>
+      <div data-part="frame" style={{
+        position: 'relative', flex: '1 1 auto', minHeight: 0, width: '100%', boxSizing: 'border-box',
+        padding: space('xs'), borderRadius: radius('7'), overflow: 'hidden',
+        ...(selected ? {
+          // border/lg = 2. Figma's generated code reports a solid `light-green/base`
+          // #47cb6c, while the rendered frame shows a red->green ring; the gradient is
+          // kept since that is what the component actually looks like. #47cb6c is a legacy
+          // colour style with no variable — see design-questions.md q6.
+          // T.border.lg already carries its unit ("2px") — appending px yields "2pxpx",
+          // which the browser drops silently.
+          border: `${T.border?.lg ?? '2px'} solid transparent`,
+          backgroundImage: `linear-gradient(${color('surface.raised.default')}, ${color('surface.raised.default')}), linear-gradient(135deg, ${color('status.accent')}, #47cb6c)`,
+          backgroundOrigin: 'border-box',
+          backgroundClip: 'padding-box, border-box',
+        } : null),
+      }}>
+        <div style={{ width: '100%', height: '100%', borderRadius: radius('6'), overflow: 'hidden', background: color('surface.base.default'), display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          {image ?? <Icon name="image" size={40} />}
+        </div>
+        {selected ? (
+          // Inset is 10px on the ringed variant and 12px plain — the 2px border makes up
+          // the difference, so both land 12px from the outer edge.
+          <span style={{ position: 'absolute', top: 10, left: 10, zIndex: 1 }}>
+            <Badge offer="new-card" size="md">New card</Badge>
+          </span>
+        ) : null}
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: `0 ${space('md')}`, width: '100%', boxSizing: 'border-box' }}>
+        <Text variant="body.md" as="p" style={{ textAlign: 'center', lineHeight: 1.4, margin: 0 }}>{title}</Text>
+      </div>
     </div>
   );
 }
