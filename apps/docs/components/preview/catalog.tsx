@@ -321,12 +321,14 @@ export const PAGES: Page[] = [
     controls: [
       { kind: 'select', prop: 'tone', label: 'Tone', options: ['positive', 'danger', 'warning', 'loading', 'default'], def: 'positive' },
       { kind: 'text', prop: 'message', label: 'Message', def: 'Your changes were saved' },
+      { kind: 'toggle', prop: 'subtitle', label: 'Subtitle', def: false },
       { kind: 'toggle', prop: 'action', label: 'Action', def: false },
       { kind: 'toggle', prop: 'dismiss', label: 'Dismiss', def: true },
     ],
     render: (v) => (
       <div style={{ width: 360, maxWidth: '100%' }}>
         <Snackbar tone={p(v, 'tone')} message={p(v, 'message')}
+          subtitle={p(v, 'subtitle') ? 'Text for the info' : undefined}
           action={p(v, 'action') ? 'Undo' : undefined}
           onDismiss={p(v, 'dismiss') ? () => {} : undefined} />
       </div>

@@ -958,6 +958,12 @@
       "description": ""
     },
     {
+      "name": "subtitle",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Figma `Subtitle` bool — a second line under the title."
+    },
+    {
       "name": "tone",
       "type": "enum",
       "required": false,

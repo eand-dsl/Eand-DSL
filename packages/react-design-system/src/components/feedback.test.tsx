@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { Alert, PlanUsageBar } from './feedback';
+import { Alert, PlanUsageBar, Snackbar } from './feedback';
 
 /* ---------------- Alert (Figma alert-message 30969:1112) ----------------
    Each surface/ink pair was read off its own `Staus` variant node. */
@@ -139,4 +139,44 @@ test('Alert action is midnight and not underlined, whatever the status', () => {
 test('Alert sets the icon-to-text gap from spacing/xs', () => {
   const { container } = render(<Alert status="info" title="Heads up">Body</Alert>);
   expect((container.firstElementChild as HTMLElement).style.gap).toBe('4px');
+});
+
+/* ---------------- Snackbar vs Figma 23011:7020 (Success 23011:7021) ---------------- */
+
+test('Snackbar uses the Figma pill metrics: min-h 48, px 12, py 12, gap 8', () => {
+  const { container } = render(<Snackbar tone="positive" message="Saved" />);
+  const el = container.firstElementChild as HTMLElement;
+  expect(el.style.minHeight).toBe('48px');
+  expect(el.style.padding).toBe('12px');
+  expect(el.style.gap).toBe('8px');
+});
+
+test('Snackbar title is Bold 16/20, not semibold 14', () => {
+  render(<Snackbar tone="positive" message="Snackbar success" />);
+  const title = screen.getByText('Snackbar success');
+  expect(title.style.fontSize).toBe('16px');
+  expect(title.style.lineHeight).toBe('20px');
+  expect(title.style.fontWeight).toBe('700');
+});
+
+test('Snackbar renders the optional subtitle at 14/18', () => {
+  const { rerender } = render(<Snackbar tone="positive" message="Saved" />);
+  expect(screen.queryByText('Text for the info')).not.toBeInTheDocument();
+  rerender(<Snackbar tone="positive" message="Saved" subtitle="Text for the info" />);
+  const sub = screen.getByText('Text for the info');
+  expect(sub.style.fontSize).toBe('14px');
+  expect(sub.style.lineHeight).toBe('18px');
+});
+
+test('Snackbar action is an underlined Regular 14 link', () => {
+  render(<Snackbar tone="positive" message="Saved" action="Undo" />);
+  const btn = screen.getByRole('button', { name: 'Undo' });
+  expect(btn.style.textDecoration).toBe('underline');
+  expect(btn.style.fontSize).toBe('14px');
+  expect(btn.style.fontWeight).not.toBe('700');
+});
+
+test('Snackbar centres the loading state', () => {
+  const { container } = render(<Snackbar tone="loading" message="Working" />);
+  expect((container.firstElementChild as HTMLElement).style.justifyContent).toBe('center');
 });

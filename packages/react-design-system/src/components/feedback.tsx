@@ -121,25 +121,42 @@ const SNACK_MARK: Record<'positive' | 'danger' | 'warning', { bg: string; icon: 
 export interface SnackbarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   tone?: SnackbarTone;
   message: ReactNode;
+  /** Figma `Subtitle` bool — a second line under the title. */
+  subtitle?: ReactNode;
   action?: ReactNode;
   onAction?: () => void;
   onDismiss?: () => void;
 }
-export function Snackbar({ tone = 'default', message, action, onAction, onDismiss, style, ...rest }: SnackbarProps) {
-  const bare = tone === 'default' && !action && !onDismiss;
-  const mark = tone === 'loading' ? <Spinner size={22} />
+/* Metrics from Figma `Snackbar` 23011:7020 (Success 23011:7021): min-h 48, px 12,
+   py spacing/md, gap 8, radius border-radius/7. Title is Suisse Bold at raw scale steps
+   (16/20) rather than a typography token; subtitle and action are Regular 14/18.
+
+   NOT bound to tokens: the subtitle and action colours. Figma points them at the legacy
+   colour styles `text/alert/<tone>/strong` (#246636, #a74b08, #806d2c). None of the three
+   exists as a variable in the 944-token export, and the nearest alert-message greens are a
+   different colour entirely. Left on the current token pending the ruling in
+   tools/audit/v1.1/design-questions.md, rather than hardcoding three more dead values. */
+export function Snackbar({ tone = 'default', message, subtitle, action, onAction, onDismiss, style, ...rest }: SnackbarProps) {
+  const bare = tone === 'default' && !action && !onDismiss && !subtitle;
+  const centred = bare || tone === 'loading';
+  const mark = tone === 'loading' ? <Spinner size={24} />
     : tone === 'default' ? null
-    : <StatusMark {...SNACK_MARK[tone]} size={22} />;
+    : <StatusMark {...SNACK_MARK[tone]} size={24} />;
   return (
     <div role="status" style={{
-      display: 'flex', alignItems: 'center', gap: space('md'), width: '100%', boxSizing: 'border-box',
-      padding: `${space('md')} ${space('lg')}`, borderRadius: radius('7'), background: color('surface.overlay.floating-inverse'),
-      color: '#ffffff', justifyContent: bare ? 'center' : 'flex-start', ...style,
+      display: 'flex', alignItems: 'center', gap: space('sm'), width: '100%', boxSizing: 'border-box',
+      minHeight: 48, padding: space('md'), borderRadius: radius('7'), background: color('surface.overlay.floating-inverse'),
+      color: color('text.default.inverse'), justifyContent: centred ? 'center' : 'flex-start', ...style,
     }} {...rest}>
       {mark}
-      <Text variant="body.md" color="#ffffff" style={{ flex: bare ? '0 1 auto' : 1, fontWeight: 600, textAlign: bare ? 'center' : 'left' }}>{message}</Text>
-      {action ? <button onClick={onAction} style={{ border: 0, background: 'transparent', cursor: 'pointer', padding: 0, ...ty('button.sm'), color: color('text.brand.subtle'), fontWeight: 700 }}>{action}</button> : null}
-      {onDismiss ? <button onClick={onDismiss} aria-label="Dismiss" style={{ border: 0, background: 'transparent', cursor: 'pointer', color: 'inherit', padding: 0, opacity: 0.7 }}><IconBox size="sm"><Icon name="close" size={12} /></IconBox></button> : null}
+      <span style={{ display: 'flex', flexDirection: 'column', flex: centred ? '0 1 auto' : 1, minWidth: 0 }}>
+        <Text as="div" variant="body.lg" color={color('text.default.inverse')}
+          style={{ fontSize: 16, lineHeight: '20px', fontWeight: 700, textAlign: centred ? 'center' : 'left' }}>{message}</Text>
+        {subtitle ? <Text as="div" variant="body.md" color={color('text.default.inverse')}
+          style={{ fontSize: 14, lineHeight: '18px', fontWeight: 400 }}>{subtitle}</Text> : null}
+      </span>
+      {action ? <button onClick={onAction} style={{ border: 0, background: 'transparent', cursor: 'pointer', padding: 0, ...ty('body.md'), fontSize: 14, lineHeight: '18px', textDecoration: 'underline', color: color('text.brand.subtle') }}>{action}</button> : null}
+      {onDismiss ? <button onClick={onDismiss} aria-label="Dismiss" style={{ border: 0, background: 'transparent', cursor: 'pointer', color: 'inherit', padding: 0, opacity: 0.7 }}><IconBox size="sm"><Icon name="close" size={16} /></IconBox></button> : null}
     </div>
   );
 }
