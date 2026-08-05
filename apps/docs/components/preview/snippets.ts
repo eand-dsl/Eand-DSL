@@ -1397,35 +1397,82 @@ fun SectionLink(title: String, link: String, onLink: () -> Unit) {
     swift: `import SwiftUI
 import EandTokens
 
+// 48px filled block: the fill shows what is LEFT, the amount reads inside it,
+// the category sits in the track opposite. Green normally, orange on low data.
 struct PlanUsageBar: View {
-  let label: String; let used: Double; let total: Double; let unit: String
+  let label: String; let remaining: Double; let total: Double; let unit: String
+  var note: String? = nil
+  var lowData: Bool = false
+
   var body: some View {
-    VStack(alignment: .leading, spacing: EandSpacing.xs) {
-      HStack {
-        Text(label).font(.system(size: EandTypography.titleXs.size, weight: .semibold))
-        Spacer()
-        Text("\\(Int(used)) / \\(Int(total)) \\(unit)").foregroundColor(EandColor.textDefaultMuted)
+    GeometryReader { geo in
+      ZStack(alignment: .leading) {
+        RoundedRectangle(cornerRadius: EandRadius.radius3)
+          .fill(EandColor.surfaceCanvasInverse)
+        RoundedRectangle(cornerRadius: EandRadius.radius3)
+          .fill(lowData ? EandColor.orange500 : EandColor.green550)
+          .frame(width: geo.size.width * fraction)
+        HStack {
+          VStack(alignment: .leading, spacing: 0) {
+            Text("\\(Int(remaining)) \\(unit) left")
+              .font(.system(size: EandTypography.titleXs.size, weight: .semibold))
+            if let note { Text(note).font(.system(size: EandTypography.bodySm.size)) }
+          }
+          Spacer()
+          Text(label).font(.system(size: EandTypography.buttonMd.size, weight: .medium))
+        }
+        .padding(.horizontal, EandSpacing.lg)
       }
-      ProgressBar(value: used / total)   // recolours by remaining %
     }
+    .frame(height: 48)
   }
+
+  // Clamped: no allowance means nothing to draw, a top-up must not overflow the track.
+  private var fraction: Double { total > 0 ? min(1, max(0, remaining / total)) : 0 }
 }`,
     kotlin: `import com.eand.tokens.EandColor
 
+// 48px filled block: the fill shows what is LEFT, the amount reads inside it,
+// the category sits in the track opposite. Green normally, orange on low data.
 @Composable
-fun PlanUsageBar(label: String, used: Float, total: Float, unit: String) {
-  Column(verticalArrangement = Arrangement.spacedBy(EandSpacing.xs)) {
-    Row {
-      Text(label, style = EandTypography.titleXs, modifier = Modifier.weight(1f))
-      Text(used.toInt().toString() + " / " + total.toInt() + " " + unit,
-        color = EandColor.textDefaultMuted)
+fun PlanUsageBar(
+  label: String, remaining: Float, total: Float, unit: String,
+  note: String? = null, lowData: Boolean = false,
+) {
+  // Clamped: no allowance means nothing to draw, a top-up must not overflow the track.
+  val fraction = if (total > 0f) (remaining / total).coerceIn(0f, 1f) else 0f
+  Box(
+    Modifier.fillMaxWidth().height(48.dp)
+      .clip(RoundedCornerShape(EandRadius.radius3))
+      .background(EandColor.surfaceCanvasInverse)
+  ) {
+    Box(
+      Modifier.fillMaxWidth(fraction).fillMaxHeight()
+        .clip(RoundedCornerShape(EandRadius.radius3))
+        .background(if (lowData) EandColor.orange500 else EandColor.green550)
+    )
+    Row(
+      Modifier.fillMaxSize().padding(horizontal = EandSpacing.lg),
+      verticalAlignment = Alignment.CenterVertically,
+      horizontalArrangement = Arrangement.SpaceBetween,
+    ) {
+      Column {
+        Text("\${remaining.toInt()} $unit left", style = EandTypography.titleXs)
+        if (note != null) Text(note, style = EandTypography.bodySm)
+      }
+      Text(label, style = EandTypography.buttonMd)
     }
-    ProgressBar(used / total)
   }
 }`,
     react: `import { PlanUsageBar } from '@eand/react-design-system';
 
-<PlanUsageBar label="Data" used={2} total={20} unit="GB" />`,
+// The fill shows what is LEFT of the allowance, not what has been consumed.
+<PlanUsageBar label="Local Data" remaining={20} total={40} unit="GB" />
+
+// "low-data" is the caller's call — the threshold is a product rule, and it
+// differs for data, minutes and roaming.
+<PlanUsageBar label="Roaming Data" remaining={0.6} total={10} unit="GB"
+  status="low-data" note="Expires 3 days" />`,
   },
 
   productcard: {

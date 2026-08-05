@@ -1,7 +1,7 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 import { color, space, ty, radius } from '../system';
 import { Icon } from '../icons';
-import { Text, IconBox, ProgressBar } from './primitives';
+import { Text, IconBox } from './primitives';
 
 export type StatusTone = 'info' | 'positive' | 'warning' | 'danger';
 const TONE_COLOR: Record<StatusTone, string> = {
@@ -12,22 +12,76 @@ const TONE_COLOR: Record<StatusTone, string> = {
 const TONE_ICON: Record<StatusTone, string> = { info: 'info', positive: 'check', warning: 'warning', danger: 'close' };
 
 /* ---------------- PlanUsageBar ---------------- */
-export interface PlanUsageBarProps extends HTMLAttributes<HTMLDivElement> {
+/** Figma `Progress status` (28927:22814): the fill is green normally, orange on low data.
+ *  Two discrete states, not a gradient — the caller decides when "low" starts, because
+ *  the threshold is a product rule (it differs for data, minutes and roaming), not a
+ *  property of the bar. `color/green/550` in Figma is `green.600` in our variables export;
+ *  same value (#54bc72), different step name. */
+export type PlanUsageStatus = 'default' | 'low-data';
+const USAGE_FILL: Record<PlanUsageStatus, string> = {
+  'default': color('green.600'),
+  'low-data': color('orange.500'),
+};
+
+export interface PlanUsageBarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
+  /** Category name, right-aligned in the track — e.g. "Local Data". */
   label?: ReactNode;
-  used: number;
+  /** Amount left in the plan. This is what the block shows and measures. */
+  remaining?: number;
+  /** @deprecated Pass `remaining`. Kept so `used`-based call sites keep working. */
+  used?: number;
+  /** Plan allowance the block is measured against. */
   total: number;
   unit?: string;
+  /** Second line under the value, e.g. "Expires 3 days". */
+  note?: ReactNode;
+  status?: PlanUsageStatus;
 }
-export function PlanUsageBar({ label = 'Data', used, total, unit = 'GB', style, ...rest }: PlanUsageBarProps) {
-  const pct = total > 0 ? (used / total) * 100 : 0;
-  const tone: StatusTone = pct >= 90 ? 'danger' : pct >= 75 ? 'warning' : 'positive';
+
+/** Usage meter: a 48px rounded row where a coloured block shows how much of the plan is
+ *  left. The amount reads inside the block, the category label sits in the track opposite.
+ *  Figma `.plan-usage-bar` 28927:23669. Stack them with a 4px gap for a plan breakdown. */
+export function PlanUsageBar({
+  label = 'Data', remaining, used, total, unit = 'GB', note, status = 'default', style, ...rest
+}: PlanUsageBarProps) {
+  const left = remaining ?? (used != null ? total - used : 0);
+  // Guard the whole range: a plan with no allowance has nothing to draw (and would divide
+  // by zero), and a top-up can leave more than the allowance without overflowing the track.
+  const pct = total > 0 ? Math.min(100, Math.max(0, (left / total) * 100)) : 0;
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: space('xs'), width: '100%', ...style }} {...rest}>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Text variant="title.xs">{label}</Text>
-        <Text variant="body.sm" color={color('text.default.muted')}>{used} / {total} {unit}</Text>
+    <div
+      role="progressbar"
+      aria-valuenow={left}
+      aria-valuemin={0}
+      aria-valuemax={total}
+      aria-valuetext={`${left} ${unit} left`}
+      style={{
+        position: 'relative', width: '100%', height: 48, boxSizing: 'border-box',
+        background: color('surface.canvas.inverse'), borderRadius: radius('3'), overflow: 'hidden',
+        ...style,
+      }}
+      {...rest}
+    >
+      <div
+        data-part="fill"
+        style={{
+          position: 'absolute', insetBlock: 0, left: 0, width: `${pct}%`,
+          background: USAGE_FILL[status], borderRadius: radius('3'),
+        }}
+      />
+      {/* Above the fill, spanning the full track: the value rides over the block while the
+          label stays out on the plain background, exactly as the Figma overlay does. */}
+      <div style={{
+        position: 'absolute', inset: 0, display: 'flex', alignItems: 'center',
+        justifyContent: 'space-between', gap: space('sm'), padding: `0 ${space('lg')}`,
+      }}>
+        <span style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', minWidth: 0 }}>
+          <Text variant="title.xs" as="span">{left} {unit} left</Text>
+          {note != null ? <Text variant="body.sm" as="span">{note}</Text> : null}
+        </span>
+        <Text variant="button.md" as="span" style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>{label}</Text>
       </div>
-      <ProgressBar value={pct} tone={tone === 'positive' ? 'accent' : tone} />
     </div>
   );
 }

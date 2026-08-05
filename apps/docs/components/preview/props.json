@@ -890,19 +890,32 @@
       "name": "total",
       "type": "number",
       "required": true,
-      "description": ""
-    },
-    {
-      "name": "used",
-      "type": "number",
-      "required": true,
-      "description": ""
+      "description": "Plan allowance the block is measured against."
     },
     {
       "name": "label",
       "type": "ReactNode",
       "required": false,
       "default": "Data",
+      "description": "Category name, right-aligned in the track — e.g. \"Local Data\"."
+    },
+    {
+      "name": "note",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Second line under the value, e.g. \"Expires 3 days\"."
+    },
+    {
+      "name": "remaining",
+      "type": "number",
+      "required": false,
+      "description": "Amount left in the plan. This is what the block shows and measures."
+    },
+    {
+      "name": "status",
+      "type": "enum",
+      "required": false,
+      "default": "default",
       "description": ""
     },
     {
@@ -911,6 +924,12 @@
       "required": false,
       "default": "GB",
       "description": ""
+    },
+    {
+      "name": "used",
+      "type": "number",
+      "required": false,
+      "description": "@deprecated Pass `remaining`. Kept so `used`-based call sites keep working."
     }
   ],
   "Snackbar": [

@@ -122,7 +122,7 @@ mParking → `car` · All Services → `grid` · e& Shop → `shop` · retail br
 
 **Feedback / overlays**
 - `Alert({ status: success|alert|warning|info, title, action, onAction })` — in-page message block with a status mark, body text as children, and an optional underlined action.
-- `PlanUsageBar({ label, used, total, unit })` — the "2 GB of 10 GB" meter.
+- `PlanUsageBar({ label, remaining, total, unit, note, status: default|low-data })` — a 48px filled block showing what is **left** of an allowance: the amount reads inside the block ("2 GB left"), the category label sits in the track opposite ("Local Data"). Green normally, orange on `low-data` — set it yourself, the bar does not guess the threshold. `note` adds a second line such as "Expires 3 days". Stack them with a 4px gap for a plan breakdown.
 - `Snackbar({ tone: default|positive|warning|danger|loading, message, action, onAction, onDismiss })` — transient toast.
 - `AlertModal({ open, tone: info|positive|warning|danger, title, body, actions, onDismiss })` — centred confirm dialog.
 - `Tooltip({ content, title, media, action, steps, size: simple|standard|rich, surface: default|dark, visible, placement: top|bottom|left|right })` — hint bubble; `steps` drives the coach-mark counter.

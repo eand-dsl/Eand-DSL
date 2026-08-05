@@ -1,14 +1,37 @@
 ---
 title: PlanUsageBar
-description: Usage meter that reddens as you approach the limit.
+description: Filled block showing what is left of a plan allowance.
 ---
 
 <ComponentDemo id="planusagebar" />
+
+A 48px rounded row where a coloured block shows how much of the allowance is **left**.
+The amount reads inside the block; the category label sits in the track opposite. Stack
+them with a 4px gap for a plan breakdown.
 
 ## Props
 
 <PropsTable name="PlanUsageBar" />
 
+`remaining` is what the block measures — not consumption. Pass `total` so the fill has
+something to be a share of; with `total={0}` there is no allowance and nothing is drawn.
+
+`status` is explicit rather than derived. The point at which an allowance counts as "low"
+is a product rule and differs for data, minutes and roaming, so the bar does not guess it.
+
+`used` still works as a deprecated alias — it is converted to `remaining` as
+`total - used`.
+
 ## Design
 
-Figma source: [PlanUsageBar — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=26663-89880)
+Figma source: [.plan-usage-bar — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=28927-23669)
+
+Colours come from the `Progress status` axis
+([28927:22814](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=28927-22814)):
+`Default` is green `#54bc72`, `low data` is orange `#ff9f52`. Two discrete states, not a
+gradient.
+
+The bar is one part of the Figma **Plan usage** block
+([29222:13753](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=29222-13753)),
+which composes a `Chip` filter row, a stack of these bars, and an `ActionBar` prompting a
+top-up. Assemble that from the parts — it is a screen pattern, not a single component.

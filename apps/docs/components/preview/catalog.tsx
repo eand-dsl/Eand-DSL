@@ -683,16 +683,23 @@ export const PAGES: Page[] = [
     ) },
 
   /* ---------------- Feedback & Status ---------------- */
-  { id: 'planusagebar', group: 'Feedback', title: 'PlanUsageBar', frame: 'phone',
-    blurb: 'Usage meter: label, used/total readout, and a progress track that reddens as you approach the limit.',
+  { id: 'planusagebar', group: 'Feedback', title: 'PlanUsageBar', frame: 'phone', minH: 180,
+    blurb: 'Usage meter: a filled block showing what is left of the plan, with the amount inside it and the category in the track opposite. Green normally, orange on low data.',
     controls: [
       { kind: 'text', prop: 'label', label: 'Label', def: 'Local Data' },
-      { kind: 'select', prop: 'used', label: 'Used', options: [2, 6, 9], def: 6 },
-      { kind: 'select', prop: 'total', label: 'Total', options: [10], def: 10 },
+      { kind: 'select', prop: 'remaining', label: 'Remaining', options: [2, 20, 38], def: 20 },
+      { kind: 'select', prop: 'total', label: 'Total', options: [40], def: 40 },
+      { kind: 'select', prop: 'status', label: 'Status', options: ['default', 'low-data'], def: 'default' },
+      { kind: 'text', prop: 'note', label: 'Note', def: '' },
     ],
     render: (v) => (
-      <div style={{ width: 320, maxWidth: '100%' }}>
-        <PlanUsageBar label={p(v, 'label')} used={p(v, 'used')} total={p(v, 'total')} unit="GB" />
+      // Stacked at the 4px gap the Figma bar-set uses (instances sit 52px apart, 48px tall),
+      // inset like the Section they sit in on a real screen.
+      <div style={{ width: '100%', padding: '16px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: 4 }}>
+        <PlanUsageBar label={p(v, 'label')} remaining={p(v, 'remaining')} total={p(v, 'total')}
+          unit="GB" status={p(v, 'status')} note={p(v, 'note') || undefined} />
+        <PlanUsageBar label="Minutes" remaining={200} total={500} unit="min" />
+        <PlanUsageBar label="Roaming Data" remaining={0.6} total={10} unit="GB" status="low-data" note="Expires 3 days" />
       </div>
     ) },
 
