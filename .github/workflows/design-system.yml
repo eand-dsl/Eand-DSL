@@ -1,0 +1,42 @@
+# Runs the pre-publish gate from packages/react-design-system/MAKE_KIT_README.md on every
+# push to main and every pull request. It adds no new checks — it guarantees the existing
+# ones actually run. The demo silently stopped building for weeks because nothing did.
+name: design-system
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: design-system-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        # No root package.json and no npm workspaces — the package is standalone and owns
+        # its own lockfile, so every step has to run from inside it.
+        working-directory: packages/react-design-system
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: packages/react-design-system/package-lock.json
+
+      - run: npm ci
+      - run: npm run build
+      - run: npm test                    # vitest
+      - run: npm run typecheck           # src + code-connect + demo/**/*.tsx
+      - run: npm run guidelines:check    # guidelines match the library
+      - run: npm run guidelines:example  # worked example compiles against dist
+      - run: npm run smoke               # built ESM imports and renders
+      - run: npx vite build --config demo/vite.config.ts
+      - run: npm pack --dry-run          # dist + the two MD files only
