@@ -31,6 +31,39 @@
 
 `variables.json` (exported ~2026-06-21) **predates the 2026-07-02 Figma edit**. Proof: the new `color/alert-message/*` family (05-feedback) has zero hits in the export; Colors spot-check found ~32 drifted tokens. **USER ACTION: re-export Variables from the Figma UI → replace repo-root `variables.json` → `npm run build:tokens` → review diff.** Until then, all token-level fixes are provisional.
 
+### P0 verified against the live file (2026-08-05)
+
+The Figma Plugin API (`use_figma` → `getLocalVariableCollectionsAsync`) can read the
+collections directly, so the staleness is now measured rather than inferred. **The export
+is 830 leaf tokens; the live file has 944** — collections `size` 90 (unchanged),
+`primitives` 243 → 260, `tokens` 497 → 594.
+
+Families entirely absent from the export:
+
+| Family | Live count | Notes |
+|---|---|---|
+| `motion/duration/*` | 5 | **new `TIMING` type** |
+| `motion/easing/*`, `motion/spring/*` | 11 | **new `EASING` type** — cubic-bezier / spring objects |
+| `color/effects/glass/*`, `color/effects/shadow/*` | 19 | glass depth/dispersion/frost/refraction, shadow blur/spread/offset |
+| `color/alert-message/*` | 8 | the family 05-feedback is blocked on |
+| `typography/alerts/*` | 5 | |
+| `color/stepper/*` | 4 | |
+| `fixed-states/*` | 3 | |
+| `color/dismiss/*` | 2 | |
+
+**Trap — do not re-export naively.** `scripts/build-tokens.ts` `conv()` handles only
+numbers and the `WEIGHT` string map. `EASING` values are objects
+(`{type:'CUSTOM_CUBIC_BEZIER', easingFunctionCubicBezier:{…}}`) and will stringify to
+`[object Object]` in `tokens.css` — invalid CSS that browsers drop silently, exactly the
+failure mode `src/tokens/token-paths.test.ts` was written to catch. Teach `build-tokens.ts`
+`TIMING` and `EASING` **before** replacing the file.
+
+**Correction to an earlier note.** `color/green/550` (`#54bc72`, used by `.plan-usage-bar`)
+is **not a missing step in our export** — it is a *deleted* variable in Figma. It resolves
+by ID (`remote:false`) but its collection no longer lists it, so the fill carries a dangling
+binding. Live `color/green/600` is the identical colour and is what the code should use.
+Worth re-pointing that binding in Figma.
+
 ## P1 — drift fixes on existing components (Phase B, proceed on approval)
 
 Rebuilds (V1.1 shape differs fundamentally): **SmilesBalance · Voucher · PlanUsageBar · AddTrigger · Logo** (real lockup SVGs, 4 versions) · **ActionBar** — CORRECTED by 10-extensions: the sticky-footer model was RELOCATED to Figma's `Footer`/`Sticky footer` sets (27907:20590 / 29415:15592), not removed; align code to them (shadow not top-border, padding 20, type variants, safe-area) AND separately consider the new inline `action-bar` row from 03 as its own component. **TopBar brand variant** similarly maps to `Profile header - NEW` (drifted: 48px@10% circle buttons, 14-Bold number, action-card carousel) — two duplicate Figma sets need a design merge first.
