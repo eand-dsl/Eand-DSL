@@ -56,14 +56,15 @@ function TriggerChevron({ onDark }: { onDark: boolean }) {
     // 40px rounded button (radius 14); default = white w/ #615d6d chevron, inverse = glass w/ white chevron
     <span style={{
       width: 40, height: 40, flex: 'none', borderRadius: radius('4'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-      background: onDark ? 'rgba(255,255,255,0.20)' : color('surface.raised.default'),
+      background: onDark ? color('surface.glass.white.lg') : color('surface.raised.default'),
       backdropFilter: onDark ? 'blur(20px)' : undefined, WebkitBackdropFilter: onDark ? 'blur(20px)' : undefined,
       color: onDark ? 'rgba(255,255,255,0.70)' : '#615d6d',
       boxShadow: onDark ? 'none' : '0 1px 4px rgba(25,19,41,0.12)',
     }}>
-      <svg aria-hidden width={20} height={20} viewBox="0 0 24 24" fill="none">
-        <path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
+      {/* Figma puts a chevron-right glyph in a 24 icon-size here. This used to be a
+          hand-drawn <path>, which the library's own guideline forbids — never draw an
+          icon, the set has one. */}
+      <Icon name="chevron-right" size={24} />
     </span>
   );
 }

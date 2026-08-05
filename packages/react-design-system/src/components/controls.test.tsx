@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Checkbox, Radio, Chip, FilterPill, Searchbar, Input, OtpInput, Picker, PickerOption } from './controls';
+import { Checkbox, Radio, Chip, FilterPill, Searchbar, Input, OtpInput, Picker, PickerOption, Tabs } from './controls';
 
 /* ---------------- Checkbox ---------------- */
 
@@ -365,4 +365,36 @@ test('Picker manages single selection and fires onChange', async () => {
   expect(tiles[1]).toHaveAttribute('aria-checked', 'true');
   await userEvent.click(tiles[2]); // disabled
   expect(fn).toHaveBeenCalledTimes(1);
+});
+
+/* ---------------- Tabs vs Figma `pill-tabs` 25502:12416 ----------------
+   h40 and the pill radius were right; the label ramp, padding and the active fill were not.
+   The audit asked for `tab/surface/global/active`; that name no longer exists — Figma
+   restructured the tab tokens to default/inverse, and the colour lives at
+   color/tab/default/surface/active (#fce6e6). */
+
+test('Tabs label is title/xs 14 SemiBold, not button/sm 12', () => {
+  render(<Tabs tabs={['For you', 'Account']} />);
+  const tab = screen.getByRole('tab', { name: 'Account' });
+  expect(tab.style.fontSize).toBe('14px');
+  expect(tab.style.fontWeight).toBe('600');
+});
+
+test('Tabs pill is min-width 72 with 8px side padding', () => {
+  render(<Tabs tabs={['All']} />);
+  const tab = screen.getByRole('tab', { name: 'All' });
+  expect(tab.style.minWidth).toBe('72px');
+  expect(tab.style.padding).toBe('0px 8px');
+});
+
+test('Tabs global active binds the tab tokens, not surface/canvas/brand-muted', () => {
+  render(<Tabs tabs={['For you', 'Account']} defaultValue={1} />);
+  const active = screen.getByRole('tab', { name: 'Account' });
+  expect(active.style.background).toBe('rgb(252, 230, 230)');  // tab/default/surface/active #fce6e6
+  expect(active.style.color).toBe('rgb(224, 8, 0)');           // tab/default/text/active
+});
+
+test('Tabs renders an optional leading icon', () => {
+  const { container } = render(<Tabs tabs={['All']} icons={[<i data-testid="ic" />]} />);
+  expect(container.querySelector('[data-testid="ic"]')).toBeInTheDocument();
 });

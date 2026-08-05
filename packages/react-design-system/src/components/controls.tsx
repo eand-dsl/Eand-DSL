@@ -1,5 +1,5 @@
 import { useRef, useState, type CSSProperties, type HTMLAttributes, type InputHTMLAttributes, type ReactNode } from 'react';
-import { color, space, ty, radius, PILL, T } from '../system';
+import { color, space, ty, radius, scale, PILL, T } from '../system';
 import { Icon } from '../icons';
 import { Text, IconBox } from './primitives';
 
@@ -413,10 +413,16 @@ export interface TabsProps {
   tabs: string[];
   value?: number;
   defaultValue?: number;
+  /** Not a Figma variant axis — the published set has one look, and Global vs Local are
+   *  instance-level colour overrides described in the statesheet. Kept as a prop because
+   *  both appear on real screens. `global` binds `color/tab/default/*`; `local` is the
+   *  midnight treatment, which has no token of its own. */
   scope?: 'global' | 'local';
+  /** Optional leading glyph per tab, index-aligned with `tabs`. Figma draws it at 20px. */
+  icons?: ReactNode[];
   onChange?: (index: number) => void;
 }
-export function Tabs({ tabs, value, defaultValue = 0, scope = 'global', onChange }: TabsProps) {
+export function Tabs({ tabs, value, defaultValue = 0, scope = 'global', icons, onChange }: TabsProps) {
   const [internal, setInternal] = useState(defaultValue);
   const active = value ?? internal;
   return (
@@ -425,19 +431,24 @@ export function Tabs({ tabs, value, defaultValue = 0, scope = 'global', onChange
         const on = i === active;
         let s: CSSProperties;
         if (scope === 'global') {
+          // The audit asked for `tab/surface/global/active`; Figma has since restructured
+          // these to default/inverse, and the same #fce6e6 lives at tab/default/surface/active.
           s = on
-            ? { background: color('surface.canvas.brand-muted'), color: color('text.brand.default'), border: '1px solid transparent' }
-            : { background: color('surface.base.default'), color: color('text.default.muted'), border: '1px solid transparent' };
+            ? { background: color('tab.default.surface.active'), color: color('tab.default.text.active'), border: '1px solid transparent' }
+            : { background: color('surface.base.default'), color: color('tab.default.text.default'), border: '1px solid transparent' };
         } else {
           s = on
-            ? { background: color('surface.base.midnight'), color: '#fff', border: '1px solid transparent' }
+            ? { background: color('surface.base.midnight'), color: color('text.default.inverse'), border: '1px solid transparent' }
             : { background: color('surface.canvas.default'), color: color('text.default.default'), border: `1px solid ${color('border.surface-based.canvas.default')}` };
         }
         return (
           <button key={i} role="tab" aria-selected={on}
             onClick={() => { setInternal(i); onChange?.(i); }}
-            style={{ height: 40, padding: `0 ${space('md')}`, borderRadius: PILL, cursor: 'pointer', whiteSpace: 'nowrap', ...ty('button.sm'), ...s }}>
-            {t}
+            style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: space('xs'),
+              height: T.tabs?.height?.md ?? 40, minWidth: scale('72'), padding: `0 ${space('sm')}`,
+              borderRadius: PILL, cursor: 'pointer', whiteSpace: 'nowrap', boxSizing: 'border-box',
+              ...ty('title.xs'), ...s }}>
+            {icons?.[i] ?? null}{t}
           </button>
         );
       })}

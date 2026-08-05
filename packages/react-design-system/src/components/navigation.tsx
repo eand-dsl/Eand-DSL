@@ -74,11 +74,14 @@ function StatusGlyphs() {
     </span>
   );
 }
+// Uses the icon set rather than a hand-drawn path — the library's own guideline is never
+// to draw a glyph that already exists. (The wifi/signal marks above are not icon-set
+// glyphs; they are the faux iOS status bar, so they stay hand-drawn.)
 function Chevron({ size = 20, color: c }: { size?: number; color?: string }) {
   return (
-    <svg aria-hidden width={size} height={size} viewBox="0 0 24 24" fill="none" style={{ flex: 'none', color: c }}>
-      <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
+    <span aria-hidden style={{ flex: 'none', color: c, display: 'inline-flex' }}>
+      <Icon name="chevron-down" size={size} />
+    </span>
   );
 }
 export function TopBar({
@@ -302,9 +305,9 @@ export function ActionBar({ title, subtitle, icon: leading, action, chevron, sur
         {subtitle != null ? <Text variant="body.md" color={subtitleColor} style={clamp}>{subtitle}</Text> : null}
       </span>
       {chevron
-        ? <svg aria-hidden width={24} height={24} viewBox="0 0 24 24" fill="none" style={{ flex: 'none', color: titleColor }}>
-            <path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+        ? <span aria-hidden style={{ flex: 'none', display: 'inline-flex', color: titleColor }}>
+            <Icon name="chevron-right" size={24} />
+          </span>
         : action != null ? <span style={{ flex: 'none', display: 'inline-flex' }}>{action}</span> : null}
     </div>
   );
