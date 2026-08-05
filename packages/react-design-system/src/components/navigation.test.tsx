@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { TopBar } from './navigation';
+import { TopBar, QuickAction } from './navigation';
 
 /* ---------------- TopBar V1.1 slot system (Figma 22542:13963) ---------------- */
 
@@ -68,4 +68,24 @@ test('TopBar does not leak the rounded prop onto the DOM', () => {
   const header = container.querySelector('header')!;
   expect(header.getAttribute('rounded')).toBeNull();
   expect(header.style.borderBottomLeftRadius).toBe('0');
+});
+
+/* ---------------- QuickAction vs Figma `quick-action` 27962:37107 ----------------
+   Radius, surface, h148 and padding were already right. The grid arity, label ramp and
+   badge placement were not. */
+
+test('QuickAction grid is 2-up by default, matching Figma Grid=On', () => {
+  const { container } = render(<QuickAction items={[{ label: 'Add-ons' }]} />);
+  expect((container.firstElementChild as HTMLElement).style.gridTemplateColumns).toBe('repeat(2, 1fr)');
+});
+
+test('QuickAction label is title/sm 16, not title/xs 14', () => {
+  render(<QuickAction items={[{ label: 'Add-ons' }]} />);
+  expect(screen.getByText('Add-ons').style.fontSize).toBe('16px');
+});
+
+test('QuickAction badge sits in the header row, not absolutely positioned', () => {
+  const { container } = render(<QuickAction items={[{ label: 'Add-ons', badge: <b>3</b> }]} />);
+  const badgeHost = container.querySelector<HTMLElement>('[data-part="qa-badge"]')!;
+  expect(badgeHost.style.position).not.toBe('absolute');
 });

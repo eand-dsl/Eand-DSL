@@ -355,18 +355,24 @@ export interface QuickActionProps extends HTMLAttributes<HTMLDivElement> {
   columns?: number;
 }
 /** Grid of white shortcut cards: icon in a grey square (top-left), label bottom-left, optional badge. */
-export function QuickAction({ items, columns = 3, style, ...rest }: QuickActionProps) {
+/** Figma's `Grid=On` layout is 2-up (334w, 165x148 cells). The 3-visible arrangement is
+ *  the separate Carousel axis, which is not modelled here. */
+export function QuickAction({ items, columns = 2, style, ...rest }: QuickActionProps) {
   return (
     <div style={{ display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, gap: 4, width: '100%', ...style }} {...rest}>
       {items.map((it, i) => (
         // Figma .quick-task-core (27962:37103): radius border-radius/6 = 20, bg surface/raised/default.
         <button key={i} onClick={it.onClick}
           style={{ position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: rowHeight('row-2'), padding: space('md'), borderRadius: radius('6'), border: 0, background: color('surface.raised.default'), cursor: 'pointer', textAlign: 'left' }}>
-          <span style={{ width: 40, height: 40, borderRadius: radius('3'), background: color('surface.base.default'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: color('text.default.default') }}>
-            {it.icon ?? <Icon name="placeholder" size={24} />}
+          {/* Header row: icon tile with the status badge beside it. The badge used to be
+              absolutely positioned over the corner; Figma has it in flow. */}
+          <span data-part="qa-badge" style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: space('sm'), width: '100%' }}>
+            <span style={{ width: 40, height: 40, flex: 'none', borderRadius: radius('3'), background: color('surface.base.default'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: color('text.default.default') }}>
+              {it.icon ?? <Icon name="placeholder" size={24} />}
+            </span>
+            {it.badge ?? null}
           </span>
-          {it.badge ? <span style={{ position: 'absolute', top: 10, right: 10 }}>{it.badge}</span> : null}
-          <Text variant="title.xs">{it.label}</Text>
+          <Text variant="title.sm">{it.label}</Text>
         </button>
       ))}
     </div>

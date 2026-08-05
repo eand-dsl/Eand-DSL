@@ -115,6 +115,37 @@ but it is currently un-tokenised and undocumented.
 **Need:** confirm whether Smiles brand colours belong in the DSL (as a `special/*` group,
 alongside gold/silver/bronze) or stay app-level.
 
+## 8. `SectionLink` — the name refers to two different things
+
+Figma's published `section-link` (**25440:14243**, 9 symbols) is an **icon-only 40×40 link
+button** that sits top-right of a Section header. Our exported `SectionLink` is a
+**full-width header row** (title + "See all" + chevron) — the composed pattern, not the
+published component.
+
+The icon button already exists in code as `TriggerChevron` inside `Section` (40×40,
+radius/4, glass on dark). It just is not exported, and the name is taken.
+
+Two things are needed, and both are yours:
+
+1. **Naming.** Keep the composed row as `SectionLink` and export the icon button under a
+   different name, or rename the row and give `SectionLink` to the icon button? The latter
+   is a breaking change for anyone importing it.
+2. **A size ruling.** The statesheet says Lg 48 / Md 36 / Sm 32, but every published symbol
+   and the `section-link/lg` variable say **40**. The audit flags this as needing a
+   designer call.
+
+Also unbuilt: the NEW `Top-bar link` atom (**31511:33083**, 40×40 circle, glass 15% /
+white focus / 10% disabled, chevron-left). `TopBar`'s internal `CircleBtn` approximates it
+at 18% but has no focus or disabled state and is not exported.
+
+## 9. Three rebuilds that are blocked on more than styling
+
+| Component | What blocks it |
+| --- | --- |
+| **Voucher** | The V1.1 shape is a 144×144 ticket tile with **notch cutouts and a dashed perforation**, which the audit is explicit must be an SVG mask, not a dashed border. Separately, the code's `status` model (`active`/`redeemed`/`expired`) has **no V1.1 equivalent** — Figma's axes are `Display` (Light/Dark) × `State` (Default/Applied). What happens to redeemed and expired? |
+| **Logo** | Currently a text placeholder. Needs **four real lockup SVGs** exported from Figma and committed as assets. That is asset work, not styling, and the assets have to come from someone with export rights. |
+| **ActionBar** | Not removed — **relocated** to Figma's `Footer` / `Sticky footer` sets (27907:20590 / 29415:15592). The 03-navigation entry also describes a *separate* new inline `action-bar` row. So one code component currently stands for two Figma things; which one keeps the name is a design call. |
+
 ## Also worth a design decision, found while reconciling tokens
 
 **`color/green/550` is a deleted variable that is still bound.** `.plan-usage-bar`'s fill
