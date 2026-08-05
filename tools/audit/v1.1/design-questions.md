@@ -138,13 +138,35 @@ Also unbuilt: the NEW `Top-bar link` atom (**31511:33083**, 40×40 circle, glass
 white focus / 10% disabled, chevron-left). `TopBar`'s internal `CircleBtn` approximates it
 at 18% but has no focus or disabled state and is not exported.
 
-## 9. Three rebuilds that are blocked on more than styling
+## 9. Voucher — what happens to `redeemed` and `expired`?
 
-| Component | What blocks it |
-| --- | --- |
-| **Voucher** | The V1.1 shape is a 144×144 ticket tile with **notch cutouts and a dashed perforation**, which the audit is explicit must be an SVG mask, not a dashed border. Separately, the code's `status` model (`active`/`redeemed`/`expired`) has **no V1.1 equivalent** — Figma's axes are `Display` (Light/Dark) × `State` (Default/Applied). What happens to redeemed and expired? |
-| **Logo** | Currently a text placeholder. Needs **four real lockup SVGs** exported from Figma and committed as assets. That is asset work, not styling, and the assets have to come from someone with export rights. |
-| **ActionBar** | Not removed — **relocated** to Figma's `Footer` / `Sticky footer` sets (27907:20590 / 29415:15592). The 03-navigation entry also describes a *separate* new inline `action-bar` row. So one code component currently stands for two Figma things; which one keeps the name is a design call. |
+**Built** (2026-08-06): the 144×144 ticket tile, notches and perforation are done — the
+exported shape path punches the holes, so it needs no ruling. Logo and the Footer
+alignment are done too; only this one question is left from that group.
+
+Figma's axes are `Display` (Light/Dark) × `State` (Default/Applied). The code's V1.0
+`status` had three values:
+
+| `status` | Mapped to | Confidence |
+| --- | --- | --- |
+| `active` | `state="default"` | unambiguous |
+| `redeemed` | `state="applied"` | unambiguous |
+| `expired` | `state="applied"` + 60% opacity | **invented** — no V1.1 equivalent |
+
+**Need:** is an expired voucher a real state? If so it needs a Figma variant. If not, the
+prop value should be removed rather than left dimming a tile on a convention nobody agreed.
+
+## 9b. ActionBar — one code component, two Figma things
+
+`CtaFooter` is now aligned to Figma's `Footer` (29415:15497): shadow instead of a top
+border, rounded top by default, 20px padding, safe-area indicator. That covers the
+sticky-footer model the audit says was *relocated*, not deleted.
+
+Still open: 03-navigation describes a **separate new inline `action-bar` row**, and code's
+`ActionBar` (the 72px promo row) is a third thing again. Nobody has said whether the inline
+row is a new component, a variant of the promo row, or a rename.
+
+**Need:** confirm what the inline `action-bar` is, before anything is built for it.
 
 ## Also worth a design decision, found while reconciling tokens
 

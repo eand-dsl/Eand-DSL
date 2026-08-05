@@ -99,3 +99,20 @@ test('CtaFooter payment variant renders PaymentRow beside the action', () => {
   expect(screen.getByText('•••• 4326')).toBeInTheDocument();
   expect(screen.getByRole('button', { name: 'Primary' })).toBeInTheDocument();
 });
+
+/* ---------------- CtaFooter vs Figma `Footer` 29415:15497 ----------------
+   This is where the V1.0 sticky-footer ActionBar was relocated to. */
+
+test('CtaFooter lifts off the page with a shadow and no top border', () => {
+  const { container } = render(<CtaFooter actions={<button>Pay</button>} />);
+  const el = container.querySelector('footer')!;
+  expect(el.style.boxShadow).toContain('44px');
+  expect(el.style.borderTop).toBe('');
+});
+
+test('CtaFooter rounds its top corners by default', () => {
+  const { container } = render(<CtaFooter actions={<button>Pay</button>} />);
+  const el = container.querySelector('footer')!;
+  expect(el.style.borderTopLeftRadius).toBe('24px');
+  expect(el.style.borderTopRightRadius).toBe('24px');
+});

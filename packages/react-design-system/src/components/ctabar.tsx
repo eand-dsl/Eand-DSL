@@ -120,16 +120,22 @@ export interface CtaFooterProps extends HTMLAttributes<HTMLElement> {
   actions: ReactNode;
   /** iOS home-indicator strip below the actions (Figma footer variants include it). */
   homeIndicator?: boolean;
-  /** Round the top corners (when the footer floats over page content). */
+  /** Round the top corners. Figma's `Footer` always does; pass `false` for a flush edge. */
   rounded?: boolean;
 }
-export function CtaFooter({ ribbon, price, terms, payment, actions, homeIndicator, rounded, style, ...rest }: CtaFooterProps) {
+export function CtaFooter({ ribbon, price, terms, payment, actions, homeIndicator, rounded = true, style, ...rest }: CtaFooterProps) {
   const pad = space('xl'); // 20px side padding per Figma
   return (
+    /* Figma `Footer` 29415:15497 (and `Sticky footer` 29415:15592). This is where the
+       V1.0 sticky-footer ActionBar was relocated to — not deleted, as the drift table
+       first read it. The footer lifts off the page with a shadow; it has no top border.
+       The shadow is the node's own (x1 y0 blur44 15%), not `color/effects/shadow/md`,
+       which is x0 y0 blur44 at 10%. */
     <footer style={{
       position: 'sticky', bottom: 0, zIndex: 10, width: '100%', boxSizing: 'border-box',
       background: color('surface.canvas.default'), overflow: 'hidden',
       borderTopLeftRadius: rounded ? radius('7') : 0, borderTopRightRadius: rounded ? radius('7') : 0,
+      boxShadow: '1px 0px 44px 0px rgba(25, 19, 41, 0.15)',
       ...style,
     }} {...rest}>
       {ribbon}
