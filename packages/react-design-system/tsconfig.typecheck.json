@@ -9,7 +9,7 @@
 // rotted: it went on importing `../../icons/src` long after the icons were folded into this
 // package, so it could not build and nothing said so. Only the app source is covered —
 // vite.config.ts uses the `__dirname` shim Vite injects when it loads a config, which does
-// not typecheck without @types/node (absent here) and which playground/ relies on too.
+// not typecheck without @types/node (absent here).
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {

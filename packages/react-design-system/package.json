@@ -26,8 +26,6 @@
     "build:tokens": "tsx scripts/build-tokens.ts",
     "build": "npm run build:tokens && vite build && tsc --emitDeclarationOnly --outDir dist",
     "dev": "vite",
-    "playground": "vite --config playground/vite.config.ts",
-    "build:playground": "vite build --config playground/vite.config.ts",
     "typecheck": "tsc --noEmit -p tsconfig.typecheck.json",
     "test": "vitest run",
     "codeconnect:check": "figma connect publish --dry-run",

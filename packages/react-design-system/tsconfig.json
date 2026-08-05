@@ -20,6 +20,8 @@
   // package.json's "types": "./dist/index.d.ts" then resolves to nothing — consumers
   // silently fall back to inferred `any` types. Code Connect files are typechecked by
   // tsconfig.typecheck.json instead (see the `typecheck` script), along with demo/.
+  // test-setup.ts is vitest scaffolding (vite.config.ts loads it by path, not by this
+  // config), so it must not reach the published dist/ as a stray .d.ts.
   "include": ["src"],
-  "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx", "scripts"]
+  "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx", "src/test-setup.ts", "scripts"]
 }

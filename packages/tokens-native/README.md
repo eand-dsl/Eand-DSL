@@ -74,4 +74,6 @@ Or use the XML resources directly: `@color/text_default_default`, `@dimen/spacin
 - Colors carry alpha (e.g. white `a90` → `rgba`/`#E6FFFFFF`).
 - `Suisse Int'l` is the type family (commercial license); load the font in-app and apply
   it to the generated text styles.
-- Icons ship separately — see `@eand/icons` (mirrors the e& App Icons Figma library).
+- Icons are web-only for now: they ship inside `@eand/react-design-system` as React
+  components (mirroring the e& App Icons Figma library). There is no native icon export
+  in this package.

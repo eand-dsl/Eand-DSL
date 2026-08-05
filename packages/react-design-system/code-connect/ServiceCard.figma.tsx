@@ -9,7 +9,7 @@ import { ServiceCard, Badge } from '../src';
 // The badge is spec'd as Status Badge lg / positive (audit 03-navigation).
 // NOT MAPPED — the `type` variant (quick-pay, order-track, sim-activate, sim-replace,
 // addon-buy, devices, device-buy, plan-change, live-chat, contact-us, subscriptions,
-// mParking, all-services): these glyphs have no counterpart in @eand/icons yet
+// mParking, all-services): these glyphs have no counterpart in the icon set yet
 // (mid-migration gap flagged in audit 01-primitives/03-navigation), so `icon` is left to its
 // code default rather than mapped to invented icon names. Revisit once the icon set lands.
 figma.connect(ServiceCard, 'https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=27917-8012', {

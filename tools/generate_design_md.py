@@ -429,23 +429,29 @@ def main():
     w("\n### Border radius\n"); w(", ".join(f"`{k}`={v}" for k,v in R["border-radius"].items()))
     w("\n### Icon sizes\n"); w(", ".join(f"`{k}`={v}" for k,v in R["icon"].items()))
 
-    w("\n### Icons — separate `@eand/icons` package\n")
-    w("Icons are **not** part of this UI library. They live in their own package "
-      "`@eand/icons`, mirroring the **e& App Icons** Figma library "
-      "(`9Q64oRPBkm3Sla5HMP4LJA`, MS-Fluent-2 line set + 13 Core Service Icons) — kept "
-      "separate so the UI library stays light. Render `<Icon name=\"…\" />` from "
-      "`@eand/icons` into any `icon`/`leadingIcon`/`actions` slot; icons are stroked with "
-      "`currentColor` so they inherit the slot color (red on an active `NavBar` tab, white "
-      "on the brand `TopBar`, dark in a `QuickAction`/`ListRow` square). Prominent slots use "
-      "the **filled** house style (variant `filled:on, stroke:2, radius:2`); these are exported "
-      "exactly from the live screens, not the generic line set.\n")
-    w("Available names: `home`, `support`, `profile`, `shop`, `mshop` (the detached special "
-      "nav button), `search`, `notification`, `sparkle` (AI), `puzzle` (Add-ons), "
-      "`subscriptions`, `mobile`, `sim`, `wallet`, `car` (mParking), `truck`, `grid` "
-      "(All Services), `tv`, `wifi`, `gift`, `plus`, `mic`, `shield`, `chevron-right`.\n")
-    w("> **Never generate, draw, or emoji-substitute an icon.** If a screen needs a glyph "
-      "that isn't in `@eand/icons` yet, request it be added to the package (exported from "
-      "the e& App Icons library) rather than inventing one.\n")
+    w("\n### Icons — folded into `@eand/react-design-system`\n")
+    w("Icons ship **inside** this UI library — there is no separate icons package. Import "
+      "`Icon` from `@eand/react-design-system` alongside the components and render "
+      "`<Icon name=\"…\" />` into any `icon`/`leadingIcon`/`actions` slot. The set mirrors "
+      "the **e& App Icons** Figma library (`9Q64oRPBkm3Sla5HMP4LJA`, MS-Fluent-2 line set + "
+      "13 Core Service Icons). Icons tint via CSS `color`, so they inherit the slot colour "
+      "(red on an active `NavBar` tab, white on the brand `TopBar`, dark in a "
+      "`QuickAction`/`ListRow` square). `Icon` takes `name`, `size` (px, default 24), "
+      "`color`, and `title`.\n")
+    w("Every icon has two forms: the outline `name` and the filled `name-filled` (e.g. "
+      "`home` and `home-filled`) — **198 base names, 396 total**. Prominent slots (active "
+      "nav tabs, hero tiles, quick-action squares, service tiles) take the filled form; "
+      "inline and secondary glyphs (list rows, buttons, header actions, hints) take the "
+      "outline form.\n")
+    w("The authoritative name list is the grouped registry in "
+      "`packages/react-design-system/MAKE_KIT_GUIDELINES.md` (between the `icons:begin` / "
+      "`icons:end` markers), which `npm run guidelines:check` verifies against the built "
+      "library on every push. It is deliberately not duplicated here — a second copy would "
+      "drift. In code, `ICONS` and `ICON_META` are exported from the package itself.\n")
+    w("> **Never generate, draw, or emoji-substitute an icon.** If the concept you want has "
+      "no entry, pick the nearest real name — never a placeholder or a drawing. If nothing "
+      "fits, request the glyph be added to the package (exported from the e& App Icons "
+      "library) rather than inventing one.\n")
 
     # ---------------- Composition map ----------------
     w("\n\n---\n\n## Component composition map\n")

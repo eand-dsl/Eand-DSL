@@ -2,7 +2,8 @@
 
 > Figma: `e& Consumer App DSL V1.1` (fileKey `pzm63BTLfPfT1stcF89ILQ`, published library, last observed edit **2026-07-02**).
 > Audited **2026-07-02 → 2026-07-06** against `@eand/react-design-system` (`packages/react-design-system`), `tools/anatomy/*.md`, `design.md`.
-> Predecessor: [`AUDIT.md`](./AUDIT.md) (V1.0, deprecated, historical).
+> Predecessor: the V1.0 audit (`AUDIT.md`), deleted once fully superseded — recoverable
+> from git history at commit `7d324c0` if the historical record is ever needed.
 > Section detail lives in [`tools/audit/v1.1/`](./tools/audit/v1.1/) — this file is the roll-up + decision sheet.
 
 **Verdicts:** OK · TOKEN-DRIFT · VARIANT-DRIFT · VISUAL-DRIFT · MISSING-IN-CODE · REMOVED-IN-FIGMA · STALE-ANATOMY (entries carry multiple).

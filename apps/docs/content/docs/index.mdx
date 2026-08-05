@@ -1,20 +1,24 @@
 ---
 title: Get started
-description: Install the e& design system packages and build your first screen.
+description: Install the e& design system and build your first screen.
 ---
 
-The e& Consumer App design system ships as two npm packages built from a single
-token source (`variables.json`, exported from the Figma DSL V1.1 library) — the
-same source that generates the SwiftUI and Compose tokens, so values never drift
-between platforms.
+The e& Consumer App design system ships as a single npm package built from one token
+source (`variables.json`, exported from the Figma DSL V1.1 library) — the same source
+that generates the SwiftUI and Compose tokens, so values never drift between platforms.
 
 ## Install
 
 ```bash
-npm install @eand/react-design-system @eand/icons
+npm install @eand/react-design-system
 ```
 
-Import the stylesheet once — it carries every `--eand-*` design token:
+Components, design tokens, and the full **e& App Icons** set all come from this one
+package — there is no separate icons package.
+
+Components are inline-token-styled, so they render correctly with no CSS import. If you
+want the raw `--eand-*` custom properties for your own styles, import the stylesheet
+once:
 
 ```tsx
 import '@eand/react-design-system/styles.css';
@@ -23,13 +27,16 @@ import '@eand/react-design-system/styles.css';
 ## First screen
 
 ```tsx
-import { TopBar, Section, ListRow, Button } from '@eand/react-design-system';
-import { Icon } from '@eand/icons';
+import { TopBar, Section, ListRow, Button, Icon } from '@eand/react-design-system';
 
 export function Account() {
   return (
     <>
-      <TopBar variant="brand" greeting="Hi, Ahmed" title="050 123 4567" />
+      <TopBar
+        surface="brand"
+        account={{ greeting: 'Hi, Ahmed', name: '050 •••• 567' }}
+        actions={[<Icon name="notification" />, <Icon name="settings" />]}
+      />
       <Section title="My Plan" context="Freedom Live Plan 200">
         <ListRow label="2 GB left" value="Local Data" chevron={false} />
         <ListRow label="200 min left" value="Minutes" chevron={false} />
@@ -40,22 +47,36 @@ export function Account() {
 }
 ```
 
+`TopBar` is slot-based: `surface` picks the red account header or the white detail
+header, `account` renders the greeting over a masked number, and `children` fills the
+bottom slot with a search field, `Tabs`, chips, or a `Stepper`. The older `variant`,
+`greeting`, and `actionBar` props still compile but are back-compat aliases — reach for
+`surface`, `account`, and `children` instead.
+
 ## Typography
 
 The ramp is designed for **Suisse Int'l** (Latin) with a parallel `aed/*` ramp for
 Arabic. The font is licensed — load it in your app yourself. Until it's present the
 components fall back to `"Helvetica Neue", Inter, system-ui`.
 
-## Figma Make
-
-`@eand/react-design-system` doubles as a **Figma Make kit**: register the package in
-Make and it assembles e& screens from these exact components. See
-`MAKE_KIT_GUIDELINES.md` in the package for the component and icon rules.
-
 ## Icons
 
-Icons come from `@eand/icons` only — never generate or inline ad-hoc SVGs:
+Icons are part of the package — never generate or inline ad-hoc SVGs:
 
 ```tsx
-<Icon name="home" size={24} />
+import { Icon } from '@eand/react-design-system';
+
+<Icon name="wallet" size={24} />
+<Icon name="wallet-filled" size={24} />
 ```
+
+Every icon has an outline form and a `-filled` form: 198 base names, 396 total. Browse
+the whole set in [Icons](/docs/foundations/icons).
+
+## Figma Make
+
+`@eand/react-design-system` doubles as a **Figma Make kit**: register the package in Make
+and it assembles e& screens from these exact components. The kit is published from
+[`eand-dsl/eand-make-kit`](https://github.com/eand-dsl/eand-make-kit), which carries the
+`MAKE_KIT_GUIDELINES.md` you paste into Make as the kit guidelines — the package alone
+isn't enough; the guidelines are what teach Make how to assemble a screen.
