@@ -1,18 +1,25 @@
 # e& Consumer App — Design System (E&DSA)
 
 The e& Consumer App design system: a React component library built to the Figma
-**e& Consumer App DSL V1.1**, plus a documentation site.
+**e& Consumer App DSL V1.1**, plus a documentation site and a Figma Make kit.
 
 ## Repository layout
 
 ```
 packages/
-  react-design-system/   @eand/react-design-system — components, design tokens,
-                         and the e& App Icons (folded in: <Icon name="…" />)
+  react-design-system/   @eand/react-design-system — 54 components, design tokens,
+                         and the 396-icon e& App Icons set (folded in: <Icon name="…" />)
+  tokens-native/         SwiftUI + Compose token exports from the same variable source
 apps/
-  docs/                  Documentation site (Next.js + fumadocs) with live,
-                         knob-driven demos and SwiftUI / Compose / React snippets
-figma-component-audit.md Component-by-component audit vs Figma V1.1
+  docs/                  Documentation site (Next.js + fumadocs) with live, knob-driven
+                         demos, an editable playground, and SwiftUI / Compose / React snippets
+tools/
+  anatomy/               Per-component anatomy specs
+  audit/v1.1/            Component-by-component drift audit against Figma V1.1
+  generate_design_md.py  Generates design.md from variables.json + anatomy
+design.md                Master spec (generated) — the source of truth for behaviour
+variables.json           Figma Variables export (DTCG), the token source of truth
+AUDIT-V1.1.md            Drift audit roll-up + decision sheet
 ```
 
 There is no npm workspace root — `apps/docs` consumes the library via a
@@ -29,7 +36,8 @@ npm --prefix packages/react-design-system run build
 # 2. run the docs site
 cd apps/docs
 npm install
-npm run dev            # http://localhost:3000
+npm run extract:props   # regenerate prop tables from the library source
+npm run dev             # http://localhost:3000
 ```
 
 Library tests: `npm --prefix packages/react-design-system test`.
@@ -42,22 +50,75 @@ committed, so deploys don't need Python). Regenerate with:
 python3 packages/react-design-system/scripts/build-icons.py
 ```
 
-## Deploy the docs to Vercel
+`design.md` is generated too — edit `tools/generate_design_md.py`, not the output:
 
-The docs are a static-prerendered Next.js app. To host on Vercel's free tier:
+```bash
+python3 tools/generate_design_md.py
+```
 
-1. **Import** this repo at [vercel.com/new](https://vercel.com/new).
-2. Set **Root Directory** to `apps/docs`.
-3. Enable **Settings → Build → "Include files outside the root directory"** — the
-   docs build reaches `../../packages/react-design-system`.
-4. Leave the build/install commands to `apps/docs/vercel.json` (already committed):
-   it installs the library's deps, builds the library, regenerates prop tables,
-   then runs `next build`.
-5. Deploy. Every push to `main` redeploys; every branch gets a preview URL.
+## The gate
 
-> The Vercel free "Hobby" tier is for non-commercial use per their ToS. For a
-> ToS-clean company deploy, either move to Vercel Pro or host the static export
-> (this app prerenders fully) on Cloudflare Pages / GitHub Pages.
+`.github/workflows/design-system.yml` runs this on every push and PR. Run it before
+proposing anything, from `packages/react-design-system`:
+
+```bash
+npm ci
+npm run build
+npm test                    # vitest
+npm run typecheck           # src + code-connect + demo
+npm run guidelines:check    # Make kit guidelines match the library
+npm run guidelines:example  # the worked example compiles against dist
+npm run smoke               # built ESM imports and renders
+npm pack --dry-run          # dist + the two MD files only (22 files)
+npx vite build --config demo/vite.config.ts
+```
+
+`guidelines:check` is the one that matters most: Figma Make follows
+`MAKE_KIT_GUIDELINES.md` literally, so a green library with stale guidelines still
+produces broken screens.
+
+## Documentation site
+
+Deployed from `apps/docs` on Vercel. Two project settings are mandatory because the
+build reaches outside its root directory:
+
+- **Root Directory** = `apps/docs`
+- **Settings → Build → "Include files outside the root directory"** = enabled
+
+`apps/docs/vercel.json` owns the install and build commands — don't override them in the
+dashboard. Every push to `main` redeploys; every branch gets a preview URL.
+
+> Vercel's free "Hobby" tier is non-commercial per their ToS. For a ToS-clean company
+> deploy, either move to Vercel Pro or host the static export (this app prerenders fully)
+> on Cloudflare Pages / GitHub Pages.
+
+## Figma Make kit
+
+The library doubles as a **Figma Make kit**. It is published to its own repository,
+[eand-dsl/eand-make-kit](https://github.com/eand-dsl/eand-make-kit), which is a **build
+artifact — never edit it by hand**:
+
+```bash
+cd packages/react-design-system
+npm run kit:release -- --dry-run   # gate + stage, print the tree, push nothing
+npm run kit:release                # gate + stage, force-push and tag the kit repo
+```
+
+`scripts/release-kit.ts` runs the full gate, then pushes `dist/` plus
+`MAKE_KIT_GUIDELINES.md` and `MAKE_KIT_README.md` and tags `v<version>`.
+`.github/workflows/release-kit.yml` does the same on `workflow_dispatch` or a `v*` tag
+(needs a `KIT_REPO_TOKEN` secret with `contents: write` on the kit repo).
+
+Figma Make can take it either way:
+
+- **esm.sh**, no credentials — `https://esm.sh/gh/eand-dsl/eand-make-kit@v1.0.0`. Pin the
+  tag; the kit repo's `main` is force-pushed on every release.
+- **npm** — publish `@eand/react-design-system` to Figma's private registry or public
+  npm. Runbook in `packages/react-design-system/MAKE_KIT_README.md`; needs e& org
+  credentials, so it is deliberately manual.
+
+Either way, paste `MAKE_KIT_GUIDELINES.md` into the kit's guidelines field. The package
+alone does not teach Make how to assemble a screen.
 
 ## Figma Code Connect
 
@@ -85,16 +146,9 @@ Highlight, Alert, AtomSurface (×2), CardBgColor. Add more by dropping a new
 Mappings target the **published original** (`pzm63BTLfPfT1stcF89ILQ`). Node IDs are
 identical in the de-dotted copy, but **layer names are not** — `nestedProps()` matches
 on layer name and fails soft (empty prop, no error), so always use the original's
-names. `npm run typecheck` now covers `code-connect/`.
+names. `npm run typecheck` covers `code-connect/`.
 
 Several mappings carry a `NOT MAPPED` comment naming a Figma property with no code
 counterpart — those comments are the todo list. See
 `tools/audit/v1.1/atom-gap-report.md` for the full reconciliation status, and
 `component-map.json` for the machine-readable inventory.
-
-## Figma Make
-
-The library is published as a single package (`@eand/react-design-system`) that
-exports every component **and** the icons, so it — together with the Code Connect
-mappings above — can back a Figma Make kit from this repo without a second
-dependency.

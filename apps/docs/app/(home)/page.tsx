@@ -9,7 +9,7 @@ const entries = [
   {
     href: '/docs/components/button',
     title: 'Components',
-    body: '46 documented components with live, knob-driven demos and prop tables.',
+    body: '45 documented components with live, knob-driven demos and prop tables.',
   },
   {
     href: '/docs/foundations/colors',

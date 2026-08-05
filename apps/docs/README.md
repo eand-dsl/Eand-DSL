@@ -1,7 +1,7 @@
 # `@eand/docs` — e& Design System documentation site
 
 Next.js + [fumadocs](https://fumadocs.dev) site documenting
-`@eand/react-design-system`: 46 component pages with live demos, 4 foundations pages,
+`@eand/react-design-system`: 45 component pages with live demos, 4 foundations pages,
 searchable prop tables, and an icon gallery.
 
 ## Develop
