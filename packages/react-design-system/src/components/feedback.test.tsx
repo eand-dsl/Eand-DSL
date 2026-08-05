@@ -111,3 +111,32 @@ test('still accepts the deprecated used= alias', () => {
   render(<PlanUsageBar label="Local Data" used={38} total={40} unit="GB" />);
   expect(screen.getByText(/2\s*GB\s*left/)).toBeInTheDocument();
 });
+
+/* ---------------- Alert vs Figma alert-message 30969:1112 ----------------
+   Read off the Success variant (30969:1111). The V1.0 shape survived in three places. */
+
+test('Alert status mark is a 32px pill, not a 24px clipped shape', () => {
+  const { container } = render(<Alert status="success" title="Saved">Done</Alert>);
+  const mark = container.querySelector<HTMLElement>('[data-part="status-mark"]')!;
+  expect(mark.style.width).toBe('32px');
+  expect(mark.style.height).toBe('32px');
+  // `.icon-status` > icon-size uses border-radius/8 (the pill step) for every status —
+  // Figma has no triangle mark on this component.
+  expect(mark.style.clipPath).toBe('');
+});
+
+test('Alert action is midnight and not underlined, whatever the status', () => {
+  // Figma binds the action label to color/alert-message/text/info (#191329) on every
+  // variant — it is not tone-matched, and `button/md` carries no underline.
+  for (const status of ['success', 'alert', 'warning', 'info'] as const) {
+    const { container } = render(<Alert status={status} action="Fix">Body</Alert>);
+    const btn = container.querySelector<HTMLElement>('button')!;
+    expect(btn.style.textDecoration).toBe('');
+    expect(btn.style.color).toBe('rgb(25, 19, 41)');
+  }
+});
+
+test('Alert sets the icon-to-text gap from spacing/xs', () => {
+  const { container } = render(<Alert status="info" title="Heads up">Body</Alert>);
+  expect((container.firstElementChild as HTMLElement).style.gap).toBe('4px');
+});

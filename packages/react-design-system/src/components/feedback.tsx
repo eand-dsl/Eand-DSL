@@ -101,7 +101,7 @@ function Spinner({ size = 22, stroke = '#ffffff' }: { size?: number; stroke?: st
 /** Coloured circle/triangle badge with an icon-set glyph inside (`icon` is an icon name). */
 function StatusMark({ bg, icon, fg, shape, size = 22 }: { bg: string; icon: string; fg: string; shape: 'circle' | 'triangle'; size?: number }) {
   return (
-    <span aria-hidden style={{
+    <span aria-hidden data-part="status-mark" style={{
       width: size, height: size, flex: '0 0 auto', display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
       background: bg, color: fg, lineHeight: 0,
       ...(shape === 'triangle'
@@ -194,15 +194,19 @@ export function Alert({ status, tone, title, action, onAction, children, style, 
   const t = ALERT_STATUS[status ?? (tone ? TONE_TO_STATUS[tone] : 'info')];
   return (
     <div role="status" style={{
-      display: 'flex', alignItems: 'flex-start', gap: space('md'), width: '100%', boxSizing: 'border-box',
+      display: 'flex', alignItems: 'flex-start', gap: space('xs'), width: '100%', boxSizing: 'border-box',
       padding: space('lg'), borderRadius: radius('6'), background: t.bg, ...style,
     }} {...rest}>
-      <StatusMark bg={t.mark} icon={t.icon} fg="#ffffff" shape={t.shape} size={24} />
+      {/* `.icon-status` (30969:1138): a 32px pill holding a filled glyph. Every status uses
+          the same pill — the triangle mark was a V1.0 shape that V1.1 does not have. */}
+      <StatusMark bg={t.mark} icon={t.icon} fg={color('text.default.inverse')} shape="circle" size={32} />
       <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: space('2xs') }}>
         {title ? <Text variant="title.sm" color={t.strong} as="div" style={{ fontWeight: 700 }}>{title}</Text> : null}
         {children ? <Text variant="body.sm" color={t.strong} style={{ opacity: 0.85 }}>{children}</Text> : null}
       </div>
-      {action ? <button onClick={onAction} style={{ border: 0, background: 'transparent', cursor: 'pointer', padding: 0, textDecoration: 'underline', ...ty('button.sm'), color: t.action, whiteSpace: 'nowrap', fontWeight: 700 }}>{action}</button> : null}
+      {/* `.alert-action`: `button/md`, no underline, and bound to alert-message/text/info on
+          every status — the label does not take the tone colour. */}
+      {action ? <button onClick={onAction} style={{ border: 0, background: 'transparent', cursor: 'pointer', padding: `0 ${space('xs')}`, ...ty('button.md'), color: color('alert-message.text.info'), whiteSpace: 'nowrap' }}>{action}</button> : null}
     </div>
   );
 }

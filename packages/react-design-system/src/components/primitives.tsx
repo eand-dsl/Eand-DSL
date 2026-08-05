@@ -94,7 +94,10 @@ export interface ProgressBarProps extends HTMLAttributes<HTMLDivElement> {
   tone?: 'accent' | 'positive' | 'warning' | 'danger';
 }
 export function ProgressBar({ value = 50, tone, style, ...rest }: ProgressBarProps) {
-  // Figma V1.1 progress-bar-core (26437:43709): h scale/4, fill color/text/positive/subtle.
+  // Figma V1.1 progress-bar-core (26437:43709): a 300x4 clip holding one green fill and
+  // nothing else — no track colour and no corner radius on the container or the bar. The
+  // pill radius and sunken-grey track here were V1.0 leftovers. Pass `style` to add a track
+  // back if a surface needs one.
   const fill = tone === 'accent' ? color('status.accent')
     : tone === 'positive' ? color('status.positive')
     : tone === 'warning' ? color('status.warning')
@@ -102,8 +105,8 @@ export function ProgressBar({ value = 50, tone, style, ...rest }: ProgressBarPro
     : color('text.positive.subtle');
   return (
     <div role="progressbar" aria-valuenow={value} aria-valuemin={0} aria-valuemax={100}
-      style={{ width: '100%', height: scale('4'), borderRadius: PILL, background: color('surface.sunken.default'), overflow: 'hidden', ...style }} {...rest}>
-      <div style={{ width: `${Math.max(0, Math.min(100, value))}%`, height: '100%', background: fill, borderRadius: PILL }} />
+      style={{ width: '100%', height: scale('4'), overflow: 'hidden', ...style }} {...rest}>
+      <div style={{ width: `${Math.max(0, Math.min(100, value))}%`, height: '100%', background: fill }} />
     </div>
   );
 }

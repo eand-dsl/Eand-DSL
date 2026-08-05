@@ -74,11 +74,8 @@ test('ProgressBar default fill is text.positive.subtle green', () => {
   expect(fill.style.width).toBe('50%');
 });
 
-test('ProgressBar keeps a visible track behind the fill', () => {
-  render(<ProgressBar value={50} />);
-  // track = surface.sunken.default #e4e3ea
-  expect(screen.getByRole('progressbar').style.background).toMatch(/#e4e3ea|rgb\(228,\s*227,\s*234\)/i);
-});
+// (The old "keeps a visible track" case is gone: Figma's progress-bar-core has no track
+//  fill at all. Replaced by "draws no track behind the fill" above.)
 
 test('ProgressBar tone prop still overrides the fill', () => {
   render(<ProgressBar value={50} tone="accent" />);
@@ -221,4 +218,31 @@ test('CardBgColor fixedSize uses the Figma card/width|height/lg footprint', () =
 
 test('CARD_BG_TINTS exposes all eight Figma variants', () => {
   expect(CARD_BG_TINTS).toEqual(['default', 'red', 'orange', 'yellow', 'green', 'cyan', 'blue', 'violet']);
+});
+
+/* Figma `progress-bar-core` 26437:43709 is a 300x4 clip with a single green fill and
+   *nothing behind it* — no track colour and no corner radius on either the container or
+   the bar. The code carried a pill radius and a sunken-grey track from V1.0. */
+
+test('ProgressBar draws no track behind the fill', () => {
+  const { container } = render(<ProgressBar value={40} />);
+  const track = container.firstElementChild as HTMLElement;
+  expect(track.style.background).toBe('');
+  expect(track.style.backgroundColor).toBe('');
+});
+
+test('ProgressBar has square ends, not a pill', () => {
+  const { container } = render(<ProgressBar value={40} />);
+  const track = container.firstElementChild as HTMLElement;
+  const fill = track.firstElementChild as HTMLElement;
+  expect(track.style.borderRadius).toBe('');
+  expect(fill.style.borderRadius).toBe('');
+});
+
+test('ProgressBar is 4px tall and green by default', () => {
+  const { container } = render(<ProgressBar value={40} />);
+  const track = container.firstElementChild as HTMLElement;
+  expect(track.style.height).toBe('4px');
+  // color/text/positive/subtle = green/600 #54bc72
+  expect((track.firstElementChild as HTMLElement).style.background).toBe('rgb(84, 188, 114)');
 });
