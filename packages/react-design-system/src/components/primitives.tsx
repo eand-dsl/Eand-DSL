@@ -1,6 +1,7 @@
 import type { CSSProperties, ElementType, HTMLAttributes, ReactNode } from 'react';
 import { T, ty, space, icon, color, radius, scale, PILL } from '../system';
 import { Icon } from '../icons';
+import { LogoArt, type LogoVersion } from '../icons/logo';
 
 /* ---------------- Text ---------------- */
 export interface TextProps extends HTMLAttributes<HTMLElement> {
@@ -116,11 +117,11 @@ export function ProgressBar({ value = 50, tone, style, ...rest }: ProgressBarPro
    Segmented step progress (Figma V1.1 Stepper, page 31614:11244): a 6px-tall row of
    equal pill segments, 2–8 steps, completed segments filled. Also used as the
    top-bar `.topbar-stepper` bottom element. */
-// Figma vars color/stepper/{scheme}/{state} — not yet in the generated tokens.ts
-// (variables.json export predates the stepper group), values from live Figma.
+// Figma vars color/stepper/{scheme}/{state}. Hardcoded while the variables.json export
+// predated the stepper group; bound now, to the same four values.
 const STEPPER = {
-  default: { inactive: '#e4e3ea', active: '#e73933' },
-  inverse: { inactive: '#ffffff66', active: '#ffffff' },
+  default: { inactive: color('stepper.default.default'), active: color('stepper.default.active') },
+  inverse: { inactive: color('stepper.inverse.default'), active: color('stepper.inverse.active') },
 } as const;
 export interface StepperProps extends HTMLAttributes<HTMLDivElement> {
   /** Total segments — Figma defines 2–8. */
@@ -306,11 +307,26 @@ export function CardBgColor({ tint = 'default', fixedSize, style, children, ...r
   );
 }
 
-/* ---------------- Logo ---------------- */
-export function Logo({ style, ...rest }: HTMLAttributes<HTMLSpanElement>) {
+/* ---------------- Logo ----------------
+   Figma `e&-logo` 27032:50455, 96x96, `version` = default | white | midnight | red.
+   `default` is the red app tile with a white lockup; the other three are the bare
+   lockup and take their colour from CSS, so they inherit a surface's `color`.
+
+   The artwork is generated into src/icons/logo.tsx by scripts/build-logo.py from the
+   exported SVGs in src/icons/logo-raw/ — this used to be a styled text span reading
+   "e&", which is not the mark. */
+export interface LogoProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'color'> {
+  version?: LogoVersion;
+  /** Rendered size in px; the artwork is a square. */
+  size?: number | string;
+  /** Overrides the version's ink. Pass `currentColor` to inherit from CSS instead. */
+  color?: string;
+}
+export function Logo({ version = 'default', size = 32, color: colorOverride, style, ...rest }: LogoProps) {
   return (
-    <span style={{ fontWeight: 700, color: color('text.brand.default'), fontSize: 22, letterSpacing: '-0.02em', ...style } as CSSProperties} {...rest}>
-      e&amp;
+    <span role="img" aria-label="e&"
+      style={{ display: 'inline-flex', flex: 'none', lineHeight: 0, ...style } as CSSProperties} {...rest}>
+      <LogoArt version={version} size={size} color={colorOverride} />
     </span>
   );
 }

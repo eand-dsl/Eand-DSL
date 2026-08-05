@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Badge, ProgressBar, Stepper, Dismiss, AtomSurface, CardBgColor, CARD_BG_TINTS, AddTrigger } from './primitives';
+import { Badge, ProgressBar, Stepper, Dismiss, AtomSurface, CardBgColor, CARD_BG_TINTS, AddTrigger, Logo } from './primitives';
 
 /* ---------------- Badge ---------------- */
 
@@ -266,4 +266,42 @@ test('AddTrigger label is button/lg 16 in midnight, not brand red', () => {
   const el = container.firstElementChild as HTMLElement;
   expect(el.style.fontSize).toBe('16px');
   expect(el.style.color).toBe('rgb(25, 19, 41)');
+});
+
+/* ---------------- Logo vs Figma `e&-logo` 27032:50455 ----------------
+   Was a styled text span reading "e&". V1.1 is a 96x96 lockup with four versions. */
+
+test('Logo renders real lockup artwork, not a text glyph', () => {
+  const { container } = render(<Logo />);
+  expect(container.querySelector('svg')).toBeInTheDocument();
+  expect(container.querySelectorAll('path').length).toBeGreaterThan(5);
+  expect(container.textContent).toBe('');
+});
+
+test('Logo version=default is the red app tile', () => {
+  const { container } = render(<Logo />);
+  expect(container.querySelector('rect')!.getAttribute('fill')).toBe('#E00800');
+});
+
+// The three bare versions are one shape in three inks, so `version` has to carry the
+// colour — leaving them all on currentColor made `red` and `midnight` render identically,
+// which the tests missed and a screenshot caught.
+test.each([
+  ['white', '#ffffff'],
+  ['midnight', '#191329'],
+  ['red', '#E00800'],
+] as const)('Logo version=%s drops the tile and inks the lockup %s', (version, fill) => {
+  const { container } = render(<Logo version={version} />);
+  expect(container.querySelector('rect')).toBeNull();
+  expect(container.querySelector('g')!.getAttribute('fill')).toBe(fill);
+});
+
+test('Logo color prop overrides the version ink', () => {
+  const { container } = render(<Logo version="midnight" color="currentColor" />);
+  expect(container.querySelector('g')!.getAttribute('fill')).toBe('currentColor');
+});
+
+test('Logo carries an accessible name', () => {
+  render(<Logo />);
+  expect(screen.getByRole('img', { name: /e&/i })).toBeInTheDocument();
 });

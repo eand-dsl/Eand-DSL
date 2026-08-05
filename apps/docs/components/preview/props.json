@@ -186,7 +186,7 @@
       "name": "width",
       "type": "string | number",
       "required": false,
-      "default": "200",
+      "default": "137",
       "description": ""
     }
   ],
@@ -630,6 +630,12 @@
       "description": ""
     },
     {
+      "name": "icons",
+      "type": "ReactNode[]",
+      "required": false,
+      "description": "Optional leading glyph per tab, index-aligned with `tabs`. Figma draws it at 20px."
+    },
+    {
       "name": "onChange",
       "type": "((index: number) => void)",
       "required": false,
@@ -640,7 +646,7 @@
       "type": "enum",
       "required": false,
       "default": "global",
-      "description": ""
+      "description": "Not a Figma variant axis — the published set has one look, and Global vs Local are\ninstance-level colour overrides described in the statesheet. Kept as a prop because\nboth appear on real screens. `global` binds `color/tab/default/*`; `local` is the\nmidnight treatment, which has no token of its own."
     },
     {
       "name": "value",
@@ -1422,7 +1428,7 @@
       "name": "columns",
       "type": "number",
       "required": false,
-      "default": "3",
+      "default": "2",
       "description": ""
     }
   ],
@@ -1744,7 +1750,28 @@
       "description": "Figma `color` axis."
     }
   ],
-  "Logo": [],
+  "Logo": [
+    {
+      "name": "color",
+      "type": "string",
+      "required": false,
+      "description": "Overrides the version's ink. Pass `currentColor` to inherit from CSS instead."
+    },
+    {
+      "name": "size",
+      "type": "string | number",
+      "required": false,
+      "default": "32",
+      "description": "Rendered size in px; the artwork is a square."
+    },
+    {
+      "name": "version",
+      "type": "enum",
+      "required": false,
+      "default": "default",
+      "description": ""
+    }
+  ],
   "CARD_BG_TINTS": [],
   "Button": [
     {

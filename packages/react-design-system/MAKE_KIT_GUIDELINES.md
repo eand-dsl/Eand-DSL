@@ -114,7 +114,7 @@ mParking → `car` · All Services → `grid` · e& Shop → `shop` · retail br
 
 **Primitives**
 - `Text({ variant, as, color })` — `variant` is a typography token path such as `body.md`, `title.sm`, `heading.lg`; `as` picks the element. For glyphs use `<Icon name="…" />` (see "Icons" above) — never emoji.
-- `Logo` — the e& wordmark, for the header `leading`/`logo` slot.
+- `Logo({ version: default|white|midnight|red, size, color })` — the real e& lockup ("e&" ligature over "etisalat and"), for the header `leading`/`logo` slot. `default` is the red app tile with a white mark; the other three are the bare lockup already inked for you — `white` on dark surfaces, `midnight` on light, `red` for brand emphasis. Never re-create the mark from text or an emoji.
 - `IconBox({ size })` — fixed square that keeps a glyph on the icon scale (`xs`…`4xl`).
 - `Badge({ offer, status, size: sm|md|lg })` — **offer**: `new-card`/`new-plan` (green) · `mega-deals`/`green-friday`/`discount` (red) · `limited-stock`/`validity`/`limited-time` (yellow) · `best-seller` (magenta) · `online-exclusive`/`exclusive-for-emirati` (burgundy) · `sold-out` (grey). **status**: `neutral`/`neutral-inverse`/`disabled`/`positive`/`warning`/`danger`/`brand`.
 - `SmilesRow({ count, plus, size })` — overlapping Smiles avatars with a "+N"; `SmilesAvatar({ size, label, bg })` is the single avatar.

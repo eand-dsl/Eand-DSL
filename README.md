@@ -50,6 +50,13 @@ committed, so deploys don't need Python). Regenerate with:
 python3 packages/react-design-system/scripts/build-icons.py
 ```
 
+The e& lockup is generated the same way, from the four SVGs exported out of Figma
+`e&-logo` 27032:50455 into `src/icons/logo-raw/`:
+
+```bash
+python3 packages/react-design-system/scripts/build-logo.py
+```
+
 `design.md` is generated too — edit `tools/generate_design_md.py`, not the output:
 
 ```bash
