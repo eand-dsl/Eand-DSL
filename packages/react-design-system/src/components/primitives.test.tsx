@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Badge, ProgressBar, Stepper, Dismiss, AtomSurface, CardBgColor, CARD_BG_TINTS, AddTrigger, Logo } from './primitives';
+import { Badge, ProgressBar, Stepper, Dismiss, AtomSurface, CardBgColor, CARD_BG_TINTS, AddTrigger, Logo, SectionLinkButton } from './primitives';
 
 /* ---------------- Badge ---------------- */
 
@@ -304,4 +304,27 @@ test('Logo color prop overrides the version ink', () => {
 test('Logo carries an accessible name', () => {
   render(<Logo />);
   expect(screen.getByRole('img', { name: /e&/i })).toBeInTheDocument();
+});
+
+/* ---------------- SectionLinkButton vs Figma `section-link` 25440:14243 ----------------
+   The published component is this icon-only 40x40 button. `SectionLink` already meant the
+   composed header row, so this ships beside it rather than renaming an export. */
+
+test('SectionLinkButton is 40x40 at radius 14', () => {
+  render(<SectionLinkButton />);
+  const btn = screen.getByRole('button', { name: 'See all' });
+  expect(btn.style.width).toBe('40px');
+  expect(btn.style.height).toBe('40px');
+  expect(btn.style.borderRadius).toBe('14px');
+});
+
+test('SectionLinkButton uses the icon set, not a drawn chevron', () => {
+  const { container } = render(<SectionLinkButton />);
+  expect(container.querySelector('svg')).toBeInTheDocument();
+  expect(container.textContent!.trim()).toBe('');   // no "\u203a" character standing in
+});
+
+test('SectionLinkButton inverse goes glass', () => {
+  render(<SectionLinkButton surface="inverse" />);
+  expect(screen.getByRole('button').style.background).toBe('rgba(255, 255, 255, 0.2)');
 });

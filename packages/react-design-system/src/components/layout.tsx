@@ -1,7 +1,7 @@
 import { type CSSProperties, type HTMLAttributes, type ReactNode, useState } from 'react';
 import { T, space, color, ty, radius } from '../system';
 import { Icon } from '../icons';
-import { Text, IconBox } from './primitives';
+import { Text, IconBox, SectionLinkButton } from './primitives';
 
 /* ---------------- Section: the full-width body container ----------------
    Figma V1.1 Section (page 25519:12055, final 32899:266508): a rounded container
@@ -51,24 +51,6 @@ export interface SectionProps extends Omit<HTMLAttributes<HTMLElement>, 'title'>
   onSeeAll?: () => void;
 }
 
-function TriggerChevron({ onDark }: { onDark: boolean }) {
-  return (
-    // 40px rounded button (radius 14); default = white w/ #615d6d chevron, inverse = glass w/ white chevron
-    <span style={{
-      width: 40, height: 40, flex: 'none', borderRadius: radius('4'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-      background: onDark ? color('surface.glass.white.lg') : color('surface.raised.default'),
-      backdropFilter: onDark ? 'blur(20px)' : undefined, WebkitBackdropFilter: onDark ? 'blur(20px)' : undefined,
-      color: onDark ? 'rgba(255,255,255,0.70)' : '#615d6d',
-      boxShadow: onDark ? 'none' : '0 1px 4px rgba(25,19,41,0.12)',
-    }}>
-      {/* Figma puts a chevron-right glyph in a 24 icon-size here. This used to be a
-          hand-drawn <path>, which the library's own guideline forbids — never draw an
-          icon, the set has one. */}
-      <Icon name="chevron-right" size={24} />
-    </span>
-  );
-}
-
 export function Section({
   title = 'Section', context, titleLine = 1, filterPill, surface = 'default', showHeader = true,
   trigger, triggerLabel = 'See all', onTrigger, size, gradient, carousel,
@@ -98,9 +80,9 @@ export function Section({
           <div style={{ display: 'flex', alignItems: 'center', gap: space('sm'), flex: 'none' }}>
             {filterPill}
             {trig === 'chevron' ? (
-              <button onClick={fire} aria-label="See all" style={{ border: 0, background: 'transparent', padding: 0, cursor: 'pointer' }}>
-                <TriggerChevron onDark={onDark} />
-              </button>
+              // Figma's published `section-link` button — shared with the export rather
+              // than kept as a private copy here.
+              <SectionLinkButton surface={onDark ? 'inverse' : 'default'} onClick={fire} />
             ) : trig === 'button' ? (
               <button onClick={fire} style={{ display: 'inline-flex', alignItems: 'center', gap: 2, border: 0, background: 'transparent', cursor: 'pointer', padding: `0 ${space('xs')}`, color: onDark ? text : color('text.brand.default'), ...ty('button.sm') }}>
                 {triggerLabel}<IconBox size="md"><Icon name="chevron-right-sm" size={16} /></IconBox>

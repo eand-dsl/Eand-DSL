@@ -59,13 +59,13 @@ npm run smoke               # built ESM imports and renders
 npm pack --dry-run          # dist + 2 md files only
 ```
 
-`npm pack --dry-run` must list **23 files**: `dist/**` (20), `package.json`,
+`npm pack --dry-run` must list **24 files**: `dist/**` (21), `package.json`,
 `MAKE_KIT_GUIDELINES.md`, `MAKE_KIT_README.md`. If `src/`, `scripts/` or
 `guidelines-facts.json` appear, fix the `files` array in `package.json` — it must stay
 `["dist", "MAKE_KIT_GUIDELINES.md", "MAKE_KIT_README.md"]`. (`npm run kit:release`
 asserts the *shape* rather than the count, so a release cannot ship a regressed `files`
-array; the count here is a human sanity check and moves when a module is added — it went
-19 -> 20 when the logo artwork landed.)
+array; the count here is a human sanity check and moves whenever a module is added — dist
+went 19 -> 20 with the logo artwork and 20 -> 21 with the voucher shape.)
 
 ### 2. Set the version
 

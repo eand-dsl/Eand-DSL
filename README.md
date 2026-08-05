@@ -7,7 +7,7 @@ The e& Consumer App design system: a React component library built to the Figma
 
 ```
 packages/
-  react-design-system/   @eand/react-design-system — 54 components, design tokens,
+  react-design-system/   @eand/react-design-system — 55 components, design tokens,
                          and the 396-icon e& App Icons set (folded in: <Icon name="…" />)
   tokens-native/         SwiftUI + Compose token exports from the same variable source
 apps/
@@ -76,7 +76,7 @@ npm run typecheck           # src + code-connect + demo
 npm run guidelines:check    # Make kit guidelines match the library
 npm run guidelines:example  # the worked example compiles against dist
 npm run smoke               # built ESM imports and renders
-npm pack --dry-run          # dist + the two MD files only (22 files)
+npm pack --dry-run          # dist + the two MD files only (24 files)
 npx vite build --config demo/vite.config.ts
 ```
 

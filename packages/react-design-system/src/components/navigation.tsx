@@ -342,7 +342,8 @@ export function SectionLink({ title, link = 'See all', onLinkClick, style, ...re
       <Text variant="heading.xs">{title}</Text>
       <button onClick={onLinkClick} style={{ display: 'inline-flex', alignItems: 'center', gap: 2, background: 'transparent', border: 0, cursor: 'pointer', color: color('text.brand.default') }}>
         <Text variant="button.sm" color={color('text.brand.default')}>{link}</Text>
-        <IconBox size="md">›</IconBox>
+        {/* Was a literal "›" character standing in for a glyph the icon set has. */}
+        <Icon name="chevron-right-sm" size={16} />
       </button>
     </div>
   );

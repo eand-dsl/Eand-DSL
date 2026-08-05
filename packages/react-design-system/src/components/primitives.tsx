@@ -307,6 +307,41 @@ export function CardBgColor({ tint = 'default', fixedSize, style, children, ...r
   );
 }
 
+/* ---------------- SectionLinkButton ----------------
+   Figma's published `section-link` (25440:14243, 9 symbols) is this: an icon-only 40x40
+   link button that sits top-right of a Section header. It is NOT the composed header row
+   that `SectionLink` exports — that name was taken first, so this ships alongside it
+   rather than renaming an export out from under callers. See design-questions.md q8.
+
+   Size: every published symbol and the `section-link/lg` variable say 40. The statesheet
+   prose says Lg 48 / Md 36 / Sm 32. Two sources against one, so 40 — but the conflict is
+   still open with design. */
+export interface SectionLinkButtonProps extends HTMLAttributes<HTMLButtonElement> {
+  surface?: 'default' | 'inverse';
+  /** Glyph to show; Figma's default is a right chevron. */
+  icon?: ReactNode;
+  disabled?: boolean;
+  onClick?: () => void;
+}
+export function SectionLinkButton({ surface = 'default', icon, disabled, style, ...rest }: SectionLinkButtonProps) {
+  const onDark = surface === 'inverse';
+  return (
+    <button type="button" aria-label="See all" disabled={disabled}
+      style={{
+        width: 40, height: 40, flex: 'none', padding: `0 ${space('md')}`, border: 0,
+        borderRadius: radius('4'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+        background: onDark ? color('surface.glass.white.lg') : color('surface.raised.default'),
+        backdropFilter: onDark ? 'blur(20px)' : undefined, WebkitBackdropFilter: onDark ? 'blur(20px)' : undefined,
+        color: onDark ? color('text.default.inverse-subtle') : color('text.default.subtle'),
+        boxShadow: onDark ? 'none' : '0 1px 4px rgba(25,19,41,0.12)',
+        opacity: disabled ? 0.4 : 1, cursor: disabled ? 'default' : 'pointer', boxSizing: 'border-box',
+        ...style,
+      }} {...rest}>
+      {icon ?? <Icon name="chevron-right" size={24} />}
+    </button>
+  );
+}
+
 /* ---------------- Logo ----------------
    Figma `e&-logo` 27032:50455, 96x96, `version` = default | white | midnight | red.
    `default` is the red app tile with a white lockup; the other three are the bare
