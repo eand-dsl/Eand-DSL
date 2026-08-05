@@ -72,6 +72,26 @@ by ID (`remote:false`) but its collection no longer lists it, so the fill carrie
 binding. Live `color/green/600` is the identical colour and is what the code should use.
 Worth re-pointing that binding in Figma.
 
+## P1 status — the list below is STALE (checked 2026-08-05)
+
+**Most of P1 was actioned in July and this section was never updated.** `git log --since=2026-07-06 -- src/components` shows dedicated commits for Badge, Button, Checkbox, Radio, Chip, FilterPill, ProgressBar, Tooltip, BottomSheet, AtomSurface, and two passes over the card family's axes and heights. Reading the list below as a worklist means re-doing finished work — that was verified the slow way before it was noticed.
+
+What the July pass consistently *did* fix: **variant axes**. What it consistently *missed*: **metrics and type ramp**. Every component re-read against Figma on 2026-08-05 had the right axes and the wrong numbers:
+
+| Component | Axes (July) | Still drifted, fixed 2026-08-05 |
+|---|---|---|
+| ProgressBar | h4 + green default ✓ | pill radius and grey track — Figma has neither |
+| Alert | `Staus` axis + alert-message colours ✓ | 24px clipped triangle mark (Figma: 32px pill), tone-matched underlined action (Figma: plain midnight), gap 12 (Figma: 4) |
+| Snackbar | tones ✓ | title semibold 14 (Figma: Bold 16/20), no subtitle slot, action not underlined, px/gap |
+| NewCard | `selected` axis ✓ | still a boxed card; Figma is a story tile with no surface |
+| PlanCard | `color-scheme` axis, width, radius ✓ | whole type ramp one step small; badge sm not lg |
+| Badge | statuses + heights ✓ | `lg` had no min-width |
+| AddTrigger | — untouched | full rebuild: 40px dashed pill → 72px glass panel |
+
+**Consequence for anyone continuing:** do not trust this section, and do not trust the per-section drift tables either — `07-cards` records NewCard as 170×300 when Figma says 137×224, and lists ServiceCard fixes that already shipped. Read the component from Figma, diff it against the code, then act. The audit is a map of where to look, not a list of what to do.
+
+Still believed outstanding (not yet re-read against Figma): ProductCard · General `Card` · Voucher · Logo · ActionBar · Tabs · SectionLink · QuickAction · Section.
+
 ## P1 — drift fixes on existing components (Phase B, proceed on approval)
 
 Rebuilds (V1.1 shape differs fundamentally): **SmilesBalance · Voucher · PlanUsageBar · AddTrigger · Logo** (real lockup SVGs, 4 versions) · **ActionBar** — CORRECTED by 10-extensions: the sticky-footer model was RELOCATED to Figma's `Footer`/`Sticky footer` sets (27907:20590 / 29415:15592), not removed; align code to them (shadow not top-border, padding 20, type variants, safe-area) AND separately consider the new inline `action-bar` row from 03 as its own component. **TopBar brand variant** similarly maps to `Profile header - NEW` (drifted: 48px@10% circle buttons, 14-Bold number, action-card carousel) — two duplicate Figma sets need a design merge first.
