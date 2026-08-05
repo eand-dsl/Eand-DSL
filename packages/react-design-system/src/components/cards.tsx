@@ -1,9 +1,10 @@
 import type { HTMLAttributes, ReactNode } from 'react';
-import { color, space, radius, rowHeight, T } from '../system';
+import { color, space, radius, rowHeight, ty, PILL, T } from '../system';
 import { Text, Badge, SmilesRow, cardBgTint } from './primitives';
 import { Icon } from '../icons';
 import type { CardBgTint } from './primitives';
 import { Button } from './Button';
+import { VOUCHER_SHAPE_PATH, VOUCHER_SHAPE_SIZE } from './voucher-shape';
 
 const mutedOn = (onDark: boolean) => (onDark ? 'rgba(255,255,255,0.72)' : color('text.default.muted'));
 const imageBox = (h: number, node?: ReactNode) => (
@@ -261,19 +262,65 @@ export function SmilesBalance({ points = '12,450 Smiles', cta = 'Redeem', style,
   );
 }
 
-/* ---------------- Voucher ---------------- */
-export interface VoucherProps extends HTMLAttributes<HTMLDivElement> {
-  value?: ReactNode; code?: ReactNode; validity?: ReactNode; status?: 'active' | 'redeemed' | 'expired';
+/* ---------------- Voucher ----------------
+   Figma `Voucher` 28278:13817 — a fixed 144x144 ticket tile, `Display`(Light|Dark) x
+   `State`(Default|Applied). The V1.0 code was a full-width coupon row that faked the
+   perforation with a dashed border; the real shape is one exported path whose dash
+   subpaths punch holes (see voucher-shape.ts).
+
+   `status` is the V1.0 model and has no clean V1.1 mapping: Figma has only Default and
+   Applied. active -> Default and redeemed -> Applied are unambiguous; `expired` has no
+   counterpart, so it renders Applied-but-dimmed and is flagged for design
+   (tools/audit/v1.1/design-questions.md q9) rather than invented. */
+export type VoucherDisplay = 'light' | 'dark';
+export type VoucherState = 'default' | 'applied';
+export interface VoucherProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
+  title?: ReactNode;
+  /** Second line under the title, e.g. "above AED 60+". */
+  description?: ReactNode;
+  display?: VoucherDisplay;
+  state?: VoucherState;
+  onApply?: () => void;
+  /** @deprecated V1.0. `active`->Default, `redeemed`->Applied; `expired` dims the tile. */
+  status?: 'active' | 'redeemed' | 'expired';
 }
-export function Voucher({ value = 'AED 50 off', code = 'EAND50', validity, status = 'active', style, ...rest }: VoucherProps) {
-  const s = status === 'active' ? 'positive' : status === 'expired' ? 'danger' : 'neutral';
+export function Voucher({
+  title = 'Title with 2 lines', description = 'above AED 60+',
+  display = 'light', state, status, onApply, style, ...rest
+}: VoucherProps) {
+  const st: VoucherState = state ?? (status && status !== 'active' ? 'applied' : 'default');
+  const dark = display === 'dark';
+  // Dark binds surface/raised/midnight (#312c40), not base/midnight — read off the
+  // Dark variants (28278:13836/13845), where base/midnight does not appear at all.
+  const ticket = dark ? color('surface.raised.midnight') : color('surface.base.inverse');
+  const ink = dark ? color('text.default.inverse') : color('text.default.default');
+  const applied = st === 'applied';
+  // The Applied green differs per display: subtle (#54bc72) on light, muted (#9ff3b7) on
+  // dark. Using one green for both left the dark tile at roughly 1.3:1 — unreadable.
+  const appliedInk = dark ? color('text.positive.muted') : color('text.positive.subtle');
   return (
-    <div style={{ width: '100%', boxSizing: 'border-box', background: color('surface.raised.default'), border: `1px dashed ${color('border.surface-based.raised.default')}`, borderRadius: radius('5'), padding: space('lg'), display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: space('md'), opacity: status === 'expired' ? 0.6 : 1, ...style }} {...rest}>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-        <Text variant="heading.xs">{value}</Text>
-        <Text variant="body.sm" color={color('text.default.muted')}>Code: {code}{validity ? ` · ${validity}` : ''}</Text>
+    <div style={{
+      position: 'relative', width: VOUCHER_SHAPE_SIZE, height: VOUCHER_SHAPE_SIZE, flex: '0 0 auto',
+      boxSizing: 'border-box', display: 'flex', flexDirection: 'column', alignItems: 'center',
+      borderRadius: radius('5'), overflow: 'hidden', opacity: status === 'expired' ? 0.6 : 1, ...style,
+    }} {...rest}>
+      {/* Shape 28278:13819 — outline, side notches and perforation in one path. */}
+      <svg aria-hidden width={VOUCHER_SHAPE_SIZE} height={VOUCHER_SHAPE_SIZE}
+        viewBox={`0 0 ${VOUCHER_SHAPE_SIZE} ${VOUCHER_SHAPE_SIZE}`}
+        style={{ position: 'absolute', inset: 0 }}>
+        <path d={VOUCHER_SHAPE_PATH} fill={ticket} />
+      </svg>
+      <div style={{ position: 'relative', flex: 1, minHeight: 0, width: '100%', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: `${space('lg')} ${space('sm')}`, overflow: 'hidden' }}>
+        <Text as="div" variant="title.xs" color={ink} style={{ lineHeight: 1.3, width: '100%' }}>{title}</Text>
+        {description != null ? <Text as="div" variant="body.md" color={ink} style={{ lineHeight: 1.4, width: '100%' }}>{description}</Text> : null}
       </div>
-      <Badge status={s as any} size="sm">{status}</Badge>
+      <div style={{ position: 'relative', width: '100%', boxSizing: 'border-box', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: `${space('lg')} ${space('md')}` }}>
+        <button type="button" onClick={applied ? undefined : onApply} disabled={applied}
+          style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: space('xs'), border: 0, background: 'transparent', borderRadius: PILL, cursor: applied ? 'default' : 'pointer', padding: `0 ${space('xs')}`, ...ty('button.lg'), color: applied ? appliedInk : (dark ? color('text.default.inverse') : color('button.tertiary.text.midnight.default')) }}>
+          {applied ? 'Applied' : 'Apply'}
+          <Icon name={applied ? 'check' : 'add-filled'} size={24} />
+        </button>
+      </div>
     </div>
   );
 }

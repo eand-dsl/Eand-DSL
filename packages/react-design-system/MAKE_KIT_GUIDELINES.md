@@ -134,7 +134,7 @@ mParking → `car` · All Services → `grid` · e& Shop → `shop` · retail br
 - `ProductCard({ eyebrow, title, image, discount, price, period, pts, type: addon|product|category, tint, width })` — card-features. `pts` shows Smiles pricing; `tint` is a `CardBgColor` tint name for the media area.
 - `DealCard({ image, title, subtitle, badge, width })` · `NewCard({ image, title, width, selected })` · `ServiceCard({ icon, label, badge, size: grid|carousel })` — badge e.g. `<Badge offer="new-plan" size="sm">New</Badge>`.
 - `Highlight({ title, subtitle, image, cta, action, tone: brand|image|purple, background, width })` — full-bleed banner; `action` (`{ title, subtitle, cta }`) adds the Play-now action bar. The default `tone="image"` reserves a 452px photo banner, so **pass an `image` with it** — without one you get a tall empty gradient. With no artwork to hand, use `tone="brand"` or `tone="purple"`, which are 200px and designed to stand alone.
-- `SmilesBalance({ points, cta })` — the gold loyalty balance strip; `Voucher({ value, code, validity, status: active|redeemed|expired })` — the dashed coupon row.
+- `SmilesBalance({ points, cta })` — the gold loyalty balance strip; `Voucher({ title, description, display: light|dark, state: default|applied, onApply })` — a fixed 144×144 ticket tile with notched sides and a punched perforation, carrying a title, a qualifier line and an Apply action. It is a fixed-size carousel cell, not a full-width row: put several in a `<Section carousel>`.
 
 ## UX → UI assembly (turn a wireframe into a screen)
 | UX pattern | Use |

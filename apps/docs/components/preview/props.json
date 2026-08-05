@@ -287,30 +287,42 @@
   ],
   "Voucher": [
     {
-      "name": "code",
+      "name": "description",
       "type": "ReactNode",
       "required": false,
-      "default": "EAND50",
+      "default": "above AED 60+",
+      "description": "Second line under the title, e.g. \"above AED 60+\"."
+    },
+    {
+      "name": "display",
+      "type": "enum",
+      "required": false,
+      "default": "light",
+      "description": ""
+    },
+    {
+      "name": "onApply",
+      "type": "(() => void)",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "state",
+      "type": "enum",
+      "required": false,
       "description": ""
     },
     {
       "name": "status",
       "type": "enum",
       "required": false,
-      "default": "active",
-      "description": ""
+      "description": "@deprecated V1.0. `active`->Default, `redeemed`->Applied; `expired` dims the tile."
     },
     {
-      "name": "validity",
+      "name": "title",
       "type": "ReactNode",
       "required": false,
-      "description": ""
-    },
-    {
-      "name": "value",
-      "type": "ReactNode",
-      "required": false,
-      "default": "AED 50 off",
+      "default": "Title with 2 lines",
       "description": ""
     }
   ],

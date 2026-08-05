@@ -771,12 +771,19 @@ export const PAGES: Page[] = [
     blurb: 'Gold loyalty strip showing the Smiles balance with a redeem action.',
     render: () => cardStage(<div style={{ width: 320 }}><SmilesBalance points="12,450 Smiles" cta="Redeem" /></div>) },
 
-  { id: 'voucher', group: 'Cards', title: 'Voucher', frame: 'phone',
-    blurb: 'Dashed-border voucher: value, code, validity and a status badge (active / redeemed / expired).',
+  { id: 'voucher', group: 'Cards', title: 'Voucher', frame: 'phone', minH: 200,
+    blurb: '144×144 ticket tile with notched sides and a punched perforation. Light or dark, Apply or Applied.',
     controls: [
-      { kind: 'select', prop: 'status', label: 'Status', options: ['active', 'redeemed', 'expired'] },
+      { kind: 'select', prop: 'display', label: 'Display', options: ['light', 'dark'], def: 'light' },
+      { kind: 'select', prop: 'state', label: 'State', options: ['default', 'applied'], def: 'default' },
+      { kind: 'text', prop: 'title', label: 'Title', def: 'Title with 2 lines' },
+      { kind: 'text', prop: 'description', label: 'Description', def: 'above AED 60+' },
     ],
     render: (v) => cardStage(
-      <div style={{ width: 320 }}><Voucher value="AED 50 off" code="EAND50" validity="Exp 30 Jun" status={p(v, 'status')} /></div>
+      // Fixed-size carousel cells, so two sit side by side the way a Section would place them.
+      <div style={{ display: 'flex', gap: 8 }}>
+        <Voucher display={p(v, 'display')} state={p(v, 'state')} title={p(v, 'title')} description={p(v, 'description')} />
+        <Voucher display={p(v, 'display')} state={p(v, 'state') === 'applied' ? 'default' : 'applied'} title="Free delivery" description="on any order" />
+      </div>
     ) },
 ];

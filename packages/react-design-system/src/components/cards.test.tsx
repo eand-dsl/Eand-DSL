@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { ProductCard, PlanCard, DealCard, NewCard, ServiceCard, Highlight } from './cards';
+import { ProductCard, PlanCard, DealCard, NewCard, ServiceCard, Highlight, Voucher } from './cards';
 
 const root = (c: HTMLElement) => c.firstElementChild as HTMLElement;
 
@@ -181,4 +181,55 @@ test('PlanCard discount badge is the lg size', () => {
   render(<PlanCard discount />);
   // badges-offers on plans-mini is h24 min-w64 — the lg step, not sm.
   expect(screen.getByText('Discount').closest('span')!.style.minWidth).toBe('64px');
+});
+
+/* ---------------- Voucher vs Figma `Voucher` 28278:13817 ----------------
+   V1.1 is a fixed 144x144 ticket tile: Display (Light/Dark) x State (Default/Applied).
+   The code was a full-width coupon ROW faking the perforation with a dashed border. */
+
+test('Voucher is a fixed 144x144 tile, not a full-width row', () => {
+  const { container } = render(<Voucher title="Title with 2 lines" />);
+  const el = root(container);
+  expect(el.style.width).toBe('144px');
+  expect(el.style.height).toBe('144px');
+});
+
+test('Voucher draws the ticket silhouette as a path, not a dashed border', () => {
+  const { container } = render(<Voucher />);
+  expect(container.querySelector('svg path')).toBeInTheDocument();
+  expect(root(container).style.border).not.toContain('dashed');
+});
+
+test('Voucher Display tints the ticket and the ink', () => {
+  const light = render(<Voucher display="light" />).container;
+  const dark = render(<Voucher display="dark" />).container;
+  // SVG presentation attributes keep the token's raw hex — jsdom only normalises to rgb()
+  // for CSS style properties.
+  expect(light.querySelector('path')!.getAttribute('fill')).toBe('#ffffff');   // surface/base/inverse
+  expect(dark.querySelector('path')!.getAttribute('fill')).toBe('#312c40');    // surface/raised/midnight
+});
+
+test('Voucher Applied green differs per display, for contrast', () => {
+  // subtle #54bc72 on light, muted #9ff3b7 on dark. One green for both left the dark
+  // tile at about 1.3:1 against #312c40.
+  render(<Voucher display="light" state="applied" />);
+  expect(screen.getByText('Applied').closest('button')!.style.color).toBe('rgb(84, 188, 114)');
+  render(<Voucher display="dark" state="applied" />);
+  const dark = screen.getAllByText('Applied').at(-1)!.closest('button')!;
+  expect(dark.style.color).toBe('rgb(159, 243, 183)');
+});
+
+test('Voucher State=Applied swaps the action to a positive "Applied"', () => {
+  render(<Voucher state="applied" />);
+  expect(screen.getByText('Applied')).toBeInTheDocument();
+  expect(screen.queryByText('Apply')).not.toBeInTheDocument();
+});
+
+test('Voucher deprecated status maps onto the new state model', () => {
+  // active -> Default, redeemed -> Applied. `expired` has no V1.1 equivalent and is
+  // rendered as Applied-but-dimmed until design rules on it.
+  render(<Voucher status="redeemed" />);
+  expect(screen.getByText('Applied')).toBeInTheDocument();
+  const { container } = render(<Voucher status="expired" />);
+  expect(Number(root(container).style.opacity)).toBeLessThan(1);
 });
