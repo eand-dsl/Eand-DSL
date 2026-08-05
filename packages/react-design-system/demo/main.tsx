@@ -1,8 +1,8 @@
 import { createRoot } from 'react-dom/client';
 import {
   TopBar, NavBar, Section, Tabs, ListRow, QuickAction, Chip, Searchbar, Badge, Button,
-  Icon as EaIcon,
 } from '../src';
+import { Icon as EaIcon } from '../../icons/src';
 
 const ic = (name: string, size = 24, color?: string) => <EaIcon name={name} size={size} color={color} />;
 
