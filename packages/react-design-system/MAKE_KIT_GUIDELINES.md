@@ -1,8 +1,9 @@
 # e& Design System — Figma Make kit guidelines
 
 These guidelines teach Figma Make how to build e& Consumer App screens with
-`@eand/react-design-system`. The package is **web React 18**, self-contained
-(token styles are inline — no separate CSS import required), and renders via esm.sh.
+`@eand/react-design-system`. The package is **web React 18**, Vite-compatible, and
+self-contained: no dependencies, and token styles are inline, so no separate CSS import
+is required.
 
 Everything ships from one package — components, `Icon`, and the design tokens:
 

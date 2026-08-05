@@ -12,20 +12,31 @@ npm test             # vitest
 ```
 `npm run build:tokens` regenerates tokens from `../../variables.json` (re-run after a new Figma variables export).
 
-## Cut a kit release (GitHub)
+## How this reaches Figma Make
+
+**Figma Make kits only accept npm packages** — the public npm registry, or a Figma-hosted
+private registry scoped to your org. GitHub repositories and CDN URLs such as esm.sh are
+**not** accepted as kit sources
+([Figma developer docs](https://developers.figma.com/docs/code/bring-your-design-system-package/)).
+
+So the pipeline has two stages, and only the second one feeds Make:
+
+1. **`npm run kit:release`** → pushes the built package to
+   [eand-dsl/eand-make-kit](https://github.com/eand-dsl/eand-make-kit) and tags
+   `v<version>`. This is the versioned, reviewable artifact and the thing you publish
+   *from*. It is a **build artifact — never edit it by hand**; the next release
+   overwrites it.
+2. **`npm publish`** → puts that same package on a registry Make can install from. This
+   is the step that makes the kit usable, and it is manual because it needs e& org
+   credentials.
 
 ```bash
 npm run kit:release -- --dry-run   # gate + stage, print the tree, push nothing
 npm run kit:release                # gate + stage, force-push and tag eand-dsl/eand-make-kit
 ```
 
-`scripts/release-kit.ts` runs the full gate below, then publishes `dist/` plus these two
-markdown files to [eand-dsl/eand-make-kit](https://github.com/eand-dsl/eand-make-kit) and
-tags it `v<version>`. That repo is a **build artifact — never edit it by hand**; the next
-release overwrites it. Figma Make can consume the tag directly through esm.sh, which needs
-no npm registry and no credentials.
-
-Publishing to npm is separate and still manual — see below.
+Figma's own requirements for the package — React 18, Vite-compatible, no `workspace:*`
+dependencies, published to a registry — are all met except the last.
 
 ## Publish runbook (npm)
 
@@ -48,10 +59,11 @@ npm run smoke               # built ESM imports and renders
 npm pack --dry-run          # dist + 2 md files only
 ```
 
-`npm pack --dry-run` must list **23 files**: `dist/**` (20), `package.json`,
+`npm pack --dry-run` must list **22 files**: `dist/**` (19), `package.json`,
 `MAKE_KIT_GUIDELINES.md`, `MAKE_KIT_README.md`. If `src/`, `scripts/` or
 `guidelines-facts.json` appear, fix the `files` array in `package.json` — it must stay
-`["dist", "MAKE_KIT_GUIDELINES.md", "MAKE_KIT_README.md"]`.
+`["dist", "MAKE_KIT_GUIDELINES.md", "MAKE_KIT_README.md"]`. (`npm run kit:release`
+asserts this too, so a release cannot ship a regressed `files` array.)
 
 ### 2. Set the version
 
@@ -63,26 +75,52 @@ peers (`^18 || ^19`). Confirm there are no `workspace:*` dependencies before pub
 
 ### 3. Pick a registry and configure auth
 
-**A) Figma private registry — recommended, since you have the e& org.**
-1. Org admin: Figma → Admin → Resources → **npm registry**, add the `@eand` scope.
-2. Point the scope at Figma's registry and authenticate. In `~/.npmrc` (not the repo —
-   never commit a token):
+**A) Figma private registry — the intended route for e&.**
+
+Keeps the library inside the *e& UAE Consumer* org. Requires a paid Figma plan (the org
+qualifies) and, critically, **an org admin** — only admins can claim an npm scope.
+
+1. **Org admin** enables the npm registry for the org and claims the `@eand` scope, then
+   issues a publish token. This is done in Figma's admin settings; Figma's own
+   npm-registry instructions are the authority on the current UI path, the registry
+   host, and how tokens are minted. Do not guess these values.
+2. Point the scope at that host and authenticate, in `~/.npmrc` — **not** in the repo, and
+   never commit a token:
    ```
    @eand:registry=https://<figma-registry-host>/
    //<figma-registry-host>/:_authToken=${FIGMA_NPM_TOKEN}
    ```
-   Take the host and token-minting steps from Figma's own npm-registry instructions;
-   they are the authority on both.
 3. Publish:
    ```bash
    npm publish
    ```
 
-**B) Public npm.** The `@eand` scope is private by default, so the flag is required:
+If you are not an org admin, this is the blocking step — see "Requesting the scope" below.
+
+**B) Public npm — fallback.** Works without anyone's permission, but publishes the
+compiled component library, tokens, and icon set publicly. That is a business decision,
+not a technical one. The `@eand` scope is private by default, so the flag is required:
 ```bash
 npm login
 npm publish --access public
 ```
+
+### Requesting the scope (if you are not a Figma org admin)
+
+Send your *e& UAE Consumer* Figma org admin this:
+
+> I need to publish our design system as a private npm package so it can be used as a
+> Figma Make kit. Could you enable the **Figma private npm registry** for the
+> *e& UAE Consumer* org and claim the **`@eand`** scope, then issue me a publish token?
+>
+> Figma's setup docs: https://developers.figma.com/docs/code/working-with-npm/
+>
+> The package is `@eand/react-design-system` — the e& Consumer App component library,
+> built from the DSL V1.1 Figma variables. Publishing it privately keeps it inside the
+> org; the alternative is publishing it to public npm, which I'd rather avoid.
+>
+> I need three things back: the registry host, a publish token scoped to `@eand`, and
+> confirmation the scope is claimed.
 
 ### 4. Verify what landed
 
@@ -92,13 +130,14 @@ npm view @eand/react-design-system version
 
 ### 5. Create the Make kit in Figma
 
-1. Figma Make → **Make kits** → create a kit → point it at the package, either by name
-   (`@eand/react-design-system`, once published per the steps above) or by esm.sh URL
-   against a tag of the generated kit repo:
-   `https://esm.sh/gh/eand-dsl/eand-make-kit@v1.0.0`. Always pin the tag — the kit repo's
-   `main` is force-pushed on every release.
-2. Paste **`MAKE_KIT_GUIDELINES.md`** as the kit guidelines. This is the artifact that
-   teaches Make how to assemble e& screens — the package alone is not enough.
+1. Figma Make → **Make kits** → create a kit → add the package by name,
+   `@eand/react-design-system`. Only a published npm package works here; a GitHub URL or
+   an esm.sh URL will not.
+2. The kit gets a `guidelines/` folder. Paste **`MAKE_KIT_GUIDELINES.md`** into
+   `guidelines/guidelines.md` — Make reads that file first. This is the artifact that
+   teaches Make how to assemble e& screens; the package alone is not enough. Figma can
+   auto-generate guidelines, but ours are hand-written and fact-checked against the
+   library, so use ours.
 3. In a Make file, prompt with a UX wireframe. Make installs the package and builds the
    screen from the components per the guidelines.
 
@@ -121,5 +160,5 @@ npx vite --config demo/vite.config.ts          # dev server
 ```
 
 ## Notes
-- Components are **inline-token-styled** (no required CSS import) so they render via esm.sh without extra setup. `dist/styles.css` ships the raw `--eand-*` CSS variables for anyone who wants them.
+- Components are **inline-token-styled** (no required CSS import) so they render with no build-step configuration, which is what keeps them reliable inside Make's Vite sandbox. `dist/styles.css` ships the raw `--eand-*` CSS variables for anyone who wants them.
 - Source of truth for component behavior/states/anatomy is the source repo's `design.md`; `MAKE_KIT_GUIDELINES.md` is the Make-facing distillation.

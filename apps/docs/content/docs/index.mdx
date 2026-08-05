@@ -76,7 +76,11 @@ the whole set in [Icons](/docs/foundations/icons).
 ## Figma Make
 
 `@eand/react-design-system` doubles as a **Figma Make kit**: register the package in Make
-and it assembles e& screens from these exact components. The kit is published from
-[`eand-dsl/eand-make-kit`](https://github.com/eand-dsl/eand-make-kit), which carries the
-`MAKE_KIT_GUIDELINES.md` you paste into Make as the kit guidelines — the package alone
-isn't enough; the guidelines are what teach Make how to assemble a screen.
+and it assembles e& screens from these exact components.
+
+Make kits install from an npm registry, so the package has to be published — to Figma's
+private org registry or to public npm. The release artifact lives at
+[`eand-dsl/eand-make-kit`](https://github.com/eand-dsl/eand-make-kit), which also carries
+the `MAKE_KIT_GUIDELINES.md` you paste into the kit's `guidelines/guidelines.md`. That
+file isn't optional — the package alone gives Make the components, the guidelines are
+what teach it how to assemble a screen.

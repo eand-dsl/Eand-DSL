@@ -1,10 +1,10 @@
 /**
  * Publishes the Figma Make kit to its own GitHub repository.
  *
- * The kit repo is a *build artifact*, never hand-edited. It exists because Figma Make
- * consumes the library from outside this monorepo — either through esm.sh, which resolves
- * package.json `exports` straight from a tagged GitHub tree, or from an npm registry. A
- * hand-copied kit is what drifted last time (it went on referencing demo/home-screen.png
+ * The kit repo is a *build artifact*, never hand-edited. It is the versioned, reviewable
+ * snapshot you publish to npm from — Figma Make itself only accepts npm packages, not
+ * GitHub repos or CDN URLs, so this repo feeds `npm publish` rather than Make directly.
+ * A hand-copied kit is what drifted last time (it went on referencing demo/home-screen.png
  * for weeks after that file was renamed), so nothing here is copied by hand.
  *
  * Usage:
@@ -81,13 +81,14 @@ for (const f of ['package.json', 'MAKE_KIT_GUIDELINES.md', 'MAKE_KIT_README.md']
   cpSync(join(PKG_DIR, f), join(stage, f));
 }
 
-// The monorepo's root .gitignore ignores dist/. The kit repo must NOT: esm.sh resolves
-// package.json "exports" against the committed tree, so an uncommitted dist/ is an empty kit.
+// The monorepo's root .gitignore ignores dist/. The kit repo must NOT: the whole point of
+// that repo is to be an inspectable snapshot of exactly what `npm publish` uploads, and a
+// tag with no dist/ shows nothing. `npm publish` is run from a checkout of it.
 writeFileSync(
   join(stage, '.gitignore'),
   [
-    '# dist/ is deliberately committed — esm.sh resolves package.json "exports" from the',
-    '# tagged tree, so the built output has to be in it.',
+    '# dist/ is deliberately committed — this repo is a snapshot of exactly what',
+    '# `npm publish` uploads, so the built output has to be in the tagged tree.',
     'node_modules/',
     '.DS_Store',
     '*.log',
@@ -144,11 +145,16 @@ rmSync(stage, { recursive: true, force: true });
 console.log(`
 ✓ published ${KIT_REPO} ${tag}
 
-  Repo    https://github.com/${KIT_REPO}
-  esm.sh  https://esm.sh/gh/${KIT_REPO}@${tag}
+  https://github.com/${KIT_REPO}/releases/tag/${tag}
 
-Next: in Figma Make, create a kit from that package and paste MAKE_KIT_GUIDELINES.md as
-the kit guidelines. The package alone does not teach Make how to assemble a screen.
+This is the artifact, not yet a usable Make kit — Figma Make installs from an npm
+registry, not from GitHub. To finish:
+
+  1. npm publish   (Figma private registry or public npm — see MAKE_KIT_README.md)
+  2. Figma Make -> Make kits -> add ${pkg.name}
+  3. paste MAKE_KIT_GUIDELINES.md into the kit's guidelines/guidelines.md
+
+Step 3 is not optional: the package alone does not teach Make how to assemble a screen.
 `);
 
 // ---------------------------------------------------------------- kit README
@@ -178,32 +184,36 @@ library and styled entirely from its exported design tokens.
 
 ## Set up the kit in Figma Make
 
-### 1. Point Make at the package
+> **This repository is not itself a Make kit source.** Figma Make kits accept **npm
+> packages only** — the public registry, or a Figma-hosted private registry scoped to your
+> org. GitHub repositories and CDN URLs such as esm.sh are not accepted
+> ([Figma docs](https://developers.figma.com/docs/code/bring-your-design-system-package/)).
+> This repo is the versioned artifact you publish *from*.
 
-**Option A — esm.sh (no credentials, works immediately)**
+### 1. Publish the package
 
-\`\`\`
-https://esm.sh/gh/${KIT_REPO}@${tag}
-\`\`\`
+Publish \`@eand/react-design-system\` to Figma's private npm registry (the intended route —
+it keeps the library inside the e& org, and needs a Figma org admin to claim the \`@eand\`
+scope) or to public npm. The full runbook — registry setup, auth, versioning, verification,
+and the exact request to send an org admin — is in
+[\`MAKE_KIT_README.md\`](./MAKE_KIT_README.md). It needs e& org credentials, so it is
+deliberately a manual, owner-operated step.
 
-Pin the tag, never \`main\`. \`main\` is force-pushed on every release, so an unpinned
-reference changes underneath your Make files without warning.
+The package already satisfies Figma's requirements: React 18 as a peer dependency,
+Vite-built, and no \`workspace:*\` dependencies (in fact no dependencies at all).
 
-**Option B — npm registry**
+### 2. Add it to a kit and paste the guidelines
 
-Publish \`@eand/react-design-system\` to Figma's private npm registry (recommended if you
-have the e& org) or to public npm, then add it to the kit by package name. The full
-runbook — registry setup, auth, versioning, and verification — is in
-[\`MAKE_KIT_README.md\`](./MAKE_KIT_README.md). Publishing needs e& org credentials, so it
-is deliberately a manual, owner-operated step.
+Figma Make → **Make kits** → create a kit → add \`@eand/react-design-system\` by name. The
+kit gets a \`guidelines/\` folder; copy all of
+[\`MAKE_KIT_GUIDELINES.md\`](./MAKE_KIT_GUIDELINES.md) into \`guidelines/guidelines.md\`,
+which Make reads first.
 
-### 2. Paste the guidelines
-
-Copy all of [\`MAKE_KIT_GUIDELINES.md\`](./MAKE_KIT_GUIDELINES.md) into the kit's
-guidelines field. **This step is not optional.** The package gives Make the components;
-the guidelines give it the golden rules, the prop reference, the UX→UI assembly table,
-and a worked screen. Without them Make produces code that imports the right library and
-still assembles the wrong screen.
+**This step is not optional.** The package gives Make the components; the guidelines give
+it the golden rules, the prop reference, the UX→UI assembly table, and a worked screen.
+Without them Make produces code that imports the right library and still assembles the
+wrong screen. Figma can auto-generate guidelines — don't; these are hand-written and
+fact-checked against the library on every push.
 
 ### 3. Prompt with a wireframe
 
@@ -220,9 +230,10 @@ npm install @eand/react-design-system   # once published to a registry
 import { TopBar, Section, ListRow, Button, Icon } from '@eand/react-design-system';
 \`\`\`
 
-Components are inline-token-styled, so they render correctly with no CSS import — that is
-what lets them work through esm.sh with no build step. \`dist/styles.css\` ships the raw
-\`--eand-*\` custom properties if you want them for your own styles.
+Components are inline-token-styled, so they render correctly with no CSS import and no
+build-step configuration — which is what keeps them reliable inside Make's Vite sandbox.
+\`dist/styles.css\` ships the raw \`--eand-*\` custom properties if you want them for your
+own styles.
 
 Icons are part of this package; there is no separate icons package. Every icon has an
 outline form and a \`-filled\` form: 198 base names, 396 total.

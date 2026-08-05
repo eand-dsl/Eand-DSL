@@ -109,16 +109,20 @@ npm run kit:release                # gate + stage, force-push and tag the kit re
 `.github/workflows/release-kit.yml` does the same on `workflow_dispatch` or a `v*` tag
 (needs a `KIT_REPO_TOKEN` secret with `contents: write` on the kit repo).
 
-Figma Make can take it either way:
+**The kit repo is not itself a Make source.** Figma Make kits accept **npm packages only**
+— public npm, or a Figma-hosted registry private to your org. GitHub repos and CDN URLs
+such as esm.sh are not accepted
+([Figma docs](https://developers.figma.com/docs/code/bring-your-design-system-package/)).
+The kit repo is the versioned artifact you publish *from*:
 
-- **esm.sh**, no credentials — `https://esm.sh/gh/eand-dsl/eand-make-kit@v1.0.0`. Pin the
-  tag; the kit repo's `main` is force-pushed on every release.
-- **npm** — publish `@eand/react-design-system` to Figma's private registry or public
-  npm. Runbook in `packages/react-design-system/MAKE_KIT_README.md`; needs e& org
-  credentials, so it is deliberately manual.
+1. `npm run kit:release` → tagged snapshot on GitHub
+2. `npm publish` → Figma's private `@eand` registry (needs a Figma **org admin** to claim
+   the scope) or public npm. Runbook and the exact admin request:
+   `packages/react-design-system/MAKE_KIT_README.md`
+3. Figma Make → Make kits → add `@eand/react-design-system` → paste
+   `MAKE_KIT_GUIDELINES.md` into the kit's `guidelines/guidelines.md`
 
-Either way, paste `MAKE_KIT_GUIDELINES.md` into the kit's guidelines field. The package
-alone does not teach Make how to assemble a screen.
+Step 3 is not optional. The package alone does not teach Make how to assemble a screen.
 
 ## Figma Code Connect
 
