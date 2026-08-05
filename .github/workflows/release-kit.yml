@@ -1,0 +1,64 @@
+# Publishes the Figma Make kit to eand-dsl/eand-make-kit.
+#
+# The same script runs locally via `npm run kit:release`. It exists here so a release
+# never depends on whose laptop cut it, and so the gate cannot be skipped by hand.
+#
+# Requires a repository secret `KIT_REPO_TOKEN`: a GitHub token with `contents: write` on
+# eand-dsl/eand-make-kit. The default GITHUB_TOKEN is scoped to this repository only and
+# cannot push to another one.
+name: release-kit
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Run the gate and stage the tree without pushing'
+        type: boolean
+        default: false
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-kit
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        # No root package.json and no npm workspaces — the package is standalone and owns
+        # its own lockfile, so every step has to run from inside it.
+        working-directory: packages/react-design-system
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: packages/react-design-system/package-lock.json
+
+      - run: npm ci
+
+      - name: Configure git identity for the generated commit
+        run: |
+          git config --global user.name 'eand-dsl-bot'
+          git config --global user.email 'eand-dsl-bot@users.noreply.github.com'
+
+      # The token goes in the credential helper rather than the remote URL so it is never
+      # written into the generated repo's .git/config.
+      - name: Authenticate to the kit repository
+        if: ${{ !inputs.dry_run }}
+        run: |
+          git config --global credential.'https://github.com'.helper \
+            '!f() { echo "username=x-access-token"; echo "password=$KIT_REPO_TOKEN"; }; f'
+        env:
+          KIT_REPO_TOKEN: ${{ secrets.KIT_REPO_TOKEN }}
+
+      - name: Release the kit
+        run: npm run kit:release ${{ inputs.dry_run && '-- --dry-run' || '' }}
+        env:
+          KIT_REPO_TOKEN: ${{ secrets.KIT_REPO_TOKEN }}

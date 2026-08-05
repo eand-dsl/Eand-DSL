@@ -12,7 +12,22 @@ npm test             # vitest
 ```
 `npm run build:tokens` regenerates tokens from `../../variables.json` (re-run after a new Figma variables export).
 
-## Publish runbook
+## Cut a kit release (GitHub)
+
+```bash
+npm run kit:release -- --dry-run   # gate + stage, print the tree, push nothing
+npm run kit:release                # gate + stage, force-push and tag eand-dsl/eand-make-kit
+```
+
+`scripts/release-kit.ts` runs the full gate below, then publishes `dist/` plus these two
+markdown files to [eand-dsl/eand-make-kit](https://github.com/eand-dsl/eand-make-kit) and
+tags it `v<version>`. That repo is a **build artifact — never edit it by hand**; the next
+release overwrites it. Figma Make can consume the tag directly through esm.sh, which needs
+no npm registry and no credentials.
+
+Publishing to npm is separate and still manual — see below.
+
+## Publish runbook (npm)
 
 Follow these five steps in order. Everything here is owner-operated — it needs e& org
 credentials, so it is deliberately not automated.
@@ -77,12 +92,15 @@ npm view @eand/react-design-system version
 
 ### 5. Create the Make kit in Figma
 
-1. Figma Make → **Make kits** → create a kit → add the package
-   `@eand/react-design-system`.
+1. Figma Make → **Make kits** → create a kit → point it at the package, either by name
+   (`@eand/react-design-system`, once published per the steps above) or by esm.sh URL
+   against a tag of the generated kit repo:
+   `https://esm.sh/gh/eand-dsl/eand-make-kit@v1.0.0`. Always pin the tag — the kit repo's
+   `main` is force-pushed on every release.
 2. Paste **`MAKE_KIT_GUIDELINES.md`** as the kit guidelines. This is the artifact that
    teaches Make how to assemble e& screens — the package alone is not enough.
-3. In a Make file, prompt with a UX wireframe. Make installs the package (via esm.sh)
-   and builds the screen from the components per the guidelines.
+3. In a Make file, prompt with a UX wireframe. Make installs the package and builds the
+   screen from the components per the guidelines.
 
 > **Maintenance:** after changing any component's props or the icon set, run
 > `npm run guidelines:check` — it fails when the guidelines fall out of sync, and the
@@ -90,7 +108,13 @@ npm view @eand/react-design-system version
 > produces broken screens.
 
 ## Local consumption proof
-`demo/` assembles a full e& Account screen from the package (`demo/account-screen.png`):
+
+`demo/` assembles a full e& Account screen from the built package
+(`demo/account-screen.png`). It lives in the **source repository**
+([eand-dsl/Eand-DSL](https://github.com/eand-dsl/Eand-DSL), under
+`packages/react-design-system/`) — it is not shipped in the published package or the
+generated kit repo, which carry only `dist/` and these two markdown files.
+
 ```bash
 npx vite --config demo/vite.config.ts          # dev server
 # or: npx vite build --config demo/vite.config.ts && serve demo/dist
@@ -98,4 +122,4 @@ npx vite --config demo/vite.config.ts          # dev server
 
 ## Notes
 - Components are **inline-token-styled** (no required CSS import) so they render via esm.sh without extra setup. `dist/styles.css` ships the raw `--eand-*` CSS variables for anyone who wants them.
-- Source of truth for component behavior/states/anatomy is the repo's `design.md`; `MAKE_KIT_GUIDELINES.md` is the Make-facing distillation.
+- Source of truth for component behavior/states/anatomy is the source repo's `design.md`; `MAKE_KIT_GUIDELINES.md` is the Make-facing distillation.
