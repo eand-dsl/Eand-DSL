@@ -51,6 +51,14 @@ Families entirely absent from the export:
 | `fixed-states/*` | 3 | |
 | `color/dismiss/*` | 2 | |
 
+**The re-export is now a script, not a manual step.** `npm run tokens:pull` (in
+`packages/react-design-system`) regenerates `variables.json` from the Figma REST API;
+`-- --check` fails without writing, so CI can catch staleness instead of it going unnoticed
+for six weeks. Needs `FIGMA_ACCESS_TOKEN` with `file_variables:read` (Enterprise scope — if
+it 403s, the identical JSON can be produced through the Figma MCP `use_figma` tool, which
+is how the numbers above were measured). `build-tokens.ts` already understands the new
+types, so the pull is safe to run.
+
 **Trap — do not re-export naively.** `scripts/build-tokens.ts` `conv()` handles only
 numbers and the `WEIGHT` string map. `EASING` values are objects
 (`{type:'CUSTOM_CUBIC_BEZIER', easingFunctionCubicBezier:{…}}`) and will stringify to
@@ -77,6 +85,12 @@ Icons bulk (~197 glyphs + variant axes) · Dismiss primitive · Suggestion Chips
 
 **Audit next:** Slider control family (Slider, interactive slider, indicator → fold into 02) · jump-to (→03) · Footer family (Footer, Sticky footer → 04) · Visual asset (→01) · Profile header - NEW (→03, awaiting design merge of duplicate sets) · Offer/Promo/Text banner sets (→08 extension).
 **Out of DSL-core scope:** Mshop banners. **Confirm-and-deprecate:** Info/Notification banner (likely superseded by 05 Alert/Snackbar). **Scratch:** "Banner 1", "Component 3" (accidental publishes).
+
+## Blocked on design — see [`tools/audit/v1.1/design-questions.md`](tools/audit/v1.1/design-questions.md)
+
+Switcher sizing · Highlight tone removals · TopBar brand vs `Profile header - NEW` ·
+Accordion (page still V1.0) · the six deprecations below. Each has two defensible answers,
+so they are written up as questions with the current code state rather than guessed at.
 
 ## Deprecations pending design confirm
 

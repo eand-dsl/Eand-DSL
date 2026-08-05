@@ -3,12 +3,13 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
+import { toCssValue, toTsValue } from './token-convert';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const VARS = resolve(here, '../../../variables.json');
 const OUTDIR = resolve(here, '../src/tokens');
 
-type Leaf = { $value: unknown };
+type Leaf = { $value: unknown; $type?: string };
 const isLeaf = (n: any): n is Leaf => n != null && typeof n === 'object' && '$value' in n;
 
 function deepMerge(t: any, s: any) {
@@ -43,34 +44,44 @@ function resolveVal(tree: any, leaf: Leaf, seen = new Set<string>()): unknown {
   return v;
 }
 
-const WEIGHT: Record<string, string> = {
-  Thin: '100', Light: '300', Regular: '400', Book: '450', Medium: '500',
-  'Semi bold': '600', Bold: '700', Black: '800',
-};
-const conv = (v: unknown): string | number =>
-  typeof v === 'number' ? `${v}px` : (WEIGHT[v as string] ?? (v as string));
 const camel = (k: string) => k.replace(/-([a-z])/g, (_, c) => c.toUpperCase());
 
 const raw = JSON.parse(readFileSync(VARS, 'utf8'));
 const tree = loadMerged(raw);
 
+/** A leaf's own $type, or — when it aliases another token — the type of what it resolves
+ *  to. `motion/*` aliases inherit TIMING/EASING this way. */
+function typeOf(leaf: Leaf, seen = new Set<string>()): string | undefined {
+  const v = leaf.$value;
+  if (typeof v === 'string') {
+    let ref: string | null = null;
+    if (v.startsWith('{') && v.endsWith('}')) ref = v.slice(1, -1);
+    else if (v.startsWith('$.')) ref = v.slice(2).split('.').slice(2).join('.');
+    if (ref && !seen.has(ref)) {
+      seen.add(ref);
+      const t = lookup(tree, ref);
+      if (t) return typeOf(t, seen) ?? leaf.$type;
+    }
+  }
+  return leaf.$type;
+}
+
 const cssLines: string[] = [];
+const skipped: string[] = [];
 const walkCss = (node: any, path: string[]) => {
   if (isLeaf(node)) {
-    const resolved = resolveVal(tree, node);
-    // skip non-CSS-able values: empty (gradients/placeholders) and composite Font(...) tokens
-    if (resolved === '' || resolved == null || (typeof resolved === 'string' && resolved.startsWith('Font('))) return;
-    let val: string | number = conv(resolved);
+    const name = path.map((s) => s.replace(/[^a-zA-Z0-9]+/g, '-')).join('-'); // valid custom-property name
+    let val = toCssValue(resolveVal(tree, node), typeOf(node));
+    if (val === null) { skipped.push(name); return; }
     // quote font-family names (they contain spaces/apostrophes -> invalid CSS unquoted)
     if (typeof val === 'string' && path.some((p) => p.includes('family'))) val = `"${val}"`;
-    const name = path.map((s) => s.replace(/[^a-zA-Z0-9]+/g, '-')).join('-'); // valid custom-property name
     cssLines.push(`  --eand-${name}: ${val};`);
     return;
   }
   for (const [k, v] of Object.entries(node)) walkCss(v, [...path, k]);
 };
 const walkTs = (node: any): any => {
-  if (isLeaf(node)) return conv(resolveVal(tree, node));
+  if (isLeaf(node)) return toTsValue(resolveVal(tree, node), typeOf(node));
   const out: any = {};
   for (const [k, v] of Object.entries(node)) out[camel(k)] = walkTs(v);
   return out;
@@ -85,3 +96,8 @@ mkdirSync(OUTDIR, { recursive: true });
 writeFileSync(resolve(OUTDIR, 'tokens.css'), css);
 writeFileSync(resolve(OUTDIR, 'tokens.ts'), ts);
 console.log(`Wrote tokens.css (${cssLines.length} vars) + tokens.ts`);
+if (skipped.length) {
+  // Not an error — springs and composite Font() tokens have no CSS form. Printed so a
+  // sudden jump in the count is visible rather than silent.
+  console.log(`Skipped ${skipped.length} token(s) with no CSS representation.`);
+}
