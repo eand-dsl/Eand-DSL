@@ -9,7 +9,11 @@ export const ty = (variant: string): CSSProperties => {
   const [c, s] = variant.split('.');
   const t = (T.typography?.[c]?.[s] ?? {}) as Record<string, string>;
   return {
-    fontFamily: t.fontFamily ? `${t.fontFamily}, -apple-system, system-ui, sans-serif` : undefined,
+    // The family must be quoted. The token is `Suisse int'l`, and these components style
+    // themselves inline — unquoted, that apostrophe opens a CSS string the parser never
+    // sees closed, so every declaration after font-family in the same style attribute is
+    // silently discarded (background, colour, border…). See system.test.ts.
+    fontFamily: t.fontFamily ? `"${t.fontFamily}", -apple-system, system-ui, sans-serif` : undefined,
     fontSize: t.fontSize,
     fontWeight: t.fontWeight as any,
     lineHeight: t.lineHeight,
