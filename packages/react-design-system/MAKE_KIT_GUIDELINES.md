@@ -131,7 +131,7 @@ mParking → `car` · All Services → `grid` · e& Shop → `shop` · retail br
 - `PlanCard({ name, category, price, period, discount, colorScheme: default|inverse, smiles, width })` — Plans-mini: Postpaid eyebrow + Discount badge + title + smiles row + "from AED…/mo".
 - `ProductCard({ eyebrow, title, image, discount, price, period, pts, type: addon|product|category, tint, width })` — card-features. `pts` shows Smiles pricing; `tint` is a `CardBgColor` tint name for the media area.
 - `DealCard({ image, title, subtitle, badge, width })` · `NewCard({ image, title, width, selected })` · `ServiceCard({ icon, label, badge, size: grid|carousel })` — badge e.g. `<Badge offer="new-plan" size="sm">New</Badge>`.
-- `Highlight({ title, subtitle, image, cta, action, tone: brand|image|purple, background, width })` — full-bleed banner; `action` (`{ title, subtitle, cta }`) adds the Play-now action bar.
+- `Highlight({ title, subtitle, image, cta, action, tone: brand|image|purple, background, width })` — full-bleed banner; `action` (`{ title, subtitle, cta }`) adds the Play-now action bar. The default `tone="image"` reserves a 452px photo banner, so **pass an `image` with it** — without one you get a tall empty gradient. With no artwork to hand, use `tone="brand"` or `tone="purple"`, which are 200px and designed to stand alone.
 - `SmilesBalance({ points, cta })` — the gold loyalty balance strip; `Voucher({ value, code, validity, status: active|redeemed|expired })` — the dashed coupon row.
 
 ## UX → UI assembly (turn a wireframe into a screen)
@@ -195,6 +195,7 @@ mParking → `car` · All Services → `grid` · e& Shop → `shop` · retail br
   </Section>
 
   <Highlight
+    tone="purple"
     title="For Travellers"
     subtitle="Stay connected, even when you are away"
     action={{ title: 'Smiles Unlimited', subtitle: 'Exclusive venue deals', cta: 'Play now' }}

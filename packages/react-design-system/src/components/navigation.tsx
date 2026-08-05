@@ -50,6 +50,30 @@ export interface TopBarProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> 
 function CircleBtn({ children, dark }: { children: ReactNode; dark?: boolean }) {
   return <span style={{ width: 40, height: 40, borderRadius: '50%', flex: 'none', background: dark ? color('surface.glass.white.md') : color('surface.base.default'), backdropFilter: dark ? 'blur(20px)' : undefined, WebkitBackdropFilter: dark ? 'blur(20px)' : undefined, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: dark ? '#fff' : color('text.default.default') }}>{children}</span>;
 }
+/** Faux iOS status glyphs — monochrome and inheriting currentColor, so they sit
+ *  correctly on both the red brand header and the white default one. */
+function StatusGlyphs() {
+  return (
+    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, color: 'currentColor' }}>
+      <svg aria-hidden width={17} height={11} viewBox="0 0 17 11" fill="currentColor">
+        <rect x={0} y={7.5} width={3} height={3.5} rx={1} />
+        <rect x={4.7} y={5} width={3} height={6} rx={1} />
+        <rect x={9.4} y={2.5} width={3} height={8.5} rx={1} />
+        <rect x={14} y={0} width={3} height={11} rx={1} />
+      </svg>
+      <svg aria-hidden width={15} height={11} viewBox="0 0 15 11" fill="none">
+        <path d="M1 3.6a9 9 0 0 1 13 0" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" />
+        <path d="M3.6 6.3a5.4 5.4 0 0 1 7.8 0" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" />
+        <circle cx={7.5} cy={9.3} r={1.3} fill="currentColor" />
+      </svg>
+      <svg aria-hidden width={25} height={12} viewBox="0 0 25 12" fill="none">
+        <rect x={0.6} y={0.6} width={21} height={10.8} rx={3} stroke="currentColor" strokeOpacity={0.45} strokeWidth={1.2} />
+        <rect x={2.2} y={2.2} width={17.8} height={7.6} rx={1.8} fill="currentColor" />
+        <path d="M23.2 4.3a2.1 2.1 0 0 1 0 3.4Z" fill="currentColor" fillOpacity={0.45} />
+      </svg>
+    </span>
+  );
+}
 function Chevron({ size = 20, color: c }: { size?: number; color?: string }) {
   return (
     <svg aria-hidden width={size} height={size} viewBox="0 0 24 24" fill="none" style={{ flex: 'none', color: c }}>
@@ -85,7 +109,7 @@ export function TopBar({
   return (
     <header style={{ position: 'sticky', top: 0, zIndex: 10, width: '100%', boxSizing: 'border-box', background: onDark ? color('surface.base.brand') : color('surface.canvas.default'), color: text, borderBottomLeftRadius: round ? radius('6') : 0, borderBottomRightRadius: round ? radius('6') : 0, padding: `0 ${space('lg')} ${space('lg')}`, display: 'flex', flexDirection: 'column', gap: space('md'), ...style }} {...rest}>
       {statusBar !== false && (
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: 44, fontSize: 14, fontWeight: 600, color: text }}><span>9:41</span><span style={{ letterSpacing: 2 }}>▂▄▆ 📶 🔋</span></div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: 44, fontSize: 14, fontWeight: 600, color: text }}><span>9:41</span><StatusGlyphs /></div>
       )}
       {/* header top row: left-part · middle (logo) · right-part */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: space('md'), minHeight: 40 }}>

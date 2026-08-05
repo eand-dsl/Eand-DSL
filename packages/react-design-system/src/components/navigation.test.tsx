@@ -54,6 +54,15 @@ test('TopBar statusBar shows the faux iOS clock on brand by default', () => {
   expect(screen.getByText('9:41')).toBeInTheDocument();
 });
 
+test('TopBar statusBar draws signal/wifi/battery rather than emoji', () => {
+  // Emoji render as full-colour platform glyphs, which clash with the brand-red
+  // header; the faux iOS row should be monochrome and inherit currentColor.
+  const { container } = render(<TopBar surface="brand" bigTitle="Store" />);
+  const row = screen.getByText('9:41').parentElement!;
+  expect(row.textContent).not.toMatch(/\p{Extended_Pictographic}|[▀-▟]/u);
+  expect(row.querySelectorAll('svg').length).toBe(3);
+});
+
 test('TopBar does not leak the rounded prop onto the DOM', () => {
   const { container } = render(<TopBar surface="brand" bigTitle="Store" rounded={false} statusBar={false} />);
   const header = container.querySelector('header')!;

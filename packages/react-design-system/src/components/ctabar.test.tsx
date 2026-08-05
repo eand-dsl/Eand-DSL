@@ -4,6 +4,13 @@ import { StatusRibbon, ButtonGroup, PaymentRow, CtaFooter } from './ctabar';
 import { Button } from './Button';
 import { Checkbox } from './controls';
 
+test('PaymentRow keeps the masked identifier on one line', () => {
+  // In a CtaFooter the actions never shrink, so PaymentRow absorbs the squeeze
+  // and a masked card number must not break mid-token ("••••" over "4326").
+  render(<PaymentRow label="•••• 4326" />);
+  expect(screen.getByText('•••• 4326').style.whiteSpace).toBe('nowrap');
+});
+
 /* ---------------- StatusRibbon ---------------- */
 
 test('StatusRibbon renders message and fires action', async () => {

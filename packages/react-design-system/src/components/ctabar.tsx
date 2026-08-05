@@ -92,7 +92,7 @@ export function PaymentRow({ icon, label, actionLabel = 'Change', onAction, styl
         <span style={{ width: 40, height: 40, borderRadius: radius('3'), overflow: 'hidden', flex: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: color('surface.base.default') }}>{icon}</span>
       ) : null}
       <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: space('2xs'), minWidth: 0 }}>
-        <Text variant="title.xs">{label}</Text>
+        <Text variant="title.xs" style={{ whiteSpace: 'nowrap' }}>{label}</Text>
         {actionLabel != null ? (
           <button onClick={onAction} style={{ border: 0, background: 'transparent', cursor: 'pointer', padding: 0, color: color('text.brand.default'), ...ty('button.md') }}>{actionLabel}</button>
         ) : null}
