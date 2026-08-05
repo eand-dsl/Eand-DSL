@@ -144,17 +144,24 @@ export function Stepper({ steps = 4, progress = 0, inverse, style, ...rest }: St
   );
 }
 
-/* ---------------- AddTrigger ---------------- */
+/* ---------------- AddTrigger ----------------
+   Figma `add-trigger` 25973:25405 (default 25752:11486): a 72px glass panel holding a
+   tertiary button — not the V1.0 dashed pill. bg surface/glass/midnight/sm, radius
+   border-radius/5, px 20 / py spacing/lg, and NO border. The label is button/lg SemiBold
+   in text/default/default; only the plus glyph is brand red.
+   `surface=inverse` (28917:4269) is a newer variant and is not built here — it needs its
+   own read rather than a mirrored guess. */
 export interface AddTriggerProps extends HTMLAttributes<HTMLButtonElement> {
   label?: string;
 }
 export function AddTrigger({ label = 'Add', style, onClick, ...rest }: AddTriggerProps) {
   return (
     <button onClick={onClick}
-      style={{ display: 'inline-flex', alignItems: 'center', gap: space('xs'), height: 40, padding: `0 ${space('lg')}`,
-        borderRadius: PILL, border: `1px dashed ${color('border.surface-based.base.default')}`, background: 'transparent',
-        color: color('text.brand.default'), cursor: 'pointer', ...ty('button.md'), ...style }} {...rest}>
-      <IconBox size="lg"><Icon name="add" size={20} /></IconBox>{label}
+      style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: space('sm'),
+        width: '100%', height: scale('72'), boxSizing: 'border-box', padding: `${space('lg')} 20px`,
+        borderRadius: radius('5'), border: 0, background: color('surface.glass.midnight.sm'),
+        color: color('text.default.default'), cursor: 'pointer', overflow: 'hidden', ...ty('button.lg'), ...style }} {...rest}>
+      <Icon name="add-filled" size={24} color={color('text.brand.default')} />{label}
     </button>
   );
 }

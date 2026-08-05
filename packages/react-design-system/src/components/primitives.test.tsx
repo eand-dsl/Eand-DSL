@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Badge, ProgressBar, Stepper, Dismiss, AtomSurface, CardBgColor, CARD_BG_TINTS } from './primitives';
+import { Badge, ProgressBar, Stepper, Dismiss, AtomSurface, CardBgColor, CARD_BG_TINTS, AddTrigger } from './primitives';
 
 /* ---------------- Badge ---------------- */
 
@@ -152,11 +152,11 @@ test('Dismiss surface picks the default vs inverse fill', () => {
    Each expected fill was read off its own Figma variant node. */
 test.each([
   ['subtle', 'rgb(240, 240, 245)'],              // 26770:100167 surface/base/default
-  // KNOWN TOKEN DRIFT — asserts what the stale token currently produces, not Figma.
-  // Figma reports surface/base/inverse = #ffffff99 (60% white), but variables.json still
-  // aliases it to primitives color.white.1000 (opaque). The correct alias is white.a60,
-  // which already exists in the export. Re-export variables.json from Figma (or retarget
-  // that one alias) and this expectation becomes 'rgba(255, 255, 255, 0.6)'.
+  // This was marked "KNOWN TOKEN DRIFT — re-export variables.json and it becomes
+  // rgba(255,255,255,0.6)". The re-export has since happened (830 -> 944 tokens) and the
+  // value did not move: color/surface/base/inverse still aliases primitives white/1000,
+  // opaque. So the variable and whatever node reported #ffffff99 disagree in Figma itself.
+  // Not drift on our side; if the 60% is intended, the variable needs re-pointing there.
   ['default', 'rgb(255, 255, 255)'],             // 26770:100168 surface/base/inverse
   ['sunken', 'rgb(228, 227, 234)'],              // 26770:100169 surface/sunken/default
   ['midnight-base', 'rgb(25, 19, 41)'],          // 26770:100162 surface/base/midnight
@@ -245,4 +245,25 @@ test('ProgressBar is 4px tall and green by default', () => {
   expect(track.style.height).toBe('4px');
   // color/text/positive/subtle = green/600 #54bc72
   expect((track.firstElementChild as HTMLElement).style.background).toBe('rgb(84, 188, 114)');
+});
+
+/* ---------------- AddTrigger vs Figma `add-trigger` 25752:11486 ----------------
+   V1.1 is a 72px glass panel with a tertiary button inside it. The code was still the
+   V1.0 shape: a 40px dashed pill with a brand-red label. */
+
+test('AddTrigger is a 72px glass panel at radius 16, with no dashed border', () => {
+  const { container } = render(<AddTrigger label="Make your own deal now" />);
+  const el = container.firstElementChild as HTMLElement;
+  expect(el.style.height).toBe('72px');
+  expect(el.style.borderRadius).toBe('16px');
+  expect(el.style.border).not.toContain('dashed');
+  // surface/glass/midnight/sm
+  expect(el.style.background).toBe('rgba(25, 19, 41, 0.07)');
+});
+
+test('AddTrigger label is button/lg 16 in midnight, not brand red', () => {
+  const { container } = render(<AddTrigger label="Make your own deal now" />);
+  const el = container.firstElementChild as HTMLElement;
+  expect(el.style.fontSize).toBe('16px');
+  expect(el.style.color).toBe('rgb(25, 19, 41)');
 });
