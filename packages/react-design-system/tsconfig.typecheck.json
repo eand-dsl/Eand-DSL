@@ -1,0 +1,21 @@
+// Typecheck-only config for everything outside the published entry point:
+// the Code Connect mappings and the demo app.
+//
+// These cannot live in tsconfig.json's `include`: that config drives
+// `tsc --emitDeclarationOnly --outDir dist`, and widening its root past `src/` moves the
+// emitted entry to dist/src/index.d.ts, breaking package.json's "types" path.
+//
+// `demo/**/*.tsx` is here because the demo belonged to no tsconfig at all and silently
+// rotted: it went on importing `../../icons/src` long after the icons were folded into this
+// package, so it could not build and nothing said so. Only the app source is covered —
+// vite.config.ts uses the `__dirname` shim Vite injects when it loads a config, which does
+// not typecheck without @types/node (absent here) and which playground/ relies on too.
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "emitDeclarationOnly": false,
+    "declaration": false
+  },
+  "include": ["src", "code-connect", "demo/**/*.tsx"]
+}

@@ -7,7 +7,9 @@
     <style>
       body { margin: 0; background: #e4e3ea; font-family: system-ui, sans-serif; }
       #root { width: 390px; margin: 0 auto; min-height: 100vh; background: #fff; display: flex; flex-direction: column; }
-      .scroll { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; padding-bottom: 8px; }
+      /* NavBar is a floating sticky bar (position: sticky; bottom: 0), so the body has to
+         reserve room for it or the last section sits underneath. */
+      .scroll { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; padding-bottom: 96px; }
     </style>
   </head>
   <body>

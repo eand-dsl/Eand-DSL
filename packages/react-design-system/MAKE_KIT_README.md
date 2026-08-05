@@ -90,7 +90,7 @@ npm view @eand/react-design-system version
 > produces broken screens.
 
 ## Local consumption proof
-`demo/` assembles a full e& Home screen from the package (`demo/home-screen.png`):
+`demo/` assembles a full e& Account screen from the package (`demo/account-screen.png`):
 ```bash
 npx vite --config demo/vite.config.ts          # dev server
 # or: npx vite build --config demo/vite.config.ts && serve demo/dist

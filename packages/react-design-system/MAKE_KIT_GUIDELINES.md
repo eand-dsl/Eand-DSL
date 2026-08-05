@@ -223,7 +223,7 @@ mParking → `car` · All Services → `grid` · e& Shop → `shop` · retail br
   ]} />
 </>
 ```
-See `demo/home-screen.png` for the rendered result. **Tip for Make:** put each content
+**Tip for Make:** put each content
 block in its own `Section` (grey container), use `carousel` + `size` for horizontal card
 rows, reach for the specific card (`PlanCard`/`ProductCard`/`DealCard`) rather than a
 generic `Card`, and give every prominent glyph the `-filled` form.

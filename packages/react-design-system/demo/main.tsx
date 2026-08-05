@@ -1,15 +1,15 @@
 import { createRoot } from 'react-dom/client';
 import {
   TopBar, NavBar, Section, Tabs, ListRow, QuickAction, Chip, Searchbar, Badge, Button,
+  Icon as EaIcon,
 } from '../src';
-import { Icon as EaIcon } from '../../icons/src';
 
 const ic = (name: string, size = 24, color?: string) => <EaIcon name={name} size={size} color={color} />;
 
 function Account() {
   return (
     <>
-      <TopBar variant="brand" greeting="Hi, Ahmed" title="050 123 4567"
+      <TopBar surface="brand" account={{ greeting: 'Hi, Ahmed', name: '050 123 4567' }}
         actions={[ic('magic-wand', 22, '#fff'), ic('notification', 22, '#fff')]} />
 
       <div className="scroll">
@@ -17,7 +17,7 @@ function Account() {
           <Tabs scope="global" tabs={['For you', 'Account', 'Loyalty']} defaultValue={1} />
         </div>
 
-        <Section title="My Plan" context="Freedom Live Plan 200" hideChevron
+        <Section title="My Plan" context="Freedom Live Plan 200" trigger="none"
           filterPill={<span style={{ color: '#e00800', fontWeight: 600, fontSize: 13 }}>Manage</span>}>
           <Tabs scope="local" tabs={['All', 'Data', 'Calls']} />
           <ListRow label="2 GB left" value="Local Data" chevron={false} />
@@ -26,12 +26,12 @@ function Account() {
           <ListRow label="600 MB left" value="Roaming Data" chevron={false} />
         </Section>
 
-        <Section title="My Bill" onSeeAll={() => {}}>
+        <Section title="My Bill" onTrigger={() => {}}>
           <ListRow label="Total: AED 500" sublabel="Monthly bill: AED 480 · Extras: AED 20"
             value={<Button size="sm" variant="secondary">Overview</Button>} chevron={false} />
         </Section>
 
-        <Section title="My Account Hub" onSeeAll={() => {}}>
+        <Section title="My Account Hub" onTrigger={() => {}}>
           <QuickAction columns={2} items={[
             { label: 'Add-ons', icon: ic('puzzle'), badge: <Badge status="positive" size="sm">3 active</Badge> },
             { label: 'Subscriptions', icon: ic('sync'), badge: <Badge status="neutral" size="sm">0</Badge> },
@@ -42,7 +42,7 @@ function Account() {
           ]} />
         </Section>
 
-        <Section title="Jump to..." surface="brand-muted" onSeeAll={() => {}}>
+        <Section title="Jump to..." surface="brand-muted" onTrigger={() => {}}>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
             {['Manage my Plan', 'Change Plan', 'My limits', 'Family Plan', 'Buy Add-on', 'Replace SIM', 'Switch to Postpaid'].map((c) => <Chip key={c}>{c}</Chip>)}
           </div>

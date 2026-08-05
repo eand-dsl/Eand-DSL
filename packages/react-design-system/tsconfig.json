@@ -19,7 +19,7 @@
   // the widest included path, so adding code-connect here emits dist/src/index.d.ts and
   // package.json's "types": "./dist/index.d.ts" then resolves to nothing — consumers
   // silently fall back to inferred `any` types. Code Connect files are typechecked by
-  // tsconfig.code-connect.json instead (see the `typecheck` script).
+  // tsconfig.typecheck.json instead (see the `typecheck` script), along with demo/.
   "include": ["src"],
   "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx", "scripts"]
 }
