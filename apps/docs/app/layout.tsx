@@ -4,6 +4,7 @@ import './global.css';
 import '@eand/react-design-system/styles.css';
 import { Inter } from 'next/font/google';
 import { appName, siteUrl } from '@/lib/shared';
+import SearchDialogWithImage from '@/components/search-dialog';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -22,7 +23,7 @@ export default function Layout({ children }: LayoutProps<'/'>) {
   return (
     <html lang="en" className={inter.className} suppressHydrationWarning>
       <body className="flex flex-col min-h-screen">
-        <RootProvider>{children}</RootProvider>
+        <RootProvider search={{ SearchDialog: SearchDialogWithImage }}>{children}</RootProvider>
       </body>
     </html>
   );

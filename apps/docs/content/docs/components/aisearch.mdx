@@ -1,11 +1,25 @@
 ---
 title: AISearch
-description: The “Ask e&” assistant entry point — a Searchbar preset.
+description: The “Ask e&” search bar, wired to the component finder.
 ---
 
 <ComponentDemo id="aisearch" />
 
+By default `<AISearch/>` is a live **finder**: type to search every React component, icon, and
+Figma-library component at once, or drop / paste an image to search by picture. The visual search
+runs a SigLIP model **in the browser** (loaded on demand) over a prebuilt static index — there is no
+server model, so it deploys as a fully static site. See the [Finder](/finder) page for the live bar.
+
 ## Props
+
+Extends `Searchbar` (all input props, plus `onMic`), and adds:
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `finder` | `boolean` | `true` | Live finder dropdown. Set `false` for the plain presentational field. |
+| `indexBase` | `string` | `"/finder/"` | Base URL of the prebuilt finder data (`index.json`, `embeddings.f32`, `thumbs/`) that the app serves. |
+| `enableVisual` | `boolean` | `true` | Allow in-browser visual + image search (the ✨ toggle and image drop / paste). |
+| `maxResults` | `number` | `8` | Max results shown in the dropdown. |
 
 <PropsTable name="Searchbar" />
 

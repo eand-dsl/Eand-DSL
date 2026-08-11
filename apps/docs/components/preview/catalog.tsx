@@ -505,8 +505,8 @@ export const PAGES: Page[] = [
     render: (v) => <div style={{ width: 320, maxWidth: '100%' }}><Searchbar placeholder={p(v, 'placeholder')} /></div> },
 
   { id: 'aisearch', group: 'Controls', title: 'AISearch', frame: 'pad',
-    blurb: 'The Searchbar preset for the “Ask e&” assistant entry point — same field, AI-forward placeholder.',
-    render: () => <div style={{ width: 320, maxWidth: '100%' }}><AISearch /></div> },
+    blurb: 'The “Ask e&” search bar, wired to the finder: type to search every component, icon, and Figma-library component; drop an image to search by picture (model runs in-browser). Live demo on the Finder page; shown here as the plain field.',
+    render: () => <div style={{ width: 320, maxWidth: '100%' }}><AISearch finder={false} /></div> },
 
   { id: 'checkbox', group: 'Controls', title: 'Checkbox', frame: 'pad',
     blurb: 'Selection mark. Checkbox (square) or radio (circle) share one component. Default fills e& red with a white tick; on brand/midnight surfaces (inverse) it fills white with a red tick. States: Off, Off/Disabled, On, On/Disabled. Sizes: md (20) and sm (16).',
