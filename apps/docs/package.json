@@ -8,7 +8,8 @@
     "build": "next build",
     "dev": "next dev",
     "start": "next start",
-    "types:check": "fumadocs-mdx && next typegen && tsc --noEmit"
+    "types:check": "fumadocs-mdx && next typegen && tsc --noEmit",
+    "test": "vitest run"
   },
   "dependencies": {
     "@eand/react-design-system": "file:../../packages/react-design-system",
@@ -32,6 +33,7 @@
     "react-docgen-typescript": "^2.4.0",
     "tailwindcss": "^4.3.1",
     "tsx": "^4.16.0",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vitest": "^3.2.7"
   }
 }

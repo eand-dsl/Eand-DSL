@@ -14,13 +14,16 @@ import {
 } from 'fumadocs-ui/components/dialog/search';
 import { useDocsSearch } from 'fumadocs-core/search/client';
 import { fetchClient } from 'fumadocs-core/search/client/fetch';
+import { Icon } from '@eand/react-design-system';
 import { searchByImage, thumbBase, type FinderEntry } from '@/lib/finder-client';
 
 type Props = { open: boolean; onOpenChange: (open: boolean) => void };
 
 const muted = 'var(--color-fd-muted-foreground)';
 const border = 'var(--color-fd-border)';
-const acc = '#e30613';
+// The real brand red from the token export (#e00800). This was a hand-typed #e30613 —
+// a near-match to nothing, and the one colour on screen not bound to the DSL.
+const acc = 'var(--eand-color-surface-base-brand)';
 
 export default function SearchDialogWithImage(props: Props) {
   const router = useRouter();
@@ -28,6 +31,7 @@ export default function SearchDialogWithImage(props: Props) {
   const { search, setSearch, query } = useDocsSearch({ client });
   const [image, setImage] = useState<string | null>(null);
   const [imgResults, setImgResults] = useState<FinderEntry[] | null>(null);
+  const [failed, setFailed] = useState(false);
   const [busy, setBusy] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
   const tok = useRef(0);
@@ -36,13 +40,20 @@ export default function SearchDialogWithImage(props: Props) {
   async function useFile(f?: File | null) {
     if (!f || !f.type.startsWith('image/')) return;
     const url = await toURL(f);
-    setImage(url); setSearch(''); setImgResults(null); setBusy(true);
+    setImage(url); setSearch(''); setImgResults(null); setFailed(false); setBusy(true);
     const t = ++tok.current;
-    try { const res = await searchByImage(url); if (t === tok.current) setImgResults(res.slice(0, 12)); }
-    catch { if (t === tok.current) setImgResults([]); }
-    finally { if (t === tok.current) setBusy(false); }
+    // Scoped to the react library: this dialog only ever navigates to docs pages.
+    try {
+      const res = await searchByImage(url, { kinds: ['component', 'icon'], requireDocs: true, limit: 12 });
+      if (t === tok.current) setImgResults(res);
+    } catch {
+      // An outage is not an empty result — say so, rather than "No visual matches".
+      if (t === tok.current) { setImgResults([]); setFailed(true); }
+    } finally {
+      if (t === tok.current) setBusy(false);
+    }
   }
-  function clearImage() { setImage(null); setImgResults(null); if (fileRef.current) fileRef.current.value = ''; }
+  function clearImage() { setImage(null); setImgResults(null); setFailed(false); if (fileRef.current) fileRef.current.value = ''; }
   function goto(e: FinderEntry) {
     if (!e.docs) return; // only ever open pages inside the react library
     props.onOpenChange(false);
@@ -62,7 +73,7 @@ export default function SearchDialogWithImage(props: Props) {
           <input ref={fileRef} type="file" accept="image/*" hidden onChange={(e) => useFile(e.target.files?.[0])} />
           <button type="button" onClick={() => fileRef.current?.click()} aria-label="Search by image" title="Search by image — upload, paste, or drop a picture"
             style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 30, height: 30, borderRadius: 8, border: 0, background: 'transparent', cursor: 'pointer', color: image ? acc : muted, flex: '0 0 auto' }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="9" cy="9" r="1.6" /><path d="m21 15-4.5-4.5L7 20" /></svg>
+            <Icon name="image" size={18} />
           </button>
           <SearchDialogClose />
         </SearchDialogHeader>
@@ -89,7 +100,12 @@ export default function SearchDialogWithImage(props: Props) {
                 <span style={{ flex: '0 0 auto', fontSize: 11, fontWeight: 600, color: acc }}>Docs</span>
               </button>
             ))}
-            {!busy && imgResults && imgResults.length === 0 && <div style={{ padding: 14, color: muted, fontSize: 13 }}>No visual matches.</div>}
+            {!busy && failed && (
+              <div style={{ padding: 14, color: muted, fontSize: 13 }}>
+                Image search is unavailable right now — clear the image and try again.
+              </div>
+            )}
+            {!busy && !failed && imgResults && imgResults.length === 0 && <div style={{ padding: 14, color: muted, fontSize: 13 }}>No visual matches.</div>}
           </div>
         ) : (
           <SearchDialogList items={query.data !== 'empty' ? query.data : null} />

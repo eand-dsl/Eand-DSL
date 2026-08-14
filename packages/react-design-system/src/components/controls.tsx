@@ -2,7 +2,6 @@ import { useRef, useState, type CSSProperties, type HTMLAttributes, type InputHT
 import { color, space, ty, radius, scale, PILL, T } from '../system';
 import { Icon } from '../icons';
 import { Text, IconBox } from './primitives';
-import { FinderSearchBar } from './finder-engine';
 
 /* ---------------- Input ----------------
    Figma V1.1 input-field (page 22609:113539): a single filled style — 56px field,
@@ -404,25 +403,9 @@ export function Searchbar({ placeholder = 'Search', onMic, style, ...rest }: Sea
   );
 }
 
-/* ---------------- AISearch ----------------
-   The "Ask e&" search bar, wired to the finder: type to search every component,
-   icon, and Figma-library component at once; drop/paste an image to search by
-   picture (SigLIP runs in the browser). Set `finder={false}` for the plain
-   presentational field. Data is loaded from `indexBase` (default "/finder/"),
-   which the consuming app serves as static files. */
-export interface AISearchProps extends SearchbarProps {
-  /** Live finder dropdown (default true). `false` renders the plain field. */
-  finder?: boolean;
-  /** Base URL of the prebuilt finder data (index.json, embeddings.f32, thumbs/). */
-  indexBase?: string;
-  /** Allow in-browser visual + image search (default true). */
-  enableVisual?: boolean;
-  /** Max results shown in the dropdown (default 8). */
-  maxResults?: number;
-}
-export function AISearch({ placeholder = 'Ask e& or search', finder = true, indexBase, enableVisual, maxResults, ...rest }: AISearchProps) {
-  if (!finder) return <Searchbar placeholder={placeholder} {...rest} />;
-  return <FinderSearchBar placeholder={placeholder} indexBase={indexBase} enableVisual={enableVisual} maxResults={maxResults} {...rest} />;
+/* ---------------- AISearch ---------------- */
+export function AISearch({ placeholder = 'Ask e& or search', ...rest }: SearchbarProps) {
+  return <Searchbar placeholder={placeholder} {...rest} />;
 }
 
 /* ---------------- Tabs (Pill Tabs) ---------------- */

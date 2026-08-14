@@ -26,14 +26,26 @@ const norm = (s) => (s || '').toLowerCase().replace(/[^a-z0-9]+/g, '');
 const readJSON = (f) => JSON.parse(fs.readFileSync(f, 'utf8'));
 
 // ---- 1. Figma index + embeddings -----------------------------------------
-const figComps = fs.existsSync(path.join(FDATA, 'components.json')) ? readJSON(path.join(FDATA, 'components.json')) : [];
-const figIcons = fs.existsSync(path.join(FDATA, 'icons.json')) ? readJSON(path.join(FDATA, 'icons.json')) : [];
-const embMeta = readJSON(path.join(FDATA, 'img-embed-meta.json'));
-const DIM = embMeta.dim;
-const embBuf = fs.readFileSync(path.join(FDATA, 'img-embeddings.f32'));
-const embMat = new Float32Array(embBuf.buffer, embBuf.byteOffset, embBuf.byteLength / 4);
-const rowByKey = new Map(); embMeta.ids.forEach((k, i) => rowByKey.set(k, i));
-const vecFor = (k) => { const r = rowByKey.get(k); return r == null ? null : embMat.subarray(r * DIM, (r + 1) * DIM); };
+// All four inputs are optional and guarded the same way. ~/figma-component-finder is a
+// separate local project, so on a fresh clone none of this exists — the script then
+// emits a name-searchable React-only index instead of throwing ENOENT on line 1.
+const readIfPresent = (f, fallback) => (fs.existsSync(f) ? readJSON(f) : fallback);
+const figComps = readIfPresent(path.join(FDATA, 'components.json'), []);
+const figIcons = readIfPresent(path.join(FDATA, 'icons.json'), []);
+const embMeta = readIfPresent(path.join(FDATA, 'img-embed-meta.json'), { dim: 0, ids: [], model: null });
+const DIM = embMeta.dim || 0;
+const embPath = path.join(FDATA, 'img-embeddings.f32');
+const embBuf = DIM && fs.existsSync(embPath) ? fs.readFileSync(embPath) : null;
+const embMat = embBuf ? new Float32Array(embBuf.buffer, embBuf.byteOffset, embBuf.byteLength / 4) : null;
+const rowByKey = new Map(); (embMeta.ids || []).forEach((k, i) => rowByKey.set(k, i));
+const vecFor = (k) => {
+  if (!embMat || !DIM) return null;
+  const r = rowByKey.get(k);
+  return r == null ? null : embMat.subarray(r * DIM, (r + 1) * DIM);
+};
+if (!figComps.length && !figIcons.length) {
+  console.warn(`! no Figma index at ${FDATA} — writing a React-only index (no visual search).`);
+}
 
 // cross-link maps: normalized name -> best Figma item (prefer one with an embedding + thumb)
 const compByName = new Map(), iconByName = new Map();
@@ -77,7 +89,12 @@ function copyThumb(figItem, id) {
 function attachEmb(figItem, id) {
   const v = figItem && figItem.k ? vecFor(figItem.k) : null;
   if (!v) return null;
-  embIds.push(id); embVecs.push(Array.from(v)); return embIds.length - 1;
+  // Store unit-norm rows so the client's dot product IS the cosine. The upstream vectors
+  // already are, but normalising here makes that a property of this file rather than an
+  // assumption about another project. finder-client.test.ts asserts it on the output.
+  let n = 0; for (const x of v) n += x * x;
+  n = Math.sqrt(n) || 1;
+  embIds.push(id); embVecs.push(Array.from(v, (x) => x / n)); return embIds.length - 1;
 }
 
 // 4a. React components
