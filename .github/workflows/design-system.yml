@@ -40,3 +40,31 @@ jobs:
       - run: npm run smoke               # built ESM imports and renders
       - run: npx vite build --config demo/vite.config.ts
       - run: npm pack --dry-run          # dist + the two MD files only
+
+  # The docs app is the live site (eand-dsl.vercel.app) and had no CI at all — Vercel
+  # deploying a red build was the first anyone would hear of a break. It owns the finder,
+  # so its search engine is only covered here.
+  docs:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/docs
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: apps/docs/package-lock.json
+
+      # `@eand/react-design-system` is a file: dependency, so its dist has to exist
+      # before the docs app can install against it.
+      - run: npm ci
+        working-directory: packages/react-design-system
+      - run: npm run build
+        working-directory: packages/react-design-system
+
+      - run: npm ci
+      - run: npm test                    # finder engine (vitest)
+      - run: npm run types:check
+      - run: npm run build               # next build
