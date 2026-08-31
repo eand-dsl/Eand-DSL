@@ -185,7 +185,7 @@ export function ListRow({ icon, label, sublabel, value, chevron = true, style, .
 }
 
 /* ---------------- NavBar (bottom nav) ---------------- */
-export interface NavItem { label: string; icon?: ReactNode; avatar?: ReactNode; active?: boolean; special?: boolean; onClick?: () => void; }
+export interface NavItem { label: string; icon?: ReactNode; avatar?: ReactNode; active?: boolean; onClick?: () => void; }
 export interface NavBarProps extends HTMLAttributes<HTMLElement> {
   items: NavItem[];
   /** Figma `.navbar-scroll` axis. `down` collapses to icons only (scrolled down);

@@ -7,9 +7,12 @@
     <style>
       body { margin: 0; background: #e4e3ea; font-family: system-ui, sans-serif; }
       #root { width: 390px; margin: 0 auto; min-height: 100vh; background: #fff; display: flex; flex-direction: column; }
-      /* NavBar is a floating sticky bar (position: sticky; bottom: 0), so the body has to
-         reserve room for it or the last section sits underneath. */
-      .scroll { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; padding-bottom: 96px; }
+      /* The canvas behind the sections is white: Section paints #f0f0f5 itself, so the
+         4px padding/gap here is what shows through as the gutter. A grey canvas would
+         make the sections dissolve into the background.
+         NavBar is a floating sticky bar (position: sticky; bottom: 0), so the body also
+         has to reserve room for it or the last section sits underneath. */
+      .scroll { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 4px; padding: 4px; padding-bottom: 100px; }
     </style>
   </head>
   <body>

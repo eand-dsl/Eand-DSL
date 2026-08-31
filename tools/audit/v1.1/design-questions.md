@@ -174,3 +174,33 @@ row is a new component, a variant of the promo row, or a rename.
 (`28927:23669`) points at it; it resolves by ID but its collection no longer lists it.
 Live `color/green/600` is the identical colour (`#54bc72`). Re-pointing the binding in
 Figma would clear it. Code already uses `green.600` and is unaffected.
+
+## 10. NavBar — a wireframe wants a detached Shop button that Figma has deleted
+
+The Account-screen UX wireframe (`Design App Interface/src/imports/ux.png`) draws the
+bottom nav as **three tabs in the glass pill (Home · Profile · Support) plus Shop as a
+separate dark rounded square to the right of the pill.** The published design system says
+something different on both counts:
+
+- `navbar` **29317:6983** is a single pill of **4 equal tabs, ordered Home · Support ·
+  Profile · Shop**. There is no detached element.
+- `.navbar-tab-state` **26593:20631** now publishes only a `selected = true|false` axis.
+  The `special` axis is **gone** — 03-navigation recorded it as "published only as *no*"
+  and it has since been removed outright, along with the `focus-special` tokens.
+
+Code followed Figma: `NavItem.special` existed but was never read by `NavBar`'s render, so
+passing it did nothing. It has now been removed, and `MAKE_KIT_GUIDELINES.md` no longer
+claims a "detached glass circle left of the pill" for mShop — that sentence described
+behaviour no published symbol has ever had.
+
+**Need:** a ruling on whether the detached Shop/mShop button is a real V1.2 direction or
+just wireframe shorthand. If it is real, it needs a published variant axis and tokens
+before code can carry it; if it is not, the wireframes should be corrected to the 4-tab
+pill so screens generated from them stop diverging. Also confirm the tab **order** —
+wireframes are using Home · Profile · Support · Shop against the symbol's Home · Support ·
+Profile · Shop.
+
+Stale leftover to clear either way: `tokens.ts` still carries
+`color.navbar-tab.*.focusSpecial` (#e00800 / #ffffff) for an axis Figma no longer
+publishes. It is a generated file, so this clears on the next `tokens:pull` once Figma is
+settled.

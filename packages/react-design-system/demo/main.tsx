@@ -13,9 +13,7 @@ function Account() {
         actions={[ic('magic-wand', 22, '#fff'), ic('notification', 22, '#fff')]} />
 
       <div className="scroll">
-        <div style={{ padding: '8px 8px 0' }}>
-          <Tabs scope="global" tabs={['For you', 'Account', 'Loyalty']} defaultValue={1} />
-        </div>
+        <Tabs scope="global" tabs={['For you', 'Account', 'Loyalty']} defaultValue={1} />
 
         <Section title="My Plan" context="Freedom Live Plan 200" trigger="none"
           filterPill={<span style={{ color: '#e00800', fontWeight: 600, fontSize: 13 }}>Manage</span>}>
@@ -51,8 +49,7 @@ function Account() {
       </div>
 
       <NavBar items={[
-        { label: 'mShop', icon: ic('store'), special: true },
-        { label: 'Home', icon: ic('home'), active: true }, { label: 'Support', icon: ic('support') },
+        { label: 'Home', icon: ic('home-filled'), active: true }, { label: 'Support', icon: ic('support') },
         { label: 'Profile', icon: ic('user') }, { label: 'Shop', icon: ic('shop') },
       ]} />
     </>

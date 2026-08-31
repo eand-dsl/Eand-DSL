@@ -350,7 +350,7 @@ fun QuickActionCell(label: String, icon: Painter) {
 
   navbar: {
     swift: `// Floating glass pill over a midnight scrim. Active tab = solid white pill with red
-// icon + label; a 'special' mShop tab is a detached glass circle to the left.
+// icon + label. One pill of 4 equal tabs — there is no detached nav button.
 import SwiftUI
 import EandTokens
 
@@ -368,7 +368,7 @@ struct NavTab: View {
     .clipShape(Capsule())
   }
 }`,
-    kotlin: `// Frosted white-15% pill; active tab = white pill + red icon/label; mShop = detached circle.
+    kotlin: `// Frosted white-15% pill; active tab = white pill + red icon/label. 4 tabs, no detached circle.
 import com.eand.tokens.EandColor
 
 @Composable
