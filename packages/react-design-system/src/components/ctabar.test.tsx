@@ -113,6 +113,6 @@ test('CtaFooter lifts off the page with a shadow and no top border', () => {
 test('CtaFooter rounds its top corners by default', () => {
   const { container } = render(<CtaFooter actions={<button>Pay</button>} />);
   const el = container.querySelector('footer')!;
-  expect(el.style.borderTopLeftRadius).toBe('24px');
-  expect(el.style.borderTopRightRadius).toBe('24px');
+  expect(el.style.borderStartStartRadius).toBe('24px');
+  expect(el.style.borderStartEndRadius).toBe('24px');
 });

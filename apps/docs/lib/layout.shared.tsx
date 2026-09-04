@@ -1,16 +1,13 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
+import NavTitle from '@/components/nav-title';
 
 export function baseOptions(): BaseLayoutProps {
   return {
+    // Renders fumadocs' own language dropdown against the locales supplied by
+    // LanguageProvider. Routing stays single-locale; the provider owns the switch.
+    i18n: true,
     nav: {
-      title: (
-        <span style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
-          <span style={{ fontSize: 22, fontWeight: 800, letterSpacing: '-1px', lineHeight: 1 }}>
-            e<b style={{ color: '#e00800' }}>&amp;</b>
-          </span>
-          <span style={{ fontSize: 13, fontWeight: 600 }}>Design System</span>
-        </span>
-      ),
+      title: <NavTitle />,
     },
   };
 }

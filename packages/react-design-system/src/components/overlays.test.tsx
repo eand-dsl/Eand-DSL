@@ -90,8 +90,8 @@ test.each([
 
 test('BottomSheet corners bind border-radius/7 = 24', () => {
   const el = sheet(<BottomSheet>body</BottomSheet>);
-  expect(el.style.borderTopLeftRadius).toBe('24px');
-  expect(el.style.borderTopRightRadius).toBe('24px');
+  expect(el.style.borderStartStartRadius).toBe('24px');
+  expect(el.style.borderStartEndRadius).toBe('24px');
 });
 
 test('BottomSheet footer has no divider (Figma has none)', () => {

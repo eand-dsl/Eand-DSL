@@ -3,8 +3,28 @@ title: Typography
 description: The Suisse Int'l type ramp — display, heading, title, body, button.
 ---
 
+<EN>
 Sizes, weights, and line-heights come from the tokens. The `aed/*` ramp is the
-Arabic/RTL parallel — same steps, tuned metrics. Load the licensed Suisse Int'l
-font in your app; the stack falls back to `"Helvetica Neue", Inter, system-ui`.
+Arabic/RTL parallel — same steps, tuned metrics.
+
+Suisse Int'l is licensed, and this site loads it. The upright weights (300–700)
+carry the full Arabic alphabet, the Arabic-Indic digits, and the contextual
+shaping forms, so Arabic sets as connected script rather than isolated letters.
+The italics are Latin-only, which is correct — Arabic does not use them. Book
+(450) is the one exception: it has no Arabic cut, so Arabic at 450 is served from
+Regular via `unicode-range`.
+</EN>
+
+<AR>
+تأتي المقاسات والأوزان وارتفاعات الأسطر من الرموز التصميمية. وتُمثّل مجموعة
+`aed/*` النظير العربي للكتابة من اليمين إلى اليسار — بالدرجات نفسها وبمقاييس
+مضبوطة.
+
+خط Suisse Int'l مرخّص، وهذا الموقع يحمّله فعلًا. تحمل الأوزان القائمة (من 300 إلى
+700) الأبجدية العربية كاملةً والأرقام العربية الهندية وأشكال الحروف السياقية، فتُصفّ
+العربية خطًّا متّصلًا لا حروفًا منفصلة. أما الأوزان المائلة فهي لاتينية فقط، وهذا هو
+الصحيح لأن العربية لا تستخدمها. ويبقى وزن Book (450) الاستثناء الوحيد: لا نسخة
+عربية له، لذا يُخدَّم النص العربي بوزن 450 من Regular عبر `unicode-range`.
+</AR>
 
 <TokenTypography />

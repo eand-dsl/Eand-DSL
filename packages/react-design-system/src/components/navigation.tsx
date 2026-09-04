@@ -110,7 +110,7 @@ export function TopBar({
   }
 
   return (
-    <header style={{ position: 'sticky', top: 0, zIndex: 10, width: '100%', boxSizing: 'border-box', background: onDark ? color('surface.base.brand') : color('surface.canvas.default'), color: text, borderBottomLeftRadius: round ? radius('6') : 0, borderBottomRightRadius: round ? radius('6') : 0, padding: `0 ${space('lg')} ${space('lg')}`, display: 'flex', flexDirection: 'column', gap: space('md'), ...style }} {...rest}>
+    <header style={{ position: 'sticky', top: 0, zIndex: 10, width: '100%', boxSizing: 'border-box', background: onDark ? color('surface.base.brand') : color('surface.canvas.default'), color: text, borderEndStartRadius: round ? radius('6') : 0, borderEndEndRadius: round ? radius('6') : 0, padding: `0 ${space('lg')} ${space('lg')}`, display: 'flex', flexDirection: 'column', gap: space('md'), ...style }} {...rest}>
       {statusBar !== false && (
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: 44, fontSize: 14, fontWeight: 600, color: text }}><span>9:41</span><StatusGlyphs /></div>
       )}
@@ -172,7 +172,7 @@ export interface ListRowProps extends Omit<HTMLAttributes<HTMLButtonElement>, 't
 }
 export function ListRow({ icon, label, sublabel, value, chevron = true, style, ...rest }: ListRowProps) {
   return (
-    <button style={{ width: '100%', boxSizing: 'border-box', display: 'flex', alignItems: 'center', gap: space('md'), padding: space('lg'), borderRadius: radius('5'), background: color('surface.raised.default'), border: 0, cursor: 'pointer', textAlign: 'left', ...style }} {...rest}>
+    <button style={{ width: '100%', boxSizing: 'border-box', display: 'flex', alignItems: 'center', gap: space('md'), padding: space('lg'), borderRadius: radius('5'), background: color('surface.raised.default'), border: 0, cursor: 'pointer', textAlign: 'start', ...style }} {...rest}>
       {icon ? <span style={{ width: 40, height: 40, borderRadius: radius('3'), background: color('surface.base.default'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flex: '0 0 auto' }}><IconBox size="md">{icon}</IconBox></span> : null}
       <span style={{ flex: 1, minWidth: 0 }}>
         <Text variant="title.sm" as="div">{label}</Text>
@@ -305,7 +305,7 @@ export function ActionBar({ title, subtitle, icon: leading, action, chevron, sur
         {subtitle != null ? <Text variant="body.md" color={subtitleColor} style={clamp}>{subtitle}</Text> : null}
       </span>
       {chevron
-        ? <span aria-hidden style={{ flex: 'none', display: 'inline-flex', color: titleColor }}>
+        ? <span aria-hidden data-rtl-flip style={{ flex: 'none', display: 'inline-flex', color: titleColor }}>
             <Icon name="chevron-right" size={24} />
           </span>
         : action != null ? <span style={{ flex: 'none', display: 'inline-flex' }}>{action}</span> : null}
@@ -343,7 +343,7 @@ export function SectionLink({ title, link = 'See all', onLinkClick, style, ...re
       <button onClick={onLinkClick} style={{ display: 'inline-flex', alignItems: 'center', gap: 2, background: 'transparent', border: 0, cursor: 'pointer', color: color('text.brand.default') }}>
         <Text variant="button.sm" color={color('text.brand.default')}>{link}</Text>
         {/* Was a literal "›" character standing in for a glyph the icon set has. */}
-        <Icon name="chevron-right-sm" size={16} />
+        <span data-rtl-flip style={{ display: 'inline-flex' }}><Icon name="chevron-right-sm" size={16} /></span>
       </button>
     </div>
   );
@@ -364,7 +364,7 @@ export function QuickAction({ items, columns = 2, style, ...rest }: QuickActionP
       {items.map((it, i) => (
         // Figma .quick-task-core (27962:37103): radius border-radius/6 = 20, bg surface/raised/default.
         <button key={i} onClick={it.onClick}
-          style={{ position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: rowHeight('row-2'), padding: space('md'), borderRadius: radius('6'), border: 0, background: color('surface.raised.default'), cursor: 'pointer', textAlign: 'left' }}>
+          style={{ position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: rowHeight('row-2'), padding: space('md'), borderRadius: radius('6'), border: 0, background: color('surface.raised.default'), cursor: 'pointer', textAlign: 'start' }}>
           {/* Header row: icon tile with the status badge beside it. The badge used to be
               absolutely positioned over the corner; Figma has it in flow. */}
           <span data-part="qa-badge" style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: space('sm'), width: '100%' }}>

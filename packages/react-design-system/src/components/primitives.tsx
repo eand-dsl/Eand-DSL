@@ -80,10 +80,10 @@ export function SmilesRow({ count = 2, plus = 4, size = 28 }: { count?: number; 
   return (
     <span style={{ display: 'inline-flex', alignItems: 'center' }}>
       {Array.from({ length: count }).map((_, i) => (
-        <span key={i} style={{ marginLeft: i ? -8 : 0 }}><SmilesAvatar size={size} /></span>
+        <span key={i} style={{ marginInlineStart: i ? -8 : 0 }}><SmilesAvatar size={size} /></span>
       ))}
       {plus ? (
-        <span style={{ marginLeft: -8, width: size, height: size, borderRadius: '50%', background: '#c0bfc8', color: '#fff', fontSize: 11, fontWeight: 600, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', border: '1.5px solid #fff', boxSizing: 'border-box' }}>+{plus}</span>
+        <span style={{ marginInlineStart: -8, width: size, height: size, borderRadius: '50%', background: '#c0bfc8', color: '#fff', fontSize: 11, fontWeight: 600, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', border: '1.5px solid #fff', boxSizing: 'border-box' }}>+{plus}</span>
       ) : null}
     </span>
   );
@@ -107,8 +107,8 @@ export function ProgressBar({ value = 50, tone, style, ...rest }: ProgressBarPro
     : color('text.positive.subtle');
   return (
     <div role="progressbar" aria-valuenow={value} aria-valuemin={0} aria-valuemax={100}
-      style={{ width: '100%', height: scale('4'), overflow: 'hidden', ...style }} {...rest}>
-      <div style={{ width: `${Math.max(0, Math.min(100, value))}%`, height: '100%', background: fill }} />
+      style={{ position: 'relative', width: '100%', height: scale('4'), overflow: 'hidden', ...style }} {...rest}>
+      <div style={{ position: 'absolute', insetInlineStart: 0, insetBlock: 0, width: `${Math.max(0, Math.min(100, value))}%`, background: fill }} />
     </div>
   );
 }
@@ -337,7 +337,7 @@ export function SectionLinkButton({ surface = 'default', icon, disabled, style, 
         opacity: disabled ? 0.4 : 1, cursor: disabled ? 'default' : 'pointer', boxSizing: 'border-box',
         ...style,
       }} {...rest}>
-      {icon ?? <Icon name="chevron-right" size={24} />}
+      {icon ?? <span data-rtl-flip style={{ display: 'inline-flex' }}><Icon name="chevron-right" size={24} /></span>}
     </button>
   );
 }

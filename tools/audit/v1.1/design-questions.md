@@ -1,3 +1,4 @@
+
 # Open questions for design — V1.1 reconciliation
 
 Drift items from `AUDIT-V1.1.md` that **cannot be fixed in code without a ruling**. Each

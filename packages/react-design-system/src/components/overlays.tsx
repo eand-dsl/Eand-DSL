@@ -131,7 +131,7 @@ export function BottomSheet({
     <div onClick={onDismiss} style={{ position: 'fixed', inset: 0, background: color('surface.overlay.scrim'), display: 'flex', alignItems: 'flex-end', zIndex: 1000 }}>
       <div role="dialog" aria-modal="true" onClick={(e) => e.stopPropagation()} style={{
         width: '100%', maxHeight: '90%', boxSizing: 'border-box', background: sheetBg, color: ink,
-        borderTopLeftRadius: radius('7'), borderTopRightRadius: radius('7'),
+        borderStartStartRadius: radius('7'), borderStartEndRadius: radius('7'),
         display: 'flex', flexDirection: 'column', overflow: 'hidden', ...style,
       }} {...rest}>
         {grabber ? (

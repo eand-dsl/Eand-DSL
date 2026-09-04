@@ -104,7 +104,7 @@ export function ProductCard({ eyebrow, title = 'iPhone Clear Case For Safe Use',
         {image ? (
           <div style={{ position: 'relative' }}>
             {imageBox(140, image)}
-            {discount ? <span style={{ position: 'absolute', top: 8, right: 8 }}><Badge offer="discount" size="sm">{discount}</Badge></span> : null}
+            {discount ? <span style={{ position: 'absolute', top: 8, insetInlineEnd: 8 }}><Badge offer="discount" size="sm">{discount}</Badge></span> : null}
           </div>
         ) : null}
         <Text variant="title.sm">{title}</Text>
@@ -129,7 +129,7 @@ export function DealCard({ image, title = 'Deal title', subtitle, badge, width =
       {/* image fills the remaining height (Figma .card-general: 224 tall, image inset-0, title pinned bottom) */}
       <div style={{ position: 'relative', flex: 1, display: 'flex', padding: space('sm') }}>
         <div style={{ flex: 1, borderRadius: radius('3'), overflow: 'hidden', background: color('surface.base.default'), display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 40 }}>{image ?? <Icon name="image" size={40} />}</div>
-        {badge ? <span style={{ position: 'absolute', top: 14, left: 14 }}>{badge}</span> : null}
+        {badge ? <span style={{ position: 'absolute', top: 14, insetInlineStart: 14 }}>{badge}</span> : null}
       </div>
       <div style={{ padding: `0 ${space('lg')} ${space('lg')}`, display: 'flex', flexDirection: 'column', gap: 2 }}>
         <Text variant="title.sm">{title}</Text>
@@ -181,7 +181,7 @@ export function NewCard({ image, title = 'New on e&', width = 137, selected, sty
         {selected ? (
           // Inset is 10px on the ringed variant and 12px plain — the 2px border makes up
           // the difference, so both land 12px from the outer edge.
-          <span style={{ position: 'absolute', top: 10, left: 10, zIndex: 1 }}>
+          <span style={{ position: 'absolute', top: 10, insetInlineStart: 10, zIndex: 1 }}>
             <Badge offer="new-card" size="md">New card</Badge>
           </span>
         ) : null}
@@ -205,7 +205,7 @@ export interface ServiceCardProps extends HTMLAttributes<HTMLButtonElement> {
 export function ServiceCard({ icon = <Icon name="placeholder" size={34} />, label, badge, size, style, ...rest }: ServiceCardProps) {
   return (
     <button style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: space('sm'), padding: space('md'), width: size ? SERVICE_CARD_WIDTH[size] : undefined, minHeight: rowHeight('row-2'), borderRadius: radius('6'), border: 0, background: color('surface.canvas.default'), cursor: 'pointer', ...style }} {...rest}>
-      {badge ? <span style={{ position: 'absolute', top: 8, left: 8 }}>{badge}</span> : null}
+      {badge ? <span style={{ position: 'absolute', top: 8, insetInlineStart: 8 }}>{badge}</span> : null}
       <span style={{ fontSize: 34, lineHeight: 1 }}>{icon}</span>
       <Text variant="body.sm" style={{ textAlign: 'center' }}>{label}</Text>
     </button>

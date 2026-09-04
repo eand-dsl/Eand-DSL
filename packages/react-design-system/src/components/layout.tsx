@@ -85,7 +85,7 @@ export function Section({
               <SectionLinkButton surface={onDark ? 'inverse' : 'default'} onClick={fire} />
             ) : trig === 'button' ? (
               <button onClick={fire} style={{ display: 'inline-flex', alignItems: 'center', gap: 2, border: 0, background: 'transparent', cursor: 'pointer', padding: `0 ${space('xs')}`, color: onDark ? text : color('text.brand.default'), ...ty('button.sm') }}>
-                {triggerLabel}<IconBox size="md"><Icon name="chevron-right-sm" size={16} /></IconBox>
+                {triggerLabel}<IconBox size="md" data-rtl-flip><Icon name="chevron-right-sm" size={16} /></IconBox>
               </button>
             ) : null}
           </div>

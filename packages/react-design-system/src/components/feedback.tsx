@@ -66,7 +66,7 @@ export function PlanUsageBar({
       <div
         data-part="fill"
         style={{
-          position: 'absolute', insetBlock: 0, left: 0, width: `${pct}%`,
+          position: 'absolute', insetBlock: 0, insetInlineStart: 0, width: `${pct}%`,
           background: USAGE_FILL[status], borderRadius: radius('3'),
         }}
       />
@@ -80,7 +80,7 @@ export function PlanUsageBar({
           <Text variant="title.xs" as="span">{left} {unit} left</Text>
           {note != null ? <Text variant="body.sm" as="span">{note}</Text> : null}
         </span>
-        <Text variant="button.md" as="span" style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>{label}</Text>
+        <Text variant="button.md" as="span" style={{ textAlign: 'end', whiteSpace: 'nowrap' }}>{label}</Text>
       </div>
     </div>
   );
@@ -151,7 +151,7 @@ export function Snackbar({ tone = 'default', message, subtitle, action, onAction
       {mark}
       <span style={{ display: 'flex', flexDirection: 'column', flex: centred ? '0 1 auto' : 1, minWidth: 0 }}>
         <Text as="div" variant="body.lg" color={color('text.default.inverse')}
-          style={{ fontSize: 16, lineHeight: '20px', fontWeight: 700, textAlign: centred ? 'center' : 'left' }}>{message}</Text>
+          style={{ fontSize: 16, lineHeight: '20px', fontWeight: 700, textAlign: centred ? 'center' : 'start' }}>{message}</Text>
         {subtitle ? <Text as="div" variant="body.md" color={color('text.default.inverse')}
           style={{ fontSize: 14, lineHeight: '18px', fontWeight: 400 }}>{subtitle}</Text> : null}
       </span>

@@ -5,6 +5,7 @@ import { Playground } from './preview/playground';
 import { PropsTable } from './preview/props-table';
 import { TokenColors, TokenTypography, TokenSpacing } from './preview/tokens-browser';
 import { IconGallery } from './preview/icons-browser';
+import { AR, EN } from './lang-slot';
 
 export function getMDXComponents(components?: MDXComponents) {
   return {
@@ -16,6 +17,8 @@ export function getMDXComponents(components?: MDXComponents) {
     TokenTypography,
     TokenSpacing,
     IconGallery,
+    EN,
+    AR,
     ...components,
   } satisfies MDXComponents;
 }

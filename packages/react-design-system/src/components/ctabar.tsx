@@ -134,15 +134,15 @@ export function CtaFooter({ ribbon, price, terms, payment, actions, homeIndicato
     <footer style={{
       position: 'sticky', bottom: 0, zIndex: 10, width: '100%', boxSizing: 'border-box',
       background: color('surface.canvas.default'), overflow: 'hidden',
-      borderTopLeftRadius: rounded ? radius('7') : 0, borderTopRightRadius: rounded ? radius('7') : 0,
-      boxShadow: '1px 0px 44px 0px rgba(25, 19, 41, 0.15)',
+      borderStartStartRadius: rounded ? radius('7') : 0, borderStartEndRadius: rounded ? radius('7') : 0,
+      boxShadow: '0 0 44px 0 rgba(25, 19, 41, 0.15)',
       ...style,
     }} {...rest}>
       {ribbon}
       {price ? (
         <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: space('sm'), padding: `${pad} ${pad} 0` }}>
           <Text variant="body.md" color={color('text.default.subtle')}>{price.label}</Text>
-          <span style={{ textAlign: 'right' }}>
+          <span style={{ textAlign: 'end' }}>
             <Text variant="title.sm" as="div">{price.value}</Text>
             {price.note ? <Text variant="body.sm" color={color('text.default.muted')}>{price.note}</Text> : null}
           </span>

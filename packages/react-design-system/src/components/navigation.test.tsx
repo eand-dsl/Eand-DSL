@@ -15,7 +15,7 @@ test('TopBar brand hero uses the brand surface and rounds its bottom', () => {
   const { container } = render(<TopBar surface="brand" bigTitle="Large title" statusBar={false} />);
   const header = container.querySelector('header')!;
   expect(header.style.background).toBe('rgb(224, 8, 0)'); // surface.base.brand
-  expect(header.style.borderBottomLeftRadius).toBe('20px'); // radius 6
+  expect(header.style.borderEndStartRadius).toBe('20px'); // radius 6
 });
 
 test('TopBar big-title block renders eyebrow, title and subtext', () => {
@@ -67,7 +67,7 @@ test('TopBar does not leak the rounded prop onto the DOM', () => {
   const { container } = render(<TopBar surface="brand" bigTitle="Store" rounded={false} statusBar={false} />);
   const header = container.querySelector('header')!;
   expect(header.getAttribute('rounded')).toBeNull();
-  expect(header.style.borderBottomLeftRadius).toBe('0');
+  expect(header.style.borderEndStartRadius).toBe('0');
 });
 
 /* ---------------- QuickAction vs Figma `quick-action` 27962:37107 ----------------

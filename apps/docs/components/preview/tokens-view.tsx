@@ -58,12 +58,17 @@ export function TypographyView() {
       {styles.map((p) => {
         const s = get(p);
         const px = parseFloat(s.fontSize);
+        // `aed/*` is the Arabic ramp, so it gets an Arabic pangram — a Latin
+        // specimen says nothing about the metrics this ramp exists to tune.
+        const arabic = p[0] === 'aed';
         return (
           <div className="spec-row" key={p.join('.')}>
             <div className="lbl">{p.join('.')}</div>
             <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontSize: Math.min(px, 40), fontWeight: Number(s.fontWeight) || 400, lineHeight: 1.1, letterSpacing: px > 28 ? '-0.5px' : 0 }}>
-                The quick brown fox
+              <div
+                style={{ fontSize: Math.min(px, 40), fontWeight: Number(s.fontWeight) || 400, lineHeight: arabic ? 1.4 : 1.1, letterSpacing: px > 28 ? '-0.5px' : 0 }}
+              >
+                {arabic ? 'نص حكيم له سر قاطع وذو شأن عظيم' : 'The quick brown fox'}
               </div>
               <div className="vl" style={{ color: 'var(--muted)', fontFamily: 'var(--mono)', fontSize: 11, marginTop: 4 }}>
                 {s.fontSize} · {s.fontWeight} · lh {s.lineHeight}

@@ -1,56 +1,45 @@
-import Link from 'next/link';
+'use client';
 
-const entries = [
-  {
-    href: '/docs',
-    title: 'Get started',
-    body: 'Install the package and assemble your first e& screen.',
-  },
-  {
-    href: '/docs/components/button',
-    title: 'Components',
-    body: '45 documented components with live, knob-driven demos and prop tables.',
-  },
-  {
-    href: '/docs/foundations/colors',
-    title: 'Foundations',
-    body: 'Colour, typography, and spacing — resolved from the Figma variable export.',
-  },
-  {
-    href: '/docs/foundations/icons',
-    title: 'Icons',
-    body: '198 icons in outline and filled forms, searchable by name, description, or alias.',
-  },
-];
+import Link from 'next/link';
+import { useLang } from '@/lib/i18n/provider';
 
 export default function HomePage() {
+  const { lang, t } = useLang();
+
+  const entries = [
+    { href: '/docs', ...t.cards.started },
+    { href: '/docs/components/button', ...t.cards.components },
+    { href: '/docs/foundations/colors', ...t.cards.foundations },
+    { href: '/docs/foundations/icons', ...t.cards.icons },
+  ];
+
   return (
     <main className="flex flex-1 flex-col items-center justify-center px-4 py-20">
-      <p className="text-fd-muted-foreground text-sm font-medium tracking-wide uppercase">
-        e&amp; Consumer App
+      {/* Arabic has no letter case, and uppercasing would corrupt the `e&` mark. */}
+      <p
+        className={`text-fd-muted-foreground text-sm font-medium tracking-wide ${
+          lang === 'en' ? 'uppercase' : ''
+        }`}
+      >
+        {t.tagline}
       </p>
       <h1 className="mt-3 max-w-2xl text-center text-4xl font-bold tracking-tight sm:text-5xl">
-        The e&amp; Design System
+        {t.heroTitle}
       </h1>
-      <p className="text-fd-muted-foreground mt-5 max-w-xl text-center text-lg">
-        A React component library built to the Figma{' '}
-        <span className="font-medium">e&amp; Consumer App DSL V1.1</span> — every token
-        resolved from the same variable export that generates the SwiftUI and Compose
-        tokens, so values never drift between platforms.
-      </p>
+      <p className="text-fd-muted-foreground mt-5 max-w-xl text-center text-lg">{t.heroBody}</p>
 
       <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
         <Link
           href="/docs"
           className="bg-fd-primary text-fd-primary-foreground rounded-full px-5 py-2.5 text-sm font-semibold transition-opacity hover:opacity-90"
         >
-          Read the docs
+          {t.ctaDocs}
         </Link>
         <Link
           href="/docs/components/button"
           className="border-fd-border hover:bg-fd-accent rounded-full border px-5 py-2.5 text-sm font-semibold transition-colors"
         >
-          Browse components
+          {t.ctaComponents}
         </Link>
       </div>
 

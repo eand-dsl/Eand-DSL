@@ -384,7 +384,7 @@ export function Switcher({ checked, defaultChecked = false, disabled, size = 'lg
       onClick={() => { if (disabled) return; setInternal(!on); onChange?.(!on); }}
       style={{ width: w, height: h, borderRadius: PILL, border: 0, padding: 2, cursor: disabled ? 'not-allowed' : 'pointer',
         background: on ? color('surface.base.brand') : color('surface.sunken.default'), opacity: disabled ? 0.5 : 1, position: 'relative', transition: 'background 150ms' }}>
-      <span style={{ position: 'absolute', top: 2, left: on ? w - knob - 2 : 2, width: knob, height: knob, borderRadius: '50%', background: '#fff', transition: 'left 150ms' }} />
+      <span style={{ position: 'absolute', top: 2, insetInlineStart: on ? w - knob - 2 : 2, width: knob, height: knob, borderRadius: '50%', background: '#fff', transition: 'inset-inline-start 150ms' }} />
     </button>
   );
 }
@@ -494,7 +494,7 @@ export function PickerOption({ value, caption, badge, surface = 'default', selec
       onClick={onClick}
       style={{
         position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: space('xs'),
-        minWidth: 96, minHeight: 72, boxSizing: 'border-box', textAlign: 'left', cursor: disabled ? 'not-allowed' : 'pointer',
+        minWidth: 96, minHeight: 72, boxSizing: 'border-box', textAlign: 'start', cursor: disabled ? 'not-allowed' : 'pointer',
         padding: `${space('sm')} ${space('sm')}`, borderRadius: radius('5'),
         background: s.bg, color: s.value,
         // always render a border so selecting doesn't shift layout
@@ -507,7 +507,7 @@ export function PickerOption({ value, caption, badge, surface = 'default', selec
     >
       {selected ? (
         <svg aria-hidden width={16} height={16} viewBox="0 0 24 24" fill="none"
-          style={{ position: 'absolute', top: space('sm'), right: space('sm'), color: s.value }}>
+          style={{ position: 'absolute', top: space('sm'), insetInlineEnd: space('sm'), color: s.value }}>
           <path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       ) : null}
