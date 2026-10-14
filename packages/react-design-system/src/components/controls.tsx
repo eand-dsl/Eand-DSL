@@ -1,7 +1,7 @@
 import { useRef, useState, type CSSProperties, type HTMLAttributes, type InputHTMLAttributes, type ReactNode } from 'react';
 import { color, space, ty, radius, scale, PILL, T } from '../system';
 import { Icon } from '../icons';
-import { Text, IconBox } from './primitives';
+import { Text, IconBox, Badge, Dismiss } from './primitives';
 
 /* ---------------- Input ----------------
    Figma V1.1 input-field (page 22609:113539): a single filled style — 56px field,
@@ -577,25 +577,47 @@ export function Tabs({ tabs, value, defaultValue = 0, scope = 'global', icons, o
 }
 
 /* ---------------- Picker ----------------
-   Figma V1.1 Picker (page 28278:1530, set 31358:139406): a selectable option tile —
-   value + optional caption + optional status badge, 16px radius, ~72px tall.
-   Surface axis default | light | inverse | glass; selected = red accent border +
-   check indicator; disabled dims the tile. `Picker` manages single selection over
+   Figma V1.2 `picker` 34373:16787 (page 28278:1530): a fixed 106×72 option tile — value
+   (title/sm) over a caption (body/xs), both centred, with an optional full-width neutral sm
+   status badge along the bottom. State lives on the atoms `.picker-scheme-default` 34373:16315
+   and `.picker-scheme-inverse` 34373:16508:
+   - selected (13.07.2026, per VD feedback): the fill and ink swap — default scheme →
+     surface/raised/midnight + text/default/inverse; inverse scheme → surface/raised/default +
+     text/default/{default,subtle} — plus a `check-circle` (filled) 20px glyph in a 24px
+     icon-size at top/end 6. No border.
+   - disabled: text/default/disabled (inverse: inverse-disabled), badge hidden, no opacity.
+   Surfaces: default = Figma sunken, light = Figma default (canvas), inverse = Figma midnight,
+   glass = Figma glass (white 20% + glass effect). `Picker` manages single selection over
    `options`; `PickerOption` is the standalone tile for custom layouts. */
 export type PickerSurface = 'default' | 'light' | 'inverse' | 'glass';
-// All from real tokens except the glass fill (surface.glass.white.lg = white-20%).
-const PICKER_SURFACE: Record<PickerSurface, { bg: string; value: string; caption: string; blur?: boolean }> = {
-  default: { bg: color('surface.sunken.default'), value: color('text.default.default'), caption: color('text.default.subtle') },
-  light:   { bg: color('surface.canvas.default'), value: color('text.default.default'), caption: color('text.default.subtle') },
-  inverse: { bg: color('surface.raised.midnight'), value: color('text.default.inverse'), caption: color('text.default.inverse-subtle') },
-  glass:   { bg: color('surface.glass.white.lg'), value: color('text.default.inverse'), caption: color('text.default.inverse-subtle'), blur: true },
+type PickerInk = { bg: string; value: string; caption: string; disabled: string; blur?: boolean };
+const PICKER_DEFAULT_SCHEME = { value: color('text.default.default'), caption: color('text.default.subtle'), disabled: color('text.default.disabled') };
+const PICKER_INVERSE_SCHEME = { value: color('text.default.inverse'), caption: color('text.default.inverse'), disabled: color('text.default.inverse-disabled') };
+const PICKER_SURFACE: Record<PickerSurface, PickerInk> = {
+  default: { bg: color('surface.sunken.default'), ...PICKER_DEFAULT_SCHEME },
+  light:   { bg: color('surface.canvas.default'), ...PICKER_DEFAULT_SCHEME },
+  inverse: { bg: color('surface.raised.midnight'), ...PICKER_INVERSE_SCHEME },
+  glass:   { bg: color('surface.glass.white.lg'), ...PICKER_INVERSE_SCHEME, blur: true },
 };
+const PICKER_SELECTED = {
+  // default scheme (default, light)
+  default: { bg: color('surface.raised.midnight'), value: color('text.default.inverse'), caption: color('text.default.inverse'), check: color('surface.base.inverse') },
+  // inverse scheme (inverse, glass)
+  inverse: { bg: color('surface.raised.default'), value: color('text.default.default'), caption: color('text.default.subtle'), check: color('text.brand.default') },
+};
+// The check sits 6px from the top and end edges (absolute at 76,6 in the 106 tile). 6 is not a
+// spacing step, so it stays literal.
+const PICKER_CHECK_INSET = '6px';
+// Figma: 106×72 fixed. 106 has no scale/* step.
+const PICKER_WIDTH = '106px';
 export interface PickerOptionProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onClick' | 'value'> {
-  /** Primary text (title.sm). */
+  /** Primary text (title/sm, centred). */
   value?: ReactNode;
-  /** Secondary line under the value (body.xs, subtle) — e.g. a unit. */
+  /** Secondary line under the value (body/xs) — e.g. a unit. */
   caption?: ReactNode;
-  /** Status badge slot rendered at the bottom of the tile. */
+  /** Status badge along the bottom of the tile (Figma `badges`). A string or number renders the
+   *  published neutral sm status badge across the tile; any other node renders as given.
+   *  Hidden while disabled. */
   badge?: ReactNode;
   surface?: PickerSurface;
   selected?: boolean;
@@ -604,7 +626,11 @@ export interface PickerOptionProps extends Omit<HTMLAttributes<HTMLButtonElement
 }
 export function PickerOption({ value, caption, badge, surface = 'default', selected, disabled, style, children, onClick, ...rest }: PickerOptionProps) {
   const s = PICKER_SURFACE[surface];
-  const accent = color('border.interactive.accent.default');
+  const inverseScheme = surface === 'inverse' || surface === 'glass';
+  const sel = selected && !disabled ? PICKER_SELECTED[inverseScheme ? 'inverse' : 'default'] : null;
+  const valueInk = disabled ? s.disabled : sel ? sel.value : s.value;
+  const captionInk = disabled ? s.disabled : sel ? sel.caption : s.caption;
+  const showBadge = badge != null && badge !== false && !disabled;
   return (
     <button
       type="button"
@@ -613,31 +639,37 @@ export function PickerOption({ value, caption, badge, surface = 'default', selec
       disabled={disabled}
       onClick={onClick}
       style={{
-        position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: space('xs'),
-        minWidth: 96, minHeight: 72, boxSizing: 'border-box', textAlign: 'start', cursor: disabled ? 'not-allowed' : 'pointer',
-        padding: `${space('sm')} ${space('sm')}`, borderRadius: radius('6'),
-        background: s.bg, color: s.value,
-        // always render a border so selecting doesn't shift layout
-        border: `1.5px solid ${selected ? accent : 'transparent'}`,
-        opacity: disabled ? 0.5 : 1,
-        ...(s.blur ? { backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' } : {}),
+        position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'stretch', flex: 'none',
+        width: PICKER_WIDTH, height: scale('72'), boxSizing: 'border-box', padding: 0, border: 0,
+        textAlign: 'center', cursor: disabled ? 'not-allowed' : 'pointer', borderRadius: radius('6'),
+        background: sel ? sel.bg : s.bg, color: valueInk, overflow: 'hidden',
+        ...(s.blur && !sel ? { backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' } : {}),
         ...style,
       }}
       {...rest}
     >
-      {selected ? (
-        <svg aria-hidden width={16} height={16} viewBox="0 0 24 24" fill="none"
-          style={{ position: 'absolute', top: space('sm'), insetInlineEnd: space('sm'), color: s.value }}>
-          <path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+      {sel ? (
+        <IconBox size="xl" aria-hidden style={{ position: 'absolute', top: PICKER_CHECK_INSET, insetInlineEnd: PICKER_CHECK_INSET }}>
+          <Icon name="check-circle-filled" size={20} color={sel.check} />
+        </IconBox>
       ) : null}
       {children ?? (
-        <span style={{ display: 'flex', flexDirection: 'column' }}>
-          {value != null ? <Text variant="title.sm" color={s.value} as="span">{value}</Text> : null}
-          {caption != null ? <Text variant="body.xs" color={s.caption} as="span">{caption}</Text> : null}
+        // `.picker-body` content: 20px top (spacing/xl), 8px sides (spacing/sm); label gap −2.
+        <span style={{ display: 'flex', flexDirection: 'column', paddingTop: space('xl'), paddingInline: space('sm'), minWidth: 0 }}>
+          {value != null ? <Text variant="title.sm" color={valueInk} as="span">{value}</Text> : null}
+          {caption != null ? <Text variant="body.xs" color={captionInk} as="span" style={{ marginTop: `calc(-1 * ${space('2xs')})` }}>{caption}</Text> : null}
         </span>
       )}
-      {badge != null ? <span>{badge}</span> : null}
+      {showBadge ? (
+        // `Label` strip: 0/2/2/2 (spacing/2xs) at the bottom of the tile.
+        <span style={{ display: 'flex', marginTop: 'auto', padding: `0 ${space('2xs')} ${space('2xs')}` }}>
+          {typeof badge === 'string' || typeof badge === 'number'
+            // Figma sets the strip badge to 6/6/28/28; Figma clamps each corner to half the 16px
+            // height, so it renders 6/6/8/8 (CSS would scale all four down instead).
+            ? <Badge status="neutral" size="sm" style={{ width: '100%', borderRadius: `${radius('2')} ${radius('2')} ${radius('3')} ${radius('3')}` }}>{badge}</Badge>
+            : badge}
+        </span>
+      ) : null}
     </button>
   );
 }

@@ -504,21 +504,70 @@ test.each([
   expect(screen.getByRole('radio').style.background).toBe(bg);
 });
 
-test('PickerOption selected adds the accent border and a check indicator', () => {
-  const { container } = render(<PickerOption value="5" selected />);
+/* Picker vs Figma V1.2 `picker` 34373:16787 + state atoms `.picker-scheme-default` 34373:16315
+   / `-inverse` 34373:16508. 13.07.2026 "Changed selected state per VD feedback": selected is a
+   fill + text swap with an icon-set check-circle (filled, 20 in a 24 icon-size, top/end 6), not
+   a red border with a hand-drawn tick. Fixed 106×72, centred, content padding 20 top / 8 sides,
+   disabled via text tokens with the badge hidden, not opacity. */
+
+test('PickerOption is a fixed 106×72 centred tile with 20/8 content padding', () => {
+  render(<PickerOption value="5" caption="AED" />);
   const tile = screen.getByRole('radio');
-  expect(tile).toHaveAttribute('aria-checked', 'true');
-  expect(tile.style.border).toContain('rgb(224, 8, 0)'); // #e00800
-  expect(container.querySelector('svg')).toBeInTheDocument();
+  expect(tile.style.width).toBe('106px');
+  expect(tile.style.height).toBe('72px');
+  expect(tile.style.textAlign).toBe('center');
+  const content = screen.getByText('5').parentElement!;
+  expect(content.style.paddingTop).toBe('20px');
+  expect(content.style.paddingInline).toBe('8px');
 });
 
-test('PickerOption disabled dims and cannot be clicked', async () => {
-  const fn = vi.fn();
-  render(<PickerOption value="5" disabled onClick={fn} />);
+test.each([
+  // [surface, selected bg, value ink, caption ink, check ink]
+  ['default', 'rgb(49, 44, 64)', 'rgb(255, 255, 255)', 'rgb(255, 255, 255)', 'rgb(255, 255, 255)'], // raised/midnight
+  ['light', 'rgb(49, 44, 64)', 'rgb(255, 255, 255)', 'rgb(255, 255, 255)', 'rgb(255, 255, 255)'],
+  ['glass', 'rgb(255, 255, 255)', 'rgb(25, 19, 41)', 'rgb(87, 83, 98)', 'rgb(224, 8, 0)'],          // raised/default
+  ['inverse', 'rgb(255, 255, 255)', 'rgb(25, 19, 41)', 'rgb(87, 83, 98)', 'rgb(224, 8, 0)'],
+] as const)('PickerOption surface=%s selected swaps fill and ink and shows check-circle', (surface, bg, value, caption, check) => {
+  const { container } = render(<PickerOption value="5" caption="AED" surface={surface} selected />);
   const tile = screen.getByRole('radio');
-  expect(tile.style.opacity).toBe('0.5');
+  expect(tile).toHaveAttribute('aria-checked', 'true');
+  expect(tile.style.background).toBe(bg);
+  expect(tile.style.border).toBe('0px'); // no accent border any more
+  expect(screen.getByText('5').style.color).toBe(value);
+  expect(screen.getByText('AED').style.color).toBe(caption);
+  const icon = container.querySelector('[aria-label="check-circle-filled"]') as HTMLElement;
+  expect(icon.style.color).toBe(check);
+  const box = icon.parentElement as HTMLElement;
+  expect(box.style.width).toBe('24px');
+  expect(box.style.top).toBe('6px');
+  expect(box.style.insetInlineEnd).toBe('6px');
+});
+
+test('PickerOption inverse caption is text/default/inverse, not inverse-subtle', () => {
+  render(<PickerOption value="5" caption="AED" surface="glass" />);
+  expect(screen.getByText('AED').style.color).toBe('rgb(255, 255, 255)');
+});
+
+test('PickerOption string badge renders the neutral sm status badge across the tile', () => {
+  render(<PickerOption value="5" badge="Neutral" />);
+  const badge = screen.getByText('Neutral');
+  expect(badge.style.background).toBe('rgb(240, 240, 245)'); // badge/surface/status/neutral
+  expect(badge.style.height).toBe('16px');
+  expect(badge.style.width).toBe('100%');
+});
+
+test('PickerOption disabled uses disabled inks, hides the badge, no opacity, and cannot be clicked', async () => {
+  const fn = vi.fn();
+  const { rerender } = render(<PickerOption value="5" caption="AED" badge="Neutral" disabled onClick={fn} />);
+  const tile = screen.getByRole('radio');
+  expect(tile.style.opacity).toBe('');
+  expect(screen.getByText('5').style.color).toBe('rgb(192, 191, 200)');
+  expect(screen.getByText('AED').style.color).toBe('rgb(192, 191, 200)');
+  expect(screen.queryByText('Neutral')).toBeNull();
   await userEvent.click(tile);
   expect(fn).not.toHaveBeenCalled();
+  rerender(<PickerOption value="5" caption="AED" surface="glass" disabled />);
+  expect(screen.getByText('5').style.color).toBe('rgba(255, 255, 255, 0.5)'); // inverse-disabled
 });
 
 test('Picker manages single selection and fires onChange', async () => {
