@@ -1,70 +1,113 @@
 import { useRef, useState, type CSSProperties, type HTMLAttributes, type InputHTMLAttributes, type ReactNode } from 'react';
 import { color, space, ty, radius, scale, PILL, T } from '../system';
 import { Icon } from '../icons';
-import { Text, IconBox } from './primitives';
+import { Text, IconBox, Badge, Dismiss } from './primitives';
 
 /* ---------------- Input ----------------
-   Figma V1.1 input-field (page 22609:113539): a single filled style — 56px field,
-   16px radius, 1.5px state border, floating label (16px resting → 12px floated).
-   `type` maps the Figma axis: text | dropdown (trailing 16px chevron) |
-   picker (leading slot + chevron) | comment (multiline). OTP is `OtpInput` below. */
+   Figma V1.2 `input-field` 29010:3152 (page 22609:113539; 08.06.2026 "Overhauled entire
+   component to v2.0"): a 56px field (scale/56), radius border-radius/5 = 14, inline padding
+   12 (spacing/md), floating label (body/lg resting → body/sm floated). The surface has no
+   stroke at rest, filled or disabled; active = 1px border/interactive/accent/default, error =
+   1px border/interactive/danger/subtle — both INSIDE, drawn here as an inset shadow so the
+   field never shifts. Inverse = `.input-surface-inverse` 29706:19982: surface/glass/white/md +
+   glass effect, disabled surface/glass/white/sm.
+   Slots (`.input-addon` 38127:23558), spacing carried by each slot rather than a row gap:
+   leading 24px icon-size + 4 end · text · dropdown chevron-down 12 in a 16 box · trailing
+   4 start + 24 icon-size · clear = `dismiss` md (24) with 8 start padding, active+filled only.
+   Status row (`.input-status` 25328:25295 as instanced here): 12px inline inset, a 20px
+   icon-size holding the 16px `info` glyph for every status, body/sm text.
+   Vertical text padding stays 8: Figma's 12 + label 17 + 2 + value 22 + 12 = 65 overflows its
+   own bound 56px height (design question). `type` maps the Figma axis: text | dropdown |
+   picker | comment. OTP is `OtpInput` below. */
 export type InputType = 'text' | 'dropdown' | 'picker' | 'comment';
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'type'> {
   /** Floating label inside the field. */
   label?: ReactNode;
+  /** Neutral hint below the field (Figma status=neutral). */
   helper?: ReactNode;
-  /** Error hint below the field (Figma status=error); drives the error border. */
+  /** Error hint below the field (Figma status=error); drives the error stroke. */
   error?: ReactNode;
-  /** Success hint below the field (Figma status=Success). */
+  /** Success hint below the field (Figma status=success). */
   success?: ReactNode;
+  /** Show the `info` glyph before the status text (Figma `info-icon`, default true). */
+  statusIcon?: boolean;
   /** Figma `type` axis. dropdown/picker render read-only with a trailing chevron. */
   type?: InputType;
   /** Underlying HTML input type (password, email, …) for type="text". */
   htmlType?: InputHTMLAttributes<HTMLInputElement>['type'];
   /** Inverse scheme for dark (midnight/brand) surfaces. */
   inverse?: boolean;
+  /** Leading slot: a 24px icon-size — pass a 20px glyph. */
   leadingIcon?: ReactNode;
+  /** Trailing slot: a 24px icon-size — pass a 20px glyph. */
   trailingIcon?: ReactNode;
-  /** Show the 24px erase button when the field has a value. */
+  /** Show the 24px dismiss (clear) button while the field is active and has a value. */
   clearable?: boolean;
   onClear?: () => void;
   /** @deprecated V1.0 axis — V1.1 has a single filled style; ignored. */
   variant?: 'outlined' | 'filled';
 }
+const INPUT_GLASS = { backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' } as const;
+/** Figma INSIDE stroke, as an inset shadow (no layout shift between states). */
+const insideStroke = (c: string | null) => (c ? `inset 0 0 0 ${T.border.sm} ${c}` : 'none');
+/** `.input-status`: 20px icon-size with the 16px `info` glyph + body/sm text, in the status ink. */
+function StatusLine({ ink, inset, gap, bottom, icon = true, children }: { ink: string; inset: string; gap: string; bottom: string; icon?: boolean; children: ReactNode }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'flex-start', gap, paddingTop: space('2xs'), paddingBottom: bottom, paddingInline: inset }}>
+      {icon ? <IconBox size="lg" style={{ color: ink }}><Icon name="info" size={16} /></IconBox> : null}
+      <span style={{ paddingTop: space('2xs'), minWidth: 0 }}>
+        <Text variant="body.sm" color={ink}>{children}</Text>
+      </span>
+    </div>
+  );
+}
 export function Input({
-  label, helper, error, success, type = 'text', htmlType, inverse, leadingIcon, trailingIcon,
+  label, helper, error, success, statusIcon = true, type = 'text', htmlType, inverse, leadingIcon, trailingIcon,
   clearable, onClear, variant: _variant, style, disabled, value, defaultValue, onChange, onFocus, onBlur, ...rest
 }: InputProps) {
   const inputRef = useRef<HTMLInputElement & HTMLTextAreaElement>(null);
+  // Active = focus anywhere inside the field (the input or its clear button), so tabbing to
+  // the clear button does not hide it.
   const [focused, setFocused] = useState(false);
   const [internal, setInternal] = useState(String(defaultValue ?? ''));
   const current = String(value ?? internal);
   const floated = !label || focused || current.length > 0;
   const scheme = inverse ? 'inverse' : 'default';
   const stateKey = disabled ? 'disabled' : 'default';
-  const borderColor = disabled ? color('inputField.border.disabled')
-    : error ? color('inputField.border.error')
-    : focused ? color('inputField.border.focus')
-    : color('inputField.border.default');
+  const stroke = disabled ? null
+    : error ? color('border.interactive.danger.subtle')
+    : focused ? color('border.interactive.accent.default')
+    : null;
+  const surface = inverse
+    ? (disabled ? { background: color('surface.glass.white.sm') } : { background: color('surface.glass.white.md'), ...INPUT_GLASS })
+    : { background: color(`inputField.surface.default.${stateKey}`) };
   const labelColor = color(`inputField.text.${scheme}.label.${stateKey}`);
   const valueColor = color(`inputField.text.${scheme}.value.${disabled ? 'disabled' : 'default'}`);
   const readOnly = type === 'dropdown' || type === 'picker';
+  const lead = leadingIcon ?? (type === 'picker' ? <Icon name="placeholder" size={20} /> : null);
+  const showClear = clearable && focused && current.length > 0 && !disabled;
+  const status = error ?? success ?? helper;
+  const statusInk = error ? color('text.danger.subtle') : success ? color('text.positive.subtle') : color('text.default.muted');
   // typed loosely: 'input' and 'textarea' props diverge (rows vs type)
   const FieldTag = (type === 'comment' ? 'textarea' : 'input') as any;
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: space('xs'), width: '100%' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
       <div
         onClick={() => inputRef.current?.focus()}
+        onFocus={() => setFocused(true)}
+        onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setFocused(false); }}
         style={{
-          display: 'flex', alignItems: 'center', gap: space('sm'), minHeight: T.scale?.['56'] ?? 56,
-          padding: `0 ${space('md')}`, borderRadius: radius('6'), boxSizing: 'border-box',
-          background: color(`inputField.surface.${scheme}.${stateKey}`),
-          border: `${T.border?.md ?? '1.5px'} solid ${borderColor}`,
+          display: 'flex', alignItems: 'center', gap: 0, minHeight: scale('56'),
+          padding: `0 ${space('md')}`, borderRadius: radius('5'), boxSizing: 'border-box', border: 0,
+          ...surface, boxShadow: insideStroke(stroke),
           cursor: disabled ? 'not-allowed' : readOnly ? 'pointer' : 'text',
         }}
       >
-        {(leadingIcon ?? (type === 'picker' ? <Icon name="placeholder" size={20} /> : null)) != null
-          ? <IconBox size="lg" style={{ color: valueColor }}>{leadingIcon ?? <Icon name="placeholder" size={20} />}</IconBox> : null}
+        {lead != null ? (
+          <span style={{ display: 'inline-flex', flex: 'none', paddingInlineEnd: space('xs') }}>
+            <IconBox size="xl" style={{ color: valueColor }}>{lead}</IconBox>
+          </span>
+        ) : null}
         <span style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: space('2xs'), padding: `${space('sm')} 0` }}>
           {label ? (
             <span style={{ color: labelColor, transition: 'font-size 120ms ease, line-height 120ms ease', ...ty(floated ? 'body.sm' : 'body.lg') } as CSSProperties}>{label}</span>
@@ -78,8 +121,8 @@ export function Input({
             defaultValue={defaultValue}
             rows={type === 'comment' ? 2 : undefined}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setInternal(e.currentTarget.value); onChange?.(e); }}
-            onFocus={(e: React.FocusEvent<HTMLInputElement>) => { setFocused(true); onFocus?.(e); }}
-            onBlur={(e: React.FocusEvent<HTMLInputElement>) => { setFocused(false); onBlur?.(e); }}
+            onFocus={onFocus}
+            onBlur={onBlur}
             style={{
               width: '100%', minWidth: 0, border: 0, outline: 'none', background: 'transparent', padding: 0,
               resize: 'none', color: valueColor, caretColor: color('text.brand.default'),
@@ -89,38 +132,43 @@ export function Input({
             {...rest}
           />
         </span>
-        {clearable && current.length > 0 && !disabled ? (
-          <button
-            aria-label="Clear"
-            onClick={(e) => {
-              e.stopPropagation(); setInternal('');
-              if (value === undefined && inputRef.current) inputRef.current.value = ''; // uncontrolled: clear the DOM too
-              onClear?.(); inputRef.current?.focus();
-            }}
-            // 24px erase button, Figma `color/dismiss/default` (#908e9a) — no dismiss token group yet
-            style={{ width: 24, height: 24, flex: 'none', border: 0, borderRadius: '50%', background: '#908e9a', color: '#ffffff', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, lineHeight: 1 }}
-          ><Icon name="close" size={12} /></button>
+        {showClear ? (
+          <span style={{ display: 'inline-flex', flex: 'none', paddingInlineStart: space('sm') }}>
+            <Dismiss
+              size="md"
+              aria-label="Clear"
+              // keep focus in the field: the clear button only exists while the field is active
+              onMouseDown={(e) => e.preventDefault()}
+              onClick={() => {
+                setInternal('');
+                if (value === undefined && inputRef.current) inputRef.current.value = ''; // uncontrolled: clear the DOM too
+                onClear?.(); inputRef.current?.focus();
+              }}
+            />
+          </span>
         ) : null}
-        {readOnly ? <IconBox size="md" style={{ color: labelColor }}><Icon name="chevron-down-sm" size={16} /></IconBox>
-          : trailingIcon ? <IconBox size="lg" style={{ color: valueColor }}>{trailingIcon}</IconBox> : null}
+        {readOnly ? (
+          <IconBox size="md" style={{ color: labelColor }}><Icon name="chevron-down" size={12} /></IconBox>
+        ) : trailingIcon ? (
+          <span style={{ display: 'inline-flex', flex: 'none', paddingInlineStart: space('xs') }}>
+            <IconBox size="xl" style={{ color: valueColor }}>{trailingIcon}</IconBox>
+          </span>
+        ) : null}
       </div>
-      {(error || success || helper) ? (
-        <span style={{ display: 'inline-flex', alignItems: 'center', gap: space('xs') }}>
-          {error ? <IconBox size="sm" style={{ color: color('text.danger.subtle') }}><Icon name="info" size={12} /></IconBox>
-            : success ? <IconBox size="sm" style={{ color: color('text.positive.subtle') }}><Icon name="check" size={12} /></IconBox> : null}
-          <Text variant="body.sm" color={error ? color('text.danger.subtle') : success ? color('text.positive.subtle') : color('text.default.muted')}>
-            {error ?? success ?? helper}
-          </Text>
-        </span>
-      ) : null}
+      {/* input-field: status wrapper pBottom xs + .input-status pBottom xs = 8; gap 0 as instanced */}
+      {status ? <StatusLine ink={statusInk} inset={space('md')} gap="0" bottom={space('sm')} icon={statusIcon}>{status}</StatusLine> : null}
     </div>
   );
 }
 
 /* ---------------- OtpInput ----------------
-   Figma input-field type=otp: a row of 48×56 one-character cells sharing the
-   input-field surface/border tokens; the active cell shows the active border. */
+   Figma V1.2 `otp` 33330:26041 (filled · disabled · error · filled-half): a row of six 48×56
+   `input-field type=otp` cells, space-between, 16px side padding (spacing/lg), then the status
+   line — always `.input-status status=error` (16px inset, gap 2). Cells share the input-field
+   surface and stroke rules: no stroke at rest, 1px accent on the active cell (filled-half),
+   1px danger on error. Figma's default row is built from disabled cells (Figma bug). */
 export interface OtpInputProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
+  /** Number of cells. Figma publishes 6. */
   length?: number;
   value?: string;
   defaultValue?: string;
@@ -131,7 +179,7 @@ export interface OtpInputProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onC
   disabled?: boolean;
   error?: ReactNode;
 }
-export function OtpInput({ length = 4, value, defaultValue = '', onValueChange, masked, inverse, disabled, error, style, ...rest }: OtpInputProps) {
+export function OtpInput({ length = 6, value, defaultValue = '', onValueChange, masked, inverse, disabled, error, style, ...rest }: OtpInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [focused, setFocused] = useState(false);
   const [internal, setInternal] = useState(defaultValue.slice(0, length));
@@ -139,9 +187,17 @@ export function OtpInput({ length = 4, value, defaultValue = '', onValueChange, 
   const scheme = inverse ? 'inverse' : 'default';
   const stateKey = disabled ? 'disabled' : 'default';
   const activeIndex = Math.min(current.length, length - 1);
+  const surface = inverse
+    ? (disabled ? { background: color('surface.glass.white.sm') } : { background: color('surface.glass.white.md'), ...INPUT_GLASS })
+    : { background: color(`inputField.surface.default.${stateKey}`) };
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: space('xs'), ...style }} {...rest}>
-      <div onClick={() => inputRef.current?.focus()} style={{ position: 'relative', display: 'flex', gap: space('sm'), cursor: disabled ? 'not-allowed' : 'text' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', ...style }} {...rest}>
+      {/* Codes are entered and read left-to-right in Arabic too, so the cells never mirror
+          (Figma has no rtl otp variant). The status line below still follows the page. */}
+      <div dir="ltr" onClick={() => inputRef.current?.focus()} style={{
+        position: 'relative', display: 'flex', justifyContent: 'space-between', paddingInline: space('lg'),
+        cursor: disabled ? 'not-allowed' : 'text',
+      }}>
         <input
           ref={inputRef}
           aria-label="One-time code"
@@ -157,36 +213,34 @@ export function OtpInput({ length = 4, value, defaultValue = '', onValueChange, 
         {Array.from({ length }).map((_, i) => {
           const ch = current[i];
           const active = focused && !disabled && i === activeIndex;
-          const borderColor = disabled ? color('inputField.border.disabled')
-            : error ? color('inputField.border.error')
-            : active ? color('inputField.border.focus')
-            : color('inputField.border.default');
+          const stroke = disabled ? null
+            : error ? color('border.interactive.danger.subtle')
+            : active ? color('border.interactive.accent.default')
+            : null;
           return (
             <span key={i} aria-hidden style={{
-              width: T.scale?.['48'] ?? 48, height: T.scale?.['56'] ?? 56, boxSizing: 'border-box',
-              borderRadius: radius('6'), background: color(`inputField.surface.${scheme}.${stateKey}`),
-              border: `${T.border?.md ?? '1.5px'} solid ${borderColor}`,
+              width: scale('48'), height: scale('56'), flex: 'none', boxSizing: 'border-box',
+              borderRadius: radius('5'), ...surface, boxShadow: insideStroke(stroke),
               display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
               color: color(`inputField.text.${scheme}.value.${disabled ? 'disabled' : 'default'}`), ...ty('body.lg'),
             }}>{ch ? (masked ? '•' : ch) : ''}</span>
           );
         })}
       </div>
-      {error ? (
-        <span style={{ display: 'inline-flex', alignItems: 'center', gap: space('xs') }}>
-          <IconBox size="sm" style={{ color: color('text.danger.subtle') }}><Icon name="info" size={12} /></IconBox>
-          <Text variant="body.sm" color={color('text.danger.subtle')}>{error}</Text>
-        </span>
-      ) : null}
+      {error ? <StatusLine ink={color('text.danger.subtle')} inset={space('lg')} gap={space('2xs')} bottom={space('xs')}>{error}</StatusLine> : null}
     </div>
   );
 }
 
 /* ---------------- Chip ----------------
-   Figma V1.1 chips (page 28171:29640, set 31539:8725): type = outline | filled |
-   glass | inverse × state default/focus/disabled. 40px pill, 1px border (outline
-   & inverse), 16px leading icon; content `type=check` swaps in a check mark when
-   selected; `Loader <-> IconBox=on` swaps it for a spinner. */
+   Figma V1.2 `chips` 31539:8725 (page 28171:29640, status "In review"): type = outline |
+   filled | glass | inverse × state default/selected/disabled. 40px pill (tabs/height/md),
+   min-width scale/72, 1px stroke on outline/inverse default and disabled only — selected is
+   fill only. Content `.chips-core-status` 31543:14084: with the marker, padding start 8
+   (spacing/sm) · 16px `.chips.marker` (12px glyph in an icon/md box) · 4 (spacing/xs) · label
+   (body/md) · end 12 (spacing/md); `selected=true` there is the removable chip — start 12 ·
+   label · 4 · `dismiss` small (20) · end 8. V1.2 has no loader (the V1.1 `Loader <-> IconBox`
+   is gone); `loading` is kept for existing screens and deprecated. */
 export type ChipType = 'outline' | 'filled' | 'glass' | 'inverse';
 // V1.2 renamed the chip state `focus` -> `selected` (color/chips/default/*/selected).
 type ChipState = 'default' | 'selected' | 'disabled';
@@ -196,30 +250,32 @@ type ChipState = 'default' | 'selected' | 'disabled';
 // renamed the `default` type to `outline`, which is why the old `chips.default.default.*`
 // paths stopped resolving once the export was refreshed.
 const GLASS_BLUR = { backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' } as const;
+// A transparent 1px border where Figma has no stroke keeps every state the same size.
+const NO_STROKE = '1px solid transparent';
 const CHIP_STYLE: Record<ChipType, Record<ChipState, CSSProperties>> = {
   outline: {
     default:  { background: 'transparent', color: color('chips.default.outline.text.default'), border: `1px solid ${color('chips.default.outline.border.default')}` },
-    selected: { background: color('chips.default.outline.surface.selected'), color: color('chips.default.outline.text.selected'), border: `1px solid ${color('chips.default.outline.border.selected')}` },
+    selected: { background: color('chips.default.outline.surface.selected'), color: color('chips.default.outline.text.selected'), border: NO_STROKE },
     disabled: { background: 'transparent', color: color('chips.default.outline.text.disabled'), border: `1px solid ${color('chips.default.outline.border.disabled')}` },
   },
   filled: {
-    default:  { background: color('chips.default.filled.surface.default'), color: color('chips.default.filled.text.default'), border: '1px solid transparent' },
-    selected: { background: color('chips.default.filled.surface.selected'), color: color('chips.default.filled.text.selected'), border: '1px solid transparent' },
+    default:  { background: color('chips.default.filled.surface.default'), color: color('chips.default.filled.text.default'), border: NO_STROKE },
+    selected: { background: color('chips.default.filled.surface.selected'), color: color('chips.default.filled.text.selected'), border: NO_STROKE },
     // V1.2 fixed the old `sisabled` typo in the Figma variable name.
-    disabled: { background: color('chips.default.filled.surface.disabled'), color: color('chips.default.filled.text.disabled'), border: '1px solid transparent' },
+    disabled: { background: color('chips.default.filled.surface.disabled'), color: color('chips.default.filled.text.disabled'), border: NO_STROKE },
   },
   glass: {
-    default:  { background: color('chips.default.glass.surface.default'), color: color('chips.default.glass.text.default'), border: '1px solid transparent', ...GLASS_BLUR },
-    selected: { background: color('chips.default.glass.surface.selected'), color: color('chips.default.glass.text.selected'), border: '1px solid transparent', ...GLASS_BLUR },
-    disabled: { background: color('chips.default.glass.surface.disabled'), color: color('chips.default.glass.text.disabled'), border: '1px solid transparent', ...GLASS_BLUR },
+    default:  { background: color('chips.default.glass.surface.default'), color: color('chips.default.glass.text.default'), border: NO_STROKE, ...GLASS_BLUR },
+    selected: { background: color('chips.default.glass.surface.selected'), color: color('chips.default.glass.text.selected'), border: NO_STROKE, ...GLASS_BLUR },
+    disabled: { background: color('chips.default.glass.surface.disabled'), color: color('chips.default.glass.text.disabled'), border: NO_STROKE, ...GLASS_BLUR },
   },
   inverse: {
     default:  { background: 'transparent', color: color('chips.default.inverse.text.default'), border: `1px solid ${color('chips.default.inverse.border.default')}` },
-    selected: { background: color('chips.default.inverse.surface.selected'), color: color('chips.default.inverse.text.selected'), border: `1px solid ${color('chips.default.inverse.border.selected')}` },
+    selected: { background: color('chips.default.inverse.surface.selected'), color: color('chips.default.inverse.text.selected'), border: NO_STROKE },
     disabled: { background: 'transparent', color: color('chips.default.inverse.text.disabled'), border: `1px solid ${color('chips.default.inverse.border.disabled')}` },
   },
 };
-/** 16px self-contained spinner for the chip loading state. */
+/** 16px self-contained spinner for the deprecated chip loading state. */
 function ChipSpinner() {
   return (
     <svg width={16} height={16} viewBox="0 0 24 24" fill="none" style={{ display: 'block' }} aria-hidden>
@@ -233,41 +289,76 @@ function ChipSpinner() {
 export interface ChipProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onClick'> {
   /** Figma `type` axis. */
   type?: ChipType;
-  /** Figma state=focus (the pressed/active chip). */
+  /** Figma state=selected (the pressed/active chip). */
   selected?: boolean;
   disabled?: boolean;
   /** @deprecated Alias for `type="inverse"`. */
   inverse?: boolean;
+  /** Leading marker (Figma `.chips.marker type=custom-icon`): a 16px box — pass a 12px glyph. */
   leadingIcon?: ReactNode;
-  /** Show a check mark as the leading icon while selected (Figma content `type=check`). */
+  /** Show a check mark as the leading marker while selected (Figma marker `type=check`). */
   check?: boolean;
-  /** Spinner replaces the leading icon (Figma `Loader <-> IconBox=on`); clicks suppressed. */
+  /** @deprecated V1.2 chips have no loader. Still renders a spinner in the marker slot and
+   *  suppresses clicks. */
   loading?: boolean;
+  /** Makes the chip removable (Figma `.chips-core-status selected=true`): a trailing 20px
+   *  dismiss that calls this. The label stays a separate button for `onClick`. */
+  onDismiss?: () => void;
+  /** Accessible name for the dismiss button. Defaults to "Remove <label>". */
+  dismissLabel?: string;
   onClick?: () => void;
 }
-export function Chip({ type, selected, disabled, inverse, leadingIcon, check, loading, style, children, onClick, ...rest }: ChipProps) {
+export function Chip({ type, selected, disabled, inverse, leadingIcon, check, loading, onDismiss, dismissLabel, style, children, onClick, ...rest }: ChipProps) {
   const t: ChipType = type ?? (inverse ? 'inverse' : 'outline');
   const state: ChipState = disabled ? 'disabled' : selected ? 'selected' : 'default';
   const lead = loading ? <ChipSpinner />
-    : check && selected ? <Icon name="check" size={16} />
+    : check && selected ? <Icon name="check" size={12} />
     : leadingIcon;
+  const removable = onDismiss != null;
+  const pill: CSSProperties = {
+    display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: space('xs'), boxSizing: 'border-box',
+    height: T.tabs.height.md, minWidth: scale('72'), paddingBlock: 0,
+    paddingInlineStart: lead != null ? space('sm') : space('md'),
+    paddingInlineEnd: removable ? space('sm') : space('md'),
+    borderRadius: PILL, whiteSpace: 'nowrap',
+    ...CHIP_STYLE[t][state], ...ty('body.md'),
+  };
+  const marker = lead != null ? <IconBox size="md">{lead}</IconBox> : null;
+  if (removable) {
+    const name = dismissLabel ?? (typeof children === 'string' ? `Remove ${children}` : 'Remove');
+    return (
+      <span style={{ ...pill, ...style }}>
+        <button type="button" onClick={loading ? undefined : onClick} aria-pressed={selected} disabled={disabled} aria-busy={loading || undefined}
+          {...rest}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: space('xs'), padding: 0, margin: 0, border: 0, background: 'transparent',
+            color: 'inherit', font: 'inherit', letterSpacing: 'inherit', cursor: disabled ? 'not-allowed' : loading ? 'progress' : 'pointer' }}>
+          {marker}{children}
+        </button>
+        <Dismiss size="sm" aria-label={name} aria-disabled={disabled || undefined} onClick={disabled ? undefined : onDismiss}
+          style={disabled ? { cursor: 'not-allowed' } : undefined} />
+      </span>
+    );
+  }
   return (
-    <button onClick={loading ? undefined : onClick} aria-pressed={selected} disabled={disabled} aria-busy={loading || undefined}
-      style={{
-        display: 'inline-flex', alignItems: 'center', gap: space('xs'), height: 40, padding: `0 ${space('md')}`,
-        borderRadius: PILL, cursor: disabled ? 'not-allowed' : loading ? 'progress' : 'pointer', whiteSpace: 'nowrap',
-        ...CHIP_STYLE[t][state], ...ty('body.md'), ...style,
-      }} {...rest}>
-      {lead != null ? <IconBox size="md">{lead}</IconBox> : null}{children}
+    <button type="button" onClick={loading ? undefined : onClick} aria-pressed={selected} disabled={disabled} aria-busy={loading || undefined}
+      style={{ ...pill, cursor: disabled ? 'not-allowed' : loading ? 'progress' : 'pointer', ...style }} {...rest}>
+      {marker}{children}
     </button>
   );
 }
 
-/* ---------------- FilterPill ---------------- */
+/* ---------------- FilterPill ----------------
+   Figma V1.2 `filter-pill` 26151:391 (state default/selected/disabled × inverse) with body
+   `.filter-pill-body` 37884:67515: 40px pill (tabs/height/md), min-width scale/72, 1px stroke
+   `filter-pill/border/*`. No fill on any variant except inverse+selected
+   (`filter-pill/surface/inverse/selected`). Body: padding start 12 (spacing/md) / end 8
+   (spacing/sm), gap 2 (spacing/2xs), body/md label, `chevron-down` 16px in a 20px icon-size.
+   The default+selected stroke is an unbound #191329 in Figma, the value of
+   filter-pill/border/default/selected. The orphaned `has-loader` property drives no layer. */
 export interface FilterPillProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onClick'> {
-  /** Maps to Figma `State=Focused` (V1.1 `filter-pill` set 26151:391) — the pressed/active pill state. */
+  /** Figma `state=selected` — the pressed/active pill state. */
   selected?: boolean;
-  /** Inverse color scheme for dark (midnight/brand) surfaces (Figma `Color=Inverse`). */
+  /** Inverse color scheme for dark (midnight/brand) surfaces (Figma `inverse=true`). */
   inverse?: boolean;
   disabled?: boolean;
   onClick?: () => void;
@@ -275,19 +366,19 @@ export interface FilterPillProps extends Omit<HTMLAttributes<HTMLButtonElement>,
 export function FilterPill({ selected, inverse, disabled, style, children, onClick, ...rest }: FilterPillProps) {
   const scheme = inverse ? 'inverse' : 'default';
   const state = disabled ? 'disabled' : selected ? 'selected' : 'default';
-  const background = selected && !disabled
-    ? color(inverse ? 'filterPill.surface.inverse.selected' : 'surface.base.default')
-    : inverse ? 'transparent' : color('surface.canvas.default');
+  const background = inverse && selected && !disabled ? color('filterPill.surface.inverse.selected') : 'transparent';
   return (
-    <button onClick={onClick} aria-pressed={selected} disabled={disabled}
+    <button type="button" onClick={onClick} aria-pressed={selected} disabled={disabled}
       style={{
-        display: 'inline-flex', alignItems: 'center', gap: space('xs'), height: 40, padding: `0 ${space('md')}`,
+        display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: space('2xs'), boxSizing: 'border-box',
+        height: T.tabs.height.md, minWidth: scale('72'),
+        paddingBlock: 0, paddingInlineStart: space('md'), paddingInlineEnd: space('sm'),
         borderRadius: PILL, cursor: disabled ? 'not-allowed' : 'pointer', whiteSpace: 'nowrap',
         border: `1px solid ${color(`filterPill.border.${scheme}.${state}`)}`,
         background,
         color: color(`filterPill.text.${scheme}.${state}`), ...ty('body.md'), ...style,
       }} {...rest}>
-      {children}<IconBox size="md"><Icon name="chevron-down-sm" size={16} /></IconBox>
+      {children}<IconBox size="lg"><Icon name="chevron-down" size={16} /></IconBox>
     </button>
   );
 }
@@ -303,38 +394,105 @@ export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement
    *  colors and states (Figma `radio (single selection)=yes`, node 27685:5017). */
   radio?: boolean;
 }
+/* Per-state colours from Figma V1.2 `checkbox` 27685:5017 — the 07.07.2026 revamp binds
+   every state to `color/mark/{default,inverse}/*`. Disabled is a colour, not opacity.
+   Label colours come from the consent row `checkbox-variants` 33489:12153 (the atom has no
+   label): body/md in text/default/{default,disabled} or, inverse, text/default/inverse-subtle
+   and inverse-disabled. */
+const MARK = {
+  default: {
+    boxOn: color('mark.default.surface.selected'), boxOnDisabled: color('mark.default.surface.selected-disabled'),
+    tickOn: color('mark.default.icon.selected'), tickOnDisabled: color('mark.default.icon.selected-disabled'),
+    borderOff: color('mark.default.border.default'), borderOffDisabled: color('mark.default.border.disabled'),
+    label: color('text.default.default'), labelDisabled: color('text.default.disabled'),
+  },
+  inverse: {
+    boxOn: color('mark.inverse.surface.selected'), boxOnDisabled: color('mark.inverse.surface.selected-disabled'),
+    tickOn: color('mark.inverse.icon.selected'), tickOnDisabled: color('mark.inverse.icon.selected-disabled'),
+    borderOff: color('mark.inverse.border.default'), borderOffDisabled: color('mark.inverse.border.disabled'),
+    label: color('text.default.inverse-subtle'), labelDisabled: color('text.default.inverse-disabled'),
+  },
+} as const;
 export function Checkbox({ label, checked, defaultChecked, disabled, onChange, size = 'md', inverse, radio, style, ...rest }: CheckboxProps) {
   const [internal, setInternal] = useState(defaultChecked ?? false);
   const on = checked ?? internal;
   const dim = T.checkbox[size];
-  // Per-state colors from Figma `color/mark` tokens (V1.1 checkbox, node 27685:5017).
-  // Two schemes — `default` (light surfaces) and `inverse` (brand/midnight surfaces) —
-  // each across on/off × enabled/disabled. Disabled is a distinct muted fill, not opacity.
-  const scheme = inverse
-    ? { boxOn: 'surface.base.inverse', boxOnDisabled: 'border.interactive.inverse.disabled', tickOn: 'text.brand.default', tickOnDisabled: 'text.default.inverseMuted', borderOff: 'border.interactive.inverse.pressed', borderOffDisabled: 'border.interactive.inverse.disabled' }
-    : { boxOn: 'surface.base.brand', boxOnDisabled: 'border.surfaceBased.base.default', tickOn: 'text.default.inverse', tickOnDisabled: 'text.default.muted', borderOff: 'text.default.muted', borderOffDisabled: 'border.surfaceBased.base.default' };
+  const m = MARK[inverse ? 'inverse' : 'default'];
   const box: CSSProperties = on
-    ? { border: `${T.border.md} solid transparent`, background: color(disabled ? scheme.boxOnDisabled : scheme.boxOn) }
-    : { border: `${T.border.md} solid ${color(disabled ? scheme.borderOffDisabled : scheme.borderOff)}`, background: 'transparent' };
-  const tick = color(disabled ? scheme.tickOnDisabled : scheme.tickOn);
-  const labelColor = inverse
-    ? color(disabled ? 'text.default.inverseMuted' : 'text.default.inverse')
-    : color(disabled ? 'text.default.disabled' : 'text.default.default');
+    ? { border: `${T.border.md} solid transparent`, background: disabled ? m.boxOnDisabled : m.boxOn }
+    : { border: `${T.border.md} solid ${disabled ? m.borderOffDisabled : m.borderOff}`, background: 'transparent' };
   return (
     <label style={{ display: 'inline-flex', alignItems: 'center', gap: space('sm'), cursor: disabled ? 'not-allowed' : 'pointer', ...style }}>
       <span style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: dim, height: dim, borderRadius: radio ? '50%' : radius('1'), boxSizing: 'border-box', flex: 'none', ...box }}>
         <input type={radio ? 'radio' : 'checkbox'} checked={checked} defaultChecked={defaultChecked} disabled={disabled}
           onChange={(e) => { setInternal(e.currentTarget.checked); onChange?.(e); }}
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', margin: 0, opacity: 0, cursor: 'inherit' }} {...rest} />
+        {/* Figma instances `check` filled=true: 12px in a 16px icon-size (md), 8px in 12px (sm). */}
         {on ? (
-          <svg aria-hidden viewBox="0 0 12 10" style={{ width: '80%', height: '80%', display: 'block' }}>
-            <polyline points="1,5 4.5,8.5 11,1.5" fill="none"
-              stroke={tick} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+          <IconBox size={size === 'sm' ? 'sm' : 'md'} aria-hidden style={{ pointerEvents: 'none' }}>
+            <Icon name="check-filled" size={size === 'sm' ? 8 : 12} color={disabled ? m.tickOnDisabled : m.tickOn} />
+          </IconBox>
         ) : null}
       </span>
-      {label ? <Text variant="body.md" color={labelColor}>{label}</Text> : null}
+      {label ? <Text variant="body.md" color={disabled ? m.labelDisabled : m.label}>{label}</Text> : null}
     </label>
+  );
+}
+
+/* ---------------- ConsentCheckbox ----------------
+   Figma V1.2 `checkbox-variants` 33489:12153 (inverse × selected × disabled) with its core
+   `.checkbox-core-variants-core` 38351:31883 (title-string, link-1, link-2, description,
+   direction). A md checkbox, 8px gap, then one wrapping run of body/md text: "Agree to" ·
+   link · "and" · link · "before proceeding". The links are `button type=link size=md` —
+   body/md, 2px inline padding, no underline, button/link/text/{brand|inverse}/*. */
+export interface ConsentLink {
+  label: ReactNode;
+  /** Renders an `<a>` when set, otherwise a `<button>`. */
+  href?: string;
+  onClick?: () => void;
+}
+export interface ConsentCheckboxProps extends Omit<CheckboxProps, 'label' | 'size' | 'radio' | 'prefix'> {
+  /** Text before the first link (Figma `title-string`, "Agree to"). */
+  prefix?: ReactNode;
+  /** Inline legal links (Figma `link-1`, `link-2`). Two are joined by `conjunction`. */
+  links?: ConsentLink[];
+  /** Word between the links (Figma "and"). */
+  conjunction?: ReactNode;
+  /** Text after the links (Figma `description-string`, "before proceeding"). */
+  suffix?: ReactNode;
+}
+export function ConsentCheckbox({ prefix, links = [], conjunction = 'and', suffix, inverse, disabled, ...rest }: ConsentCheckboxProps) {
+  const m = MARK[inverse ? 'inverse' : 'default'];
+  const ink = disabled ? m.labelDisabled : m.label;
+  // Figma disables the links with the row on the inverse scheme; the default-scheme disabled
+  // variant leaves them at state=default (design question). Code disables them in both.
+  const linkInk = color(`button.link.text.${inverse ? 'inverse' : 'brand'}.${disabled ? 'disabled' : 'default'}`);
+  const seg = (c: ReactNode) => (c == null || c === '' ? null : <span style={{ color: ink }}>{c}</span>);
+  const linkStyle: CSSProperties = {
+    ...ty('body.md'), color: linkInk, paddingInline: space('2xs'), paddingBlock: 0, margin: 0, border: 0,
+    background: 'transparent', textDecoration: 'none', cursor: disabled ? 'not-allowed' : 'pointer',
+  };
+  const items: ReactNode[] = [];
+  links.forEach((l, i) => {
+    if (i > 0) items.push(<span key={`c${i}`}>{seg(conjunction)}</span>);
+    items.push(l.href && !disabled
+      ? <a key={`l${i}`} href={l.href} onClick={l.onClick} style={linkStyle}>{l.label}</a>
+      : l.href
+        ? <a key={`l${i}`} aria-disabled="true" style={linkStyle}>{l.label}</a>
+        : <button key={`l${i}`} type="button" disabled={disabled} onClick={l.onClick} style={linkStyle}>{l.label}</button>);
+  });
+  return (
+    <Checkbox
+      {...rest}
+      size="md"
+      inverse={inverse}
+      disabled={disabled}
+      label={
+        <span style={{ display: 'inline-flex', flexWrap: 'wrap', alignItems: 'center' }}>
+          {seg(prefix)}{items}{seg(suffix)}
+        </span>
+      }
+    />
   );
 }
 
@@ -346,58 +504,116 @@ export interface RadioProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   /** Inverse color scheme for dark (midnight/brand) surfaces (Figma `color-scheme=inverse`). */
   inverse?: boolean;
 }
+/* Figma V1.2 `radio-button` 26369:775 (color-scheme × small × selected × disabled): a 2px
+   inside ring (`border/lg`) and a 16px dot in the 24 control / 12px in the 20
+   (`scale/16|12`). Radio missed the mark migration (last touched 05.05.2026): four states
+   bind variables outside the token set, and the inverse scheme binds `mark/default/*`, which
+   turns the selected radio grey on dark surfaces (design question).
+   - default: on = mark/default/surface/selected; on-disabled = …/selected-disabled; off and
+     off-disabled are #908e9a / #d8d7de on deleted variables, bound here to the tokens holding
+     those exact values, mark/default/border/{default,disabled} (the checkbox off ring).
+   - inverse: the shipped white ring + dot and 60% off ring are kept until design rules;
+     disabled uses mark/inverse/{border,surface}/…disabled (white 40%) instead of opacity. */
+const RADIO = {
+  default: {
+    on: color('mark.default.surface.selected'), onDisabled: color('mark.default.surface.selected-disabled'),
+    off: color('mark.default.border.default'), offDisabled: color('mark.default.border.disabled'),
+  },
+  inverse: {
+    on: color('mark.inverse.surface.selected'), onDisabled: color('mark.inverse.surface.selected-disabled'),
+    off: color('border.interactive.inverse.default'), offDisabled: color('mark.inverse.border.disabled'),
+  },
+} as const;
 export function Radio({ label, checked, defaultChecked, disabled, onChange, size = 'lg', inverse, style, ...rest }: RadioProps) {
   const [internal, setInternal] = useState(defaultChecked ?? false);
   const on = checked ?? internal;
   const dim = size === 'sm' ? T.radio.sm : T.radio.md; // Figma lg 24×24 maps to token radio.md
-  const ring = on
-    ? color(inverse ? 'border.interactive.inverse.pressed' : 'border.interactive.accent.default')
-    : color(inverse ? 'border.interactive.inverse.default' : 'border.interactive.default.default');
+  const dot = size === 'sm' ? scale('12') : scale('16');
+  const r = RADIO[inverse ? 'inverse' : 'default'];
+  const ink = on ? (disabled ? r.onDisabled : r.on) : (disabled ? r.offDisabled : r.off);
+  const m = MARK[inverse ? 'inverse' : 'default'];
   return (
-    <label style={{ display: 'inline-flex', alignItems: 'center', gap: space('sm'), cursor: disabled ? 'not-allowed' : 'pointer', opacity: disabled ? 0.5 : 1, ...style }}>
-      <span style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: dim, height: dim, borderRadius: '50%', boxSizing: 'border-box', flex: 'none', border: `1px solid ${ring}`, background: 'transparent' }}>
+    <label style={{ display: 'inline-flex', alignItems: 'center', gap: space('sm'), cursor: disabled ? 'not-allowed' : 'pointer', ...style }}>
+      <span style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: dim, height: dim, borderRadius: '50%', boxSizing: 'border-box', flex: 'none', border: `${T.border.lg} solid ${ink}`, background: 'transparent' }}>
         <input type="radio" checked={checked} defaultChecked={defaultChecked} disabled={disabled}
           onChange={(e) => { setInternal(e.currentTarget.checked); onChange?.(e); }}
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', margin: 0, opacity: 0, cursor: 'inherit' }} {...rest} />
-        {on ? <span style={{ width: '50%', height: '50%', borderRadius: '50%', background: inverse ? color('surface.base.inverse') : color('surface.base.brand') }} /> : null}
+        {on ? <span style={{ width: dot, height: dot, flex: 'none', borderRadius: '50%', background: ink, pointerEvents: 'none' }} /> : null}
       </span>
-      {label ? <Text variant="body.md">{label}</Text> : null}
+      {/* No label on the Figma atom; same inks as the Checkbox label so disabled reads as disabled. */}
+      {label ? <Text variant="body.md" color={disabled ? m.labelDisabled : m.label}>{label}</Text> : null}
     </label>
   );
 }
 
-/* ---------------- Switcher ---------------- */
+/* ---------------- Switcher ----------------
+   Figma V1.2 `switcher` 26215:7141: inverse × small × active × disabled. Track md 40×24 /
+   sm 32×20 (`switcher/track/*`), knob 20 / 16 (`switcher/thumb/*`), 2px inset
+   (`spacing/2xs`), pill. Every state is a `color/mark/*` pair — disabled is a colour, not
+   opacity (15.07.2026 "Updated colours based on common 'mark' variables"). */
+type SwitchState = 'off' | 'on' | 'offDisabled' | 'onDisabled';
+const SWITCH: Record<'default' | 'inverse', Record<SwitchState, { track: string; knob: string }>> = {
+  default: {
+    off:         { track: color('mark.default.surface.default'),          knob: color('mark.default.icon.default') },
+    on:          { track: color('mark.default.surface.selected'),         knob: color('mark.default.icon.selected') },
+    offDisabled: { track: color('mark.default.surface.disabled'),         knob: color('mark.default.icon.disabled') },
+    onDisabled:  { track: color('mark.default.surface.selected-disabled'), knob: color('mark.default.icon.selected-disabled') },
+  },
+  inverse: {
+    // The md and sm symbols disagree here: md binds a variable outside the token set
+    // (`mark/default/border/default1`, white 70%) with a `surface/raised/default` knob; sm binds
+    // `mark/inverse/surface/default` + `mark/inverse/icon/default`. Code follows sm, the one in
+    // the mark/inverse family (design question raised).
+    off:         { track: color('mark.inverse.surface.default'),          knob: color('mark.inverse.icon.default') },
+    on:          { track: color('mark.inverse.surface.selected'),         knob: color('mark.inverse.icon.selected') },
+    offDisabled: { track: color('mark.inverse.surface.disabled'),         knob: color('mark.inverse.icon.disabled') },
+    // Both sizes bind the knob to `surface/sunken/default`, not `mark/inverse/icon/selected-disabled`.
+    onDisabled:  { track: color('mark.inverse.surface.selected-disabled'), knob: color('surface.sunken.default') },
+  },
+};
 export interface SwitcherProps {
   checked?: boolean;
   defaultChecked?: boolean;
   disabled?: boolean;
-  size?: 'sm' | 'lg';
+  /** `md` 40×24 (Figma small=false) or `sm` 32×20 (small=true). `lg` is the deprecated
+   *  pre-V1.2 name for `md`. */
+  size?: 'sm' | 'md' | 'lg';
+  /** Inverse scheme for brand/midnight surfaces: white track, red knob when on. */
+  inverse?: boolean;
   onChange?: (checked: boolean) => void;
 }
-export function Switcher({ checked, defaultChecked = false, disabled, size = 'lg', onChange }: SwitcherProps) {
+export function Switcher({ checked, defaultChecked = false, disabled, size = 'md', inverse, onChange }: SwitcherProps) {
   const [internal, setInternal] = useState(defaultChecked);
   const on = checked ?? internal;
-  const w = size === 'lg' ? 56 : 48, h = size === 'lg' ? 24 : 20, knob = h - 4;
+  const k = size === 'sm' ? 'sm' : 'md';
+  const w = T.switcher.track.width[k], h = T.switcher.track.height[k], knob = T.switcher.thumb.width[k];
+  const inset = space('2xs');
+  const c = SWITCH[inverse ? 'inverse' : 'default'][disabled ? (on ? 'onDisabled' : 'offDisabled') : on ? 'on' : 'off'];
   return (
-    <button role="switch" aria-checked={on} disabled={disabled}
+    <button type="button" role="switch" aria-checked={on} disabled={disabled}
       onClick={() => { if (disabled) return; setInternal(!on); onChange?.(!on); }}
-      style={{ width: w, height: h, borderRadius: PILL, border: 0, padding: 2, cursor: disabled ? 'not-allowed' : 'pointer',
-        background: on ? color('surface.base.brand') : color('surface.sunken.default'), opacity: disabled ? 0.5 : 1, position: 'relative', transition: 'background 150ms' }}>
-      <span style={{ position: 'absolute', top: 2, insetInlineStart: on ? w - knob - 2 : 2, width: knob, height: knob, borderRadius: '50%', background: '#fff', transition: 'inset-inline-start 150ms' }} />
+      style={{ width: w, height: h, borderRadius: PILL, border: 0, padding: 0, flex: 'none', boxSizing: 'border-box',
+        cursor: disabled ? 'not-allowed' : 'pointer', background: c.track, position: 'relative', transition: 'background 150ms' }}>
+      <span style={{ position: 'absolute', top: inset, insetInlineStart: on ? `calc(${w} - ${knob} - ${inset})` : inset,
+        width: knob, height: T.switcher.thumb.height[k], borderRadius: '50%', background: c.knob, transition: 'inset-inline-start 150ms' }} />
     </button>
   );
 }
 
-/* ---------------- Searchbar ---------------- */
+/* ---------------- Searchbar ----------------
+   The Searchbar page is [Not Finalized] (no published symbol), so only clear bugs are fixed
+   against its "Standard search" frames 28114:62804: both glyphs are 20px (they rendered 24px,
+   overflowing their 20px boxes) and the mic is text/brand/default (was muted). The rest — 1px
+   stroke, 16px gaps, typing/typed states — waits for the page to be finalised. */
 export interface SearchbarProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
   onMic?: () => void;
 }
 export function Searchbar({ placeholder = 'Search', onMic, style, ...rest }: SearchbarProps) {
   return (
     <span style={{ display: 'flex', alignItems: 'center', gap: space('sm'), height: 52, padding: `0 ${space('lg')}`, borderRadius: radius('6'), background: color('surface.base.default'), width: '100%', boxSizing: 'border-box', ...style }}>
-      <IconBox size="lg"><Icon name="search" size={24} /></IconBox>
+      <IconBox size="lg"><Icon name="search" size={20} /></IconBox>
       <input placeholder={placeholder} style={{ flex: 1, minWidth: 0, border: 0, outline: 'none', background: 'transparent', ...ty('body.md') }} {...rest} />
-      <button onClick={onMic} aria-label="Voice search" style={{ border: 0, background: 'transparent', cursor: 'pointer', color: color('text.default.muted') }}><IconBox size="lg"><Icon name="mic" size={24} /></IconBox></button>
+      <button type="button" onClick={onMic} aria-label="Voice search" style={{ display: 'inline-flex', padding: 0, border: 0, background: 'transparent', cursor: 'pointer', color: color('text.brand.default') }}><IconBox size="lg"><Icon name="mic" size={20} /></IconBox></button>
     </span>
   );
 }
@@ -407,21 +623,36 @@ export function AISearch({ placeholder = 'Ask e& or search', ...rest }: Searchba
   return <Searchbar placeholder={placeholder} {...rest} />;
 }
 
-/* ---------------- Tabs (Pill Tabs) ---------------- */
+/* ---------------- Tabs (Pill Tabs) ----------------
+   Figma V1.2 `tab-pill` 25502:12416 (selected × inverse) + `tab-pill-content` 37840:19927:
+   height scale/48, min-width scale/72, padding 0/16 (spacing/lg), pill, gap 0. Content = a
+   20px icon-size (icon/lg, 16 glyph) + the title/xs label with 2px (spacing/2xs) side padding.
+   default: unselected tab/default/surface/default (#fff) + tab/default/text/default,
+            selected tab/default/surface/selected + text/selected.
+   inverse (dark, midnight or glass surfaces; 06.07.2026 "Added Glass version"): unselected
+            tab/inverse/surface/default (white 20%) + glass effect, selected
+            tab/inverse/surface/selected (#fff) + tab/inverse/text/selected.
+   Figma binds two of these to look-alike variables (the default selected ink to
+   tab/inverse/text/selected, the inverse unselected ink to a button token); code binds the
+   tab/* name that holds the same value. */
+const TAB_GLASS = { backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' } as const;
 export interface TabsProps {
   tabs: string[];
   value?: number;
   defaultValue?: number;
-  /** Not a Figma variant axis — the published set has one look, and Global vs Local are
-   *  instance-level colour overrides described in the statesheet. Kept as a prop because
-   *  both appear on real screens. `global` binds `color/tab/default/*`; `local` is the
-   *  midnight treatment, which has no token of its own. */
+  /** Inverse (glass) pills for brand, midnight or glass surfaces — e.g. the TopBar tabs add-on. */
+  inverse?: boolean;
+  /** @deprecated `local` (midnight selected pill, bordered white unselected) exists on no V1.2
+   *  symbol — Figma publishes one look plus `inverse`. Kept working for existing screens;
+   *  `global` (the default) is the published look. */
   scope?: 'global' | 'local';
-  /** Optional leading glyph per tab, index-aligned with `tabs`. Figma draws it at 20px. */
-  icons?: ReactNode[];
+  /** Leading glyph per tab, index-aligned with `tabs`, drawn in a 20px icon-size. A string is
+   *  an icon-set name rendered at Figma's 16px; a node renders as given. Figma's rule is that
+   *  the icon is always present; code keeps it optional so text-only rows still work. */
+  icons?: (ReactNode | string)[];
   onChange?: (index: number) => void;
 }
-export function Tabs({ tabs, value, defaultValue = 0, scope = 'global', icons, onChange }: TabsProps) {
+export function Tabs({ tabs, value, defaultValue = 0, inverse, scope = 'global', icons, onChange }: TabsProps) {
   const [internal, setInternal] = useState(defaultValue);
   const active = value ?? internal;
   return (
@@ -429,25 +660,31 @@ export function Tabs({ tabs, value, defaultValue = 0, scope = 'global', icons, o
       {tabs.map((t, i) => {
         const on = i === active;
         let s: CSSProperties;
-        if (scope === 'global') {
-          // The audit asked for `tab/surface/global/active`; Figma has since restructured
-          // these to default/inverse, and V1.2 renamed `active` to `selected` (#fce6e6).
+        if (inverse) {
           s = on
-            ? { background: color('tab.default.surface.selected'), color: color('tab.default.text.selected'), border: '1px solid transparent' }
-            : { background: color('surface.base.default'), color: color('tab.default.text.default'), border: '1px solid transparent' };
+            ? { background: color('tab.inverse.surface.selected'), color: color('tab.inverse.text.selected') }
+            : { background: color('tab.inverse.surface.default'), color: color('tab.inverse.text.default'), ...TAB_GLASS };
+        } else if (scope === 'local') {
+          s = on
+            ? { background: color('surface.base.midnight'), color: color('text.default.inverse') }
+            : { background: color('surface.canvas.default'), color: color('text.default.default'), boxShadow: `inset 0 0 0 1px ${color('border.surface-based.canvas.default')}` };
         } else {
           s = on
-            ? { background: color('surface.base.midnight'), color: color('text.default.inverse'), border: '1px solid transparent' }
-            : { background: color('surface.canvas.default'), color: color('text.default.default'), border: `1px solid ${color('border.surface-based.canvas.default')}` };
+            ? { background: color('tab.default.surface.selected'), color: color('tab.default.text.selected') }
+            : { background: color('tab.default.surface.default'), color: color('tab.default.text.default') };
         }
+        const ic = icons?.[i];
         return (
-          <button key={i} role="tab" aria-selected={on}
+          <button key={i} type="button" role="tab" aria-selected={on}
             onClick={() => { setInternal(i); onChange?.(i); }}
-            style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: space('xs'),
-              height: T.tabs?.height?.md ?? 40, minWidth: scale('72'), padding: `0 ${space('sm')}`,
+            style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 0, flex: 'none', // Figma gap 0; the label carries 2px padding
+              height: scale('48'), minWidth: scale('72'), paddingInline: space('lg'), paddingBlock: 0, border: 0,
               borderRadius: PILL, cursor: 'pointer', whiteSpace: 'nowrap', boxSizing: 'border-box',
               ...ty('title.xs'), ...s }}>
-            {icons?.[i] ?? null}{t}
+            {ic != null && ic !== false ? (
+              <IconBox size="lg">{typeof ic === 'string' ? <Icon name={ic} size={16} /> : ic}</IconBox>
+            ) : null}
+            <span style={{ paddingInline: space('2xs') }}>{t}</span>
           </button>
         );
       })}
@@ -456,25 +693,47 @@ export function Tabs({ tabs, value, defaultValue = 0, scope = 'global', icons, o
 }
 
 /* ---------------- Picker ----------------
-   Figma V1.1 Picker (page 28278:1530, set 31358:139406): a selectable option tile —
-   value + optional caption + optional status badge, 16px radius, ~72px tall.
-   Surface axis default | light | inverse | glass; selected = red accent border +
-   check indicator; disabled dims the tile. `Picker` manages single selection over
+   Figma V1.2 `picker` 34373:16787 (page 28278:1530): a fixed 106×72 option tile — value
+   (title/sm) over a caption (body/xs), both centred, with an optional full-width neutral sm
+   status badge along the bottom. State lives on the atoms `.picker-scheme-default` 34373:16315
+   and `.picker-scheme-inverse` 34373:16508:
+   - selected (13.07.2026, per VD feedback): the fill and ink swap — default scheme →
+     surface/raised/midnight + text/default/inverse; inverse scheme → surface/raised/default +
+     text/default/{default,subtle} — plus a `check-circle` (filled) 20px glyph in a 24px
+     icon-size at top/end 6. No border.
+   - disabled: text/default/disabled (inverse: inverse-disabled), badge hidden, no opacity.
+   Surfaces: default = Figma sunken, light = Figma default (canvas), inverse = Figma midnight,
+   glass = Figma glass (white 20% + glass effect). `Picker` manages single selection over
    `options`; `PickerOption` is the standalone tile for custom layouts. */
 export type PickerSurface = 'default' | 'light' | 'inverse' | 'glass';
-// All from real tokens except the glass fill (surface.glass.white.lg = white-20%).
-const PICKER_SURFACE: Record<PickerSurface, { bg: string; value: string; caption: string; blur?: boolean }> = {
-  default: { bg: color('surface.sunken.default'), value: color('text.default.default'), caption: color('text.default.subtle') },
-  light:   { bg: color('surface.canvas.default'), value: color('text.default.default'), caption: color('text.default.subtle') },
-  inverse: { bg: color('surface.raised.midnight'), value: color('text.default.inverse'), caption: color('text.default.inverse-subtle') },
-  glass:   { bg: color('surface.glass.white.lg'), value: color('text.default.inverse'), caption: color('text.default.inverse-subtle'), blur: true },
+type PickerInk = { bg: string; value: string; caption: string; disabled: string; blur?: boolean };
+const PICKER_DEFAULT_SCHEME = { value: color('text.default.default'), caption: color('text.default.subtle'), disabled: color('text.default.disabled') };
+const PICKER_INVERSE_SCHEME = { value: color('text.default.inverse'), caption: color('text.default.inverse'), disabled: color('text.default.inverse-disabled') };
+const PICKER_SURFACE: Record<PickerSurface, PickerInk> = {
+  default: { bg: color('surface.sunken.default'), ...PICKER_DEFAULT_SCHEME },
+  light:   { bg: color('surface.canvas.default'), ...PICKER_DEFAULT_SCHEME },
+  inverse: { bg: color('surface.raised.midnight'), ...PICKER_INVERSE_SCHEME },
+  glass:   { bg: color('surface.glass.white.lg'), ...PICKER_INVERSE_SCHEME, blur: true },
 };
+const PICKER_SELECTED = {
+  // default scheme (default, light)
+  default: { bg: color('surface.raised.midnight'), value: color('text.default.inverse'), caption: color('text.default.inverse'), check: color('surface.base.inverse') },
+  // inverse scheme (inverse, glass)
+  inverse: { bg: color('surface.raised.default'), value: color('text.default.default'), caption: color('text.default.subtle'), check: color('text.brand.default') },
+};
+// The check sits 6px from the top and end edges (absolute at 76,6 in the 106 tile). 6 is not a
+// spacing step, so it stays literal.
+const PICKER_CHECK_INSET = '6px';
+// Figma: 106×72 fixed. 106 has no scale/* step.
+const PICKER_WIDTH = '106px';
 export interface PickerOptionProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onClick' | 'value'> {
-  /** Primary text (title.sm). */
+  /** Primary text (title/sm, centred). */
   value?: ReactNode;
-  /** Secondary line under the value (body.xs, subtle) — e.g. a unit. */
+  /** Secondary line under the value (body/xs) — e.g. a unit. */
   caption?: ReactNode;
-  /** Status badge slot rendered at the bottom of the tile. */
+  /** Status badge along the bottom of the tile (Figma `badges`). A string or number renders the
+   *  published neutral sm status badge across the tile; any other node renders as given.
+   *  Hidden while disabled. */
   badge?: ReactNode;
   surface?: PickerSurface;
   selected?: boolean;
@@ -483,7 +742,11 @@ export interface PickerOptionProps extends Omit<HTMLAttributes<HTMLButtonElement
 }
 export function PickerOption({ value, caption, badge, surface = 'default', selected, disabled, style, children, onClick, ...rest }: PickerOptionProps) {
   const s = PICKER_SURFACE[surface];
-  const accent = color('border.interactive.accent.default');
+  const inverseScheme = surface === 'inverse' || surface === 'glass';
+  const sel = selected && !disabled ? PICKER_SELECTED[inverseScheme ? 'inverse' : 'default'] : null;
+  const valueInk = disabled ? s.disabled : sel ? sel.value : s.value;
+  const captionInk = disabled ? s.disabled : sel ? sel.caption : s.caption;
+  const showBadge = badge != null && badge !== false && !disabled;
   return (
     <button
       type="button"
@@ -492,31 +755,38 @@ export function PickerOption({ value, caption, badge, surface = 'default', selec
       disabled={disabled}
       onClick={onClick}
       style={{
-        position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: space('xs'),
-        minWidth: 96, minHeight: 72, boxSizing: 'border-box', textAlign: 'start', cursor: disabled ? 'not-allowed' : 'pointer',
-        padding: `${space('sm')} ${space('sm')}`, borderRadius: radius('6'),
-        background: s.bg, color: s.value,
-        // always render a border so selecting doesn't shift layout
-        border: `1.5px solid ${selected ? accent : 'transparent'}`,
-        opacity: disabled ? 0.5 : 1,
-        ...(s.blur ? { backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' } : {}),
+        position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'stretch', flex: 'none',
+        width: PICKER_WIDTH, height: scale('72'), boxSizing: 'border-box', padding: 0, border: 0,
+        textAlign: 'center', cursor: disabled ? 'not-allowed' : 'pointer', borderRadius: radius('6'),
+        background: sel ? sel.bg : s.bg, color: valueInk, overflow: 'hidden',
+        ...(s.blur && !sel ? { backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' } : {}),
         ...style,
       }}
       {...rest}
     >
-      {selected ? (
-        <svg aria-hidden width={16} height={16} viewBox="0 0 24 24" fill="none"
-          style={{ position: 'absolute', top: space('sm'), insetInlineEnd: space('sm'), color: s.value }}>
-          <path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+      {sel ? (
+        <IconBox size="xl" aria-hidden style={{ position: 'absolute', top: PICKER_CHECK_INSET, insetInlineEnd: PICKER_CHECK_INSET }}>
+          <Icon name="check-circle-filled" size={20} color={sel.check} />
+        </IconBox>
       ) : null}
       {children ?? (
-        <span style={{ display: 'flex', flexDirection: 'column' }}>
-          {value != null ? <Text variant="title.sm" color={s.value} as="span">{value}</Text> : null}
-          {caption != null ? <Text variant="body.xs" color={s.caption} as="span">{caption}</Text> : null}
+        // `.picker-body` content: 20px top (spacing/xl), 8px sides (spacing/sm); label gap −2.
+        <span style={{ display: 'flex', flexDirection: 'column', paddingTop: space('xl'), paddingInline: space('sm'), minWidth: 0 }}>
+          {value != null ? <Text variant="title.sm" color={valueInk} as="span">{value}</Text> : null}
+          {caption != null ? <Text variant="body.xs" color={captionInk} as="span" style={{ marginTop: `calc(-1 * ${space('2xs')})` }}>{caption}</Text> : null}
         </span>
       )}
-      {badge != null ? <span>{badge}</span> : null}
+      {showBadge ? (
+        // `Label` strip: 0/2/2/2 (spacing/2xs) at the bottom of the tile.
+        <span style={{ display: 'flex', marginTop: 'auto', padding: `0 ${space('2xs')} ${space('2xs')}` }}>
+          {typeof badge === 'string' || typeof badge === 'number'
+            // The strip badge is 6/6/28/28 in Figma: top bound to border-radius/2, bottom an unbound
+            // 28. On a 16px-tall badge both Figma and CSS scale the four radii down to fit, so the
+            // bottom corners follow the tile's curve (checked against a 4x render of 34373:16315).
+            ? <Badge status="neutral" size="sm" style={{ width: '100%', borderRadius: `${radius('2')} ${radius('2')} 28px 28px` }}>{badge}</Badge>
+            : badge}
+        </span>
+      ) : null}
     </button>
   );
 }
