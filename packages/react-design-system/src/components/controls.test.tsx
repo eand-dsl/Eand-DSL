@@ -599,11 +599,45 @@ test('Tabs label is title/xs 14 SemiBold, not button/sm 12', () => {
   expect(tab.style.fontWeight).toBe('600');
 });
 
-test('Tabs pill is min-width 72 with 8px side padding', () => {
+/* V1.2 `tab-pill` 25502:12416 + `tab-pill-content` 37840:19927: height scale/48 (was
+   tabs/height/md 40, which is the chips height), padding 0/16 (was 8), gap 0 with a 2px label
+   pad, a 20px icon-size (16 glyph), unselected fill tab/default/surface/default #fff (was
+   surface/base/default #f0f0f5), and an `inverse` glass variant (was missing). */
+
+test('Tabs pill is 48 tall, min-width 72, with 16px side padding and no gap', () => {
   render(<Tabs tabs={['All']} />);
   const tab = screen.getByRole('tab', { name: 'All' });
+  expect(tab.style.height).toBe('48px');
   expect(tab.style.minWidth).toBe('72px');
-  expect(tab.style.padding).toBe('0px 8px');
+  expect(tab.style.paddingInline).toBe('16px');
+  expect(tab.style.gap).toBe('0');
+  expect(screen.getByText('All').style.paddingInline).toBe('2px');
+});
+
+test('Tabs global unselected is white (tab/default/surface/default) with muted ink', () => {
+  render(<Tabs tabs={['For you', 'Account']} />);
+  const tab = screen.getByRole('tab', { name: 'Account' });
+  expect(tab.style.background).toBe('rgb(255, 255, 255)');
+  expect(tab.style.color).toBe('rgb(144, 142, 154)');
+});
+
+test('Tabs inverse is glass when unselected and white with red ink when selected', () => {
+  render(<Tabs inverse tabs={['For you', 'Account']} />);
+  const on = screen.getByRole('tab', { name: 'For you' });
+  const off = screen.getByRole('tab', { name: 'Account' });
+  expect(off.style.background).toBe('rgba(255, 255, 255, 0.2)'); // tab/inverse/surface/default
+  expect(off.style.color).toBe('rgb(255, 255, 255)');            // tab/inverse/text/default
+  expect(off.style.backdropFilter).toBe('blur(20px)');
+  expect(on.style.background).toBe('rgb(255, 255, 255)');        // tab/inverse/surface/selected
+  expect(on.style.color).toBe('rgb(224, 8, 0)');                 // tab/inverse/text/selected
+});
+
+test('Tabs icons sit in a 20px icon-size box; a string is an icon-set name at 16px', () => {
+  const { container } = render(<Tabs tabs={['All', 'Data']} icons={['placeholder', <i data-testid="ic" />]} />);
+  const named = container.querySelector('[aria-label="placeholder"]') as HTMLElement;
+  expect((named.parentElement as HTMLElement).style.width).toBe('20px');
+  expect(named.querySelector('svg')!.getAttribute('width')).toBe('16');
+  expect((screen.getByTestId('ic').parentElement as HTMLElement).style.width).toBe('20px');
 });
 
 test('Tabs global active binds the tab tokens, not surface/canvas/brand-muted', () => {

@@ -528,21 +528,36 @@ export function AISearch({ placeholder = 'Ask e& or search', ...rest }: Searchba
   return <Searchbar placeholder={placeholder} {...rest} />;
 }
 
-/* ---------------- Tabs (Pill Tabs) ---------------- */
+/* ---------------- Tabs (Pill Tabs) ----------------
+   Figma V1.2 `tab-pill` 25502:12416 (selected × inverse) + `tab-pill-content` 37840:19927:
+   height scale/48, min-width scale/72, padding 0/16 (spacing/lg), pill, gap 0. Content = a
+   20px icon-size (icon/lg, 16 glyph) + the title/xs label with 2px (spacing/2xs) side padding.
+   default: unselected tab/default/surface/default (#fff) + tab/default/text/default,
+            selected tab/default/surface/selected + text/selected.
+   inverse (dark, midnight or glass surfaces; 06.07.2026 "Added Glass version"): unselected
+            tab/inverse/surface/default (white 20%) + glass effect, selected
+            tab/inverse/surface/selected (#fff) + tab/inverse/text/selected.
+   Figma binds two of these to look-alike variables (the default selected ink to
+   tab/inverse/text/selected, the inverse unselected ink to a button token); code binds the
+   tab/* name that holds the same value. */
+const TAB_GLASS = { backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' } as const;
 export interface TabsProps {
   tabs: string[];
   value?: number;
   defaultValue?: number;
-  /** Not a Figma variant axis — the published set has one look, and Global vs Local are
-   *  instance-level colour overrides described in the statesheet. Kept as a prop because
-   *  both appear on real screens. `global` binds `color/tab/default/*`; `local` is the
-   *  midnight treatment, which has no token of its own. */
+  /** Inverse (glass) pills for brand, midnight or glass surfaces — e.g. the TopBar tabs add-on. */
+  inverse?: boolean;
+  /** @deprecated `local` (midnight selected pill, bordered white unselected) exists on no V1.2
+   *  symbol — Figma publishes one look plus `inverse`. Kept working for existing screens;
+   *  `global` (the default) is the published look. */
   scope?: 'global' | 'local';
-  /** Optional leading glyph per tab, index-aligned with `tabs`. Figma draws it at 20px. */
-  icons?: ReactNode[];
+  /** Leading glyph per tab, index-aligned with `tabs`, drawn in a 20px icon-size. A string is
+   *  an icon-set name rendered at Figma's 16px; a node renders as given. Figma's rule is that
+   *  the icon is always present; code keeps it optional so text-only rows still work. */
+  icons?: (ReactNode | string)[];
   onChange?: (index: number) => void;
 }
-export function Tabs({ tabs, value, defaultValue = 0, scope = 'global', icons, onChange }: TabsProps) {
+export function Tabs({ tabs, value, defaultValue = 0, inverse, scope = 'global', icons, onChange }: TabsProps) {
   const [internal, setInternal] = useState(defaultValue);
   const active = value ?? internal;
   return (
@@ -550,25 +565,31 @@ export function Tabs({ tabs, value, defaultValue = 0, scope = 'global', icons, o
       {tabs.map((t, i) => {
         const on = i === active;
         let s: CSSProperties;
-        if (scope === 'global') {
-          // The audit asked for `tab/surface/global/active`; Figma has since restructured
-          // these to default/inverse, and V1.2 renamed `active` to `selected` (#fce6e6).
+        if (inverse) {
           s = on
-            ? { background: color('tab.default.surface.selected'), color: color('tab.default.text.selected'), border: '1px solid transparent' }
-            : { background: color('surface.base.default'), color: color('tab.default.text.default'), border: '1px solid transparent' };
+            ? { background: color('tab.inverse.surface.selected'), color: color('tab.inverse.text.selected') }
+            : { background: color('tab.inverse.surface.default'), color: color('tab.inverse.text.default'), ...TAB_GLASS };
+        } else if (scope === 'local') {
+          s = on
+            ? { background: color('surface.base.midnight'), color: color('text.default.inverse') }
+            : { background: color('surface.canvas.default'), color: color('text.default.default'), boxShadow: `inset 0 0 0 1px ${color('border.surface-based.canvas.default')}` };
         } else {
           s = on
-            ? { background: color('surface.base.midnight'), color: color('text.default.inverse'), border: '1px solid transparent' }
-            : { background: color('surface.canvas.default'), color: color('text.default.default'), border: `1px solid ${color('border.surface-based.canvas.default')}` };
+            ? { background: color('tab.default.surface.selected'), color: color('tab.default.text.selected') }
+            : { background: color('tab.default.surface.default'), color: color('tab.default.text.default') };
         }
+        const ic = icons?.[i];
         return (
-          <button key={i} role="tab" aria-selected={on}
+          <button key={i} type="button" role="tab" aria-selected={on}
             onClick={() => { setInternal(i); onChange?.(i); }}
-            style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: space('xs'),
-              height: T.tabs?.height?.md ?? 40, minWidth: scale('72'), padding: `0 ${space('sm')}`,
+            style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 0, flex: 'none', // Figma gap 0; the label carries 2px padding
+              height: scale('48'), minWidth: scale('72'), paddingInline: space('lg'), paddingBlock: 0, border: 0,
               borderRadius: PILL, cursor: 'pointer', whiteSpace: 'nowrap', boxSizing: 'border-box',
               ...ty('title.xs'), ...s }}>
-            {icons?.[i] ?? null}{t}
+            {ic != null && ic !== false ? (
+              <IconBox size="lg">{typeof ic === 'string' ? <Icon name={ic} size={16} /> : ic}</IconBox>
+            ) : null}
+            <span style={{ paddingInline: space('2xs') }}>{t}</span>
           </button>
         );
       })}
