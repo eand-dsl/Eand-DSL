@@ -28,3 +28,16 @@ describe('ty() font stack', () => {
     expect(ty('nope.nope').fontFamily).toBeUndefined();
   });
 });
+
+/* The RTL sweep (7007200) wrapped directional glyphs in `<span data-rtl-flip>` "for CSS
+   mirror", but no CSS rule was ever written, so no chevron mirrored in Arabic. Components
+   are inline-styled and must work without a stylesheet import, so system.ts injects it. */
+describe('data-rtl-flip', () => {
+  it('injects one mirror rule into the document head', async () => {
+    await import('./system');
+    const tags = document.head.querySelectorAll('style#eand-rtl-flip');
+    expect(tags).toHaveLength(1);
+    expect(tags[0].textContent).toContain('[data-rtl-flip]');
+    expect(tags[0].textContent).toContain('scaleX(-1)');
+  });
+});
