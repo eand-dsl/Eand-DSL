@@ -561,6 +561,12 @@ test('OtpInput defaults to 6 cells spread across a 16px-padded row', () => {
   expect(cells[0].style.boxShadow).toBe('none');
 });
 
+test('OtpInput keeps its cells left-to-right inside an RTL page (codes read LTR)', () => {
+  const { container } = render(<div dir="rtl"><OtpInput defaultValue="12" /></div>);
+  const row = (container.querySelector('span[aria-hidden]') as HTMLElement).parentElement!;
+  expect(row).toHaveAttribute('dir', 'ltr');
+});
+
 test('OtpInput active cell gets the 1px accent stroke; error cells the danger stroke', async () => {
   const { container, rerender } = render(<OtpInput />);
   const cells = () => Array.from(container.querySelectorAll('span[aria-hidden]')) as HTMLElement[];
@@ -619,11 +625,12 @@ test('Chip check shows a check mark only while selected', () => {
    1px ring in the selected colour). selected=true atom = removable chip: 12 start, label, 4,
    dismiss small (20), 8 end. */
 
-test('Chip is min-width 72 and 40 tall', () => {
+test('Chip is min-width 72 and 40 tall, content centred (chips root CENTER)', () => {
   render(<Chip>C</Chip>);
   const chip = screen.getByRole('button');
   expect(chip.style.minWidth).toBe('72px');
   expect(chip.style.height).toBe('40px');
+  expect(chip.style.justifyContent).toBe('center');
 });
 
 test('Chip padding is 12/12 without a marker and 8 start / 12 end with one', () => {

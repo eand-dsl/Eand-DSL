@@ -192,7 +192,9 @@ export function OtpInput({ length = 6, value, defaultValue = '', onValueChange, 
     : { background: color(`inputField.surface.default.${stateKey}`) };
   return (
     <div style={{ display: 'flex', flexDirection: 'column', ...style }} {...rest}>
-      <div onClick={() => inputRef.current?.focus()} style={{
+      {/* Codes are entered and read left-to-right in Arabic too, so the cells never mirror
+          (Figma has no rtl otp variant). The status line below still follows the page. */}
+      <div dir="ltr" onClick={() => inputRef.current?.focus()} style={{
         position: 'relative', display: 'flex', justifyContent: 'space-between', paddingInline: space('lg'),
         cursor: disabled ? 'not-allowed' : 'text',
       }}>
@@ -314,7 +316,7 @@ export function Chip({ type, selected, disabled, inverse, leadingIcon, check, lo
     : leadingIcon;
   const removable = onDismiss != null;
   const pill: CSSProperties = {
-    display: 'inline-flex', alignItems: 'center', gap: space('xs'), boxSizing: 'border-box',
+    display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: space('xs'), boxSizing: 'border-box',
     height: T.tabs.height.md, minWidth: scale('72'), paddingBlock: 0,
     paddingInlineStart: lead != null ? space('sm') : space('md'),
     paddingInlineEnd: removable ? space('sm') : space('md'),
@@ -778,9 +780,10 @@ export function PickerOption({ value, caption, badge, surface = 'default', selec
         // `Label` strip: 0/2/2/2 (spacing/2xs) at the bottom of the tile.
         <span style={{ display: 'flex', marginTop: 'auto', padding: `0 ${space('2xs')} ${space('2xs')}` }}>
           {typeof badge === 'string' || typeof badge === 'number'
-            // Figma sets the strip badge to 6/6/28/28; Figma clamps each corner to half the 16px
-            // height, so it renders 6/6/8/8 (CSS would scale all four down instead).
-            ? <Badge status="neutral" size="sm" style={{ width: '100%', borderRadius: `${radius('2')} ${radius('2')} ${radius('3')} ${radius('3')}` }}>{badge}</Badge>
+            // The strip badge is 6/6/28/28 in Figma: top bound to border-radius/2, bottom an unbound
+            // 28. On a 16px-tall badge both Figma and CSS scale the four radii down to fit, so the
+            // bottom corners follow the tile's curve (checked against a 4x render of 34373:16315).
+            ? <Badge status="neutral" size="sm" style={{ width: '100%', borderRadius: `${radius('2')} ${radius('2')} 28px 28px` }}>{badge}</Badge>
             : badge}
         </span>
       ) : null}
