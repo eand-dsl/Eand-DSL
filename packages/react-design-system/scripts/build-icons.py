@@ -39,9 +39,22 @@ for name, (comp, vb, inner) in icons.items():
         f"xmlns=\"http://www.w3.org/2000/svg\" {{...p}} dangerouslySetInnerHTML={{{{ __html: {json.dumps(inner)} }}}} />;\n"
         f"}}"
     )
+# V1.1 names that V1.2 renamed. They keep resolving so existing screens don't lose a glyph,
+# but they are deprecated: `add` itself changed meaning (V1.1 `add` was the circled plus,
+# which V1.2 calls `add-content`), so it cannot be aliased and is not listed here.
+DEPRECATED = {"add-2": "add", "copy-2": "copy-doc", "grid-2": "grid"}
+for old, new in list(DEPRECATED.items()):
+    DEPRECATED[old + "-filled"] = new + "-filled"
+for old, new in DEPRECATED.items():
+    if new not in icons:
+        raise SystemExit(f"alias {old} -> {new}: target icon missing")
+    if old in icons:
+        raise SystemExit(f"alias {old} shadows a real icon")
 reg = ", ".join(f"{json.dumps(n)}: {c}" for n, (c, _, _) in icons.items())
 lines.append(f"\nexport const ICONS = {{ {reg} }} as const;")
 lines.append("export type IconName = keyof typeof ICONS;")
+lines.append("/** @deprecated V1.1 names renamed in V1.2 — use the value instead. */")
+lines.append(f"export const ICON_ALIASES: Record<string, IconName> = {json.dumps(DEPRECATED)};")
 lines.append("""
 export interface IconProps {
   name: IconName | (string & {});
@@ -52,7 +65,7 @@ export interface IconProps {
   className?: string;
 }
 export function Icon({ name, size = 24, color, title, style, className }: IconProps) {
-  const C = (ICONS as Record<string, (p: IconSvgProps) => JSX.Element>)[name];
+  const C = (ICONS as Record<string, (p: IconSvgProps) => JSX.Element>)[ICON_ALIASES[name] ?? name];
   if (!C) return null;
   return (
     <span role="img" aria-label={title ?? name} className={className}

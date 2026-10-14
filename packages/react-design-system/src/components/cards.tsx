@@ -318,7 +318,7 @@ export function Voucher({
         <button type="button" onClick={applied ? undefined : onApply} disabled={applied}
           style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: space('xs'), border: 0, background: 'transparent', borderRadius: PILL, cursor: applied ? 'default' : 'pointer', padding: `0 ${space('xs')}`, ...ty('button.lg'), color: applied ? appliedInk : (dark ? color('text.default.inverse') : color('button.tertiary.text.midnight.default')) }}>
           {applied ? 'Applied' : 'Apply'}
-          <Icon name={applied ? 'check' : 'add-filled'} size={24} />
+          <Icon name={applied ? 'check' : 'add-content-filled'} size={24} />
         </button>
       </div>
     </div>

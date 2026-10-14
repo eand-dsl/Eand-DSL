@@ -34,11 +34,11 @@ a placeholder or a drawing. `placeholder` is design scaffolding only; never ship
 a customer-facing screen.
 
 <!-- icons:begin -->
-**Navigation & wayfinding** — `home` · `explore` · `menu` · `apps` · `grid` · `grid-2` · `rows` · `more-horizontal` · `more-vertical` · `chevron-up` · `chevron-down` · `chevron-left` · `chevron-right` · `chevron-up-sm` · `chevron-down-sm` · `chevron-left-sm` · `chevron-right-sm` · `arrow-up` · `arrow-down` · `arrow-left` · `arrow-right` · `arrow-up-right` · `external-link`
+**Navigation & wayfinding** — `home` · `explore` · `menu` · `apps` · `grid` · `rows` · `more-horizontal` · `more-vertical` · `chevron-up` · `chevron-down` · `chevron-left` · `chevron-right` · `chevron-up-sm` · `chevron-down-sm` · `chevron-left-sm` · `chevron-right-sm` · `arrow-up` · `arrow-down` · `arrow-left` · `arrow-right` · `arrow-up-right` · `external-link`
 
-**Actions & editing** — `add` · `add-2` · `subtract` · `close` · `dismiss` · `delete` · `remove` · `edit` · `cut` · `copy` · `copy-2` · `save` · `undo` · `redo` · `refresh` · `sync` · `swap` · `shuffle` · `move` · `drag` · `expand` · `expand-horizontal` · `expand-vertical` · `collapse` · `aspect-ratio` · `filter` · `filters` · `sort` · `sort-vertical` · `search` · `search-list`
+**Actions & editing** — `add` · `add-content` · `subtract` · `close` · `dismiss` · `delete` · `remove` · `edit` · `cut` · `copy` · `copy-doc` · `save` · `undo` · `redo` · `refresh` · `sync` · `swap` · `shuffle` · `move` · `drag` · `expand` · `expand-horizontal` · `expand-vertical` · `collapse` · `aspect-ratio` · `filter` · `filters` · `sort` · `sort-vertical` · `search` · `search-list`
 
-**Status & feedback** — `check` · `check-circle` · `checklist` · `verified` · `warning` · `info` · `help` · `hourglass` · `thumbs-up` · `thumbs-down` · `smiley` · `celebrate` · `heart`
+**Status & feedback** — `check` · `check-circle` · `dot` · `checklist` · `verified` · `warning` · `info` · `help` · `hourglass` · `thumbs-up` · `thumbs-down` · `smiley` · `celebrate` · `heart`
 
 **Time & scheduling** — `alarm` · `calendar` · `calendar-pick` · `clock` · `timer`
 
@@ -69,7 +69,7 @@ Common e& mappings: account/profile → `user` · AI assistant → `ai` · hands
 `phone-device` · order tracking → `delivery` or `order-tracking` · add-ons → `puzzle` ·
 subscriptions → `package` · privacy/protection → `security` · add something → `add` ·
 mParking → `car` · All Services → `grid` · e& Shop → `shop` · retail branch → `store` ·
-a sparkle/star glyph in a header action → `magic-wand` or `ai` (not `add-2`).
+a sparkle/star glyph in a header action → `magic-wand` or `ai` (not `add`).
 
 ## Golden rules (always apply)
 - **Build screens, not loose mockups.** An e& screen = **red account `TopBar`** (`surface="brand"` + `account={{ greeting, name }}` → "Hi, Ahmed" over a masked number, plus circle `actions`) → optional **global `Tabs`** row (For you / Account / Loyalty) → a vertical scroll body of grey **`Section`s on a white canvas** (wrapping cards / `ListRow`s / `QuickAction` grids / carousels) → floating **`NavBar`** (Home · Support · Profile · Shop, active = white pill with a red icon). Overlays (`BottomSheet`, `AlertModal`, `Snackbar`, `Tooltip`) float above; a persistent primary CTA → `CtaFooter` pinned under the body. Detail/pushed pages use the default white `TopBar` with a back chevron.

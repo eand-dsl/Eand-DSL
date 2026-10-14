@@ -162,7 +162,7 @@ export function AddTrigger({ label = 'Add', style, onClick, ...rest }: AddTrigge
         width: '100%', height: scale('72'), boxSizing: 'border-box', padding: `${space('lg')} 20px`,
         borderRadius: radius('6'), border: 0, background: color('surface.glass.midnight.sm'),
         color: color('text.default.default'), cursor: 'pointer', overflow: 'hidden', ...ty('button.lg'), ...style }} {...rest}>
-      <Icon name="add-filled" size={24} color={color('text.brand.default')} />{label}
+      <Icon name="add-content-filled" size={24} color={color('text.brand.default')} />{label}
     </button>
   );
 }
