@@ -28,15 +28,27 @@ function sourceFiles(): string[] {
     .map((f) => resolve(PKG, f));
 }
 
-/** Exported PascalCase values, excluding SCREAMING_SNAKE constants. */
+/**
+ * Exported component names declared in one source file.
+ *
+ * A capitalised `export function` is always a component — that is how `FAQ` is declared,
+ * and an all-caps name must not hide it. An `export const` is a component unless its name
+ * is SCREAMING_SNAKE (`CARD_BG_TINTS`, `QUICK_ACTION_PRESETS`, `ICON_ALIASES`, `CARD`):
+ * those are data tables. A screaming const that wraps `forwardRef`/`memo` still counts.
+ */
+export function componentNamesFromSource(src: string): string[] {
+  const names = new Set<string>();
+  for (const m of src.matchAll(/export function ([A-Z][A-Za-z0-9_]*)/g)) names.add(m[1]);
+  for (const m of src.matchAll(/export const ([A-Z][A-Za-z0-9_]*)\s*(?::[^=]*)?=\s*([^\n]*)/g)) {
+    const [, name, init] = m;
+    if (!SCREAMING.test(name) || /^(?:React\.)?(?:forwardRef|memo)\b/.test(init)) names.add(name);
+  }
+  return [...names].sort();
+}
+
 function exportedComponentNames(files: string[]): string[] {
   const names = new Set<string>();
-  for (const file of files) {
-    const src = readFileSync(file, 'utf8');
-    for (const m of src.matchAll(/export (?:function|const) ([A-Z][A-Za-z0-9_]*)/g)) {
-      if (!SCREAMING.test(m[1])) names.add(m[1]);
-    }
-  }
+  for (const file of files) for (const n of componentNamesFromSource(readFileSync(file, 'utf8'))) names.add(n);
   return [...names].sort();
 }
 

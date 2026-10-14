@@ -1,25 +1,42 @@
 import figma from '@figma/code-connect';
 import { DealCard } from '../src';
 
-// e& Consumer App DSL V1.1 — deals-card (node 25973:22611)
+// e& Consumer App DSL V1.2 — deals-card/ltr (node 25973:22611)
 //
-// CORRECTED TARGET. This previously pointed at 26825:101736, which is `.card-general` —
-// the General card's cell atom, now mapped by Card.figma.tsx. deals-card is the real
-// Deals-for-you card: a single symbol 166x224 with NO variant axis, composed of
-// `.default-surface/default` + `.deals-card-core` + `.footer/Default`.
+// A single 166×224 symbol with NO variant axis: `.default-surface/default` +
+// `.deals-card-core` (overline, title, logo row) + `.footer` (discount badge, struck-through
+// price, price). V1.2 renamed the core's text properties (`top-line-string` →
+// `overline-string`, `item-name-string` → `title-string`), and DealCard was rebuilt to
+// match: `overline` replaces the deprecated `subtitle`, and the footer now maps.
 //
-// Layer names are the ORIGINAL file's (dotted).
-//
-// NOT MAPPED — `.footer/Default` (discount / discounted-string / price-string) and the
-// nested logo-row. DealCard is still the V1.0 image-led card and has no props for a
-// struck-through price, logo row or feedback pill; the audit calls for an anatomy rebuild
-// before those can map. Mapping them now would mean inventing props.
-figma.connect(DealCard, 'https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25973-22611', {
+// Prices are split in Figma ("AED" is a fixed layer before each string), so the mapped
+// value is the number only; Code Connect examples cannot concatenate the prefix back, so
+// a caller writes "AED 400" in code. NOT MAPPED — the feedback pill's like count: it is plain text, not a
+// property.
+figma.connect(DealCard, 'https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=25973-22611', {
   props: {
     core: figma.nestedProps('.deals-card-core', {
-      subtitle: figma.string('top-line-string'),
-      title: figma.string('item-name-string'),
+      overline: figma.boolean('overline', {
+        true: figma.string('overline-string'),
+        false: undefined,
+      }),
+      title: figma.string('title-string'),
+      logos: figma.boolean('logo-row'),
+    }),
+    footer: figma.nestedProps('.footer', {
+      discount: figma.boolean('discount', { true: 'Discount', false: undefined }),
+      wasPrice: figma.string('discounted-string'),
+      price: figma.string('price-string'),
     }),
   },
-  example: (p) => <DealCard title={p.core.title} subtitle={p.core.subtitle} />,
+  example: (p) => (
+    <DealCard
+      overline={p.core.overline}
+      title={p.core.title}
+      logos={p.core.logos}
+      discount={p.footer.discount}
+      wasPrice={p.footer.wasPrice}
+      price={p.footer.price}
+    />
+  ),
 });
