@@ -303,38 +303,105 @@ export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement
    *  colors and states (Figma `radio (single selection)=yes`, node 27685:5017). */
   radio?: boolean;
 }
+/* Per-state colours from Figma V1.2 `checkbox` 27685:5017 — the 07.07.2026 revamp binds
+   every state to `color/mark/{default,inverse}/*`. Disabled is a colour, not opacity.
+   Label colours come from the consent row `checkbox-variants` 33489:12153 (the atom has no
+   label): body/md in text/default/{default,disabled} or, inverse, text/default/inverse-subtle
+   and inverse-disabled. */
+const MARK = {
+  default: {
+    boxOn: color('mark.default.surface.selected'), boxOnDisabled: color('mark.default.surface.selected-disabled'),
+    tickOn: color('mark.default.icon.selected'), tickOnDisabled: color('mark.default.icon.selected-disabled'),
+    borderOff: color('mark.default.border.default'), borderOffDisabled: color('mark.default.border.disabled'),
+    label: color('text.default.default'), labelDisabled: color('text.default.disabled'),
+  },
+  inverse: {
+    boxOn: color('mark.inverse.surface.selected'), boxOnDisabled: color('mark.inverse.surface.selected-disabled'),
+    tickOn: color('mark.inverse.icon.selected'), tickOnDisabled: color('mark.inverse.icon.selected-disabled'),
+    borderOff: color('mark.inverse.border.default'), borderOffDisabled: color('mark.inverse.border.disabled'),
+    label: color('text.default.inverse-subtle'), labelDisabled: color('text.default.inverse-disabled'),
+  },
+} as const;
 export function Checkbox({ label, checked, defaultChecked, disabled, onChange, size = 'md', inverse, radio, style, ...rest }: CheckboxProps) {
   const [internal, setInternal] = useState(defaultChecked ?? false);
   const on = checked ?? internal;
   const dim = T.checkbox[size];
-  // Per-state colors from Figma `color/mark` tokens (V1.1 checkbox, node 27685:5017).
-  // Two schemes — `default` (light surfaces) and `inverse` (brand/midnight surfaces) —
-  // each across on/off × enabled/disabled. Disabled is a distinct muted fill, not opacity.
-  const scheme = inverse
-    ? { boxOn: 'surface.base.inverse', boxOnDisabled: 'border.interactive.inverse.disabled', tickOn: 'text.brand.default', tickOnDisabled: 'text.default.inverseMuted', borderOff: 'border.interactive.inverse.pressed', borderOffDisabled: 'border.interactive.inverse.disabled' }
-    : { boxOn: 'surface.base.brand', boxOnDisabled: 'border.surfaceBased.base.default', tickOn: 'text.default.inverse', tickOnDisabled: 'text.default.muted', borderOff: 'text.default.muted', borderOffDisabled: 'border.surfaceBased.base.default' };
+  const m = MARK[inverse ? 'inverse' : 'default'];
   const box: CSSProperties = on
-    ? { border: `${T.border.md} solid transparent`, background: color(disabled ? scheme.boxOnDisabled : scheme.boxOn) }
-    : { border: `${T.border.md} solid ${color(disabled ? scheme.borderOffDisabled : scheme.borderOff)}`, background: 'transparent' };
-  const tick = color(disabled ? scheme.tickOnDisabled : scheme.tickOn);
-  const labelColor = inverse
-    ? color(disabled ? 'text.default.inverseMuted' : 'text.default.inverse')
-    : color(disabled ? 'text.default.disabled' : 'text.default.default');
+    ? { border: `${T.border.md} solid transparent`, background: disabled ? m.boxOnDisabled : m.boxOn }
+    : { border: `${T.border.md} solid ${disabled ? m.borderOffDisabled : m.borderOff}`, background: 'transparent' };
   return (
     <label style={{ display: 'inline-flex', alignItems: 'center', gap: space('sm'), cursor: disabled ? 'not-allowed' : 'pointer', ...style }}>
       <span style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: dim, height: dim, borderRadius: radio ? '50%' : radius('1'), boxSizing: 'border-box', flex: 'none', ...box }}>
         <input type={radio ? 'radio' : 'checkbox'} checked={checked} defaultChecked={defaultChecked} disabled={disabled}
           onChange={(e) => { setInternal(e.currentTarget.checked); onChange?.(e); }}
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', margin: 0, opacity: 0, cursor: 'inherit' }} {...rest} />
+        {/* Figma instances `check` filled=true: 12px in a 16px icon-size (md), 8px in 12px (sm). */}
         {on ? (
-          <svg aria-hidden viewBox="0 0 12 10" style={{ width: '80%', height: '80%', display: 'block' }}>
-            <polyline points="1,5 4.5,8.5 11,1.5" fill="none"
-              stroke={tick} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+          <IconBox size={size === 'sm' ? 'sm' : 'md'} aria-hidden style={{ pointerEvents: 'none' }}>
+            <Icon name="check-filled" size={size === 'sm' ? 8 : 12} color={disabled ? m.tickOnDisabled : m.tickOn} />
+          </IconBox>
         ) : null}
       </span>
-      {label ? <Text variant="body.md" color={labelColor}>{label}</Text> : null}
+      {label ? <Text variant="body.md" color={disabled ? m.labelDisabled : m.label}>{label}</Text> : null}
     </label>
+  );
+}
+
+/* ---------------- ConsentCheckbox ----------------
+   Figma V1.2 `checkbox-variants` 33489:12153 (inverse × selected × disabled) with its core
+   `.checkbox-core-variants-core` 38351:31883 (title-string, link-1, link-2, description,
+   direction). A md checkbox, 8px gap, then one wrapping run of body/md text: "Agree to" ·
+   link · "and" · link · "before proceeding". The links are `button type=link size=md` —
+   body/md, 2px inline padding, no underline, button/link/text/{brand|inverse}/*. */
+export interface ConsentLink {
+  label: ReactNode;
+  /** Renders an `<a>` when set, otherwise a `<button>`. */
+  href?: string;
+  onClick?: () => void;
+}
+export interface ConsentCheckboxProps extends Omit<CheckboxProps, 'label' | 'size' | 'radio'> {
+  /** Text before the first link (Figma `title-string`, "Agree to"). */
+  prefix?: ReactNode;
+  /** Inline legal links (Figma `link-1`, `link-2`). Two are joined by `conjunction`. */
+  links?: ConsentLink[];
+  /** Word between the links (Figma "and"). */
+  conjunction?: ReactNode;
+  /** Text after the links (Figma `description-string`, "before proceeding"). */
+  suffix?: ReactNode;
+}
+export function ConsentCheckbox({ prefix, links = [], conjunction = 'and', suffix, inverse, disabled, ...rest }: ConsentCheckboxProps) {
+  const m = MARK[inverse ? 'inverse' : 'default'];
+  const ink = disabled ? m.labelDisabled : m.label;
+  // Figma disables the links with the row on the inverse scheme; the default-scheme disabled
+  // variant leaves them at state=default (design question). Code disables them in both.
+  const linkInk = color(`button.link.text.${inverse ? 'inverse' : 'brand'}.${disabled ? 'disabled' : 'default'}`);
+  const seg = (c: ReactNode) => (c == null || c === '' ? null : <span style={{ color: ink }}>{c}</span>);
+  const linkStyle: CSSProperties = {
+    ...ty('body.md'), color: linkInk, paddingInline: space('2xs'), paddingBlock: 0, margin: 0, border: 0,
+    background: 'transparent', textDecoration: 'none', cursor: disabled ? 'not-allowed' : 'pointer',
+  };
+  const items: ReactNode[] = [];
+  links.forEach((l, i) => {
+    if (i > 0) items.push(<span key={`c${i}`}>{seg(conjunction)}</span>);
+    items.push(l.href && !disabled
+      ? <a key={`l${i}`} href={l.href} onClick={l.onClick} style={linkStyle}>{l.label}</a>
+      : l.href
+        ? <a key={`l${i}`} aria-disabled="true" style={linkStyle}>{l.label}</a>
+        : <button key={`l${i}`} type="button" disabled={disabled} onClick={l.onClick} style={linkStyle}>{l.label}</button>);
+  });
+  return (
+    <Checkbox
+      {...rest}
+      size="md"
+      inverse={inverse}
+      disabled={disabled}
+      label={
+        <span style={{ display: 'inline-flex', flexWrap: 'wrap', alignItems: 'center' }}>
+          {seg(prefix)}{items}{seg(suffix)}
+        </span>
+      }
+    />
   );
 }
 

@@ -102,6 +102,86 @@ test('Checkbox radio variant renders a circular radio input', () => {
   expect(input.parentElement!.style.borderRadius).toBe('50%');
 });
 
+/* Checkbox vs Figma V1.2 `checkbox` 27685:5017 (07.07.2026 token revamp). The tick was a
+   hand-drawn <polyline> at 80% of the box (rule 4; 12.8px at sm where Figma is 8px). Figma
+   instances the icon-set `check` (filled) — 12px in a 16px icon-size at md, 8px in 12px at sm. */
+
+test.each([
+  ['md', '16px', 12],
+  ['sm', '12px', 8],
+] as const)('Checkbox %s tick is the icon-set check-filled glyph in a %s box, not a hand-drawn path', (size, box, glyph) => {
+  const { container } = render(<Checkbox label="x" size={size} defaultChecked />);
+  expect(container.querySelector('polyline')).toBeNull();
+  const icon = container.querySelector('[aria-label="check-filled"]') as HTMLElement;
+  expect(icon).toBeInTheDocument();
+  expect((icon.parentElement as HTMLElement).style.width).toBe(box);
+  expect(icon.querySelector('svg')!.getAttribute('width')).toBe(String(glyph));
+});
+
+test.each([
+  // [label, props, box background, box border, tick colour]
+  ['default on', { defaultChecked: true }, 'rgb(224, 8, 0)', null, 'rgb(255, 255, 255)'],
+  ['default on disabled', { defaultChecked: true, disabled: true }, 'rgb(216, 215, 222)', null, 'rgb(144, 142, 154)'],
+  ['default off', {}, 'transparent', 'rgb(144, 142, 154)', null],
+  ['default off disabled', { disabled: true }, 'transparent', 'rgb(216, 215, 222)', null],
+  ['inverse on', { inverse: true, defaultChecked: true }, 'rgb(255, 255, 255)', null, 'rgb(224, 8, 0)'],
+  ['inverse on disabled', { inverse: true, defaultChecked: true, disabled: true }, 'rgba(255, 255, 255, 0.4)', null, 'rgba(255, 255, 255, 0.6)'],
+  ['inverse off', { inverse: true }, 'transparent', 'rgb(255, 255, 255)', null],
+  ['inverse off disabled', { inverse: true, disabled: true }, 'transparent', 'rgba(255, 255, 255, 0.4)', null],
+] as const)('Checkbox %s binds color/mark/*', (_l, props, bg, border, tick) => {
+  const { container } = render(<Checkbox label="x" {...props} />);
+  const box = screen.getByRole('checkbox').parentElement!;
+  expect(box.style.background).toBe(bg);
+  if (border) expect(box.style.border).toContain(border);
+  if (tick) expect((container.querySelector('[aria-label="check-filled"]') as HTMLElement).style.color).toBe(tick);
+});
+
+test.each([
+  // The consent row (checkbox-variants 33489:12153) carries the label colours.
+  ['default', {}, 'rgb(25, 19, 41)'],
+  ['default disabled', { disabled: true }, 'rgb(192, 191, 200)'],
+  ['inverse', { inverse: true }, 'rgba(255, 255, 255, 0.75)'],         // was text/default/inverse (100%)
+  ['inverse disabled', { inverse: true, disabled: true }, 'rgba(255, 255, 255, 0.5)'], // was inverse-muted (60%)
+] as const)('Checkbox %s label colour follows checkbox-variants', (_l, props, fg) => {
+  render(<Checkbox label="Agree" {...props} />);
+  expect(screen.getByText('Agree').style.color).toBe(fg);
+});
+
+/* ConsentCheckbox — Figma `checkbox-variants` 33489:12153 + `.checkbox-core-variants-core`
+   38351:31883: checkbox md + "Agree to" + link + "and" + link + "before proceeding", body/md,
+   gap 8, links are `button type=link size=md` (body/md, 2px inline padding, no underline). */
+
+test('ConsentCheckbox composes prefix, two links joined by "and", and suffix', async () => {
+  const onTerms = vi.fn();
+  render(
+    <ConsentCheckbox prefix="Agree to" suffix="before proceeding"
+      links={[{ label: "T&C's", onClick: onTerms }, { label: 'Privacy Policy', href: '/privacy' }]} />,
+  );
+  expect(screen.getByText('Agree to')).toBeInTheDocument();
+  expect(screen.getByText('and')).toBeInTheDocument();
+  expect(screen.getByText('before proceeding')).toBeInTheDocument();
+  const terms = screen.getByRole('button', { name: "T&C's" });
+  const privacy = screen.getByRole('link', { name: 'Privacy Policy' });
+  expect(privacy).toHaveAttribute('href', '/privacy');
+  expect(terms.style.color).toBe('rgb(224, 8, 0)'); // button/link/text/brand/default
+  expect(terms.style.fontSize).toBe('14px');
+  expect(terms.style.paddingInline).toBe('2px');
+  // Clicking a link does not toggle the checkbox.
+  await userEvent.click(terms);
+  expect(onTerms).toHaveBeenCalledTimes(1);
+  expect(screen.getByRole('checkbox')).not.toBeChecked();
+  await userEvent.click(screen.getByText('Agree to'));
+  expect(screen.getByRole('checkbox')).toBeChecked();
+});
+
+test('ConsentCheckbox inverse and disabled use the inverse link tokens and disabled links', () => {
+  render(<ConsentCheckbox inverse disabled prefix="Agree to" links={[{ label: 'Terms', onClick: () => {} }]} />);
+  const link = screen.getByRole('button', { name: 'Terms' });
+  expect(link).toBeDisabled();
+  expect(link.style.color).toBe('rgba(255, 255, 255, 0.5)'); // button/link/text/inverse/disabled
+  expect(screen.getByText('Agree to').style.color).toBe('rgba(255, 255, 255, 0.5)'); // text/default/inverse-disabled
+});
+
 /* ---------------- Radio ---------------- */
 
 test('Radio selects on click and fires onChange', async () => {
