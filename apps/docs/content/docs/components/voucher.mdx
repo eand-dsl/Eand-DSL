@@ -1,9 +1,33 @@
 ---
 title: Voucher
-description: Dashed-border voucher with value, code and status.
+description: A 144px ticket tile — a title, a description and an Apply action, light or dark, default or applied.
 ---
 
 <ComponentDemo id="voucher" />
+
+## When to use
+
+- **Use** to offer a promo code or voucher the user can apply at checkout, in a row of tiles.
+- **Don't use** for a deal the user browses (use [DealCard](./dealcard)).
+
+## Anatomy
+
+- **Ticket** — one exported shape with side notches and a perforation.
+- **Text** — `title` in `title/xs` over `description` in `body/md`, centred.
+- **Action** — "Apply" with an add glyph, which calls `onApply`. Once `state="applied"`, it reads
+  "Applied" with a check, in green, and is disabled.
+
+`display="light"` is the white ticket; `display="dark"` the midnight-raised one.
+
+```tsx
+<Voucher title="20% off" description="above AED 60+" onApply={apply} />
+<Voucher display="dark" state="applied" title="Free delivery" description="on orders over AED 100" />
+```
+
+<Callout type="warn" title="Deprecated">
+  `status` is the V1.0 model: `active` becomes `state="default"` and `redeemed` becomes
+  `state="applied"`. `expired` has no Figma counterpart; it renders the applied tile dimmed.
+</Callout>
 
 ## Props
 
@@ -11,4 +35,11 @@ description: Dashed-border voucher with value, code and status.
 
 ## Design
 
-Figma source: [Voucher — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=28278-13069)
+Figma source: [Voucher — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=28278-13817)
+
+- A fixed 144 × 144 tile. The ticket fills `surface/base/inverse`, or `surface/raised/midnight`
+  when dark.
+- Text block padding 16 × 8 (`spacing/lg`, `spacing/sm`); action padding 16 × 12.
+- The action uses `button/lg` with a 24px glyph. Applied green is `text/positive/subtle` on light
+  and `text/positive/muted` on dark, for contrast.
+- The Voucher page in Figma is still marked work in progress.

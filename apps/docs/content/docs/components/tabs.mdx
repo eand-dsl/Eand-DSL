@@ -1,9 +1,22 @@
 ---
 title: Tabs
-description: Pill tabs with global (tinted-red) and local (midnight) scopes.
+description: 48px pill tabs with an optional leading icon, in a default look and an inverse glass look for dark surfaces.
 ---
 
 <ComponentDemo id="tabs" />
+
+## When to use
+
+- **Use** to switch between sibling views at the same level. Exactly one tab is selected.
+- **Use** `inverse` on brand-red, midnight and glass surfaces, such as the tabs add-on of the
+  [TopBar](./topbar).
+- **Don't use** for filters ([Chip](./chip)) or for steps in a flow ([Stepper](./stepper)).
+  [PageHeader](./pageheader) draws its own tab pills.
+
+`icons` is index-aligned with `tabs`. A string is an icon-set name drawn at 16px; a node
+renders as given. Figma always shows the icon; the code keeps it optional so text-only rows
+still work. `scope="local"` (a midnight selected pill) exists on no V1.2 symbol and is
+deprecated.
 
 ## Props
 
@@ -11,4 +24,13 @@ description: Pill tabs with global (tinted-red) and local (midnight) scopes.
 
 ## Design
 
-Figma source: [Tabs — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=22542-13966)
+Figma source: [tab-pill — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=25502-12416)
+
+- 48px tall (`scale/48`), minimum width `scale/72`, `spacing/lg` inline padding, pill.
+- A 20px icon box with a 16px glyph, then the `title/xs` label with 2px (`spacing/2xs`) side
+  padding.
+- Default: unselected `tab/default/surface/default` (white), selected
+  `tab/default/surface/selected` with `tab/default/text/selected`.
+- Inverse: unselected `tab/inverse/surface/default` (white at 20%) behind a 20px backdrop
+  blur; selected `tab/inverse/surface/selected` (white) with `tab/inverse/text/selected`.
+- Pills sit `spacing/sm` apart in a row that scrolls sideways.

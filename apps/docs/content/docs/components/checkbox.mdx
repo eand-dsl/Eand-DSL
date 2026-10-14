@@ -1,9 +1,21 @@
 ---
 title: Checkbox
-description: Square selection control with a white tick when checked.
+description: Square selection mark at md (20) or sm (16), with the icon-set check, on default or inverse surfaces.
 ---
 
 <ComponentDemo id="checkbox" />
+
+## When to use
+
+- **Use** for independent options the user can combine, or for a single opt-in.
+- **Use** [ConsentCheckbox](./consentcheckbox) when the label carries legal links, such as
+  Terms and Privacy Policy.
+- **Don't use** for one choice out of several — that is [Radio](./radio). For a setting that
+  takes effect at once, use the [Switcher](./switcher).
+
+`radio` draws the circular checkbox from the same Figma set: a filled circle with a tick, on
+the same tokens. For the ring-and-dot control, use [Radio](./radio). Pass `inverse` on
+brand-red and midnight surfaces.
 
 ## Props
 
@@ -11,4 +23,12 @@ description: Square selection control with a white tick when checked.
 
 ## Design
 
-Figma source: [Checkbox — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25394-83294)
+Figma source: [checkbox — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=27685-5017)
+
+- `md` 20 and `sm` 16 (`checkbox/md·sm`), `border-radius/1` (4); unchecked boxes have a 1.5px
+  (`border/md`) border.
+- The tick is the icon set's `check-filled`: 12px in a 16px box at `md`, 8px in 12px at `sm`.
+- Every state binds `mark/{default,inverse}/{surface,icon,border}/*`. Disabled is a colour,
+  not opacity.
+- The label is `body/md`, `spacing/sm` from the box, in `text/default/default`; inverse uses
+  `text/default/inverse-subtle`.

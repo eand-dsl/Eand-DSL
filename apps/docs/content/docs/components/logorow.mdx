@@ -1,14 +1,45 @@
 ---
 title: LogoRow
-description: A horizontal, evenly spaced row of brand logos.
+description: A row of circular brand logos in three sizes, plain or on glass tiles, with an optional “+N” overflow circle.
 ---
 
 <ComponentDemo id="logorow" />
+
+## When to use
+
+- **Use** to show the partner brands or benefits that come with a plan, card or highlight:
+  up to five logos, then `more` for the rest.
+- **Use** `glass` when the row sits on imagery or on a brand-red or midnight surface.
+- **Don't use** for the e& brand mark — that is [Logo](./logo). Not for avatars, and not
+  for a set of tappable services (use [QuickAction](./quickaction) or
+  [ServiceCard](./servicecard)).
+
+## Choosing a size
+
+| `size` | Logo | Gap | Glass tile | Glass gap |
+| --- | --- | --- | --- | --- |
+| `sm` | 24 (`icon/xl`) | 4 | 40 | 4 |
+| `md` | 32 (`icon/2xl`) | 4 | 48 | 8 |
+| `lg` | 40 (`icon/3xl`) | 8 | 56 | 8 |
+
+`md` is the default because it is the size the row rendered before V1.2; Figma's default is
+`sm`. Pass logos as elements sized to fill their circle, or as image URLs. The brand artwork
+is not part of the package.
 
 ## Props
 
 <PropsTable name="LogoRow" />
 
+The “+N” circle at the end of the row is [MoreItems](./moreitems); `LogoRow` sizes it to
+match the logos. Every published logo row uses the `inverse` counter (white glass), which is
+built for dark surfaces; `moreSurface` switches it.
+
 ## Design
 
-Figma source: [LogoRow — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25996-32494)
+Figma source: [logo-row — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=25997-32516)
+
+- Logos are clipped to circles (`border-radius/9`). The row never wraps.
+- Glass tiles: `surface/glass/white/lg` with a backdrop blur from `effects/glass/md/frost`
+  (20px) and `spacing/sm` padding. Each logo carries a 0.5px (`border/xs`) inside ring in
+  `border/surface-based/glass/default/sm`.
+- In RTL the row mirrors and the counter reads “4+”, as `more-items-rtl` does.

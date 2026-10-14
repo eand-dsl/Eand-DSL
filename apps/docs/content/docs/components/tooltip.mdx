@@ -1,9 +1,53 @@
 ---
 title: Tooltip
-description: Small dark bubble anchored to a target.
+description: A bubble with a caret, anchored to a target — simple, standard, or rich with a title, media, steps and a close button.
 ---
 
 <ComponentDemo id="tooltip" />
+
+## When to use
+
+- **Use** to explain a control or a term in place, or for a guided hint during onboarding (the
+  rich size, with `steps`).
+- **Don't use** for information the user needs to complete the task; put it on the page. Not
+  for status (use [Alert](./alert)) or for long content (use [BottomSheet](./bottomsheet)).
+
+## Choosing a size
+
+| `size` | Width | Content |
+| --- | --- | --- |
+| `simple` | Hugs one line | `content` only |
+| `standard` (default) | 200px | `content` as a short paragraph |
+| `rich` | 280px | `title`, `media`, `content`, then `steps` and an `action`; `onClose` adds a close button |
+
+`surface` is `default` (white) or `dark` (midnight).
+
+## Placement and caret
+
+- `placement` is the side of the target the bubble sits on: `top` (default), `bottom`, `left`
+  or `right`. The caret always points back at the target.
+- `caretAlign` moves the caret along the edge: `start`, `center` (default) or `end`, inset 32px
+  from the corner. It applies to `top` and `bottom`; on the sides the caret stays centred.
+- `caret={false}` hides it.
+
+Visibility is controlled: the tooltip shows while `visible` is true. Wire it to your own hover,
+focus or tap handling.
+
+```tsx
+<Tooltip
+  size="rich"
+  visible={open}
+  placement="bottom"
+  caretAlign="start"
+  title="Track your usage"
+  content="See what is left of your data, minutes and roaming."
+  steps="1 of 3"
+  action={<Button size="sm">Next</Button>}
+  onClose={() => setOpen(false)}
+>
+  <Icon name="info" size={20} />
+</Tooltip>
+```
 
 ## Props
 
@@ -11,4 +55,14 @@ description: Small dark bubble anchored to a target.
 
 ## Design
 
-Figma source: [Tooltip — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=23201-15868)
+Figma source: [Tooltip — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=33202-6649)
+
+- Simple: 4px radius (`border-radius/1`), padding 4/12. Standard: 12px radius
+  (`border-radius/4`), padding 12. Rich: 20px radius (`border-radius/7`), padding 16.
+- Surface `surface/canvas/default` or `surface/canvas/midnight`; every size carries `shadow/md`
+  (0 0 44px, `midnight/a10`).
+- Caret: a 12 × 6 shape on `surface/raised/default` (or `surface/canvas/midnight` when dark),
+  inset by `spacing/3xl` when it is not centred.
+- Rich: the media clips to a 20px radius; the body is `body/sm` in `text/default/subtle`; the
+  close is a 32px button at a 12px radius on `surface/base/default`, holding a 17px
+  `close-filled`.

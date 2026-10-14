@@ -1,9 +1,31 @@
 ---
 title: Accordion
-description: Expand/collapse disclosure row for FAQs.
+description: A flat disclosure row that shows or hides content under a title. For questions and answers, use FAQ.
 ---
 
 <ComponentDemo id="accordion" />
+
+<Callout type="warn" title="Not finalised in Figma">
+  The Accordion page in Figma DSL V1.2 is marked [Not Finalized], so this component is unchanged
+  from V1.1. The V1.2 question-and-answer pattern is [FAQ](./faq): white accordion cards, an
+  optional category chip row, one item open at a time.
+</Callout>
+
+## When to use
+
+- **Use** for a single show-and-hide group inside a form or a detail page, where a flat row
+  with a divider suits the layout.
+- **Don't use** for a list of questions and answers; that is [FAQ](./faq). Not for navigation
+  (use [ActionBar](./actionbar)) or for content the user always needs to see.
+
+## Anatomy
+
+- **Header** — a full-width button with the `title` in `title/sm` and a 16px `chevron-down-sm`
+  that turns 180° when the row opens. It sets `aria-expanded`.
+- **Content** — `children`, rendered only while open, with 12px below.
+- **Divider** — a 1px bottom border in `border/surface-based/raised/default`.
+
+The row manages its own state; `defaultOpen` sets the initial state.
 
 ## Props
 
@@ -11,4 +33,8 @@ description: Expand/collapse disclosure row for FAQs.
 
 ## Design
 
-Figma source: [Accordion — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=27465-29326)
+Figma source: [Accordion — e& Consumer App DSL V1.2 (Not Finalized)](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=27465-29326)
+
+- Header padding 12 top and bottom (`spacing/md`), gap 12 between the title and the chevron.
+- Neither the page's V1.0 `Accordion header` nor its card exploration is a final spec. The
+  exploration's card style is what [FAQ](./faq) uses.

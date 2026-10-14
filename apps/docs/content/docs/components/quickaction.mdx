@@ -1,9 +1,62 @@
 ---
 title: QuickAction
-description: Account-hub grid of borderless white action cards.
+description: Shortcut tiles for common account tasks, laid out as a two-up grid or a horizontal carousel.
 ---
 
 <ComponentDemo id="quickaction" />
+
+## When to use
+
+- **Use** on the home screen and account hub to reach frequent tasks in one tap: paying a bill,
+  changing a plan, tracking an order. Prefer the catalogue tasks below.
+- **Don't use** for top-level destinations (use [NavBar](./navbar)), for a single prompt with
+  a description (use [ActionBar](./actionbar)), or for a catalogue of services (use
+  [ServiceCard](./servicecard)).
+
+## Anatomy
+
+Each tile is 148px tall on a white surface:
+
+- **Header** — a 40px icon tile on `surface/base/default` holding a 24px glyph, with an optional
+  `badge` at the end, typically `<Badge status="positive" size="lg">`.
+- **Label** — `title/sm`, at the bottom of the tile.
+
+`layout="grid"` (default) places tiles in `columns` (2) that fill the row.
+`layout="carousel"` scrolls sideways in 147px cells; `rows` sets how many rows it stacks (1).
+
+## Catalogue tasks
+
+Set an item's `type` and it takes the Figma label and filled glyph. Pass `label` or `icon` to
+override either. The same data is exported as `QUICK_ACTION_PRESETS`.
+
+| `type` | Label |
+| --- | --- |
+| `quick-pay` | Quick Pay & Recharge |
+| `order-track` | Track Your Order |
+| `sim-activate` | Activate SIM |
+| `sim-replace` | Replace SIM |
+| `addon-buy` | Buy Add-ons |
+| `devices` | My Devices |
+| `device-buy` | Buy Devices |
+| `plan-change` | Change Plan |
+| `live-chat` | Live Chat |
+| `contact-us` | Contact us |
+| `subscriptions` | Subscriptions |
+| `mParking` | mParking |
+| `all-services` | All Services |
+
+```tsx
+<QuickAction
+  layout="carousel"
+  rows={2}
+  items={[
+    { type: 'quick-pay' },
+    { type: 'plan-change', badge: <Badge status="positive" size="lg">New</Badge> },
+    { type: 'live-chat' },
+    { type: 'all-services' },
+  ]}
+/>
+```
 
 ## Props
 
@@ -11,4 +64,11 @@ description: Account-hub grid of borderless white action cards.
 
 ## Design
 
-Figma source: [QuickAction — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25507-13670)
+Figma source: [quick-action — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=27962-37107)
+
+- Tile (`.quick-action-core`): 148px tall (`section/body/height/row-2`), padding 12
+  (`spacing/md`), 20px radius (`border-radius/7`), `surface/raised/default`.
+- Icon tile 40px (`scale/40`) at a 12px radius (`border-radius/4`), with a 32px box around the
+  24px glyph.
+- Tiles sit 4px apart (`spacing/xs`) in both layouts.
+- The carousel cell is 147px wide, a value off the scale that Figma leaves unbound.

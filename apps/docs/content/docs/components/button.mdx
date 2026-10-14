@@ -1,14 +1,68 @@
 ---
 title: Button
-description: Pill-shaped action button. Primary is e& red; secondary is outlined; glass is frosted for brand/imagery surfaces.
+description: Pill-shaped action button — primary, secondary, tertiary, link and glass, in three sizes, with a scheme for light, red and dark backgrounds.
 ---
 
 <ComponentDemo id="button" />
+
+## When to use
+
+- **Use** `primary` for the one main action on a screen or sheet, `secondary` beside it for
+  the alternative, and `tertiary` or `link` for low-emphasis text actions. Use `glass` on
+  imagery and brand surfaces.
+- **Use** `block` for full-width actions, such as those in a [CTA Bar](./ctabar).
+- **Don't use** for the legal links in a consent row ([ConsentCheckbox](./consentcheckbox)
+  sets them), for filters ([Chip](./chip), [FilterPill](./filterpill)) or for a section's
+  “See all” ([SectionLink](./sectionlink)).
+
+## Choosing a scheme
+
+| `scheme` | Primary, tertiary, link | Secondary |
+| --- | --- | --- |
+| `default` | Brand red | Red outline |
+| `inverse` | White, for red and dark backgrounds | Dark (midnight) outline |
+| `midnight` | Ink | White outline |
+
+Secondary follows the published symbol, whose bindings are crossed relative to every other
+type: `scheme="inverse"` is the dark outline and `scheme="midnight"` the white one. On a red or
+dark background, pair `primary scheme="inverse"` with `secondary scheme="midnight"`. Whether
+the crossing is intended is an open design question. Glass has no scheme.
+
+## Sizes and states
+
+- **Sizes** — `lg` 48, `md` 40, `sm` 32. The icon slots are 24 / 20 / 16, so pass
+  `<Icon size>` 20 / 16 / 12 to `leadingIcon` and `trailingIcon`.
+- **Tertiary and link** hug their text, with no height or padding. Link is set in body type
+  and is underlined only while pressed.
+- **Pressed** follows the pointer, or Space and Enter while held; it never lingers on focus.
+  Keyboard focus shows a 2px ring. Figma has no focus state, so the ring is a code-side
+  accessibility addition.
+- **Disabled** uses the disabled tokens, with no opacity. **Loading** puts a spinner in the
+  leading slot and suppresses clicks.
+
+`surface` and `tone` are deprecated aliases from V1.1; `scheme` wins when both are set.
+Rendering is identical except for secondary:
+
+| Deprecated | New (primary, tertiary, link, glass) | New (secondary) |
+| --- | --- | --- |
+| `surface="brand"` | `scheme="default"` | `scheme="default"` |
+| `surface="inverse-brand"`, `"white"`, `tone="inverse"` | `scheme="inverse"` | `scheme="midnight"` |
+| `surface="midnight"` | `scheme="midnight"` | `scheme="inverse"` |
 
 ## Props
 
 <PropsTable name="Button" />
 
+For UAE PASS sign-in, use [UaePassButton](./uaepassbutton): it is its own published
+component, not a Button variant.
+
 ## Design
 
-Figma source: [Button — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=22542-13972)
+Figma source: [button — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=25394-85067)
+
+- Height and minimum width `scale/48·40·32`; radius `border-radius/9`.
+- Inline inset 16 / 16 / 10: the outer `spacing/sm` (`spacing/xs` at `sm`), plus the content's
+  `spacing/xs`, plus the label's `spacing/xs` (`spacing/2xs` at `sm`).
+- Secondary has a 1px (`border/sm`) inside stroke; pressed is a solid fill with no stroke.
+- Labels are `button/lg·md·sm`; link uses `body/lg·md·sm`. Glass is `button/glass/*` behind a
+  20px backdrop blur.

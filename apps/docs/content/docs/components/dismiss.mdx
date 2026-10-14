@@ -1,9 +1,19 @@
 ---
 title: Dismiss
-description: Circular close button — a filled circle with a white X, in default or inverse surface at md (24) or sm (20).
+description: Close control — an X knocked out of a filled circle, at md (24) or sm (20), on default or inverse surfaces.
 ---
 
 <ComponentDemo id="dismiss" />
+
+## When to use
+
+- **Use** to close or remove something in place: a sheet, a banner, a tooltip. The library
+  uses it for the removable [Chip](./chip) and for clearing an [Input](./input).
+- **Use** `surface="inverse"` on dark surfaces.
+- **Don't use** for back navigation — that belongs to the [TopBar](./topbar).
+
+The accessible name defaults to “Dismiss”. Pass `aria-label` when the context needs a more
+specific one, such as “Remove filter”.
 
 ## Props
 
@@ -11,11 +21,11 @@ description: Circular close button — a filled circle with a white X, in defaul
 
 ## Design
 
-Figma source: [Dismiss — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=28961-16066)
+Figma source: [dismiss — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=28961-19839)
 
-Notes from the Figma spec:
-
-- Circular button; filled in the `color/dismiss/*` value with a white X.
-- Surface **default** (`#908e9a`) for light backgrounds, **inverse** (`#c0bfc8`) for dark.
-- Size **md** = 24px, **sm** = 20px. The dismiss colors aren't in the exported
-  `variables.json` yet, so the component carries the live Figma values.
+- `md`: a transparent 24px box (`icon/xl`) with a 2px inset (`spacing/2xs`) holding a 20px
+  `dismiss-filled` glyph. `sm` (Figma `small`): a 20px box with a 16px glyph.
+- Ink `color/dismiss/default` or `color/dismiss/inverse`. The X is knocked out, so the
+  surface shows through; it is not white.
+- Figma still instances a legacy local close icon of the same geometry; the code uses the
+  icon set's `dismiss-filled`.

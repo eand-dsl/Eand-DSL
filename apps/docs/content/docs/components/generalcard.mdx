@@ -1,0 +1,53 @@
+---
+title: GeneralCard
+description: A fixed 224px tile with a centred title, an image and an optional badge, for grids and carousels.
+---
+
+<ComponentDemo id="generalcard" />
+
+## When to use
+
+- **Use** for category or offer tiles inside a [Section](./section): a short title (two lines at
+  most) and a visual, in a two-up grid or a carousel.
+- **Don't use** for content with body copy and an action; that is [Card](./card). Not for plans
+  or products with prices ([PlanCard](./plancard), [ProductCard](./productcard)), and not for
+  full-width campaign banners ([Highlight](./highlight)).
+
+<Callout type="warn">
+  `surface` follows the published Figma naming: `default` is the **dark** card and `inverse` is
+  the white one. That is the reverse of [Card](./card). The label is awaiting design
+  confirmation.
+</Callout>
+
+## Options
+
+| Prop | Values | Effect |
+| --- | --- | --- |
+| `size` | `sm` · `md` · `lg` | Image 64px, 128px, or 224px full-bleed |
+| `topAlignment` | `false` · `true` | `true` moves the title to the bottom and the image and badge to the top |
+| `carousel` | `false` · `true` | `true` fixes the width at 147px; otherwise the card fills its grid slot |
+| `badgePlacement` | `start` · `center` · `end` | Badge alignment; mirrors in RTL |
+
+`topAlignment` follows the published symbol. The symbol's description text says the reverse,
+which is logged as a design question.
+
+Pass a `Badge` as `badge`. `image` takes a URL or your own node. `imageAlt` defaults to an empty
+string, which marks the image as decorative; set it when the image carries meaning.
+
+## Props
+
+<PropsTable name="GeneralCard" />
+
+## Design
+
+Figma source: [General-card — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=28463-12391)
+
+- 224px tall (`rem/14`), `border-radius/7` (20px), clipped. In a two-up grid it is 166px wide
+  (`section/body/width/col-12`); the 147px carousel width has no token.
+- Title `title/sm`, centred, two lines at most. Padding 24/12/0 (`spacing/2xl`, `spacing/md`), or
+  0/12/24 with `topAlignment`.
+- Fill: `default` is `surface/raised/midnight` with `text/default/inverse`; `inverse` is
+  `surface/base/inverse` with `text/default/default`.
+- The badge sits in `.badge-placement`: padding 12 (`spacing/md`), gap 4 (`spacing/xs`).
+- Images are placed by constraints: `sm` 104px from the top (56px with `topAlignment`), `md` flush
+  to the edge opposite the title, `lg` filling the card.

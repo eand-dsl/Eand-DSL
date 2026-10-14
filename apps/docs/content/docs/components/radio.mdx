@@ -1,9 +1,16 @@
 ---
 title: Radio
-description: Single-choice control — pick one option.
+description: Single-choice control — a 2px ring with a filled dot, at lg (24) or sm (20), on default or inverse surfaces.
 ---
 
 <ComponentDemo id="radio" />
+
+## When to use
+
+- **Use** to pick exactly one option from a short list where every option stays visible.
+  Give the radios in a group the same `name`.
+- **Don't use** for options that combine — that is a [Checkbox](./checkbox). For a long list,
+  use an [Input](./input) of `type="dropdown"`; for value tiles, a [Picker](./picker).
 
 ## Props
 
@@ -11,4 +18,14 @@ description: Single-choice control — pick one option.
 
 ## Design
 
-Figma source: [Radio — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25394-83997)
+Figma source: [radio-button — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=26369-775)
+
+- `lg` 24 (token `radio/md`) or `sm` 20; a 2px ring (`border/lg`) and a 16px or 12px dot.
+- Default scheme: selected `mark/default/surface/selected`, unselected
+  `mark/default/border/default`; disabled uses `mark/default/surface/selected-disabled` and
+  `mark/default/border/disabled`. Disabled is a colour, not opacity.
+- Inverse scheme: a white ring and dot, an unselected ring in
+  `border/interactive/inverse/default`, and white at 40% when disabled. The published inverse
+  binds the default mark family, so these colours are held pending a design ruling.
+- The Figma radio has no label; the code's label uses the Checkbox inks, so a disabled row
+  still reads as disabled.

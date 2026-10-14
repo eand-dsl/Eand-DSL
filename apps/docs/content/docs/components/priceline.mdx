@@ -1,0 +1,41 @@
+---
+title: PriceLine
+description: The total row of a checkout — a label with an optional action on one side, the price on the other.
+---
+
+<ComponentDemo id="priceline" />
+
+## When to use
+
+- **Use** for the price summary above the actions at the end of a purchase flow. Inside
+  [ActionBlock](./actionblock) or the [CTA Bar](./ctabar), pass the same fields as `price`
+  rather than rendering a `PriceLine` yourself.
+- **Don't use** for itemised charges or detail rows; use [ListRow](./listrow). Not for prices on
+  plan or product cards, which carry their own.
+
+## Anatomy
+
+- **Label** — `body/md`, subtle, for example "Total".
+- **Action** — optional. `actionLabel` adds a tertiary button under the label, such as "View
+  breakdown", with `onAction` and an optional trailing `actionIcon`. A directional glyph is not
+  mirrored for you; add `data-rtl-flip` to it.
+- **Value** — the price in `title/xs`, end-aligned.
+
+The published symbol has no layer for an original, struck-through price. If a screen needs one,
+compose it inside `value`. `note` is deprecated: it has no Figma counterpart and is kept only so
+existing screens keep rendering.
+
+## Props
+
+<PropsTable name="PriceLine" />
+
+## Design
+
+Figma source: [price-line — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=33496-60459)
+
+- Padding 12 at the top (`spacing/md`) and 20 at the sides (`spacing/xl`); gap 12 (`spacing/md`);
+  both columns top-aligned.
+- Label `body/md` in `text/default/subtle`; the tertiary md button sits 2 below it
+  (`spacing/2xs`), with a 20px trailing icon.
+- Value `title/xs` in `text/default/default`.
+- Every row is a flex row with logical padding, so the line mirrors in RTL.

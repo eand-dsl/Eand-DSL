@@ -1,9 +1,59 @@
 ---
 title: BottomSheet
-description: Modal sheet that slides up from the bottom.
+description: A modal sheet that rises from the bottom over a Scrim — an optional visual, icon, title, description and pills, then a body and a footer.
 ---
 
 <ComponentDemo id="bottomsheet" />
+
+## When to use
+
+- **Use** for a focused task or detail that keeps the user in context: choosing an option,
+  reviewing details before paying, reading a system message.
+- **Don't use** for a whole flow (use a page), for the outcome of a flow (use
+  [AlertModal](./alertmodal) with `integration="bottom-sheet"`), or for a passing confirmation
+  (use [Snackbar](./snackbar)).
+
+## Choosing a type
+
+| `type` | Figma composition |
+| --- | --- |
+| `basic` | Visual, icon, title and description |
+| `detailed` (default) | Title and body |
+| `system-message` | Close button and body, no grabber |
+
+`type` records the Figma variant and sets the grabber default: on, except for
+`system-message`. The content you pass decides what renders.
+
+## Anatomy
+
+- **Grabber** — a 40 × 4 pill at the top. `grabber` overrides the type's default.
+- **Visual** — `visual`, media above the header, framed with a 4px inset and a 16px radius.
+- **Title block** — an `icon` in a 40px tile, the `title` in bold 20px, and a `description` in
+  `body/md`.
+- **Pills** — `pills`, a row of [Chips](./chip) 16px under the title that scrolls sideways.
+- **Body** — `children`, in a scrolling content area on `surface/base/default`.
+- **Footer** — `footer`, for example block buttons or a [CTA Bar](./ctabar).
+
+Setting `onDismiss` shows a close button and lets a scrim click dismiss the sheet. The close
+sits at the end of the title row, or over the visual when there is one. `closeButton={false}`
+hides it.
+
+```tsx
+<BottomSheet
+  title="Choose a plan"
+  description="Prices include VAT."
+  pills={<><Chip selected>Monthly</Chip><Chip>Yearly</Chip></>}
+  onDismiss={close}
+  footer={<Button block onClick={confirm}>Continue</Button>}
+>
+  …
+</BottomSheet>
+```
+
+<Callout type="warn" title="Deprecated">
+  `display="dark"` has no V1.2 counterpart; the sheet is always light. `subheader` is replaced by
+  `pills`; it still renders under the title.
+</Callout>
 
 ## Props
 
@@ -11,4 +61,13 @@ description: Modal sheet that slides up from the bottom.
 
 ## Design
 
-Figma source: [BottomSheet — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=27907-11716)
+Figma source: [bottom-sheet — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=40299-160405)
+
+- Sheet: `surface/sunken/inverse` (#f0f0f5) with 24px top corners (`border-radius/8`), on a
+  [Scrim](./scrim): `surface/overlay/scrim` under a 20px blur.
+- Title frame padding 20/20/0 (`spacing/xl`); the title binds `font/size/6` (20px) at 110%;
+  the header ends with 20px of padding.
+- Close: a 40px section-link button, solid in the title row and glass inverse 20px in from the
+  top end over a visual.
+- Body padding 0/20/20 on `surface/base/default`; footer padding 20.
+- Grabber: 40 × 4 on `surface/glass/midnight/md`, in an 8px frame.

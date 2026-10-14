@@ -5,52 +5,71 @@
       "type": "ReactNode",
       "required": false,
       "default": "Postpaid",
-      "description": ""
+      "description": "Figma `overline-string`. `null` hides the overline."
     },
     {
       "name": "colorScheme",
-      "type": "enum",
+      "type": "'default' | 'inverse'",
       "required": false,
       "description": "Figma `color-scheme` axis. Takes precedence over `variant`."
     },
     {
       "name": "discount",
+      "type": "ReactNode",
+      "required": false,
+      "default": "true",
+      "description": "Figma `badge` — the lg Discount badge in the footer. `true` labels it \"Discount\"."
+    },
+    {
+      "name": "from",
       "type": "boolean",
       "required": false,
       "default": "true",
-      "description": ""
+      "description": "Figma `price-from` — the \"from\" line above the price."
+    },
+    {
+      "name": "logos",
+      "type": "ReactNode[]",
+      "required": false,
+      "description": "Logos for the logo row; implies `smiles`."
+    },
+    {
+      "name": "moreLogos",
+      "type": "number",
+      "required": false,
+      "description": "The +N bubble at the end of the logo row. Default 4 with placeholders."
     },
     {
       "name": "name",
       "type": "ReactNode",
       "required": false,
       "default": "Entertainment plans",
-      "description": ""
+      "description": "Figma `title-string`."
     },
     {
       "name": "period",
       "type": "ReactNode",
       "required": false,
       "default": "/mo",
-      "description": ""
+      "description": "Figma `price-monthly`. `null` hides it."
     },
     {
       "name": "price",
       "type": "ReactNode",
       "required": false,
       "default": "AED 1250",
-      "description": ""
+      "description": "Figma `price-string`."
     },
     {
       "name": "smiles",
       "type": "boolean",
       "required": false,
       "default": "true",
-      "description": ""
+      "description": "Figma `logo-row` (md, 32px logos). Shows Smiles placeholders unless `logos` is given."
     },
     {
       "name": "variant",
-      "type": "enum",
+      "type": "'default' | 'brand' | 'midnight'",
       "required": false,
       "description": "@deprecated Use `colorScheme`."
     },
@@ -64,67 +83,93 @@
   ],
   "ProductCard": [
     {
+      "name": "colors",
+      "type": "string[]",
+      "required": false,
+      "description": "Figma `badge-or-color=color-spot` — swatches (CSS colours) shown in place of the badge."
+    },
+    {
       "name": "discount",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "Figma `badge-or-color=badge` — the lg Discount badge label, e.g. \"20% off\"."
     },
     {
       "name": "eyebrow",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "Figma `overline-string` (package only)."
     },
     {
       "name": "image",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "Media for product / category."
+    },
+    {
+      "name": "labelPts",
+      "type": "ReactNode",
+      "required": false,
+      "default": "30",
+      "description": "Points for `priceLabel=\"smiles-combined\"` (\"From {n} PTS\")."
+    },
+    {
+      "name": "logos",
+      "type": "boolean | ReactNode[]",
+      "required": false,
+      "description": "Figma `logo-row` (sm). `true` shows placeholders; package and product only."
     },
     {
       "name": "period",
       "type": "ReactNode",
       "required": false,
       "default": "/mo",
-      "description": ""
+      "description": "Figma `price-monthly`. `null` hides it."
     },
     {
       "name": "price",
       "type": "ReactNode",
       "required": false,
       "default": "AED 200",
-      "description": ""
+      "description": "Figma `price-string`."
+    },
+    {
+      "name": "priceLabel",
+      "type": "'none' | 'from' | 'pay-only' | 'smiles-combined'",
+      "required": false,
+      "default": "from",
+      "description": "Figma `.product-card-price-label`. Default `from`."
     },
     {
       "name": "pts",
       "type": "boolean",
       "required": false,
-      "description": ""
+      "description": "Figma `.product-card-price type=smiles`: Smiley + amount + \"PTS\"."
     },
     {
       "name": "tint",
       "type": "(string & {}) | CardBgTint",
       "required": false,
-      "description": "A `.card-bg-color` tint name (Figma 25710:20065). A raw CSS colour still works."
+      "description": "A `.card-bg-color` tint name (Figma 25710:20065) for the panel. A raw CSS colour still works."
     },
     {
       "name": "title",
       "type": "ReactNode",
       "required": false,
       "default": "iPhone Clear Case For Safe Use",
-      "description": ""
+      "description": "Figma `title-string`."
     },
     {
       "name": "type",
-      "type": "enum",
+      "type": "'package' | 'product' | 'category' | 'addon'",
       "required": false,
-      "description": "Which card-features sibling this is."
+      "description": "Which card-features sibling this is. `addon` is the V1.1 name of `package`."
     },
     {
       "name": "width",
       "type": "string | number",
       "required": false,
-      "default": "200",
+      "default": "229",
       "description": ""
     }
   ],
@@ -133,36 +178,91 @@
       "name": "badge",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "@deprecated Use `discount` (a label). A node passed here renders in the discount row."
+    },
+    {
+      "name": "discount",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Figma `discount` — the md Discount badge label, e.g. \"20% off\"."
     },
     {
       "name": "image",
       "type": "ReactNode",
       "required": false,
+      "description": "@deprecated V1.1 image card. Rendered in the logo-row slot; Figma's deals card has no image."
+    },
+    {
+      "name": "likes",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Like count in the feedback pill, e.g. \"120.8k\". Setting it (or a handler) shows the pill."
+    },
+    {
+      "name": "logos",
+      "type": "boolean | ReactNode[]",
+      "required": false,
+      "description": "Figma `logo-row` (sm). `true` shows placeholders."
+    },
+    {
+      "name": "onDislike",
+      "type": "(() => void)",
+      "required": false,
       "description": ""
+    },
+    {
+      "name": "onLike",
+      "type": "(() => void)",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "overline",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Figma `overline-string`."
+    },
+    {
+      "name": "price",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Figma `price-string`, e.g. \"AED 400\"."
     },
     {
       "name": "subtitle",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "@deprecated Use `overline`."
     },
     {
       "name": "title",
       "type": "ReactNode",
       "required": false,
       "default": "Deal title",
-      "description": ""
+      "description": "Figma `title-string` — two lines max."
+    },
+    {
+      "name": "wasPrice",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Figma `discounted-string` — the struck-through old price, e.g. \"AED 500\"."
     },
     {
       "name": "width",
       "type": "string | number",
       "required": false,
-      "default": "240",
+      "default": "T.section.body.width['col-12']",
       "description": ""
     }
   ],
   "NewCard": [
+    {
+      "name": "badge",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "description": "Figma `badge` — the \"New card\" badge. Independent of `selected`; on by default."
+    },
     {
       "name": "image",
       "type": "ReactNode",
@@ -173,7 +273,7 @@
       "name": "selected",
       "type": "boolean",
       "required": false,
-      "description": "Figma `selected` axis — the gradient ring plus the New-card badge."
+      "description": "Figma `selected` axis — the gradient ring (the last carousel card, for three days)."
     },
     {
       "name": "title",
@@ -201,18 +301,18 @@
       "name": "badge",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "A badge node, e.g. `<Badge offer=\"new-plan\" size=\"md\">New plan</Badge>`."
     },
     {
       "name": "icon",
       "type": "ReactNode",
       "required": false,
-      "default": "<Icon name=\"placeholder\" size={34} />",
+      "default": "<Icon name=\"placeholder\" size={48} />",
       "description": ""
     },
     {
       "name": "size",
-      "type": "enum",
+      "type": "'grid' | 'carousel'",
       "required": false,
       "description": "Figma `size` axis; omit to let the cell fill its grid track."
     }
@@ -222,29 +322,136 @@
       "name": "action",
       "type": "HighlightAction",
       "required": false,
-      "description": ""
+      "description": "Figma type=action — the glass action bar."
     },
     {
       "name": "background",
       "type": "string",
       "required": false,
-      "description": ""
+      "description": "@deprecated V1.2 has one surface: image + midnight gradient."
+    },
+    {
+      "name": "badge",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Label for `tag=\"badge\"`. Default \"Limited time offer\"."
     },
     {
       "name": "cta",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "@deprecated V1.2 has no bare CTA — use `action`. Still renders when no `action` is set."
     },
     {
       "name": "image",
       "type": "string",
       "required": false,
-      "description": ""
+      "description": "Image URL for the banner fill."
+    },
+    {
+      "name": "items",
+      "type": "HighlightItem[]",
+      "required": false,
+      "description": "Further banners for `placement=\"stacked\"`."
+    },
+    {
+      "name": "logos",
+      "type": "ReactNode[]",
+      "required": false,
+      "description": "Logos for `tag=\"logos\"`; Smiles placeholders otherwise."
+    },
+    {
+      "name": "placement",
+      "type": "'single' | 'stacked'",
+      "required": false,
+      "default": "single",
+      "description": "Figma `placement`. `stacked` lays this banner and `items` out as 307-wide peeking cards."
+    },
+    {
+      "name": "size",
+      "type": "'lg' | 'md' | 'sm'",
+      "required": false,
+      "default": "lg",
+      "description": "Figma `.highlight-sizes` size. Default `lg`."
     },
     {
       "name": "subtitle",
       "type": "ReactNode",
+      "required": false,
+      "description": "Figma `text-secondary-string` (lg only)."
+    },
+    {
+      "name": "tag",
+      "type": "'none' | 'logos' | 'badge'",
+      "required": false,
+      "default": "logos",
+      "description": "Figma `offer-tags`. Default `logos`."
+    },
+    {
+      "name": "title",
+      "type": "ReactNode",
+      "required": false,
+      "default": "Primary Text 2-lines max",
+      "description": "Figma `text-primary-string` (lg only)."
+    },
+    {
+      "name": "tone",
+      "type": "'brand' | 'image' | 'purple'",
+      "required": false,
+      "default": "image",
+      "description": "@deprecated V1.2 has one surface: image + midnight gradient (design-questions q2)."
+    },
+    {
+      "name": "width",
+      "type": "string | number",
+      "required": false,
+      "description": ""
+    }
+  ],
+  "Recommendation": [
+    {
+      "name": "carousel",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Figma `carousel` — this card and `items` as 338-wide peeking cards."
+    },
+    {
+      "name": "cta",
+      "type": "ReactNode",
+      "required": false,
+      "default": "Explore",
+      "description": "Figma `button` label. `null` hides the button."
+    },
+    {
+      "name": "description",
+      "type": "ReactNode",
+      "required": false,
+      "default": "Handpicked offers based on how you use e&.",
+      "description": "Figma `description-string`."
+    },
+    {
+      "name": "icon",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Figma `visual-asset` — a 32px logo. Smiles placeholder by default; `null` hides it."
+    },
+    {
+      "name": "inverse",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "description": "Figma `inverse` — glass on a dark backdrop (default) vs white."
+    },
+    {
+      "name": "items",
+      "type": "RecommendationItem[]",
+      "required": false,
+      "description": "Further cards for `carousel`."
+    },
+    {
+      "name": "onCta",
+      "type": "(() => void)",
       "required": false,
       "description": ""
     },
@@ -252,15 +459,8 @@
       "name": "title",
       "type": "ReactNode",
       "required": false,
-      "default": "Primary Text 2-lines max",
-      "description": ""
-    },
-    {
-      "name": "tone",
-      "type": "enum",
-      "required": false,
-      "default": "image",
-      "description": ""
+      "default": "Recommended for you",
+      "description": "Figma `title-string` — two lines max."
     },
     {
       "name": "width",
@@ -271,18 +471,78 @@
   ],
   "SmilesBalance": [
     {
+      "name": "active",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "description": "Figma `states`: points-activated (default) | points-not-active."
+    },
+    {
       "name": "cta",
       "type": "ReactNode",
       "required": false,
-      "default": "Redeem",
+      "description": "@deprecated V1.0 gold strip's Redeem button — absent in V1.2. Renders only when set."
+    },
+    {
+      "name": "label",
+      "type": "ReactNode",
+      "required": false,
+      "default": "Points",
+      "description": "The unit line under the total."
+    },
+    {
+      "name": "message",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Replaces the footer line."
+    },
+    {
+      "name": "nextTier",
+      "type": "'silver' | 'gold' | 'platinum'",
+      "required": false,
+      "default": "gold",
+      "description": "The tier the footer line points to."
+    },
+    {
+      "name": "onInfo",
+      "type": "(() => void)",
+      "required": false,
       "description": ""
     },
     {
       "name": "points",
       "type": "ReactNode",
       "required": false,
-      "default": "12,450 Smiles",
-      "description": ""
+      "default": "40,340",
+      "description": "Figma `points-total-string`."
+    },
+    {
+      "name": "pointsToNext",
+      "type": "ReactNode",
+      "required": false,
+      "default": "2,500",
+      "description": "Figma `points-left-string`."
+    },
+    {
+      "name": "progress",
+      "type": "number",
+      "required": false,
+      "default": "5",
+      "description": "Progress towards the next tier, 0–100."
+    },
+    {
+      "name": "tier",
+      "type": "SmilesTier | null",
+      "required": false,
+      "default": "silver",
+      "description": "The member's current tier (pill, activated only). `null` hides the pill."
+    },
+    {
+      "name": "tooltip",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "description": "Figma `tooltip` — the info icon beside \"Points\"."
     }
   ],
   "Voucher": [
@@ -295,7 +555,7 @@
     },
     {
       "name": "display",
-      "type": "enum",
+      "type": "'light' | 'dark'",
       "required": false,
       "default": "light",
       "description": ""
@@ -308,13 +568,13 @@
     },
     {
       "name": "state",
-      "type": "enum",
+      "type": "'default' | 'applied'",
       "required": false,
       "description": ""
     },
     {
       "name": "status",
-      "type": "enum",
+      "type": "'active' | 'redeemed' | 'expired'",
       "required": false,
       "description": "@deprecated V1.0. `active`->Default, `redeemed`->Applied; `expired` dims the tile."
     },
@@ -331,19 +591,19 @@
       "name": "clearable",
       "type": "boolean",
       "required": false,
-      "description": "Show the 24px erase button when the field has a value."
+      "description": "Show the 24px dismiss (clear) button while the field is active and has a value."
     },
     {
       "name": "error",
       "type": "ReactNode",
       "required": false,
-      "description": "Error hint below the field (Figma status=error); drives the error border."
+      "description": "Error hint below the field (Figma status=error); drives the error stroke."
     },
     {
       "name": "helper",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "Neutral hint below the field (Figma status=neutral)."
     },
     {
       "name": "htmlType",
@@ -367,7 +627,7 @@
       "name": "leadingIcon",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "Leading slot: a 24px icon-size — pass a 20px glyph."
     },
     {
       "name": "onClear",
@@ -376,27 +636,34 @@
       "description": ""
     },
     {
+      "name": "statusIcon",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "description": "Show the `info` glyph before the status text (Figma `info-icon`, default true)."
+    },
+    {
       "name": "success",
       "type": "ReactNode",
       "required": false,
-      "description": "Success hint below the field (Figma status=Success)."
+      "description": "Success hint below the field (Figma status=success)."
     },
     {
       "name": "trailingIcon",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "Trailing slot: a 24px icon-size — pass a 20px glyph."
     },
     {
       "name": "type",
-      "type": "enum",
+      "type": "'text' | 'dropdown' | 'picker' | 'comment'",
       "required": false,
       "default": "text",
       "description": "Figma `type` axis. dropdown/picker render read-only with a trailing chevron."
     },
     {
       "name": "variant",
-      "type": "enum",
+      "type": "'outlined' | 'filled'",
       "required": false,
       "description": "@deprecated V1.0 axis — V1.1 has a single filled style; ignored."
     }
@@ -431,8 +698,8 @@
       "name": "length",
       "type": "number",
       "required": false,
-      "default": "4",
-      "description": ""
+      "default": "6",
+      "description": "Number of cells. Figma publishes 6."
     },
     {
       "name": "masked",
@@ -458,13 +725,19 @@
       "name": "check",
       "type": "boolean",
       "required": false,
-      "description": "Show a check mark as the leading icon while selected (Figma content `type=check`)."
+      "description": "Show a check mark as the leading marker while selected (Figma marker `type=check`)."
     },
     {
       "name": "disabled",
       "type": "boolean",
       "required": false,
       "description": ""
+    },
+    {
+      "name": "dismissLabel",
+      "type": "string",
+      "required": false,
+      "description": "Accessible name for the dismiss button. Defaults to \"Remove <label>\"."
     },
     {
       "name": "inverse",
@@ -476,13 +749,13 @@
       "name": "leadingIcon",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "Leading marker (Figma `.chips.marker type=custom-icon`): a 16px box — pass a 12px glyph."
     },
     {
       "name": "loading",
       "type": "boolean",
       "required": false,
-      "description": "Spinner replaces the leading icon (Figma `Loader <-> IconBox=on`); clicks suppressed."
+      "description": "@deprecated V1.2 chips have no loader. Still renders a spinner in the marker slot and\nsuppresses clicks."
     },
     {
       "name": "onClick",
@@ -491,14 +764,20 @@
       "description": ""
     },
     {
+      "name": "onDismiss",
+      "type": "(() => void)",
+      "required": false,
+      "description": "Makes the chip removable (Figma `.chips-core-status selected=true`): a trailing 20px\ndismiss that calls this. The label stays a separate button for `onClick`."
+    },
+    {
       "name": "selected",
       "type": "boolean",
       "required": false,
-      "description": "Figma state=focus (the pressed/active chip)."
+      "description": "Figma state=selected (the pressed/active chip)."
     },
     {
       "name": "type",
-      "type": "enum",
+      "type": "'inverse' | 'filled' | 'outline' | 'glass'",
       "required": false,
       "description": "Figma `type` axis."
     }
@@ -514,7 +793,7 @@
       "name": "inverse",
       "type": "boolean",
       "required": false,
-      "description": "Inverse color scheme for dark (midnight/brand) surfaces (Figma `Color=Inverse`)."
+      "description": "Inverse color scheme for dark (midnight/brand) surfaces (Figma `inverse=true`)."
     },
     {
       "name": "onClick",
@@ -526,7 +805,7 @@
       "name": "selected",
       "type": "boolean",
       "required": false,
-      "description": "Maps to Figma `State=Focused` (V1.1 `filter-pill` set 26151:391) — the pressed/active pill state."
+      "description": "Figma `state=selected` — the pressed/active pill state."
     }
   ],
   "Checkbox": [
@@ -550,10 +829,44 @@
     },
     {
       "name": "size",
-      "type": "enum",
+      "type": "'md' | 'sm'",
       "required": false,
       "default": "md",
       "description": "Control size — `md` 20×20 (default) or `sm` 16×16 (Figma V1.1 `size` axis)."
+    }
+  ],
+  "ConsentCheckbox": [
+    {
+      "name": "conjunction",
+      "type": "ReactNode",
+      "required": false,
+      "default": "and",
+      "description": "Word between the links (Figma \"and\")."
+    },
+    {
+      "name": "inverse",
+      "type": "boolean",
+      "required": false,
+      "description": "Inverse color scheme for dark (midnight/brand) surfaces (Figma `color-scheme=inverse`)."
+    },
+    {
+      "name": "links",
+      "type": "ConsentLink[]",
+      "required": false,
+      "default": "[]",
+      "description": "Inline legal links (Figma `link-1`, `link-2`). Two are joined by `conjunction`."
+    },
+    {
+      "name": "prefix",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Text before the first link (Figma `title-string`, \"Agree to\")."
+    },
+    {
+      "name": "suffix",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Text after the links (Figma `description-string`, \"before proceeding\")."
     }
   ],
   "Radio": [
@@ -571,7 +884,7 @@
     },
     {
       "name": "size",
-      "type": "enum",
+      "type": "'lg' | 'sm'",
       "required": false,
       "default": "lg",
       "description": "Control size — `lg` 24×24 (default) or `sm` 20×20 (Figma V1.1 `small` axis)."
@@ -598,6 +911,12 @@
       "description": ""
     },
     {
+      "name": "inverse",
+      "type": "boolean",
+      "required": false,
+      "description": "Inverse scheme for brand/midnight surfaces: white track, red knob when on."
+    },
+    {
       "name": "onChange",
       "type": "((checked: boolean) => void)",
       "required": false,
@@ -605,10 +924,10 @@
     },
     {
       "name": "size",
-      "type": "enum",
+      "type": "'lg' | 'md' | 'sm'",
       "required": false,
-      "default": "lg",
-      "description": ""
+      "default": "md",
+      "description": "`md` 40×24 (Figma small=false) or `sm` 32×20 (small=true). `lg` is the deprecated\npre-V1.2 name for `md`."
     }
   ],
   "Searchbar": [
@@ -645,7 +964,13 @@
       "name": "icons",
       "type": "ReactNode[]",
       "required": false,
-      "description": "Optional leading glyph per tab, index-aligned with `tabs`. Figma draws it at 20px."
+      "description": "Leading glyph per tab, index-aligned with `tabs`, drawn in a 20px icon-size. A string is\nan icon-set name rendered at Figma's 16px; a node renders as given. Figma's rule is that\nthe icon is always present; code keeps it optional so text-only rows still work."
+    },
+    {
+      "name": "inverse",
+      "type": "boolean",
+      "required": false,
+      "description": "Inverse (glass) pills for brand, midnight or glass surfaces — e.g. the TopBar tabs add-on."
     },
     {
       "name": "onChange",
@@ -655,10 +980,10 @@
     },
     {
       "name": "scope",
-      "type": "enum",
+      "type": "'global' | 'local'",
       "required": false,
       "default": "global",
-      "description": "Not a Figma variant axis — the published set has one look, and Global vs Local are\ninstance-level colour overrides described in the statesheet. Kept as a prop because\nboth appear on real screens. `global` binds `color/tab/default/*`; `local` is the\nmidnight treatment, which has no token of its own."
+      "description": "@deprecated `local` (midnight selected pill, bordered white unselected) exists on no V1.2\nsymbol — Figma publishes one look plus `inverse`. Kept working for existing screens;\n`global` (the default) is the published look."
     },
     {
       "name": "value",
@@ -672,13 +997,13 @@
       "name": "badge",
       "type": "ReactNode",
       "required": false,
-      "description": "Status badge slot rendered at the bottom of the tile."
+      "description": "Status badge along the bottom of the tile (Figma `badges`). A string or number renders the\npublished neutral sm status badge across the tile; any other node renders as given.\nHidden while disabled."
     },
     {
       "name": "caption",
       "type": "ReactNode",
       "required": false,
-      "description": "Secondary line under the value (body.xs, subtle) — e.g. a unit."
+      "description": "Secondary line under the value (body/xs) — e.g. a unit."
     },
     {
       "name": "disabled",
@@ -700,7 +1025,7 @@
     },
     {
       "name": "surface",
-      "type": "enum",
+      "type": "'default' | 'inverse' | 'light' | 'glass'",
       "required": false,
       "default": "default",
       "description": ""
@@ -709,7 +1034,7 @@
       "name": "value",
       "type": "ReactNode",
       "required": false,
-      "description": "Primary text (title.sm)."
+      "description": "Primary text (title/sm, centred)."
     }
   ],
   "Picker": [
@@ -733,7 +1058,7 @@
     },
     {
       "name": "surface",
-      "type": "enum",
+      "type": "'default' | 'inverse' | 'light' | 'glass'",
       "required": false,
       "default": "default",
       "description": ""
@@ -777,13 +1102,13 @@
       "name": "action",
       "type": "ReactNode",
       "required": false,
-      "description": "Trailing action label (tap target spans the label + icon)."
+      "description": "Trailing action label (Figma `show-action`); the tap target spans the label + icon."
     },
     {
       "name": "leadingIcon",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "Leading glyph, drawn in a 24px box (Figma `show-icon`)."
     },
     {
       "name": "onAction",
@@ -793,7 +1118,7 @@
     },
     {
       "name": "status",
-      "type": "enum",
+      "type": "'alert' | 'success' | 'warning' | 'info'",
       "required": false,
       "default": "info",
       "description": ""
@@ -814,10 +1139,10 @@
     },
     {
       "name": "orientation",
-      "type": "enum",
+      "type": "'horizontal' | 'vertical'",
       "required": false,
       "default": "vertical",
-      "description": "`vertical` stacks the buttons; `horizontal` puts secondary+primary side by side\n(Figma `button-stack` vertical<->horizontal axis, 31617:1409)."
+      "description": "`vertical` stacks the buttons; `horizontal` puts secondary+primary side by side\n(Figma `button-stack` horizontal false|true, 31617:1409)."
     },
     {
       "name": "secondary",
@@ -859,6 +1184,110 @@
       "description": ""
     }
   ],
+  "PriceLine": [
+    {
+      "name": "label",
+      "type": "ReactNode",
+      "required": true,
+      "description": ""
+    },
+    {
+      "name": "value",
+      "type": "ReactNode",
+      "required": true,
+      "description": ""
+    },
+    {
+      "name": "actionIcon",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Trailing icon inside the tertiary button (Figma's 20px `.button-icon`)."
+    },
+    {
+      "name": "actionLabel",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Tertiary button under the label (Figma `button type=tertiary size=md`)."
+    },
+    {
+      "name": "note",
+      "type": "ReactNode",
+      "required": false,
+      "description": "@deprecated Code-only: `price-line` 33496:60459 has no note under the value. Still\nrenders (body.sm, muted) so existing screens keep working; prefer `actionLabel`."
+    },
+    {
+      "name": "onAction",
+      "type": "(() => void)",
+      "required": false,
+      "description": ""
+    }
+  ],
+  "CheckboxLine": [
+    {
+      "name": "conjunction",
+      "type": "ReactNode",
+      "required": false,
+      "default": "and",
+      "description": "Word placed between links (Figma's \"and\")."
+    },
+    {
+      "name": "description",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Trailing copy after the links (Figma `description-string`, e.g. \"before proceeding\")."
+    },
+    {
+      "name": "inverse",
+      "type": "boolean",
+      "required": false,
+      "description": "Inverse color scheme for dark (midnight/brand) surfaces (Figma `color-scheme=inverse`)."
+    },
+    {
+      "name": "label",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Lead-in copy before the links (Figma `title-string`, e.g. \"Agree to the\")."
+    },
+    {
+      "name": "links",
+      "type": "CheckboxLineLink[]",
+      "required": false,
+      "default": "[]",
+      "description": "One or two inline link buttons (Figma `link-1`, `link-2`), e.g. Terms, Privacy Policy."
+    }
+  ],
+  "ActionBlock": [
+    {
+      "name": "actions",
+      "type": "ReactNode",
+      "required": true,
+      "description": "CTA buttons (use <ButtonGroup/> or a block <Button/>)."
+    },
+    {
+      "name": "payment",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Payment-method summary (use <PaymentRow/>); renders beside the actions, half each."
+    },
+    {
+      "name": "price",
+      "type": "CtaFooterPrice",
+      "required": false,
+      "description": "Price summary, rendered as a <PriceLine/>."
+    },
+    {
+      "name": "ribbon",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Status strip across the very top (use <StatusRibbon/>)."
+    },
+    {
+      "name": "terms",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Checkbox line — pass a <CheckboxLine/> (or a <Checkbox/>) so state stays with the caller."
+    }
+  ],
   "CtaFooter": [
     {
       "name": "actions",
@@ -870,19 +1299,20 @@
       "name": "homeIndicator",
       "type": "boolean",
       "required": false,
-      "description": "iOS home-indicator strip below the actions (Figma footer variants include it)."
+      "default": "true",
+      "description": "iOS home-indicator block below the actions (Figma `home-indicator`, default true).\nIt is also the bar's only bottom spacing: with it off the actions sit flush, as in\nthe symbol."
     },
     {
       "name": "payment",
       "type": "ReactNode",
       "required": false,
-      "description": "Payment-method summary (use <PaymentRow/>); renders beside the actions."
+      "description": "Payment-method summary (use <PaymentRow/>); renders beside the actions, half each."
     },
     {
       "name": "price",
       "type": "CtaFooterPrice",
       "required": false,
-      "description": "Total row: label left, price right (Figma `price` atom)."
+      "description": "Price summary, rendered as a <PriceLine/>."
     },
     {
       "name": "ribbon",
@@ -895,13 +1325,20 @@
       "type": "boolean",
       "required": false,
       "default": "true",
-      "description": "Round the top corners. Figma's `Footer` always does; pass `false` for a flush edge."
+      "description": "Round the top corners (24px). Figma's `cta-bar` always does; pass `false` for a flush edge."
+    },
+    {
+      "name": "surface",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "description": "White card + `shadow/md` (Figma `surface`, default true). `false` = transparent, no shadow."
     },
     {
       "name": "terms",
       "type": "ReactNode",
       "required": false,
-      "description": "Terms row content rendered beside a checkbox slot — pass the checkbox+label\nyourself (e.g. <Checkbox label={...}/>) so state stays with the caller."
+      "description": "Checkbox line — pass a <CheckboxLine/> (or a <Checkbox/>) so state stays with the caller."
     }
   ],
   "PlanUsageBar": [
@@ -919,6 +1356,12 @@
       "description": "Category name, right-aligned in the track — e.g. \"Local Data\"."
     },
     {
+      "name": "labelState",
+      "type": "'default' | 'filled'",
+      "required": false,
+      "description": "Ink of the category label. Omit to switch automatically once the fill covers it."
+    },
+    {
       "name": "note",
       "type": "ReactNode",
       "required": false,
@@ -932,7 +1375,7 @@
     },
     {
       "name": "status",
-      "type": "enum",
+      "type": "'default' | 'low-data'",
       "required": false,
       "default": "default",
       "description": ""
@@ -949,6 +1392,12 @@
       "type": "number",
       "required": false,
       "description": "@deprecated Pass `remaining`. Kept so `used`-based call sites keep working."
+    },
+    {
+      "name": "valueState",
+      "type": "'default' | 'filled'",
+      "required": false,
+      "description": "Ink of the value and note. Omit to switch automatically once the fill covers them."
     }
   ],
   "Snackbar": [
@@ -962,7 +1411,19 @@
       "name": "action",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "Label of the primary / sm / inverse button (Figma `Show button`)."
+    },
+    {
+      "name": "aed",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Figma `aed-text` — an amount after the message, e.g. \"AED 60.00\"."
+    },
+    {
+      "name": "backdrop",
+      "type": "boolean",
+      "required": false,
+      "description": "Figma `back-ground=yes`: a blurred gradient scrim behind the pill, for busy content."
     },
     {
       "name": "onAction",
@@ -974,20 +1435,25 @@
       "name": "onDismiss",
       "type": "(() => void)",
       "required": false,
-      "description": ""
+      "description": "@deprecated The V1.2 snack bar has no dismiss control."
+    },
+    {
+      "name": "status",
+      "type": "'alert' | 'success' | 'warning' | 'info' | 'loader'",
+      "required": false,
+      "description": "Figma `.icon-snackbar-status` axis. Takes precedence over `tone`. Default `info`."
     },
     {
       "name": "subtitle",
       "type": "ReactNode",
       "required": false,
-      "description": "Figma `Subtitle` bool — a second line under the title."
+      "description": "@deprecated The V1.2 snack bar has no second line."
     },
     {
       "name": "tone",
-      "type": "enum",
+      "type": "'default' | 'warning' | 'positive' | 'danger' | 'loading'",
       "required": false,
-      "default": "default",
-      "description": ""
+      "description": "@deprecated Use `status`. `tone=\"default\"` still renders the old bare, centred message."
     }
   ],
   "Alert": [
@@ -995,7 +1461,14 @@
       "name": "action",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "Label of the primary / sm / inverse button. One CTA per alert."
+    },
+    {
+      "name": "actionPlacement",
+      "type": "'end' | 'below'",
+      "required": false,
+      "default": "end",
+      "description": "Default `end`. Use `below` when the body runs to several lines."
     },
     {
       "name": "onAction",
@@ -1004,10 +1477,23 @@
       "description": ""
     },
     {
-      "name": "status",
-      "type": "enum",
+      "name": "stack",
+      "type": "number",
       "required": false,
-      "description": "Figma `Staus` axis. Takes precedence over `tone`."
+      "description": "Figma `Stack=yes`: how many alerts share this slot (2+ draws the step counter)."
+    },
+    {
+      "name": "stackIndex",
+      "type": "number",
+      "required": false,
+      "default": "0",
+      "description": "Which stacked alert is in view, 0-based."
+    },
+    {
+      "name": "status",
+      "type": "'alert' | 'success' | 'warning' | 'info' | 'info-midnight'",
+      "required": false,
+      "description": "Figma `State` axis. Takes precedence over `tone`."
     },
     {
       "name": "title",
@@ -1017,7 +1503,7 @@
     },
     {
       "name": "tone",
-      "type": "enum",
+      "type": "'default' | 'warning' | 'positive' | 'danger'",
       "required": false,
       "description": "@deprecated Use `status`; `warning` maps to `alert` and `danger` to `warning`."
     }
@@ -1027,19 +1513,43 @@
       "name": "actions",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "@deprecated Centred dialog only — use `footer`."
     },
     {
       "name": "body",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "@deprecated Centred dialog only — use `description`."
+    },
+    {
+      "name": "description",
+      "type": "ReactNode",
+      "required": false,
+      "description": "`alert-title` description."
+    },
+    {
+      "name": "footer",
+      "type": "ReactNode",
+      "required": false,
+      "description": "The cta-bar content — usually one or two block `Button`s. Padded spacing/xl."
+    },
+    {
+      "name": "integration",
+      "type": "'full-screen' | 'bottom-sheet'",
+      "required": false,
+      "description": "Figma `integration`. Default `full-screen`."
+    },
+    {
+      "name": "onClose",
+      "type": "(() => void)",
+      "required": false,
+      "description": "Shows the `top-group` close button."
     },
     {
       "name": "onDismiss",
       "type": "(() => void)",
       "required": false,
-      "description": ""
+      "description": "@deprecated Use `onClose`. Still dismisses on a scrim click in the centred dialog."
     },
     {
       "name": "open",
@@ -1052,14 +1562,19 @@
       "name": "title",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "`alert-title` heading."
     },
     {
       "name": "tone",
-      "type": "enum",
+      "type": "'warning' | 'info' | 'positive' | 'danger'",
       "required": false,
-      "default": "info",
-      "description": ""
+      "description": "@deprecated Centred dialog only."
+    },
+    {
+      "name": "visual",
+      "type": "ReactNode",
+      "required": false,
+      "description": "The `status-banner` hero (illustration). Framed with a 4px inset."
     }
   ],
   "Section": [
@@ -1079,13 +1594,13 @@
       "name": "filterPill",
       "type": "ReactNode",
       "required": false,
-      "description": "Optional filter pill in the header, before the trigger."
+      "description": "Optional filter pill, inline after the title (Figma `filter-pill`). Pass `inverse` on dark surfaces."
     },
     {
       "name": "gradient",
       "type": "boolean",
       "required": false,
-      "description": "Bottom-biased dark gradient over the body (for highlight-style content)."
+      "description": "Sunset glow over the body (Figma `.section-body` `gradient`). Only on the most important section."
     },
     {
       "name": "hideChevron",
@@ -1110,17 +1625,17 @@
       "type": "boolean",
       "required": false,
       "default": "true",
-      "description": "Hide the whole header (Figma `Show header`)."
+      "description": "Hide the whole header (Figma `show-header`)."
     },
     {
       "name": "size",
-      "type": "enum",
+      "type": "'lg' | 'md' | 'sm' | 'xs' | 'xl'",
       "required": false,
       "description": "Body slot size — reserves the row height for the card type it holds."
     },
     {
       "name": "surface",
-      "type": "enum",
+      "type": "'default' | 'inverse' | 'brand' | 'midnight' | 'raised' | 'ai-powered' | 'midnight-base' | 'midnight-raised' | 'glass-midnight' | 'glass-white' | 'brand-muted'",
       "required": false,
       "default": "default",
       "description": ""
@@ -1134,16 +1649,16 @@
     },
     {
       "name": "titleLine",
-      "type": "enum",
+      "type": "1 | 2",
       "required": false,
       "default": "1",
-      "description": "Clamp the title to one or two lines (Figma `Title line`)."
+      "description": "Clamp the title to one or two lines (Figma `lines`)."
     },
     {
       "name": "trigger",
-      "type": "enum",
+      "type": "'none' | 'button' | 'chevron'",
       "required": false,
-      "description": "Header trigger: a chevron circle, a text button, or none (Figma `chevron ↔ button`)."
+      "description": "Header trigger: the section-link chevron, a tertiary lg button, or none (Figma `.section-trigger` link | button)."
     },
     {
       "name": "triggerLabel",
@@ -1174,10 +1689,10 @@
     },
     {
       "name": "surface",
-      "type": "enum",
+      "type": "'default' | 'inverse'",
       "required": false,
       "default": "default",
-      "description": "Figma `.card-general` 26825:101736 `surface` axis."
+      "description": "`default` = white, `inverse` = midnight-raised (NOT the GeneralCard / Figma naming)."
     },
     {
       "name": "title",
@@ -1190,6 +1705,107 @@
       "type": "string | number",
       "required": false,
       "description": "fixed width for use inside a carousel"
+    }
+  ],
+  "GeneralCard": [
+    {
+      "name": "title",
+      "type": "ReactNode",
+      "required": true,
+      "description": ""
+    },
+    {
+      "name": "badge",
+      "type": "ReactNode",
+      "required": false,
+      "description": "A `Badge` (offer or status), placed 12px in from the corner."
+    },
+    {
+      "name": "badgePlacement",
+      "type": "'end' | 'start' | 'center'",
+      "required": false,
+      "default": "start",
+      "description": "Badge alignment (Figma `.badge-placement` Left | Center | Right, mirrored in RTL)."
+    },
+    {
+      "name": "carousel",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Carousel cell (147 wide) instead of a grid cell that fills its slot."
+    },
+    {
+      "name": "image",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Image URL, or your own node (it is sized to the media box)."
+    },
+    {
+      "name": "imageAlt",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": ""
+    },
+    {
+      "name": "size",
+      "type": "'lg' | 'md' | 'sm'",
+      "required": false,
+      "default": "sm",
+      "description": "Media size (Figma `size`): sm 64 · md 128 · lg 224 full-bleed."
+    },
+    {
+      "name": "surface",
+      "type": "'default' | 'inverse'",
+      "required": false,
+      "default": "default",
+      "description": "Figma `surface`: `default` is the DARK card, `inverse` the white one (as published)."
+    },
+    {
+      "name": "topAlignment",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Figma `top-alignment`: true = image and badge at the top, title at the bottom."
+    }
+  ],
+  "FAQ": [
+    {
+      "name": "items",
+      "type": "FAQEntry[]",
+      "required": true,
+      "description": ""
+    },
+    {
+      "name": "categories",
+      "type": "string[]",
+      "required": false,
+      "description": "Category chip labels. Omit for no chip row."
+    },
+    {
+      "name": "defaultOpen",
+      "type": "number",
+      "required": false,
+      "description": "Index into `items` of the item open at first. Default: none."
+    },
+    {
+      "name": "defaultValue",
+      "type": "number",
+      "required": false,
+      "default": "0",
+      "description": ""
+    },
+    {
+      "name": "onCategoryChange",
+      "type": "((index: number) => void)",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "value",
+      "type": "number",
+      "required": false,
+      "description": "Selected category index (controlled)."
     }
   ],
   "Accordion": [
@@ -1216,7 +1832,7 @@
     },
     {
       "name": "type",
-      "type": "enum",
+      "type": "'brand' | 'warning' | 'positive' | 'danger' | 'neutral'",
       "required": false,
       "default": "positive",
       "description": ""
@@ -1231,14 +1847,14 @@
     },
     {
       "name": "alignment",
-      "type": "enum",
+      "type": "'center' | 'left'",
       "required": false,
       "default": "center",
       "description": ""
     },
     {
       "name": "as",
-      "type": "enum",
+      "type": "'h1' | 'h2' | 'h3'",
       "required": false,
       "default": "h2",
       "description": "Heading level for the title."
@@ -1251,7 +1867,7 @@
     },
     {
       "name": "status",
-      "type": "enum",
+      "type": "'brand' | 'warning' | 'positive' | 'danger' | 'neutral'",
       "required": false,
       "default": "positive",
       "description": "Outcome the status icon reflects (lg and md only)."
@@ -1264,7 +1880,7 @@
     },
     {
       "name": "type",
-      "type": "enum",
+      "type": "'lg' | 'md' | 'sm' | 'xs'",
       "required": false,
       "default": "lg",
       "description": ""
@@ -1279,7 +1895,7 @@
     },
     {
       "name": "as",
-      "type": "enum",
+      "type": "'h1' | 'h2'",
       "required": false,
       "default": "h1",
       "description": ""
@@ -1334,7 +1950,7 @@
       "name": "account",
       "type": "TopBarAccount",
       "required": false,
-      "description": "Middle: account display — greeting over a masked name with a chevron."
+      "description": "Left column: account — optional avatar, greeting over a masked number with a chevron."
     },
     {
       "name": "actionBar",
@@ -1346,31 +1962,43 @@
       "name": "actions",
       "type": "ReactNode[]",
       "required": false,
-      "description": "Right-part: circular icon buttons."
+      "description": "Right column: 40px round controls (Figma `topbar-link`). Pass icons."
     },
     {
       "name": "bigTitle",
       "type": "ReactNode",
       "required": false,
-      "description": "Big-title block: the large title (`heading.lg`)."
+      "description": "Title block: the large title (heading/lg text style, 24px)."
     },
     {
       "name": "chevron",
       "type": "boolean",
       "required": false,
-      "description": "Trailing chevron on the big title / account name."
+      "description": "Chevron after the big title (24px, default off) and the account number (16px, default on)."
     },
     {
       "name": "children",
       "type": "ReactNode",
       "required": false,
-      "description": "Bottom slot: search, tabs, chips, stepper, action cards…"
+      "description": "Add-ons: search, tabs, chips, stepper, action cards… each gets 16px top padding."
+    },
+    {
+      "name": "compact",
+      "type": "boolean",
+      "required": false,
+      "description": "@deprecated Code-only 56px single-row header with no status bar. Figma has no\ncompact top bar — every V1.2 surface carries the status bar and header row."
     },
     {
       "name": "eyebrow",
       "type": "ReactNode",
       "required": false,
-      "description": "Big-title block: small overline above the large title."
+      "description": "Title block (`.topbar-title`): overline above the large title, body/md."
+    },
+    {
+      "name": "eyebrowChevron",
+      "type": "boolean",
+      "required": false,
+      "description": "Title block: 16px chevron after the overline (Figma `overline-chevron`)."
     },
     {
       "name": "greeting",
@@ -1382,53 +2010,65 @@
       "name": "leading",
       "type": "ReactNode",
       "required": false,
-      "description": "Left-part: back chevron, avatar+text, etc."
+      "description": "Left column: custom content (e.g. an avatar). For a back button use `onBack`."
     },
     {
       "name": "logo",
       "type": "ReactNode",
       "required": false,
-      "description": "Middle: the centered e& logo (`true`) or a custom node."
+      "description": "Middle: the etisalat logo (`true`) or a custom node."
+    },
+    {
+      "name": "onBack",
+      "type": "(() => void)",
+      "required": false,
+      "description": "Left column: renders the 40px back button (Figma `.topbar-body-left-side type=back-button`)."
     },
     {
       "name": "rounded",
       "type": "boolean",
       "required": false,
-      "description": "Rounded bottom corners (defaults on brand)."
+      "description": "Figma rounds every surface (36 top / 20 bottom). `false` squares the corners."
     },
     {
       "name": "statusBar",
       "type": "boolean",
       "required": false,
-      "description": "Faux iOS status row (default on brand)."
+      "description": "Faux iOS status bar (on by default on every surface)."
     },
     {
       "name": "subtext",
       "type": "ReactNode",
       "required": false,
-      "description": "Big-title block: supporting line under the title."
+      "description": "Title block: supporting line under the title, body/lg."
+    },
+    {
+      "name": "subtitle",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Middle: body/md line under the page name (Figma `description-string`)."
     },
     {
       "name": "surface",
-      "type": "enum",
+      "type": "'default' | 'brand' | 'midnight' | 'none' | 'white'",
       "required": false,
-      "description": ""
+      "description": "Figma `surface`: `brand` (brand-red), `midnight`, `white` or `none` (Figma `false`,\ntransparent — for a midnight or light-grey canvas). Defaults to `brand` when an\n`account` or `bigTitle` is given, else `white`. `default` is a deprecated alias of `white`."
     },
     {
       "name": "title",
       "type": "ReactNode",
       "required": false,
-      "description": "Middle: page name (used when there's no logo/account/big-title)."
+      "description": "Middle: page name, centred title/sm (Figma `.topbar-page-name`). Ignored when `logo` is set."
     },
     {
       "name": "trailing",
       "type": "ReactNode",
       "required": false,
-      "description": "Right-part: a link or button after the icon buttons."
+      "description": "Right column: a link or button after the controls."
     },
     {
       "name": "variant",
-      "type": "enum",
+      "type": "'default' | 'brand' | 'midnight' | 'none' | 'white'",
       "required": false,
       "description": "@deprecated Use `surface`."
     }
@@ -1438,32 +2078,93 @@
       "name": "label",
       "type": "ReactNode",
       "required": true,
-      "description": ""
+      "description": "Title, title/xs."
+    },
+    {
+      "name": "action",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Under the subtitle — a tertiary md `Button` (Figma `.content button`)."
+    },
+    {
+      "name": "badge",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Trailing badge under the value (Figma `badges-offers` md)."
     },
     {
       "name": "chevron",
       "type": "boolean",
       "required": false,
       "default": "true",
-      "description": ""
+      "description": "Trailing chevron-right. Default on."
+    },
+    {
+      "name": "hint",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Trailing second line, body/md subtle."
     },
     {
       "name": "icon",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "Leading glyph, shown in the 40px icon tile (Figma `.logo type=icon`)."
+    },
+    {
+      "name": "inverse",
+      "type": "boolean",
+      "required": false,
+      "description": "Figma `.list-item-scheme inverse` — white ink for dark or glass surroundings."
+    },
+    {
+      "name": "logo",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Leading brand logo / art, 40px on surface/base/default (Figma `.logo type=logo`)."
+    },
+    {
+      "name": "onTooltipClick",
+      "type": "(() => void)",
+      "required": false,
+      "description": "Makes the tooltip glyph a button. Ignored when the row itself has `onClick`."
+    },
+    {
+      "name": "padding",
+      "type": "boolean",
+      "required": false,
+      "description": "Figma `.list-item-padding`. Defaults to `true` for info, `false` for price."
     },
     {
       "name": "sublabel",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "Subtitle, body/md subtle."
+    },
+    {
+      "name": "surface",
+      "type": "'default' | 'glass' | 'midnight-base' | 'midnight-raised' | 'subtle' | 'sunken' | 'white-transparent' | 'midnight-transparent'",
+      "required": false,
+      "description": "Card surface (padded rows only). Light: default·subtle·sunken·glass. Inverse:\nglass·midnight-base·midnight-raised·midnight-transparent·white-transparent.\nDefaults to `default`, or `glass` when `inverse`."
+    },
+    {
+      "name": "tooltip",
+      "type": "boolean",
+      "required": false,
+      "description": "Info glyph after the title (Figma `tooltip`)."
+    },
+    {
+      "name": "type",
+      "type": "'info' | 'price'",
+      "required": false,
+      "default": "info",
+      "description": "Figma `type`. `info` (default) = padded card on a surface; `price` = flat line item."
     },
     {
       "name": "value",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "Trailing first line, title/xs (e.g. \"AED 20.00\")."
     }
   ],
   "NavBar": [
@@ -1475,7 +2176,7 @@
     },
     {
       "name": "scrollDirection",
-      "type": "enum",
+      "type": "'up' | 'down'",
       "required": false,
       "default": "up",
       "description": "Figma `.navbar-scroll` axis. `down` collapses to icons only (scrolled down);\n`up` (default) shows icon + label. Transitions are animated."
@@ -1486,13 +2187,19 @@
       "name": "action",
       "type": "ReactNode",
       "required": false,
-      "description": "Trailing action — typically a `<Button>`. Only one trailing action; do not combine with `chevron`."
+      "description": "Trailing action — typically a `<Button>`. Only one trailing trigger; do not combine with `chevron` or `switcher`."
     },
     {
       "name": "chevron",
       "type": "boolean",
       "required": false,
       "description": "Show a trailing chevron instead of a button — the whole bar becomes the tap target."
+    },
+    {
+      "name": "colorScheme",
+      "type": "'default' | 'inverse'",
+      "required": false,
+      "description": "Figma `color-scheme`: the ink. Defaults from `surface` — `inverse` for the dark/glass\nsurfaces, else `default`. Set `default` with `surface=\"glass\"` for the light-family glass."
     },
     {
       "name": "icon",
@@ -1504,13 +2211,13 @@
       "name": "inverse",
       "type": "boolean",
       "required": false,
-      "description": "@deprecated Use `surface=\"glass\"`. Kept as a back-compat alias for the inverse scheme."
+      "description": "@deprecated Use `colorScheme=\"inverse\"` (or `surface=\"glass\"`)."
     },
     {
       "name": "stack",
       "type": "boolean",
       "required": false,
-      "description": "Multiple-stack — layered \"stacked cards\" look. Inverse/dark surfaces only (Figma)."
+      "description": "Multiple-stack — layered \"stacked cards\" look. Inverse scheme only (Figma `type=multiple`)."
     },
     {
       "name": "subtitle",
@@ -1520,9 +2227,15 @@
     },
     {
       "name": "surface",
-      "type": "enum",
+      "type": "'default' | 'glass' | 'midnight-base' | 'midnight-raised' | 'subtle' | 'sunken' | 'white-transparent' | 'midnight-transparent'",
       "required": false,
-      "description": "Backing surface. Light family: `default`·`subtle`·`sunken`·`white-transparent`;\ndark family: `glass`·`midnight-base`·`midnight-raised`·`midnight-transparent`."
+      "description": "Backing surface. Light family: `default`·`subtle`·`sunken`·`glass`; inverse family:\n`glass`·`white-transparent`·`midnight-base`·`midnight-raised`·`midnight-transparent`."
+    },
+    {
+      "name": "switcher",
+      "type": "boolean | SwitcherProps",
+      "required": false,
+      "description": "Trailing switcher (Figma `trigger=switcher`). `true`, or the `Switcher` props."
     },
     {
       "name": "title",
@@ -1564,9 +2277,25 @@
       "type": "number",
       "required": false,
       "default": "2",
-      "description": ""
+      "description": "Grid columns (Figma `grid` is 2-up)."
+    },
+    {
+      "name": "layout",
+      "type": "'grid' | 'carousel'",
+      "required": false,
+      "default": "grid",
+      "description": "Figma `grid` (default) or `carousel` (horizontal scroll, 147px cells)."
+    },
+    {
+      "name": "rows",
+      "type": "number",
+      "required": false,
+      "default": "1",
+      "description": "Carousel rows (Figma `rows`)."
     }
   ],
+  "QUICK_ACTION_PRESETS": [],
+  "Scrim": [],
   "Tooltip": [
     {
       "name": "content",
@@ -1578,24 +2307,44 @@
       "name": "action",
       "type": "ReactNode",
       "required": false,
-      "description": "Rich only — action row (`.tooltip-icon-button` / a Button)."
+      "description": "Rich only — the action block's button."
+    },
+    {
+      "name": "caret",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "description": "Figma `show-caret`. Default true."
+    },
+    {
+      "name": "caretAlign",
+      "type": "'end' | 'start' | 'center'",
+      "required": false,
+      "default": "center",
+      "description": ""
     },
     {
       "name": "media",
       "type": "ReactNode",
       "required": false,
-      "description": "Rich only — `.tooltip-media-image`."
+      "description": "Rich only — `.tooltip-media-image`, clipped to border-radius/7."
+    },
+    {
+      "name": "onClose",
+      "type": "(() => void)",
+      "required": false,
+      "description": "Rich only — shows the `.tooltip-icon-button` close at the top end."
     },
     {
       "name": "placement",
-      "type": "enum",
+      "type": "'left' | 'top' | 'bottom' | 'right'",
       "required": false,
       "default": "top",
       "description": ""
     },
     {
       "name": "size",
-      "type": "enum",
+      "type": "'simple' | 'standard' | 'rich'",
       "required": false,
       "default": "standard",
       "description": ""
@@ -1608,7 +2357,7 @@
     },
     {
       "name": "surface",
-      "type": "enum",
+      "type": "'default' | 'dark'",
       "required": false,
       "default": "default",
       "description": ""
@@ -1629,11 +2378,23 @@
   ],
   "BottomSheet": [
     {
+      "name": "closeButton",
+      "type": "boolean",
+      "required": false,
+      "description": "Figma `close-button`. Default: shown whenever `onDismiss` is set."
+    },
+    {
+      "name": "description",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Figma `text-secondary` — body/md under the title."
+    },
+    {
       "name": "display",
-      "type": "enum",
+      "type": "'light' | 'dark'",
       "required": false,
       "default": "light",
-      "description": "Figma `Display` axis — the sheet surface."
+      "description": "@deprecated V1.2 has no Display axis; the sheet is always light."
     },
     {
       "name": "footer",
@@ -1645,8 +2406,13 @@
       "name": "grabber",
       "type": "boolean",
       "required": false,
-      "default": "true",
-      "description": "Figma `Grabber` boolean."
+      "description": "Figma `grabber` boolean. Default: on, except for `system-message`."
+    },
+    {
+      "name": "icon",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Figma `icon` — a 40px logo tile above the title (pass an image or an icon)."
     },
     {
       "name": "onDismiss",
@@ -1662,10 +2428,16 @@
       "description": ""
     },
     {
+      "name": "pills",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Figma `pills` — a row of `Chip`s under the title."
+    },
+    {
       "name": "subheader",
       "type": "ReactNode",
       "required": false,
-      "description": "Figma Subheader 27928:11034 — search / filters under the title."
+      "description": "@deprecated V1.1 Subheader. Use `pills`; still rendered under the title."
     },
     {
       "name": "title",
@@ -1674,10 +2446,17 @@
       "description": ""
     },
     {
+      "name": "type",
+      "type": "'basic' | 'detailed' | 'system-message'",
+      "required": false,
+      "default": "detailed",
+      "description": "Figma `type`. `system-message` drops the grabber by default. Default `detailed`."
+    },
+    {
       "name": "visual",
       "type": "ReactNode",
       "required": false,
-      "description": "Figma Visual asset 29355:9189 — media strip above the header."
+      "description": "Figma `visual-asset` — media above the header, framed with a 4px inset and r16."
     }
   ],
   "Text": [
@@ -1704,8 +2483,21 @@
   ],
   "IconBox": [
     {
+      "name": "category",
+      "type": "'2d' | 'logo'",
+      "required": false,
+      "default": "2d",
+      "description": "Figma `category`: `2d` insets the glyph; `logo` clips artwork to the full box."
+    },
+    {
+      "name": "icon",
+      "type": "\"security\" | (string & {}) | \"search\" | \"send\" | \"grid\" | \"link\" | \"menu\" | \"navigation\" | \"timer\" | \"location\" | \"copy\" | \"move\" | \"package\" | \"image\" | \"placeholder\" | \"file\" | ... 381 more ...",
+      "required": false,
+      "description": "Icon-set glyph to draw at the Figma size for this box. Ignored when children are given."
+    },
+    {
       "name": "size",
-      "type": "string",
+      "type": "(string & {}) | IconBoxSize",
       "required": false,
       "default": "md",
       "description": ""
@@ -1713,24 +2505,54 @@
   ],
   "Badge": [
     {
+      "name": "chevron",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Figma `.badges-core` `chevron`: a trailing chevron after the label. Every published\nbadge ships with it off."
+    },
+    {
       "name": "offer",
-      "type": "enum",
+      "type": "'discount' | 'new-card' | 'new-plan' | 'mega-deals' | 'green-friday' | 'limited-stock' | 'validity' | 'limited-time' | 'best-seller' | 'online-exclusive' | 'exclusive-for-emirati' | 'sold-out'",
       "required": false,
       "description": ""
     },
     {
       "name": "size",
-      "type": "enum",
+      "type": "'lg' | 'md' | 'sm'",
       "required": false,
       "default": "md",
       "description": ""
     },
     {
       "name": "status",
-      "type": "enum",
+      "type": "'brand' | 'disabled' | 'warning' | 'positive' | 'danger' | 'neutral' | 'neutral-inverse'",
       "required": false,
       "default": "neutral",
       "description": ""
+    }
+  ],
+  "StatusIndicator": [
+    {
+      "name": "dot",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "description": "Figma `circle` — the leading dot."
+    },
+    {
+      "name": "status",
+      "type": "'warning' | 'positive' | 'danger' | 'neutral'",
+      "required": false,
+      "default": "positive",
+      "description": ""
+    },
+    {
+      "name": "type",
+      "type": "'glass' | 'basic' | 'pill' | 'glass-dark'",
+      "required": false,
+      "default": "basic",
+      "description": "Figma `type`. `glass-dark` is Figma's `Glass-dark`."
     }
   ],
   "SmilesAvatar": [
@@ -1782,7 +2604,7 @@
   "ProgressBar": [
     {
       "name": "tone",
-      "type": "enum",
+      "type": "'warning' | 'positive' | 'danger' | 'accent'",
       "required": false,
       "description": "Optional fill override; omit for the Figma V1.1 default (text.positive.subtle green)."
     },
@@ -1823,6 +2645,13 @@
       "required": false,
       "default": "Add",
       "description": ""
+    },
+    {
+      "name": "surface",
+      "type": "'default' | 'inverse'",
+      "required": false,
+      "default": "default",
+      "description": "Figma `surface`: `inverse` for dark surfaces."
     }
   ],
   "Dismiss": [
@@ -1834,14 +2663,37 @@
     },
     {
       "name": "size",
-      "type": "enum",
+      "type": "'md' | 'sm'",
       "required": false,
       "default": "md",
-      "description": ""
+      "description": "md = 24 (icon-size xl), sm = 20 (icon-size lg) — Figma `small`."
     },
     {
       "name": "surface",
-      "type": "enum",
+      "type": "'default' | 'inverse'",
+      "required": false,
+      "default": "default",
+      "description": ""
+    }
+  ],
+  "MoreItems": [
+    {
+      "name": "count",
+      "type": "string | number",
+      "required": false,
+      "default": "4",
+      "description": "Figma `x-more-integer`."
+    },
+    {
+      "name": "size",
+      "type": "string | number",
+      "required": false,
+      "default": "icon('xl')",
+      "description": "Circle diameter in px or any CSS length; default icon/xl (24)."
+    },
+    {
+      "name": "surface",
+      "type": "'default' | 'inverse'",
       "required": false,
       "default": "default",
       "description": ""
@@ -1849,25 +2701,52 @@
   ],
   "LogoRow": [
     {
+      "name": "glass",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Figma `style=glass`: each logo sits on a glass tile."
+    },
+    {
       "name": "logos",
       "type": "ReactNode[]",
       "required": false,
       "default": "[]",
-      "description": ""
+      "description": "Logo artwork: elements sized to fill their circle, or image URLs."
+    },
+    {
+      "name": "more",
+      "type": "string | number",
+      "required": false,
+      "description": "Figma `+x-more`: append a \"+N\" `more-items` circle."
+    },
+    {
+      "name": "moreSurface",
+      "type": "'default' | 'inverse'",
+      "required": false,
+      "default": "inverse",
+      "description": "The `more-items` surface; every Figma logo-row uses `inverse`."
+    },
+    {
+      "name": "size",
+      "type": "'lg' | 'md' | 'sm'",
+      "required": false,
+      "default": "md",
+      "description": "Figma `size`. Defaults to md (32px), the size this component rendered before V1.2."
     }
   ],
   "AtomSurface": [
     {
       "name": "level",
-      "type": "enum",
+      "type": "'raised' | 'sunken' | 'base' | 'canvas'",
       "required": false,
       "description": "@deprecated V1.0 elevation axis with no Figma counterpart; use `surfaceColor`.\nRetained so existing call sites keep their current fill."
     },
     {
       "name": "surfaceColor",
-      "type": "enum",
+      "type": "'default' | 'brand' | 'midnight-base' | 'midnight-raised' | 'glass-midnight' | 'glass-white' | 'subtle' | 'sunken'",
       "required": false,
-      "description": "Figma `surface-color` axis — all seven values across both surface atoms."
+      "description": "Figma `surface-color` axis — the seven shared-atom values plus `brand`."
     }
   ],
   "CardBgColor": [
@@ -1879,7 +2758,7 @@
     },
     {
       "name": "tint",
-      "type": "enum",
+      "type": "'default' | 'red' | 'orange' | 'yellow' | 'green' | 'cyan' | 'blue' | 'violet'",
       "required": false,
       "default": "default",
       "description": "Figma `color` axis."
@@ -1887,16 +2766,35 @@
   ],
   "SectionLinkButton": [
     {
+      "name": "action",
+      "type": "'close' | 'forward' | 'backwards'",
+      "required": false,
+      "default": "forward",
+      "description": "Figma `.section-link-action` type."
+    },
+    {
       "name": "disabled",
       "type": "boolean",
       "required": false,
       "description": ""
     },
     {
+      "name": "glass",
+      "type": "boolean",
+      "required": false,
+      "description": "Figma `glass`."
+    },
+    {
       "name": "icon",
       "type": "ReactNode",
       "required": false,
-      "description": "Glyph to show; Figma's default is a right chevron."
+      "description": "Custom glyph; overrides `action`."
+    },
+    {
+      "name": "inverse",
+      "type": "boolean",
+      "required": false,
+      "description": "Figma `inverse`."
     },
     {
       "name": "onClick",
@@ -1906,10 +2804,9 @@
     },
     {
       "name": "surface",
-      "type": "enum",
+      "type": "'default' | 'inverse'",
       "required": false,
-      "default": "default",
-      "description": ""
+      "description": "@deprecated V1.1 axis. `default` = solid default; `inverse` = glass + inverse (what it\nrendered). Use `glass` / `inverse`."
     }
   ],
   "Logo": [
@@ -1920,18 +2817,31 @@
       "description": "Overrides the version's ink. Pass `currentColor` to inherit from CSS instead."
     },
     {
+      "name": "rtl",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Arabic lockup / wordmark. Logomark and bilingual are direction-free."
+    },
+    {
       "name": "size",
       "type": "string | number",
       "required": false,
       "default": "32",
-      "description": "Rendered size in px; the artwork is a square."
+      "description": "Rendered size in px; the symbol is a square."
+    },
+    {
+      "name": "type",
+      "type": "'lockup' | 'logomark' | 'wordmark' | 'bilingual'",
+      "required": false,
+      "description": "A `.etisalat-logo-variations` artwork. Omit for the `etisalat-logo` symbol."
     },
     {
       "name": "version",
-      "type": "enum",
+      "type": "'default' | 'midnight' | 'red' | 'white'",
       "required": false,
       "default": "default",
-      "description": ""
+      "description": "Figma color-scheme. `midnight` is deprecated (removed in V1.2)."
     }
   ],
   "CARD_BG_TINTS": [],
@@ -1946,45 +2856,72 @@
       "name": "leadingIcon",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "Leading icon. The slot is 24 / 20 / 16 (lg / md / sm) with 2px inset, so pass an\n`<Icon size>` of 20 / 16 / 12."
     },
     {
       "name": "loading",
       "type": "boolean",
       "required": false,
-      "description": "Show a spinner in the leading-icon slot and suppress clicks (Figma `Loader <-> Icon=on`).\nKeeps the default palette — loading is not the disabled state."
+      "description": "Show a spinner in the leading-icon slot and suppress clicks (Figma `.button-icon loader=true`).\nKeeps the default palette — loading is not the disabled state."
+    },
+    {
+      "name": "scheme",
+      "type": "'default' | 'inverse' | 'midnight'",
+      "required": false,
+      "description": "Colour scheme (Figma V1.2 `scheme`). Takes precedence over `surface` and `tone`.\nSecondary follows the published symbol, whose bindings are crossed relative to the\nother types: `scheme=\"inverse\"` is the dark (midnight) outline and `scheme=\"midnight\"`\nis the white outline. Logged as a design question."
     },
     {
       "name": "size",
-      "type": "enum",
+      "type": "'lg' | 'md' | 'sm'",
       "required": false,
       "default": "md",
       "description": ""
     },
     {
       "name": "surface",
-      "type": "enum",
+      "type": "'brand' | 'midnight' | 'white' | 'inverse-brand'",
       "required": false,
-      "description": "Surface axis per Figma V1.1. Takes precedence over `tone` when both are set."
+      "description": "@deprecated Use `scheme`. Kept as a back-compat alias; `scheme` wins when both are set."
     },
     {
       "name": "tone",
-      "type": "enum",
+      "type": "'inverse' | 'brand'",
       "required": false,
-      "description": "@deprecated Use `surface` instead. Kept as a back-compat alias."
+      "description": "@deprecated Use `scheme`. Kept as a back-compat alias."
     },
     {
       "name": "trailingIcon",
       "type": "ReactNode",
       "required": false,
-      "description": ""
+      "description": "Trailing icon — same slot sizes as `leadingIcon`."
     },
     {
       "name": "variant",
-      "type": "enum",
+      "type": "'link' | 'glass' | 'primary' | 'secondary' | 'tertiary'",
       "required": false,
       "default": "primary",
       "description": ""
+    }
+  ],
+  "UaePassButton": [
+    {
+      "name": "block",
+      "type": "boolean",
+      "required": false,
+      "description": "Stretch to fill the container width."
+    },
+    {
+      "name": "children",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Label override. Defaults to the Figma copy for `variant`."
+    },
+    {
+      "name": "variant",
+      "type": "'login' | 'continue' | 'rtl'",
+      "required": false,
+      "default": "login",
+      "description": "Figma `type`: `login` \"Login with UAE PASS\" · `continue` \"Continue with UAE PASS\" ·\n`rtl` the Arabic login label, laid out right-to-left (logo after the text)."
     }
   ]
 }

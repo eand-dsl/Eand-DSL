@@ -1,0 +1,70 @@
+---
+title: ConsentCheckbox
+description: A checkbox whose label is a consent sentence with inline links to the terms and policies.
+---
+
+<ComponentDemo id="consentcheckbox" />
+
+## When to use
+
+- **Use** when a person must accept terms before going on, typically in the `terms` slot of the
+  [CTA Bar](./ctabar) or an [ActionBlock](./actionblock).
+- **Don't use** for ordinary options or preferences; that is [Checkbox](./checkbox), or
+  [Switcher](./switcher) for a setting that applies at once.
+
+## Anatomy
+
+The label is one wrapping sentence: `prefix` · first link · `conjunction` · second link ·
+`suffix`, for example "Agree to the Terms and Privacy Policy before proceeding". Two links are
+joined by `conjunction` (default "and").
+
+- A link with `href` renders as an anchor; without it, as a button that calls `onClick`.
+- Selecting a link follows it without toggling the box. Selecting the rest of the sentence toggles
+  the box.
+- `disabled` disables the box and its links together.
+
+The box is always the md (20px) checkbox. Besides its own props, `ConsentCheckbox` accepts the
+props of [Checkbox](./checkbox) — `checked`, `defaultChecked`, `onChange`, `disabled` and
+`inverse` — and passes them through.
+
+```tsx
+import { useState } from 'react';
+import { ConsentCheckbox } from '@eand/react-design-system';
+
+function Terms() {
+  const [agreed, setAgreed] = useState(false);
+  return (
+    <ConsentCheckbox
+      checked={agreed}
+      onChange={(e) => setAgreed(e.currentTarget.checked)}
+      prefix="Agree to the"
+      links={[
+        { label: 'Terms', href: '/terms' },
+        { label: 'Privacy Policy', href: '/privacy' },
+      ]}
+      suffix="before proceeding"
+    />
+  );
+}
+```
+
+<Callout type="info">
+  `CheckboxLine` from the CTA bar is a deprecated alias of this component. It renders
+  `ConsentCheckbox`, with `label` mapped to `prefix` and `description` to `suffix`. Use
+  `ConsentCheckbox` in new screens.
+</Callout>
+
+## Props
+
+<PropsTable name="ConsentCheckbox" />
+
+## Design
+
+Figma source: [checkbox-variants — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=33489-12153)
+
+- A md checkbox, then the sentence 8px away (`spacing/sm`), in `body/md`.
+- Copy: `text/default/default`, or `text/default/disabled` when disabled. Inverse:
+  `text/default/inverse-subtle` and `text/default/inverse-disabled`.
+- Links follow `button type=link size=md`: `body/md`, 2px inline padding (`spacing/2xs`), no
+  underline, in `button/link/text/brand/*` or, inverse, `button/link/text/inverse/*`.
+- The core `.checkbox-core-variants-core` has an RTL mirror; the flex row follows `dir`.

@@ -1,9 +1,38 @@
 ---
 title: PlanCard
-description: "Plans-mini card: eyebrow, name, smiles, price."
+description: The plans card — an overline, the plan name, partner logos, a Discount badge and the price.
 ---
 
 <ComponentDemo id="plancard" />
+
+## When to use
+
+- **Use** to compare plans in a carousel, in a [Section](./section) of size `lg`.
+- **Don't use** for products, devices or add-ons (use [ProductCard](./productcard)), or for
+  deals with a like count (use [DealCard](./dealcard)).
+
+## Anatomy
+
+- **Header** — `category`, the overline, in `body/md` subtle; `name` in bold 20px, up to two
+  lines; then the logo row of 32px partner logos with a +N bubble. Pass `logos` and `moreLogos`,
+  or leave `smiles` on for placeholders.
+- **Footer** — bottom-aligned: the `lg` Discount badge (`discount={true}` labels it
+  "Discount"), the "from" line (`from`), then `price` and `period`.
+
+`category` and `period` accept `null` to hide them.
+
+`colorScheme="default"` is the white card; `colorScheme="inverse"` is the midnight card with
+white ink. Both use the same red Discount badge.
+
+```tsx
+<PlanCard name="Entertainment plans" category="Postpaid" price="AED 1250" period="/mo" discount="20% off" />
+<PlanCard colorScheme="inverse" name="Data plans" discount={false} from={false} price="AED 300" />
+```
+
+<Callout type="warn" title="Deprecated">
+  `variant` is now `colorScheme`: `midnight` becomes `inverse`. `brand` has no Figma
+  counterpart.
+</Callout>
 
 ## Props
 
@@ -11,4 +40,11 @@ description: "Plans-mini card: eyebrow, name, smiles, price."
 
 ## Design
 
-Figma source: [PlanCard — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25915-74211)
+Figma source: [plans-portable — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=26003-40647)
+
+- 222 × 300 (`section/body/height/row-4`) at a 16px radius (`border-radius/6`), padding 16
+  (`spacing/lg`), on `surface/base/inverse` or `surface/base/midnight`.
+- Header and footer gaps are 4 (`spacing/xs`); the logo row has 8px above it (`spacing/sm`).
+- The name applies the `heading/md` text style: 20px at 110%. The price is `title/md`.
+- Inverse ink binds `text/default/inverse` and `text/default/inverse-subtle`. The +N bubble is
+  `surface/glass/white/md` on the inverse card and `surface/glass/midnight/lg` on the default one.

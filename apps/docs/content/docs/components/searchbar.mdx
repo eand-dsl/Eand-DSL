@@ -1,9 +1,23 @@
 ---
 title: Searchbar
-description: Grey search field with a magnifier and voice-search mic.
+description: Rounded search field with a leading search glyph and a voice-search mic. Its Figma page is not yet final.
 ---
 
+<Callout title="Not final in Figma">
+  The Searchbar page in Figma DSL V1.2 is marked Not Finalized and has no published symbol.
+  The component follows the page's example frames where they are settled. The stroke and the
+  typing and typed states will follow once the page is final.
+</Callout>
+
 <ComponentDemo id="searchbar" />
+
+## When to use
+
+- **Use** above a searchable list, or as an add-on below the [TopBar](./topbar) title.
+- **Use** [AISearch](./aisearch) for the “Ask e&” assistant entry point.
+- **Don't use** for form fields — that is the [Input](./input).
+
+`Searchbar` accepts every native input prop, plus `onMic` for the voice-search button.
 
 ## Props
 
@@ -11,4 +25,11 @@ description: Grey search field with a magnifier and voice-search mic.
 
 ## Design
 
-Figma source: [Searchbar — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=28114-62397)
+Figma source: [Standard search — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=28114-62804)
+
+- 52px tall, `spacing/lg` (16) inline padding, `border-radius/6` (16), fill
+  `surface/base/default`.
+- 20px search and mic glyphs in 20px boxes; the mic is `text/brand/default`.
+- Placeholder and value are `body/md`.
+- Not yet built: the 1px stroke (bound to a remote foundation variable with no DSL token),
+  the 16px gaps, and the typing and typed states.

@@ -5,33 +5,61 @@ description: Filled block showing what is left of a plan allowance.
 
 <ComponentDemo id="planusagebar" />
 
-A 48px rounded row where a coloured block shows how much of the allowance is **left**.
-The amount reads inside the block; the category label sits in the track opposite. Stack
-them with a 4px gap for a plan breakdown.
+## When to use
+
+- **Use** to show the balance of one allowance — data, minutes, roaming — in a plan breakdown.
+  Stack bars with a 4px gap, one per allowance.
+- **Don't use** for progress through a task or flow (use [ProgressBar](./progressbar) or
+  [Stepper](./stepper)), or for a loyalty tier (use [SmilesBalance](./smilesbalance)).
+
+## Anatomy
+
+A 48px rounded row where a coloured block shows how much of the allowance is **left**. The
+amount reads inside the block; the category `label` sits in the track at the opposite end.
+
+- **Value** — the amount, the `unit` and "left", with an optional `note` underneath, such as
+  "Expires in 3 days".
+- **Label** — the category, end-aligned.
+
+`remaining` is what the block measures, not consumption. Pass `total` so the fill has something
+to be a share of; with `total={0}` there is no allowance and nothing is drawn.
+
+`status` is explicit rather than derived: `default` fills green, `low-data` orange. The point at
+which an allowance counts as low is a product rule that differs for data, minutes and roaming,
+so the bar does not guess it.
+
+## Text on the fill
+
+Where the block sits under the text, the text switches to its `filled` state: white, and for
+the value a Medium weight. The bar measures this itself, separately for the value and the
+label: each flips once the fill covers it completely. Pin either one with `valueState` or
+`labelState` when you need a fixed result, for example in a static mock-up.
+
+<Callout type="warn" title="Deprecated">
+  `used` still works and is converted to `remaining` as `total - used`. Pass `remaining`.
+</Callout>
 
 ## Props
 
 <PropsTable name="PlanUsageBar" />
 
-`remaining` is what the block measures — not consumption. Pass `total` so the fill has
-something to be a share of; with `total={0}` there is no allowance and nothing is drawn.
-
-`status` is explicit rather than derived. The point at which an allowance counts as "low"
-is a product rule and differs for data, minutes and roaming, so the bar does not guess it.
-
-`used` still works as a deprecated alias — it is converted to `remaining` as
-`total - used`.
-
 ## Design
 
-Figma source: [.plan-usage-bar — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=28927-23669)
+Figma source: [.plan-usage-bar — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=28927-23669) ·
+[states](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=33838-4470)
 
-Colours come from the `Progress status` axis
-([28927:22814](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=28927-22814)):
-`Default` is green `#54bc72`, `low data` is orange `#ff9f52`. Two discrete states, not a
-gradient.
+- Track: 48px tall, 12px radius (`border-radius/4`), on `surface/canvas/inverse`, with 16px
+  side padding (`spacing/lg`).
+- Fill: the `Progress status` axis
+  ([28927:22814](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=28927-22814)),
+  green #54bc72 or orange #ff9f52. Two discrete states, not a gradient.
+- Value: `title/xs` in `text/default/default`; filled, `button/md` in `text/default/inverse`.
+  The amount, unit and "left" are spaced by 2px (`spacing/2xs`). Note: `body/sm` at 130%.
+- Label: `button/md`, in `text/default/default` or, filled, `text/default/inverse`.
 
-The bar is one part of the Figma **Plan usage** block
-([29222:13753](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=29222-13753)),
-which composes a `Chip` filter row, a stack of these bars, and an `ActionBar` prompting a
-top-up. Assemble that from the parts — it is a screen pattern, not a single component.
+The bar is one part of the Figma **plan-usage** card
+([38351:53904](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=38351-53904)).
+That card is a screen pattern, not a component; assemble it from the parts: a row of outline
+[Chips](./chip) (40px, 4px apart) and the stacked bars (4px apart) in a 20px-radius card on
+`surface/canvas/default` with 12px padding and an 8px gap, followed after 4px by a 72px
+[ActionBar](./actionbar) prompting a top-up.

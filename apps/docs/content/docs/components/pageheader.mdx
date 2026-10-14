@@ -16,7 +16,7 @@ description: Opens a content page — icon, a two-line muted/strong title, a sub
 ## Anatomy
 
 - **Icon** — a 56px slot, typically a 3D illustration. Do not resize it.
-- **Title** — `heading/lg`, up to two lines. Each line pairs a *muted* word with a *strong* word:
+- **Title** — bold 28px at 120%, up to two lines. Each line pairs a *muted* word with a *strong* word:
   `{ muted: 'Discover', strong: 'Thermostats.' }`.
 - **Subtitle** — `body/md`, centred. Optional but recommended.
 - **Tabs** — 48px pills in a row that scrolls sideways. Exactly one is always selected.
@@ -33,6 +33,8 @@ token flips to its inverse. The tab pills follow the header — don't restyle th
 Figma source: [page-header — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=37390-28734)
 
 - Card padding 24 × 16 (`spacing/2xl`, `spacing/lg`); content gap 12 (`spacing/md`); title-to-subtitle 4.
+- The title binds the `typography/heading/lg` variables (28px, 120%, tight tracking), not the
+  24px `heading/lg` text style that `Section` applies.
 - Default surface is `surface/base/inverse` (white) at `border-radius/7` (20px); inverse is
   `surface/glass/white/lg` at `border-radius/8` (24px), as the published symbol has them.
 - In RTL the title words, subtitle and tab row mirror automatically.

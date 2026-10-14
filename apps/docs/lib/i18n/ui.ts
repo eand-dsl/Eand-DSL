@@ -10,13 +10,13 @@ export const ui = {
     siteTitle: 'Design System',
     heroTitle: 'The e& Design System',
     heroBody:
-      'A React component library built to the Figma e& Consumer App DSL V1.1 — every token resolved from the same variable export that generates the SwiftUI and Compose tokens, so values never drift between platforms.',
-    heroBodyEmphasis: 'e& Consumer App DSL V1.1',
+      'A React component library built to the Figma e& Consumer App DSL V1.2 — every token resolved from the same variable export that generates the SwiftUI and Compose tokens, so values never drift between platforms.',
+    heroBodyEmphasis: 'e& Consumer App DSL V1.2',
     ctaDocs: 'Read the docs',
     ctaComponents: 'Browse components',
     cards: {
       started: { title: 'Get started', body: 'Install the package and assemble your first e& screen.' },
-      components: { title: 'Components', body: '45 documented components with live, knob-driven demos and prop tables.' },
+      components: { title: 'Components', body: '57 documented components with live, knob-driven demos and prop tables.' },
       foundations: { title: 'Foundations', body: 'Colour, typography, and spacing — resolved from the Figma variable export.' },
       icons: { title: 'Icons', body: '198 icons in outline and filled forms, searchable by name, description, or alias.' },
     },
@@ -34,13 +34,13 @@ export const ui = {
     siteTitle: 'نظام التصميم',
     heroTitle: 'نظام التصميم من ⁦e&⁩',
     heroBody:
-      'مكتبة مكوّنات React مبنية وفق نظام التصميم في Figma الخاص بتطبيق ⁦e&⁩ للأفراد، الإصدار 1.1 — تُستمد كل الرموز التصميمية من ملف المتغيّرات نفسه الذي يولّد رموز SwiftUI وCompose، فلا تتباين القيم بين المنصّات.',
-    heroBodyEmphasis: 'نظام تصميم تطبيق ⁦e&⁩ للأفراد 1.1',
+      'مكتبة مكوّنات React مبنية وفق نظام التصميم في Figma الخاص بتطبيق ⁦e&⁩ للأفراد، الإصدار 1.2 — تُستمد كل الرموز التصميمية من ملف المتغيّرات نفسه الذي يولّد رموز SwiftUI وCompose، فلا تتباين القيم بين المنصّات.',
+    heroBodyEmphasis: 'نظام تصميم تطبيق ⁦e&⁩ للأفراد 1.2',
     ctaDocs: 'اطّلع على التوثيق',
     ctaComponents: 'استعرض المكوّنات',
     cards: {
       started: { title: 'ابدأ الآن', body: 'ثبّت الحزمة وابنِ أول شاشة لك من ⁦e&⁩.' },
-      components: { title: 'المكوّنات', body: '45 مكوّنًا موثّقًا مع عروض تفاعلية مباشرة وجداول للخصائص.' },
+      components: { title: 'المكوّنات', body: '57 مكوّنًا موثّقًا مع عروض تفاعلية مباشرة وجداول للخصائص.' },
       foundations: { title: 'الأساسيات', body: 'الألوان والطباعة والمسافات — مستمدّة من ملف متغيّرات Figma.' },
       icons: { title: 'الأيقونات', body: '198 أيقونة بنمطي الإطار والتعبئة، قابلة للبحث بالاسم أو الوصف أو الاسم البديل.' },
     },

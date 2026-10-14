@@ -1,9 +1,54 @@
 ---
 title: ListRow
-description: "White rounded row: label ↔ value, optional icon and chevron."
+description: A single data row — a title and subtitle set against a value, price or badge, on a card or as a flat line item.
 ---
 
 <ComponentDemo id="listrow" />
+
+## When to use
+
+- **Use** to present one piece of data: a balance, an add-on and its price, a line on a bill,
+  a setting's current value. Inside a [Section](./section), rows stack 4px apart.
+- **Don't use** as a tap target. Figma defines the list item as a data row and points tappable
+  rows to [ActionBar](./actionbar). Not for section headings (use [Section](./section)).
+
+<Callout title="A div, not a button">
+  `ListRow` renders a `<div>`. Passing `onClick` still renders a `<button>` so existing screens
+  keep working, but new tappable rows should use `ActionBar`.
+</Callout>
+
+## Anatomy
+
+- **Leading** (optional) — `icon` in a 40px tile on `surface/glass/midnight/sm`, or `logo`
+  full-bleed in a 40px tile on `surface/base/default`. Both tiles have a 12px radius.
+- **Content** — `label` in `title/xs`; `tooltip` adds an info glyph after it (`onTooltipClick`
+  makes the glyph a button); `sublabel` in `body/md`, subtle; `action` below, typically a
+  tertiary `md` [Button](./button).
+- **Trailing** — end-aligned: `value` in `title/xs`, `hint` in `body/md` subtle, and `badge`.
+  Then `chevron` (on by default), a 16px `chevron-right`. Set `chevron={false}` for pure data.
+
+## Choosing a type
+
+| `type` | Layout | Use for |
+| --- | --- | --- |
+| `info` (default) | Padded card, 16px all round, on a `surface` | Standalone data rows |
+| `price` | Flat, 16px bottom padding, no surface | Line items in a price summary |
+
+`padding` overrides the type's default.
+
+Pass `inverse` on dark or glass backgrounds: the title and value turn white, the subtitle and
+hint inverse-subtle, and the icon tile `surface/glass/white/sm`. The `surface` options follow
+the scheme:
+
+- **Light** — `default` (`surface/raised/default`), `subtle` (`surface/base/default`), `sunken`
+  (`surface/sunken/default`), `glass`.
+- **Inverse** — `glass` (the default when `inverse` is set), `midnight-base`,
+  `midnight-raised`, `midnight-transparent`, `white-transparent`.
+
+```tsx
+<ListRow type="price" label="Data add-on" sublabel="10 GB, 30 days" value="AED 49.00" chevron={false} />
+<ListRow inverse surface="midnight-raised" label="Balance" tooltip value="AED 120.50" hint="Due 12 Oct" />
+```
 
 ## Props
 
@@ -11,4 +56,13 @@ description: "White rounded row: label ↔ value, optional icon and chevron."
 
 ## Design
 
-Figma source: [ListRow — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=26760-100129)
+Figma source: [list-item — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=34677-66964)
+
+- Padded rows: 16px padding (`spacing/lg`) at a 20px radius (`border-radius/7`).
+- Gaps: 12 between leading, content and trailing (`spacing/md`); 8 between the tile and the
+  text (`spacing/sm`); 2 inside the content and trailing blocks (`spacing/2xs`).
+- Leading tile 40px (`scale/40`) at `border-radius/4`, holding a 32px icon box; it stays
+  top-aligned when the content runs to several lines.
+- Title and value `title/xs` (14px); subtitle and hint `body/md` (14px) in
+  `text/default/subtle`.
+- The chevron sits in a 20px box, 4px after the value block, vertically centred.

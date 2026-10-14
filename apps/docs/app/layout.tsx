@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: { default: appName, template: `%s — ${appName}` },
   description:
-    'React component library for the e& Consumer App, built to the Figma e& Consumer App DSL V1.1.',
+    'React component library for the e& Consumer App, built to the Figma e& Consumer App DSL V1.2.',
 };
 
 export default function Layout({ children }: LayoutProps<'/'>) {

@@ -1,0 +1,67 @@
+---
+title: ActionBlock
+description: The content of a CTA bar — status ribbon, price line, consent checkbox and actions — without its surface.
+---
+
+<ComponentDemo id="actionblock" />
+
+## When to use
+
+- **Use** when you need the closing actions of a flow step on a surface you already provide. For
+  the standard sticky footer, use the [CTA Bar](./ctabar) (`CtaFooter`): it renders an
+  `ActionBlock` on its white surface with a shadow and the home indicator.
+- **Don't use** for actions inside page content; use a [Button](./button) or a `ButtonGroup`
+  there.
+
+## Anatomy
+
+The slots stack top to bottom, as in Figma. Only `actions` is required.
+
+1. **`ribbon`** — a full-width `StatusRibbon`.
+2. **`price`** — the fields of a [PriceLine](./priceline): `{ label, value, actionLabel?, onAction?, actionIcon? }`.
+3. **`terms`** — a [ConsentCheckbox](./consentcheckbox). Its state stays with you.
+4. **`actions`** — a `ButtonGroup` or a block `Button`. With **`payment`** (a `PaymentRow`), the
+   payment summary and the actions sit side by side, half the width each.
+
+<Callout type="warn">
+  `ActionBlock` has no bottom padding. In the CTA Bar the 34px home indicator supplies it; on your
+  own surface, add the bottom spacing yourself.
+</Callout>
+
+```tsx
+import { useState } from 'react';
+import { ActionBlock, Button, ButtonGroup, ConsentCheckbox } from '@eand/react-design-system';
+
+function CheckoutActions() {
+  const [agreed, setAgreed] = useState(false);
+  return (
+    <ActionBlock
+      price={{ label: 'Total', value: 'AED 125.00' }}
+      terms={
+        <ConsentCheckbox
+          checked={agreed}
+          onChange={(e) => setAgreed(e.currentTarget.checked)}
+          prefix="Agree to the"
+          links={[{ label: 'Terms & Conditions', href: '/terms' }]}
+        />
+      }
+      actions={<ButtonGroup primary={<Button size="lg" block disabled={!agreed}>Pay now</Button>} />}
+    />
+  );
+}
+```
+
+## Props
+
+<PropsTable name="ActionBlock" />
+
+## Design
+
+Figma source: [.action-block — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=31617-1499)
+
+- Order: status ribbon, price line, checkbox line, actions.
+- Checkbox line: padding 16/20/0 (`spacing/lg`, `spacing/xl`).
+- Actions without payment: padding 20/20/0 (`spacing/xl`), the padding of `.button-group-vertical`.
+- Actions with payment: padding 16/20/0, gap 2 (`spacing/2xs`); the payment row and the button take
+  half each.
+- Every row is a flex row with symmetric or logical padding, so the block mirrors in RTL.

@@ -1,9 +1,32 @@
 ---
 title: AtomSurface
-description: The raw rounded surface primitive, tinted by elevation.
+description: The shared surface atom — eight Figma surface colours at a 20px radius, from white and sunken grey to midnight, glass and brand red.
 ---
 
 <ComponentDemo id="atomsurface" />
+
+## When to use
+
+- **Use** as the background of a custom block that must sit on the system's surfaces, when no
+  higher-level component fits.
+- **Don't use** where a component already owns its surface: [Card](./card),
+  [Section](./section), [ListRow](./listrow) and the other cards bring their own.
+
+## Choosing a surface
+
+| `surfaceColor` | Token |
+| --- | --- |
+| `default` | `surface/base/inverse` |
+| `subtle` | `surface/base/default` |
+| `sunken` | `surface/sunken/default` |
+| `midnight-base` | `surface/base/midnight` |
+| `midnight-raised` | `surface/raised/midnight` |
+| `glass-midnight` | `surface/glass/midnight/md` |
+| `glass-white` | `surface/glass/white/lg`, with a backdrop blur |
+| `brand` | `surface/base/brand` |
+
+The values are Figma's variant labels, which do not match its own token names: `default`
+binds `surface/base/inverse`. `level` is the deprecated V1.0 axis; use `surfaceColor`.
 
 ## Props
 
@@ -11,4 +34,12 @@ description: The raw rounded surface primitive, tinted by elevation.
 
 ## Design
 
-Figma source: [AtomSurface — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=26729-91998)
+Figma source: [.default-surface — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=26770-100166) ·
+[.inverse-surface](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=26770-100161)
+
+- Radius `border-radius/7` (20); content is clipped.
+- `glass-white` carries a backdrop blur from `effects/glass/lg/frost`, the glass effect bound
+  in Figma.
+- `brand` comes from the Plans page copy of the atom; the shared atom has no brand value.
+- The page-local copies of this atom disagree with the shared one; the code follows the
+  shared atom.
