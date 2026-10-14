@@ -477,6 +477,60 @@ test('Chip check shows a check mark only while selected', () => {
   expect(container.querySelector('[aria-label="check"]')).toBeInTheDocument();
 });
 
+/* Chip vs Figma V1.2 `chips` 31539:8725 + `.chips-core-status` 31543:14084 + `.chips.marker`
+   31543:14010: min-width scale/72 (was none), height tabs/height/md 40, padding start 8 / end 12
+   with the 16px marker and a 4px marker→label gap, 12/12 without one (was 12/12 always). The
+   marker glyph is 12 in a 16 icon-size (was 16). Selected outline/inverse have no stroke (was a
+   1px ring in the selected colour). selected=true atom = removable chip: 12 start, label, 4,
+   dismiss small (20), 8 end. */
+
+test('Chip is min-width 72 and 40 tall', () => {
+  render(<Chip>C</Chip>);
+  const chip = screen.getByRole('button');
+  expect(chip.style.minWidth).toBe('72px');
+  expect(chip.style.height).toBe('40px');
+});
+
+test('Chip padding is 12/12 without a marker and 8 start / 12 end with one', () => {
+  const { rerender } = render(<Chip>C</Chip>);
+  expect(screen.getByRole('button').style.paddingInlineStart).toBe('12px');
+  expect(screen.getByRole('button').style.paddingInlineEnd).toBe('12px');
+  rerender(<Chip leadingIcon="★">C</Chip>);
+  expect(screen.getByRole('button').style.paddingInlineStart).toBe('8px');
+  expect(screen.getByRole('button').style.paddingInlineEnd).toBe('12px');
+  expect(screen.getByRole('button').style.gap).toBe('4px');
+});
+
+test('Chip check marker is a 12px glyph in the 16px icon-size', () => {
+  const { container } = render(<Chip check selected>C</Chip>);
+  const icon = container.querySelector('[aria-label="check"]') as HTMLElement;
+  expect(icon.querySelector('svg')!.getAttribute('width')).toBe('12');
+  expect((icon.parentElement as HTMLElement).style.width).toBe('16px');
+});
+
+test.each(['outline', 'inverse'] as const)('Chip type=%s selected has no stroke', (type) => {
+  render(<Chip type={type} selected>C</Chip>);
+  expect(screen.getByRole('button').style.border).toBe('1px solid transparent');
+});
+
+test('Chip onDismiss renders the removable chip: label button + 20px dismiss, 12 start / 8 end', async () => {
+  const click = vi.fn();
+  const dismiss = vi.fn();
+  render(<Chip onClick={click} onDismiss={dismiss}>5G</Chip>);
+  const label = screen.getByRole('button', { name: '5G' });
+  const remove = screen.getByRole('button', { name: 'Remove 5G' });
+  expect(remove.style.width).toBe('20px');
+  const pill = label.parentElement!;
+  expect(pill.style.paddingInlineStart).toBe('12px');
+  expect(pill.style.paddingInlineEnd).toBe('8px');
+  expect(pill.style.minWidth).toBe('72px');
+  await userEvent.click(remove);
+  expect(dismiss).toHaveBeenCalledTimes(1);
+  expect(click).not.toHaveBeenCalled();
+  await userEvent.click(label);
+  expect(click).toHaveBeenCalledTimes(1);
+});
+
 test('Chip loading shows a spinner and suppresses clicks', async () => {
   const fn = vi.fn();
   const { container } = render(<Chip loading onClick={fn}>C</Chip>);

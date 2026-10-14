@@ -183,10 +183,14 @@ export function OtpInput({ length = 4, value, defaultValue = '', onValueChange, 
 }
 
 /* ---------------- Chip ----------------
-   Figma V1.1 chips (page 28171:29640, set 31539:8725): type = outline | filled |
-   glass | inverse × state default/focus/disabled. 40px pill, 1px border (outline
-   & inverse), 16px leading icon; content `type=check` swaps in a check mark when
-   selected; `Loader <-> IconBox=on` swaps it for a spinner. */
+   Figma V1.2 `chips` 31539:8725 (page 28171:29640, status "In review"): type = outline |
+   filled | glass | inverse × state default/selected/disabled. 40px pill (tabs/height/md),
+   min-width scale/72, 1px stroke on outline/inverse default and disabled only — selected is
+   fill only. Content `.chips-core-status` 31543:14084: with the marker, padding start 8
+   (spacing/sm) · 16px `.chips.marker` (12px glyph in an icon/md box) · 4 (spacing/xs) · label
+   (body/md) · end 12 (spacing/md); `selected=true` there is the removable chip — start 12 ·
+   label · 4 · `dismiss` small (20) · end 8. V1.2 has no loader (the V1.1 `Loader <-> IconBox`
+   is gone); `loading` is kept for existing screens and deprecated. */
 export type ChipType = 'outline' | 'filled' | 'glass' | 'inverse';
 // V1.2 renamed the chip state `focus` -> `selected` (color/chips/default/*/selected).
 type ChipState = 'default' | 'selected' | 'disabled';
@@ -196,30 +200,32 @@ type ChipState = 'default' | 'selected' | 'disabled';
 // renamed the `default` type to `outline`, which is why the old `chips.default.default.*`
 // paths stopped resolving once the export was refreshed.
 const GLASS_BLUR = { backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' } as const;
+// A transparent 1px border where Figma has no stroke keeps every state the same size.
+const NO_STROKE = '1px solid transparent';
 const CHIP_STYLE: Record<ChipType, Record<ChipState, CSSProperties>> = {
   outline: {
     default:  { background: 'transparent', color: color('chips.default.outline.text.default'), border: `1px solid ${color('chips.default.outline.border.default')}` },
-    selected: { background: color('chips.default.outline.surface.selected'), color: color('chips.default.outline.text.selected'), border: `1px solid ${color('chips.default.outline.border.selected')}` },
+    selected: { background: color('chips.default.outline.surface.selected'), color: color('chips.default.outline.text.selected'), border: NO_STROKE },
     disabled: { background: 'transparent', color: color('chips.default.outline.text.disabled'), border: `1px solid ${color('chips.default.outline.border.disabled')}` },
   },
   filled: {
-    default:  { background: color('chips.default.filled.surface.default'), color: color('chips.default.filled.text.default'), border: '1px solid transparent' },
-    selected: { background: color('chips.default.filled.surface.selected'), color: color('chips.default.filled.text.selected'), border: '1px solid transparent' },
+    default:  { background: color('chips.default.filled.surface.default'), color: color('chips.default.filled.text.default'), border: NO_STROKE },
+    selected: { background: color('chips.default.filled.surface.selected'), color: color('chips.default.filled.text.selected'), border: NO_STROKE },
     // V1.2 fixed the old `sisabled` typo in the Figma variable name.
-    disabled: { background: color('chips.default.filled.surface.disabled'), color: color('chips.default.filled.text.disabled'), border: '1px solid transparent' },
+    disabled: { background: color('chips.default.filled.surface.disabled'), color: color('chips.default.filled.text.disabled'), border: NO_STROKE },
   },
   glass: {
-    default:  { background: color('chips.default.glass.surface.default'), color: color('chips.default.glass.text.default'), border: '1px solid transparent', ...GLASS_BLUR },
-    selected: { background: color('chips.default.glass.surface.selected'), color: color('chips.default.glass.text.selected'), border: '1px solid transparent', ...GLASS_BLUR },
-    disabled: { background: color('chips.default.glass.surface.disabled'), color: color('chips.default.glass.text.disabled'), border: '1px solid transparent', ...GLASS_BLUR },
+    default:  { background: color('chips.default.glass.surface.default'), color: color('chips.default.glass.text.default'), border: NO_STROKE, ...GLASS_BLUR },
+    selected: { background: color('chips.default.glass.surface.selected'), color: color('chips.default.glass.text.selected'), border: NO_STROKE, ...GLASS_BLUR },
+    disabled: { background: color('chips.default.glass.surface.disabled'), color: color('chips.default.glass.text.disabled'), border: NO_STROKE, ...GLASS_BLUR },
   },
   inverse: {
     default:  { background: 'transparent', color: color('chips.default.inverse.text.default'), border: `1px solid ${color('chips.default.inverse.border.default')}` },
-    selected: { background: color('chips.default.inverse.surface.selected'), color: color('chips.default.inverse.text.selected'), border: `1px solid ${color('chips.default.inverse.border.selected')}` },
+    selected: { background: color('chips.default.inverse.surface.selected'), color: color('chips.default.inverse.text.selected'), border: NO_STROKE },
     disabled: { background: 'transparent', color: color('chips.default.inverse.text.disabled'), border: `1px solid ${color('chips.default.inverse.border.disabled')}` },
   },
 };
-/** 16px self-contained spinner for the chip loading state. */
+/** 16px self-contained spinner for the deprecated chip loading state. */
 function ChipSpinner() {
   return (
     <svg width={16} height={16} viewBox="0 0 24 24" fill="none" style={{ display: 'block' }} aria-hidden>
@@ -233,32 +239,60 @@ function ChipSpinner() {
 export interface ChipProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onClick'> {
   /** Figma `type` axis. */
   type?: ChipType;
-  /** Figma state=focus (the pressed/active chip). */
+  /** Figma state=selected (the pressed/active chip). */
   selected?: boolean;
   disabled?: boolean;
   /** @deprecated Alias for `type="inverse"`. */
   inverse?: boolean;
+  /** Leading marker (Figma `.chips.marker type=custom-icon`): a 16px box — pass a 12px glyph. */
   leadingIcon?: ReactNode;
-  /** Show a check mark as the leading icon while selected (Figma content `type=check`). */
+  /** Show a check mark as the leading marker while selected (Figma marker `type=check`). */
   check?: boolean;
-  /** Spinner replaces the leading icon (Figma `Loader <-> IconBox=on`); clicks suppressed. */
+  /** @deprecated V1.2 chips have no loader. Still renders a spinner in the marker slot and
+   *  suppresses clicks. */
   loading?: boolean;
+  /** Makes the chip removable (Figma `.chips-core-status selected=true`): a trailing 20px
+   *  dismiss that calls this. The label stays a separate button for `onClick`. */
+  onDismiss?: () => void;
+  /** Accessible name for the dismiss button. Defaults to "Remove <label>". */
+  dismissLabel?: string;
   onClick?: () => void;
 }
-export function Chip({ type, selected, disabled, inverse, leadingIcon, check, loading, style, children, onClick, ...rest }: ChipProps) {
+export function Chip({ type, selected, disabled, inverse, leadingIcon, check, loading, onDismiss, dismissLabel, style, children, onClick, ...rest }: ChipProps) {
   const t: ChipType = type ?? (inverse ? 'inverse' : 'outline');
   const state: ChipState = disabled ? 'disabled' : selected ? 'selected' : 'default';
   const lead = loading ? <ChipSpinner />
-    : check && selected ? <Icon name="check" size={16} />
+    : check && selected ? <Icon name="check" size={12} />
     : leadingIcon;
+  const removable = onDismiss != null;
+  const pill: CSSProperties = {
+    display: 'inline-flex', alignItems: 'center', gap: space('xs'), boxSizing: 'border-box',
+    height: T.tabs.height.md, minWidth: scale('72'), paddingBlock: 0,
+    paddingInlineStart: lead != null ? space('sm') : space('md'),
+    paddingInlineEnd: removable ? space('sm') : space('md'),
+    borderRadius: PILL, whiteSpace: 'nowrap',
+    ...CHIP_STYLE[t][state], ...ty('body.md'),
+  };
+  const marker = lead != null ? <IconBox size="md">{lead}</IconBox> : null;
+  if (removable) {
+    const name = dismissLabel ?? (typeof children === 'string' ? `Remove ${children}` : 'Remove');
+    return (
+      <span style={{ ...pill, ...style }}>
+        <button type="button" onClick={loading ? undefined : onClick} aria-pressed={selected} disabled={disabled} aria-busy={loading || undefined}
+          {...rest}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: space('xs'), padding: 0, margin: 0, border: 0, background: 'transparent',
+            color: 'inherit', font: 'inherit', letterSpacing: 'inherit', cursor: disabled ? 'not-allowed' : loading ? 'progress' : 'pointer' }}>
+          {marker}{children}
+        </button>
+        <Dismiss size="sm" aria-label={name} aria-disabled={disabled || undefined} onClick={disabled ? undefined : onDismiss}
+          style={disabled ? { cursor: 'not-allowed' } : undefined} />
+      </span>
+    );
+  }
   return (
-    <button onClick={loading ? undefined : onClick} aria-pressed={selected} disabled={disabled} aria-busy={loading || undefined}
-      style={{
-        display: 'inline-flex', alignItems: 'center', gap: space('xs'), height: 40, padding: `0 ${space('md')}`,
-        borderRadius: PILL, cursor: disabled ? 'not-allowed' : loading ? 'progress' : 'pointer', whiteSpace: 'nowrap',
-        ...CHIP_STYLE[t][state], ...ty('body.md'), ...style,
-      }} {...rest}>
-      {lead != null ? <IconBox size="md">{lead}</IconBox> : null}{children}
+    <button type="button" onClick={loading ? undefined : onClick} aria-pressed={selected} disabled={disabled} aria-busy={loading || undefined}
+      style={{ ...pill, cursor: disabled ? 'not-allowed' : loading ? 'progress' : 'pointer', ...style }} {...rest}>
+      {marker}{children}
     </button>
   );
 }
