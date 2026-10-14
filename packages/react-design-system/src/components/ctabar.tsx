@@ -93,7 +93,9 @@ export function ButtonGroup({ orientation = 'vertical', primary, secondary, tert
           {secondary != null ? <div style={stretch}>{secondary}</div> : null}
         </>
       )}
-      {tertiary != null ? <div style={{ display: 'flex', justifyContent: 'center' }}>{tertiary}</div> : null}
+      {/* Figma's tertiary row is full width with spacing/sm above and below (37px for a 21px
+          label) — it matters now that Button tertiary hugs its text. */}
+      {tertiary != null ? <div style={{ display: 'flex', justifyContent: 'center', paddingBlock: space('sm') }}>{tertiary}</div> : null}
     </div>
   );
 }

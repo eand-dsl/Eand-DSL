@@ -351,3 +351,15 @@ test('CtaFooter price accepts the V1.2 action and renders it as a PriceLine', ()
   expect(screen.getByRole('button', { name: 'Details' })).toBeInTheDocument();
   expect(screen.getByText('AED 5').style.fontSize).toBe('14px');
 });
+
+/* Button tertiary now hugs its 21px label (V1.2 25394:85067), so the group's own row
+   padding matters: in `button-group` 31617:958 / 31617:1293 the tertiary instance is a
+   full-width row with spacing/sm (8px) above and below — 37px tall, not a bare 21px. */
+test('ButtonGroup gives the tertiary row 8px block padding (spacing/sm)', () => {
+  const { getByText } = render(
+    <ButtonGroup primary={<Button>P</Button>} tertiary={<Button variant="tertiary">T</Button>} />,
+  );
+  const row = getByText('T').closest('button')!.parentElement as HTMLElement;
+  expect(row.style.paddingBlock).toBe('8px');
+  expect(row.style.justifyContent).toBe('center');
+});
