@@ -70,7 +70,7 @@ export function Section({
   const slotHeight = size ? SECTION_SIZE[size] : undefined;
 
   return (
-    <section style={{ width: '100%', boxSizing: 'border-box', background: s.bg, borderRadius: radius('7'), overflow: 'hidden', ...style }} {...rest}>
+    <section style={{ width: '100%', boxSizing: 'border-box', background: s.bg, borderRadius: radius('8'), overflow: 'hidden', ...style }} {...rest}>
       {showHeader && (
         <header style={{ display: 'flex', alignItems: 'flex-start', gap: space('sm'), padding: `${space('2xl')} ${space('lg')} 0` }}>
           <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
@@ -93,7 +93,7 @@ export function Section({
       )}
       {/* body slot: 16px padding, `size` reserves the row height; gradient overlays it */}
       <div style={{ position: 'relative', padding: space('lg') }}>
-        {gradient ? <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(20,15,33,0) 35%, rgba(20,15,33,0.78))', pointerEvents: 'none', borderRadius: radius('7') }} /> : null}
+        {gradient ? <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(20,15,33,0) 35%, rgba(20,15,33,0.78))', pointerEvents: 'none', borderRadius: radius('8') }} /> : null}
         <div style={{
           position: 'relative', minHeight: slotHeight,
           ...(carousel
@@ -131,7 +131,7 @@ export function Card({ media, title, body, action, width, surface = 'default', s
       background: onDark ? color('surface.raised.midnight') : color('surface.raised.default'),
       color: onDark ? color('text.default.inverse') : undefined,
       // Figma General-card (28463:12391): radius border-radius/6 = 20 (was 16).
-      borderRadius: radius('6'), overflow: 'hidden',
+      borderRadius: radius('7'), overflow: 'hidden',
       display: 'flex', flexDirection: 'column', ...style,
     }} {...rest}>
       {media ? <div style={{ width: '100%' }}>{media}</div> : null}

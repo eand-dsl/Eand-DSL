@@ -66,12 +66,29 @@ function typeOf(leaf: Leaf, seen = new Set<string>()): string | undefined {
   return leaf.$type;
 }
 
+/** Like typeOf, but reports `LINE_HEIGHT` for anything that is — or aliases — a token
+ *  scoped to line height. V1.2 binds these as FLOAT, so $type alone cannot tell a
+ *  140% line height from a 140px length. */
+function kindOf(leaf: Leaf & { $scopes?: string[] }, seen = new Set<string>()): string | undefined {
+  if (leaf.$scopes?.includes('LINE_HEIGHT')) return 'LINE_HEIGHT';
+  const v = leaf.$value;
+  if (typeof v === 'string' && v.startsWith('$.')) {
+    const ref = v.slice(2).split('.').slice(2).join('.');
+    if (!seen.has(ref)) {
+      seen.add(ref);
+      const t = lookup(tree, ref);
+      if (t && kindOf(t, seen) === 'LINE_HEIGHT') return 'LINE_HEIGHT';
+    }
+  }
+  return typeOf(leaf);
+}
+
 const cssLines: string[] = [];
 const skipped: string[] = [];
 const walkCss = (node: any, path: string[]) => {
   if (isLeaf(node)) {
     const name = path.map((s) => s.replace(/[^a-zA-Z0-9]+/g, '-')).join('-'); // valid custom-property name
-    let val = toCssValue(resolveVal(tree, node), typeOf(node));
+    let val = toCssValue(resolveVal(tree, node), kindOf(node));
     if (val === null) { skipped.push(name); return; }
     // quote font-family names (they contain spaces/apostrophes -> invalid CSS unquoted)
     if (typeof val === 'string' && path.some((p) => p.includes('family'))) val = `"${val}"`;
@@ -81,7 +98,7 @@ const walkCss = (node: any, path: string[]) => {
   for (const [k, v] of Object.entries(node)) walkCss(v, [...path, k]);
 };
 const walkTs = (node: any): any => {
-  if (isLeaf(node)) return toTsValue(resolveVal(tree, node), typeOf(node));
+  if (isLeaf(node)) return toTsValue(resolveVal(tree, node), kindOf(node));
   const out: any = {};
   for (const [k, v] of Object.entries(node)) out[camel(k)] = walkTs(v);
   return out;

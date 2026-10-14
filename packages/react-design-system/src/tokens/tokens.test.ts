@@ -7,7 +7,7 @@ test('semantic colors resolve to concrete values', () => {
 
 test('scales carry px units', () => {
   expect(tokens.spacing.lg).toBe('16px');
-  expect(tokens.borderRadius['5']).toBe('16px');
+  expect(tokens.borderRadius['6']).toBe('16px');
 });
 
 test('typography resolves with px size and numeric weight', () => {

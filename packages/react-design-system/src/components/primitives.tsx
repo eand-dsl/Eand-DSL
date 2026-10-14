@@ -59,7 +59,7 @@ export function Badge({ offer, status = 'neutral', size = 'md', style, children,
       style={{
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: space('2xs'),
         boxSizing: 'border-box', height, minWidth,
-        padding: `${padY} ${padX}`, borderRadius: radius('2'),
+        padding: `${padY} ${padX}`, borderRadius: radius('3'),
         background: color(`badge.surface.${key}`), color: color(`badge.text.${key}`),
         ...ty(`badge.${size}`), whiteSpace: 'nowrap', ...style,
       }}
@@ -120,8 +120,8 @@ export function ProgressBar({ value = 50, tone, style, ...rest }: ProgressBarPro
 // Figma vars color/stepper/{scheme}/{state}. Hardcoded while the variables.json export
 // predated the stepper group; bound now, to the same four values.
 const STEPPER = {
-  default: { inactive: color('stepper.default.default'), active: color('stepper.default.active') },
-  inverse: { inactive: color('stepper.inverse.default'), active: color('stepper.inverse.active') },
+  default: { inactive: color('stepper.default.default'), active: color('stepper.default.selected') },
+  inverse: { inactive: color('stepper.inverse.default'), active: color('stepper.inverse.selected') },
 } as const;
 export interface StepperProps extends HTMLAttributes<HTMLDivElement> {
   /** Total segments — Figma defines 2–8. */
@@ -160,7 +160,7 @@ export function AddTrigger({ label = 'Add', style, onClick, ...rest }: AddTrigge
     <button onClick={onClick}
       style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: space('sm'),
         width: '100%', height: scale('72'), boxSizing: 'border-box', padding: `${space('lg')} 20px`,
-        borderRadius: radius('5'), border: 0, background: color('surface.glass.midnight.sm'),
+        borderRadius: radius('6'), border: 0, background: color('surface.glass.midnight.sm'),
         color: color('text.default.default'), cursor: 'pointer', overflow: 'hidden', ...ty('button.lg'), ...style }} {...rest}>
       <Icon name="add-filled" size={24} color={color('text.brand.default')} />{label}
     </button>
@@ -247,7 +247,7 @@ export function AtomSurface({ surfaceColor, level, style, children, ...rest }: A
     ? color(SURFACE_COLOR[surfaceColor])
     : color(`surface.${level ?? 'base'}.default`);
   return (
-    <div style={{ background: bg, borderRadius: radius('5'), ...style }} {...rest}>
+    <div style={{ background: bg, borderRadius: radius('6'), ...style }} {...rest}>
       {children}
     </div>
   );
@@ -295,7 +295,7 @@ export function CardBgColor({ tint = 'default', fixedSize, style, children, ...r
   return (
     <div
       style={{
-        background: cardBgTint(tint), borderRadius: radius('5'), boxSizing: 'border-box',
+        background: cardBgTint(tint), borderRadius: radius('6'), boxSizing: 'border-box',
         width: fixedSize ? T.card?.width?.lg : undefined,
         height: fixedSize ? T.card?.height?.lg : undefined,
         ...style,
@@ -329,7 +329,7 @@ export function SectionLinkButton({ surface = 'default', icon, disabled, style, 
     <button type="button" aria-label="See all" disabled={disabled}
       style={{
         width: 40, height: 40, flex: 'none', padding: `0 ${space('md')}`, border: 0,
-        borderRadius: radius('4'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+        borderRadius: radius('5'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
         background: onDark ? color('surface.glass.white.lg') : color('surface.raised.default'),
         backdropFilter: onDark ? 'blur(20px)' : undefined, WebkitBackdropFilter: onDark ? 'blur(20px)' : undefined,
         color: onDark ? color('text.default.inverse-subtle') : color('text.default.subtle'),

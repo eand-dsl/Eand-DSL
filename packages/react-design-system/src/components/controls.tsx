@@ -44,10 +44,10 @@ export function Input({
   const stateKey = disabled ? 'disabled' : 'default';
   const borderColor = disabled ? color('inputField.border.disabled')
     : error ? color('inputField.border.error')
-    : focused ? color('inputField.border.active')
+    : focused ? color('inputField.border.focus')
     : color('inputField.border.default');
   const labelColor = color(`inputField.text.${scheme}.label.${stateKey}`);
-  const valueColor = color(`inputField.text.${scheme}.value.${disabled ? 'disabled' : 'active'}`);
+  const valueColor = color(`inputField.text.${scheme}.value.${disabled ? 'disabled' : 'default'}`);
   const readOnly = type === 'dropdown' || type === 'picker';
   // typed loosely: 'input' and 'textarea' props diverge (rows vs type)
   const FieldTag = (type === 'comment' ? 'textarea' : 'input') as any;
@@ -57,7 +57,7 @@ export function Input({
         onClick={() => inputRef.current?.focus()}
         style={{
           display: 'flex', alignItems: 'center', gap: space('sm'), minHeight: T.scale?.['56'] ?? 56,
-          padding: `0 ${space('md')}`, borderRadius: radius('5'), boxSizing: 'border-box',
+          padding: `0 ${space('md')}`, borderRadius: radius('6'), boxSizing: 'border-box',
           background: color(`inputField.surface.${scheme}.${stateKey}`),
           border: `${T.border?.md ?? '1.5px'} solid ${borderColor}`,
           cursor: disabled ? 'not-allowed' : readOnly ? 'pointer' : 'text',
@@ -159,15 +159,15 @@ export function OtpInput({ length = 4, value, defaultValue = '', onValueChange, 
           const active = focused && !disabled && i === activeIndex;
           const borderColor = disabled ? color('inputField.border.disabled')
             : error ? color('inputField.border.error')
-            : active ? color('inputField.border.active')
+            : active ? color('inputField.border.focus')
             : color('inputField.border.default');
           return (
             <span key={i} aria-hidden style={{
               width: T.scale?.['48'] ?? 48, height: T.scale?.['56'] ?? 56, boxSizing: 'border-box',
-              borderRadius: radius('5'), background: color(`inputField.surface.${scheme}.${stateKey}`),
+              borderRadius: radius('6'), background: color(`inputField.surface.${scheme}.${stateKey}`),
               border: `${T.border?.md ?? '1.5px'} solid ${borderColor}`,
               display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-              color: color(`inputField.text.${scheme}.value.${disabled ? 'disabled' : 'active'}`), ...ty('body.lg'),
+              color: color(`inputField.text.${scheme}.value.${disabled ? 'disabled' : 'default'}`), ...ty('body.lg'),
             }}>{ch ? (masked ? '•' : ch) : ''}</span>
           );
         })}
@@ -188,7 +188,8 @@ export function OtpInput({ length = 4, value, defaultValue = '', onValueChange, 
    & inverse), 16px leading icon; content `type=check` swaps in a check mark when
    selected; `Loader <-> IconBox=on` swaps it for a spinner. */
 export type ChipType = 'outline' | 'filled' | 'glass' | 'inverse';
-type ChipState = 'default' | 'focus' | 'disabled';
+// V1.2 renamed the chip state `focus` -> `selected` (color/chips/default/*/selected).
+type ChipState = 'default' | 'selected' | 'disabled';
 // All four types read from `color/chips/default/*`. The filled and glass values used to be
 // hardcoded hex "from live Figma, absent from the generated tokens.ts" — they were absent
 // because the token export was six weeks stale, not because Figma lacked them. Figma also
@@ -198,25 +199,23 @@ const GLASS_BLUR = { backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(2
 const CHIP_STYLE: Record<ChipType, Record<ChipState, CSSProperties>> = {
   outline: {
     default:  { background: 'transparent', color: color('chips.default.outline.text.default'), border: `1px solid ${color('chips.default.outline.border.default')}` },
-    focus:    { background: color('chips.default.outline.surface.focus'), color: color('chips.default.outline.text.focus'), border: `1px solid ${color('chips.default.outline.border.focus')}` },
+    selected: { background: color('chips.default.outline.surface.selected'), color: color('chips.default.outline.text.selected'), border: `1px solid ${color('chips.default.outline.border.selected')}` },
     disabled: { background: 'transparent', color: color('chips.default.outline.text.disabled'), border: `1px solid ${color('chips.default.outline.border.disabled')}` },
   },
   filled: {
     default:  { background: color('chips.default.filled.surface.default'), color: color('chips.default.filled.text.default'), border: '1px solid transparent' },
-    focus:    { background: color('chips.default.filled.surface.focus'), color: color('chips.default.filled.text.focus'), border: '1px solid transparent' },
-    // `sisabled` is a typo in the Figma variable name itself
-    // (color/chips/default/filled/surface/sisabled). Mirrored deliberately — "correcting" it
-    // here would simply stop resolving on the next export.
-    disabled: { background: color('chips.default.filled.surface.sisabled'), color: color('chips.default.filled.text.disabled'), border: '1px solid transparent' },
+    selected: { background: color('chips.default.filled.surface.selected'), color: color('chips.default.filled.text.selected'), border: '1px solid transparent' },
+    // V1.2 fixed the old `sisabled` typo in the Figma variable name.
+    disabled: { background: color('chips.default.filled.surface.disabled'), color: color('chips.default.filled.text.disabled'), border: '1px solid transparent' },
   },
   glass: {
     default:  { background: color('chips.default.glass.surface.default'), color: color('chips.default.glass.text.default'), border: '1px solid transparent', ...GLASS_BLUR },
-    focus:    { background: color('chips.default.glass.surface.focus'), color: color('chips.default.glass.text.focus'), border: '1px solid transparent', ...GLASS_BLUR },
+    selected: { background: color('chips.default.glass.surface.selected'), color: color('chips.default.glass.text.selected'), border: '1px solid transparent', ...GLASS_BLUR },
     disabled: { background: color('chips.default.glass.surface.disabled'), color: color('chips.default.glass.text.disabled'), border: '1px solid transparent', ...GLASS_BLUR },
   },
   inverse: {
     default:  { background: 'transparent', color: color('chips.default.inverse.text.default'), border: `1px solid ${color('chips.default.inverse.border.default')}` },
-    focus:    { background: color('chips.default.inverse.surface.focus'), color: color('chips.default.inverse.text.focus'), border: `1px solid ${color('chips.default.inverse.border.focus')}` },
+    selected: { background: color('chips.default.inverse.surface.selected'), color: color('chips.default.inverse.text.selected'), border: `1px solid ${color('chips.default.inverse.border.selected')}` },
     disabled: { background: 'transparent', color: color('chips.default.inverse.text.disabled'), border: `1px solid ${color('chips.default.inverse.border.disabled')}` },
   },
 };
@@ -248,7 +247,7 @@ export interface ChipProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onCl
 }
 export function Chip({ type, selected, disabled, inverse, leadingIcon, check, loading, style, children, onClick, ...rest }: ChipProps) {
   const t: ChipType = type ?? (inverse ? 'inverse' : 'outline');
-  const state: ChipState = disabled ? 'disabled' : selected ? 'focus' : 'default';
+  const state: ChipState = disabled ? 'disabled' : selected ? 'selected' : 'default';
   const lead = loading ? <ChipSpinner />
     : check && selected ? <Icon name="check" size={16} />
     : leadingIcon;
@@ -275,9 +274,9 @@ export interface FilterPillProps extends Omit<HTMLAttributes<HTMLButtonElement>,
 }
 export function FilterPill({ selected, inverse, disabled, style, children, onClick, ...rest }: FilterPillProps) {
   const scheme = inverse ? 'inverse' : 'default';
-  const state = disabled ? 'disabled' : selected ? 'focus' : 'default';
+  const state = disabled ? 'disabled' : selected ? 'selected' : 'default';
   const background = selected && !disabled
-    ? color(inverse ? 'filterPill.surface.inverse.focus' : 'surface.base.default')
+    ? color(inverse ? 'filterPill.surface.inverse.selected' : 'surface.base.default')
     : inverse ? 'transparent' : color('surface.canvas.default');
   return (
     <button onClick={onClick} aria-pressed={selected} disabled={disabled}
@@ -312,7 +311,7 @@ export function Checkbox({ label, checked, defaultChecked, disabled, onChange, s
   // Two schemes — `default` (light surfaces) and `inverse` (brand/midnight surfaces) —
   // each across on/off × enabled/disabled. Disabled is a distinct muted fill, not opacity.
   const scheme = inverse
-    ? { boxOn: 'surface.base.inverse', boxOnDisabled: 'border.interactive.inverse.disabled', tickOn: 'text.brand.default', tickOnDisabled: 'text.default.inverseMuted', borderOff: 'border.interactive.inverse.focus', borderOffDisabled: 'border.interactive.inverse.disabled' }
+    ? { boxOn: 'surface.base.inverse', boxOnDisabled: 'border.interactive.inverse.disabled', tickOn: 'text.brand.default', tickOnDisabled: 'text.default.inverseMuted', borderOff: 'border.interactive.inverse.pressed', borderOffDisabled: 'border.interactive.inverse.disabled' }
     : { boxOn: 'surface.base.brand', boxOnDisabled: 'border.surfaceBased.base.default', tickOn: 'text.default.inverse', tickOnDisabled: 'text.default.muted', borderOff: 'text.default.muted', borderOffDisabled: 'border.surfaceBased.base.default' };
   const box: CSSProperties = on
     ? { border: `${T.border.md} solid transparent`, background: color(disabled ? scheme.boxOnDisabled : scheme.boxOn) }
@@ -352,7 +351,7 @@ export function Radio({ label, checked, defaultChecked, disabled, onChange, size
   const on = checked ?? internal;
   const dim = size === 'sm' ? T.radio.sm : T.radio.md; // Figma lg 24×24 maps to token radio.md
   const ring = on
-    ? color(inverse ? 'border.interactive.inverse.focus' : 'border.interactive.accent.default')
+    ? color(inverse ? 'border.interactive.inverse.pressed' : 'border.interactive.accent.default')
     : color(inverse ? 'border.interactive.inverse.default' : 'border.interactive.default.default');
   return (
     <label style={{ display: 'inline-flex', alignItems: 'center', gap: space('sm'), cursor: disabled ? 'not-allowed' : 'pointer', opacity: disabled ? 0.5 : 1, ...style }}>
@@ -395,7 +394,7 @@ export interface SearchbarProps extends Omit<InputHTMLAttributes<HTMLInputElemen
 }
 export function Searchbar({ placeholder = 'Search', onMic, style, ...rest }: SearchbarProps) {
   return (
-    <span style={{ display: 'flex', alignItems: 'center', gap: space('sm'), height: 52, padding: `0 ${space('lg')}`, borderRadius: radius('5'), background: color('surface.base.default'), width: '100%', boxSizing: 'border-box', ...style }}>
+    <span style={{ display: 'flex', alignItems: 'center', gap: space('sm'), height: 52, padding: `0 ${space('lg')}`, borderRadius: radius('6'), background: color('surface.base.default'), width: '100%', boxSizing: 'border-box', ...style }}>
       <IconBox size="lg"><Icon name="search" size={24} /></IconBox>
       <input placeholder={placeholder} style={{ flex: 1, minWidth: 0, border: 0, outline: 'none', background: 'transparent', ...ty('body.md') }} {...rest} />
       <button onClick={onMic} aria-label="Voice search" style={{ border: 0, background: 'transparent', cursor: 'pointer', color: color('text.default.muted') }}><IconBox size="lg"><Icon name="mic" size={24} /></IconBox></button>
@@ -432,9 +431,9 @@ export function Tabs({ tabs, value, defaultValue = 0, scope = 'global', icons, o
         let s: CSSProperties;
         if (scope === 'global') {
           // The audit asked for `tab/surface/global/active`; Figma has since restructured
-          // these to default/inverse, and the same #fce6e6 lives at tab/default/surface/active.
+          // these to default/inverse, and V1.2 renamed `active` to `selected` (#fce6e6).
           s = on
-            ? { background: color('tab.default.surface.active'), color: color('tab.default.text.active'), border: '1px solid transparent' }
+            ? { background: color('tab.default.surface.selected'), color: color('tab.default.text.selected'), border: '1px solid transparent' }
             : { background: color('surface.base.default'), color: color('tab.default.text.default'), border: '1px solid transparent' };
         } else {
           s = on
@@ -495,7 +494,7 @@ export function PickerOption({ value, caption, badge, surface = 'default', selec
       style={{
         position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: space('xs'),
         minWidth: 96, minHeight: 72, boxSizing: 'border-box', textAlign: 'start', cursor: disabled ? 'not-allowed' : 'pointer',
-        padding: `${space('sm')} ${space('sm')}`, borderRadius: radius('5'),
+        padding: `${space('sm')} ${space('sm')}`, borderRadius: radius('6'),
         background: s.bg, color: s.value,
         // always render a border so selecting doesn't shift layout
         border: `1.5px solid ${selected ? accent : 'transparent'}`,

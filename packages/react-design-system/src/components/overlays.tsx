@@ -21,7 +21,7 @@ export type TooltipSurface = 'default' | 'dark';
 export type TooltipPlacement = 'top' | 'bottom' | 'left' | 'right';
 
 const TOOLTIP_RADIUS: Record<TooltipSize, string> = {
-  simple: radius('1'), standard: radius('3'), rich: radius('6'),
+  simple: radius('1'), standard: radius('4'), rich: radius('7'),
 };
 /** Figma design widths; simple hugs its single line, the others wrap to a max. */
 const TOOLTIP_MAX_WIDTH: Record<TooltipSize, number | undefined> = {
@@ -131,7 +131,7 @@ export function BottomSheet({
     <div onClick={onDismiss} style={{ position: 'fixed', inset: 0, background: color('surface.overlay.scrim'), display: 'flex', alignItems: 'flex-end', zIndex: 1000 }}>
       <div role="dialog" aria-modal="true" onClick={(e) => e.stopPropagation()} style={{
         width: '100%', maxHeight: '90%', boxSizing: 'border-box', background: sheetBg, color: ink,
-        borderStartStartRadius: radius('7'), borderStartEndRadius: radius('7'),
+        borderStartStartRadius: radius('8'), borderStartEndRadius: radius('8'),
         display: 'flex', flexDirection: 'column', overflow: 'hidden', ...style,
       }} {...rest}>
         {grabber ? (

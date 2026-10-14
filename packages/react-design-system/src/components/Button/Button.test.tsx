@@ -121,13 +121,15 @@ test('primary/brand swaps to the focus surface token while focused, and back on 
   expect(el.style.background).toMatch(BRAND);
 });
 
-test('secondary/brand gains the focus fill while focused', async () => {
+test('secondary/brand fills solid red with white text when pressed (V1.2)', async () => {
   render(<Button variant="secondary">Buy</Button>);
   const el = screen.getByRole('button');
   expect(el.style.background).toBe('transparent');
   await userEvent.tab();
-  // button.secondary.surface.brand.focus = #fce6e6
-  expect(el.style.background).toMatch(/#fce6e6|rgb\(252,\s*230,\s*230\)/i);
+  // V1.2 renamed `focus` to `pressed` and redesigned it: the V1.1 #fce6e6 tint is gone;
+  // button/secondary/surface/brand/pressed = red/1100 #bb0700, text/brand/pressed = white.
+  expect(el.style.background).toMatch(/#bb0700|rgb\(187,\s*7,\s*0\)/i);
+  expect(el.style.color).toMatch(/#ffffff|rgb\(255,\s*255,\s*255\)/i);
   expect(el.style.border).toMatch(BRAND_FOCUS);
 });
 

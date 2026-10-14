@@ -58,7 +58,7 @@ export function PlanUsageBar({
       aria-valuetext={`${left} ${unit} left`}
       style={{
         position: 'relative', width: '100%', height: 48, boxSizing: 'border-box',
-        background: color('surface.canvas.inverse'), borderRadius: radius('3'), overflow: 'hidden',
+        background: color('surface.canvas.inverse'), borderRadius: radius('4'), overflow: 'hidden',
         ...style,
       }}
       {...rest}
@@ -67,7 +67,7 @@ export function PlanUsageBar({
         data-part="fill"
         style={{
           position: 'absolute', insetBlock: 0, insetInlineStart: 0, width: `${pct}%`,
-          background: USAGE_FILL[status], borderRadius: radius('3'),
+          background: USAGE_FILL[status], borderRadius: radius('4'),
         }}
       />
       {/* Above the fill, spanning the full track: the value rides over the block while the
@@ -145,7 +145,7 @@ export function Snackbar({ tone = 'default', message, subtitle, action, onAction
   return (
     <div role="status" style={{
       display: 'flex', alignItems: 'center', gap: space('sm'), width: '100%', boxSizing: 'border-box',
-      minHeight: 48, padding: space('md'), borderRadius: radius('7'), background: color('surface.overlay.floating-inverse'),
+      minHeight: 48, padding: space('md'), borderRadius: radius('8'), background: color('surface.overlay.floating-inverse'),
       color: color('text.default.inverse'), justifyContent: centred ? 'center' : 'flex-start', ...style,
     }} {...rest}>
       {mark}
@@ -212,7 +212,7 @@ export function Alert({ status, tone, title, action, onAction, children, style, 
   return (
     <div role="status" style={{
       display: 'flex', alignItems: 'flex-start', gap: space('xs'), width: '100%', boxSizing: 'border-box',
-      padding: space('lg'), borderRadius: radius('6'), background: t.bg, ...style,
+      padding: space('lg'), borderRadius: radius('7'), background: t.bg, ...style,
     }} {...rest}>
       {/* `.icon-status` (30969:1138): a 32px pill holding a filled glyph. Every status uses
           the same pill — the triangle mark was a V1.0 shape that V1.1 does not have. */}
@@ -242,7 +242,7 @@ export function AlertModal({ open = true, tone = 'info', title, body, actions, o
   return (
     <div role="dialog" aria-modal="true" onClick={onDismiss}
       style={{ position: 'fixed', inset: 0, background: color('surface.overlay.scrim'), display: 'flex', alignItems: 'center', justifyContent: 'center', padding: space('lg'), zIndex: 1000 }}>
-      <div onClick={(e) => e.stopPropagation()} style={{ width: '100%', maxWidth: 360, background: color('surface.raised.default'), borderRadius: radius('6'), padding: space('xl'), display: 'flex', flexDirection: 'column', gap: space('md') }}>
+      <div onClick={(e) => e.stopPropagation()} style={{ width: '100%', maxWidth: 360, background: color('surface.raised.default'), borderRadius: radius('7'), padding: space('xl'), display: 'flex', flexDirection: 'column', gap: space('md') }}>
         <span style={{ color: TONE_COLOR[tone] }}><IconBox size="xl"><Icon name={TONE_ICON[tone]} size={24} /></IconBox></span>
         {title ? <Text variant="heading.sm">{title}</Text> : null}
         {body ? <Text variant="body.md" color={color('text.default.subtle')}>{body}</Text> : null}

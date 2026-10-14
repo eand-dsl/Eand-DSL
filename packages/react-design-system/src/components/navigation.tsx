@@ -110,7 +110,7 @@ export function TopBar({
   }
 
   return (
-    <header style={{ position: 'sticky', top: 0, zIndex: 10, width: '100%', boxSizing: 'border-box', background: onDark ? color('surface.base.brand') : color('surface.canvas.default'), color: text, borderEndStartRadius: round ? radius('6') : 0, borderEndEndRadius: round ? radius('6') : 0, padding: `0 ${space('lg')} ${space('lg')}`, display: 'flex', flexDirection: 'column', gap: space('md'), ...style }} {...rest}>
+    <header style={{ position: 'sticky', top: 0, zIndex: 10, width: '100%', boxSizing: 'border-box', background: onDark ? color('surface.base.brand') : color('surface.canvas.default'), color: text, borderEndStartRadius: round ? radius('7') : 0, borderEndEndRadius: round ? radius('7') : 0, padding: `0 ${space('lg')} ${space('lg')}`, display: 'flex', flexDirection: 'column', gap: space('md'), ...style }} {...rest}>
       {statusBar !== false && (
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: 44, fontSize: 14, fontWeight: 600, color: text }}><span>9:41</span><StatusGlyphs /></div>
       )}
@@ -143,7 +143,7 @@ export function TopBar({
 
       {/* deprecated action-bar sub-card */}
       {actionBar ? (
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: space('sm'), background: 'rgba(0,0,0,0.18)', borderRadius: radius('3'), padding: space('md') }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: space('sm'), background: 'rgba(0,0,0,0.18)', borderRadius: radius('4'), padding: space('md') }}>
           <div style={{ minWidth: 0 }}>
             <Text variant="title.sm" color="#fff" as="div">{actionBar.title}</Text>
             {actionBar.subtitle ? <Text variant="body.sm" color="rgba(255,255,255,0.8)">{actionBar.subtitle}</Text> : null}
@@ -172,8 +172,8 @@ export interface ListRowProps extends Omit<HTMLAttributes<HTMLButtonElement>, 't
 }
 export function ListRow({ icon, label, sublabel, value, chevron = true, style, ...rest }: ListRowProps) {
   return (
-    <button style={{ width: '100%', boxSizing: 'border-box', display: 'flex', alignItems: 'center', gap: space('md'), padding: space('lg'), borderRadius: radius('5'), background: color('surface.raised.default'), border: 0, cursor: 'pointer', textAlign: 'start', ...style }} {...rest}>
-      {icon ? <span style={{ width: 40, height: 40, borderRadius: radius('3'), background: color('surface.base.default'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flex: '0 0 auto' }}><IconBox size="md">{icon}</IconBox></span> : null}
+    <button style={{ width: '100%', boxSizing: 'border-box', display: 'flex', alignItems: 'center', gap: space('md'), padding: space('lg'), borderRadius: radius('6'), background: color('surface.raised.default'), border: 0, cursor: 'pointer', textAlign: 'start', ...style }} {...rest}>
+      {icon ? <span style={{ width: 40, height: 40, borderRadius: radius('4'), background: color('surface.base.default'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flex: '0 0 auto' }}><IconBox size="md">{icon}</IconBox></span> : null}
       <span style={{ flex: 1, minWidth: 0 }}>
         <Text variant="title.sm" as="div">{label}</Text>
         {sublabel ? <Text variant="body.sm" color={color('text.default.muted')}>{sublabel}</Text> : null}
@@ -290,13 +290,13 @@ export function ActionBar({ title, subtitle, icon: leading, action, chevron, sur
     <div onClick={onClick} style={{
       position: 'relative', display: 'flex', alignItems: 'center', gap: space('md'),
       height: 72, padding: `0 ${space('lg')}`, width: '100%', boxSizing: 'border-box',
-      borderRadius: radius('6'), overflow: 'hidden', background: color(s.bg), ...glass,
+      borderRadius: radius('7'), overflow: 'hidden', background: color(s.bg), ...glass,
       cursor: tappable ? 'pointer' : undefined, ...(showStack ? {} : style),
     }} {...(showStack ? {} : rest)}>
       {leading != null ? (
         <span style={{
           flex: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-          width: 40, height: 40, borderRadius: radius('3'), background: tileBg, color: titleColor,
+          width: 40, height: 40, borderRadius: radius('4'), background: tileBg, color: titleColor,
           overflow: 'hidden', // clip a full-bleed image leading (`.image-asset type=image`)
         }}>{leading}</span>
       ) : null}
@@ -317,7 +317,7 @@ export function ActionBar({ title, subtitle, icon: leading, action, chevron, sur
   const ghost = (top: number, inset: number, opacity: number) => (
     <div aria-hidden style={{
       position: 'absolute', top, left: inset, right: inset, height: 72,
-      borderRadius: radius('6'), background: color(s.bg), ...glass, opacity,
+      borderRadius: radius('7'), background: color(s.bg), ...glass, opacity,
       border: `1px solid ${color('surface.glass.white.md')}`,
     }} />
   );
@@ -364,11 +364,11 @@ export function QuickAction({ items, columns = 2, style, ...rest }: QuickActionP
       {items.map((it, i) => (
         // Figma .quick-task-core (27962:37103): radius border-radius/6 = 20, bg surface/raised/default.
         <button key={i} onClick={it.onClick}
-          style={{ position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: rowHeight('row-2'), padding: space('md'), borderRadius: radius('6'), border: 0, background: color('surface.raised.default'), cursor: 'pointer', textAlign: 'start' }}>
+          style={{ position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: rowHeight('row-2'), padding: space('md'), borderRadius: radius('7'), border: 0, background: color('surface.raised.default'), cursor: 'pointer', textAlign: 'start' }}>
           {/* Header row: icon tile with the status badge beside it. The badge used to be
               absolutely positioned over the corner; Figma has it in flow. */}
           <span data-part="qa-badge" style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: space('sm'), width: '100%' }}>
-            <span style={{ width: 40, height: 40, flex: 'none', borderRadius: radius('3'), background: color('surface.base.default'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: color('text.default.default') }}>
+            <span style={{ width: 40, height: 40, flex: 'none', borderRadius: radius('4'), background: color('surface.base.default'), display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: color('text.default.default') }}>
               {it.icon ?? <Icon name="placeholder" size={24} />}
             </span>
             {it.badge ?? null}

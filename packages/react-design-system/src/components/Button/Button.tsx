@@ -11,7 +11,8 @@ export type ButtonSurface = 'brand' | 'inverse-brand' | 'white' | 'midnight';
 export type ButtonTone = 'brand' | 'inverse';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
-type ButtonState = 'default' | 'focus' | 'disabled';
+// V1.2 renamed the interaction state from `focus` to `pressed` across color/button/*.
+type ButtonState = 'default' | 'pressed' | 'disabled';
 type TokenKey = 'brand' | 'inverse' | 'midnight';
 
 export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'color'> {
@@ -48,7 +49,7 @@ const TOKEN_KEY: Record<ButtonSurface, TokenKey> = {
 // moving the disabled label from 50% to 60% white (text/default/inverse-muted).
 const GLASS: Record<ButtonState, { bg: string; fg: string }> = {
   default:  { bg: color('button.glass.surface.default'), fg: color('button.glass.text.default') },
-  focus:    { bg: color('button.glass.surface.focus'), fg: color('button.glass.text.focus') },
+  pressed:  { bg: color('button.glass.surface.pressed'), fg: color('button.glass.text.pressed') },
   disabled: { bg: color('button.glass.surface.disabled'), fg: color('button.glass.text.disabled') },
 };
 
@@ -70,9 +71,9 @@ function palette(variant: ButtonVariant, key: TokenKey, state: ButtonState): CSS
     };
   }
   if (variant === 'secondary') {
-    // transparent fill (token fill on focus), token border + text
+    // transparent fill (token fill when pressed), token border + text
     return {
-      background: state === 'focus' ? color(`button.secondary.surface.${key}.focus`) : 'transparent',
+      background: state === 'pressed' ? color(`button.secondary.surface.${key}.pressed`) : 'transparent',
       color: color(`button.secondary.text.${key}.${state}`),
       border: `2px solid ${color(`button.secondary.border.${key}.${state}`)}`,
     };
@@ -107,7 +108,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
 ) {
   const [focused, setFocused] = useState(false);
   const key: TokenKey = surface ? TOKEN_KEY[surface] : tone === 'inverse' ? 'inverse' : 'brand';
-  const state: ButtonState = disabled ? 'disabled' : focused ? 'focus' : 'default';
+  const state: ButtonState = disabled ? 'disabled' : focused ? 'pressed' : 'default';
   return (
     <button
       ref={ref}

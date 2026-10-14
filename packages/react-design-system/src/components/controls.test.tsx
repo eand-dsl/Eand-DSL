@@ -135,7 +135,9 @@ test('FilterPill disabled blocks the click and styles with disabled tokens', asy
   await userEvent.click(pill);
   expect(fn).not.toHaveBeenCalled();
   expect(pill).toBeDisabled();
-  expect(pill.style.color).toMatch(/#c0bfc8|rgb\(192,\s*191,\s*200\)/i);
+  // V1.2: filter-pill/text/default/disabled moved from text/default/disabled (#c0bfc8)
+  // to text/default/muted (#908e9a).
+  expect(pill.style.color).toMatch(/#908e9a|rgb\(144,\s*142,\s*154\)/i);
 });
 
 test('FilterPill selected (Figma State=Focused) uses the focus border on the default scheme', () => {

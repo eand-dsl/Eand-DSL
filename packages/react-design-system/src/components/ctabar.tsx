@@ -89,7 +89,7 @@ export function PaymentRow({ icon, label, actionLabel = 'Change', onAction, styl
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: space('sm'), ...style }} {...rest}>
       {icon != null ? (
-        <span style={{ width: 40, height: 40, borderRadius: radius('3'), overflow: 'hidden', flex: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: color('surface.base.default') }}>{icon}</span>
+        <span style={{ width: 40, height: 40, borderRadius: radius('4'), overflow: 'hidden', flex: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: color('surface.base.default') }}>{icon}</span>
       ) : null}
       <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: space('2xs'), minWidth: 0 }}>
         <Text variant="title.xs" style={{ whiteSpace: 'nowrap' }}>{label}</Text>
@@ -134,7 +134,7 @@ export function CtaFooter({ ribbon, price, terms, payment, actions, homeIndicato
     <footer style={{
       position: 'sticky', bottom: 0, zIndex: 10, width: '100%', boxSizing: 'border-box',
       background: color('surface.canvas.default'), overflow: 'hidden',
-      borderStartStartRadius: rounded ? radius('7') : 0, borderStartEndRadius: rounded ? radius('7') : 0,
+      borderStartStartRadius: rounded ? radius('8') : 0, borderStartEndRadius: rounded ? radius('8') : 0,
       boxShadow: '0 0 44px 0 rgba(25, 19, 41, 0.15)',
       ...style,
     }} {...rest}>

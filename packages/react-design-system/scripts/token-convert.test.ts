@@ -68,3 +68,20 @@ describe('EASING', () => {
     expect(toCssValue({ a: 1 }, 'FLOAT')).toBeNull();
   });
 });
+
+/* V1.2 replaced the typography line-height strings ("120%" everywhere) with FLOAT
+   variables scoped LINE_HEIGHT, valued 100/120/130/135/140. Their Figma description says
+   "Export as unitless: divide by 100". Treated as a length they became "140px" — a 16px
+   body line rendered 140px tall. */
+describe('LINE_HEIGHT', () => {
+  it('renders a percentage-number as a unitless multiplier, in CSS and TS', () => {
+    expect(toCssValue(140, 'LINE_HEIGHT')).toBe('1.4');
+    expect(toCssValue(100, 'LINE_HEIGHT')).toBe('1');
+    expect(toTsValue(135, 'LINE_HEIGHT')).toBe('1.35');
+  });
+  it('never emits px for a line height', () => {
+    for (const n of [100, 120, 130, 135, 140]) {
+      expect(String(toCssValue(n, 'LINE_HEIGHT'))).not.toContain('px');
+    }
+  });
+});

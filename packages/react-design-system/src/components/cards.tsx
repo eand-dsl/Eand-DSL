@@ -8,7 +8,7 @@ import { VOUCHER_SHAPE_PATH, VOUCHER_SHAPE_SIZE } from './voucher-shape';
 
 const mutedOn = (onDark: boolean) => (onDark ? 'rgba(255,255,255,0.72)' : color('text.default.muted'));
 const imageBox = (h: number, node?: ReactNode) => (
-  <div style={{ width: '100%', height: h, borderRadius: radius('3'), overflow: 'hidden', background: color('surface.base.default'), display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 40 }}>{node ?? <Icon name="image" size={40} />}</div>
+  <div style={{ width: '100%', height: h, borderRadius: radius('4'), overflow: 'hidden', background: color('surface.base.default'), display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 40 }}>{node ?? <Icon name="image" size={40} />}</div>
 );
 
 /* ---------------- PlanCard (plans-mini) ----------------
@@ -41,13 +41,13 @@ export function PlanCard({ name = 'Entertainment plans', category = 'Postpaid', 
   const text = onDark ? '#fff' : color('text.default.default');
   return (
     /* Figma plans-mini (26003:40647): radius 16, p16, no border on either scheme. */
-    <div style={{ width, flex: '0 0 auto', boxSizing: 'border-box', background: PLAN_BG[v], borderRadius: radius('5'), padding: space('lg'), minHeight: rowHeight('row-4'), display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: space('lg'), ...style }} {...rest}>
+    <div style={{ width, flex: '0 0 auto', boxSizing: 'border-box', background: PLAN_BG[v], borderRadius: radius('6'), padding: space('lg'), minHeight: rowHeight('row-4'), display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: space('lg'), ...style }} {...rest}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: space('sm') }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: space('sm') }}>
           {/* `.header > wrapper`: body/md in text/default/subtle, with the lg offers badge. */}
           <Text variant="body.md" color={onDark ? mutedOn(onDark) : color('text.default.subtle')}>{category}</Text>
           {discount ? (onDark
-            ? <span style={{ background: '#fff', color: color('text.brand.default'), padding: `${space('xs')} ${space('sm')}`, borderRadius: radius('2'), fontWeight: 600, fontSize: 14, minWidth: 64, height: 24, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', boxSizing: 'border-box' }}>Discount</span>
+            ? <span style={{ background: '#fff', color: color('text.brand.default'), padding: `${space('xs')} ${space('sm')}`, borderRadius: radius('3'), fontWeight: 600, fontSize: 14, minWidth: 64, height: 24, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', boxSizing: 'border-box' }}>Discount</span>
             : <Badge offer="discount" size="lg">Discount</Badge>) : null}
         </div>
         <Text variant="heading.md" color={text}>{name}</Text>
@@ -93,7 +93,7 @@ export function ProductCard({ eyebrow, title = 'iPhone Clear Case For Safe Use',
   return (
     /* Figma card-features (25893:54098): radius border-radius/6 = 20, no resting border,
        height section/body/height/row-4 = 300 across all three siblings. */
-    <div data-card-type={kind} style={{ width, flex: '0 0 auto', boxSizing: 'border-box', background: bg, borderRadius: radius('6'), padding: space('lg'), minHeight: rowHeight('row-4'), display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: space('md'), ...style }} {...rest}>
+    <div data-card-type={kind} style={{ width, flex: '0 0 auto', boxSizing: 'border-box', background: bg, borderRadius: radius('7'), padding: space('lg'), minHeight: rowHeight('row-4'), display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: space('md'), ...style }} {...rest}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: space('sm') }}>
         {(eyebrow || (discount && !image)) && (
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: space('sm') }}>
@@ -125,10 +125,10 @@ export interface DealCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'tit
 }
 export function DealCard({ image, title = 'Deal title', subtitle, badge, width = 240, style, ...rest }: DealCardProps) {
   return (
-    <div style={{ width, flex: '0 0 auto', boxSizing: 'border-box', minHeight: rowHeight('row-3'), background: color('surface.raised.default'), border: `1px solid ${color('border.surface-based.raised.default')}`, borderRadius: radius('5'), overflow: 'hidden', display: 'flex', flexDirection: 'column', ...style }} {...rest}>
+    <div style={{ width, flex: '0 0 auto', boxSizing: 'border-box', minHeight: rowHeight('row-3'), background: color('surface.raised.default'), border: `1px solid ${color('border.surface-based.raised.default')}`, borderRadius: radius('6'), overflow: 'hidden', display: 'flex', flexDirection: 'column', ...style }} {...rest}>
       {/* image fills the remaining height (Figma .card-general: 224 tall, image inset-0, title pinned bottom) */}
       <div style={{ position: 'relative', flex: 1, display: 'flex', padding: space('sm') }}>
-        <div style={{ flex: 1, borderRadius: radius('3'), overflow: 'hidden', background: color('surface.base.default'), display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 40 }}>{image ?? <Icon name="image" size={40} />}</div>
+        <div style={{ flex: 1, borderRadius: radius('4'), overflow: 'hidden', background: color('surface.base.default'), display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 40 }}>{image ?? <Icon name="image" size={40} />}</div>
         {badge ? <span style={{ position: 'absolute', top: 14, insetInlineStart: 14 }}>{badge}</span> : null}
       </div>
       <div style={{ padding: `0 ${space('lg')} ${space('lg')}`, display: 'flex', flexDirection: 'column', gap: 2 }}>
@@ -161,7 +161,7 @@ export function NewCard({ image, title = 'New on e&', width = 137, selected, sty
     }} {...rest}>
       <div data-part="frame" style={{
         position: 'relative', flex: '1 1 auto', minHeight: 0, width: '100%', boxSizing: 'border-box',
-        padding: space('xs'), borderRadius: radius('7'), overflow: 'hidden',
+        padding: space('xs'), borderRadius: radius('8'), overflow: 'hidden',
         ...(selected ? {
           // border/lg = 2. Figma's generated code reports a solid `light-green/base`
           // #47cb6c, while the rendered frame shows a red->green ring; the gradient is
@@ -175,7 +175,7 @@ export function NewCard({ image, title = 'New on e&', width = 137, selected, sty
           backgroundClip: 'padding-box, border-box',
         } : null),
       }}>
-        <div style={{ width: '100%', height: '100%', borderRadius: radius('6'), overflow: 'hidden', background: color('surface.base.default'), display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ width: '100%', height: '100%', borderRadius: radius('7'), overflow: 'hidden', background: color('surface.base.default'), display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           {image ?? <Icon name="image" size={40} />}
         </div>
         {selected ? (
@@ -204,7 +204,7 @@ export interface ServiceCardProps extends HTMLAttributes<HTMLButtonElement> {
 }
 export function ServiceCard({ icon = <Icon name="placeholder" size={34} />, label, badge, size, style, ...rest }: ServiceCardProps) {
   return (
-    <button style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: space('sm'), padding: space('md'), width: size ? SERVICE_CARD_WIDTH[size] : undefined, minHeight: rowHeight('row-2'), borderRadius: radius('6'), border: 0, background: color('surface.canvas.default'), cursor: 'pointer', ...style }} {...rest}>
+    <button style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: space('sm'), padding: space('md'), width: size ? SERVICE_CARD_WIDTH[size] : undefined, minHeight: rowHeight('row-2'), borderRadius: radius('7'), border: 0, background: color('surface.canvas.default'), cursor: 'pointer', ...style }} {...rest}>
       {badge ? <span style={{ position: 'absolute', top: 8, insetInlineStart: 8 }}>{badge}</span> : null}
       <span style={{ fontSize: 34, lineHeight: 1 }}>{icon}</span>
       <Text variant="body.sm" style={{ textAlign: 'center' }}>{label}</Text>
@@ -226,14 +226,14 @@ export function Highlight({ title = 'Primary Text 2-lines max', subtitle, image,
       : image ? `center/cover no-repeat url(${image})`
       : 'linear-gradient(160deg,#3a3340,#191329)');
   return (
-    <div style={{ width: width ?? '100%', flex: width ? '0 0 auto' : undefined, boxSizing: 'border-box', position: 'relative', minHeight: tone === 'image' ? rowHeight('row-6') : 200, borderRadius: radius('7'), overflow: 'hidden', background: bg, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', ...style }} {...rest}>
+    <div style={{ width: width ?? '100%', flex: width ? '0 0 auto' : undefined, boxSizing: 'border-box', position: 'relative', minHeight: tone === 'image' ? rowHeight('row-6') : 200, borderRadius: radius('8'), overflow: 'hidden', background: bg, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', ...style }} {...rest}>
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(20,15,33,0) 35%, rgba(20,15,33,0.78))' }} />
       <div style={{ position: 'relative', padding: space('lg'), display: 'flex', flexDirection: 'column', gap: space('sm') }}>
         <SmilesRow count={3} plus={0} size={32} />
         <Text variant="heading.sm" color="#fff">{title}</Text>
         {subtitle ? <Text variant="body.sm" color="rgba(255,255,255,0.85)">{subtitle}</Text> : null}
         {action ? (
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: space('sm'), background: 'rgba(25,19,41,0.55)', backdropFilter: 'blur(4px)', borderRadius: radius('3'), padding: space('sm'), marginTop: space('xs') }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: space('sm'), background: 'rgba(25,19,41,0.55)', backdropFilter: 'blur(4px)', borderRadius: radius('4'), padding: space('sm'), marginTop: space('xs') }}>
             <div style={{ minWidth: 0 }}>
               <Text variant="title.xs" color="#fff" as="div">{action.title ?? 'Smiles Unlimited'}</Text>
               <Text variant="body.sm" color="rgba(255,255,255,0.75)">{action.subtitle ?? 'Exclusive venue deals'}</Text>
@@ -252,7 +252,7 @@ export interface SmilesBalanceProps extends HTMLAttributes<HTMLDivElement> {
 }
 export function SmilesBalance({ points = '12,450 Smiles', cta = 'Redeem', style, ...rest }: SmilesBalanceProps) {
   return (
-    <div style={{ width: '100%', boxSizing: 'border-box', background: 'linear-gradient(120deg,#e2c668,#d9b14a)', borderRadius: radius('5'), padding: space('lg'), display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: space('md'), ...style }} {...rest}>
+    <div style={{ width: '100%', boxSizing: 'border-box', background: 'linear-gradient(120deg,#e2c668,#d9b14a)', borderRadius: radius('6'), padding: space('lg'), display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: space('md'), ...style }} {...rest}>
       <div>
         <Text variant="body.sm" color="rgba(25,19,41,0.7)">Smiles balance</Text>
         <Text variant="heading.sm" as="div">{points}</Text>
@@ -302,7 +302,7 @@ export function Voucher({
     <div style={{
       position: 'relative', width: VOUCHER_SHAPE_SIZE, height: VOUCHER_SHAPE_SIZE, flex: '0 0 auto',
       boxSizing: 'border-box', display: 'flex', flexDirection: 'column', alignItems: 'center',
-      borderRadius: radius('5'), overflow: 'hidden', opacity: status === 'expired' ? 0.6 : 1, ...style,
+      borderRadius: radius('6'), overflow: 'hidden', opacity: status === 'expired' ? 0.6 : 1, ...style,
     }} {...rest}>
       {/* Shape 28278:13819 — outline, side notches and perforation in one path. */}
       <svg aria-hidden width={VOUCHER_SHAPE_SIZE} height={VOUCHER_SHAPE_SIZE}

@@ -24,7 +24,7 @@ const SUNKEN = 'var(--eand-color-surface-sunken-default)';
 const LINE = 'var(--eand-color-border-surface-based-canvas-default)';
 const TEXT = 'var(--eand-color-text-default-default)';
 const MUTED = 'var(--eand-color-text-default-muted)';
-const RADIUS = 'var(--eand-border-radius-5)';
+const RADIUS = 'var(--eand-border-radius-6)';
 const SP_SM = 'var(--eand-spacing-sm)';
 const SP_LG = 'var(--eand-spacing-lg)';
 
