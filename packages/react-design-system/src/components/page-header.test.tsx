@@ -112,11 +112,15 @@ test('PageHeader inverse: 20% glass card (24px) and inverse text tokens', () => 
   expect(screen.getByText('Sub').style.color).toBe('rgba(255, 255, 255, 0.75)');
 });
 
-test('PageHeader title is heading/lg (28px, tight tracking) and a single heading', () => {
+// `.title-block` (37291:112320) binds the typography/heading/lg VARIABLES (28px / 1.2 /
+// tight), not the heading/lg text style (24px / 110% / snug) that Section applies.
+test('PageHeader title is the heading/lg variables (28px, 1.2, tight tracking) and a single heading', () => {
   render(<PageHeader title={LINES} />);
   const h = screen.getByRole('heading');
   expect(h).toHaveTextContent('Discover Thermostats. Built for Intelligence');
   expect(h.style.fontSize).toBe('28px');
+  expect(h.style.lineHeight).toBe('1.2');
+  expect(h.style.fontWeight).toBe('700');
   expect(parseFloat(h.style.letterSpacing)).toBeCloseTo(-0.65, 3);
 });
 
