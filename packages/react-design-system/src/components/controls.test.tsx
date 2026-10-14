@@ -339,12 +339,33 @@ test('Searchbar renders 20px (lg) search and mic icons per Figma', () => {
   expect(icons.length).toBeGreaterThanOrEqual(2);
 });
 
-test('FilterPill chevron is the chevron-down-sm icon in a 16px (md) box', () => {
+/* FilterPill vs Figma V1.2 `filter-pill` 26151:391 + `.filter-pill-body` 37884:67515
+   (13.08.2026 "switched placeholder to chevron"): the chevron is `chevron-down` 16 in a 20
+   icon-size (was chevron-down-sm 16 in a 16 box); padding start 12 / end 8 with a 2px gap (was
+   12/12, gap 4); min-width scale/72; default and selected have no fill (was canvas / base). */
+
+test('FilterPill chevron is chevron-down at 16px in a 20px (lg) box', () => {
   const { container } = render(<FilterPill>Category</FilterPill>);
   // Icon renders <span role="img" aria-label={name}>; its IconBox parent carries the size.
-  const icon = container.querySelector('[aria-label="chevron-down-sm"]')!;
+  const icon = container.querySelector('[aria-label="chevron-down"]')!;
   expect(icon).toBeInTheDocument();
-  expect((icon.parentElement as HTMLElement).style.width).toBe('16px');
+  expect(icon.querySelector('svg')!.getAttribute('width')).toBe('16');
+  expect((icon.parentElement as HTMLElement).style.width).toBe('20px');
+});
+
+test('FilterPill is min-width 72, 12 start / 8 end, gap 2', () => {
+  render(<FilterPill>Price</FilterPill>);
+  const pill = screen.getByRole('button');
+  expect(pill.style.minWidth).toBe('72px');
+  expect(pill.style.height).toBe('40px');
+  expect(pill.style.paddingInlineStart).toBe('12px');
+  expect(pill.style.paddingInlineEnd).toBe('8px');
+  expect(pill.style.gap).toBe('2px');
+});
+
+test.each([[false], [true]])('FilterPill default scheme is transparent (selected=%s)', (selected) => {
+  render(<FilterPill selected={selected}>Price</FilterPill>);
+  expect(screen.getByRole('button').style.background).toBe('transparent');
 });
 
 test('Chip leading icon is 16px (md) per Figma chips-core', () => {

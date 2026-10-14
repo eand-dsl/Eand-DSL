@@ -297,11 +297,18 @@ export function Chip({ type, selected, disabled, inverse, leadingIcon, check, lo
   );
 }
 
-/* ---------------- FilterPill ---------------- */
+/* ---------------- FilterPill ----------------
+   Figma V1.2 `filter-pill` 26151:391 (state default/selected/disabled × inverse) with body
+   `.filter-pill-body` 37884:67515: 40px pill (tabs/height/md), min-width scale/72, 1px stroke
+   `filter-pill/border/*`. No fill on any variant except inverse+selected
+   (`filter-pill/surface/inverse/selected`). Body: padding start 12 (spacing/md) / end 8
+   (spacing/sm), gap 2 (spacing/2xs), body/md label, `chevron-down` 16px in a 20px icon-size.
+   The default+selected stroke is an unbound #191329 in Figma, the value of
+   filter-pill/border/default/selected. The orphaned `has-loader` property drives no layer. */
 export interface FilterPillProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onClick'> {
-  /** Maps to Figma `State=Focused` (V1.1 `filter-pill` set 26151:391) — the pressed/active pill state. */
+  /** Figma `state=selected` — the pressed/active pill state. */
   selected?: boolean;
-  /** Inverse color scheme for dark (midnight/brand) surfaces (Figma `Color=Inverse`). */
+  /** Inverse color scheme for dark (midnight/brand) surfaces (Figma `inverse=true`). */
   inverse?: boolean;
   disabled?: boolean;
   onClick?: () => void;
@@ -309,19 +316,19 @@ export interface FilterPillProps extends Omit<HTMLAttributes<HTMLButtonElement>,
 export function FilterPill({ selected, inverse, disabled, style, children, onClick, ...rest }: FilterPillProps) {
   const scheme = inverse ? 'inverse' : 'default';
   const state = disabled ? 'disabled' : selected ? 'selected' : 'default';
-  const background = selected && !disabled
-    ? color(inverse ? 'filterPill.surface.inverse.selected' : 'surface.base.default')
-    : inverse ? 'transparent' : color('surface.canvas.default');
+  const background = inverse && selected && !disabled ? color('filterPill.surface.inverse.selected') : 'transparent';
   return (
-    <button onClick={onClick} aria-pressed={selected} disabled={disabled}
+    <button type="button" onClick={onClick} aria-pressed={selected} disabled={disabled}
       style={{
-        display: 'inline-flex', alignItems: 'center', gap: space('xs'), height: 40, padding: `0 ${space('md')}`,
+        display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: space('2xs'), boxSizing: 'border-box',
+        height: T.tabs.height.md, minWidth: scale('72'),
+        paddingBlock: 0, paddingInlineStart: space('md'), paddingInlineEnd: space('sm'),
         borderRadius: PILL, cursor: disabled ? 'not-allowed' : 'pointer', whiteSpace: 'nowrap',
         border: `1px solid ${color(`filterPill.border.${scheme}.${state}`)}`,
         background,
         color: color(`filterPill.text.${scheme}.${state}`), ...ty('body.md'), ...style,
       }} {...rest}>
-      {children}<IconBox size="md"><Icon name="chevron-down-sm" size={16} /></IconBox>
+      {children}<IconBox size="lg"><Icon name="chevron-down" size={16} /></IconBox>
     </button>
   );
 }
