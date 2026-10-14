@@ -1,6 +1,55 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Checkbox, Radio, Chip, FilterPill, Searchbar, Input, OtpInput, Picker, PickerOption, Tabs } from './controls';
+import { Checkbox, ConsentCheckbox, Radio, Chip, FilterPill, Searchbar, Input, OtpInput, Picker, PickerOption, Tabs, Switcher } from './controls';
+
+/* ---------------- Switcher vs Figma V1.2 `switcher` 26215:7141 ----------------
+   Was 56×24 / 48×20 (the stale statesheet prose); the published symbols, the bound
+   switcher/track/* variables and the new description all say 40×24 / 32×20 — design
+   question #1 resolved by the source-of-truth rule. Colours were surface.* tokens plus a
+   literal #fff knob and opacity .5 for disabled; Figma binds color/mark/* per state. */
+
+const track = () => screen.getByRole('switch');
+const knob = () => track().firstElementChild as HTMLElement;
+
+test.each([
+  ['md', '40px', '24px', '20px'],
+  ['lg', '40px', '24px', '20px'], // deprecated alias of md (Figma small=false)
+  ['sm', '32px', '20px', '16px'],
+] as const)('Switcher size=%s is %s×%s with a %s knob (switcher/track, switcher/thumb)', (size, w, h, k) => {
+  render(<Switcher size={size} />);
+  expect(track().style.width).toBe(w);
+  expect(track().style.height).toBe(h);
+  expect(knob().style.width).toBe(k);
+  expect(knob().style.height).toBe(k);
+});
+
+test.each([
+  // [label, props, track, knob]
+  ['off', {}, 'rgb(192, 191, 200)', 'rgb(255, 255, 255)'],                          // mark/default/surface/default, icon/default
+  ['on', { checked: true }, 'rgb(224, 8, 0)', 'rgb(255, 255, 255)'],                 // surface/selected, icon/selected
+  ['off disabled', { disabled: true }, 'rgb(216, 215, 222)', 'rgb(240, 240, 245)'],  // surface/disabled, icon/disabled
+  ['on disabled', { checked: true, disabled: true }, 'rgb(216, 215, 222)', 'rgb(144, 142, 154)'], // selected-disabled
+  ['inverse off', { inverse: true }, 'rgb(192, 191, 200)', 'rgb(255, 255, 255)'],    // mark/inverse/surface/default (sm symbol)
+  ['inverse on', { inverse: true, checked: true }, 'rgb(255, 255, 255)', 'rgb(224, 8, 0)'], // mark/inverse/surface|icon/selected
+  ['inverse off disabled', { inverse: true, disabled: true }, 'rgba(255, 255, 255, 0.4)', 'rgba(255, 255, 255, 0.6)'],
+  ['inverse on disabled', { inverse: true, checked: true, disabled: true }, 'rgba(255, 255, 255, 0.4)', 'rgb(228, 227, 234)'], // knob: surface/sunken/default per symbol
+] as const)('Switcher %s binds the mark tokens, no opacity', (_l, props, t, k) => {
+  render(<Switcher {...props} />);
+  expect(track().style.background).toBe(t);
+  expect(knob().style.background).toBe(k);
+  expect(track().style.opacity).toBe('');
+});
+
+test('Switcher toggles and reports the new state; disabled does not', async () => {
+  const fn = vi.fn();
+  const { rerender } = render(<Switcher onChange={fn} />);
+  await userEvent.click(track());
+  expect(fn).toHaveBeenLastCalledWith(true);
+  expect(track()).toHaveAttribute('aria-checked', 'true');
+  rerender(<Switcher onChange={fn} disabled />);
+  await userEvent.click(track());
+  expect(fn).toHaveBeenCalledTimes(1);
+});
 
 /* ---------------- Checkbox ---------------- */
 

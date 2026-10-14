@@ -366,24 +366,56 @@ export function Radio({ label, checked, defaultChecked, disabled, onChange, size
   );
 }
 
-/* ---------------- Switcher ---------------- */
+/* ---------------- Switcher ----------------
+   Figma V1.2 `switcher` 26215:7141: inverse × small × active × disabled. Track md 40×24 /
+   sm 32×20 (`switcher/track/*`), knob 20 / 16 (`switcher/thumb/*`), 2px inset
+   (`spacing/2xs`), pill. Every state is a `color/mark/*` pair — disabled is a colour, not
+   opacity (15.07.2026 "Updated colours based on common 'mark' variables"). */
+type SwitchState = 'off' | 'on' | 'offDisabled' | 'onDisabled';
+const SWITCH: Record<'default' | 'inverse', Record<SwitchState, { track: string; knob: string }>> = {
+  default: {
+    off:         { track: color('mark.default.surface.default'),          knob: color('mark.default.icon.default') },
+    on:          { track: color('mark.default.surface.selected'),         knob: color('mark.default.icon.selected') },
+    offDisabled: { track: color('mark.default.surface.disabled'),         knob: color('mark.default.icon.disabled') },
+    onDisabled:  { track: color('mark.default.surface.selected-disabled'), knob: color('mark.default.icon.selected-disabled') },
+  },
+  inverse: {
+    // The md and sm symbols disagree here: md binds a variable outside the token set
+    // (`mark/default/border/default1`, white 70%) with a `surface/raised/default` knob; sm binds
+    // `mark/inverse/surface/default` + `mark/inverse/icon/default`. Code follows sm, the one in
+    // the mark/inverse family (design question raised).
+    off:         { track: color('mark.inverse.surface.default'),          knob: color('mark.inverse.icon.default') },
+    on:          { track: color('mark.inverse.surface.selected'),         knob: color('mark.inverse.icon.selected') },
+    offDisabled: { track: color('mark.inverse.surface.disabled'),         knob: color('mark.inverse.icon.disabled') },
+    // Both sizes bind the knob to `surface/sunken/default`, not `mark/inverse/icon/selected-disabled`.
+    onDisabled:  { track: color('mark.inverse.surface.selected-disabled'), knob: color('surface.sunken.default') },
+  },
+};
 export interface SwitcherProps {
   checked?: boolean;
   defaultChecked?: boolean;
   disabled?: boolean;
-  size?: 'sm' | 'lg';
+  /** `md` 40×24 (Figma small=false) or `sm` 32×20 (small=true). `lg` is the deprecated
+   *  pre-V1.2 name for `md`. */
+  size?: 'sm' | 'md' | 'lg';
+  /** Inverse scheme for brand/midnight surfaces: white track, red knob when on. */
+  inverse?: boolean;
   onChange?: (checked: boolean) => void;
 }
-export function Switcher({ checked, defaultChecked = false, disabled, size = 'lg', onChange }: SwitcherProps) {
+export function Switcher({ checked, defaultChecked = false, disabled, size = 'md', inverse, onChange }: SwitcherProps) {
   const [internal, setInternal] = useState(defaultChecked);
   const on = checked ?? internal;
-  const w = size === 'lg' ? 56 : 48, h = size === 'lg' ? 24 : 20, knob = h - 4;
+  const k = size === 'sm' ? 'sm' : 'md';
+  const w = T.switcher.track.width[k], h = T.switcher.track.height[k], knob = T.switcher.thumb.width[k];
+  const inset = space('2xs');
+  const c = SWITCH[inverse ? 'inverse' : 'default'][disabled ? (on ? 'onDisabled' : 'offDisabled') : on ? 'on' : 'off'];
   return (
-    <button role="switch" aria-checked={on} disabled={disabled}
+    <button type="button" role="switch" aria-checked={on} disabled={disabled}
       onClick={() => { if (disabled) return; setInternal(!on); onChange?.(!on); }}
-      style={{ width: w, height: h, borderRadius: PILL, border: 0, padding: 2, cursor: disabled ? 'not-allowed' : 'pointer',
-        background: on ? color('surface.base.brand') : color('surface.sunken.default'), opacity: disabled ? 0.5 : 1, position: 'relative', transition: 'background 150ms' }}>
-      <span style={{ position: 'absolute', top: 2, insetInlineStart: on ? w - knob - 2 : 2, width: knob, height: knob, borderRadius: '50%', background: '#fff', transition: 'inset-inline-start 150ms' }} />
+      style={{ width: w, height: h, borderRadius: PILL, border: 0, padding: 0, flex: 'none', boxSizing: 'border-box',
+        cursor: disabled ? 'not-allowed' : 'pointer', background: c.track, position: 'relative', transition: 'background 150ms' }}>
+      <span style={{ position: 'absolute', top: inset, insetInlineStart: on ? `calc(${w} - ${knob} - ${inset})` : inset,
+        width: knob, height: T.switcher.thumb.height[k], borderRadius: '50%', background: c.knob, transition: 'inset-inline-start 150ms' }} />
     </button>
   );
 }
