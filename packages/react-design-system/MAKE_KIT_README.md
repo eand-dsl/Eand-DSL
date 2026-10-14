@@ -118,7 +118,7 @@ Send your *e& UAE Consumer* Figma org admin this:
 > Figma's setup docs: https://developers.figma.com/docs/code/working-with-npm/
 >
 > The package is `@eand/react-design-system` — the e& Consumer App component library,
-> built from the DSL V1.1 Figma variables. Publishing it privately keeps it inside the
+> built from the DSL V1.2 Figma variables. Publishing it privately keeps it inside the
 > org; the alternative is publishing it to public npm, which I'd rather avoid.
 >
 > I need three things back: the registry host, a publish token scoped to `@eand`, and
