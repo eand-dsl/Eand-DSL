@@ -1569,5 +1569,325 @@ export const tokens = {
       "mdLocked": "md",
       "lgLocked": "lg"
     }
+  },
+  "textStyle": {
+    "display": {
+      "lg": {
+        "fontFamily": "Suisse int'l",
+        "fontSize": "48px",
+        "fontWeight": "700",
+        "lineHeight": "1.2",
+        "letterSpacing": "-0.65px"
+      },
+      "md": {
+        "fontFamily": "Suisse int'l",
+        "fontSize": "40px",
+        "fontWeight": "700",
+        "lineHeight": "1.2",
+        "letterSpacing": "-0.65px"
+      }
+    },
+    "heading": {
+      "2xl": {
+        "fontFamily": "Suisse int'l",
+        "fontSize": "32px",
+        "fontWeight": "700",
+        "lineHeight": "1",
+        "letterSpacing": "-0.65px"
+      },
+      "xl": {
+        "fontFamily": "Suisse int'l",
+        "fontSize": "28px",
+        "fontWeight": "700",
+        "lineHeight": "1.1",
+        "letterSpacing": "-0.65px"
+      },
+      "lg": {
+        "fontFamily": "Suisse int'l",
+        "fontSize": "24px",
+        "fontWeight": "700",
+        "lineHeight": "1.1",
+        "letterSpacing": "-0.35px"
+      },
+      "md": {
+        "fontFamily": "Suisse int'l",
+        "fontSize": "20px",
+        "fontWeight": "700",
+        "lineHeight": "1.1",
+        "letterSpacing": "-0.35px"
+      },
+      "sm": {
+        "fontFamily": "Suisse int'l",
+        "fontSize": "18px",
+        "fontWeight": "700",
+        "lineHeight": "1.1",
+        "letterSpacing": "-0.35px"
+      },
+      "xs": {
+        "fontFamily": "Suisse int'l",
+        "fontSize": "16px",
+        "fontWeight": "700",
+        "lineHeight": "1.2",
+        "letterSpacing": "0px"
+      }
+    },
+    "title": {
+      "xl": {
+        "fontFamily": "Suisse int'l",
+        "fontSize": "28px",
+        "fontWeight": "600",
+        "lineHeight": "1.3",
+        "letterSpacing": "-0.35px"
+      },
+      "lg": {
+        "fontFamily": "Suisse int'l",
+        "fontSize": "24px",
+        "fontWeight": "600",
+        "lineHeight": "1.3",
+        "letterSpacing": "-0.35px"
+      },
+      "md": {
+        "fontFamily": "Suisse int'l",
+        "fontSize": "20px",
+        "fontWeight": "600",
+        "lineHeight": "1.3",
+        "letterSpacing": "-0.35px"
+      },
+      "sm": {
+        "fontFamily": "Suisse int'l",
+        "fontSize": "16px",
+        "fontWeight": "600",
+        "lineHeight": "1.3",
+        "letterSpacing": "0px"
+      },
+      "xs": {
+        "fontFamily": "Suisse int'l",
+        "fontSize": "14px",
+        "fontWeight": "600",
+        "lineHeight": "1.3",
+        "letterSpacing": "0px"
+      }
+    },
+    "body": {
+      "xl": {
+        "fontFamily": "Suisse int'l",
+        "fontSize": "20px",
+        "fontWeight": "400",
+        "lineHeight": "1.4",
+        "letterSpacing": "0px"
+      },
+      "lg": {
+        "fontFamily": "Suisse int'l",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "lineHeight": "1.4",
+        "letterSpacing": "0px"
+      },
+      "md": {
+        "fontFamily": "Suisse int'l",
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "lineHeight": "1.4",
+        "letterSpacing": "0px"
+      },
+      "sm": {
+        "fontFamily": "Suisse int'l",
+        "fontSize": "12px",
+        "fontWeight": "400",
+        "lineHeight": "1.4",
+        "letterSpacing": "0px"
+      },
+      "xs": {
+        "fontFamily": "Suisse int'l",
+        "fontSize": "10px",
+        "fontWeight": "400",
+        "lineHeight": "1.4",
+        "letterSpacing": "0px"
+      }
+    },
+    "button": {
+      "lg": {
+        "fontFamily": "Suisse int'l",
+        "fontSize": "16px",
+        "fontWeight": "600",
+        "lineHeight": "1.3",
+        "letterSpacing": "0px"
+      },
+      "md": {
+        "fontFamily": "Suisse int'l",
+        "fontSize": "14px",
+        "fontWeight": "500",
+        "lineHeight": "1.3",
+        "letterSpacing": "0px"
+      },
+      "sm": {
+        "fontFamily": "Suisse int'l",
+        "fontSize": "12px",
+        "fontWeight": "500",
+        "lineHeight": "1.3",
+        "letterSpacing": "0px"
+      }
+    },
+    "badge": {
+      "lg": {
+        "fontFamily": "Suisse int'l",
+        "fontSize": "14px",
+        "fontWeight": "450",
+        "lineHeight": "1.3",
+        "letterSpacing": "0px"
+      },
+      "md": {
+        "fontFamily": "Suisse int'l",
+        "fontSize": "12px",
+        "fontWeight": "450",
+        "lineHeight": "1.3",
+        "letterSpacing": "0px"
+      },
+      "sm": {
+        "fontFamily": "Suisse int'l",
+        "fontSize": "10px",
+        "fontWeight": "450",
+        "lineHeight": "1.3",
+        "letterSpacing": "0px"
+      }
+    },
+    "aed": {
+      "display": {
+        "lg": {
+          "fontFamily": "Suisse int'l",
+          "fontSize": "48px",
+          "fontWeight": "700",
+          "lineHeight": "1.2",
+          "letterSpacing": "-0.65px"
+        },
+        "md": {
+          "fontFamily": "Suisse int'l",
+          "fontSize": "40px",
+          "fontWeight": "700",
+          "lineHeight": "1.2",
+          "letterSpacing": "-0.65px"
+        }
+      },
+      "heading": {
+        "xl": {
+          "fontFamily": "Suisse int'l",
+          "fontSize": "32px",
+          "fontWeight": "700",
+          "lineHeight": "1.2",
+          "letterSpacing": "-0.65px"
+        },
+        "lg": {
+          "fontFamily": "Suisse int'l",
+          "fontSize": "28px",
+          "fontWeight": "700",
+          "lineHeight": "1.2",
+          "letterSpacing": "-0.65px"
+        },
+        "md": {
+          "fontFamily": "Suisse int'l",
+          "fontSize": "24px",
+          "fontWeight": "700",
+          "lineHeight": "1.2",
+          "letterSpacing": "-0.35px"
+        },
+        "sm": {
+          "fontFamily": "Suisse int'l",
+          "fontSize": "20px",
+          "fontWeight": "700",
+          "lineHeight": "1.2",
+          "letterSpacing": "-0.35px"
+        },
+        "xs": {
+          "fontFamily": "Suisse int'l",
+          "fontSize": "16px",
+          "fontWeight": "700",
+          "lineHeight": "1.2",
+          "letterSpacing": "0px"
+        }
+      },
+      "title": {
+        "xl": {
+          "fontFamily": "Suisse int'l",
+          "fontSize": "28px",
+          "fontWeight": "600",
+          "lineHeight": "1.2",
+          "letterSpacing": "-0.35px"
+        },
+        "lg": {
+          "fontFamily": "Suisse int'l",
+          "fontSize": "24px",
+          "fontWeight": "600",
+          "lineHeight": "1.2",
+          "letterSpacing": "-0.35px"
+        },
+        "md": {
+          "fontFamily": "Suisse int'l",
+          "fontSize": "20px",
+          "fontWeight": "600",
+          "lineHeight": "1.2",
+          "letterSpacing": "-0.35px"
+        },
+        "sm": {
+          "fontFamily": "Suisse int'l",
+          "fontSize": "16px",
+          "fontWeight": "600",
+          "lineHeight": "1.2",
+          "letterSpacing": "0px"
+        },
+        "xs": {
+          "fontFamily": "Suisse int'l",
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "lineHeight": "1.4",
+          "letterSpacing": "0px"
+        }
+      },
+      "body": {
+        "xl": {
+          "fontFamily": "Suisse int'l",
+          "fontSize": "20px",
+          "fontWeight": "400",
+          "lineHeight": "1.4",
+          "letterSpacing": "0px"
+        },
+        "lg": {
+          "fontFamily": "Suisse int'l",
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "lineHeight": "1.4",
+          "letterSpacing": "0px"
+        },
+        "md": {
+          "fontFamily": "Suisse int'l",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "lineHeight": "1.4",
+          "letterSpacing": "0px"
+        },
+        "sm": {
+          "fontFamily": "Suisse int'l",
+          "fontSize": "12px",
+          "fontWeight": "400",
+          "lineHeight": "1.4",
+          "letterSpacing": "0px"
+        },
+        "xs": {
+          "fontFamily": "Suisse int'l",
+          "fontSize": "10px",
+          "fontWeight": "400",
+          "lineHeight": "1.4",
+          "letterSpacing": "0px"
+        }
+      }
+    },
+    "alerts": {
+      "md": {
+        "fontFamily": "Suisse int'l",
+        "fontSize": "14px",
+        "fontWeight": "600",
+        "lineHeight": "1.3",
+        "letterSpacing": "0px"
+      }
+    }
   }
 } as const;

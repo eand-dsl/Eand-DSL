@@ -251,3 +251,31 @@ because no token carries it.
 
 **Need:** either a `page-title/*` typography token set (or a 110 line-height token), or a
 ruling that page-title should use the plain `heading/*` styles.
+
+## 14. Typography — the heading text styles and the heading variables have split
+
+V1.2 retuned the published **text styles** without updating the **variables** of the same name:
+
+| | text style (what symbols apply) | `typography/<style>/*` variables |
+| --- | --- | --- |
+| heading/2xl | 32 / 100% (new) | — |
+| heading/xl | 28 / 110% | 32 / 100% |
+| heading/lg | 24 / 110% | 28 / 120% |
+| heading/md | 20 / 110% | 24 / 135% |
+| heading/sm | 18 / 110% | 20 / 135% |
+| alerts/md | Semi Bold 14 / 130% | Light 20 / 130% |
+
+The styles now bind `font/size/*` primitives directly, so `typography/heading/*/font-size`,
+`…/line-height` and `typography/alerts/md/*` are bound by nothing that uses the style. Most
+symbols apply the style (Section titles, page-title, cards). A few bind the variables
+directly instead — page-header's `.title-block` (37291:112320) and the topbar `Big title`
+(29547:11486) render 28px / 120%.
+
+Code now follows the symbols. `ty('heading.lg')` and the other text-style lookups read the
+published styles, which `text-styles.json` holds and which generate `tokens.textStyle`. The raw
+variables are still in `tokens.typography`, and the components that bind them read those
+explicitly. This also corrects #13 above, which assumed heading/lg was 28px.
+
+**Need:** either update the `typography/heading/*` and `typography/alerts/md/*` variables to
+match the styles, or delete them. Also re-point page-header and Big title at the styles if they
+were meant to follow them.
