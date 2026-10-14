@@ -119,7 +119,19 @@ def fmt(n):
     return str(int(n)) if float(n).is_integer() else ("%.4g" % n)
 
 # ---------------- collect ----------------
-R = resolved_tree(load_merged(json.load(open(VARS))))
+TREE = load_merged(json.load(open(VARS)))
+R = resolved_tree(TREE)
+
+def is_line_height(dotpath, seen=None):
+    """True when the leaf — or what it aliases — is scoped LINE_HEIGHT. V1.2 binds line
+    heights as FLOAT percentages (120 = 120%), indistinguishable from a length by value."""
+    seen = seen or set(); leaf = lookup(TREE, dotpath)
+    if not leaf: return False
+    if "LINE_HEIGHT" in leaf.get("$scopes", []): return True
+    v = leaf["$value"]
+    if isinstance(v, str) and v.startswith("$.") and v not in seen:
+        seen.add(v); return is_line_height(".".join(v[2:].split(".")[2:]), seen)
+    return False
 
 # colors: everything under `color`
 colors = []  # (parts, rgba)  parts excludes leading 'color'
@@ -158,6 +170,8 @@ def collect_typo(node, parts):
             lh_px = None
             if isinstance(lh, str) and lh.endswith("%") and size is not None:
                 lh_px = size * float(lh[:-1]) / 100.0
+            elif num(lh) is not None and size is not None and is_line_height(".".join(["typography"] + parts + ["line-height"])):
+                lh_px = size * num(lh) / 100.0
             elif num(lh) is not None:
                 lh_px = num(lh)
             if size is not None:

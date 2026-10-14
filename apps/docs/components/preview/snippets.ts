@@ -149,7 +149,7 @@ struct TopBar: View {
     .foregroundColor(.white)
     .padding(.horizontal, EandSpacing.lg).padding(.bottom, EandSpacing.lg)
     .background(EandColor.surfaceBaseBrand)
-    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius6))
+    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius7))
   }
 }`,
     kotlin: `import com.eand.tokens.EandColor
@@ -161,7 +161,7 @@ fun TopBar() {
     Modifier
       .fillMaxWidth()
       .background(EandColor.surfaceBaseBrand,
-        RoundedCornerShape(bottomStart = EandRadius.radius6, bottomEnd = EandRadius.radius6))
+        RoundedCornerShape(bottomStart = EandRadius.radius7, bottomEnd = EandRadius.radius7))
       .padding(horizontal = EandSpacing.lg).padding(bottom = EandSpacing.lg),
     verticalArrangement = Arrangement.spacedBy(EandSpacing.md),
   ) {
@@ -224,7 +224,7 @@ struct EandSection<Content: View>: View {
         .padding(EandSpacing.lg)
     }
     .background(EandColor.surfaceBaseDefault)
-    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius7))
+    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius8))
   }
 }`,
     kotlin: `import com.eand.tokens.EandColor
@@ -238,7 +238,7 @@ fun EandSection(
   Column(
     Modifier
       .fillMaxWidth()
-      .background(EandColor.surfaceBaseDefault, RoundedCornerShape(EandRadius.radius7)),
+      .background(EandColor.surfaceBaseDefault, RoundedCornerShape(EandRadius.radius8)),
   ) {
     Row(
       Modifier.padding(top = EandSpacing.spacing2xl, start = EandSpacing.lg, end = EandSpacing.lg),
@@ -278,7 +278,7 @@ struct PlanRow: View {
     }
     .padding(EandSpacing.lg)
     .background(EandColor.surfaceRaisedDefault)
-    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius5))
+    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius6))
   }
 }`,
     kotlin: `import com.eand.tokens.EandColor
@@ -288,7 +288,7 @@ fun PlanRow(label: String, value: String) {
   Row(
     Modifier
       .fillMaxWidth()
-      .background(EandColor.surfaceRaisedDefault, RoundedCornerShape(EandRadius.radius5))
+      .background(EandColor.surfaceRaisedDefault, RoundedCornerShape(EandRadius.radius6))
       .padding(EandSpacing.lg),
     verticalAlignment = Alignment.CenterVertically,
   ) {
@@ -313,14 +313,14 @@ struct QuickActionCell: View {
       icon.frame(width: EandIcon.lg, height: EandIcon.lg)
         .padding(10)
         .background(EandColor.surfaceBaseDefault)            // grey square
-        .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius3))
+        .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius4))
       Spacer()
       Text(label).font(.system(size: EandTypography.titleXs.size, weight: .semibold))
     }
     .padding(EandSpacing.md)
     .frame(minHeight: 104, alignment: .leading)
     .background(EandColor.surfaceCanvasDefault)              // white card, NO border
-    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius6))
+    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius7))
   }
 }`,
     kotlin: `import com.eand.tokens.EandColor
@@ -329,12 +329,12 @@ struct QuickActionCell: View {
 fun QuickActionCell(label: String, icon: Painter) {
   Column(
     Modifier
-      .background(EandColor.surfaceCanvasDefault, RoundedCornerShape(EandRadius.radius6))  // no border
+      .background(EandColor.surfaceCanvasDefault, RoundedCornerShape(EandRadius.radius7))  // no border
       .padding(EandSpacing.md)
       .heightIn(min = 104.dp),
     verticalArrangement = Arrangement.SpaceBetween,
   ) {
-    Box(Modifier.background(EandColor.surfaceBaseDefault, RoundedCornerShape(EandRadius.radius3)).padding(10.dp)) {
+    Box(Modifier.background(EandColor.surfaceBaseDefault, RoundedCornerShape(EandRadius.radius4)).padding(10.dp)) {
       Icon(icon, null, Modifier.size(EandIcon.lg))
     }
     Text(label, style = EandTypography.titleXs)
@@ -410,7 +410,7 @@ struct PlanCard: View {
     }
     .padding(EandSpacing.lg)
     .background(EandColor.surfaceRaisedDefault)
-    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius6))
+    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius7))
   }
 }`,
     kotlin: `import com.eand.tokens.EandColor
@@ -419,7 +419,7 @@ struct PlanCard: View {
 fun PlanCard() {
   Column(
     Modifier
-      .background(EandColor.surfaceRaisedDefault, RoundedCornerShape(EandRadius.radius6))
+      .background(EandColor.surfaceRaisedDefault, RoundedCornerShape(EandRadius.radius7))
       .padding(EandSpacing.lg),
     verticalArrangement = Arrangement.spacedBy(EandSpacing.sm),
   ) {
@@ -510,7 +510,7 @@ struct Snackbar: View {
     .padding(.horizontal, EandSpacing.lg)
     .padding(.vertical, EandSpacing.md)
     .background(EandColor.surfaceOverlayFloatingInverse)   // midnight pill
-    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius7))
+    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius8))
   }
 }`,
     kotlin: `import com.eand.tokens.EandColor
@@ -520,7 +520,7 @@ fun Snackbar(message: String) {
   Row(
     Modifier
       .fillMaxWidth()
-      .background(EandColor.surfaceOverlayFloatingInverse, RoundedCornerShape(EandRadius.radius7))
+      .background(EandColor.surfaceOverlayFloatingInverse, RoundedCornerShape(EandRadius.radius8))
       .padding(horizontal = EandSpacing.lg, vertical = EandSpacing.md),
     verticalAlignment = Alignment.CenterVertically,
     horizontalArrangement = Arrangement.spacedBy(EandSpacing.md),
@@ -553,7 +553,7 @@ struct Alert: View {
     }
     .padding(EandSpacing.lg)
     .background(EandColor.alertMessageSurfaceSuccess)
-    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius6))
+    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius7))
   }
 }`,
     kotlin: `import com.eand.tokens.EandColor
@@ -562,7 +562,7 @@ struct Alert: View {
 fun Alert(title: String, body: String) {
   Row(
     Modifier
-      .background(EandColor.alertMessageSurfaceSuccess, RoundedCornerShape(EandRadius.radius6))
+      .background(EandColor.alertMessageSurfaceSuccess, RoundedCornerShape(EandRadius.radius7))
       .padding(EandSpacing.lg),
     horizontalArrangement = Arrangement.spacedBy(EandSpacing.md),
   ) {
@@ -596,7 +596,7 @@ struct AlertModal: View {
     }
     .padding(EandSpacing.xl)
     .background(EandColor.surfaceRaisedDefault)
-    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius6))
+    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius7))
   }
 }`,
     kotlin: `import com.eand.tokens.EandColor
@@ -606,7 +606,7 @@ fun AlertModal(title: String, body: String) {
   Column(
     Modifier
       .widthIn(max = 360.dp)
-      .background(EandColor.surfaceRaisedDefault, RoundedCornerShape(EandRadius.radius6))
+      .background(EandColor.surfaceRaisedDefault, RoundedCornerShape(EandRadius.radius7))
       .padding(EandSpacing.xl),
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.spacedBy(EandSpacing.md),
@@ -837,7 +837,7 @@ struct Searchbar: View {
     }
     .padding(.horizontal, EandSpacing.lg).frame(height: 52)
     .background(EandColor.surfaceBaseDefault)
-    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius5))
+    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius6))
   }
 }`,
     kotlin: `import com.eand.tokens.EandColor
@@ -847,7 +847,7 @@ fun Searchbar(query: String, onQueryChange: (String) -> Unit) {
   Row(
     Modifier
       .fillMaxWidth().height(52.dp)
-      .background(EandColor.surfaceBaseDefault, RoundedCornerShape(EandRadius.radius5))
+      .background(EandColor.surfaceBaseDefault, RoundedCornerShape(EandRadius.radius6))
       .padding(horizontal = EandSpacing.lg),
     verticalAlignment = Alignment.CenterVertically,
     horizontalArrangement = Arrangement.spacedBy(EandSpacing.sm),
@@ -876,7 +876,7 @@ struct AISearch: View {
     }
     .padding(.horizontal, EandSpacing.lg).frame(height: 52)
     .background(EandColor.surfaceBaseDefault)
-    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius5))
+    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius6))
   }
 }`,
     kotlin: `import com.eand.tokens.EandColor
@@ -886,7 +886,7 @@ fun AISearch(query: String, onQueryChange: (String) -> Unit) {
   Row(
     Modifier
       .fillMaxWidth().height(52.dp)
-      .background(EandColor.surfaceBaseDefault, RoundedCornerShape(EandRadius.radius5))
+      .background(EandColor.surfaceBaseDefault, RoundedCornerShape(EandRadius.radius6))
       .padding(horizontal = EandSpacing.lg),
     verticalAlignment = Alignment.CenterVertically,
     horizontalArrangement = Arrangement.spacedBy(EandSpacing.sm),
@@ -953,13 +953,13 @@ struct EandInput: View {
         .foregroundColor(EandColor.inputFieldTextDefaultLabelDefault)
       TextField("", text: $value)
         .font(.system(size: EandTypography.bodyLg.size))
-        .foregroundColor(EandColor.inputFieldTextDefaultValueActive)
+        .foregroundColor(EandColor.inputFieldTextDefaultValueDefault)
     }
     .padding(.horizontal, EandSpacing.md).frame(minHeight: 56)
     .background(EandColor.inputFieldSurfaceDefaultDefault)
-    .overlay(RoundedRectangle(cornerRadius: EandRadius.radius5)
+    .overlay(RoundedRectangle(cornerRadius: EandRadius.radius6)
       .stroke(EandColor.inputFieldBorderDefault, lineWidth: 1.5))
-    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius5))
+    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius6))
   }
 }`,
     kotlin: `import com.eand.tokens.EandColor
@@ -969,8 +969,8 @@ fun EandInput(label: String, value: String, onValueChange: (String) -> Unit) {
   Column(
     Modifier
       .fillMaxWidth().heightIn(min = 56.dp)
-      .background(EandColor.inputFieldSurfaceDefaultDefault, RoundedCornerShape(EandRadius.radius5))
-      .border(1.5.dp, EandColor.inputFieldBorderDefault, RoundedCornerShape(EandRadius.radius5))
+      .background(EandColor.inputFieldSurfaceDefaultDefault, RoundedCornerShape(EandRadius.radius6))
+      .border(1.5.dp, EandColor.inputFieldBorderDefault, RoundedCornerShape(EandRadius.radius6))
       .padding(horizontal = EandSpacing.md, vertical = EandSpacing.sm),
   ) {
     Text(label, style = EandTypography.bodySm, color = EandColor.inputFieldTextDefaultLabelDefault)
@@ -1029,7 +1029,7 @@ struct Stepper: View {
     HStack(spacing: EandSpacing.sm) {
       ForEach(0..<steps, id: \\.self) { i in
         Capsule()
-          .fill(i < progress ? EandColor.stepperDefaultActive : EandColor.stepperDefaultDefault)
+          .fill(i < progress ? EandColor.stepperDefaultSelected : EandColor.stepperDefaultDefault)
           .frame(height: 6).frame(maxWidth: .infinity)
       }
     }
@@ -1043,7 +1043,7 @@ fun Stepper(steps: Int, progress: Int) {
     horizontalArrangement = Arrangement.spacedBy(EandSpacing.sm)) {
     repeat(steps) { i ->
       Box(Modifier.weight(1f).fillMaxHeight().clip(CircleShape)
-        .background(if (i < progress) EandColor.stepperDefaultActive else EandColor.stepperDefaultDefault))
+        .background(if (i < progress) EandColor.stepperDefaultSelected else EandColor.stepperDefaultDefault))
     }
   }
 }`,
@@ -1067,7 +1067,7 @@ struct AddTrigger: View {
     }
     .foregroundColor(EandColor.textBrandDefault)
     .padding(.horizontal, EandSpacing.lg).frame(height: 52)
-    .overlay(RoundedRectangle(cornerRadius: EandRadius.radius5)
+    .overlay(RoundedRectangle(cornerRadius: EandRadius.radius6)
       .strokeBorder(EandColor.borderDefault, style: StrokeStyle(lineWidth: 1, dash: [4])))
   }
 }`,
@@ -1078,7 +1078,7 @@ fun AddTrigger(label: String) {
   Row(
     Modifier
       .height(52.dp)
-      .dashedBorder(1.dp, EandColor.borderDefault, RoundedCornerShape(EandRadius.radius5))
+      .dashedBorder(1.dp, EandColor.borderDefault, RoundedCornerShape(EandRadius.radius6))
       .padding(horizontal = EandSpacing.lg),
     verticalAlignment = Alignment.CenterVertically,
     horizontalArrangement = Arrangement.spacedBy(EandSpacing.xs),
@@ -1096,34 +1096,39 @@ fun AddTrigger(label: String) {
     swift: `import SwiftUI
 import EandTokens
 
-// e& logo asset in 4 versions — default / white / midnight / red.
-struct EandLogo: View {
-  enum Version { case defaultV, white, midnight, red }
-  let version: Version
+// etisalat logo (DSL V1.2). Export the Figma artworks into the asset catalog:
+// etisalat-logo-{default,white,red} and etisalat-{lockup,logomark,wordmark,bilingual}[-rtl].
+struct EtisalatLogo: View {
+  enum Scheme: String { case \`default\`, white, red }
+  var scheme: Scheme = .default
+  var size: CGFloat = 96
   var body: some View {
-    Image("eand-logo-\\(version)")   // from the asset catalog
-      .resizable().scaledToFit().frame(width: 96, height: 96)
+    Image("etisalat-logo-\\(scheme.rawValue)")
+      .resizable().scaledToFit().frame(width: size, height: size)
+      .accessibilityLabel("etisalat")
   }
 }`,
     kotlin: `import com.eand.tokens.R
 
-// e& logo asset in 4 versions — default / white / midnight / red.
+// etisalat logo (DSL V1.2): color-scheme default (red tile) / white / red.
 @Composable
-fun EandLogo(version: LogoVersion = LogoVersion.Default) {
+fun EtisalatLogo(scheme: LogoScheme = LogoScheme.Default, size: Dp = 96.dp) {
   Image(
-    painterResource(when (version) {
-      LogoVersion.White -> R.drawable.eand_logo_white
-      LogoVersion.Midnight -> R.drawable.eand_logo_midnight
-      LogoVersion.Red -> R.drawable.eand_logo_red
-      else -> R.drawable.eand_logo_default
+    painterResource(when (scheme) {
+      LogoScheme.White -> R.drawable.etisalat_logo_white
+      LogoScheme.Red -> R.drawable.etisalat_logo_red
+      else -> R.drawable.etisalat_logo_default
     }),
-    contentDescription = "e&",
-    modifier = Modifier.size(96.dp),
+    contentDescription = "etisalat",
+    modifier = Modifier.size(size),
   )
 }`,
     react: `import { Logo } from '@eand/react-design-system';
 
-<Logo />`,
+<Logo />                                   {/* red tile — the brand symbol */}
+<Logo version="white" />                   {/* on brand or dark surfaces */}
+<Logo version="red" type="logomark" />     {/* the swoosh alone */}
+<Logo version="white" type="lockup" rtl /> {/* Arabic lockup */}`,
   },
 
   logorow: {
@@ -1204,20 +1209,172 @@ struct AtomSurface<Content: View>: View {
   var body: some View {
     content
       .background(level)
-      .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius5))
+      .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius6))
   }
 }`,
     kotlin: `import com.eand.tokens.EandColor
 
 @Composable
 fun AtomSurface(level: Color = EandColor.surfaceBaseDefault, content: @Composable () -> Unit) {
-  Box(Modifier.background(level, RoundedCornerShape(EandRadius.radius5))) { content() }
+  Box(Modifier.background(level, RoundedCornerShape(EandRadius.radius6))) { content() }
 }`,
     react: `import { AtomSurface } from '@eand/react-design-system';
 
 <AtomSurface level="raised">Content on a raised surface</AtomSurface>`,
   },
 
+  pageheader: {
+    swift: `import SwiftUI
+import EandTokens
+
+struct PageHeader: View {
+  let lines: [(muted: String, strong: String)]
+  let subtitle: String
+  let tabs: [String]
+  @State private var selected = 0
+  var body: some View {
+    VStack(spacing: EandSpacing.md) {
+      VStack(spacing: EandSpacing.xs) {
+        ForEach(lines.indices, id: \\.self) { i in
+          (Text(lines[i].muted + " ").foregroundColor(EandColor.textDefaultSubtle)
+            + Text(lines[i].strong).foregroundColor(EandColor.textDefaultDefault))
+            .font(.system(size: EandTypography.headingLg.size, weight: .bold))
+        }
+        Text(subtitle)
+          .font(.system(size: EandTypography.bodyMd.size))
+          .foregroundColor(EandColor.textDefaultSubtle)
+          .multilineTextAlignment(.center)
+          .padding(.horizontal, EandSpacing.spacing2xl)
+      }
+      ScrollView(.horizontal, showsIndicators: false) {
+        HStack(spacing: EandSpacing.xs) {
+          ForEach(tabs.indices, id: \\.self) { i in
+            Text(tabs[i])
+              .font(.system(size: EandTypography.titleXs.size, weight: .semibold))
+              .foregroundColor(i == selected ? EandColor.tabInverseTextSelected : EandColor.tabDefaultTextDefault)
+              .padding(.horizontal, EandSpacing.lg).frame(minWidth: 72, minHeight: 48)
+              .background(i == selected ? EandColor.tabInverseSurfaceSelected : EandColor.tabDefaultSurfaceDefault)
+              .clipShape(Capsule())
+              .onTapGesture { selected = i }
+          }
+        }
+      }
+    }
+    .padding(.vertical, EandSpacing.spacing2xl).padding(.horizontal, EandSpacing.lg)
+    .background(EandColor.surfaceBaseInverse)
+    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius7))
+  }
+}`,
+    kotlin: `import com.eand.tokens.EandColor
+
+@Composable
+fun PageHeader(lines: List<Pair<String, String>>, subtitle: String, tabs: List<String>) {
+  var selected by remember { mutableStateOf(0) }
+  Column(
+    Modifier.fillMaxWidth().clip(RoundedCornerShape(EandRadius.radius7))
+      .background(EandColor.surfaceBaseInverse)
+      .padding(vertical = EandSpacing.spacing2xl, horizontal = EandSpacing.lg),
+    horizontalAlignment = Alignment.CenterHorizontally,
+    verticalArrangement = Arrangement.spacedBy(EandSpacing.md),
+  ) {
+    lines.forEach { (muted, strong) ->
+      Text(buildAnnotatedString {
+        withStyle(SpanStyle(color = EandColor.textDefaultSubtle)) { append("$muted ") }
+        withStyle(SpanStyle(color = EandColor.textDefaultDefault)) { append(strong) }
+      }, style = EandTypography.headingLg)
+    }
+    Text(subtitle, style = EandTypography.bodyMd, color = EandColor.textDefaultSubtle,
+      textAlign = TextAlign.Center, modifier = Modifier.padding(horizontal = EandSpacing.spacing2xl))
+    LazyRow(horizontalArrangement = Arrangement.spacedBy(EandSpacing.xs)) {
+      itemsIndexed(tabs) { i, label ->
+        val on = i == selected
+        Box(
+          Modifier.height(48.dp).widthIn(min = 72.dp).clip(CircleShape)
+            .background(if (on) EandColor.tabInverseSurfaceSelected else EandColor.tabDefaultSurfaceDefault)
+            .clickable { selected = i }.padding(horizontal = EandSpacing.lg),
+          contentAlignment = Alignment.Center,
+        ) {
+          Text(label, style = EandTypography.titleXs,
+            color = if (on) EandColor.tabInverseTextSelected else EandColor.tabDefaultTextDefault)
+        }
+      }
+    }
+  }
+}`,
+    react: `import { PageHeader } from '@eand/react-design-system';
+
+<PageHeader
+  icon={<img src={thermostat3d} alt="" width={56} height={56} />}
+  title={[
+    { muted: 'Discover', strong: 'Thermostats.' },
+    { muted: 'Built for', strong: 'Intelligence' },
+  ]}
+  subtitle="Your home learns your rhythm — adjusting temperature, saving energy, and creating comfort before you even notice."
+  tabs={['Home', 'Thermostats', 'Cameras', 'Lighting']}
+  onTabChange={(i) => setCategory(i)}
+/>`,
+  },
+  pagetitle: {
+    swift: `import SwiftUI
+import EandTokens
+
+struct PageTitle: View {
+  let title: String
+  let description: String?
+  var body: some View {
+    VStack(spacing: EandSpacing.md) {
+      Image(systemName: "checkmark.circle.fill")
+        .font(.system(size: 32))
+        .foregroundColor(EandColor.statusIconIconPositive)
+        .frame(width: 56, height: 56)
+        .background(EandColor.statusIconSurfacePositive)
+        .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius7))
+      VStack(spacing: EandSpacing.xs) {
+        Text(title)
+          .font(.system(size: 24, weight: .bold))   // font/size/7 — a step below heading/lg
+          .lineLimit(2)
+        if let description {
+          Text(description).font(.system(size: EandTypography.bodyMd.size))
+        }
+      }
+      .foregroundColor(EandColor.textDefaultDefault)
+      .multilineTextAlignment(.center)
+    }
+    .padding(.bottom, EandSpacing.xl)
+  }
+}`,
+    kotlin: `import com.eand.tokens.EandColor
+
+@Composable
+fun PageTitle(title: String, description: String? = null) {
+  Column(
+    Modifier.fillMaxWidth().padding(bottom = EandSpacing.xl),
+    horizontalAlignment = Alignment.CenterHorizontally,
+    verticalArrangement = Arrangement.spacedBy(EandSpacing.md),
+  ) {
+    Box(
+      Modifier.size(56.dp).clip(RoundedCornerShape(EandRadius.radius7))
+        .background(EandColor.statusIconSurfacePositive),
+      contentAlignment = Alignment.Center,
+    ) {
+      Icon(Icons.Filled.CheckCircle, null, tint = EandColor.statusIconIconPositive, modifier = Modifier.size(32.dp))
+    }
+    Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(EandSpacing.xs)) {
+      Text(title, style = EandTypography.headingLg.copy(fontSize = 24.sp, lineHeight = 26.4.sp),
+        color = EandColor.textDefaultDefault, maxLines = 2, overflow = TextOverflow.Ellipsis, textAlign = TextAlign.Center)
+      description?.let { Text(it, style = EandTypography.bodyMd, color = EandColor.textDefaultDefault, textAlign = TextAlign.Center) }
+    }
+  }
+}`,
+    react: `import { PageTitle } from '@eand/react-design-system';
+
+<PageTitle
+  type="lg"
+  status="positive"
+  title="Your new plan is active"
+  description="Freedom Live Plan 200 starts today. We have sent the details to your email."
+/>`,
+  },
   accordion: {
     swift: `import SwiftUI
 import EandTokens
@@ -1277,9 +1434,9 @@ struct EandCard<Content: View>: View {
     }
     .padding(EandSpacing.lg)
     .background(EandColor.surfaceRaisedDefault)
-    .overlay(RoundedRectangle(cornerRadius: EandRadius.radius5)
+    .overlay(RoundedRectangle(cornerRadius: EandRadius.radius6)
       .stroke(EandColor.borderSolidSubtle, lineWidth: 1))
-    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius5))
+    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius6))
   }
   var body: some View { content }
 }`,
@@ -1289,8 +1446,8 @@ struct EandCard<Content: View>: View {
 fun EandCard(title: String, body: String, action: @Composable () -> Unit) {
   Column(
     Modifier
-      .background(EandColor.surfaceRaisedDefault, RoundedCornerShape(EandRadius.radius5))
-      .border(1.dp, EandColor.borderSolidSubtle, RoundedCornerShape(EandRadius.radius5))
+      .background(EandColor.surfaceRaisedDefault, RoundedCornerShape(EandRadius.radius6))
+      .border(1.dp, EandColor.borderSolidSubtle, RoundedCornerShape(EandRadius.radius6))
       .padding(EandSpacing.lg),
     verticalArrangement = Arrangement.spacedBy(EandSpacing.xs),
   ) {
@@ -1314,7 +1471,7 @@ struct ActionBar: View {
   let title: String; let subtitle: String
   var body: some View {
     HStack(spacing: EandSpacing.md) {
-      RoundedRectangle(cornerRadius: EandRadius.radius3)
+      RoundedRectangle(cornerRadius: EandRadius.radius4)
         .fill(EandColor.surfaceBaseDefault).frame(width: 40, height: 40)
       VStack(alignment: .leading) {
         Text(title).font(.system(size: EandTypography.titleXs.size, weight: .semibold))
@@ -1326,7 +1483,7 @@ struct ActionBar: View {
     }
     .padding(.horizontal, EandSpacing.lg).frame(height: 72)
     .background(EandColor.surfaceBaseInverse)
-    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius6))
+    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius7))
   }
 }`,
     kotlin: `import com.eand.tokens.EandColor
@@ -1336,12 +1493,12 @@ fun ActionBar(title: String, subtitle: String) {
   Row(
     Modifier
       .fillMaxWidth().height(72.dp)
-      .background(EandColor.surfaceBaseInverse, RoundedCornerShape(EandRadius.radius6))
+      .background(EandColor.surfaceBaseInverse, RoundedCornerShape(EandRadius.radius7))
       .padding(horizontal = EandSpacing.lg),
     verticalAlignment = Alignment.CenterVertically,
     horizontalArrangement = Arrangement.spacedBy(EandSpacing.md),
   ) {
-    Box(Modifier.size(40.dp).background(EandColor.surfaceBaseDefault, RoundedCornerShape(EandRadius.radius3)))
+    Box(Modifier.size(40.dp).background(EandColor.surfaceBaseDefault, RoundedCornerShape(EandRadius.radius4)))
     Column(Modifier.weight(1f)) {
       Text(title, style = EandTypography.titleXs)
       Text(subtitle, style = EandTypography.bodyMd, color = EandColor.textDefaultSubtle)
@@ -1407,9 +1564,9 @@ struct PlanUsageBar: View {
   var body: some View {
     GeometryReader { geo in
       ZStack(alignment: .leading) {
-        RoundedRectangle(cornerRadius: EandRadius.radius3)
+        RoundedRectangle(cornerRadius: EandRadius.radius4)
           .fill(EandColor.surfaceCanvasInverse)
-        RoundedRectangle(cornerRadius: EandRadius.radius3)
+        RoundedRectangle(cornerRadius: EandRadius.radius4)
           .fill(lowData ? EandColor.orange500 : EandColor.green550)
           .frame(width: geo.size.width * fraction)
         HStack {
@@ -1443,12 +1600,12 @@ fun PlanUsageBar(
   val fraction = if (total > 0f) (remaining / total).coerceIn(0f, 1f) else 0f
   Box(
     Modifier.fillMaxWidth().height(48.dp)
-      .clip(RoundedCornerShape(EandRadius.radius3))
+      .clip(RoundedCornerShape(EandRadius.radius4))
       .background(EandColor.surfaceCanvasInverse)
   ) {
     Box(
       Modifier.fillMaxWidth(fraction).fillMaxHeight()
-        .clip(RoundedCornerShape(EandRadius.radius3))
+        .clip(RoundedCornerShape(EandRadius.radius4))
         .background(if (lowData) EandColor.orange500 else EandColor.green550)
     )
     Row(
@@ -1484,7 +1641,7 @@ struct ProductCard: View {
   let title: String; let price: String
   var body: some View {
     VStack(alignment: .leading, spacing: EandSpacing.md) {
-      RoundedRectangle(cornerRadius: EandRadius.radius3)
+      RoundedRectangle(cornerRadius: EandRadius.radius4)
         .fill(EandColor.surfaceBaseDefault).frame(height: 140)
       Text(title).font(.system(size: EandTypography.titleSm.size, weight: .semibold))
       Spacer()
@@ -1496,7 +1653,7 @@ struct ProductCard: View {
     }
     .padding(EandSpacing.lg).frame(width: 200)
     .background(EandColor.surfaceRaisedDefault)
-    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius5))
+    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius6))
   }
 }`,
     kotlin: `import com.eand.tokens.EandColor
@@ -1506,12 +1663,12 @@ fun ProductCard(title: String, price: String) {
   Column(
     Modifier
       .width(200.dp)
-      .background(EandColor.surfaceRaisedDefault, RoundedCornerShape(EandRadius.radius5))
+      .background(EandColor.surfaceRaisedDefault, RoundedCornerShape(EandRadius.radius6))
       .padding(EandSpacing.lg),
     verticalArrangement = Arrangement.spacedBy(EandSpacing.md),
   ) {
     Box(Modifier.fillMaxWidth().height(140.dp)
-      .background(EandColor.surfaceBaseDefault, RoundedCornerShape(EandRadius.radius3)))
+      .background(EandColor.surfaceBaseDefault, RoundedCornerShape(EandRadius.radius4)))
     Text(title, style = EandTypography.titleSm)
     Text("from", style = EandTypography.bodySm, color = EandColor.textDefaultMuted)
     Text(price, style = EandTypography.titleSm)
@@ -1531,7 +1688,7 @@ struct DealCard: View {
   let title: String; let subtitle: String
   var body: some View {
     VStack(alignment: .leading, spacing: 2) {
-      RoundedRectangle(cornerRadius: EandRadius.radius3)
+      RoundedRectangle(cornerRadius: EandRadius.radius4)
         .fill(EandColor.surfaceBaseDefault).frame(height: 120).padding(EandSpacing.sm)
       VStack(alignment: .leading) {
         Text(title).font(.system(size: EandTypography.titleSm.size, weight: .semibold))
@@ -1541,7 +1698,7 @@ struct DealCard: View {
     }
     .frame(width: 240)
     .background(EandColor.surfaceRaisedDefault)
-    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius5))
+    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius6))
   }
 }`,
     kotlin: `import com.eand.tokens.EandColor
@@ -1551,10 +1708,10 @@ fun DealCard(title: String, subtitle: String) {
   Column(
     Modifier
       .width(240.dp)
-      .background(EandColor.surfaceRaisedDefault, RoundedCornerShape(EandRadius.radius5)),
+      .background(EandColor.surfaceRaisedDefault, RoundedCornerShape(EandRadius.radius6)),
   ) {
     Box(Modifier.padding(EandSpacing.sm).fillMaxWidth().height(120.dp)
-      .background(EandColor.surfaceBaseDefault, RoundedCornerShape(EandRadius.radius3)))
+      .background(EandColor.surfaceBaseDefault, RoundedCornerShape(EandRadius.radius4)))
     Column(Modifier.padding(horizontal = EandSpacing.lg).padding(bottom = EandSpacing.lg)) {
       Text(title, style = EandTypography.titleSm)
       Text(subtitle, style = EandTypography.bodySm, color = EandColor.textDefaultMuted)
@@ -1582,7 +1739,7 @@ struct NewCard: View {
     }
     .frame(width: 200)
     .background(EandColor.surfaceRaisedDefault)
-    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius5))
+    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius6))
   }
 }`,
     kotlin: `import com.eand.tokens.EandColor
@@ -1592,7 +1749,7 @@ fun NewCard(title: String) {
   Column(
     Modifier
       .width(200.dp)
-      .clip(RoundedCornerShape(EandRadius.radius5))
+      .clip(RoundedCornerShape(EandRadius.radius6))
       .background(EandColor.surfaceRaisedDefault),
   ) {
     Box(Modifier.fillMaxWidth().height(140.dp).background(EandColor.surfaceBaseDefault))
@@ -1618,9 +1775,9 @@ struct ServiceCard: View {
     }
     .padding(EandSpacing.md).frame(minHeight: 116)
     .background(EandColor.surfaceCanvasDefault)
-    .overlay(RoundedRectangle(cornerRadius: EandRadius.radius5)
+    .overlay(RoundedRectangle(cornerRadius: EandRadius.radius6)
       .stroke(EandColor.borderSolidSubtle, lineWidth: 1))
-    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius5))
+    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius6))
   }
 }`,
     kotlin: `import com.eand.tokens.EandColor
@@ -1630,8 +1787,8 @@ fun ServiceCard(label: String, icon: Painter) {
   Column(
     Modifier
       .heightIn(min = 116.dp)
-      .background(EandColor.surfaceCanvasDefault, RoundedCornerShape(EandRadius.radius5))
-      .border(1.dp, EandColor.borderSolidSubtle, RoundedCornerShape(EandRadius.radius5))
+      .background(EandColor.surfaceCanvasDefault, RoundedCornerShape(EandRadius.radius6))
+      .border(1.dp, EandColor.borderSolidSubtle, RoundedCornerShape(EandRadius.radius6))
       .padding(EandSpacing.md),
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.spacedBy(EandSpacing.sm),
@@ -1665,7 +1822,7 @@ struct Highlight: View {
       }.padding(EandSpacing.lg)
     }
     .frame(height: 340)
-    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius6))
+    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius7))
   }
 }`,
     kotlin: `import com.eand.tokens.EandColor
@@ -1675,7 +1832,7 @@ fun Highlight(title: String, subtitle: String) {
   Box(
     Modifier
       .fillMaxWidth().height(340.dp)
-      .clip(RoundedCornerShape(EandRadius.radius6))
+      .clip(RoundedCornerShape(EandRadius.radius7))
       .background(Brush.verticalGradient(listOf(Color(0xFF3A3340), Color(0xFF191329)))),
     contentAlignment = Alignment.BottomStart,
   ) {
@@ -1710,7 +1867,7 @@ struct SmilesBalance: View {
     .padding(EandSpacing.lg)
     .background(LinearGradient(colors: [Color(hex: "#E2C668"), Color(hex: "#D9B14A")],
                                startPoint: .topLeading, endPoint: .bottomTrailing))
-    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius5))
+    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius6))
   }
 }`,
     kotlin: `import com.eand.tokens.EandColor
@@ -1721,7 +1878,7 @@ fun SmilesBalance(points: String) {
     Modifier
       .fillMaxWidth()
       .background(Brush.linearGradient(listOf(Color(0xFFE2C668), Color(0xFFD9B14A))),
-        RoundedCornerShape(EandRadius.radius5))
+        RoundedCornerShape(EandRadius.radius6))
       .padding(EandSpacing.lg),
     verticalAlignment = Alignment.CenterVertically,
   ) {
@@ -1755,7 +1912,7 @@ struct Voucher: View {
     }
     .padding(EandSpacing.lg)
     .background(EandColor.surfaceRaisedDefault)
-    .overlay(RoundedRectangle(cornerRadius: EandRadius.radius5)
+    .overlay(RoundedRectangle(cornerRadius: EandRadius.radius6)
       .strokeBorder(EandColor.borderSolidDefault, style: StrokeStyle(lineWidth: 1, dash: [4])))
   }
 }`,
@@ -1766,8 +1923,8 @@ fun Voucher(value: String, code: String) {
   Row(
     Modifier
       .fillMaxWidth()
-      .background(EandColor.surfaceRaisedDefault, RoundedCornerShape(EandRadius.radius5))
-      .dashedBorder(1.dp, EandColor.borderSolidDefault, RoundedCornerShape(EandRadius.radius5))
+      .background(EandColor.surfaceRaisedDefault, RoundedCornerShape(EandRadius.radius6))
+      .dashedBorder(1.dp, EandColor.borderSolidDefault, RoundedCornerShape(EandRadius.radius6))
       .padding(EandSpacing.lg),
   ) {
     Column {
@@ -1794,7 +1951,7 @@ struct Tooltip: View {
       .foregroundColor(EandColor.textDefaultInverse)
       .padding(.horizontal, EandSpacing.sm).padding(.vertical, EandSpacing.xs)
       .background(EandColor.surfaceOverlayFloatingInverse)
-      .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius2))
+      .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius3))
   }
 }`,
     kotlin: `import com.eand.tokens.EandColor
@@ -1806,7 +1963,7 @@ fun Tooltip(content: String) {
     style = EandTypography.bodySm,
     color = EandColor.textDefaultInverse,
     modifier = Modifier
-      .background(EandColor.surfaceOverlayFloatingInverse, RoundedCornerShape(EandRadius.radius2))
+      .background(EandColor.surfaceOverlayFloatingInverse, RoundedCornerShape(EandRadius.radius3))
       .padding(horizontal = EandSpacing.sm, vertical = EandSpacing.xs),
   )
 }`,
@@ -1833,7 +1990,7 @@ struct BottomSheet<Content: View>: View {
     }
     .padding(.bottom, EandSpacing.lg)
     .background(EandColor.surfaceRaisedDefault)
-    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius7))
+    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius8))
   }
 }`,
     kotlin: `import com.eand.tokens.EandColor
@@ -1873,9 +2030,9 @@ struct PickerOption: View {
     }
     .padding(EandSpacing.sm).frame(minWidth: 96, minHeight: 72, alignment: .topLeading)
     .background(EandColor.surfaceSunkenDefault)
-    .overlay(RoundedRectangle(cornerRadius: EandRadius.radius5)
+    .overlay(RoundedRectangle(cornerRadius: EandRadius.radius6)
       .stroke(selected ? EandColor.borderInteractiveAccentDefault : .clear, lineWidth: 1.5))
-    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius5))
+    .clipShape(RoundedRectangle(cornerRadius: EandRadius.radius6))
   }
 }`,
     kotlin: `import com.eand.tokens.EandColor
@@ -1884,11 +2041,11 @@ struct PickerOption: View {
 fun PickerOption(value: String, caption: String, selected: Boolean, onClick: () -> Unit) {
   Column(
     Modifier
-      .clip(RoundedCornerShape(EandRadius.radius5))
+      .clip(RoundedCornerShape(EandRadius.radius6))
       .background(EandColor.surfaceSunkenDefault)
       .border(1.5.dp,
         if (selected) EandColor.borderInteractiveAccentDefault else Color.Transparent,
-        RoundedCornerShape(EandRadius.radius5))
+        RoundedCornerShape(EandRadius.radius6))
       .clickable(onClick = onClick)
       .widthIn(min = 96.dp).heightIn(min = 72.dp)
       .padding(EandSpacing.sm),
