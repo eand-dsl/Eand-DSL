@@ -413,22 +413,44 @@ export interface RadioProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   /** Inverse color scheme for dark (midnight/brand) surfaces (Figma `color-scheme=inverse`). */
   inverse?: boolean;
 }
+/* Figma V1.2 `radio-button` 26369:775 (color-scheme × small × selected × disabled): a 2px
+   inside ring (`border/lg`) and a 16px dot in the 24 control / 12px in the 20
+   (`scale/16|12`). Radio missed the mark migration (last touched 05.05.2026): four states
+   bind variables outside the token set, and the inverse scheme binds `mark/default/*`, which
+   turns the selected radio grey on dark surfaces (design question).
+   - default: on = mark/default/surface/selected; on-disabled = …/selected-disabled; off and
+     off-disabled are #908e9a / #d8d7de on deleted variables, bound here to the tokens holding
+     those exact values, mark/default/border/{default,disabled} (the checkbox off ring).
+   - inverse: the shipped white ring + dot and 60% off ring are kept until design rules;
+     disabled uses mark/inverse/{border,surface}/…disabled (white 40%) instead of opacity. */
+const RADIO = {
+  default: {
+    on: color('mark.default.surface.selected'), onDisabled: color('mark.default.surface.selected-disabled'),
+    off: color('mark.default.border.default'), offDisabled: color('mark.default.border.disabled'),
+  },
+  inverse: {
+    on: color('mark.inverse.surface.selected'), onDisabled: color('mark.inverse.surface.selected-disabled'),
+    off: color('border.interactive.inverse.default'), offDisabled: color('mark.inverse.border.disabled'),
+  },
+} as const;
 export function Radio({ label, checked, defaultChecked, disabled, onChange, size = 'lg', inverse, style, ...rest }: RadioProps) {
   const [internal, setInternal] = useState(defaultChecked ?? false);
   const on = checked ?? internal;
   const dim = size === 'sm' ? T.radio.sm : T.radio.md; // Figma lg 24×24 maps to token radio.md
-  const ring = on
-    ? color(inverse ? 'border.interactive.inverse.pressed' : 'border.interactive.accent.default')
-    : color(inverse ? 'border.interactive.inverse.default' : 'border.interactive.default.default');
+  const dot = size === 'sm' ? scale('12') : scale('16');
+  const r = RADIO[inverse ? 'inverse' : 'default'];
+  const ink = on ? (disabled ? r.onDisabled : r.on) : (disabled ? r.offDisabled : r.off);
+  const m = MARK[inverse ? 'inverse' : 'default'];
   return (
-    <label style={{ display: 'inline-flex', alignItems: 'center', gap: space('sm'), cursor: disabled ? 'not-allowed' : 'pointer', opacity: disabled ? 0.5 : 1, ...style }}>
-      <span style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: dim, height: dim, borderRadius: '50%', boxSizing: 'border-box', flex: 'none', border: `1px solid ${ring}`, background: 'transparent' }}>
+    <label style={{ display: 'inline-flex', alignItems: 'center', gap: space('sm'), cursor: disabled ? 'not-allowed' : 'pointer', ...style }}>
+      <span style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: dim, height: dim, borderRadius: '50%', boxSizing: 'border-box', flex: 'none', border: `${T.border.lg} solid ${ink}`, background: 'transparent' }}>
         <input type="radio" checked={checked} defaultChecked={defaultChecked} disabled={disabled}
           onChange={(e) => { setInternal(e.currentTarget.checked); onChange?.(e); }}
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', margin: 0, opacity: 0, cursor: 'inherit' }} {...rest} />
-        {on ? <span style={{ width: '50%', height: '50%', borderRadius: '50%', background: inverse ? color('surface.base.inverse') : color('surface.base.brand') }} /> : null}
+        {on ? <span style={{ width: dot, height: dot, flex: 'none', borderRadius: '50%', background: ink, pointerEvents: 'none' }} /> : null}
       </span>
-      {label ? <Text variant="body.md">{label}</Text> : null}
+      {/* No label on the Figma atom; same inks as the Checkbox label so disabled reads as disabled. */}
+      {label ? <Text variant="body.md" color={disabled ? m.labelDisabled : m.label}>{label}</Text> : null}
     </label>
   );
 }

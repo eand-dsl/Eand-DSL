@@ -222,6 +222,45 @@ test('Radio inverse selected shows a white dot and white ring', () => {
   expect(dot.style.background).toMatch(/#ffffff|rgb\(255,\s*255,\s*255\)/i);
 });
 
+/* Radio vs Figma V1.2 `radio-button` 26369:775: a 2px inside ring (`border/lg`, was 1px), a
+   16px dot in the 24 control and 12px in the 20 (`scale/16|12`, was 50% = 12/10), and
+   disabled as colours (was opacity .5). */
+
+test.each([
+  ['lg', '16px'],
+  ['sm', '12px'],
+] as const)('Radio %s has a 2px ring and a %s dot', (size, dot) => {
+  render(<Radio label="x" size={size} defaultChecked />);
+  const control = screen.getByRole('radio').parentElement!;
+  expect(control.style.border).toMatch(/^2px solid/);
+  const d = control.querySelector('span')!;
+  expect(d.style.width).toBe(dot);
+  expect(d.style.height).toBe(dot);
+});
+
+test.each([
+  // [label, props, ring, dot]
+  ['off', {}, 'rgb(144, 142, 154)', null],                                    // #908e9a = mark/default/border/default
+  ['on', { defaultChecked: true }, 'rgb(224, 8, 0)', 'rgb(224, 8, 0)'],        // mark/default/surface/selected
+  ['off disabled', { disabled: true }, 'rgb(216, 215, 222)', null],           // #d8d7de
+  ['on disabled', { defaultChecked: true, disabled: true }, 'rgb(216, 215, 222)', 'rgb(216, 215, 222)'],
+  ['inverse off disabled', { inverse: true, disabled: true }, 'rgba(255, 255, 255, 0.4)', null],
+  ['inverse on disabled', { inverse: true, defaultChecked: true, disabled: true }, 'rgba(255, 255, 255, 0.4)', 'rgba(255, 255, 255, 0.4)'],
+] as const)('Radio %s uses colour tokens, not opacity', (_l, props, ring, dot) => {
+  render(<Radio label="Opt" {...props} />);
+  const control = screen.getByRole('radio').parentElement!;
+  expect(control.style.border).toContain(ring);
+  if (dot) expect(control.querySelector('span')!.style.background).toBe(dot);
+  expect(control.parentElement!.style.opacity).toBe('');
+});
+
+test('Radio disabled label uses the disabled ink instead of dimming the row', () => {
+  const { rerender } = render(<Radio label="Opt" disabled />);
+  expect(screen.getByText('Opt').style.color).toBe('rgb(192, 191, 200)');
+  rerender(<Radio label="Opt" inverse />);
+  expect(screen.getByText('Opt').style.color).toBe('rgba(255, 255, 255, 0.75)');
+});
+
 /* ---------------- Chip ---------------- */
 
 test('Chip fires onClick and reflects selected via aria-pressed', async () => {
