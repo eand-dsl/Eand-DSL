@@ -28,3 +28,15 @@ describe('ty() font stack', () => {
     expect(ty('nope.nope').fontFamily).toBeUndefined();
   });
 });
+
+describe('ty() follows the published text styles', () => {
+  it('heading.lg is the V1.2 style (24px / 1.1), not the stale variable (28px)', () => {
+    expect(ty('heading.lg')).toMatchObject({ fontSize: '24px', lineHeight: '1.1' });
+  });
+  it('knows the new heading/2xl', () => {
+    expect(ty('heading.2xl').fontSize).toBe('32px');
+  });
+  it('still quotes the family', () => {
+    expect(ty('heading.lg').fontFamily).toBe(`"Suisse int'l", -apple-system, system-ui, sans-serif`);
+  });
+});

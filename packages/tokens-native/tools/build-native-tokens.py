@@ -180,6 +180,26 @@ def collect_typo(node, parts):
         for k, v in node.items(): collect_typo(v, parts + [k])
 collect_typo(R.get("typography", {}), [])
 
+# V1.2 retuned the published text styles (heading/lg 24 / 110% …) without updating the
+# typography/heading/* variables, so the styles override them where they exist — the same
+# rule the web build follows (scripts/build-tokens.ts, `textStyle`). heading/2xl is new.
+STYLES = json.load(open(os.path.join(ROOT, "text-styles.json")))
+WEIGHT_OF = {"thin": "Thin", "light": "Light", "regular": "Regular", "book": "Book",
+             "medium": "Medium", "semi bold": "Semi bold", "bold": "Bold", "black": "Black"}
+by_parts = {tuple(t[0]): i for i, t in enumerate(typo)}
+for st in STYLES:
+    parts = st["name"].split("/")
+    size = float(st["fontSize"])
+    w = WEIGHT_OF[st["fontStyle"].lower()]
+    lh = st["lineHeight"]
+    i = by_parts.get(tuple(parts))
+    lh_px = size * lh["value"] / 100.0 if lh["unit"] == "PERCENT" else (
+        lh["value"] if lh["unit"] == "PIXELS" else (typo[i][3] if i is not None else None))
+    fam = typo[i][4] if i is not None else typo[0][4]
+    row = (parts, size, w, lh_px, fam)
+    if i is None: typo.append(row); by_parts[tuple(parts)] = len(typo) - 1
+    else: typo[i] = row
+
 FAMILY = R.get("font", {}).get("family", {}).get("default", {})
 FAMILY = FAMILY if isinstance(FAMILY, str) else "Suisse int'l"
 

@@ -7,7 +7,9 @@ export const T = tokens as any;
 /** Typography style from a `category.size` variant, e.g. "body.md", "heading.lg". */
 export const ty = (variant: string): CSSProperties => {
   const [c, s] = variant.split('.');
-  const t = (T.typography?.[c]?.[s] ?? {}) as Record<string, string>;
+  // Published text styles first (what Figma symbols apply); the typography variables only
+  // where no style exists. In V1.2 they disagree for headings — see tokens.test.ts.
+  const t = (T.textStyle?.[c]?.[s] ?? T.typography?.[c]?.[s] ?? {}) as Record<string, string>;
   return {
     // The family must be quoted. The token is `Suisse int'l`, and these components style
     // themselves inline — unquoted, that apostrophe opens a CSS string the parser never
