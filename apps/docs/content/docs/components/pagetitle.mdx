@@ -1,0 +1,48 @@
+---
+title: PageTitle
+description: Concludes an activity — a status icon, a bold two-line title and an optional description.
+---
+
+<ComponentDemo id="pagetitle" />
+
+## When to use
+
+- **Use** for the outcome of an action — payment success, a failed top-up, a plan change that
+  needs attention — on a full page, inside a `Section`, or inside a `BottomSheet`.
+- **Don't use** to introduce a page; that is [PageHeader](./pageheader). Not for inline form
+  validation or toasts (use `Input` errors and `Snackbar`).
+
+## Choosing a size
+
+| Type | Title | Icon | Use for |
+| --- | --- | --- | --- |
+| `lg` | 24px bold | yes | Top-level outcomes such as a payment confirmation |
+| `md` | 20px bold | yes | Outcomes inside a section or a tall sheet |
+| `sm` | 18px bold | no | Messages lower in the hierarchy |
+| `xs` | 16px bold | no | Compact messages inside a sheet or card |
+
+Use `alignment="center"` for standalone screens and `"left"` when the message sits in a content
+flow. Always match `status` to the real outcome: `positive`, `danger`, `warning`, `brand` (an e&
+moment, not success) or `neutral`.
+
+## Props
+
+<PropsTable name="PageTitle" />
+
+## StatusIcon
+
+The 56px tinted tile `PageTitle` uses, available on its own. `icon` swaps the glyph for any
+name in the icon set.
+
+<PropsTable name="StatusIcon" />
+
+## Design
+
+Figma source: [page-title — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=40283-145186) ·
+[status-icon](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=40283-145559)
+
+- Gap 12 (`spacing/md`), title-to-description 4 (`spacing/xs`), bottom padding 20 (`spacing/xl`).
+- Title sizes are bound to `font/size/7·6·5` and `heading/xs` — a step below the `heading/*`
+  text styles of the same names. Line height 110% (120% at `xs`); the title clamps at two lines.
+- Status tile: `status-icon/surface/<type>` behind a 32px filled glyph in `status-icon/icon/<type>`,
+  `border-radius/7`.

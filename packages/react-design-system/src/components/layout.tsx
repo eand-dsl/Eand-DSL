@@ -163,3 +163,180 @@ export function Accordion({ title, defaultOpen = false, style, children, ...rest
     </div>
   );
 }
+
+/* ---------------- StatusIcon ----------------
+   Figma V1.2 status-icon (page 37140:111844, set 40283:145559): a 56px tile at
+   border-radius/7 holding a 40px icon box (4px padding, so a 32px glyph). Surface and
+   glyph bind status-icon/{surface,icon}/<type>. The glyph is a filled icon-set mark;
+   brand and neutral carry Figma's wallet placeholder, so `icon` swaps it. */
+export type StatusIconType = 'positive' | 'danger' | 'warning' | 'brand' | 'neutral';
+const STATUS_GLYPH: Record<StatusIconType, string> = {
+  positive: 'check-circle-filled',
+  danger: 'dismiss-filled',
+  warning: 'warning-filled',
+  brand: 'wallet-filled',
+  neutral: 'wallet-filled',
+};
+export interface StatusIconProps extends HTMLAttributes<HTMLDivElement> {
+  type?: StatusIconType;
+  /** An icon-set name to replace the default glyph for this type. */
+  icon?: string;
+}
+export function StatusIcon({ type = 'positive', icon, style, ...rest }: StatusIconProps) {
+  return (
+    <div style={{
+      width: T.scale['56'], height: T.scale['56'], flexShrink: 0, borderRadius: radius('7'),
+      display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden',
+      background: color(`status-icon.surface.${type}`), ...style,
+    }} {...rest}>
+      <div style={{ width: 40, height: 40, padding: space('xs'), boxSizing: 'border-box', display: 'flex' }}>
+        <Icon name={icon ?? STATUS_GLYPH[type]} size={32} color={color(`status-icon.icon.${type}`)} />
+      </div>
+    </div>
+  );
+}
+
+/* ---------------- PageTitle ----------------
+   Figma V1.2 page-title (page 37140:111844, set 40283:145186): concludes an activity —
+   a status icon (lg and md only), a bold title of at most two lines, and an optional
+   body/md description. Not for introducing a page: that is PageHeader.
+   The title size is bound per variant to font/size/7·6·5 and heading/xs, a step below
+   the heading/<size> styles of the same name. Line height 110% is held on the symbol
+   (Figma cannot bind line height), except xs at 120%. */
+export type PageTitleType = 'lg' | 'md' | 'sm' | 'xs';
+const PAGE_TITLE: Record<PageTitleType, { size: string; lineHeight: string; tracking: string; icon: boolean }> = {
+  lg: { size: T.font.size['7'], lineHeight: '1.1', tracking: T.font.letterSpacing.snug, icon: true },
+  md: { size: T.font.size['6'], lineHeight: '1.1', tracking: T.typography.heading.md.letterSpacing, icon: true },
+  sm: { size: T.font.size['5'], lineHeight: '1.1', tracking: T.typography.heading.sm.letterSpacing, icon: false },
+  xs: { size: T.typography.heading.xs.fontSize, lineHeight: T.font.lineHeight['120'], tracking: T.typography.heading.xs.letterSpacing, icon: false },
+};
+export interface PageTitleProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
+  type?: PageTitleType;
+  alignment?: 'center' | 'left';
+  /** Outcome the status icon reflects (lg and md only). */
+  status?: StatusIconType;
+  /** Replaces the status icon's default glyph. */
+  statusIcon?: string;
+  title: ReactNode;
+  description?: ReactNode;
+  /** Heading level for the title. */
+  as?: 'h1' | 'h2' | 'h3';
+}
+export function PageTitle({
+  type = 'lg', alignment = 'center', status = 'positive', statusIcon, title, description,
+  as: Heading = 'h2', style, ...rest
+}: PageTitleProps) {
+  const t = PAGE_TITLE[type];
+  const center = alignment === 'center';
+  const textAlign = center ? 'center' : 'start';
+  return (
+    <div style={{
+      display: 'flex', flexDirection: 'column', gap: space('md'), paddingBottom: space('xl'),
+      alignItems: center ? 'center' : 'flex-start', width: '100%', ...style,
+    }} {...rest}>
+      {t.icon ? <StatusIcon type={status} icon={statusIcon} /> : null}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: space('xs'), width: '100%' }}>
+        <Heading style={{
+          margin: 0, ...ty('heading.lg'), fontSize: t.size, lineHeight: t.lineHeight, letterSpacing: t.tracking,
+          color: color('text.default.default'), textAlign, overflowWrap: 'break-word',
+          display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 2, overflow: 'hidden',
+        }}>{title}</Heading>
+        {description ? (
+          <p style={{ margin: 0, ...ty('body.md'), color: color('text.default.default'), textAlign }}>{description}</p>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
+/* ---------------- PageHeader ----------------
+   Figma V1.2 page-header (page 37140:111844, set 37390:28734): opens a page — a 56px
+   icon slot, a heading/lg title of up to two lines (each a muted word + a strong word),
+   a body/md subtitle and a row of 48px tab pills. One per screen, directly below the
+   top bar. Not for outcomes: that is PageTitle.
+   Two things are as the published symbol has them, not as its description says, and
+   are logged in tools/audit/v1.1/design-questions.md: the default surface is 20px
+   (border-radius/7) while the inverse one is 24px (/8); and the selected pill on the
+   default card is white (tab/inverse/surface/selected), not the light-red tint. */
+export interface PageHeaderLine {
+  muted?: ReactNode;
+  strong?: ReactNode;
+}
+export interface PageHeaderProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
+  /** Up to two lines; each pairs a muted word with a strong word. */
+  title: PageHeaderLine[];
+  subtitle?: ReactNode;
+  /** 56px icon slot — typically a 3D illustration. Do not resize. */
+  icon?: ReactNode;
+  tabs?: string[];
+  value?: number;
+  defaultValue?: number;
+  onTabChange?: (index: number) => void;
+  /** For dark or glass backgrounds (Figma `State=Inverse`). */
+  inverse?: boolean;
+  as?: 'h1' | 'h2';
+}
+export function PageHeader({
+  title, subtitle, icon, tabs, value, defaultValue = 0, onTabChange, inverse = false,
+  as: Heading = 'h1', style, ...rest
+}: PageHeaderProps) {
+  const [internal, setInternal] = useState(defaultValue);
+  const selected = value ?? internal;
+  const muted = color(inverse ? 'text.default.inverse-muted' : 'text.default.subtle');
+  const strong = color(inverse ? 'text.default.inverse' : 'text.default.default');
+  return (
+    <header style={{
+      display: 'flex', flexDirection: 'column', alignItems: 'center', gap: space('md'),
+      padding: `${space('2xl')} ${space('lg')}`, boxSizing: 'border-box', width: '100%', overflow: 'hidden',
+      borderRadius: inverse ? radius('8') : radius('7'),
+      background: color(inverse ? 'surface.glass.white.lg' : 'surface.base.inverse'),
+      ...(inverse ? { backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' } : null),
+      ...style,
+    }} {...rest}>
+      {icon ? (
+        <div style={{ width: T.scale['56'], height: T.scale['56'], flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{icon}</div>
+      ) : null}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: space('xs'), width: '100%' }}>
+        <Heading style={{ margin: 0, ...ty('heading.lg'), display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+          {title.slice(0, 2).map((line, i) => (
+            <span key={i} style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', columnGap: 5 }}>
+              {i > 0 ? ' ' : null}
+              {line.muted ? <span style={{ color: muted }}>{line.muted}</span> : null}
+              {line.muted && line.strong ? ' ' : null}
+              {line.strong ? <span style={{ color: strong }}>{line.strong}</span> : null}
+            </span>
+          ))}
+        </Heading>
+        {subtitle ? (
+          <p style={{
+            margin: 0, padding: `0 ${space('2xl')}`, ...ty('body.md'), textAlign: 'center',
+            color: color(inverse ? 'text.default.inverse-subtle' : 'text.default.subtle'),
+          }}>{subtitle}</p>
+        ) : null}
+      </div>
+      {tabs && tabs.length ? (
+        <div role="tablist" style={{ display: 'flex', gap: space('xs'), width: '100%', overflowX: 'auto' }}>
+          {tabs.map((label, i) => {
+            const on = i === selected;
+            // Selected pills bind tab/inverse/*/selected in both states; the rest follow
+            // the header's scheme. Labels are title/xs, single line.
+            const bg = on ? color('tab.inverse.surface.selected') : color(inverse ? 'tab.inverse.surface.default' : 'tab.default.surface.default');
+            const fg = on ? color('tab.inverse.text.selected') : color(inverse ? 'tab.inverse.text.default' : 'tab.default.text.default');
+            return (
+              <button key={i} type="button" role="tab" aria-selected={on}
+                onClick={() => { setInternal(i); onTabChange?.(i); }}
+                style={{
+                  height: 48, minWidth: 72, padding: `0 ${space('lg')}`, flexShrink: 0, boxSizing: 'border-box',
+                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                  borderRadius: radius('9'), border: 0, cursor: 'pointer', whiteSpace: 'nowrap',
+                  ...ty('title.xs'), background: bg, color: fg,
+                }}>
+                <span style={{ padding: `0 ${space('2xs')}` }}>{label}</span>
+              </button>
+            );
+          })}
+        </div>
+      ) : null}
+    </header>
+  );
+}

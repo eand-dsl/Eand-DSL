@@ -205,3 +205,49 @@ Stale leftover to clear either way: `tokens.ts` still carries
 `color.navbar-tab.*.focusSpecial` (#e00800 / #ffffff) for an axis Figma no longer
 publishes. It is a generated file, so this clears on the next `tokens:pull` once Figma is
 settled.
+
+> **Update (V1.2 token sync):** the `focusSpecial` leftover above has cleared — V1.2 no
+> longer exports it, and `tokens.ts` was regenerated from the live file.
+
+## 11. PageHeader — the two states use different corner radii
+
+`page-header` **37390:28734**. The `State=default` variant draws its card with the
+`,page-header-surface-default` layer at **`border-radius/7` (20px)**; `State=Inverse` draws
+`,page-header-surface-inverse` at **`border-radius/8` (24px)**. The outer frame is /8 in
+both, but it clips, so the default card shows 20px corners. Nothing in the description
+says the two states should differ.
+
+Code follows the symbols: 20px default, 24px inverse.
+
+**Need:** confirm whether the 4px difference is intended, or which radius both should use.
+
+## 12. PageHeader — the selected tab on the light card is white, not tinted
+
+The page-header description says the tab pills "automatically use `inverse=false` tokens on
+the default state", and `tab-pill`'s own description says a selected pill "fills with a
+light red tint". But in `State=default`, the selected pill is bound to
+**`tab/inverse/surface/selected` (#ffffff)** with `tab/inverse/text/selected` (#e00800), on
+a white card. So it reads as red text with no visible pill. The unselected pills bind
+`tab/default/surface/default` (also white). On `State=Inverse` the unselected labels bind
+`button/primary/text/brand/default` — the same white as `tab/inverse/text/default`, which
+code uses instead.
+
+Code follows the symbol: white selected pill on both states.
+
+**Need:** confirm the default-state selected pill. If it should be the tint, the binding is
+`tab/default/surface/selected` (#fce6e6) with `tab/default/text/selected` (#e00800).
+
+## 13. PageTitle — titles are a step smaller than the text styles they name
+
+`page-title` **40283:145186**. Each variant applies a `heading/<size>` text style, then
+binds the font size directly to a smaller step: lg uses `heading/lg` with `font/size/7`
+(24px, where the style is 28px); md uses `font/size/6` (20px vs 24px); sm uses
+`font/size/5` (18px vs 20px). xs keeps `heading/xs` (16px). Line height is overridden on the
+symbol to **110%** (120% at xs), which no `font/line-height/*` token holds, against 120–135%
+on the styles.
+
+Code follows the bound sizes and the symbol's 110%, written as a literal with a comment
+because no token carries it.
+
+**Need:** either a `page-title/*` typography token set (or a 110 line-height token), or a
+ruling that page-title should use the plain `heading/*` styles.

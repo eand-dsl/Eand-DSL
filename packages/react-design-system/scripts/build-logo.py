@@ -1,28 +1,30 @@
 #!/usr/bin/env python3
-"""Generate src/icons/logo.tsx from the e& lockup SVGs in src/icons/logo-raw/.
+"""Generate src/icons/logo.tsx from the etisalat logo SVGs in src/icons/logo-raw/.
 
 Mirrors build-icons.py: Python at dev time, committed TSX output, so deploys need no
-Python. Re-run after re-exporting the lockups from Figma:
+Python. Re-run after re-exporting the artwork from Figma:
 
     python3 packages/react-design-system/scripts/build-logo.py
 
-Source: Figma `e&-logo` 27032:50455, four `version` symbols, all 96x96.
-  version=default  27032:50454   red tile + white lockup (the app icon)
-  version=white    27032:50456   bare lockup, white
-  version=midnight 27032:50459   bare lockup, midnight
-  version=red      27032:50475   bare lockup, brand red
+Source: Figma DSL V1.2, page "Etisalat Logo" 27020:6155.
 
-Two things this has to do, because the raw exports are not usable as-is:
+  etisalat-logo              27032:50455  96x96 symbol, color-scheme = default | white | red.
+                                          default is a red (color/red/1000) square tile; all three
+                                          hold .etisalat-logo-core, i.e. the white lockup at
+                                          136/192 of the width, centred.
+  .etisalat-logo-variations  42176:33598  140x140 frames, art full-width and centred:
+      type=lockup,    rtl=false  42573:82636  -> lockup.svg
+      type=lockup,    rtl=true   42573:83248  -> lockup-rtl.svg
+      type=logomark,  rtl=false  42176:33685  -> logomark.svg
+      type=wordmark,  rtl=false  42176:33689  -> wordmark.svg
+      type=wordmark,  rtl=true   42176:33687  -> wordmark-rtl.svg
+      type=billingual rtl=false  42579:83633  -> bilingual.svg   (Figma spells it "billingual")
 
-1. Strip the canvas. Exporting a symbol that sits on a Figma page picks up the page
-   backdrop: a 96x96 #E8E7EA rect plus paths spanning roughly -5108..2429, far outside
-   the viewBox. Only the `<g id="version=...">` subtree is the logo.
-2. Collapse the three bare lockups into one. They are the same geometry and differ only
-   in fill, so they ship once with `currentColor` and are coloured by CSS. The script
-   asserts that equivalence and fails if a future export breaks it, rather than silently
-   emitting a lockup that is wrong for two of the three versions.
+Each raw file is the export of the artwork group alone (exportAsync SVG_STRING), so its
+viewBox is the art's own bounds. The script refuses anything but plain white <path>
+elements: a rect, transform or second colour would mean the export changed shape and the
+currentColor collapse below would be wrong.
 """
-import hashlib
 import re
 from pathlib import Path
 
@@ -30,107 +32,112 @@ ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "src" / "icons" / "logo-raw"
 OUT = ROOT / "src" / "icons" / "logo.tsx"
 
-TILE_FILL = "#E00800"          # version=default app tile
-# The `version` axis IS the colour — each bare symbol ships a different lockup fill.
-BARE_FILL = {"white": "#ffffff", "midnight": "#191329", "red": "#E00800"}
-BARE = tuple(BARE_FILL)
+ART = ["lockup", "lockup-rtl", "logomark", "wordmark", "wordmark-rtl", "bilingual"]
+TILE_FILL = "#E00800"   # color/red/1000, the default tile
+CORE_RATIO = 136 / 192  # .etisalat-logo-core: lockup width / symbol width
 
 
-def subtree(svg: str) -> str:
-    """The `<g id="version=...">` subtree — everything else is Figma canvas."""
-    i = svg.find('<g id="version=')
-    if i < 0:
-        raise SystemExit("no version= group found; did the export change?")
-    depth, j = 0, i
-    while j < len(svg):
-        if svg.startswith("<g", j):
-            depth += 1
-        elif svg.startswith("</g>", j):
-            depth -= 1
-            if depth == 0:
-                return svg[i : j + 4]
-        j += 1
-    raise SystemExit("unterminated version= group")
+def load(name: str):
+    svg = (RAW / f"{name}.svg").read_text()
+    m = re.match(r'<svg width="([\d.]+)" height="([\d.]+)" viewBox="0 0 ([\d.]+) ([\d.]+)"', svg)
+    if not m:
+        raise SystemExit(f"{name}.svg: unexpected root element")
+    w, h, vw, vh = (float(x) for x in m.groups())
+    if (w, h) != (vw, vh):
+        raise SystemExit(f"{name}.svg: width/height disagree with the viewBox")
+    body = re.sub(r"^<svg[^>]*>|</svg>\s*$", "", svg.strip()).strip()
+    elems = re.findall(r"<(\w+)", body)
+    if set(elems) != {"path"}:
+        raise SystemExit(f"{name}.svg: expected only <path>, found {sorted(set(elems))}")
+    fills = set(re.findall(r'fill="([^"]+)"', body))
+    if fills != {"white"}:
+        raise SystemExit(f"{name}.svg: expected a single white fill, found {sorted(fills)}")
+    if "transform" in body:
+        raise SystemExit(f"{name}.svg: transforms are not supported")
+    return w, h, re.findall(r'\sd="([^"]+)"', body)
 
 
-def paths(sub: str) -> list[str]:
-    return re.findall(r'<path[^>]*\sd="([^"]+)"', sub)
+art = {n: load(n) for n in ART}
 
+entries = []
+for n in ART:
+    w, h, ds = art[n]
+    paths = ",\n".join(f"      '{d}'" for d in ds)
+    entries.append(f"  '{n}': {{\n    width: {w:g},\n    height: {h:g},\n    paths: [\n{paths},\n    ],\n  }},")
+table = "\n".join(entries)
 
-def read(name: str) -> str:
-    return subtree((RAW / f"{name}.svg").read_text())
-
-
-def shape_hash(sub: str) -> str:
-    """Geometry identity, ignoring fill colour and ids."""
-    x = re.sub(r'fill="[^"]*"', "", sub)
-    x = re.sub(r'id="[^"]*"', "", x)
-    return hashlib.sha1(re.sub(r"\s+", " ", x).encode()).hexdigest()
-
-# The three bare lockups must be one shape, or the currentColor collapse is a lie.
-hashes = {n: shape_hash(read(n)) for n in BARE}
-if len(set(hashes.values())) != 1:
-    raise SystemExit(f"bare lockups are no longer identical shapes: {hashes}")
-
-lockup = paths(read("white"))
-default_sub = read("default")
-default_paths = paths(default_sub)
-
-# The default tile is a <rect>, not a path, and the lockup sits on top of it.
-if TILE_FILL not in default_sub:
-    raise SystemExit(f"version=default no longer carries the {TILE_FILL} tile")
-if default_paths != lockup:
-    raise SystemExit("version=default lockup geometry differs from the bare lockup")
-
-size = 96  # every version symbol is 96x96
-body = ",\n".join(f"  '{d}'" for d in lockup)
 OUT.write_text(f"""// AUTO-GENERATED from src/icons/logo-raw/*.svg by scripts/build-logo.py. Do not edit.
-// Figma `e&-logo` 27032:50455 — 96x96, four `version` symbols.
+// Figma DSL V1.2 "Etisalat Logo" 27020:6155: etisalat-logo 27032:50455 and
+// .etisalat-logo-variations 42176:33598.
 import type {{ SVGProps }} from 'react';
 
-/** Figma's four `version` symbols. `default` is the red app tile with a white lockup;
- *  the rest are the bare lockup, coloured by CSS. */
-export type LogoVersion = 'default' | 'white' | 'midnight' | 'red';
+/** Figma `etisalat-logo` color-scheme. `default` is the red square tile with a white
+ *  lockup; `white` and `red` are the bare mark in that ink.
+ *  `midnight` is deprecated: V1.2 removed it. It still renders, in midnight ink. */
+export type LogoVersion = 'default' | 'white' | 'red' | 'midnight';
 
-export const LOGO_SIZE = 96;
+/** Figma `.etisalat-logo-variations` type. Figma names the last one `billingual`. */
+export type LogoType = 'lockup' | 'logomark' | 'wordmark' | 'bilingual';
+
+export type LogoArtKey = {' | '.join(f"'{n}'" for n in ART)};
+
 export const LOGO_TILE_FILL = '{TILE_FILL}';
+/** `.etisalat-logo-core`: the lockup spans 136 of the symbol's 192 units. */
+export const LOGO_CORE_RATIO = {CORE_RATIO!r};
 
-/** Lockup fill per version. The axis carries the colour — `red` and `midnight` are the
- *  same artwork in different inks, so leaving them both on `currentColor` would make the
- *  prop do nothing. Pass `color="currentColor"` to inherit from CSS instead. */
 export const LOGO_FILL: Record<LogoVersion, string> = {{
   default: '#ffffff',
-  white: '{BARE_FILL["white"]}',
-  midnight: '{BARE_FILL["midnight"]}',
-  red: '{BARE_FILL["red"]}',
+  white: '#ffffff',
+  red: '{TILE_FILL}',
+  midnight: '#191329',
 }};
 
-/** The "e&" ligature + "etisalat and" wordmark. One copy: the white, midnight and red
- *  symbols are the same geometry and only differ in fill, which build-logo.py asserts. */
-export const LOGO_LOCKUP: readonly string[] = [
-{body},
-];
+/** Artwork per variation, each in its own tight viewBox. */
+export const LOGO_ART: Record<LogoArtKey, {{ width: number; height: number; paths: readonly string[] }}> = {{
+{table}
+}};
 
-export interface LogoArtProps extends Omit<SVGProps<SVGSVGElement>, 'fill' | 'color'> {{
+/** Which artwork a type + direction resolves to. Only lockup and wordmark have an Arabic
+ *  version; logomark is direction-free and bilingual carries both scripts. */
+export function logoArtKey(type: LogoType, rtl: boolean): LogoArtKey {{
+  if (rtl && (type === 'lockup' || type === 'wordmark')) return `${{type}}-rtl`;
+  return type;
+}}
+
+export interface LogoArtProps extends Omit<SVGProps<SVGSVGElement>, 'fill' | 'color' | 'type'> {{
   version?: LogoVersion;
+  /** Omit for the `etisalat-logo` symbol; set for a `.etisalat-logo-variations` frame. */
+  type?: LogoType;
+  rtl?: boolean;
+  /** Side of the square symbol, in px. */
   size?: number | string;
   /** Overrides the version's ink. `currentColor` inherits from CSS. */
   color?: string;
 }}
 
-/** Raw lockup artwork. Prefer the `Logo` component, which adds the accessible name. */
-export function LogoArt({{ version = 'default', size = LOGO_SIZE, color, ...rest }}: LogoArtProps) {{
+/** Raw logo artwork in a square, as Figma frames it. Prefer the `Logo` component, which
+ *  adds the accessible name. */
+export function LogoArt({{ version = 'default', type, rtl = false, size = 96, color, ...rest }}: LogoArtProps) {{
+  const a = LOGO_ART[logoArtKey(type ?? 'lockup', rtl)];
   const tile = version === 'default';
+  // etisalat-logo (no type) and any tiled logo use the core inset; a bare variation fills
+  // its frame edge to edge, as .etisalat-logo-variations does.
+  const span = type && !tile ? 1 : LOGO_CORE_RATIO;
+  const box = 96;
+  const s = (box * span) / a.width;
+  const x = (box - a.width * s) / 2;
+  const y = (box - a.height * s) / 2;
   return (
-    <svg width={{size}} height={{size}} viewBox="0 0 {size} {size}" fill="none"
+    <svg width={{size}} height={{size}} viewBox={{`0 0 ${{box}} ${{box}}`}} fill="none"
       xmlns="http://www.w3.org/2000/svg" {{...rest}}>
-      {{tile ? <rect width={{LOGO_SIZE}} height={{LOGO_SIZE}} fill={{LOGO_TILE_FILL}} /> : null}}
-      <g fill={{color ?? LOGO_FILL[version]}}>
-        {{LOGO_LOCKUP.map((d, i) => <path key={{i}} d={{d}} />)}}
+      {{tile ? <rect width={{box}} height={{box}} fill={{LOGO_TILE_FILL}} /> : null}}
+      <g transform={{`translate(${{x}} ${{y}}) scale(${{s}})`}} fill={{color ?? LOGO_FILL[version]}}>
+        {{a.paths.map((d, i) => <path key={{i}} d={{d}} />)}}
       </g>
     </svg>
   );
 }}
 """)
 
-print(f"Wrote {OUT.relative_to(ROOT)} — {len(lockup)} lockup paths, 4 versions")
+print(f"Wrote {OUT.relative_to(ROOT)} — {len(ART)} artworks, " +
+      ", ".join(f"{n} {len(art[n][2])} paths" for n in ART))

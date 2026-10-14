@@ -894,7 +894,8 @@
       "name": "rounded",
       "type": "boolean",
       "required": false,
-      "description": "Round the top corners (when the footer floats over page content)."
+      "default": "true",
+      "description": "Round the top corners. Figma's `Footer` always does; pass `false` for a flush edge."
     },
     {
       "name": "terms",
@@ -1202,6 +1203,128 @@
     {
       "name": "title",
       "type": "ReactNode",
+      "required": false,
+      "description": ""
+    }
+  ],
+  "StatusIcon": [
+    {
+      "name": "icon",
+      "type": "string",
+      "required": false,
+      "description": "An icon-set name to replace the default glyph for this type."
+    },
+    {
+      "name": "type",
+      "type": "enum",
+      "required": false,
+      "default": "positive",
+      "description": ""
+    }
+  ],
+  "PageTitle": [
+    {
+      "name": "title",
+      "type": "ReactNode",
+      "required": true,
+      "description": ""
+    },
+    {
+      "name": "alignment",
+      "type": "enum",
+      "required": false,
+      "default": "center",
+      "description": ""
+    },
+    {
+      "name": "as",
+      "type": "enum",
+      "required": false,
+      "default": "h2",
+      "description": "Heading level for the title."
+    },
+    {
+      "name": "description",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "status",
+      "type": "enum",
+      "required": false,
+      "default": "positive",
+      "description": "Outcome the status icon reflects (lg and md only)."
+    },
+    {
+      "name": "statusIcon",
+      "type": "string",
+      "required": false,
+      "description": "Replaces the status icon's default glyph."
+    },
+    {
+      "name": "type",
+      "type": "enum",
+      "required": false,
+      "default": "lg",
+      "description": ""
+    }
+  ],
+  "PageHeader": [
+    {
+      "name": "title",
+      "type": "PageHeaderLine[]",
+      "required": true,
+      "description": "Up to two lines; each pairs a muted word with a strong word."
+    },
+    {
+      "name": "as",
+      "type": "enum",
+      "required": false,
+      "default": "h1",
+      "description": ""
+    },
+    {
+      "name": "defaultValue",
+      "type": "number",
+      "required": false,
+      "default": "0",
+      "description": ""
+    },
+    {
+      "name": "icon",
+      "type": "ReactNode",
+      "required": false,
+      "description": "56px icon slot — typically a 3D illustration. Do not resize."
+    },
+    {
+      "name": "inverse",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "For dark or glass backgrounds (Figma `State=Inverse`)."
+    },
+    {
+      "name": "onTabChange",
+      "type": "((index: number) => void)",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "subtitle",
+      "type": "ReactNode",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "tabs",
+      "type": "string[]",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "value",
+      "type": "number",
       "required": false,
       "description": ""
     }
@@ -1760,6 +1883,33 @@
       "required": false,
       "default": "default",
       "description": "Figma `color` axis."
+    }
+  ],
+  "SectionLinkButton": [
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "icon",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Glyph to show; Figma's default is a right chevron."
+    },
+    {
+      "name": "onClick",
+      "type": "(() => void)",
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "surface",
+      "type": "enum",
+      "required": false,
+      "default": "default",
+      "description": ""
     }
   ],
   "Logo": [

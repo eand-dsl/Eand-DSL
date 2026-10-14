@@ -8,8 +8,9 @@ describe('collectFacts', () => {
     expect(facts.packageName).toBe('@eand/react-design-system');
   });
 
-  it('finds all 55 exported components', () => {
-    expect(facts.exportedComponents).toHaveLength(55);   // +SectionLinkButton (Figma section-link 25440:14243)
+  it('finds all 58 exported components', () => {
+    // +SectionLinkButton (Figma section-link 25440:14243); +PageHeader, PageTitle, StatusIcon (V1.2 page 37140:111844)
+    expect(facts.exportedComponents).toHaveLength(58);
     expect(facts.exportedComponents).toContain('Button');
     expect(facts.exportedComponents).toContain('Picker');
     expect(facts.exportedComponents).toContain('CtaFooter');

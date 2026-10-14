@@ -1,7 +1,7 @@
 import type { CSSProperties, ElementType, HTMLAttributes, ReactNode } from 'react';
 import { T, ty, space, icon, color, radius, scale, PILL } from '../system';
 import { Icon } from '../icons';
-import { LogoArt, type LogoVersion } from '../icons/logo';
+import { LogoArt, logoArtKey, type LogoVersion, type LogoType } from '../icons/logo';
 
 /* ---------------- Text ---------------- */
 export interface TextProps extends HTMLAttributes<HTMLElement> {
@@ -343,25 +343,35 @@ export function SectionLinkButton({ surface = 'default', icon, disabled, style, 
 }
 
 /* ---------------- Logo ----------------
-   Figma `e&-logo` 27032:50455, 96x96, `version` = default | white | midnight | red.
-   `default` is the red app tile with a white lockup; the other three are the bare
-   lockup and take their colour from CSS, so they inherit a surface's `color`.
+   Figma V1.2 "Etisalat Logo" (page 27020:6155). With no `type` this is the published
+   `etisalat-logo` 27032:50455: a 96x96 symbol, color-scheme default | white | red, where
+   default is the red square tile and the lockup spans 136/192 of the width
+   (`.etisalat-logo-core`). With a `type` it is a `.etisalat-logo-variations` 42176:33598
+   frame — lockup, logomark, wordmark or bilingual — with the art edge to edge; `rtl`
+   switches the lockup and wordmark to Arabic.
 
+   V1.1's "e&" lockup and its `midnight` version are gone from Figma. `midnight` still
+   renders (in midnight ink) so existing callers don't break, but is deprecated.
    The artwork is generated into src/icons/logo.tsx by scripts/build-logo.py from the
-   exported SVGs in src/icons/logo-raw/ — this used to be a styled text span reading
-   "e&", which is not the mark. */
+   exported SVGs in src/icons/logo-raw/. */
 export interface LogoProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'color'> {
+  /** Figma color-scheme. `midnight` is deprecated (removed in V1.2). */
   version?: LogoVersion;
-  /** Rendered size in px; the artwork is a square. */
+  /** A `.etisalat-logo-variations` artwork. Omit for the `etisalat-logo` symbol. */
+  type?: LogoType;
+  /** Arabic lockup / wordmark. Logomark and bilingual are direction-free. */
+  rtl?: boolean;
+  /** Rendered size in px; the symbol is a square. */
   size?: number | string;
   /** Overrides the version's ink. Pass `currentColor` to inherit from CSS instead. */
   color?: string;
 }
-export function Logo({ version = 'default', size = 32, color: colorOverride, style, ...rest }: LogoProps) {
+export function Logo({ version = 'default', type, rtl = false, size = 32, color: colorOverride, style, ...rest }: LogoProps) {
+  const arabic = logoArtKey(type ?? 'lockup', rtl).endsWith('-rtl');
   return (
-    <span role="img" aria-label="e&"
+    <span role="img" aria-label={arabic ? 'اتصالات' : 'etisalat'}
       style={{ display: 'inline-flex', flex: 'none', lineHeight: 0, ...style } as CSSProperties} {...rest}>
-      <LogoArt version={version} size={size} color={colorOverride} />
+      <LogoArt version={version} type={type} rtl={rtl} size={size} color={colorOverride} />
     </span>
   );
 }

@@ -1,0 +1,38 @@
+---
+title: PageHeader
+description: Opens a content page — icon, a two-line muted/strong title, a subtitle and tab pills.
+---
+
+<ComponentDemo id="pageheader" />
+
+## When to use
+
+- **Use** at the top of a content page, directly below the top bar, to set the page's theme
+  and give immediate category filtering. One per screen, outside any `Section`.
+- **Don't use** for the result of an action (success, failure, confirmation) — that is
+  [PageTitle](./pagetitle). Not for headings inside a page (use `Section`), and not for sheet
+  or modal titles.
+
+## Anatomy
+
+- **Icon** — a 56px slot, typically a 3D illustration. Do not resize it.
+- **Title** — `heading/lg`, up to two lines. Each line pairs a *muted* word with a *strong* word:
+  `{ muted: 'Discover', strong: 'Thermostats.' }`.
+- **Subtitle** — `body/md`, centred. Optional but recommended.
+- **Tabs** — 48px pills in a row that scrolls sideways. Exactly one is always selected.
+
+Pass `inverse` on dark or image backgrounds: the card becomes 20% white glass and every text
+token flips to its inverse. The tab pills follow the header — don't restyle them yourself.
+
+## Props
+
+<PropsTable name="PageHeader" />
+
+## Design
+
+Figma source: [page-header — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=37390-28734)
+
+- Card padding 24 × 16 (`spacing/2xl`, `spacing/lg`); content gap 12 (`spacing/md`); title-to-subtitle 4.
+- Default surface is `surface/base/inverse` (white) at `border-radius/7` (20px); inverse is
+  `surface/glass/white/lg` at `border-radius/8` (24px), as the published symbol has them.
+- In RTL the title words, subtitle and tab row mirror automatically.

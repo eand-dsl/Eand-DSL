@@ -1,9 +1,21 @@
 ---
 title: Logo
-description: The e& wordmark in brand red.
+description: The etisalat logo — the brand symbol in three colour schemes, plus lockup, logomark, wordmark and bilingual artworks.
 ---
 
 <ComponentDemo id="logo" />
+
+## When to use
+
+- **The symbol** (no `type`) wherever the brand needs to appear: headers, splash screens,
+  cards. `default` is the red square tile with a white lockup; use `white` on brand-red,
+  midnight or image backgrounds, and `red` on light surfaces.
+- **A bare artwork** (`type`) when the space calls for a specific form: `logomark` for tight
+  spots such as a small avatar, `wordmark` for text-only placements, `lockup`, or
+  `bilingual` where English and Arabic must both appear.
+- Pass `rtl` on Arabic screens: the lockup and wordmark switch to the Arabic artwork.
+  Logomark and bilingual have no separate Arabic version.
+- **Not for** partner or app logos — use `LogoRow` with the partner's own artwork.
 
 ## Props
 
@@ -11,4 +23,11 @@ description: The e& wordmark in brand red.
 
 ## Design
 
-Figma source: [Logo — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=27020-6155)
+Figma source: [Etisalat Logo — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=27020-6155)
+
+- `etisalat-logo` (27032:50455): a 96 × 96 symbol, color-scheme default | white | red. The
+  default tile is `color/red/1000` with square corners. The lockup spans 136/192 of the width.
+- `.etisalat-logo-variations` (42176:33598): lockup, logomark, wordmark and bilingual, each
+  edge to edge in its frame. Figma spells the last one `billingual`.
+- V1.2 replaced the V1.1 "e&" lockup and dropped its `midnight` version. `version="midnight"`
+  still renders, in midnight ink, but is deprecated.

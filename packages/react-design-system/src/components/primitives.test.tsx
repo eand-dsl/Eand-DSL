@@ -268,42 +268,78 @@ test('AddTrigger label is button/lg 16 in midnight, not brand red', () => {
   expect(el.style.color).toBe('rgb(25, 19, 41)');
 });
 
-/* ---------------- Logo vs Figma `e&-logo` 27032:50455 ----------------
-   Was a styled text span reading "e&". V1.1 is a 96x96 lockup with four versions. */
+/* ---------------- Logo vs Figma V1.2 "Etisalat Logo" 27020:6155 ----------------
+   V1.1 shipped the "e&" lockup in four versions. V1.2 rebranded it: `etisalat-logo`
+   27032:50455 is the etisalat swoosh + wordmark, color-scheme default | white | red
+   (midnight is gone), and `.etisalat-logo-variations` 42176:33598 adds logomark,
+   wordmark and bilingual, with Arabic lockup and wordmark. */
+import { LOGO_ART } from '../icons/logo';
 
-test('Logo renders real lockup artwork, not a text glyph', () => {
+test('Logo renders the V1.2 etisalat lockup artwork, not a text glyph', () => {
   const { container } = render(<Logo />);
   expect(container.querySelector('svg')).toBeInTheDocument();
-  expect(container.querySelectorAll('path').length).toBeGreaterThan(5);
+  // lockup.svg (42573:82636): "tisalat" letters + the two swoosh strokes = 9 paths.
+  expect(container.querySelectorAll('path')).toHaveLength(LOGO_ART.lockup.paths.length);
+  expect(LOGO_ART.lockup.paths).toHaveLength(9);
   expect(container.textContent).toBe('');
 });
 
-test('Logo version=default is the red app tile', () => {
+test('Logo version=default is the square red tile (color/red/1000, no radius)', () => {
   const { container } = render(<Logo />);
-  expect(container.querySelector('rect')!.getAttribute('fill')).toBe('#E00800');
+  const rect = container.querySelector('rect')!;
+  expect(rect.getAttribute('fill')).toBe('#E00800');
+  expect(rect.getAttribute('rx')).toBeNull();
+  expect(container.querySelector('g')!.getAttribute('fill')).toBe('#ffffff');
 });
 
-// The three bare versions are one shape in three inks, so `version` has to carry the
-// colour — leaving them all on currentColor made `red` and `midnight` render identically,
-// which the tests missed and a screenshot caught.
+// The bare versions are one shape in different inks, so `version` has to carry the
+// colour — leaving them all on currentColor once made red and midnight identical.
 test.each([
   ['white', '#ffffff'],
-  ['midnight', '#191329'],
   ['red', '#E00800'],
-] as const)('Logo version=%s drops the tile and inks the lockup %s', (version, fill) => {
+  ['midnight', '#191329'], // deprecated in V1.2, still renders
+] as const)('Logo version=%s drops the tile and inks the mark %s', (version, fill) => {
   const { container } = render(<Logo version={version} />);
   expect(container.querySelector('rect')).toBeNull();
   expect(container.querySelector('g')!.getAttribute('fill')).toBe(fill);
 });
 
+test('Logo places the lockup at 136/192 of the symbol width, as .etisalat-logo-core does', () => {
+  const { container } = render(<Logo version="white" />);
+  const t = container.querySelector('g')!.getAttribute('transform')!;
+  const scale = Number(t.match(/scale\(([\d.]+)\)/)![1]);
+  expect(LOGO_ART.lockup.width * scale).toBeCloseTo(96 * (136 / 192), 4);
+});
+
+test.each([
+  ['lockup', false, 'lockup'],
+  ['lockup', true, 'lockup-rtl'],
+  ['wordmark', false, 'wordmark'],
+  ['wordmark', true, 'wordmark-rtl'],
+  ['logomark', true, 'logomark'],
+  ['bilingual', true, 'bilingual'],
+] as const)('Logo type=%s rtl=%s draws the %s variation', (type, rtl, key) => {
+  const { container } = render(<Logo version="white" type={type} rtl={rtl} />);
+  expect(container.querySelectorAll('path')).toHaveLength(LOGO_ART[key].paths.length);
+});
+
+test('Logo with a type and no tile fills its frame edge to edge', () => {
+  const { container } = render(<Logo version="red" type="logomark" />);
+  const t = container.querySelector('g')!.getAttribute('transform')!;
+  const scale = Number(t.match(/scale\(([\d.]+)\)/)![1]);
+  expect(LOGO_ART.logomark.width * scale).toBeCloseTo(96, 4);
+});
+
 test('Logo color prop overrides the version ink', () => {
-  const { container } = render(<Logo version="midnight" color="currentColor" />);
+  const { container } = render(<Logo version="red" color="currentColor" />);
   expect(container.querySelector('g')!.getAttribute('fill')).toBe('currentColor');
 });
 
-test('Logo carries an accessible name', () => {
-  render(<Logo />);
-  expect(screen.getByRole('img', { name: /e&/i })).toBeInTheDocument();
+test('Logo is named "etisalat", or "اتصالات" for the Arabic artwork', () => {
+  const { rerender } = render(<Logo />);
+  expect(screen.getByRole('img', { name: 'etisalat' })).toBeInTheDocument();
+  rerender(<Logo type="wordmark" rtl />);
+  expect(screen.getByRole('img', { name: 'اتصالات' })).toBeInTheDocument();
 });
 
 /* ---------------- SectionLinkButton vs Figma `section-link` 25440:14243 ----------------

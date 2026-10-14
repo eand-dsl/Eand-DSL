@@ -6,7 +6,7 @@ import {
   Snackbar, Alert,
   Input, OtpInput, FilterPill, Checkbox, Radio, Switcher, Searchbar, AISearch, Selectors, Picker,
   Logo, LogoRow, ProgressBar, Stepper, AddTrigger, Dismiss, AtomSurface, SmilesRow,
-  Card, Accordion, ActionBar, SectionLink, PlanUsageBar, AlertModal, Tooltip, BottomSheet,
+  Card, Accordion, PageHeader, PageTitle, StatusIcon, ActionBar, SectionLink, PlanUsageBar, AlertModal, Tooltip, BottomSheet,
   ProductCard, DealCard, NewCard, ServiceCard, Highlight, SmilesBalance, Voucher,
   StatusRibbon, ButtonGroup, PaymentRow, CtaFooter,
   Text,
@@ -570,8 +570,18 @@ export const PAGES: Page[] = [
 
   /* ---------------- Primitives ---------------- */
   { id: 'logo', group: 'Primitives', title: 'Logo', frame: 'pad',
-    blurb: 'The e& wordmark in brand red. The atomic brand primitive used across headers and cards.',
-    render: () => <Logo style={{ fontSize: 40 }} /> },
+    blurb: 'The etisalat logo (V1.2): the square brand symbol in three colour schemes, or a bare lockup, logomark, wordmark or bilingual artwork — with Arabic lockup and wordmark.',
+    controls: [
+      { kind: 'select', prop: 'version', label: 'Colour', options: ['default', 'white', 'red'], def: 'default' },
+      { kind: 'select', prop: 'type', label: 'Type', options: ['symbol', 'lockup', 'logomark', 'wordmark', 'bilingual'], def: 'symbol' },
+      { kind: 'toggle', prop: 'rtl', label: 'Arabic (RTL)' },
+    ],
+    render: (v) => (
+      <div style={{ padding: 24, borderRadius: 16, background: p(v, 'version') === 'white' ? '#191329' : undefined }}>
+        <Logo size={140} version={p(v, 'version')} rtl={p(v, 'rtl')}
+          type={p(v, 'type') === 'symbol' ? undefined : p(v, 'type')} />
+      </div>
+    ) },
 
   { id: 'logorow', group: 'Primitives', title: 'LogoRow', frame: 'pad',
     blurb: 'A horizontal row of partner/brand logos with even spacing — wraps on narrow widths.',
@@ -661,6 +671,40 @@ export const PAGES: Page[] = [
         <Accordion title="Can I change plans anytime?">
           <Text variant="body.sm" color="#6a6577">Yes — switch once per billing cycle from the app.</Text>
         </Accordion>
+      </div>
+    ) },
+
+  { id: 'pageheader', group: 'Layout', title: 'PageHeader', frame: 'phone',
+    blurb: 'Opens a content page: a 56px icon, a two-line title of muted and strong words, a subtitle and a row of tab pills. One per screen, directly under the top bar.',
+    controls: [
+      { kind: 'toggle', prop: 'inverse', label: 'Inverse' },
+      { kind: 'toggle', prop: 'subtitle', label: 'Subtitle', def: true },
+      { kind: 'toggle', prop: 'tabs', label: 'Tabs', def: true },
+    ],
+    minH: 360,
+    render: (v) => (
+      <div style={{ padding: 16, background: p(v, 'inverse') ? 'linear-gradient(160deg,#631c46,#191329)' : '#f0f0f5' }}>
+        <PageHeader as="h2" inverse={p(v, 'inverse')} icon={ic('home-filled', '#e00800')}
+          title={[{ muted: 'Discover', strong: 'Thermostats.' }, { muted: 'Built for', strong: 'Intelligence' }]}
+          subtitle={p(v, 'subtitle') ? 'Your home learns your rhythm — adjusting temperature, saving energy, and creating comfort before you even notice.' : undefined}
+          tabs={p(v, 'tabs') ? ['Home', 'Thermostats', 'Cameras', 'Lighting'] : undefined} />
+      </div>
+    ) },
+
+  { id: 'pagetitle', group: 'Layout', title: 'PageTitle', frame: 'phone',
+    blurb: 'Concludes an activity: a status icon, a bold title of at most two lines and an optional description. lg for a full-page outcome, down to xs inside a sheet or card.',
+    controls: [
+      { kind: 'select', prop: 'type', label: 'Type', options: ['lg', 'md', 'sm', 'xs'], def: 'lg' },
+      { kind: 'select', prop: 'alignment', label: 'Alignment', options: ['center', 'left'], def: 'center' },
+      { kind: 'select', prop: 'status', label: 'Status', options: ['positive', 'danger', 'warning', 'brand', 'neutral'], def: 'positive' },
+      { kind: 'toggle', prop: 'description', label: 'Description', def: true },
+    ],
+    minH: 240,
+    render: (v) => (
+      <div style={{ padding: 24, background: '#fff' }}>
+        <PageTitle type={p(v, 'type')} alignment={p(v, 'alignment')} status={p(v, 'status')}
+          title="Your new plan is active"
+          description={p(v, 'description') ? 'Freedom Live Plan 200 starts today. We have sent the details to your email.' : undefined} />
       </div>
     ) },
 
