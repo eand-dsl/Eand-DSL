@@ -2,7 +2,7 @@ import type { CSSProperties, HTMLAttributes, ReactNode } from 'react';
 import { color, space, ty, radius, scale, T, PILL } from '../system';
 import { Text, IconBox } from './primitives';
 import { Button } from './Button/Button';
-import { Checkbox, type CheckboxProps } from './controls';
+import { Checkbox, ConsentCheckbox, type CheckboxProps } from './controls';
 
 /* Everything in this file is reconciled against Figma "e& Consumer App DSL V1.2",
    CTA Bar page 31501:35139 (changelog 27.07.2026: "Added molecules: Price Line,
@@ -191,26 +191,11 @@ export interface CheckboxLineProps extends Omit<CheckboxProps, 'label' | 'radio'
   /** Trailing copy after the links (Figma `description-string`, e.g. "before proceeding"). */
   description?: ReactNode;
 }
-export function CheckboxLine({ label, links = [], conjunction = 'and', description, inverse, disabled, style, ...rest }: CheckboxLineProps) {
-  const ink = inverse
-    ? color(disabled ? 'text.default.inverse-disabled' : 'text.default.inverse-subtle')
-    : color(disabled ? 'text.default.disabled' : 'text.default.default');
-  const parts: ReactNode[] = [];
-  if (label != null) parts.push(<span key="label" style={{ color: ink }}>{label}</span>);
-  links.forEach((l, i) => {
-    if (i > 0) parts.push(<span key={`and-${i}`} style={{ color: ink }}>{conjunction}</span>);
-    parts.push(
-      <Button key={`link-${i}`} variant="link" size="md" surface={inverse ? 'white' : 'brand'} disabled={disabled}
-        onClick={l.onClick} style={{ ...INLINE_BUTTON, verticalAlign: 'baseline' }}>{l.label}</Button>,
-    );
-  });
-  if (description != null) parts.push(<span key="desc" style={{ color: ink }}>{description}</span>);
-  // A real space between the parts so the run wraps like a sentence (Figma wraps the frame).
-  const run = parts.flatMap((p, i) => (i === 0 ? [p] : [' ', p]));
-  return (
-    <Checkbox size="md" inverse={inverse} disabled={disabled} style={{ alignItems: 'flex-start', ...style }}
-      label={<span style={{ color: ink }}>{run}</span>} {...rest} />
-  );
+/** @deprecated Use `ConsentCheckbox` from the controls — the same Figma `checkbox-variants`
+ *  33489:12153 consent row, built twice in parallel during the V1.2 sync. This keeps the
+ *  `label` / `description` names and renders the one implementation. */
+export function CheckboxLine({ label, links = [], conjunction = 'and', description, ...rest }: CheckboxLineProps) {
+  return <ConsentCheckbox prefix={label} links={links} conjunction={conjunction} suffix={description} {...rest} />;
 }
 
 /* ---------------- ActionBlock ----------------

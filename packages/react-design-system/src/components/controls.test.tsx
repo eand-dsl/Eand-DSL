@@ -466,7 +466,10 @@ test('Input clear shows only while active and filled, clears and keeps focus', a
   await userEvent.click(screen.getByRole('textbox'));
   const clear = screen.getByRole('button', { name: 'Clear' });
   expect(clear.style.width).toBe('24px');
-  expect(clear.style.background).toBe('rgb(144, 142, 154)'); // color/dismiss/default
+  // The shared V1.2 Dismiss (28961:19839): a transparent box holding the dismiss-filled
+  // glyph in color/dismiss/default — no longer a filled grey circle with a drawn X.
+  expect(clear.style.background).toBe('transparent');
+  expect((clear.querySelector('[role="img"]') as HTMLElement).style.color).toBe('rgb(144, 142, 154)');
   expect((clear.parentElement as HTMLElement).style.paddingInlineStart).toBe('8px');
   await userEvent.click(clear);
   expect(fn).toHaveBeenCalledTimes(1);
