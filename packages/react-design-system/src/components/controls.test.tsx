@@ -339,6 +339,18 @@ test('Searchbar renders 20px (lg) search and mic icons per Figma', () => {
   expect(icons.length).toBeGreaterThanOrEqual(2);
 });
 
+/* Searchbar page is [Not Finalized]; only the clear bugs are fixed. The "Standard search" frames
+   (28114:62804) draw both glyphs at 20px — code drew 24px glyphs inside 20px boxes, which the
+   box-width test above could not see — and the mic in text/brand/default (code: muted). */
+test('Searchbar glyphs are 20px inside their 20px boxes and the mic is brand red', () => {
+  const { container } = render(<Searchbar />);
+  for (const name of ['search', 'mic']) {
+    const icon = container.querySelector(`[aria-label="${name}"]`) as HTMLElement;
+    expect(icon.querySelector('svg')!.getAttribute('width')).toBe('20');
+  }
+  expect(screen.getByRole('button', { name: 'Voice search' }).style.color).toBe('rgb(224, 8, 0)');
+});
+
 /* FilterPill vs Figma V1.2 `filter-pill` 26151:391 + `.filter-pill-body` 37884:67515
    (13.08.2026 "switched placeholder to chevron"): the chevron is `chevron-down` 16 in a 20
    icon-size (was chevron-down-sm 16 in a 16 box); padding start 12 / end 8 with a 2px gap (was
@@ -393,23 +405,50 @@ test('Input keeps the label floated when it has a value', () => {
   expect(screen.getByText('Name').style.fontSize).toBe('12px');
 });
 
-test('Input border reflects state: default, active, error, disabled', async () => {
-  const { rerender, container } = render(<Input label="A" />);
-  const field = () => container.firstElementChild!.firstElementChild as HTMLElement;
-  expect(field().style.border).toContain('rgb(216, 215, 222)'); // default #d8d7de
-  await userEvent.click(screen.getByRole('textbox'));
-  expect(field().style.border).toContain('rgb(233, 82, 77)'); // active #e9524d
-  rerender(<Input label="A" error="Required" />);
-  await userEvent.tab();
-  expect(field().style.border).toContain('rgb(255, 159, 82)'); // error #ff9f52
-  rerender(<Input label="A" disabled />);
-  expect(field().style.border).toContain('rgba(25, 19, 41, 0.07)');
+/* Input vs Figma V1.2 `input-field` 29010:3152 (08.06.2026 "Overhauled … v2.0"): radius
+   border-radius/5 = 14 (was 16). No stroke in default / filled / disabled (was a 1.5px
+   inputField.border.* ring on every state); active = 1px border/interactive/accent/default
+   #e00800 (was 1.5px #e9524d), error = 1px border/interactive/danger/subtle. The strokes are
+   INSIDE in Figma, so code draws them as an inset shadow and the field never shifts. */
+
+const fieldOf = (container: HTMLElement) => container.firstElementChild!.firstElementChild as HTMLElement;
+
+test('Input field is 56 tall with a 14px radius', () => {
+  const { container } = render(<Input label="A" />);
+  expect(fieldOf(container).style.minHeight).toBe('56px');
+  expect(fieldOf(container).style.borderRadius).toBe('14px');
 });
 
-test('Input dropdown type is read-only with a trailing chevron', () => {
+test('Input stroke reflects state: none at rest/filled/disabled, 1px accent active, 1px danger error', async () => {
+  const { rerender, container } = render(<Input label="A" />);
+  expect(fieldOf(container).style.boxShadow).toBe('none');
+  expect(fieldOf(container).style.border).toMatch(/^(0px)?$/);
+  await userEvent.click(screen.getByRole('textbox'));
+  expect(fieldOf(container).style.boxShadow).toBe('inset 0 0 0 1px #e00800');
+  rerender(<Input label="A" error="Required" />);
+  await userEvent.tab();
+  expect(fieldOf(container).style.boxShadow).toBe('inset 0 0 0 1px #ff9f52');
+  rerender(<Input label="A" defaultValue="x" />);
+  expect(fieldOf(container).style.boxShadow).toBe('none');
+  rerender(<Input label="A" disabled />);
+  expect(fieldOf(container).style.boxShadow).toBe('none');
+});
+
+test('Input dropdown type is read-only with chevron-down 12 in a 16px box', () => {
   const { container } = render(<Input label="Plan" type="dropdown" />);
   expect(screen.getByRole('textbox')).toHaveAttribute('readonly');
-  expect(container.querySelector('[aria-label="chevron-down-sm"]')).toBeInTheDocument();
+  const icon = container.querySelector('[aria-label="chevron-down"]') as HTMLElement;
+  expect(icon.querySelector('svg')!.getAttribute('width')).toBe('12');
+  expect((icon.parentElement as HTMLElement).style.width).toBe('16px');
+});
+
+test('Input picker type leads with a 24px icon-size and 4px to the text', () => {
+  const { container } = render(<Input label="Country" type="picker" />);
+  const icon = container.querySelector('[aria-label="placeholder"]') as HTMLElement;
+  expect(icon.querySelector('svg')!.getAttribute('width')).toBe('20');
+  const box = icon.parentElement as HTMLElement;
+  expect(box.style.width).toBe('24px');
+  expect((box.parentElement as HTMLElement).style.paddingInlineEnd).toBe('4px');
 });
 
 test('Input comment type renders a textarea', () => {
@@ -417,25 +456,71 @@ test('Input comment type renders a textarea', () => {
   expect(screen.getByRole('textbox').tagName).toBe('TEXTAREA');
 });
 
-test('Input clearable erase button clears and refocuses', async () => {
+/* Clear = Figma `dismiss surface=default small=false` (24px) with 8px start padding, shown only
+   in active+filled. Was a hand-built #908e9a circle shown whenever the field had a value. */
+
+test('Input clear shows only while active and filled, clears and keeps focus', async () => {
   const fn = vi.fn();
   render(<Input label="Search" defaultValue="fibre" clearable onClear={fn} />);
-  await userEvent.click(screen.getByRole('button', { name: 'Clear' }));
+  expect(screen.queryByRole('button', { name: 'Clear' })).toBeNull(); // filled, not active
+  await userEvent.click(screen.getByRole('textbox'));
+  const clear = screen.getByRole('button', { name: 'Clear' });
+  expect(clear.style.width).toBe('24px');
+  expect(clear.style.background).toBe('rgb(144, 142, 154)'); // color/dismiss/default
+  expect((clear.parentElement as HTMLElement).style.paddingInlineStart).toBe('8px');
+  await userEvent.click(clear);
   expect(fn).toHaveBeenCalledTimes(1);
   expect((screen.getByRole('textbox') as HTMLInputElement).value).toBe('');
+  expect(screen.getByRole('textbox')).toHaveFocus();
 });
 
-test('Input inverse scheme uses the white-15 surface', () => {
-  const { container } = render(<Input label="A" inverse />);
-  const field = container.firstElementChild!.firstElementChild as HTMLElement;
-  expect(field.style.background).toBe('rgba(255, 255, 255, 0.15)');
+test('Input clear stays reachable by keyboard (focus moving to it keeps the field active)', async () => {
+  render(<Input label="Search" defaultValue="fibre" clearable />);
+  await userEvent.click(screen.getByRole('textbox'));
+  await userEvent.tab();
+  expect(screen.getByRole('button', { name: 'Clear' })).toHaveFocus();
 });
+
+test('Input inverse is white-15 glass; inverse disabled is white-10 without blur', () => {
+  const { container, rerender } = render(<Input label="A" inverse />);
+  expect(fieldOf(container).style.background).toBe('rgba(255, 255, 255, 0.15)'); // surface/glass/white/md
+  expect(fieldOf(container).style.backdropFilter).toBe('blur(20px)');
+  rerender(<Input label="A" inverse disabled />);
+  expect(fieldOf(container).style.background).toBe('rgba(255, 255, 255, 0.1)'); // surface/glass/white/sm
+  expect(fieldOf(container).style.backdropFilter).toBe('');
+});
+
+/* Status row = `.input-status` as instanced in input-field: 12px inline inset (matches the field
+   padding), a 20px icon-size with the 16px `info` glyph for every status — neutral included,
+   success too (was a 12px glyph, `check` for success, none for the helper) — and body/sm text. */
 
 test('Input error and success hints use danger/positive subtle colors', () => {
   const { rerender } = render(<Input label="A" error="Wrong code" />);
   expect(screen.getByText('Wrong code').style.color).toBe('rgb(224, 120, 48)'); // #e07830
   rerender(<Input label="A" success="Looks good" />);
   expect(screen.getByText('Looks good').style.color).toBe('rgb(84, 188, 114)'); // #54bc72
+});
+
+test.each([
+  ['error', 'rgb(224, 120, 48)'],
+  ['success', 'rgb(84, 188, 114)'],
+  ['helper', 'rgb(144, 142, 154)'],
+] as const)('Input %s row: 12px inset, info 16 in a 20 box in the status ink', (kind, ink) => {
+  const { container } = render(<Input label="A" {...{ [kind]: 'Message' }} />);
+  const icon = container.querySelector('[aria-label="info"]') as HTMLElement;
+  expect(icon.querySelector('svg')!.getAttribute('width')).toBe('16');
+  const box = icon.parentElement as HTMLElement;
+  expect(box.style.width).toBe('20px');
+  expect(box.style.color).toBe(ink);
+  const row = box.parentElement as HTMLElement;
+  expect(row.style.paddingInline).toBe('12px');
+  expect(screen.getByText('Message').style.fontSize).toBe('12px');
+});
+
+test('Input statusIcon={false} drops the info glyph (Figma info-icon boolean)', () => {
+  const { container } = render(<Input label="A" helper="Hint" statusIcon={false} />);
+  expect(container.querySelector('[aria-label="info"]')).toBeNull();
+  expect(screen.getByText('Hint')).toBeInTheDocument();
 });
 
 /* ---------------- OtpInput ---------------- */
@@ -458,6 +543,35 @@ test('OtpInput masked shows dots and clamps to length', async () => {
   const cells = Array.from(container.querySelectorAll('span[aria-hidden]'));
   expect(cells).toHaveLength(3);
   expect(cells.map((c) => c.textContent)).toEqual(['•', '•', '•']);
+});
+
+/* OtpInput vs Figma V1.2 `otp` 33330:26041: six 48×56 input-field type=otp cells,
+   space-between, 16px side padding (spacing/lg); cells r14 with the input-field stroke rules;
+   the status line is `.input-status status=error` (16px inset, info glyph). Was 4 cells, gap 8,
+   no padding, r16, a 1.5px ring on every cell. */
+
+test('OtpInput defaults to 6 cells spread across a 16px-padded row', () => {
+  const { container } = render(<OtpInput />);
+  const cells = Array.from(container.querySelectorAll('span[aria-hidden]')) as HTMLElement[];
+  expect(cells).toHaveLength(6);
+  const row = cells[0].parentElement!;
+  expect(row.style.justifyContent).toBe('space-between');
+  expect(row.style.paddingInline).toBe('16px');
+  expect(cells[0].style.borderRadius).toBe('14px');
+  expect(cells[0].style.boxShadow).toBe('none');
+});
+
+test('OtpInput active cell gets the 1px accent stroke; error cells the danger stroke', async () => {
+  const { container, rerender } = render(<OtpInput />);
+  const cells = () => Array.from(container.querySelectorAll('span[aria-hidden]')) as HTMLElement[];
+  await userEvent.click(screen.getByLabelText('One-time code'));
+  expect(cells()[0].style.boxShadow).toBe('inset 0 0 0 1px #e00800');
+  expect(cells()[1].style.boxShadow).toBe('none');
+  rerender(<OtpInput error="Wrong code" />);
+  expect(cells()[3].style.boxShadow).toBe('inset 0 0 0 1px #ff9f52');
+  const icon = container.querySelector('[aria-label="info"]') as HTMLElement;
+  expect(((icon.parentElement as HTMLElement).parentElement as HTMLElement).style.paddingInline).toBe('16px');
+  expect(screen.getByText('Wrong code').style.color).toBe('rgb(224, 120, 48)');
 });
 
 /* ---------------- Chip V1.1 types (Figma 31539:8725) ---------------- */

@@ -4,67 +4,110 @@ import { Icon } from '../icons';
 import { Text, IconBox, Badge, Dismiss } from './primitives';
 
 /* ---------------- Input ----------------
-   Figma V1.1 input-field (page 22609:113539): a single filled style — 56px field,
-   16px radius, 1.5px state border, floating label (16px resting → 12px floated).
-   `type` maps the Figma axis: text | dropdown (trailing 16px chevron) |
-   picker (leading slot + chevron) | comment (multiline). OTP is `OtpInput` below. */
+   Figma V1.2 `input-field` 29010:3152 (page 22609:113539; 08.06.2026 "Overhauled entire
+   component to v2.0"): a 56px field (scale/56), radius border-radius/5 = 14, inline padding
+   12 (spacing/md), floating label (body/lg resting → body/sm floated). The surface has no
+   stroke at rest, filled or disabled; active = 1px border/interactive/accent/default, error =
+   1px border/interactive/danger/subtle — both INSIDE, drawn here as an inset shadow so the
+   field never shifts. Inverse = `.input-surface-inverse` 29706:19982: surface/glass/white/md +
+   glass effect, disabled surface/glass/white/sm.
+   Slots (`.input-addon` 38127:23558), spacing carried by each slot rather than a row gap:
+   leading 24px icon-size + 4 end · text · dropdown chevron-down 12 in a 16 box · trailing
+   4 start + 24 icon-size · clear = `dismiss` md (24) with 8 start padding, active+filled only.
+   Status row (`.input-status` 25328:25295 as instanced here): 12px inline inset, a 20px
+   icon-size holding the 16px `info` glyph for every status, body/sm text.
+   Vertical text padding stays 8: Figma's 12 + label 17 + 2 + value 22 + 12 = 65 overflows its
+   own bound 56px height (design question). `type` maps the Figma axis: text | dropdown |
+   picker | comment. OTP is `OtpInput` below. */
 export type InputType = 'text' | 'dropdown' | 'picker' | 'comment';
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'type'> {
   /** Floating label inside the field. */
   label?: ReactNode;
+  /** Neutral hint below the field (Figma status=neutral). */
   helper?: ReactNode;
-  /** Error hint below the field (Figma status=error); drives the error border. */
+  /** Error hint below the field (Figma status=error); drives the error stroke. */
   error?: ReactNode;
-  /** Success hint below the field (Figma status=Success). */
+  /** Success hint below the field (Figma status=success). */
   success?: ReactNode;
+  /** Show the `info` glyph before the status text (Figma `info-icon`, default true). */
+  statusIcon?: boolean;
   /** Figma `type` axis. dropdown/picker render read-only with a trailing chevron. */
   type?: InputType;
   /** Underlying HTML input type (password, email, …) for type="text". */
   htmlType?: InputHTMLAttributes<HTMLInputElement>['type'];
   /** Inverse scheme for dark (midnight/brand) surfaces. */
   inverse?: boolean;
+  /** Leading slot: a 24px icon-size — pass a 20px glyph. */
   leadingIcon?: ReactNode;
+  /** Trailing slot: a 24px icon-size — pass a 20px glyph. */
   trailingIcon?: ReactNode;
-  /** Show the 24px erase button when the field has a value. */
+  /** Show the 24px dismiss (clear) button while the field is active and has a value. */
   clearable?: boolean;
   onClear?: () => void;
   /** @deprecated V1.0 axis — V1.1 has a single filled style; ignored. */
   variant?: 'outlined' | 'filled';
 }
+const INPUT_GLASS = { backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' } as const;
+/** Figma INSIDE stroke, as an inset shadow (no layout shift between states). */
+const insideStroke = (c: string | null) => (c ? `inset 0 0 0 ${T.border.sm} ${c}` : 'none');
+/** `.input-status`: 20px icon-size with the 16px `info` glyph + body/sm text, in the status ink. */
+function StatusLine({ ink, inset, gap, bottom, icon = true, children }: { ink: string; inset: string; gap: string; bottom: string; icon?: boolean; children: ReactNode }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'flex-start', gap, paddingTop: space('2xs'), paddingBottom: bottom, paddingInline: inset }}>
+      {icon ? <IconBox size="lg" style={{ color: ink }}><Icon name="info" size={16} /></IconBox> : null}
+      <span style={{ paddingTop: space('2xs'), minWidth: 0 }}>
+        <Text variant="body.sm" color={ink}>{children}</Text>
+      </span>
+    </div>
+  );
+}
 export function Input({
-  label, helper, error, success, type = 'text', htmlType, inverse, leadingIcon, trailingIcon,
+  label, helper, error, success, statusIcon = true, type = 'text', htmlType, inverse, leadingIcon, trailingIcon,
   clearable, onClear, variant: _variant, style, disabled, value, defaultValue, onChange, onFocus, onBlur, ...rest
 }: InputProps) {
   const inputRef = useRef<HTMLInputElement & HTMLTextAreaElement>(null);
+  // Active = focus anywhere inside the field (the input or its clear button), so tabbing to
+  // the clear button does not hide it.
   const [focused, setFocused] = useState(false);
   const [internal, setInternal] = useState(String(defaultValue ?? ''));
   const current = String(value ?? internal);
   const floated = !label || focused || current.length > 0;
   const scheme = inverse ? 'inverse' : 'default';
   const stateKey = disabled ? 'disabled' : 'default';
-  const borderColor = disabled ? color('inputField.border.disabled')
-    : error ? color('inputField.border.error')
-    : focused ? color('inputField.border.focus')
-    : color('inputField.border.default');
+  const stroke = disabled ? null
+    : error ? color('border.interactive.danger.subtle')
+    : focused ? color('border.interactive.accent.default')
+    : null;
+  const surface = inverse
+    ? (disabled ? { background: color('surface.glass.white.sm') } : { background: color('surface.glass.white.md'), ...INPUT_GLASS })
+    : { background: color(`inputField.surface.default.${stateKey}`) };
   const labelColor = color(`inputField.text.${scheme}.label.${stateKey}`);
   const valueColor = color(`inputField.text.${scheme}.value.${disabled ? 'disabled' : 'default'}`);
   const readOnly = type === 'dropdown' || type === 'picker';
+  const lead = leadingIcon ?? (type === 'picker' ? <Icon name="placeholder" size={20} /> : null);
+  const showClear = clearable && focused && current.length > 0 && !disabled;
+  const status = error ?? success ?? helper;
+  const statusInk = error ? color('text.danger.subtle') : success ? color('text.positive.subtle') : color('text.default.muted');
   // typed loosely: 'input' and 'textarea' props diverge (rows vs type)
   const FieldTag = (type === 'comment' ? 'textarea' : 'input') as any;
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: space('xs'), width: '100%' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
       <div
         onClick={() => inputRef.current?.focus()}
+        onFocus={() => setFocused(true)}
+        onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setFocused(false); }}
         style={{
-          display: 'flex', alignItems: 'center', gap: space('sm'), minHeight: T.scale?.['56'] ?? 56,
-          padding: `0 ${space('md')}`, borderRadius: radius('6'), boxSizing: 'border-box',
-          background: color(`inputField.surface.${scheme}.${stateKey}`),
-          border: `${T.border?.md ?? '1.5px'} solid ${borderColor}`,
+          display: 'flex', alignItems: 'center', gap: 0, minHeight: scale('56'),
+          padding: `0 ${space('md')}`, borderRadius: radius('5'), boxSizing: 'border-box', border: 0,
+          ...surface, boxShadow: insideStroke(stroke),
           cursor: disabled ? 'not-allowed' : readOnly ? 'pointer' : 'text',
         }}
       >
-        {(leadingIcon ?? (type === 'picker' ? <Icon name="placeholder" size={20} /> : null)) != null
-          ? <IconBox size="lg" style={{ color: valueColor }}>{leadingIcon ?? <Icon name="placeholder" size={20} />}</IconBox> : null}
+        {lead != null ? (
+          <span style={{ display: 'inline-flex', flex: 'none', paddingInlineEnd: space('xs') }}>
+            <IconBox size="xl" style={{ color: valueColor }}>{lead}</IconBox>
+          </span>
+        ) : null}
         <span style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: space('2xs'), padding: `${space('sm')} 0` }}>
           {label ? (
             <span style={{ color: labelColor, transition: 'font-size 120ms ease, line-height 120ms ease', ...ty(floated ? 'body.sm' : 'body.lg') } as CSSProperties}>{label}</span>
@@ -78,8 +121,8 @@ export function Input({
             defaultValue={defaultValue}
             rows={type === 'comment' ? 2 : undefined}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setInternal(e.currentTarget.value); onChange?.(e); }}
-            onFocus={(e: React.FocusEvent<HTMLInputElement>) => { setFocused(true); onFocus?.(e); }}
-            onBlur={(e: React.FocusEvent<HTMLInputElement>) => { setFocused(false); onBlur?.(e); }}
+            onFocus={onFocus}
+            onBlur={onBlur}
             style={{
               width: '100%', minWidth: 0, border: 0, outline: 'none', background: 'transparent', padding: 0,
               resize: 'none', color: valueColor, caretColor: color('text.brand.default'),
@@ -89,38 +132,43 @@ export function Input({
             {...rest}
           />
         </span>
-        {clearable && current.length > 0 && !disabled ? (
-          <button
-            aria-label="Clear"
-            onClick={(e) => {
-              e.stopPropagation(); setInternal('');
-              if (value === undefined && inputRef.current) inputRef.current.value = ''; // uncontrolled: clear the DOM too
-              onClear?.(); inputRef.current?.focus();
-            }}
-            // 24px erase button, Figma `color/dismiss/default` (#908e9a) — no dismiss token group yet
-            style={{ width: 24, height: 24, flex: 'none', border: 0, borderRadius: '50%', background: '#908e9a', color: '#ffffff', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, lineHeight: 1 }}
-          ><Icon name="close" size={12} /></button>
+        {showClear ? (
+          <span style={{ display: 'inline-flex', flex: 'none', paddingInlineStart: space('sm') }}>
+            <Dismiss
+              size="md"
+              aria-label="Clear"
+              // keep focus in the field: the clear button only exists while the field is active
+              onMouseDown={(e) => e.preventDefault()}
+              onClick={() => {
+                setInternal('');
+                if (value === undefined && inputRef.current) inputRef.current.value = ''; // uncontrolled: clear the DOM too
+                onClear?.(); inputRef.current?.focus();
+              }}
+            />
+          </span>
         ) : null}
-        {readOnly ? <IconBox size="md" style={{ color: labelColor }}><Icon name="chevron-down-sm" size={16} /></IconBox>
-          : trailingIcon ? <IconBox size="lg" style={{ color: valueColor }}>{trailingIcon}</IconBox> : null}
+        {readOnly ? (
+          <IconBox size="md" style={{ color: labelColor }}><Icon name="chevron-down" size={12} /></IconBox>
+        ) : trailingIcon ? (
+          <span style={{ display: 'inline-flex', flex: 'none', paddingInlineStart: space('xs') }}>
+            <IconBox size="xl" style={{ color: valueColor }}>{trailingIcon}</IconBox>
+          </span>
+        ) : null}
       </div>
-      {(error || success || helper) ? (
-        <span style={{ display: 'inline-flex', alignItems: 'center', gap: space('xs') }}>
-          {error ? <IconBox size="sm" style={{ color: color('text.danger.subtle') }}><Icon name="info" size={12} /></IconBox>
-            : success ? <IconBox size="sm" style={{ color: color('text.positive.subtle') }}><Icon name="check" size={12} /></IconBox> : null}
-          <Text variant="body.sm" color={error ? color('text.danger.subtle') : success ? color('text.positive.subtle') : color('text.default.muted')}>
-            {error ?? success ?? helper}
-          </Text>
-        </span>
-      ) : null}
+      {/* input-field: status wrapper pBottom xs + .input-status pBottom xs = 8; gap 0 as instanced */}
+      {status ? <StatusLine ink={statusInk} inset={space('md')} gap="0" bottom={space('sm')} icon={statusIcon}>{status}</StatusLine> : null}
     </div>
   );
 }
 
 /* ---------------- OtpInput ----------------
-   Figma input-field type=otp: a row of 48×56 one-character cells sharing the
-   input-field surface/border tokens; the active cell shows the active border. */
+   Figma V1.2 `otp` 33330:26041 (filled · disabled · error · filled-half): a row of six 48×56
+   `input-field type=otp` cells, space-between, 16px side padding (spacing/lg), then the status
+   line — always `.input-status status=error` (16px inset, gap 2). Cells share the input-field
+   surface and stroke rules: no stroke at rest, 1px accent on the active cell (filled-half),
+   1px danger on error. Figma's default row is built from disabled cells (Figma bug). */
 export interface OtpInputProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
+  /** Number of cells. Figma publishes 6. */
   length?: number;
   value?: string;
   defaultValue?: string;
@@ -131,7 +179,7 @@ export interface OtpInputProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onC
   disabled?: boolean;
   error?: ReactNode;
 }
-export function OtpInput({ length = 4, value, defaultValue = '', onValueChange, masked, inverse, disabled, error, style, ...rest }: OtpInputProps) {
+export function OtpInput({ length = 6, value, defaultValue = '', onValueChange, masked, inverse, disabled, error, style, ...rest }: OtpInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [focused, setFocused] = useState(false);
   const [internal, setInternal] = useState(defaultValue.slice(0, length));
@@ -139,9 +187,15 @@ export function OtpInput({ length = 4, value, defaultValue = '', onValueChange, 
   const scheme = inverse ? 'inverse' : 'default';
   const stateKey = disabled ? 'disabled' : 'default';
   const activeIndex = Math.min(current.length, length - 1);
+  const surface = inverse
+    ? (disabled ? { background: color('surface.glass.white.sm') } : { background: color('surface.glass.white.md'), ...INPUT_GLASS })
+    : { background: color(`inputField.surface.default.${stateKey}`) };
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: space('xs'), ...style }} {...rest}>
-      <div onClick={() => inputRef.current?.focus()} style={{ position: 'relative', display: 'flex', gap: space('sm'), cursor: disabled ? 'not-allowed' : 'text' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', ...style }} {...rest}>
+      <div onClick={() => inputRef.current?.focus()} style={{
+        position: 'relative', display: 'flex', justifyContent: 'space-between', paddingInline: space('lg'),
+        cursor: disabled ? 'not-allowed' : 'text',
+      }}>
         <input
           ref={inputRef}
           aria-label="One-time code"
@@ -157,27 +211,21 @@ export function OtpInput({ length = 4, value, defaultValue = '', onValueChange, 
         {Array.from({ length }).map((_, i) => {
           const ch = current[i];
           const active = focused && !disabled && i === activeIndex;
-          const borderColor = disabled ? color('inputField.border.disabled')
-            : error ? color('inputField.border.error')
-            : active ? color('inputField.border.focus')
-            : color('inputField.border.default');
+          const stroke = disabled ? null
+            : error ? color('border.interactive.danger.subtle')
+            : active ? color('border.interactive.accent.default')
+            : null;
           return (
             <span key={i} aria-hidden style={{
-              width: T.scale?.['48'] ?? 48, height: T.scale?.['56'] ?? 56, boxSizing: 'border-box',
-              borderRadius: radius('6'), background: color(`inputField.surface.${scheme}.${stateKey}`),
-              border: `${T.border?.md ?? '1.5px'} solid ${borderColor}`,
+              width: scale('48'), height: scale('56'), flex: 'none', boxSizing: 'border-box',
+              borderRadius: radius('5'), ...surface, boxShadow: insideStroke(stroke),
               display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
               color: color(`inputField.text.${scheme}.value.${disabled ? 'disabled' : 'default'}`), ...ty('body.lg'),
             }}>{ch ? (masked ? '•' : ch) : ''}</span>
           );
         })}
       </div>
-      {error ? (
-        <span style={{ display: 'inline-flex', alignItems: 'center', gap: space('xs') }}>
-          <IconBox size="sm" style={{ color: color('text.danger.subtle') }}><Icon name="info" size={12} /></IconBox>
-          <Text variant="body.sm" color={color('text.danger.subtle')}>{error}</Text>
-        </span>
-      ) : null}
+      {error ? <StatusLine ink={color('text.danger.subtle')} inset={space('lg')} gap={space('2xs')} bottom={space('xs')}>{error}</StatusLine> : null}
     </div>
   );
 }
@@ -401,7 +449,7 @@ export interface ConsentLink {
   href?: string;
   onClick?: () => void;
 }
-export interface ConsentCheckboxProps extends Omit<CheckboxProps, 'label' | 'size' | 'radio'> {
+export interface ConsentCheckboxProps extends Omit<CheckboxProps, 'label' | 'size' | 'radio' | 'prefix'> {
   /** Text before the first link (Figma `title-string`, "Agree to"). */
   prefix?: ReactNode;
   /** Inline legal links (Figma `link-1`, `link-2`). Two are joined by `conjunction`. */
@@ -550,16 +598,20 @@ export function Switcher({ checked, defaultChecked = false, disabled, size = 'md
   );
 }
 
-/* ---------------- Searchbar ---------------- */
+/* ---------------- Searchbar ----------------
+   The Searchbar page is [Not Finalized] (no published symbol), so only clear bugs are fixed
+   against its "Standard search" frames 28114:62804: both glyphs are 20px (they rendered 24px,
+   overflowing their 20px boxes) and the mic is text/brand/default (was muted). The rest — 1px
+   stroke, 16px gaps, typing/typed states — waits for the page to be finalised. */
 export interface SearchbarProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
   onMic?: () => void;
 }
 export function Searchbar({ placeholder = 'Search', onMic, style, ...rest }: SearchbarProps) {
   return (
     <span style={{ display: 'flex', alignItems: 'center', gap: space('sm'), height: 52, padding: `0 ${space('lg')}`, borderRadius: radius('6'), background: color('surface.base.default'), width: '100%', boxSizing: 'border-box', ...style }}>
-      <IconBox size="lg"><Icon name="search" size={24} /></IconBox>
+      <IconBox size="lg"><Icon name="search" size={20} /></IconBox>
       <input placeholder={placeholder} style={{ flex: 1, minWidth: 0, border: 0, outline: 'none', background: 'transparent', ...ty('body.md') }} {...rest} />
-      <button onClick={onMic} aria-label="Voice search" style={{ border: 0, background: 'transparent', cursor: 'pointer', color: color('text.default.muted') }}><IconBox size="lg"><Icon name="mic" size={24} /></IconBox></button>
+      <button type="button" onClick={onMic} aria-label="Voice search" style={{ display: 'inline-flex', padding: 0, border: 0, background: 'transparent', cursor: 'pointer', color: color('text.brand.default') }}><IconBox size="lg"><Icon name="mic" size={20} /></IconBox></button>
     </span>
   );
 }
