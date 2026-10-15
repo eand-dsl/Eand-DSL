@@ -28,3 +28,28 @@ describe('ty() font stack', () => {
     expect(ty('nope.nope').fontFamily).toBeUndefined();
   });
 });
+
+/* The RTL sweep (7007200) wrapped directional glyphs in `<span data-rtl-flip>` "for CSS
+   mirror", but no CSS rule was ever written, so no chevron mirrored in Arabic. Components
+   are inline-styled and must work without a stylesheet import, so system.ts injects it. */
+describe('data-rtl-flip', () => {
+  it('injects one mirror rule into the document head', async () => {
+    await import('./system');
+    const tags = document.head.querySelectorAll('style#eand-rtl-flip');
+    expect(tags).toHaveLength(1);
+    expect(tags[0].textContent).toContain('[data-rtl-flip]');
+    expect(tags[0].textContent).toContain('scaleX(-1)');
+  });
+});
+
+describe('ty() follows the published text styles', () => {
+  it('heading.lg is the V1.2 style (24px / 1.1), not the stale variable (28px)', () => {
+    expect(ty('heading.lg')).toMatchObject({ fontSize: '24px', lineHeight: '1.1' });
+  });
+  it('knows the new heading/2xl', () => {
+    expect(ty('heading.2xl').fontSize).toBe('32px');
+  });
+  it('still quotes the family', () => {
+    expect(ty('heading.lg').fontFamily).toBe(`"Suisse int'l", -apple-system, system-ui, sans-serif`);
+  });
+});

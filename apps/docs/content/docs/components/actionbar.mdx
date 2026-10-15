@@ -1,9 +1,54 @@
 ---
 title: ActionBar
-description: Compact bar with a leading visual, title/subtitle, and one trailing action.
+description: A 72px tappable bar — a leading visual, a title and description, and one trailing chevron, button or switch.
 ---
 
 <ComponentDemo id="actionbar" />
+
+## When to use
+
+- **Use** for a row the user acts on: a settings entry, a prompt to top up, a shortcut into a
+  flow, a feature toggle. Figma points tappable rows here rather than to the list item.
+- **Don't use** for read-only data such as a balance or a price (use [ListRow](./listrow)), or
+  for a grid of shortcuts (use [QuickAction](./quickaction)).
+
+## Anatomy
+
+- **Leading** (optional) — `icon`, an icon or image in a 40px tile.
+- **Text** — `title` in `title/xs` and `subtitle` in `body/md`, both in the scheme ink, each a
+  single line that truncates.
+- **Trigger** — one of:
+  - `chevron`: a trailing chevron; the whole bar becomes the tap target, handled by `onClick`.
+  - `action`: a trailing node, typically a [Button](./button).
+  - `switcher`: a [Switcher](./switcher); pass `true` or the `Switcher` props.
+- **Stack** — `stack` adds two glass layers that peek out below the bar, for a pile of
+  related prompts. It renders with the inverse scheme only.
+
+## Choosing a surface
+
+`colorScheme` sets the ink. When it is unset, it follows the surface: the glass and midnight
+surfaces and `white-transparent` are inverse, the rest default.
+
+| Family | `surface` |
+| --- | --- |
+| Default ink | `default` (`surface/raised/default`), `subtle` (`surface/base/default`), `sunken` (`surface/sunken/default`), `glass` with `colorScheme="default"` |
+| Inverse ink | `glass` (20% white with a blur), `white-transparent` (20% white), `midnight-base`, `midnight-raised`, `midnight-transparent` |
+
+```tsx
+<ActionBar
+  surface="midnight-raised"
+  title="Running low on data"
+  subtitle="Add 5 GB for AED 25"
+  action={<Button size="sm">Top up</Button>}
+/>
+
+<ActionBar title="Wi-Fi calling" subtitle="Call over any network" switcher={{ defaultChecked: true }} />
+```
+
+<Callout type="warn" title="Deprecated and changed">
+  `inverse` is deprecated; use `colorScheme="inverse"`. `white-transparent` moved to the
+  inverse family in V1.2, so it now renders white ink.
+</Callout>
 
 ## Props
 
@@ -11,4 +56,14 @@ description: Compact bar with a leading visual, title/subtitle, and one trailing
 
 ## Design
 
-Figma source: [Action bar — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25627-23258)
+Figma source: [action-bar — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=28201-38278)
+
+- 72px tall (`scale/72`), 16px side padding (`spacing/lg`), 20px radius (`border-radius/7`),
+  12px gap (`spacing/md`).
+- Leading tile: 40px at `border-radius/4`, on `surface/base/default`, or `white/a15` on the
+  inverse scheme.
+- The description binds `text/default/default` (or `text/default/inverse`), the same ink as the
+  title, not a subtle step.
+- The chevron is a 20px glyph in a 24px box.
+- Stack: two 64px layers at a 16px radius (`border-radius/6`) on `surface/glass/white/md` with a
+  blur, inset 6 and 12px, each peeking 10px below the one above, for a 92px total.

@@ -1,9 +1,49 @@
 ---
 title: ProductCard
-description: Product / add-on card with image, discount and price.
+description: The card-features card in three types — package, product and category — with a tinted panel, a discount or colour swatches, and a price.
 ---
 
 <ComponentDemo id="productcard" />
+
+## When to use
+
+- **Use** for packages and add-ons, products such as devices and accessories, and shop
+  categories, in a [Section](./section) of size `lg`.
+- **Don't use** for plans (use [PlanCard](./plancard)) or for deals (use
+  [DealCard](./dealcard)).
+
+## Choosing a type
+
+| `type` | Tinted panel | Footer |
+| --- | --- | --- |
+| `package` | 176px: `eyebrow`, `title` (up to four lines), logo row | Discount or swatches, price |
+| `product` | 144px: a 112px `image`, with the logo row over it | `title` (two lines), discount or swatches, price |
+| `category` | Fills the card: `title` (one line), a 128px `image`, the Discount badge and the price | — |
+
+Without a `type`, a card with an `image` is a `product` and one without is a `package`.
+
+## Anatomy
+
+- **Tint** — `tint` colours the panel only; the card itself is always white. Pass a
+  `.card-bg-color` name (`default`, `red`, `orange`, `yellow`, `green`, `cyan`, `blue`,
+  `violet`) or any CSS colour.
+- **Discount or swatches** — `discount` renders the `lg` Discount badge; `colors` renders 12px
+  colour spots in its place.
+- **Price** — a label, then `price` and `period` in `body/xl`. `priceLabel` is `from` (default),
+  `pay-only`, `smiles-combined` (with `labelPts`, "From 30 PTS") or `none`. `pts` shows the
+  price in Smiles points.
+- **Logos** — `logos` adds the small logo row on `package` and `product` cards; `true` shows
+  placeholders.
+
+```tsx
+<ProductCard type="package" eyebrow="Add-on" title="Unlimited social data" discount="20% off" price="AED 35" />
+<ProductCard type="product" image={<img src={phone} alt="" />} title="iPhone 16" colors={['#4fa0f8', '#b3b3b3']} priceLabel="pay-only" />
+```
+
+<Callout type="warn" title="Deprecated and changed">
+  `type="addon"` is deprecated; it is the V1.1 name of `package`. `tint` used to colour the
+  whole card and now colours the panel only.
+</Callout>
 
 ## Props
 
@@ -11,4 +51,16 @@ description: Product / add-on card with image, discount and price.
 
 ## Design
 
-Figma source: [ProductCard — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25701-12472)
+Figma source: [card-features-package — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=37905-18719) ·
+[card-features-product](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=37905-18753) ·
+[card-features-category](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=37905-18788)
+
+- 229 × 300 (`section/body/height/row-4`) at a 20px radius (`border-radius/7`) on
+  `surface/raised/default`.
+- The tint panel has a 24px radius (`border-radius/8`) and a 4px inside ring in
+  `border/interactive/inverse/pressed` (white).
+- Footer padding 8/12/12 (`spacing/sm`, `spacing/md`), gap 4, bottom-aligned.
+- Titles apply the heading text styles: `heading/sm` (18px, 110%) on package and product,
+  `heading/md` (20px) on category. The price is `body/xl` (20px Regular) under a `body/md`
+  subtle label.
+- The product title binds a legacy ink (#140f21) that has no V1.2 token, so it is a literal.

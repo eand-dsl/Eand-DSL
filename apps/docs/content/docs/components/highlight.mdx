@@ -1,9 +1,54 @@
 ---
 title: Highlight
-description: Full-bleed hero banner with a gradient scrim.
+description: The hero banner — an image under a midnight gradient, with a tag, a title, a subtitle and a glass action bar, in three sizes, single or stacked.
 ---
 
 <ComponentDemo id="highlight" />
+
+## When to use
+
+- **Use** for the one or two campaigns that lead a screen, in a [Section](./section) whose
+  `size` matches the banner: `xl` for `lg`, `md` for `md`, `sm` for `sm`.
+- **Don't use** for a list of offers (use [DealCard](./dealcard)), for personalised suggestions
+  (use [Recommendation](./recommendation)), or without artwork. With no image the banner falls
+  back to a plain midnight placeholder.
+
+## Choosing a size
+
+| `size` | Height | Content |
+| --- | --- | --- |
+| `lg` (default) | 452px | Tag, `title` and `subtitle` (two lines each), action bar |
+| `md` | 224px | Tag at the top, action bar at the bottom |
+| `sm` | 148px | Tag at the top, action bar at the bottom |
+
+The `md` and `sm` sizes hide the title and subtitle, as the published sizes do.
+
+## Anatomy
+
+- **Image** — `image`, a URL that covers the banner, under a midnight gradient that keeps the
+  text legible.
+- **Tag** — `tag="logos"` (default) shows a glass row of partner `logos`; `tag="badge"` shows the
+  Limited time badge, labelled by `badge`; `tag="none"` hides it.
+- **Action bar** — `action={{ title, subtitle, cta, onCta }}` renders a glass
+  [ActionBar](./actionbar) with an `md` [Button](./button).
+- **Stacked** — `placement="stacked"` lays this banner and `items` out as 307px cards, 4px
+  apart, so the next one peeks in.
+
+```tsx
+<Highlight
+  image="/campaigns/summer.jpg"
+  title="Summer in the city"
+  subtitle="Exclusive venue deals with Smiles"
+  tag="badge"
+  action={{ title: 'Smiles Unlimited', subtitle: 'From AED 25', cta: 'Play now', onCta: play }}
+/>
+```
+
+<Callout type="warn" title="Deprecated">
+  V1.2 has one surface, image under a midnight gradient, and puts the call to action in the
+  action bar. `tone`, `background` and the bare `cta` still render, but use `image` and `action`
+  instead.
+</Callout>
 
 ## Props
 
@@ -11,4 +56,14 @@ description: Full-bleed hero banner with a gradient scrim.
 
 ## Design
 
-Figma source: [Highlight — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25460-83982)
+Figma source: [highlight — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=34272-25571)
+
+- Heights bind `row-6`, `row-3` and `row-2`; the radius is 24px (`border-radius/8`).
+- Gradient: transparent at 46% of the height, `midnight/a60` at 70% and `midnight/a80` at the
+  bottom.
+- Padding: `lg` 16 at the top and 12 elsewhere (`spacing/lg`, `spacing/md`); `md` and `sm` 12
+  all round.
+- The title applies the `heading/lg` text style (24px, 110%); the subtitle is `body/md`. Both
+  use `text/default/inverse`.
+- Tag: each logo sits in a 48px `surface/glass/white/lg` circle. The badge is `lg` on the `lg`
+  banner and steps down to `md` and `sm` with the banner.

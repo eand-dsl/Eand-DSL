@@ -1,28 +1,36 @@
 ---
 title: AISearch
-description: The “Ask e&” search bar, wired to the component finder.
+description: The “Ask e&” entry point — a Searchbar with an assistant placeholder. Its Figma page is not yet final.
 ---
+
+<Callout title="Not final in Figma">
+  The AI Search frames in Figma DSL V1.2 are not finalised and have no published symbol.
+  Until they are, `AISearch` is the [Searchbar](./searchbar) with the placeholder
+  “Ask e& or search”.
+</Callout>
 
 <ComponentDemo id="aisearch" />
 
-By default `<AISearch/>` is a live **finder**: type to search every React component, icon, and
-Figma-library component at once, or drop / paste an image to search by picture. The visual search
-runs a SigLIP model **in the browser** (loaded on demand) over a prebuilt static index — there is no
-server model, so it deploys as a fully static site. See the [Finder](/finder) page for the live bar.
+## When to use
+
+- **Use** as the entry point to the e& assistant, where a query may be a question as well as
+  a search.
+- **Don't use** for plain search — use the [Searchbar](./searchbar).
+
+`AISearch` takes the same props as `Searchbar`: every native input prop, plus `onMic`. The
+site's [Finder](/finder) is a documentation feature built for this site, not this component.
 
 ## Props
 
-Extends `Searchbar` (all input props, plus `onMic`), and adds:
-
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `finder` | `boolean` | `true` | Live finder dropdown. Set `false` for the plain presentational field. |
-| `indexBase` | `string` | `"/finder/"` | Base URL of the prebuilt finder data (`index.json`, `embeddings.f32`, `thumbs/`) that the app serves. |
-| `enableVisual` | `boolean` | `true` | Allow in-browser visual + image search (the ✨ toggle and image drop / paste). |
-| `maxResults` | `number` | `8` | Max results shown in the dropdown. |
-
-<PropsTable name="Searchbar" />
+<PropsTable name="AISearch" />
 
 ## Design
 
-Figma source: [AISearch — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=28114-62397)
+Figma source: [AI Search component — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=30635-82333)
+
+- Frames only: a 367×396 card with a title row, a grid of suggestion chips or category filter
+  pills, and a search field in default, focus and typing states.
+- Voice dictation is drawn in three states: started (waveform and timer), transcribing and
+  result.
+- None of this is built yet; the component keeps the Searchbar geometry (52px,
+  `border-radius/6`).

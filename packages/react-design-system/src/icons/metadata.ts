@@ -1,9 +1,9 @@
 // AUTO-GENERATED from Figma icon descriptions (e& Consumer App DSL, icons_2d section).
-// Regenerate with: node tools/build-metadata.mjs <raw-dump.json>. Do not edit.
+// Regenerate with: node scripts/build-icon-metadata.mjs. Do not edit.
 export interface IconMeta { description: string; aliases: string[] }
 export const ICON_META: Record<string, IconMeta> = {
-  "add": {"description":"Add or create a new item. Not for \"expand\" — this creates, doesn't reveal.","aliases":["plus","new","create"]},
-  "add-2": {"description":"Add or create a new item — the bare plus glyph. Not for zoom-in or increment steppers unless that's the context. Pairs with subtract as a +/− set.","aliases":["plus","new","create","expand"]},
+  "add": {"description":"Add or create a new item — the bare plus glyph. Not for zoom-in or increment steppers unless that's the context. Pairs with subtract as a +/− set.","aliases":["plus","new","create","expand"]},
+  "add-content": {"description":"Add or create a new item. Not for \"expand\" — this creates, doesn't reveal.","aliases":["plus","new","create"]},
   "ai": {"description":"I features, smart/generative actions, magic assist. Not for favorites (use star) or ratings (use star).","aliases":["sparkles","magic","smart","generate","stars"]},
   "ai-text": {"description":"AI applied to text — smart compose, summarize, rewrite, or AI-generated list content. Not for general AI (use ai) or plain lists (use list).","aliases":["ai-list","smart-text","generate-text"]},
   "airplay": {"description":"Cast, screen mirroring, AirPlay. Not for share (use share) or upload.","aliases":["cast","mirror","airplay","screencast"]},
@@ -60,7 +60,7 @@ export const ICON_META: Record<string, IconMeta> = {
   "collapse": {"description":"Collapse from fullscreen, shrink, minimize. Not for subtract or close.","aliases":["minimize","shrink","exit-fullscreen"]},
   "cookie": {"description":"Cookies, cookie consent/preferences, privacy settings. Not for rewards or food content.","aliases":["cookies","consent","privacy","tracking"]},
   "copy": {"description":"Duplicate content to clipboard. Not for switching between items (use layers/switch).","aliases":[]},
-  "copy-2": {"description":"Copy, duplicate document, copy to clipboard. Not for delete or move.","aliases":["duplicate","copy","clipboard","files"]},
+  "copy-doc": {"description":"Copy, duplicate document, copy to clipboard. Not for delete or move.","aliases":["duplicate","copy","clipboard","files"]},
   "crown": {"description":"Premium, VIP, top tier, exclusive. Telecom: likely premium plan tier — confirm.","aliases":["premium","vip","king","exclusive","top-tier","royal"]},
   "cut": {"description":"Cut, trim, scissors. Not for delete or edit.","aliases":["scissors","trim","snip","clip"]},
   "delete": {"description":"Permanent, destructive removal of an entity (delete account, delete saved card, delete message). Not for: removing items from a list (use minus/remove), closing UI elements (use dismiss), clearing input text (use dismiss in input context), or archiving (use archive).","aliases":["trash","bin","remove"]},
@@ -68,6 +68,7 @@ export const ICON_META: Record<string, IconMeta> = {
   "devices": {"description":"Multiple devices, multi-device, cross-device sync. Not for single device types.","aliases":["multi-device","all-devices","sync-devices"]},
   "discount": {"description":"Discount, percentage off, promotional offer. Not for gift (use gift) or voucher.","aliases":["percent","sale","offer","promo","deal"]},
   "dismiss": {"description":"Close, cancel, or dismiss UI elements. Not for deletion (use delete) or remove-from-list (use remove).","aliases":["close","cancel","x"]},
+  "dot": {"description":"Generic status indicator, unread marker, selection dot, or bullet point. Confirm intended use — meaning varies heavily by context (notification dot, radio-unselected, progress step, bullet).","aliases":[]},
   "download": {"description":"Download to device. Not for import/upload (use upload) or save (use bookmark).","aliases":[]},
   "drag": {"description":"Drag handle for reordering/moving items. Not for apps-grid (use apps) or more (use more).","aliases":["drag","reorder","move","grip"]},
   "edit": {"description":"Edit, modify, write (pencil). Not for compose/new (use edit-square) or delete.","aliases":["pencil","modify","write","change"]},
@@ -89,8 +90,7 @@ export const ICON_META: Record<string, IconMeta> = {
   "gift": {"description":"Gift, reward, offer, present, Smiles perk. Not for voucher (use voucher) or discount.","aliases":["present","reward","offer","bonus","perk"]},
   "glasses": {"description":"Glasses, view mode, reading, accessibility. Confirm intended use.","aliases":["glasses","spectacles","view","read","vision"]},
   "globe": {"description":"Globe, world, international, roaming, language/region. Telecom: likely roaming/international — confirm.","aliases":["world","global","international","roaming","web","language"]},
-  "grid": {"description":"Grid view, dashboard layout, tiles. Not for menu (use more) or table.","aliases":["layout","dashboard","tiles"]},
-  "grid-2": {"description":"Grid layout, tile/gallery view, dashboard. Not for menu (use menu) or table.","aliases":["tiles","gallery","dashboard","cards-view"]},
+  "grid": {"description":"Grid layout, tile/gallery view, dashboard. Not for menu (use menu) or table.","aliases":["tiles","gallery","dashboard","cards-view"]},
   "guide": {"description":"Guide, documentation, read more, catalog, learn. Not for bookmark (use bookmark) or article (use article).","aliases":["book","docs","manual","read","learn"]},
   "headphones": {"description":"Headphones, audio device, listening, support-call. Not for volume or mic.","aliases":["headset","audio","listen","earphones"]},
   "heart": {"description":"Like, love, favorite (emotional/social favoriting). Not for ratings (use star) or saving (use bookmark).","aliases":["like","love","favorite"]},

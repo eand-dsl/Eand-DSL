@@ -1,0 +1,458 @@
+[
+  {
+    "name": "display/lg",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Bold",
+    "fontSize": 48,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 120
+    },
+    "letterSpacing": -0.65
+  },
+  {
+    "name": "display/md",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Bold",
+    "fontSize": 40,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 120
+    },
+    "letterSpacing": -0.65
+  },
+  {
+    "name": "heading/2xl",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Bold",
+    "fontSize": 32,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 100
+    },
+    "letterSpacing": -0.65
+  },
+  {
+    "name": "heading/xl",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Bold",
+    "fontSize": 28,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 110
+    },
+    "letterSpacing": -0.65
+  },
+  {
+    "name": "heading/lg",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Bold",
+    "fontSize": 24,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 110
+    },
+    "letterSpacing": -0.35
+  },
+  {
+    "name": "heading/md",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Bold",
+    "fontSize": 20,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 110
+    },
+    "letterSpacing": -0.35
+  },
+  {
+    "name": "heading/sm",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Bold",
+    "fontSize": 18,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 110
+    },
+    "letterSpacing": -0.35
+  },
+  {
+    "name": "heading/xs",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Bold",
+    "fontSize": 16,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 120
+    },
+    "letterSpacing": 0
+  },
+  {
+    "name": "title/xl",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Semi Bold",
+    "fontSize": 28,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 130
+    },
+    "letterSpacing": -0.35
+  },
+  {
+    "name": "title/lg",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Semi Bold",
+    "fontSize": 24,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 130
+    },
+    "letterSpacing": -0.35
+  },
+  {
+    "name": "title/md",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Semi Bold",
+    "fontSize": 20,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 130
+    },
+    "letterSpacing": -0.35
+  },
+  {
+    "name": "title/sm",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Semi Bold",
+    "fontSize": 16,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 130
+    },
+    "letterSpacing": 0
+  },
+  {
+    "name": "title/xs",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Semi Bold",
+    "fontSize": 14,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 130
+    },
+    "letterSpacing": 0
+  },
+  {
+    "name": "body/xl",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Regular",
+    "fontSize": 20,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 140
+    },
+    "letterSpacing": 0
+  },
+  {
+    "name": "body/lg",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Regular",
+    "fontSize": 16,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 140
+    },
+    "letterSpacing": 0
+  },
+  {
+    "name": "body/md",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Regular",
+    "fontSize": 14,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 140
+    },
+    "letterSpacing": 0
+  },
+  {
+    "name": "body/sm",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Regular",
+    "fontSize": 12,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 140
+    },
+    "letterSpacing": 0
+  },
+  {
+    "name": "body/xs",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Regular",
+    "fontSize": 10,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 140
+    },
+    "letterSpacing": 0
+  },
+  {
+    "name": "button/lg",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Semi Bold",
+    "fontSize": 16,
+    "lineHeight": {
+      "unit": "AUTO"
+    },
+    "letterSpacing": 0
+  },
+  {
+    "name": "button/md",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Medium",
+    "fontSize": 14,
+    "lineHeight": {
+      "unit": "AUTO"
+    },
+    "letterSpacing": 0
+  },
+  {
+    "name": "button/sm",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Medium",
+    "fontSize": 12,
+    "lineHeight": {
+      "unit": "AUTO"
+    },
+    "letterSpacing": 0
+  },
+  {
+    "name": "badge/lg",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Book",
+    "fontSize": 14,
+    "lineHeight": {
+      "unit": "AUTO"
+    },
+    "letterSpacing": 0
+  },
+  {
+    "name": "badge/md",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Book",
+    "fontSize": 12,
+    "lineHeight": {
+      "unit": "AUTO"
+    },
+    "letterSpacing": 0
+  },
+  {
+    "name": "badge/sm",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Book",
+    "fontSize": 10,
+    "lineHeight": {
+      "unit": "AUTO"
+    },
+    "letterSpacing": 0
+  },
+  {
+    "name": "aed/display/lg",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Bold",
+    "fontSize": 48,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 120
+    },
+    "letterSpacing": -0.65
+  },
+  {
+    "name": "aed/display/md",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Bold",
+    "fontSize": 40,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 120
+    },
+    "letterSpacing": -0.65
+  },
+  {
+    "name": "aed/heading/xl",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Bold",
+    "fontSize": 32,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 120
+    },
+    "letterSpacing": -0.65
+  },
+  {
+    "name": "aed/heading/lg",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Bold",
+    "fontSize": 28,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 120
+    },
+    "letterSpacing": -0.65
+  },
+  {
+    "name": "aed/heading/md",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Bold",
+    "fontSize": 24,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 120
+    },
+    "letterSpacing": -0.35
+  },
+  {
+    "name": "aed/heading/sm",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Bold",
+    "fontSize": 20,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 120
+    },
+    "letterSpacing": -0.35
+  },
+  {
+    "name": "aed/heading/xs",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Bold",
+    "fontSize": 16,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 120
+    },
+    "letterSpacing": 0
+  },
+  {
+    "name": "aed/title/xl",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Semi Bold",
+    "fontSize": 28,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 120
+    },
+    "letterSpacing": -0.35
+  },
+  {
+    "name": "aed/title/lg",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Semi Bold",
+    "fontSize": 24,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 120
+    },
+    "letterSpacing": -0.35
+  },
+  {
+    "name": "aed/title/md",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Semi Bold",
+    "fontSize": 20,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 120
+    },
+    "letterSpacing": -0.35
+  },
+  {
+    "name": "aed/title/sm",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Semi Bold",
+    "fontSize": 16,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 120
+    },
+    "letterSpacing": 0
+  },
+  {
+    "name": "aed/title/xs",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Semi Bold",
+    "fontSize": 14,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 140
+    },
+    "letterSpacing": 0
+  },
+  {
+    "name": "aed/body/xl",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Regular",
+    "fontSize": 20,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 140
+    },
+    "letterSpacing": 0
+  },
+  {
+    "name": "aed/body/lg",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Regular",
+    "fontSize": 16,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 140
+    },
+    "letterSpacing": 0
+  },
+  {
+    "name": "aed/body/md",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Regular",
+    "fontSize": 14,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 140
+    },
+    "letterSpacing": 0
+  },
+  {
+    "name": "aed/body/sm",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Regular",
+    "fontSize": 12,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 140
+    },
+    "letterSpacing": 0
+  },
+  {
+    "name": "aed/body/xs",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Regular",
+    "fontSize": 10,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 140
+    },
+    "letterSpacing": 0
+  },
+  {
+    "name": "alerts/md",
+    "fontFamily": "Suisse Int'l",
+    "fontStyle": "Semi Bold",
+    "fontSize": 14,
+    "lineHeight": {
+      "unit": "PERCENT",
+      "value": 130
+    },
+    "letterSpacing": 0
+  }
+]

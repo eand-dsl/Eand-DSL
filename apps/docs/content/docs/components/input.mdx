@@ -1,9 +1,31 @@
 ---
 title: Input
-description: V1.1 filled field with floating label, state border, and text/dropdown/picker/comment/OTP types.
+description: Text field with a floating label — text, dropdown, picker and comment types — plus a six-cell OTP entry.
 ---
 
 <ComponentDemo id="input" />
+
+## When to use
+
+- **Use** for values the user types: names, numbers, email, passwords (set `htmlType`). Use
+  `type="comment"` for multi-line text, and `dropdown` or `picker` for a read-only field that
+  opens a chooser.
+- **Use** `OtpInput` for one-time codes.
+- **Don't use** for search — that is the [Searchbar](./searchbar). To pick from a few visible
+  options, use a [Picker](./picker) or [Radio](./radio) group.
+
+## States
+
+- **At rest, filled and disabled** the field has no stroke. While **active** it gains a 1px
+  accent stroke.
+- **`error`** draws a 1px danger stroke and a red status line. `helper` is neutral and
+  `success` is green. `statusIcon={false}` hides the info glyph before the message.
+- **`clearable`** shows a 24px [Dismiss](./dismiss) while the field is active and has a value.
+- **`inverse`** turns the surface to white glass for brand-red and midnight backgrounds.
+
+`OtpInput` defaults to six cells. Codes read left to right, so the cells do not mirror on
+Arabic pages; `masked` shows dots instead of digits. `variant` is a deprecated V1.0 prop and
+is ignored.
 
 ## Props
 
@@ -12,4 +34,15 @@ description: V1.1 filled field with floating label, state border, and text/dropd
 
 ## Design
 
-Figma source: [Input — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=22609-113539)
+Figma source: [input-field — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=29010-3152) ·
+[otp](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=33330-26041)
+
+- 56px minimum height (`scale/56`), `border-radius/5` (14), `spacing/md` inline padding.
+- The label is `body/lg` at rest and `body/sm` once floated; the value is `body/lg`.
+- Strokes are drawn inside, so the field never shifts: active
+  `border/interactive/accent/default`, error `border/interactive/danger/subtle`, both
+  `border/sm`.
+- Slots: leading and trailing 24px icon boxes (pass a 20px glyph) with 4px spacing; the
+  dropdown chevron is 12px in a 16px box.
+- Inverse: `surface/glass/white/md` with a backdrop blur; disabled `surface/glass/white/sm`.
+- OTP cells are 48×56, spread with `spacing/lg` side padding.

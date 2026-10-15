@@ -1,9 +1,38 @@
 ---
 title: SmilesBalance
-description: Gold loyalty strip showing the Smiles balance.
+description: The Smiles loyalty card — the points total, the member's tier and the progress towards the next tier.
 ---
 
 <ComponentDemo id="smilesbalance" />
+
+## When to use
+
+- **Use** at the top of the Smiles area or the account hub, to show the member's balance and how
+  close they are to the next tier.
+- **Don't use** to list partner brands (use [SmilesRow](./smilesrow)) or for plan allowances
+  (use [PlanUsageBar](./planusagebar)).
+
+## Anatomy
+
+- **Total** — `points` in bold 28px, over the `label` ("Points") in bold 24px.
+- **Info** — `tooltip` (on by default) adds an info button after the label; `onInfo` handles it.
+- **Tier pill** — the current `tier` (`silver`, `gold` or `platinum`) with its medal. `null`
+  hides it.
+- **Footer** — a progress bar (`progress`, 0 to 100) over a line that names `pointsToNext` and
+  the `nextTier`. `message` replaces the line.
+
+`active={false}` is the not-yet-activated state: no tier pill, and the line invites the member
+to activate, with `pointsToNext` as the reward.
+
+```tsx
+<SmilesBalance points="40,340" tier="silver" nextTier="gold" pointsToNext="2,500" progress={40} onInfo={explain} />
+<SmilesBalance active={false} points="0" pointsToNext="500" />
+```
+
+<Callout type="warn" title="Deprecated">
+  `cta` belongs to the V1.0 gold strip's Redeem button, which V1.2 removes. It renders only when
+  set.
+</Callout>
 
 ## Props
 
@@ -11,4 +40,13 @@ description: Gold loyalty strip showing the Smiles balance.
 
 ## Design
 
-Figma source: [SmilesBalance — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=26610-601)
+Figma source: [smiles-balance-card — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=27131-101113)
+
+- Full width × 148px (`row-2`), 16px radius (`border-radius/6`), on `surface/base/inverse`.
+- Header padding 16/16/0 (`spacing/lg`). The total binds the `typography/heading/lg` variables
+  (28px, 120%); "Points" applies the `heading/lg` text style (24px, 110%).
+- Tier pill: 40px tall, a 32px medal and the tier name.
+- Progress bar: 12px tall, a `surface/sunken/inverse` track and a `text/positive/subtle` fill.
+- Several bindings are legacy styles with no V1.2 token (the ink, the pill fill and the tier
+  gradients), so they are literals. Only the Silver medal exists in Figma; Gold and Platinum
+  reuse their tier gradient.

@@ -1,9 +1,17 @@
 ---
 title: AddTrigger
-description: A dashed pill “add” affordance.
+description: A full-width 72px glass panel with an “add” action — a red disc with a plus, then the label.
 ---
 
 <ComponentDemo id="addtrigger" />
+
+## When to use
+
+- **Use** as the slot that adds another item to a list or group. It fills the width of its
+  container.
+- **Use** `surface="inverse"` on dark surfaces.
+- **Don't use** for a screen's main action — that is a [Button](./button). Not for a
+  section's “See all” link; use [SectionLink](./sectionlink).
 
 ## Props
 
@@ -11,4 +19,15 @@ description: A dashed pill “add” affordance.
 
 ## Design
 
-Figma source: [AddTrigger — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25752-11470)
+Figma source: [add-trigger — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=25973-25405)
+
+- 72px tall (`scale/72`), padding 16 × 20 (`spacing/lg`; the 20 is unbound in Figma),
+  `border-radius/6` (16), no border.
+- Content: a 16px disc holding an 8px `add` glyph, then the `button/lg` label, each with
+  `spacing/xs` inline padding.
+- Default: `surface/glass/midnight/sm`, label `text/default/default`, disc
+  `text/brand/default`, plus `text/default/inverse`.
+- Inverse: `surface/glass/white/lg`, label `text/default/inverse`, disc
+  `button/tertiary/text/inverse/default`, plus `surface/canvas/midnight`.
+- Figma's description still mentions a dashed border; the published symbol has none, and the
+  symbol wins.

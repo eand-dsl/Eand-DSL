@@ -1,9 +1,46 @@
 ---
 title: DealCard
-description: Wide media card for “Deals for you” carousels.
+description: The deals card — an overline, a two-line title, partner logos, a discount with the old price, the price and a like pill.
 ---
 
 <ComponentDemo id="dealcard" />
+
+## When to use
+
+- **Use** for offers in a "Deals for you" carousel, in a [Section](./section) of size `md`.
+- **Don't use** for plans (use [PlanCard](./plancard)), for products and add-ons (use
+  [ProductCard](./productcard)), or for picture-led announcements (use [NewCard](./newcard)).
+
+## Anatomy
+
+- **Header** — `overline` in `body/sm` subtle, then `title` in bold 16px, up to two lines. The
+  header takes the free height, so removing the logo row moves nothing else.
+- **Logos** — `logos`, the small logo row; `true` shows placeholders.
+- **Footer** — bottom-aligned, in a fixed 80px:
+  - `discount`, the `md` Discount badge, beside `wasPrice`, the old price struck through;
+  - `price` in `title/md`;
+  - a feedback pill with thumbs up, the `likes` count and thumbs down. It appears when `likes`,
+    `onLike` or `onDislike` is set.
+
+```tsx
+<DealCard
+  overline="Smiles"
+  title="20% off your next dinner"
+  logos
+  discount="20% off"
+  wasPrice="AED 500"
+  price="AED 400"
+  likes="120.8k"
+  onLike={like}
+  onDislike={dislike}
+/>
+```
+
+<Callout type="warn" title="Deprecated">
+  The V1.1 deal card was an image card. `subtitle` is now `overline` and `badge` is now
+  `discount` (a label). `image` still renders, in the logo-row slot, but the V1.2 deals card has
+  no image.
+</Callout>
 
 ## Props
 
@@ -11,4 +48,12 @@ description: Wide media card for “Deals for you” carousels.
 
 ## Design
 
-Figma source: [DealCard — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25717-33323)
+Figma source: [deals-card — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=25973-22611)
+
+- 166 × 224 (`section/body/width/col-12` × `row-3`) at a 16px radius (`border-radius/6`), padding
+  12 (`spacing/md`), on `surface/base/inverse`. No border, no image.
+- The title applies the `heading/xs` text style: 16px at 120%.
+- Logo row 48px tall, including 12px below; footer 80px, gap 4 (`spacing/xs`).
+- Feedback pill: 24px tall on `surface/glass/midnight/sm`, with a 1px divider in
+  `border/surface-based/canvas/inverse` between the thumbs.
+- The price binds a legacy ink (#140f21) that has no V1.2 token, so it is a literal.

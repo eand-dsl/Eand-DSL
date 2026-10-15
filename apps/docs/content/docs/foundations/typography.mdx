@@ -1,10 +1,48 @@
 ---
 title: Typography
-description: The Suisse Int'l type ramp — display, heading, title, body, button.
+description: The Suisse Int'l text styles published in Figma DSL V1.2 — display, heading, title, body, button and badge.
 ---
 
-Sizes, weights, and line-heights come from the tokens. The `aed/*` ramp is the
-Arabic/RTL parallel — same steps, tuned metrics. Load the licensed Suisse Int'l
-font in your app; the stack falls back to `"Helvetica Neue", Inter, system-ui`.
+<EN>
+The specimens below are the **text styles published in Figma DSL V1.2**
+(`tokens.textStyle`, also emitted as `--eand-text-style-*` custom properties). They are
+what `ty()` and the `Text` component apply. V1.2 retuned the heading ramp — it now runs
+from `heading/2xl` at 32px to `heading/xs` at 16px, with `heading/lg` at 24px / 110% — and
+the `aed/*` ramp is the Arabic/RTL parallel: the same steps with tuned metrics.
+
+The older `typography/*` variables are still exported (`tokens.typography`), and they
+lag one step behind the styles: the `heading/lg` variable is 28px / 120%. A few published
+symbols bind those variables directly rather than applying a style — the PageHeader title,
+the AlertModal title and the SmilesBalance total — and those components follow their
+symbol. Use the styles everywhere else.
+
+Suisse Int'l is licensed, and this site loads it. The upright weights (300–700)
+carry the full Arabic alphabet, the Arabic-Indic digits, and the contextual
+shaping forms, so Arabic sets as connected script rather than isolated letters.
+The italics are Latin-only, which is correct — Arabic does not use them. Book
+(450) is the one exception: it has no Arabic cut, so Arabic at 450 is served from
+Regular via `unicode-range`.
+</EN>
+
+<AR>
+النماذج أدناه هي **أنماط النصوص المنشورة في نظام التصميم Figma DSL بالإصدار 1.2**
+(`tokens.textStyle`، وتُصدَّر أيضًا كخصائص مخصّصة `--eand-text-style-*`)، وهي ما تطبّقه
+الدالة `ty()` والمكوّن `Text`. أعاد الإصدار 1.2 ضبط سلّم العناوين — فصار يمتدّ من
+`heading/2xl` بمقاس 32 بكسل إلى `heading/xs` بمقاس 16 بكسل، ويأتي `heading/lg` بمقاس
+24 بكسل وارتفاع سطر 110% — وتُمثّل مجموعة `aed/*` النظير العربي للكتابة من اليمين إلى
+اليسار، بالدرجات نفسها وبمقاييس مضبوطة.
+
+أما متغيّرات `typography/*` الأقدم فما زالت تُصدَّر (`tokens.typography`)، وهي متأخّرة
+بدرجة واحدة عن الأنماط: فمتغيّر `heading/lg` بمقاس 28 بكسل وارتفاع سطر 120%. وتربط
+بعض الرموز المنشورة هذه المتغيّرات مباشرةً بدلًا من تطبيق نمط — عنوان PageHeader
+وعنوان AlertModal وإجمالي SmilesBalance — فتتبع هذه المكوّنات رمزها في Figma.
+واستخدم الأنماط في كل ما عدا ذلك.
+
+خط Suisse Int'l مرخّص، وهذا الموقع يحمّله فعلًا. تحمل الأوزان القائمة (من 300 إلى
+700) الأبجدية العربية كاملةً والأرقام العربية الهندية وأشكال الحروف السياقية، فتُصفّ
+العربية خطًّا متّصلًا لا حروفًا منفصلة. أما الأوزان المائلة فهي لاتينية فقط، وهذا هو
+الصحيح لأن العربية لا تستخدمها. ويبقى وزن Book (450) الاستثناء الوحيد: لا نسخة
+عربية له، لذا يُخدَّم النص العربي بوزن 450 من Regular عبر `unicode-range`.
+</AR>
 
 <TokenTypography />

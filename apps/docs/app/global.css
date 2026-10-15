@@ -1,10 +1,12 @@
 @import 'tailwindcss';
 @import 'fumadocs-ui/css/neutral.css';
 @import 'fumadocs-ui/css/preset.css';
+@import './fonts.css';
 
 /* e& brand accent — light-only design system, docs follow */
 :root {
   --color-fd-primary: #e00800;
+  --font-eand: "Suisse int'l", -apple-system, system-ui, sans-serif;
 }
 .dark {
   --color-fd-primary: #ff6b64;
@@ -14,7 +16,41 @@ html {
   scrollbar-gutter: stable;
 }
 
+body {
+  font-family: var(--font-eand);
+}
+
 html > body[data-scroll-locked] {
   margin-right: 0px !important;
   --removed-body-scroll-bar-size: 0px !important;
+}
+
+/* ------------------------------------------------------------- Arabic ----- */
+
+/* The document stays `dir="ltr"` in both languages: the header, sidebar and TOC
+ * hold their positions and only the copy changes. Arabic words still shape and
+ * read right-to-left on their own — that is the bidi algorithm, not layout. */
+
+/* Layout direction and *sentence* direction are different things. The page stays
+ * ltr, but an Arabic sentence still has to read right-to-left or its full stop
+ * and any trailing Latin (`e&`) jump to the wrong end of the line. `plaintext`
+ * resolves each block's direction from its own first strong character, so Arabic
+ * blocks read correctly and Latin blocks are untouched — and because it only
+ * affects inline bidi, no box moves. */
+html[lang='ar']
+  :is(h1, h2, h3, h4, h5, h6, p, li, dd, dt, td, th, blockquote, figcaption, summary) {
+  unicode-bidi: plaintext;
+}
+
+/* A Latin run inside an Arabic sentence (`e&`, `variables.json`) otherwise
+ * borrows the surrounding direction and comes out reordered. */
+html[lang='ar'] p > code,
+html[lang='ar'] li > code,
+html[lang='ar'] td > code {
+  unicode-bidi: isolate;
+}
+
+/* Arabic ascenders and descenders need more leading than the Latin ramp. */
+html[lang='ar'] body {
+  line-height: 1.75;
 }

@@ -19,6 +19,16 @@ __pycache__/
 .agents/
 skills-lock.json
 ui-ux-pro-max-skill/
+# Working notes, deliberately local. Delete these two lines to share them with the team —
+# nothing in either file is secret, they are just unreviewed.
+CLAUDE.md
+AUDIT-LOG.md
 
 packages/react-design-system/guidelines-facts.json
 packages/react-design-system/.example-check/
+.vercel
+.env*
+
+# Suisse Int'l is licensed — the binaries stay out of git. Regenerate them from
+# your own copy of the font with `python3 tools/build-fonts.py`.
+apps/docs/public/fonts/*.woff2

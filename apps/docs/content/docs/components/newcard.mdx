@@ -1,9 +1,32 @@
 ---
 title: NewCard
-description: Compact media-topped “New on e&” card.
+description: The “New on e&” story tile — a rounded picture frame with a New card badge and a caption, ringed in a gradient when selected.
 ---
 
 <ComponentDemo id="newcard" />
+
+## When to use
+
+- **Use** in a "New on e&" carousel, in a [Section](./section) of size `md`, to announce new
+  services and content. Set `selected` on the last card in the carousel; Figma shows the ring
+  there for three days.
+- **Don't use** for offers with a price (use [DealCard](./dealcard)) or for general tiles (use
+  [GeneralCard](./generalcard)).
+
+## Anatomy
+
+- **Frame** — `image` in a rounded frame that fills the height above the caption.
+- **Badge** — the `md` "New card" badge at the top start. `badge` (on by default) is
+  independent of `selected`.
+- **Ring** — `selected` draws a 2px gradient ring around the frame without shrinking the image.
+- **Caption** — `title` in `body/md`, centred, up to two lines.
+
+The tile has no surface of its own; only the picture frame is rounded.
+
+```tsx
+<NewCard image={<img src={cover} alt="" />} title="e& money" selected />
+<NewCard image={<img src={cover} alt="" />} title="Stream on e& tv" badge={false} />
+```
 
 ## Props
 
@@ -11,4 +34,11 @@ description: Compact media-topped “New on e&” card.
 
 ## Design
 
-Figma source: [NewCard — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25915-75766)
+Figma source: [.new-on-eand-state — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=26523-22852)
+
+- 137 × 224 (`row-3`), with 12px (`spacing/md`) between the frame and the caption.
+- Frame: a 24px radius (`border-radius/8`) and 4px padding (`spacing/xs`) around an image
+  container at a 20px radius (`border-radius/7`).
+- Badge at 12, 12 (`spacing/md`).
+- Ring: a 37° gradient from #47cb6c through #191329 at 56% to #e00800. Its three stops are
+  legacy colour styles with no V1.2 token, so they are literals.

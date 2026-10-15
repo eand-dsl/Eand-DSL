@@ -1,9 +1,31 @@
 ---
 title: Badge
-description: Status and offer badges for counts, promos, and states.
+description: Offer and status badges in three sizes — compact labels for promotions, counts and states.
 ---
 
 <ComponentDemo id="badge" />
+
+## When to use
+
+- **Use** `offer` for merchandising labels on cards and products: New, Discount, Mega deals,
+  Limited stock, Best seller, Online exclusive, Sold out and the rest of the published set.
+- **Use** `status` for a short state on a row or card: `neutral`, `positive`, `warning`,
+  `danger`, `disabled`, and `neutral-inverse` on dark surfaces.
+- **Don't use** a badge as a control. A selectable or removable label is a [Chip](./chip);
+  a live status with a dot is a [StatusIndicator](./statusindicator).
+
+## Choosing a size
+
+| `size` | Height | Min width | Radius | Type |
+| --- | --- | --- | --- | --- |
+| `sm` | 16 | 40 | 6 | `badge/sm` |
+| `md` | 20 | 56 | 6 | `badge/md` |
+| `lg` | 24 | 64 | 8 | `badge/lg` |
+
+`chevron` adds a trailing `chevron-right-filled`. Every published badge ships with it off.
+
+`status="brand"` has no Figma counterpart and is kept only until design confirms its removal.
+Tier badges (Platinum, Gold, Silver, Bronze) are not built: their gradients have no tokens yet.
 
 ## Props
 
@@ -11,4 +33,10 @@ description: Status and offer badges for counts, promos, and states.
 
 ## Design
 
-Figma source: [Badge — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=22668-60275)
+Figma source: [badges-offers — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=12934-864) ·
+[badges-status](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=25694-12036)
+
+- Padding `spacing/2xs` × `spacing/xs` at `sm`, `spacing/xs` × `spacing/sm` at `md` and `lg`.
+- Radius `border-radius/2` (6) at `sm` and `md`, `border-radius/3` (8) at `lg`; heights and
+  minimum widths bind `scale/*`.
+- Colours are `badge/surface/<offer|status>` behind `badge/text/<offer|status>`.

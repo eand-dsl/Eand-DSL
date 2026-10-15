@@ -1,9 +1,21 @@
 ---
 title: Selectors
-description: Segmented control — one active segment on a pill track.
+description: Segmented control — one active segment on a pill track. Code-only; there is no V1.2 Figma symbol.
 ---
 
+<Callout title="No Figma counterpart">
+  Figma DSL V1.2 publishes no segmented control. Its former Selectors page was renamed
+  Pickers, and that component is [Picker](./picker). `Selectors` is kept for existing screens,
+  but its geometry is not checked against a published symbol.
+</Callout>
+
 <ComponentDemo id="selectors" />
+
+## When to use
+
+- **Use** to switch between two or three views of the same content in place.
+- **Don't use** to choose a value the user will submit — use a [Picker](./picker) or
+  [Radio](./radio) group. For views at page level, use [Tabs](./tabs).
 
 ## Props
 
@@ -11,4 +23,8 @@ description: Segmented control — one active segment on a pill track.
 
 ## Design
 
-Figma source: [Selectors — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=22542-13971)
+There is no V1.2 symbol. The track is `surface/base/default` with a 2px inset; the active
+segment is `surface/canvas/default`; segments are 36px tall with `spacing/md` inline padding
+and `button/sm` labels.
+
+The related Figma page: [Pickers — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=28278-1530)

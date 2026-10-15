@@ -1,9 +1,20 @@
 ---
 title: ProgressBar
-description: Slim 4px progress track with a rounded fill.
+description: A 4px progress fill in positive green, with no track and square ends.
 ---
 
 <ComponentDemo id="progressbar" />
+
+## When to use
+
+- **Use** for the determinate progress of a single quantity, on a surface that already frames
+  the bar. `value` runs from 0 to 100 and is clamped.
+- **Don't use** for a plan allowance — that is [PlanUsageBar](./planusagebar). Not for the
+  steps of a flow; use [Stepper](./stepper).
+
+The bar has no track of its own, as in Figma. Pass `style` to add a background if a surface
+needs one. `tone` (`accent`, `positive`, `warning`, `danger`) is a code-only override; Figma
+publishes the green fill only.
 
 ## Props
 
@@ -11,4 +22,8 @@ description: Slim 4px progress track with a rounded fill.
 
 ## Design
 
-Figma source: [ProgressBar — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=26663-89882)
+Figma source: [progress-bar-core — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=26437-43709)
+
+- A 4px (`scale/4`) clip holding one fill in `text/positive/subtle`.
+- No corner radius on the container or the fill.
+- The fill grows from the inline start, so it mirrors in RTL.

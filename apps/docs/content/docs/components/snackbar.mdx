@@ -1,9 +1,53 @@
 ---
 title: Snackbar
-description: Transient dark pill confirming an action, with tone marks.
+description: A transient midnight pill that confirms an action — a status tile, a message with an optional amount, and an optional button.
 ---
 
 <ComponentDemo id="snackbar" />
+
+## When to use
+
+- **Use** to confirm, briefly and without blocking, the result of something the user just did:
+  a payment received, an add-on activated. Use `loader` while a short process runs.
+- **Don't use** for status that must stay on the page (use [Alert](./alert)), or for an
+  outcome that deserves its own screen (use [AlertModal](./alertmodal) or
+  [PageTitle](./pagetitle)).
+
+## Choosing a status
+
+| `status` | Tile | Glyph |
+| --- | --- | --- |
+| `success` | `status-indicator/surface/positive` | `check-circle-filled` |
+| `alert` | `status-indicator/surface/warning` (amber) | `warning-filled` |
+| `warning` | `status-indicator/surface/danger` (orange) | `dismiss-filled` |
+| `info` (default) | `status-indicator/surface/neutral` | `info-filled` |
+| `loader` | `status-indicator/surface/neutral` | A spinning ring |
+
+Figma's `alert` is the amber step and its `warning` the orange one. Every V1.2 snack bar carries
+a status tile; with no `status`, it shows `info`.
+
+## Anatomy
+
+- **Tile** — a 44px status tile at the start.
+- **Message** — `message` in `body/md`, white. `aed` adds an amount, such as "AED 60.00", in
+  SemiBold 14px right after it.
+- **Action** — `action` renders a primary `sm` inverse [Button](./button) that calls `onAction`.
+- **Backdrop** — `backdrop` lays a soft gradient and blur behind the pill, so it reads over busy
+  content.
+
+```tsx
+<Snackbar status="success" message="Payment received" aed="AED 60.00" />
+<Snackbar status="loader" message="Activating your add-on" />
+<Snackbar status="alert" message="Your balance is low" action="Recharge" onAction={recharge} backdrop />
+```
+
+<Callout type="warn" title="Deprecated">
+  - `tone` is now `status`: `positive` becomes `success`, `warning` becomes `alert`, `danger`
+    becomes `warning` and `loading` becomes `loader`. `tone="default"` still renders the old
+    bare, centred message.
+  - `subtitle` and `onDismiss` have no V1.2 counterpart; the snack bar has one line and no
+    dismiss control.
+</Callout>
 
 ## Props
 
@@ -11,4 +55,12 @@ description: Transient dark pill confirming an action, with tone marks.
 
 ## Design
 
-Figma source: [Snackbar — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=22574-22808)
+Figma source: [Snack-bar — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=40278-34192)
+
+- Pill: `surface/base/midnight`, 16px radius (`border-radius/6`), padding 2/8/2/2, at least 48px
+  tall, with a 10px gap that Figma leaves unbound.
+- Tile: 44px at a 14px radius (`border-radius/5`), padding 6, holding a 24px filled glyph in
+  `alert-message/text/info`.
+- Message: `body/md` in `text/default/inverse`; the amount sits 3px after it.
+- Backdrop: padding 0/16/32/16 and a 15% gradient from #3f3f3f to transparent, rising from the
+  bottom. Figma's progressive blur (0 to 8) is approximated with a masked 8px blur.

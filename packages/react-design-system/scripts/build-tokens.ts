@@ -3,10 +3,11 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
-import { toCssValue, toTsValue } from './token-convert';
+import { toCssValue, toTsValue, WEIGHT } from './token-convert';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const VARS = resolve(here, '../../../variables.json');
+const STYLES = resolve(here, '../../../text-styles.json');
 const OUTDIR = resolve(here, '../src/tokens');
 
 type Leaf = { $value: unknown; $type?: string };
@@ -66,12 +67,29 @@ function typeOf(leaf: Leaf, seen = new Set<string>()): string | undefined {
   return leaf.$type;
 }
 
+/** Like typeOf, but reports `LINE_HEIGHT` for anything that is — or aliases — a token
+ *  scoped to line height. V1.2 binds these as FLOAT, so $type alone cannot tell a
+ *  140% line height from a 140px length. */
+function kindOf(leaf: Leaf & { $scopes?: string[] }, seen = new Set<string>()): string | undefined {
+  if (leaf.$scopes?.includes('LINE_HEIGHT')) return 'LINE_HEIGHT';
+  const v = leaf.$value;
+  if (typeof v === 'string' && v.startsWith('$.')) {
+    const ref = v.slice(2).split('.').slice(2).join('.');
+    if (!seen.has(ref)) {
+      seen.add(ref);
+      const t = lookup(tree, ref);
+      if (t && kindOf(t, seen) === 'LINE_HEIGHT') return 'LINE_HEIGHT';
+    }
+  }
+  return typeOf(leaf);
+}
+
 const cssLines: string[] = [];
 const skipped: string[] = [];
 const walkCss = (node: any, path: string[]) => {
   if (isLeaf(node)) {
     const name = path.map((s) => s.replace(/[^a-zA-Z0-9]+/g, '-')).join('-'); // valid custom-property name
-    let val = toCssValue(resolveVal(tree, node), typeOf(node));
+    let val = toCssValue(resolveVal(tree, node), kindOf(node));
     if (val === null) { skipped.push(name); return; }
     // quote font-family names (they contain spaces/apostrophes -> invalid CSS unquoted)
     if (typeof val === 'string' && path.some((p) => p.includes('family'))) val = `"${val}"`;
@@ -81,16 +99,59 @@ const walkCss = (node: any, path: string[]) => {
   for (const [k, v] of Object.entries(node)) walkCss(v, [...path, k]);
 };
 const walkTs = (node: any): any => {
-  if (isLeaf(node)) return toTsValue(resolveVal(tree, node), typeOf(node));
+  if (isLeaf(node)) return toTsValue(resolveVal(tree, node), kindOf(node));
   const out: any = {};
   for (const [k, v] of Object.entries(node)) out[camel(k)] = walkTs(v);
   return out;
 };
 
 walkCss(tree, []);
+
+/* ---- textStyle: the published Figma text styles ----
+   V1.2 retuned the local text styles that symbols apply (heading/lg 24px / 110%, a new
+   heading/2xl…) but left the typography/heading/* variables at the old 28px / 120%. The
+   variables stay in `typography`; this generates `textStyle` from text-styles.json, which is
+   the file's getLocalTextStylesAsync() export (see the header of that file's generator note
+   in the README). `ty()` reads textStyle first. */
+type StyleRow = { name: string; fontStyle: string; fontSize: number;
+  lineHeight: { unit: 'PERCENT' | 'PIXELS' | 'AUTO'; value?: number }; letterSpacing: number };
+const styles = JSON.parse(readFileSync(STYLES, 'utf8')) as StyleRow[];
+const famOf = (aed: boolean) => resolveVal(tree, lookup(tree, `font.family.${aed ? 'aed' : 'default'}`)!) as string;
+const textStyle: any = {};
+for (const st of styles) {
+  const parts = st.name.split('/');
+  const aed = parts[0] === 'aed';
+  const [cat, size] = aed ? parts.slice(1) : parts;
+  let lineHeight: string | undefined;
+  if (st.lineHeight.unit === 'PERCENT') lineHeight = toTsValue(st.lineHeight.value, 'LINE_HEIGHT') as string;
+  else if (st.lineHeight.unit === 'PIXELS') lineHeight = `${st.lineHeight.value}px`;
+  else {
+    // AUTO: Figma renders Suisse at its metric default, which the file records as
+    // font/line-height/130 ("used where line-height was previously AUTO").
+    const v = lookup(tree, `typography.${aed ? 'aed.' : ''}${cat}.${size}.line-height`);
+    lineHeight = v ? (toTsValue(resolveVal(tree, v), 'LINE_HEIGHT') as string) : undefined;
+  }
+  const entry = {
+    fontFamily: famOf(aed),
+    fontSize: `${st.fontSize}px`,
+    // Text styles name the cut "Semi Bold"; the weight variables say "Semi bold".
+    fontWeight: Object.entries(WEIGHT).find(([k]) => k.toLowerCase() === st.fontStyle.toLowerCase())?.[1]
+      ?? (() => { throw new Error(`text style ${st.name}: unknown weight ${st.fontStyle}`); })(),
+    lineHeight,
+    letterSpacing: `${st.letterSpacing}px`,
+  };
+  const into = aed ? ((textStyle.aed ??= {})[cat] ??= {}) : (textStyle[cat] ??= {});
+  into[size] = entry;
+  const css = ['text-style', ...(aed ? ['aed'] : []), cat, size].join('-');
+  for (const [k, v] of Object.entries(entry)) {
+    if (v == null) continue;
+    const prop = k.replace(/[A-Z]/g, (c) => `-${c.toLowerCase()}`);
+    cssLines.push(`  --eand-${css}-${prop}: ${k === 'fontFamily' ? `"${v}"` : v};`);
+  }
+}
 const css = `:root {\n${cssLines.join('\n')}\n}\n`;
 const ts = `// AUTO-GENERATED from variables.json by scripts/build-tokens.ts. Do not edit.\n` +
-  `export const tokens = ${JSON.stringify(walkTs(tree), null, 2)} as const;\n`;
+  `export const tokens = ${JSON.stringify({ ...walkTs(tree), textStyle }, null, 2)} as const;\n`;
 
 mkdirSync(OUTDIR, { recursive: true });
 writeFileSync(resolve(OUTDIR, 'tokens.css'), css);

@@ -1,0 +1,44 @@
+---
+title: UaePassButton
+description: The UAE PASS sign-in button — an outlined pill with the UAE PASS logo and the published copy.
+---
+
+<ComponentDemo id="uaepassbutton" />
+
+## When to use
+
+- **Use** wherever a person signs in, or continues a flow, with UAE PASS, the national digital
+  identity.
+- **Don't use** for any other sign-in method, or as a general outlined button; that is
+  [Button](./button). Keep the logo and the copy as published.
+
+## Choosing a variant
+
+| `variant` | Label | Layout |
+| --- | --- | --- |
+| `login` | Login with UAE PASS | Logo before the text |
+| `continue` | Continue with UAE PASS | Logo before the text |
+| `rtl` | تسجيل الدخول بالهوية الرقمية | Sets `dir="rtl"` and `lang="ar"` on the button; the logo follows the text |
+
+It is a separate component, not a `Button` variant, because Figma publishes it as its own set: one
+48px size, a brand logo instead of icon slots, fixed copy, and no `scheme`, pressed or loading
+state. `block` stretches it to the container width. `disabled` switches the stroke and label to
+their disabled tokens and dims the logo. `children` replaces the label; leave it unset to keep the
+published copy. The button defaults to `type="button"` and forwards its ref.
+
+## Props
+
+<PropsTable name="UaePassButton" />
+
+## Design
+
+Figma source: [button-uae-pass — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=39861-22282)
+
+- 48px tall (`scale/48`), at least 48 wide, inline padding 12 (`spacing/md`), `border-radius/9`,
+  no fill.
+- A 1px inside stroke in `button/secondary/text/midnight/default`; disabled,
+  `button/secondary/border/brand/disabled`.
+- Label `button/lg` in `button/secondary/text/midnight/default` (`…/disabled` when disabled), after
+  a 24px logo, with `spacing/xs` padding on the content and on the label.
+- The logo is the UAE PASS mark exported from Figma, in its own colours rather than e& tokens.
+  Disabled, it drops to 34% opacity, a value Figma does not bind to a token.

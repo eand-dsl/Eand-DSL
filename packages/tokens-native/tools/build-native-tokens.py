@@ -119,7 +119,19 @@ def fmt(n):
     return str(int(n)) if float(n).is_integer() else ("%.4g" % n)
 
 # ---------------- collect ----------------
-R = resolved_tree(load_merged(json.load(open(VARS))))
+TREE = load_merged(json.load(open(VARS)))
+R = resolved_tree(TREE)
+
+def is_line_height(dotpath, seen=None):
+    """True when the leaf — or what it aliases — is scoped LINE_HEIGHT. V1.2 binds line
+    heights as FLOAT percentages (120 = 120%), indistinguishable from a length by value."""
+    seen = seen or set(); leaf = lookup(TREE, dotpath)
+    if not leaf: return False
+    if "LINE_HEIGHT" in leaf.get("$scopes", []): return True
+    v = leaf["$value"]
+    if isinstance(v, str) and v.startswith("$.") and v not in seen:
+        seen.add(v); return is_line_height(".".join(v[2:].split(".")[2:]), seen)
+    return False
 
 # colors: everything under `color`
 colors = []  # (parts, rgba)  parts excludes leading 'color'
@@ -158,6 +170,8 @@ def collect_typo(node, parts):
             lh_px = None
             if isinstance(lh, str) and lh.endswith("%") and size is not None:
                 lh_px = size * float(lh[:-1]) / 100.0
+            elif num(lh) is not None and size is not None and is_line_height(".".join(["typography"] + parts + ["line-height"])):
+                lh_px = size * num(lh) / 100.0
             elif num(lh) is not None:
                 lh_px = num(lh)
             if size is not None:
@@ -165,6 +179,26 @@ def collect_typo(node, parts):
             return
         for k, v in node.items(): collect_typo(v, parts + [k])
 collect_typo(R.get("typography", {}), [])
+
+# V1.2 retuned the published text styles (heading/lg 24 / 110% …) without updating the
+# typography/heading/* variables, so the styles override them where they exist — the same
+# rule the web build follows (scripts/build-tokens.ts, `textStyle`). heading/2xl is new.
+STYLES = json.load(open(os.path.join(ROOT, "text-styles.json")))
+WEIGHT_OF = {"thin": "Thin", "light": "Light", "regular": "Regular", "book": "Book",
+             "medium": "Medium", "semi bold": "Semi bold", "bold": "Bold", "black": "Black"}
+by_parts = {tuple(t[0]): i for i, t in enumerate(typo)}
+for st in STYLES:
+    parts = st["name"].split("/")
+    size = float(st["fontSize"])
+    w = WEIGHT_OF[st["fontStyle"].lower()]
+    lh = st["lineHeight"]
+    i = by_parts.get(tuple(parts))
+    lh_px = size * lh["value"] / 100.0 if lh["unit"] == "PERCENT" else (
+        lh["value"] if lh["unit"] == "PIXELS" else (typo[i][3] if i is not None else None))
+    fam = typo[i][4] if i is not None else typo[0][4]
+    row = (parts, size, w, lh_px, fam)
+    if i is None: typo.append(row); by_parts[tuple(parts)] = len(typo) - 1
+    else: typo[i] = row
 
 FAMILY = R.get("font", {}).get("family", {}).get("default", {})
 FAMILY = FAMILY if isinstance(FAMILY, str) else "Suisse int'l"

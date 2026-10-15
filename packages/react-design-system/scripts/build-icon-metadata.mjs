@@ -1,19 +1,18 @@
 #!/usr/bin/env node
-// Generate src/metadata.ts from a raw Figma description dump.
-// Usage: node tools/build-metadata.mjs <raw-dump.json>
-//   raw-dump.json: [{ "name": "bookmark", "description": "Saved items… Also searchable as: banner, flag" }, …]
-// Re-run after re-syncing descriptions from the e& Consumer App DSL Figma file
-// (icons_2d section, node 31965:64761) — see the docs icons spec.
+// Generate src/icons/metadata.ts from the Figma icon description dump.
+// Usage: node scripts/build-icon-metadata.mjs [src/icons/descriptions.json]
+//   descriptions.json: [{ "name": "bookmark", "description": "Saved items… Also searchable as: banner, flag" }, …]
+// The dump is committed (src/icons/descriptions.json) so this can be re-run. Refresh it from
+// the e& Consumer App DSL Figma file (icons_2d section, node 31965:64761), in set order.
 //
 // Raw dump quirks handled here:
 //   - Names are slugified (trim, lowercase, spaces/commas collapsed to a
 //     single hyphen, repeated hyphens collapsed) to fix trailing-space names
 //     (e.g. "qr-code ", "ai-text ", "office ") and comma-separated names
 //     (e.g. "cloud off, offline " -> "cloud-off-offline").
-//   - The dump contains duplicate names (add, copy, grid each appear twice)
-//     for icon variants the package disambiguates as `<name>-2`. The second
-//     occurrence of any slugified name is stored under `<name>-2`; a third
-//     occurrence would warn and be skipped rather than silently overwriting.
+//   - V1.1 had duplicate names (add, copy, grid twice) that this script used to
+//     suffix as `<name>-2`. V1.2 renamed them (add / add-content, copy / copy-doc,
+//     grid), so a duplicate is now an error rather than a silent rename.
 //   - Descriptions may contain HTML-escaped entities (e.g. "e&amp;"); these
 //     are unescaped (&amp; -> &) before parsing.
 //
@@ -25,11 +24,7 @@
 // keep the whole text as the description with no aliases.
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 
-const rawPath = process.argv[2];
-if (!rawPath) {
-  console.error('Usage: node tools/build-metadata.mjs <raw-dump.json>');
-  process.exit(1);
-}
+const rawPath = process.argv[2] ?? new URL('../src/icons/descriptions.json', import.meta.url);
 const raw = JSON.parse(readFileSync(rawPath, 'utf8'));
 
 const slugify = (name) =>
@@ -42,15 +37,10 @@ const slugify = (name) =>
 const meta = {};
 const blank = [];
 for (const { name, description } of raw) {
-  let key = slugify(name);
-  // NOTE: which duplicate gets the plain name vs the -2 suffix depends on Figma dump order — after a re-sync, sanity-check add/add-2, copy/copy-2, grid/grid-2 descriptions.
+  const key = slugify(name);
   if (key in meta) {
-    const dupeKey = `${key}-2`;
-    if (dupeKey in meta) {
-      console.warn(`⚠ Duplicate name beyond the -2 suffix, skipping: ${key}`);
-      continue;
-    }
-    key = dupeKey;
+    console.error(`✗ Duplicate icon name in the Figma dump: ${key}`);
+    process.exit(1);
   }
   const unescaped = String(description ?? '').replace(/&amp;/g, '&');
   const marker = unescaped.match(/(?:also\s+)?searchable\s+as:/i);
@@ -77,7 +67,7 @@ for (const { name, description } of raw) {
 
 // Validate against the icon set: base names derived from src/raw/*.svg.
 const svgBases = new Set(
-  readdirSync(new URL('../src/raw', import.meta.url))
+  readdirSync(new URL('../src/icons/raw', import.meta.url))
     .filter((f) => f.endsWith('.svg'))
     .map((f) => f.replace(/\.svg$/, ''))
     .filter((n) => !n.endsWith('-filled')),
@@ -91,15 +81,15 @@ const entries = Object.keys(meta)
   .map((k) => `  ${JSON.stringify(k)}: ${JSON.stringify(meta[k])}`)
   .join(',\n');
 const out = `// AUTO-GENERATED from Figma icon descriptions (e& Consumer App DSL, icons_2d section).
-// Regenerate with: node tools/build-metadata.mjs <raw-dump.json>. Do not edit.
+// Regenerate with: node scripts/build-icon-metadata.mjs. Do not edit.
 export interface IconMeta { description: string; aliases: string[] }
 export const ICON_META: Record<string, IconMeta> = {
 ${entries},
 };
 `;
-writeFileSync(new URL('../src/metadata.ts', import.meta.url), out);
+writeFileSync(new URL('../src/icons/metadata.ts', import.meta.url), out);
 
-console.log(`Wrote ${figmaNames.size} entries to src/metadata.ts`);
+console.log(`Wrote ${figmaNames.size} entries to src/icons/metadata.ts`);
 if (blank.length) console.warn(`⚠ Blank descriptions (${blank.length}): ${blank.join(', ')}`);
 if (missingInFigma.length) console.warn(`⚠ In package but not in Figma dump (${missingInFigma.length}): ${missingInFigma.join(', ')}`);
 if (extraInFigma.length) console.warn(`⚠ In Figma dump but not in package (${extraInFigma.length}): ${extraInFigma.join(', ')}`);

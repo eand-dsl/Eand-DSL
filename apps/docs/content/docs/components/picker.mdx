@@ -1,15 +1,34 @@
 ---
 title: Picker
-description: Selectable option tiles (value + caption + status badge) across default, light, inverse, and glass surfaces.
+description: Fixed 106×72 option tiles — value, caption and an optional status strip; a selected tile inverts and shows a check.
 ---
 
 <ComponentDemo id="picker" />
 
+## When to use
+
+- **Use** to choose one value from a small set shown side by side, such as top-up amounts.
+  `Picker` manages the selection; `PickerOption` is the standalone tile for custom layouts.
+- **Don't use** for a long list — use an [Input](./input) of `type="dropdown"`. For options
+  that combine, use [Checkbox](./checkbox); to switch views, [Tabs](./tabs).
+
 ## Anatomy
 
-Each tile shows a **value** (`title.sm`), an optional **caption** (`body.xs`, subtle), and an
-optional **status badge**. Selecting a tile adds a red accent border and a check indicator;
-`Picker` manages single selection across the set, and `PickerOption` is the standalone tile.
+- **Value** — `title/sm`, centred. **Caption** — `body/xs` beneath it, such as a unit.
+- **Badge** — a string or number renders the neutral `sm` status [Badge](./badge) as a strip
+  along the bottom of the tile. Any other node renders as given. Hidden while disabled.
+- **Selected** — the fill and ink swap, and a check circle appears at the top end. On `default`
+  and `light` the tile turns midnight with white text; on `inverse` and `glass` it turns white.
+- **Disabled** — disabled ink, no badge. A disabled tile never shows as selected.
+
+The `surface` names predate V1.2 and map to Figma's surfaces as follows:
+
+| `surface` | Figma surface | Tile fill |
+| --- | --- | --- |
+| `default` | sunken | `surface/sunken/default` |
+| `light` | default | `surface/canvas/default` |
+| `inverse` | midnight | `surface/raised/midnight` |
+| `glass` | glass | `surface/glass/white/lg` |
 
 ## Props
 
@@ -18,12 +37,13 @@ optional **status badge**. Selecting a tile adds a red accent border and a check
 
 ## Design
 
-Figma source: [Picker — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=28278-1530)
+Figma source: [picker — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=34373-16787)
 
-Notes from the Figma spec:
-
-- 16px radius, ~72px tall; surface axis **default** (sunken grey) · **light** (white) ·
-  **inverse** (midnight) · **glass** (frosted white-20% with a backdrop blur).
-- Selected uses the `border/interactive/accent/default` red (`#e00800`); the tile always
-  renders a same-width transparent border so selecting doesn't shift layout.
-- Disabled dims the tile and blocks selection.
+- A fixed 106×72 tile (`scale/72`), `border-radius/6` (16), content centred with 20px top
+  and 8px side padding.
+- Selected, default scheme: `surface/raised/midnight` with `text/default/inverse`. Inverse
+  scheme: `surface/raised/default` with `text/default/default` and `subtle`.
+- The check is `check-circle-filled`, 20px in a 24px box, 6px from the top and end edges.
+- Badge strip: a 2px inset and corner radii 6/6/28/28, so the strip follows the tile's curve.
+  The bottom 28 has no token.
+- Glass: `surface/glass/white/lg` behind a 20px backdrop blur.

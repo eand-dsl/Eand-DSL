@@ -7,7 +7,9 @@ export const T = tokens as any;
 /** Typography style from a `category.size` variant, e.g. "body.md", "heading.lg". */
 export const ty = (variant: string): CSSProperties => {
   const [c, s] = variant.split('.');
-  const t = (T.typography?.[c]?.[s] ?? {}) as Record<string, string>;
+  // Published text styles first (what Figma symbols apply); the typography variables only
+  // where no style exists. In V1.2 they disagree for headings — see tokens.test.ts.
+  const t = (T.textStyle?.[c]?.[s] ?? T.typography?.[c]?.[s] ?? {}) as Record<string, string>;
   return {
     // The family must be quoted. The token is `Suisse int'l`, and these components style
     // themselves inline — unquoted, that apostrophe opens a CSS string the parser never
@@ -42,3 +44,21 @@ export const color = (path: string): string =>
   path.split('.').reduce((o: any, k) => (o == null ? o : o[camelKey(k)]), T.color) ?? path;
 
 export const PILL = '9999px';
+
+/* Mirror directional glyphs in RTL. Components wrap chevrons and arrows in
+   `<span data-rtl-flip>`; this is the rule that flips them. The library is inline-styled
+   and promises to work without importing a stylesheet, so the rule is injected once here
+   rather than shipped only in styles.css. `:dir(rtl)` follows the nearest `dir` ancestor
+   (including `dir="auto"`); the attribute selector covers engines without :dir(). */
+// Only :dir() resolves the *nearest* direction — an LTR island inside an RTL page, or an
+// RTL demo inside the docs' <html dir="ltr">. Attribute selectors can't, so they are only
+// the fallback for engines without :dir(), and only in the RTL direction.
+const RTL_FLIP_CSS =
+  '@supports not selector(:dir(rtl)){[dir="rtl"] [data-rtl-flip]{transform:scaleX(-1)}}' +
+  '[data-rtl-flip]:dir(rtl){transform:scaleX(-1)}';
+if (typeof document !== 'undefined' && !document.getElementById('eand-rtl-flip')) {
+  const el = document.createElement('style');
+  el.id = 'eand-rtl-flip';
+  el.textContent = RTL_FLIP_CSS;
+  document.head.appendChild(el);
+}

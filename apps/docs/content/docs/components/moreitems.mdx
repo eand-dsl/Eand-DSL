@@ -1,0 +1,36 @@
+---
+title: MoreItems
+description: The "+N" overflow circle that closes a row of logos.
+---
+
+<ComponentDemo id="moreitems" />
+
+## When to use
+
+- **Use** at the end of a row of logos to say how many are not shown. [LogoRow](./logorow) adds
+  one for you with `more={n}`, sized to its logos; use `MoreItems` directly only when you compose
+  a row yourself.
+- **Don't use** for notification or unread counts; that is [Badge](./badge).
+
+## Surfaces and size
+
+- `surface="default"` is midnight glass, for light backgrounds. `surface="inverse"` is white
+  glass, for dark backgrounds and imagery; on a light surface it is close to invisible.
+- Every published logo-row uses `inverse`, so `LogoRow` defaults `moreSurface` to it. Whether
+  logo rows on light surfaces should switch to `default` is an open design question.
+- Set `size` to the diameter of the logos beside it (24–56px). The default is 24px (`icon/xl`).
+- In RTL the circle reads "N+", as the published `more-items-rtl` does.
+
+## Props
+
+<PropsTable name="MoreItems" />
+
+## Design
+
+Figma source: [more-items — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=26560-27420) ·
+[more-items-rtl](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=37905-16028)
+
+- A clipped circle at `border-radius/9`.
+- Fill: `surface/glass/midnight/lg` (default) or `surface/glass/white/md` (inverse).
+- "+" and the count are two text cells in `typography/body/xs` (10px Regular),
+  `text/default/inverse`, centred. Flex order reverses them under `dir="rtl"`.

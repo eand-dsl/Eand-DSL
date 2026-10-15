@@ -1,9 +1,16 @@
 ---
 title: FilterPill
-description: Dropdown-style filter pill with a caret.
+description: A 40px outlined pill with a trailing chevron, for filters that open a list of options.
 ---
 
 <ComponentDemo id="filterpill" />
+
+## When to use
+
+- **Use** above a list or grid for a filter that opens a menu or a [BottomSheet](./bottomsheet)
+  of options. `selected` marks the active pill.
+- **Use** `inverse` on brand-red and midnight surfaces.
+- **Don't use** for a filter that toggles in one tap — that is a [Chip](./chip).
 
 ## Props
 
@@ -11,4 +18,10 @@ description: Dropdown-style filter pill with a caret.
 
 ## Design
 
-Figma source: [FilterPill — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25581-9146)
+Figma source: [filter-pill — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=26151-391)
+
+- Height `tabs/height/md` (40), minimum width `scale/72`, pill, 1px stroke
+  `filter-pill/border/<scheme>/<state>`.
+- No fill, except when inverse and selected (`filter-pill/surface/inverse/selected`).
+- Padding 12 at the start and 8 at the end, gap 2; a `body/md` label and a 16px
+  `chevron-down` in a 20px icon box.

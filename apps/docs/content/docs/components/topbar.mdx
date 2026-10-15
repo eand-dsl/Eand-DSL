@@ -1,20 +1,64 @@
 ---
 title: TopBar
-description: Slot-based screen header — top row, big-title block or account display, and a bottom slot for search, chips, and tabs.
+description: The screen header — an inset rounded card with the status bar, a three-column header row, an optional large title and add-ons such as search, chips and tabs.
 ---
 
 <ComponentDemo id="topbar" />
 
+## When to use
+
+- **Use** once per screen, at the top. Home and hub screens take `surface="brand"` with an
+  `account` or a `bigTitle`. Detail and pushed pages take `onBack` and a `title`, on `white`
+  over a white canvas or `none` over a grey or midnight one.
+- **Don't use** for headings inside the page (use [PageHeader](./pageheader) below the bar, or
+  [Section](./section)), or for the title of a sheet (use [BottomSheet](./bottomsheet)).
+
+## Choosing a surface
+
+| `surface` | Fill | Header scheme |
+| --- | --- | --- |
+| `brand` | `surface/base/brand` | White ink, glass controls, white logo |
+| `midnight` | `surface/base/midnight` | White ink, glass controls, white logo |
+| `white` | `surface/base/inverse` | Midnight ink, grey controls, red logo |
+| `none` | Transparent | Midnight ink, white controls, red logo |
+
+Without a `surface`, the bar is `brand` when it has an `account` or `bigTitle`, and `white`
+otherwise. A title-only `<TopBar title="…" />` is the Figma page header: a white card with the
+status bar and a centred page name.
+
 ## Anatomy
 
-`TopBar` composes the Figma master's slots:
+- **Status bar** — a 62px faux iOS bar, on by default. `statusBar={false}` removes it.
+- **Header row** — three columns; the middle stays centred whatever the sides hold.
+  - **Left:** `onBack` renders the 40px back button; `leading` takes custom content; `account`
+    shows an optional 40px `avatar`, a `greeting` in `body/md` and the masked number in
+    `title/sm` with a 16px chevron (`chevron={false}` hides it).
+  - **Middle:** `logo` (`true` renders the e& lockup, white or red to suit the surface), or a
+    `title` in `title/sm` with an optional `subtitle` in `body/md`.
+  - **Right:** `actions`, each wrapped in a 40px round control (pass icons), then `trailing`.
+- **Title block** — `eyebrow` in `body/md` (`eyebrowChevron` adds a 16px chevron), `bigTitle`
+  in bold 24px (`chevron` adds a 24px chevron after it), and `subtext` in `body/lg`.
+- **Add-ons** — `children`, such as a [Searchbar](./searchbar), [Chip](./chip) row,
+  [Tabs](./tabs) or [Stepper](./stepper), each with 16px above and at the sides.
 
-- **Top row** — `leading` (back / avatar), `logo` or `title` in the middle, and `actions` + `trailing` on the right (circular glass buttons on brand).
-- **Big-title block** — `eyebrow` (overline) · `bigTitle` (`heading.lg`) · `subtext`, with an optional `chevron`.
-- **Account display** — `account={{ greeting, name }}` for the masked-number home header.
-- **Bottom slot** — anything passed as `children`: a `Searchbar`, `Chip` row, `Tabs`, `Stepper`, or action cards.
+```tsx
+<TopBar
+  surface="brand"
+  account={{ greeting: 'Good morning, Sara', name: '050 123 4567' }}
+  logo
+  actions={[<Icon key="alerts" name="notification" size={20} />]}
+/>
 
-`surface` is `brand` (red hero, rounded bottom, `statusBar` on by default) or `default` (compact 56px light bar).
+<TopBar surface="white" onBack={() => history.back()} title="Usage" subtitle="050 123 4567" />
+```
+
+<Callout type="warn" title="Deprecated">
+  - `surface="default"` is now `surface="white"`, and `variant` is now `surface`.
+  - `greeting` is now `account={{ greeting }}`.
+  - `actionBar` is replaced by a card passed as `children`.
+  - `compact` renders a code-only 56px row with no status bar. Figma has no compact top bar,
+    so use the default header with `onBack` and `title` instead.
+</Callout>
 
 ## Props
 
@@ -22,7 +66,15 @@ description: Slot-based screen header — top row, big-title block or account di
 
 ## Design
 
-Figma source: [TopBar — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=22542-13963)
+Figma source: [topbar — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=38172-12163)
 
-The old `variant` / `greeting` / `actionBar` props still work as back-compat aliases
-(`variant` → `surface`, `greeting` → `account.greeting`); prefer the slot props above.
+- Every surface is an inset card: 4px around the top and sides (`spacing/xs`), a 36px top
+  radius and a 20px bottom radius (`border-radius/7`), 16px bottom padding. The 36px radius has
+  no token, so it is a literal. `rounded={false}` squares all four corners.
+- The status bar is 62px tall with 15/24/19/24 padding, the values of the iOS kit Figma uses.
+- Header row: 40px minimum (`scale/40`), 16px side padding (`spacing/lg`), on a
+  `minmax(0, 1fr) auto minmax(0, 1fr)` grid.
+- Controls follow the header scheme: 20% white glass with a blur on `brand` and `midnight`,
+  solid #f0f0f5 on `white`, solid white on `none`.
+- The large title applies the `heading/lg` text style: 24px, 110%, snug tracking, with 16/16/0
+  padding around the block.

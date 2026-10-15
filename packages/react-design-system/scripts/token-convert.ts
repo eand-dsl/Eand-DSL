@@ -31,6 +31,9 @@ export function toCssValue(v: unknown, type?: string): string | number | null {
   if (typeof v === 'string' && v.startsWith('Font(')) return null;  // composite font token
 
   if (type === 'TIMING' && typeof v === 'number') return `${tidy(v * 1000)}ms`;
+  // Figma stores line heights as percentages (140 = 140%) and documents the export as
+  // "divide by 100". A unitless multiplier scales with font-size, which `px` would not.
+  if (type === 'LINE_HEIGHT' && typeof v === 'number') return tidy(v / 100);
 
   if (type === 'EASING' && isEasing(v)) {
     const b = v.easingFunctionCubicBezier;
@@ -52,6 +55,7 @@ export function toCssValue(v: unknown, type?: string): string | number | null {
 /** Value for the generated `tokens.ts`. Springs survive here as structured data. */
 export function toTsValue(v: unknown, type?: string): unknown {
   if (type === 'TIMING' && typeof v === 'number') return `${tidy(v * 1000)}ms`;
+  if (type === 'LINE_HEIGHT' && typeof v === 'number') return tidy(v / 100);
   if (type === 'EASING' && isEasing(v)) {
     const b = v.easingFunctionCubicBezier;
     if (v.type === 'CUSTOM_CUBIC_BEZIER' && b) {

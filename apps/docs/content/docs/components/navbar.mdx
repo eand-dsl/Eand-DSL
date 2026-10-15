@@ -1,9 +1,37 @@
 ---
 title: NavBar
-description: Floating frosted-glass bottom navigation pill.
+description: Floating glass bottom navigation — equal tabs in a frosted pill over a midnight fade, collapsing to icons on scroll.
 ---
 
 <ComponentDemo id="navbar" />
+
+## When to use
+
+- **Use** on the app's top-level screens to move between primary destinations. Mark the
+  current destination `active`.
+- **Don't use** on pushed pages or inside flows; those take a [TopBar](./topbar) with `onBack`.
+  Not for switching views within a page (use [Tabs](./tabs)).
+
+## Anatomy
+
+- **Scrim** — a midnight gradient behind the bar so it reads over any content.
+- **Bar** — one frosted pill of equal-width tabs.
+- **Tab** — an `icon` (or an `avatar`, such as the profile picture) over a `label`. The active
+  tab sits on a white pill; its label stays Regular.
+- **Home indicator** — a 34px block holding the 144 × 5 bar.
+
+Set `scrollDirection="down"` while the page scrolls down: the labels hide, the pills shrink to
+36px and the bar narrows. `up` (default) restores it. Both transitions are animated.
+
+```tsx
+<NavBar
+  items={[
+    { label: 'Home', icon: <Icon name="home" size={24} />, active: true },
+    { label: 'Shop', icon: <Icon name="shop" size={24} /> },
+    { label: 'Care', icon: <Icon name="support-agent" size={24} /> },
+  ]}
+/>
+```
 
 ## Props
 
@@ -11,4 +39,14 @@ description: Floating frosted-glass bottom navigation pill.
 
 ## Design
 
-Figma source: [NavBar — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=22542-13964)
+Figma source: [navbar — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=29317-6983)
+
+- Scrim padding-top 16 (`spacing/lg`); the gradient runs from transparent midnight to 40% at
+  48% and 70% at the bottom. Figma leaves it unbound, so it is a literal.
+- Bar: `surface/glass/white/md` with a 20px blur, no stroke, 4px side padding
+  (`spacing/xs`), and no gap between tabs. Side margins are 16, or 48 when collapsed
+  (`spacing/5xl`).
+- Tab: a 4px wrapper top and bottom, a 32px icon box and a `body/xs` label (10px, 140%).
+  Colours bind `navbar-tab/text/default`, `navbar-tab/text/selected` and
+  `navbar-tab/surface/selected`.
+- Home indicator: the bar sits 21px down a 34px block, in `surface/raised/default`.

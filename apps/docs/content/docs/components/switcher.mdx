@@ -1,9 +1,21 @@
 ---
 title: Switcher
-description: On/off toggle; the track turns e& red when on.
+description: On/off toggle — a 40×24 or 32×20 track that turns e& red when on, with an inverse scheme for dark surfaces.
 ---
 
 <ComponentDemo id="switcher" />
+
+## When to use
+
+- **Use** for a setting that takes effect immediately, with no confirm step.
+- **Use** `inverse` on brand-red and midnight surfaces: the track is white and the knob turns
+  red when on.
+- **Don't use** inside a form that is confirmed with a submit button — use a
+  [Checkbox](./checkbox).
+
+`size` is `md` (40×24, the default) or `sm` (32×20). `lg` is the deprecated pre-V1.2 name
+for `md`. Figma's default is the small switch; the code keeps `md` so shipped screens do not
+shrink.
 
 ## Props
 
@@ -11,4 +23,11 @@ description: On/off toggle; the track turns e& red when on.
 
 ## Design
 
-Figma source: [Switcher — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25394-82591)
+Figma source: [switcher — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=26215-7141)
+
+- Track 40×24 or 32×20 (`switcher/track/*`), knob 20 or 16 (`switcher/thumb/*`), inset 2px
+  (`spacing/2xs`), pill.
+- Every state is a `mark/{default,inverse}/{surface,icon}/*` pair. Disabled is a colour, not
+  opacity.
+- The inverse off state follows the `sm` symbol; the `md` and `sm` symbols disagree there,
+  and the question is open with design.
