@@ -1,0 +1,52 @@
+---
+title: Scrim
+description: The dimmed, blurred full-screen layer behind modal surfaces.
+---
+
+<ComponentDemo id="scrim" />
+
+## When to use
+
+- **Use** behind a surface that blocks the rest of the screen until it is dismissed.
+  [BottomSheet](./bottomsheet) and the `bottom-sheet` integration of [AlertModal](./alertmodal)
+  already render one, so reach for `Scrim` only when you build your own overlay.
+- **Don't use** as a tint over imagery or inside a card. It always covers the whole viewport.
+
+## Behaviour
+
+`Scrim` is a fixed layer over the viewport (`inset: 0`, `z-index: 1000`) that renders its
+children. It carries no dialog semantics and no dismiss logic of its own:
+
+- Put `role="dialog"` and `aria-modal="true"` on the surface you place inside it.
+- To close on an outside tap, handle `onClick` on the scrim and stop propagation on the surface,
+  as BottomSheet does.
+- Position the surface with `style`, which merges over the defaults.
+
+```tsx
+import type { ReactNode } from 'react';
+import { Scrim } from '@eand/react-design-system';
+
+function Sheet({ onClose, children }: { onClose: () => void; children: ReactNode }) {
+  return (
+    <Scrim onClick={onClose} style={{ display: 'flex', alignItems: 'flex-end' }}>
+      <div role="dialog" aria-modal="true" onClick={(e) => e.stopPropagation()}>
+        {children}
+      </div>
+    </Scrim>
+  );
+}
+```
+
+## Props
+
+`Scrim` has no props of its own. It accepts every `div` attribute
+(`HTMLAttributes<HTMLDivElement>`), including `children`, `style` and `onClick`.
+
+## Design
+
+Figma source: [scrim — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=32960-77013)
+
+- Fill `surface/overlay/scrim`: midnight at 50%.
+- A GLASS effect of radius 20 (effect style `surface/glass/glass-md`), rendered as a 20px
+  backdrop blur, as the library's other glass surfaces are.
+- Figma draws it at 375 × 812, the device frame; in code it fills the viewport.

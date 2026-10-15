@@ -1,0 +1,49 @@
+---
+title: StatusIndicator
+description: A short status label with a leading dot — plain, on a tinted pill, or on glass over imagery.
+---
+
+<ComponentDemo id="statusindicator" />
+
+## When to use
+
+- **Use** to state the current condition of an item — active, expiring, suspended — next to
+  its title in a card, a list row or a banner.
+- **Don't use** for offers, counts or promotional labels; that is [Badge](./badge). Not for
+  the outcome of an action ([PageTitle](./pagetitle)) or for a message that needs an action
+  ([Alert](./alert)).
+
+## Choosing a type
+
+| Type | Surface | Height | Use for |
+| --- | --- | --- | --- |
+| `basic` | none; the label takes the status colour | 16px | Inline, beside other text |
+| `pill` | status-tinted fill | 24px | When the status needs more weight on a plain surface |
+| `glass` | white glass with a backdrop blur | 32px | Over light imagery (dark label) |
+| `glass-dark` | the same glass | 32px | Over dark imagery (white label) |
+
+Match `status` to the real condition: `positive`, `warning`, `danger` or `neutral`. The label is
+`children` (default "Status"); `dot={false}` removes the leading dot.
+
+On `glass-dark`, the `neutral` dot keeps the midnight ink the published symbol binds, so it reads
+weakly on dark imagery. Whether it should turn white is an open design question.
+
+## Props
+
+<PropsTable name="StatusIndicator" />
+
+## Design
+
+Figma source: [status-indicator-type — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=37171-3537)
+
+- Every type wraps `.status-indicator-core`: 16px tall, padding-start 4 (`spacing/xs`),
+  padding-end 8 (`spacing/sm`), an 8px `dot-filled` glyph in a 12px icon box, then the label in
+  `badge/md`.
+- The dot and the `basic` label use `status-indicator/text/<status>`; the `neutral` dot binds
+  `text/default/default`.
+- `pill`: padding-block `spacing/xs`, `border-radius/9`, fill `status-indicator/surface/<status>`,
+  label `text/default/default`.
+- `glass` and `glass-dark`: padding-block `spacing/sm`, `border-radius/9`,
+  `surface/glass/white/xs` with a backdrop blur of `effects/glass/lg/frost`; label
+  `text/default/default` or `text/default/inverse`.
+- Padding is logical, so the dot moves to the right in RTL.

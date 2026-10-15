@@ -1,9 +1,52 @@
 ---
 title: Alert
-description: Inline tinted banner for contextual status.
+description: An inline status message — a tinted box with a status tile, a title, body text and an optional button.
 ---
 
 <ComponentDemo id="alert" />
+
+## When to use
+
+- **Use** for status that belongs to a place in the page and stays there: a plan about to expire,
+  a payment that failed, a note about a service. One call to action per alert.
+- **Don't use** for a passing confirmation (use [Snackbar](./snackbar)), for the outcome of a
+  flow (use [PageTitle](./pagetitle) or [AlertModal](./alertmodal)), or for form validation
+  (use the [Input](./input) error state).
+
+## Choosing a status
+
+| `status` | Surface | Use for |
+| --- | --- | --- |
+| `success` | `status-indicator/surface/positive` | Something completed |
+| `alert` | `status-indicator/surface/warning` (amber) | Needs attention soon |
+| `warning` | `status-indicator/surface/danger` (orange) | A problem to resolve |
+| `info` (default) | `status-indicator/surface/neutral` | Neutral information |
+| `info-midnight` | `alert-message/surface/midnight` | Information on dark screens |
+
+Figma's `alert` is the amber step and its `warning` the orange one. V1.2 has no red alert.
+
+## Anatomy
+
+- **Tile** — a 32px tile in the status colour, holding a 16px white filled glyph.
+- **Text** — `title` in `title/xs` and `children` in `body/md`. Both use the default ink on every
+  status except `info-midnight`, which is white.
+- **Action** — `action` renders a primary `sm` inverse [Button](./button) that calls `onAction`.
+  `actionPlacement="below"` moves it under the text, for a body that runs to several lines.
+- **Stack** — when several alerts share one slot, `stack` (the count) and `stackIndex` (the one
+  in view, from 0) draw a vertical step counter beside the box.
+
+```tsx
+<Alert status="alert" title="Your plan renews in 3 days" action="Review" onAction={review}>
+  AED 250 will be charged to your card.
+</Alert>
+
+<Alert status="info" stack={3} stackIndex={0}>Roaming is on for this trip.</Alert>
+```
+
+<Callout type="warn" title="Deprecated">
+  `tone` is now `status`: `positive` becomes `success`, `warning` becomes `alert`, `danger`
+  becomes `warning` and `default` becomes `info`.
+</Callout>
 
 ## Props
 
@@ -11,4 +54,13 @@ description: Inline tinted banner for contextual status.
 
 ## Design
 
-Figma source: [Alert — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=22574-22808)
+Figma source: [alert-message — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=40289-34516)
+
+- Box: padding 8 (`spacing/sm`), gap 12 (`spacing/md`), 16px radius (`border-radius/6`).
+- Tile: 32px at a 12px radius (`border-radius/4`), padding 6, on `status/positive`,
+  `status/warning`, `status/danger` or `status/default`; `info-midnight` uses
+  `surface/glass/white/md`.
+- Text: `title/xs` and `body/md` in `text/default/default`, or `text/default/inverse` on
+  `info-midnight`. The ink no longer follows the status.
+- Step counter: 5px dots on `midnight/400`, 4px apart; the dot in view is 5 × 12 with a midnight
+  head.

@@ -1,0 +1,56 @@
+---
+title: Recommendation
+description: A centred 224px card that recommends one offer — logo, title, description and a single button — on glass or white.
+---
+
+<ComponentDemo id="recommendation" />
+
+## When to use
+
+- **Use** to suggest one personalised offer or next step with a single clear action. The default
+  glass card sits on a dark or image backdrop; `inverse={false}` gives a white card for light
+  sections.
+- **Don't use** for a set of offers with prices or media ([DealCard](./dealcard),
+  [ProductCard](./productcard)), or for a full-width campaign banner ([Highlight](./highlight)).
+
+## Options
+
+- **`inverse`** (default `true`) — white glass with a backdrop blur, white text and an inverse
+  primary button. `false` is a white card with a midnight primary button.
+- **`carousel`** — renders this card and each entry of `items` as 338px cards, 4px apart,
+  scrolling sideways so the next card peeks. Figma's default variant is the carousel; the
+  component defaults to a single card, because a carousel needs `items`.
+- **Content** — `icon` is a 32px logo (a Smiles placeholder until you pass one; `null` hides it).
+  `cta` is the button label; `null` hides the button. `title` and `description` default to
+  placeholder copy, so always pass your own.
+
+```tsx
+import { Recommendation } from '@eand/react-design-system';
+
+<Recommendation
+  carousel
+  title="Double data this weekend"
+  description="Get twice the data on your plan until Sunday."
+  cta="View offer"
+  items={[
+    { title: 'Add a second line', description: 'Share your plan with family.', cta: 'Explore' },
+  ]}
+/>
+```
+
+## Props
+
+<PropsTable name="Recommendation" />
+
+## Design
+
+Figma source: [Recommendation — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=36698-108342)
+
+- 224px tall (`row-3`), `border-radius/7` (20px), padding 16 (`spacing/lg`), every element centred.
+- A 32px logo (`icon/2xl`) at `border-radius/3`; 12 below it (`spacing/md`), the title in `title/md`
+  (two lines at most) and the description in `body/md`, 4 apart (`spacing/xs`); then a primary md
+  button, 12 above it.
+- `inverse`: `surface/glass/white/md` with a 20px backdrop blur, title `text/default/inverse`,
+  description `text/default/inverse-subtle`. White: `surface/base/inverse`, `text/default/default`
+  and `text/default/subtle`.
+- Carousel cards are 338px wide in a 353px slot, gap `spacing/xs`. The width has no token.

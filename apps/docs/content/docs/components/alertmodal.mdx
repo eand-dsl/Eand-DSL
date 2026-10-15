@@ -1,9 +1,46 @@
 ---
 title: AlertModal
-description: Centered confirmation dialog over a scrim.
+description: The success and outcome screen — a visual, a centred title and description, and a footer of actions, full screen or as a bottom sheet.
 ---
 
 <ComponentDemo id="alertmodal" />
+
+## When to use
+
+- **Use** at the end of a flow, when the outcome deserves its own screen: an order placed, a
+  plan changed, a payment completed. Use `bottom-sheet` when the user should keep sight of the
+  page behind.
+- **Don't use** to ask for confirmation before an action: in V1.2 this is an outcome screen,
+  not a confirmation dialog. For an outcome inside a section or sheet, use
+  [PageTitle](./pagetitle). For a brief confirmation, use [Snackbar](./snackbar).
+
+## Anatomy
+
+- **Integration** — `full-screen` (default) fills the viewport on `surface/base/default` and
+  scrolls. `bottom-sheet` places the same content on a sheet with 24px top corners, over a
+  [Scrim](./scrim).
+- **Visual** — `visual`, the hero illustration, framed with a 4px inset.
+- **Title block** — `title` in bold 28px and `description` in `body/lg`, both centred.
+- **Footer** — `footer`, usually one or two block [Buttons](./button).
+- **Close** — `onClose` shows a glass close button at the top end. On the bottom sheet, a scrim
+  click also calls it.
+
+```tsx
+<AlertModal
+  integration="bottom-sheet"
+  visual={<img src={banner} alt="" />}
+  title="You're all set"
+  description="Your new plan starts today."
+  footer={<Button block onClick={done}>Done</Button>}
+  onClose={done}
+/>
+```
+
+<Callout type="warn" title="Deprecated: the centred dialog">
+  When `integration` is unset and `tone`, `body` or `actions` is passed, the V1.0 centred
+  confirmation dialog still renders, for existing screens. To move to V1.2, set `integration`,
+  and replace `body` with `description`, `actions` with `footer` and `onDismiss` with `onClose`.
+</Callout>
 
 ## Props
 
@@ -11,4 +48,13 @@ description: Centered confirmation dialog over a scrim.
 
 ## Design
 
-Figma source: [AlertModal — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=23201-17897)
+Figma source: [alert-modal — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=32934-67842)
+
+- Title block (`alert-title`): padding 32/16/48 (`spacing/3xl`, `spacing/lg`, `spacing/5xl`),
+  gap 4 (`spacing/xs`). The title binds the `typography/heading/lg` variables: bold 28px, 120%,
+  tight tracking.
+- Footer padding 20 (`spacing/xl`). The close button sits 20px from the top and end, on
+  `section-link/glass/default` with a 20px blur.
+- The bottom sheet's top corners are 24px (`border-radius/8`).
+- Figma's `status-banner` illustrations are not shipped with the library; supply your own
+  artwork through `visual`.

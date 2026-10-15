@@ -1,0 +1,57 @@
+---
+title: FAQ
+description: A page-end list of questions and answers in white expandable cards, with optional category chips.
+---
+
+<ComponentDemo id="faq" />
+
+## When to use
+
+- **Use** at the end of a level-2 or level-3 page for three or more questions. Add `categories`
+  when the list is long enough to need filtering.
+- **Don't use** for one or two questions; answer them in the page content. Not for other
+  expandable content ([Accordion](./accordion)) or for navigation lists ([ListRow](./listrow)).
+
+## Behaviour
+
+- One answer is open at a time. Opening a question closes the previous one; selecting the open
+  question closes it. `defaultOpen` is the index of the item open at first; by default none is.
+- With `categories`, a row of outline [Chip](./chip)s filters the list. The first chip is
+  selected unless `defaultValue` says otherwise; use `value` with `onCategoryChange` to control
+  it. An item with a `category` shows only under that chip; an item without one shows under
+  every chip.
+- Each question is a button with `aria-expanded`, linked by `aria-controls` to its answer region.
+- `FAQ` has no fill and no heading, and it carries its own 16px side inset. Place it directly
+  on the page canvas under a heading of its own: nesting it in a [Section](./section) body adds
+  Section's inset to its own and doubles it.
+
+```tsx
+import { FAQ } from '@eand/react-design-system';
+
+<FAQ
+  categories={['Billing', 'Roaming']}
+  items={[
+    { question: 'When is my bill issued?', answer: 'On the same day each month.', category: 'Billing' },
+    { question: 'How do I turn on roaming?', answer: 'From Manage, under Roaming.', category: 'Roaming' },
+    { question: 'How do I contact support?', answer: 'Through Care, at any time.' },
+  ]}
+/>
+```
+
+## Props
+
+<PropsTable name="FAQ" />
+
+## Design
+
+Figma source: [faq — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=38563-27574)
+
+- Category row: padding 16 (`spacing/lg`); 40px outline chips, 8 apart (`spacing/sm`), at least
+  72 wide (`scale/72`), scrolling sideways.
+- Stack: padding 0/16, gap 4 (`spacing/xs`). Each card is `surface/base/inverse` at
+  `border-radius/7` (20px).
+- Question row: padding 16 (`spacing/lg`), gap 12 (`spacing/md`). The question is `title/xs` in
+  `text/default/default`, held in a 40px block (`scale/40`) and clamped to two lines while
+  collapsed, which gives a 72px card. A 20px chevron sits in a 24px icon box.
+- Answer: `body/md` in `text/default/subtle`; container padding 0/4/4 (`spacing/xs`), text padding
+  0/12/16 (`spacing/md`, `spacing/lg`).

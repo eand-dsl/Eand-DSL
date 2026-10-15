@@ -1,9 +1,29 @@
 ---
 title: ServiceCard
-description: Square tappable service tile with icon and label.
+description: A tappable service tile — a 48px icon over a two-line title, with an optional badge.
 ---
 
 <ComponentDemo id="servicecard" />
+
+## When to use
+
+- **Use** for a catalogue of services, in a grid or a carousel inside a
+  [Section](./section) of size `sm`.
+- **Don't use** for the account shortcuts on the home screen (use
+  [QuickAction](./quickaction)), or for a row with a description (use [ActionBar](./actionbar)).
+
+## Anatomy
+
+- **Icon** — `icon`, a 48px 3D icon, centred near the top. A placeholder shows when omitted.
+- **Title** — `label` in `title/xs`, centred, in a fixed two-line block.
+- **Badge** — `badge`, at the top start. The Figma symbol uses the `md` size:
+  `<Badge offer="new-plan" size="md">New plan</Badge>`.
+
+`size="grid"` is 109px wide and `size="carousel"` 128px. Omit `size` to fill the grid track.
+
+```tsx
+<ServiceCard icon={<img src={roaming} alt="" />} label="Roaming packs" badge={<Badge offer="new-plan" size="md">New plan</Badge>} />
+```
 
 ## Props
 
@@ -11,4 +31,13 @@ description: Square tappable service tile with icon and label.
 
 ## Design
 
-Figma source: [ServiceCard — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=26019-79144)
+Figma source: [.service-card-core — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=37840-18370) ·
+[sizes](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=27216-41370)
+
+- 148px tall (`row-2`) at a 20px radius (`border-radius/7`); padding 8/8/16 (`spacing/sm`,
+  `spacing/lg`), top-aligned.
+- Icon slot 48px (`icon/4xl`) under 24px of top padding (`spacing/2xl`).
+- Title `title/xs` (14px SemiBold) in a 40px block (`scale/40`).
+- Badge at 8, 8 (`spacing/sm`).
+- Figma fills the card with a raw #ffffff; the code binds `surface/canvas/default`, which has the
+  same value.

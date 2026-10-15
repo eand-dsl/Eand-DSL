@@ -1,9 +1,32 @@
 ---
 title: Card
-description: General-purpose card with media, title, body and action slots.
+description: A code-only content card — optional media over a title, body text, custom content and an action.
 ---
 
 <ComponentDemo id="card" />
+
+<Callout title="No V1.2 symbol">
+  Figma DSL V1.2 publishes no symbol for this card. It is kept for existing screens. For new
+  work, use [GeneralCard](./generalcard), the published fixed-height tile.
+</Callout>
+
+## When to use
+
+- **Use** on existing screens that need free-form content: media of any height, a title, a
+  paragraph and an action.
+- **Don't use** in new designs where a published card fits: [GeneralCard](./generalcard) for
+  general tiles, [PlanCard](./plancard) for plans, [ProductCard](./productcard) for products and
+  add-ons, [DealCard](./dealcard) for offers.
+
+## Anatomy
+
+- **Media** — `media` spans the full width at the top; the card clips it to its corners.
+- **Content** — a 16px-padded column with a 4px gap: `title` (`title/sm`), `body` (`body/md`,
+  subtle), then `children`, then `action` 8px further down.
+- **Width** — fills its container by default. Pass `width` to use the card as a carousel cell.
+
+`surface="default"` is white and `surface="inverse"` is midnight-raised. This naming is the
+reverse of `GeneralCard`, whose `default` is the dark card, as Figma publishes it.
 
 ## Props
 
@@ -11,4 +34,11 @@ description: General-purpose card with media, title, body and action slots.
 
 ## Design
 
-Figma source: [Card — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=26760-100129)
+Card has no V1.2 symbol. Its nearest published relative is
+[General-card — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=28463-12391),
+built as `GeneralCard`.
+
+- 20px radius (`border-radius/7`), clipped.
+- Content padding 16 (`spacing/lg`), gap 4 (`spacing/xs`).
+- Surfaces: `surface/raised/default` (white) or `surface/raised/midnight` (#312c40) with inverse
+  ink.

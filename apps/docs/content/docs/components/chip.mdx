@@ -1,9 +1,35 @@
 ---
 title: Chip
-description: Selectable 40px pill in four Figma types — outline, filled, glass, inverse — with check-mark and loading states.
+description: Selectable 40px pill in four types — outline, filled, glass and inverse — with an optional leading marker and a removable form.
 ---
 
 <ComponentDemo id="chip" />
+
+## When to use
+
+- **Use** for quick filters and tags that toggle on and off, usually in a row that scrolls
+  sideways. Pass `onDismiss` for a removable chip, such as an applied filter.
+- **Don't use** for a filter that opens a list of options — that is a
+  [FilterPill](./filterpill). Not for switching views ([Tabs](./tabs)) or for a read-only
+  label ([Badge](./badge)).
+
+## Choosing a type
+
+| `type` | Look |
+| --- | --- |
+| `outline` | 1px stroke, no fill — the default |
+| `filled` | Solid fill, no stroke |
+| `glass` | Frosted fill behind a 20px backdrop blur, for imagery |
+| `inverse` | 1px light stroke, for brand-red and midnight surfaces |
+
+A selected chip is fill only, with no stroke, in every type.
+
+- **Marker** — `leadingIcon` fills a 16px box (pass a 12px glyph). `check` shows a check
+  mark while the chip is selected.
+- **Removable** — `onDismiss` adds a trailing 20px [Dismiss](./dismiss); the label stays a
+  separate button for `onClick`. `dismissLabel` names it (default “Remove …”).
+- **Deprecated** — `inverse` is an alias for `type="inverse"`. `loading` still renders a
+  spinner, but V1.2 chips have no loader.
 
 ## Props
 
@@ -11,4 +37,11 @@ description: Selectable 40px pill in four Figma types — outline, filled, glass
 
 ## Design
 
-Figma source: [Chip — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=28171-29640)
+Figma source: [chips — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=31539-8725)
+
+- Height `tabs/height/md` (40), minimum width `scale/72`, pill; label `body/md`.
+- Padding: 12 / 12 without a marker; 8 · 16px marker · 4 · label · 12 with one; removable
+  12 · label · 4 · 20px dismiss · 8.
+- Colours are `chips/default/<type>/{surface,text,border}/<state>`.
+- The 1px stroke appears only on `outline` and `inverse`, in the default and disabled states.
+- The Chips page is still marked In review in Figma.

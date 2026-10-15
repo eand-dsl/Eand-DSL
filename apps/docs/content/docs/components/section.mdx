@@ -1,28 +1,76 @@
 ---
 title: Section
-description: The body container — a rounded surface with a header and a body slot sized to fit a given card type.
+description: The body container — a rounded surface with a header and a body slot sized to the card type it holds.
 ---
 
 <ComponentDemo id="section" />
 
+## When to use
+
+- **Use** for every content block in a screen body: one section per group of cards, rows or
+  tiles, with a title that says what the group is.
+- **Don't use** to open a page; that is [PageHeader](./pageheader), below the
+  [TopBar](./topbar). Don't nest sections. For a page-end block of questions, use
+  [FAQ](./faq) on the page canvas rather than styling questions inside a section.
+
 ## Anatomy
 
-- **Header** — `title` (`heading.lg`), optional `context` line (`body.md`, subtle), an optional
-  `filterPill`, and a `trigger` (a `chevron` circle, a text `button`, or `none`). Toggle the whole
-  header off with `showHeader={false}`.
-- **Body slot** — `children` sit in a 16px-padded slot. The **`size`** axis reserves the row height
-  so the card type fits:
+- **Header** — `title` (24px bold, one or two lines through `titleLine`), an optional
+  `filterPill` placed inline right after the title, and a `trigger` at the row end. `context`
+  adds a `body/md` line under the row. `showHeader={false}` removes the header entirely.
+- **Trigger** — `chevron` (default) is the 40px section-link button; `button` is a tertiary
+  `lg` [Button](./button) labelled `triggerLabel` (default "See all"); `none` hides it. Both
+  call `onTrigger`.
+- **Body slot** — `children` sit in a 16px-padded slot. `size` reserves the row height the card
+  type needs:
 
-  | size | slot height | fits |
-  |------|-------------|------|
+  | `size` | Slot height | Fits |
+  | --- | --- | --- |
   | `xs` | 72px | list rows, action bars |
-  | `sm` | 148px | quick-action tiles |
-  | `md` | 224px | deal / new-on cards |
-  | `lg` | 300px | plan / product cards |
+  | `sm` | 148px | quick-action and service tiles |
+  | `md` | 224px | deal, new-on and general cards |
+  | `lg` | 300px | plan and product cards |
   | `xl` | 452px | highlight banners |
 
-- **`surface`** is `default` (grey `#f0f0f5`) or `inverse` (brand red, white text). Set `carousel`
-  for a horizontal-scrolling body and `gradient` for a bottom scrim over highlight-style content.
+- `carousel` makes the body scroll sideways and bleed to the section edges. `gradient` adds the
+  sunset glow behind the body; reserve it for the most important section on the screen.
+
+## Choosing a surface
+
+| `surface` | Fill | Ink |
+| --- | --- | --- |
+| `default` | `surface/base/default` (#f0f0f5) | default |
+| `raised` | `surface/raised/default` (#fff) | default |
+| `ai-powered` | Light red-to-grey gradient | default |
+| `brand` | `surface/base/brand` | inverse |
+| `midnight-base` | `surface/base/midnight` | inverse |
+| `midnight-raised` | `surface/raised/midnight` | inverse |
+| `glass-midnight` | `surface/glass/midnight/md` | inverse |
+| `glass-white` | `surface/glass/white/lg` | inverse |
+
+Use the glass surfaces only over imagery. On the inverse surfaces, pass `inverse` to the filter
+pill yourself; the title, context and trigger switch automatically.
+
+```tsx
+<Section
+  title="Plans for you"
+  surface="midnight-base"
+  filterPill={<FilterPill inverse>Postpaid</FilterPill>}
+  trigger="button"
+  triggerLabel="Manage"
+  size="lg"
+  carousel
+>
+  <PlanCard colorScheme="inverse" />
+  <PlanCard colorScheme="inverse" />
+</Section>
+```
+
+<Callout type="warn" title="Deprecated">
+  `hideChevron` is now `trigger="none"`, and `onSeeAll` is now `onTrigger`. The V1.1 surface
+  names still work: `inverse` renders `brand` and `midnight` renders `midnight-base`.
+  `brand-muted` is code-only and has no V1.2 counterpart.
+</Callout>
 
 ## Props
 
@@ -30,7 +78,15 @@ description: The body container — a rounded surface with a header and a body s
 
 ## Design
 
-Figma source: [Section — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25519-12055) · [Slot templates](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=29394-16374)
+Figma source: [section — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=36698-87167)
 
-The old `hideChevron` / `onSeeAll` props still work (`hideChevron` → `trigger="none"`,
-`onSeeAll` → `onTrigger`).
+- 24px radius (`border-radius/8`). Header padding 16/16/0 (`spacing/lg`); a 40px field row
+  (`scale/40`); the filter pill sits 8px after the title (`spacing/sm`); the trigger has 12px
+  of inline-start padding (`spacing/md`).
+- The title applies the `heading/lg` text style: 24px (`font/size/7`), 110%, snug tracking.
+- Body padding 16. Slot heights bind `section/body/height/row-N`: 72, 148, 224, 300 and 452.
+- The sunset glow is two layer-blurred ellipses, orange #fa700c and brand red #e00800 at 27%
+  (25% on `xs` and `sm`), with the layer at 96%. Figma leaves these values unbound, so the code
+  uses them as literals.
+- The `ai-powered` gradient (#ffe4e3 to #f5f5f7) is also unbound. The glass surfaces carry no
+  blur, because the published surface symbols have none.

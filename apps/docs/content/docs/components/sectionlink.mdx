@@ -1,9 +1,28 @@
 ---
 title: SectionLink
-description: Section header row with a heading and a “See all” link.
+description: A code-only header row — a heading with a “See all” link. Inside a Section, use the Section header instead.
 ---
 
 <ComponentDemo id="sectionlink" />
+
+<Callout title="No V1.2 symbol">
+  Figma DSL V1.2 publishes no standalone title and "See all" row. The published equivalent is
+  the header of [Section](./section), with its `title` and `trigger`.
+</Callout>
+
+## When to use
+
+- **Use** only outside a `Section`, where a custom layout needs a heading with a text link.
+- **Don't use** inside a `Section`: its header already provides the title and the trigger, as a
+  chevron button or a "See all" button.
+
+## Anatomy
+
+- **Title** — `title` in `heading/xs`.
+- **Link** — `link` (default "See all") in `button/sm` and `text/brand/default`, followed by a
+  16px `chevron-right-sm`. It calls `onLinkClick`.
+
+The row is 40px tall, with the title and link at opposite ends.
 
 ## Props
 
@@ -11,4 +30,8 @@ description: Section header row with a heading and a “See all” link.
 
 ## Design
 
-Figma source: [SectionLink — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25460-83978)
+SectionLink is code-only. Its Figma counterpart is the header of
+[section — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=36698-87167).
+
+- 40px row; the link's label and chevron sit 2px apart.
+- The chevron comes from the icon set, not a typed character.

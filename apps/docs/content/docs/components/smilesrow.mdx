@@ -1,14 +1,34 @@
 ---
 title: SmilesRow
-description: Overlapping Smiles avatars with a “+N” overflow chip.
+description: Deprecated — overlapping Smiles avatars with a “+N” counter. Use LogoRow and its overflow count instead.
 ---
 
+<Callout type="warn" title="Deprecated">
+  `SmilesRow` and `SmilesAvatar` have no counterpart in Figma DSL V1.2. Figma draws the same
+  idea as a logo row of Smiles logos followed by a “+N” circle. Use [LogoRow](./logorow) with
+  `more`. Both components still render unchanged, so existing screens keep working.
+</Callout>
+
 <ComponentDemo id="smilesrow" />
+
+## Migrating
+
+```tsx
+// Before
+<SmilesRow count={2} plus={4} />
+
+// After: pass your Smiles artwork as elements or image URLs
+<LogoRow size="md" logos={[smilesLogo, smilesLogo]} more={4} />
+```
 
 ## Props
 
 <PropsTable name="SmilesRow" />
+<PropsTable name="SmilesAvatar" />
 
 ## Design
 
-Figma source: [SmilesRow — e& Consumer App DSL V1.1](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25915-74211)
+There is no V1.2 symbol for this component. Its values are hard-coded rather than tokens: a
+`#6C3FD6` avatar, a `#c0bfc8` counter, 11px text and an 8px overlap.
+
+Replacement: [logo-row — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=25997-32516)

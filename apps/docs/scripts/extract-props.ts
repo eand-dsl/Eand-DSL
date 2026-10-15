@@ -19,15 +19,29 @@ const files = globSync('src/components/**/*.tsx', { cwd: PKG })
 type Row = { name: string; type: string; required: boolean; default?: string; description: string };
 const out: Record<string, Row[]> = {};
 
+/** docgen reads defaults for two `forwardRef` components in one file from the last
+ *  one it sees, so Button inherits UaePassButton's `variant = 'login'`. Defaults that
+ *  are not a member of their own enum are dropped; these are the real ones. */
+const DEFAULT_FIXES: Record<string, string> = { 'Button.variant': 'primary' };
+
 for (const doc of parser.parse(files)) {
   if (!/^[A-Z]/.test(doc.displayName)) continue;
-  out[doc.displayName] = Object.values(doc.props).map((p) => ({
-    name: p.name,
-    type: p.type.name,
-    required: p.required,
-    default: p.defaultValue?.value != null ? String(p.defaultValue.value) : undefined,
-    description: p.description,
-  })).sort((a, b) => Number(b.required) - Number(a.required) || a.name.localeCompare(b.name));
+  out[doc.displayName] = Object.values(doc.props).map((p) => {
+    // Enums print their members ("'sm' | 'md' | 'lg'") rather than the bare word "enum".
+    const members = p.type.name === 'enum' && Array.isArray(p.type.value)
+      ? (p.type.value as { value: string }[]).map((m) => m.value.replace(/"/g, "'"))
+      : undefined;
+    let def = p.defaultValue?.value != null ? String(p.defaultValue.value) : undefined;
+    if (def != null && members && !members.includes(`'${def}'`) && members.every((m) => m.startsWith("'"))) def = undefined;
+    def = DEFAULT_FIXES[`${doc.displayName}.${p.name}`] ?? def;
+    return {
+      name: p.name,
+      type: members ? members.join(' | ') : p.type.name,
+      required: p.required,
+      default: def,
+      description: p.description,
+    };
+  }).sort((a, b) => Number(b.required) - Number(a.required) || a.name.localeCompare(b.name));
 }
 
 const dest = path.resolve(import.meta.dirname, '../components/preview/props.json');

@@ -5,13 +5,13 @@ description: Install the e& design system and build your first screen.
 
 <EN>
 The e& Consumer App design system ships as a single npm package built from one token
-source (`variables.json`, exported from the Figma DSL V1.1 library) — the same source
+source (`variables.json`, exported from the Figma DSL V1.2 library) — the same source
 that generates the SwiftUI and Compose tokens, so values never drift between platforms.
 </EN>
 
 <AR>
 يُطرح نظام تصميم تطبيق ⁦e&⁩ للأفراد في حزمة npm واحدة مبنية من مصدر رموز واحد
-(`variables.json`، المُصدَّر من مكتبة نظام التصميم في Figma بالإصدار 1.1) — وهو
+(`variables.json`، المُصدَّر من مكتبة نظام التصميم في Figma بالإصدار 1.2) — وهو
 المصدر نفسه الذي يولّد رموز SwiftUI وCompose، فلا تتباين القيم بين المنصّات.
 </AR>
 
@@ -67,19 +67,21 @@ export function Account() {
 ```
 
 <EN>
-`TopBar` is slot-based: `surface` picks the red account header or the white detail
-header, `account` renders the greeting over a masked number, and `children` fills the
-bottom slot with a search field, `Tabs`, chips, or a `Stepper`. The older `variant`,
-`greeting`, and `actionBar` props still compile but are back-compat aliases — reach for
-`surface`, `account`, and `children` instead.
+`TopBar` is slot-based: `surface` picks the header card — `brand` red for the account
+home, `midnight`, `white` for pushed pages, or `none` on a grey or midnight canvas —
+`account` renders the greeting over a masked number, and `children` adds add-ons under
+the header: a search field, `Tabs`, chips or a `Stepper`. The older `variant`,
+`greeting` and `actionBar` props still compile but are deprecated aliases — reach for
+`surface`, `account` and `children` instead.
 </EN>
 
 <AR>
-يعتمد `TopBar` على الخانات: تحدّد `surface` أيّ ترويسة تظهر، الحمراء للحساب أم
-البيضاء للتفاصيل، وتَعرض `account` عبارة الترحيب فوق رقم مُقنَّع، وتملأ `children`
-الخانة السفلية بحقل بحث أو `Tabs` أو كبسولات أو `Stepper`. أما الخصائص القديمة
-`variant` و`greeting` و`actionBar` فما زالت تُترجَم برمجيًا، لكنها أسماء بديلة
-للتوافق مع الإصدارات السابقة — استخدم `surface` و`account` و`children` بدلًا منها.
+يعتمد `TopBar` على الخانات: تحدّد `surface` بطاقة الترويسة — `brand` الحمراء
+للصفحة الرئيسية للحساب، أو `midnight`، أو `white` للصفحات الفرعية، أو `none` فوق
+خلفية رمادية أو كحلية — وتَعرض `account` عبارة الترحيب فوق رقم مُقنَّع، وتضيف
+`children` إضافات أسفل الترويسة: حقل بحث أو `Tabs` أو كبسولات أو `Stepper`. أما
+الخصائص القديمة `variant` و`greeting` و`actionBar` فما زالت تُترجَم برمجيًا، لكنها
+أسماء بديلة مُهمَلة — استخدم `surface` و`account` و`children` بدلًا منها.
 </AR>
 
 ## Typography
