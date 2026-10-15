@@ -223,7 +223,7 @@ export interface ActionBlockProps extends HTMLAttributes<HTMLDivElement> {
   ribbon?: ReactNode;
   /** Price summary, rendered as a <PriceLine/>. */
   price?: CtaFooterPrice;
-  /** Checkbox line — pass a <CheckboxLine/> (or a <Checkbox/>) so state stays with the caller. */
+  /** Checkbox line — pass a <ConsentCheckbox/> (or a <Checkbox/>) so state stays with the caller. */
   terms?: ReactNode;
   /** Payment-method summary (use <PaymentRow/>); renders beside the actions, half each. */
   payment?: ReactNode;

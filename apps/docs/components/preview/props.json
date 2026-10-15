@@ -1285,7 +1285,7 @@
       "name": "terms",
       "type": "ReactNode",
       "required": false,
-      "description": "Checkbox line — pass a <CheckboxLine/> (or a <Checkbox/>) so state stays with the caller."
+      "description": "Checkbox line — pass a <ConsentCheckbox/> (or a <Checkbox/>) so state stays with the caller."
     }
   ],
   "CtaFooter": [
@@ -1338,7 +1338,7 @@
       "name": "terms",
       "type": "ReactNode",
       "required": false,
-      "description": "Checkbox line — pass a <CheckboxLine/> (or a <Checkbox/>) so state stays with the caller."
+      "description": "Checkbox line — pass a <ConsentCheckbox/> (or a <Checkbox/>) so state stays with the caller."
     }
   ],
   "PlanUsageBar": [

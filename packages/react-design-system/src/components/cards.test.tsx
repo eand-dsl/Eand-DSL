@@ -554,3 +554,14 @@ test('Voucher deprecated status maps onto the new state model', () => {
   const { container } = render(<Voucher status="expired" />);
   expect(Number(root(container).style.opacity)).toBeLessThan(1);
 });
+
+/* Found on the docs site: the tier text used the `background` shorthand with
+   background-clip: text. When nextTier changed, React re-set the shorthand, which resets
+   background-clip, and the words became a solid gradient block. backgroundImage doesn't. */
+test('SmilesBalance tier text keeps its text clip when the tier changes', () => {
+  const { container, rerender } = render(<SmilesBalance nextTier="gold" />);
+  rerender(<SmilesBalance nextTier="platinum" />);
+  const el = container.querySelector('[data-part="next-tier"]') as HTMLElement;
+  expect(el.style.backgroundImage).toMatch(/radial-gradient/);
+  expect(el.getAttribute('style')).not.toMatch(/(^|;)\s*background:/);
+});

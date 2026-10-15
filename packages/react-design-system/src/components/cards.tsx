@@ -551,7 +551,7 @@ export function Highlight({ title = 'Primary Text 2-lines max', subtitle, image,
               ) : null}
             </div>
           ) : null}
-          {bar ?? (cta ? <div><Button size="sm" variant="primary" surface="white">{cta}</Button></div> : null)}
+          {bar ?? (cta ? <div><Button size="sm" variant="primary" scheme="inverse">{cta}</Button></div> : null)}
         </div>
       </div>
     );
@@ -628,7 +628,7 @@ export function Recommendation({ icon, title = 'Recommended for you', descriptio
       </div>
       {it.cta != null ? (
         <div style={{ paddingTop: space('md'), display: 'flex', justifyContent: 'center', flex: 'none' }}>
-          <Button variant="primary" size="md" surface={inverse ? 'white' : 'midnight'} onClick={it.onCta}>{it.cta}</Button>
+          <Button variant="primary" size="md" scheme={inverse ? 'inverse' : 'midnight'} onClick={it.onCta}>{it.cta}</Button>
         </div>
       ) : null}
     </div>
@@ -724,7 +724,9 @@ export function SmilesBalance({ points = '40,340', label = 'Points', active = tr
   const hlVar = T.typography.heading.lg; // the total binds the variables, not the style
   const [g0, g1] = TIER_GRADIENT[nextTier];
   const tierInk: CSSProperties = {
-    ...ty('title.xs'), background: `radial-gradient(150% 150% at 6% 10%, ${g0} 0%, ${g1} 100%)`,
+    // backgroundImage, not the `background` shorthand: re-setting the shorthand on update
+    // resets background-clip and the text turns into a solid block.
+    ...ty('title.xs'), backgroundImage: `radial-gradient(150% 150% at 6% 10%, ${g0} 0%, ${g1} 100%)`,
     WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent',
   };
   const line = message ?? (active

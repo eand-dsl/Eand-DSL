@@ -1,4 +1,4 @@
-import { useRef, useState, type CSSProperties, type HTMLAttributes, type InputHTMLAttributes, type ReactNode } from 'react';
+import { useRef, useState, type CSSProperties, type HTMLAttributes, type InputHTMLAttributes, type ReactNode, Fragment } from 'react';
 import { color, space, ty, radius, scale, PILL, T } from '../system';
 import { Icon } from '../icons';
 import { Text, IconBox, Badge, Dismiss } from './primitives';
@@ -488,8 +488,11 @@ export function ConsentCheckbox({ prefix, links = [], conjunction = 'and', suffi
       inverse={inverse}
       disabled={disabled}
       label={
-        <span style={{ display: 'inline-flex', flexWrap: 'wrap', alignItems: 'center' }}>
-          {seg(prefix)}{items}{seg(suffix)}
+        // Inline text, not flex: flex items drop the whitespace between them, which ran the
+        // words together ("Agree to theTerms…"). Real spaces between the parts let it wrap
+        // like a sentence.
+        <span data-part="consent-run" style={{ display: 'inline' }}>
+          {[seg(prefix), ...items, seg(suffix)].filter((p) => p != null).map((p, i) => <Fragment key={i}>{i > 0 ? ' ' : null}{p}</Fragment>)}
         </span>
       }
     />

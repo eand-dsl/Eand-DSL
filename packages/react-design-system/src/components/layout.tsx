@@ -323,7 +323,8 @@ export function GeneralCard({
    - One item open at a time (the Accordion description).
    Built from the remote Accordion (33219:2167) the FAQ instances; the local Accordion
    page is [Not Finalized], so `Accordion` below is unchanged. The faq frame has no fill
-   and no header: place it in a `Section` (or on the page canvas) for a title. */
+   and no header. Place it on the page canvas with your own heading: inside a `Section` the
+   0/16 inset doubles to 32px (design question: should FAQ ever sit in a Section?). */
 export interface FAQEntry {
   question: ReactNode;
   answer: ReactNode;

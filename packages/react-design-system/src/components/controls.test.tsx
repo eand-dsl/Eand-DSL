@@ -850,3 +850,14 @@ test('Tabs renders an optional leading icon', () => {
   const { container } = render(<Tabs tabs={['All']} icons={[<i data-testid="ic" />]} />);
   expect(container.querySelector('[data-testid="ic"]')).toBeInTheDocument();
 });
+
+/* Found on the docs site: each segment was a flex item, and flex items drop the
+   whitespace between them, so the row read "Agree to theTerms & Conditionsand…". */
+test('ConsentCheckbox keeps word spaces around its links', () => {
+  const { container } = render(
+    <ConsentCheckbox prefix="Agree to the" links={[{ label: 'Terms & Conditions' }, { label: 'Privacy Policy' }]} suffix="before proceeding" />,
+  );
+  const run = container.querySelector('label span[data-part="consent-run"]') as HTMLElement;
+  expect(run.textContent).toBe('Agree to the Terms & Conditions and Privacy Policy before proceeding');
+  expect(run.style.display).not.toMatch(/flex/);
+});
