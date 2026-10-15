@@ -94,10 +94,11 @@
 | 61 | Cards · Highlight | md/sm hide the title and subtitle: intended? | NEW | Highlight md/sm |
 | 62 | Cards · SmilesBalance | Built on legacy styles; Gold and Platinum medals missing | NEW | SmilesBalance tiers |
 | 63 | Cards · DealCard | Feedback-pill icon and states | NEW | DealCard feedback |
+| 64 | Library · publishing | `filter-pill` and `card-list` exist in the file but are not in the published library | NEW | Every canvas build and Make screen that needs a filter pill or a card list |
 
 Counts: of the V1.1 items (1–14, 9b and the six #5 sub-items), 9 are closed (8 resolved, 1
 superseded), 3 changed and 8 still open. The `green/550` note has moved to hygiene. There are
-49 new items (15–63).
+50 new items (15–64).
 
 **The five rulings that unblock the most UI:** #14 (typography), #23 (page status), #15
 (legacy bindings), #19 (assets) and #43 (ListRow vs ActionBar). #16 (gradients) comes next.
@@ -1147,6 +1148,32 @@ rebind in Figma, with no ruling needed.
 - **Code today:** outline `thumbs-up` / `thumbs-down`, with no state invented.
 - **Unblocks:** an interactive deals feedback.
 - Sources: cards qJ, G6.
+
+## Library publishing
+
+### 64. `filter-pill` and `card-list` are not in the published library
+
+- **Nodes:** `filter-pill` 26151:391 (Filter page 25581:9146, key `52bb4fe3dfaaa0ec5bad8c55dcec61a95e0ce061`)
+  and `card-list` 38626:35503 (Info card page 37479:6880, key `fa216f4f096ef56796768be868b334fe5546fd3a`).
+  Both sets exist in the working file with those keys, but `importComponentSetByKeyAsync` fails for
+  both from the *published* "e& Consumer App DSL V1.2" library, and `search_design_system` does not
+  return them (checked 15 Oct 2026). The other 56 components the canvas build kit uses resolve.
+- **Effect:** consuming files cannot instance either component. The `etisalat-dsl-build` agent skill
+  falls back to a `chips` row (or `tab-pill`) for filters and `list-item` rows for card lists, and
+  the review skill treats those fallbacks as correct, not as defects. Other descriptions still point
+  at them: `tab-pill`, `picker`, `input-field` and `media-switcher` say "use filter-pill",
+  and Recommendation says "use card-list".
+- **Related:** the published library also lags the working file elsewhere. The published `card-info` set
+  is still named `Info-card`, and the working file has changes after the last publish (for example
+  `icon-size` 5xl, added 8 Oct 2026). card-list is also "In review" (#23).
+- **Ask:** publish `filter-pill` and `card-list`, or confirm they are intentionally unpublished. If
+  so, the descriptions that point at them need rewording. Then republish the library so the
+  published version matches V1.2 as reconciled in code (PR #6).
+- **Code today:** both exist in code (`FilterPill`; card-list is not built, see #23). Unaffected:
+  code is generated from the working file, not from the published library.
+- **Unblocks:** filter rows and card lists in canvas builds and audits, and removing the fallback from
+  the agent skills.
+- Sources: agent-skill key check, 15 Oct 2026.
 
 ---
 
