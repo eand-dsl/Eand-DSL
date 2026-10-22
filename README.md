@@ -1,14 +1,14 @@
-# e& Consumer App — Design System (E&DSA)
+# etisalat Consumer App — Design System (E&DSA)
 
-The e& Consumer App design system: a React component library built to the Figma
-**e& Consumer App DSL V1.1**, plus a documentation site and a Figma Make kit.
+The etisalat Consumer App design system: a React component library built to the Figma
+**etisalat Consumer App DSL V1.2**, plus a documentation site and a Figma Make kit.
 
 ## Repository layout
 
 ```
 packages/
   react-design-system/   @eand/react-design-system — 55 components, design tokens,
-                         and the 396-icon e& App Icons set (folded in: <Icon name="…" />)
+                         and the 396-icon etisalat App Icons set (folded in: <Icon name="…" />)
   tokens-native/         SwiftUI + Compose token exports from the same variable source
 apps/
   docs/                  Documentation site (Next.js + fumadocs) with live, knob-driven
@@ -50,8 +50,8 @@ committed, so deploys don't need Python). Regenerate with:
 python3 packages/react-design-system/scripts/build-icons.py
 ```
 
-The e& lockup is generated the same way, from the four SVGs exported out of Figma
-`e&-logo` 27032:50455 into `src/icons/logo-raw/`:
+The etisalat logo is generated the same way, from the four SVGs exported out of Figma
+`etisalat-logo` 27032:50455 into `src/icons/logo-raw/`:
 
 ```bash
 python3 packages/react-design-system/scripts/build-logo.py

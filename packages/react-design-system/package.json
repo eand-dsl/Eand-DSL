@@ -1,7 +1,7 @@
 {
   "name": "@eand/react-design-system",
   "version": "1.0.0",
-  "description": "e& Consumer App design system — web React components for Figma Make",
+  "description": "etisalat Consumer App design system — web React components for Figma Make",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",

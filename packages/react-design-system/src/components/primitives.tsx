@@ -173,30 +173,6 @@ export function StatusIndicator({ type = 'basic', status = 'positive', dot = tru
   );
 }
 
-/* ---------------- Smiles avatars (used on plan/highlight cards) ----------------
-   CODE-ONLY: no V1.2 symbol matches these (hardcoded #6C3FD6 / #c0bfc8, 11px text,
-   −8 overlaps). Figma draws the same idea as `logo-row` with Brands/type=smiles logos and a
-   `more-items` counter. The Brands artwork is not in the repo yet, so these stay. */
-/** @deprecated No V1.2 counterpart — use `LogoRow` with a smiles logo (and `more`) instead. */
-export function SmilesAvatar({ size = 28, label = 'smiles', bg = '#6C3FD6' }: { size?: number; label?: string; bg?: string }) {
-  return (
-    <span style={{ width: size, height: size, borderRadius: '50%', background: bg, color: '#fff', fontSize: Math.max(7, size * 0.3), fontWeight: 700, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', border: '1.5px solid #fff', boxSizing: 'border-box' }}>{label}</span>
-  );
-}
-/** @deprecated No V1.2 counterpart — use `LogoRow` with smiles logos and `more={n}` instead. */
-export function SmilesRow({ count = 2, plus = 4, size = 28 }: { count?: number; plus?: number; size?: number }) {
-  return (
-    <span style={{ display: 'inline-flex', alignItems: 'center' }}>
-      {Array.from({ length: count }).map((_, i) => (
-        <span key={i} style={{ marginInlineStart: i ? -8 : 0 }}><SmilesAvatar size={size} /></span>
-      ))}
-      {plus ? (
-        <span style={{ marginInlineStart: -8, width: size, height: size, borderRadius: '50%', background: '#c0bfc8', color: '#fff', fontSize: 11, fontWeight: 600, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', border: '1.5px solid #fff', boxSizing: 'border-box' }}>+{plus}</span>
-      ) : null}
-    </span>
-  );
-}
-
 /* ---------------- ProgressBar ---------------- */
 export interface ProgressBarProps extends HTMLAttributes<HTMLDivElement> {
   value?: number; // 0-100

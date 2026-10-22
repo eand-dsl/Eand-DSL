@@ -1,4 +1,4 @@
-// AUTO-GENERATED from Figma icon descriptions (e& Consumer App DSL, icons_2d section).
+// AUTO-GENERATED from Figma icon descriptions (etisalat Consumer App DSL, icons_2d section).
 // Regenerate with: node scripts/build-icon-metadata.mjs. Do not edit.
 export interface IconMeta { description: string; aliases: string[] }
 export const ICON_META: Record<string, IconMeta> = {

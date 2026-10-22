@@ -5,7 +5,7 @@ import {
   Button, UaePassButton, Badge, StatusIndicator, MoreItems, Chip, Tabs, TopBar, Section, ListRow, QuickAction, NavBar, PlanCard,
   Snackbar, Alert,
   Input, OtpInput, FilterPill, Checkbox, ConsentCheckbox, Radio, Switcher, Searchbar, AISearch, Selectors, Picker,
-  Logo, LogoRow, ProgressBar, Stepper, AddTrigger, Dismiss, AtomSurface, SmilesRow,
+  Logo, LogoRow, ProgressBar, Stepper, AddTrigger, Dismiss, AtomSurface,
   Card, GeneralCard, FAQ, Accordion, PageHeader, PageTitle, ActionBar, SectionLink, PlanUsageBar, AlertModal, Tooltip, BottomSheet, Scrim,
   ProductCard, DealCard, NewCard, ServiceCard, Highlight, Recommendation, SmilesBalance, Voucher,
   StatusRibbon, ButtonGroup, PaymentRow, PriceLine, ActionBlock, CtaFooter,
@@ -764,14 +764,6 @@ export const PAGES: Page[] = [
         </div>
       );
     } },
-
-  { id: 'smilesrow', group: 'Primitives', title: 'SmilesRow', frame: 'pad',
-    blurb: 'Deprecated: overlapping Smiles avatars with a “+N” chip. Use LogoRow with `more` instead.',
-    controls: [
-      { kind: 'select', prop: 'count', label: 'Avatars', options: [1, 2, 3], def: 2 },
-      { kind: 'select', prop: 'plus', label: 'Overflow', options: [0, 4, 9], def: 4 },
-    ],
-    render: (v) => <SmilesRow count={p(v, 'count')} plus={p(v, 'plus')} size={36} /> },
 
   /* ---------------- Layout ---------------- */
   { id: 'section', group: 'Layout', title: 'Section', frame: 'phone', minH: 420,

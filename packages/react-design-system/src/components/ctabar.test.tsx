@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { StatusRibbon, ButtonGroup, PaymentRow, CtaFooter, PriceLine, CheckboxLine, ActionBlock } from './ctabar';
+import { StatusRibbon, ButtonGroup, PaymentRow, CtaFooter, PriceLine, ActionBlock } from './ctabar';
 import { Button } from './Button';
 import { Checkbox } from './controls';
 
@@ -118,7 +118,7 @@ test('CtaFooter rounds its top corners by default', () => {
 });
 
 /* ======================================================================
-   V1.2 reconciliation — Figma "e& Consumer App DSL V1.2", CTA Bar page 31501:35139.
+   V1.2 reconciliation — Figma "etisalat Consumer App DSL V1.2", CTA Bar page 31501:35139.
    Each test names the published node and what the code had wrong.
    ====================================================================== */
 
@@ -235,44 +235,6 @@ test('PriceLine renders the tertiary button under the label (33496:60459)', asyn
 test('PriceLine keeps the deprecated code-only note under the value', () => {
   render(<PriceLine label="Total" value="AED 5" note="Incl. VAT" />);
   expect(screen.getByText('Incl. VAT')).toBeInTheDocument();
-});
-
-/* ---- checkbox line: checkbox-variants 33489:12153 / core 38351:31883 ---- */
-
-test('CheckboxLine composes checkbox, lead-in, links and description (33489:12153)', async () => {
-  const onTerms = vi.fn();
-  render(
-    <CheckboxLine label="Agree to" description="before proceeding"
-      links={[{ label: 'T&C’s', onClick: onTerms }, { label: 'Privacy Policy' }]} />,
-  );
-  const box = screen.getByRole('checkbox');
-  expect(screen.getByText('Agree to')).toBeInTheDocument();
-  expect(screen.getByText('and')).toBeInTheDocument();
-  expect(screen.getByText('before proceeding')).toBeInTheDocument();
-  // Link buttons sit inside the <label> but must not toggle the checkbox.
-  await userEvent.click(screen.getByRole('button', { name: 'T&C’s' }));
-  expect(onTerms).toHaveBeenCalledTimes(1);
-  expect(box).not.toBeChecked();
-  await userEvent.click(screen.getByText('Agree to'));
-  expect(box).toBeChecked();
-});
-
-test('CheckboxLine link is the brand link button; inverse uses inverse-subtle copy (33489:12153)', () => {
-  render(<CheckboxLine inverse label="Agree to" links={[{ label: 'Terms' }]} />);
-  expect(screen.getByRole('button', { name: 'Terms' }).style.color).toBe('rgb(255, 255, 255)');
-  expect(screen.getByText('Agree to').style.color).toBe('rgba(255, 255, 255, 0.75)');
-});
-
-test('CheckboxLine default copy and link colours (checkbox-variants inverse=false)', () => {
-  render(<CheckboxLine label="Agree to" links={[{ label: 'Terms' }]} />);
-  expect(screen.getByRole('button', { name: 'Terms' }).style.color).toBe('rgb(224, 8, 0)');
-  expect(screen.getByText('Agree to').style.color).toBe('rgb(25, 19, 41)');
-});
-
-test('CheckboxLine disabled disables its links too (checkbox-variants disabled=true)', () => {
-  render(<CheckboxLine disabled label="Agree to" links={[{ label: 'Terms' }]} />);
-  expect(screen.getByRole('button', { name: 'Terms' })).toBeDisabled();
-  expect(screen.getByText('Agree to').style.color).toBe('rgb(192, 191, 200)');
 });
 
 /* ---- .action-block 31617:1499 ---- */

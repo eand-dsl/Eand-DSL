@@ -1,4 +1,4 @@
-// e& Consumer App design system — web React components for Figma Make.
+// etisalat Consumer App design system — web React components for Figma Make.
 import './tokens/tokens.css';
 
 export { tokens } from './tokens/tokens';
@@ -14,6 +14,6 @@ export * from './components/overlays';
 export * from './components/cards';
 export * from './components/ctabar';
 
-// e& App Icons — folded in (name-based <Icon name="…" />, named *Icon components,
+// etisalat App Icons — folded in (name-based <Icon name="…" />, named *Icon components,
 // the ICONS registry, and ICON_META descriptions/aliases).
 export * from './icons';

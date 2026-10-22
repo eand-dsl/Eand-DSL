@@ -1,4 +1,4 @@
-# `@eand/docs` — e& Design System documentation site
+# `@eand/docs` — etisalat Design System documentation site
 
 Next.js + [fumadocs](https://fumadocs.dev) site documenting
 `@eand/react-design-system`: 45 component pages with live demos, 4 foundations pages,

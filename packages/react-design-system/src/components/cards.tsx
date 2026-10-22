@@ -1,6 +1,6 @@
 import type { CSSProperties, HTMLAttributes, ReactNode } from 'react';
 import { color, space, radius, rowHeight, ty, scale, icon as iconSize, PILL, T } from '../system';
-import { Text, Badge, SmilesAvatar, cardBgTint } from './primitives';
+import { Text, Badge, cardBgTint } from './primitives';
 import { Icon } from '../icons';
 import type { CardBgTint } from './primitives';
 import { Button } from './Button';
@@ -41,12 +41,15 @@ const LEGACY_HIGH_EMPHASIS = '#140f21';
    glass/white/md on inverse ones. `primitives` LogoRow has no size/style axes yet, so
    cards draw the published row here. Without `logos`, Smiles placeholders stand in for
    the Brands image, as the old SmilesRow did. */
+function SmilesPlaceholder({ size }: { size: number }) {
+  return <span style={{ width: size, height: size, borderRadius: '50%', background: '#6C3FD6', color: '#fff', fontSize: Math.max(7, size * 0.3), fontWeight: 700, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', border: '1.5px solid #fff', boxSizing: 'border-box' }}>smiles</span>;
+}
 type LogoRowSize = 'sm' | 'md';
 function CardLogoRow({ size, glass, inverse, logos, placeholders = 2, more }: {
   size: LogoRowSize; glass?: boolean; inverse?: boolean; logos?: ReactNode[]; placeholders?: number; more?: number;
 }) {
   const d = size === 'md' ? 32 : 24;
-  const items = logos ?? Array.from({ length: placeholders }, (_, i) => <SmilesAvatar key={i} size={d} />);
+  const items = logos ?? Array.from({ length: placeholders }, (_, i) => <SmilesPlaceholder key={i} size={d} />);
   const cell = (node: ReactNode, i: number) => glass ? (
     <span key={i} data-part="logo" style={{
       display: 'inline-flex', padding: space('sm'), borderRadius: PILL,
@@ -603,11 +606,11 @@ export interface RecommendationProps extends Omit<HTMLAttributes<HTMLDivElement>
 /** Figma carousel=true: two cores at 338 in a 353 slot (no width token). */
 const REC_CAROUSEL_WIDTH = 338;
 /** The Brands placeholder is a square logo clipped at border-radius/3 — the Smiles purple
- *  is the same placeholder literal SmilesAvatar uses (design-questions q7). */
+ *  is the same placeholder literal SmilesPlaceholder uses (design-questions q7). */
 const BrandPlaceholder = () => (
   <span style={{ width: '100%', height: '100%', background: '#6C3FD6', color: '#fff', fontSize: 9, fontWeight: 700, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>smiles</span>
 );
-export function Recommendation({ icon, title = 'Recommended for you', description = 'Handpicked offers based on how you use e&.', cta = 'Explore', onCta, inverse = true, carousel = false, items, width, style, ...rest }: RecommendationProps) {
+export function Recommendation({ icon, title = 'Recommended for you', description = 'Handpicked offers based on how you use etisalat.', cta = 'Explore', onCta, inverse = true, carousel = false, items, width, style, ...rest }: RecommendationProps) {
   const card = (it: RecommendationItem, w: number | string | undefined, extra?: HTMLAttributes<HTMLDivElement>, ownStyle?: CSSProperties) => (
     <div data-inverse={inverse || undefined} {...extra} style={{
       width: w ?? '100%', flex: w != null ? '0 0 auto' : undefined, boxSizing: 'border-box', height: rowHeight('row-3'),
