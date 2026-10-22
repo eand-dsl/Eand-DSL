@@ -1,6 +1,6 @@
 # `@eand/react-design-system` — publishing & Figma Make kit
 
-Web React 18 component library (the e& DSL for the browser) built to be consumed
+Web React 18 component library (the etisalat DSL for the browser) built to be consumed
 by **Figma Make** as a Make kit. Self-contained, token-styled, Vite-built.
 
 ## Build
@@ -77,7 +77,7 @@ peers (`^18 || ^19`). Confirm there are no `workspace:*` dependencies before pub
 
 ### 3. Pick a registry and configure auth
 
-**A) Figma private registry — the intended route for e&.**
+**A) Figma private registry — the intended route for etisalat.**
 
 Keeps the library inside the *e& UAE Consumer* org. Requires a paid Figma plan (the org
 qualifies) and, critically, **an org admin** — only admins can claim an npm scope.
@@ -117,7 +117,7 @@ Send your *e& UAE Consumer* Figma org admin this:
 >
 > Figma's setup docs: https://developers.figma.com/docs/code/working-with-npm/
 >
-> The package is `@eand/react-design-system` — the e& Consumer App component library,
+> The package is `@eand/react-design-system` — the etisalat Consumer App component library,
 > built from the DSL V1.2 Figma variables. Publishing it privately keeps it inside the
 > org; the alternative is publishing it to public npm, which I'd rather avoid.
 >
@@ -137,7 +137,7 @@ npm view @eand/react-design-system version
    an esm.sh URL will not.
 2. The kit gets a `guidelines/` folder. Paste **`MAKE_KIT_GUIDELINES.md`** into
    `guidelines/guidelines.md` — Make reads that file first. This is the artifact that
-   teaches Make how to assemble e& screens; the package alone is not enough. Figma can
+   teaches Make how to assemble etisalat screens; the package alone is not enough. Figma can
    auto-generate guidelines, but ours are hand-written and fact-checked against the
    library, so use ours.
 3. In a Make file, prompt with a UX wireframe. Make installs the package and builds the
@@ -150,7 +150,7 @@ npm view @eand/react-design-system version
 
 ## Local consumption proof
 
-`demo/` assembles a full e& Account screen from the built package
+`demo/` assembles a full etisalat Account screen from the built package
 (`demo/account-screen.png`). It lives in the **source repository**
 ([eand-dsl/Eand-DSL](https://github.com/eand-dsl/Eand-DSL), under
 `packages/react-design-system/`) — it is not shipped in the published package or the

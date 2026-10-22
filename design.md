@@ -1,11 +1,11 @@
-# e& Consumer App DSL — Master Spec
+# etisalat Consumer App DSL — Master Spec
 
-> **Master spec for Figma Make.** This file is the single source of truth for the e& Consumer App
+> **Master spec for Figma Make.** This file is the single source of truth for the etisalat Consumer App
 > design system: every token (resolved to its concrete value), every component (states, behavior,
 > placement, composition), the layout system, and recipes for assembling UI screens from UX wireframes.
 >
 > **What Make should do with it:** given a UX wireframe, identify the screen regions (header, scrollable
-> body, bottom nav, overlays), map each region/block to the right e& component(s), and assemble an
+> body, bottom nav, overlays), map each region/block to the right etisalat component(s), and assemble an
 > accurate, token-correct UI screen — picking carousels vs. stacked cards, filter rows, forms, etc.,
 > and applying the sizing rules below. Treat this as a **UI app library**, not loose mockups.
 
@@ -14,7 +14,7 @@
 
 ## Layout system & screen composition
 
-**Screen archetype (e&):** **Top bar** — usually the **red account header** (`variant="brand"`: greeting "Hi, Ahmed" + masked number + circle icons; optional red action bar like "Complete your profile") → optional **global Pill Tabs** row (For you / Account / Loyalty) → **scroll body** = a vertical stack of full-width grey **Sections** (each wrapping cards / ListRows / QuickAction grids / carousels) → floating **Nav bar** (Home · Support · Profile · Shop; active = red pill). Optional **Action bar** above the nav; overlays (**Bottom sheet, Alert modal, Snackbar, Tooltip**) float above everything.
+**Screen archetype (etisalat):** **Top bar** — usually the **red account header** (`variant="brand"`: greeting "Hi, Ahmed" + masked number + circle icons; optional red action bar like "Complete your profile") → optional **global Pill Tabs** row (For you / Account / Loyalty) → **scroll body** = a vertical stack of full-width grey **Sections** (each wrapping cards / ListRows / QuickAction grids / carousels) → floating **Nav bar** (Home · Support · Profile · Shop; active = red pill). Optional **Action bar** above the nav; overlays (**Bottom sheet, Alert modal, Snackbar, Tooltip**) float above everything.
 
 **Sizing rules (apply to every component):**
 - **Controls** (Button, Input, Chip, Filter pill, Checkbox, Radio, Switcher, Searchbar, Tabs): `width: fill` (or `hug` for inline chips/pills/badges) + **fixed** height from tokens.
@@ -97,13 +97,19 @@
 
 ### Color — primitive ramps
 
-- **white**: `1000`=#ffffff, `a90`=rgba(255, 255, 255, 0.90), `a80`=rgba(255, 255, 255, 0.80), `a70`=rgba(255, 255, 255, 0.70), `a60`=rgba(255, 255, 255, 0.60), `a50`=rgba(255, 255, 255, 0.50), `a40`=rgba(255, 255, 255, 0.40), `a30`=rgba(255, 255, 255, 0.30), `a20`=rgba(255, 255, 255, 0.20), `a15`=rgba(255, 255, 255, 0.15), `a10`=rgba(255, 255, 255, 0.10), `a5`=rgba(255, 255, 255, 0.05)
-- **midnight**: `50`=#f7f7fa, `100`=#f0f0f5, `150`=#e4e3ea, `200`=#d8d7de, `300`=#c0bfc8, `400`=#a8a6b1, `500`=#908e9a, `600`=#797584, `700`=#615d6d, `750`=#575362, `800`=#494456, `900`=#312c40, `1000`=#191329, `1100`=#140f21, `a90`=rgba(25, 19, 41, 0.90), `a80`=rgba(25, 19, 41, 0.80), `a75`=rgba(25, 19, 41, 0.75), `a70`=rgba(25, 19, 41, 0.70), `a60`=rgba(25, 19, 41, 0.60), `a50`=rgba(25, 19, 41, 0.50), `a40`=rgba(25, 19, 41, 0.40), `a30`=rgba(25, 19, 41, 0.30), `a20`=rgba(25, 19, 41, 0.20), `a10`=rgba(25, 19, 41, 0.10), `a7`=rgba(25, 19, 41, 0.07)
+- **white**: `1000`=#ffffff, `a90`=rgba(255, 255, 255, 0.90), `a80`=rgba(255, 255, 255, 0.80), `a75`=rgba(255, 255, 255, 0.75), `a70`=rgba(255, 255, 255, 0.70), `a60`=rgba(255, 255, 255, 0.60), `a50`=rgba(255, 255, 255, 0.50), `a40`=rgba(255, 255, 255, 0.40), `a30`=rgba(255, 255, 255, 0.30), `a20`=rgba(255, 255, 255, 0.20), `a15`=rgba(255, 255, 255, 0.15), `a10`=rgba(255, 255, 255, 0.10), `a05`=rgba(255, 255, 255, 0.05)
+- **midnight**: `50`=#f7f7fa, `100`=#f0f0f5, `150`=#e4e3ea, `200`=#d8d7de, `300`=#c0bfc8, `400`=#a8a6b1, `500`=#908e9a, `600`=#797584, `700`=#615d6d, `750`=#575362, `800`=#494456, `900`=#312c40, `1000`=#191329, `1100`=#140f21, `a90`=rgba(25, 19, 41, 0.90), `a80`=rgba(25, 19, 41, 0.80), `a75`=rgba(25, 19, 41, 0.75), `a70`=rgba(25, 19, 41, 0.70), `a60`=rgba(25, 19, 41, 0.60), `a50`=rgba(25, 19, 41, 0.50), `a40`=rgba(25, 19, 41, 0.40), `a30`=rgba(25, 19, 41, 0.30), `a20`=rgba(25, 19, 41, 0.20), `a10`=rgba(25, 19, 41, 0.10), `a07`=rgba(25, 19, 41, 0.07)
 - **red**: `50`=#fff2f2, `100`=#fce6e6, `200`=#f9cecc, `300`=#f6b5b3, `400`=#f39c99, `500`=#f08480, `600`=#ed6b66, `700`=#e9524d, `800`=#e73933, `900`=#e3211a, `1000`=#e00800, `1100`=#bb0700, `1200`=#950500, `1300`=#700400, `1400`=#4b0300, `1500`=#2d0200
 - **green**: `50`=#f9fefb, `100`=#edfdf2, `200`=#dafbe3, `300`=#c1f7d0, `400`=#9ff3b7, `500`=#6ced90, `600`=#54bc72, `700`=#3b8b53, `800`=#27633b, `900`=#164025, `1000`=#0e2916
 - **orange**: `50`=#fff8f3, `100`=#ffeedd, `200`=#ffe0c4, `300`=#ffd1a8, `400`=#ffc28b, `450`=#ffb16f, `500`=#ff9f52, `600`=#e07830, `700`=#b85a1a, `800`=#8c3f0c, `900`=#612a05, `1000`=#3a1602
 - **yellow**: `100`=#fff7dd, `200`=#fff2c7, `300`=#ffecab, `400`=#ffe68f, `500`=#ffdf73, `550`=#ffd957, `600`=#d5b549, `700`=#aa913a, `800`=#806d2c, `900`=#55481d, `1000`=#332b11
 - **special** (membership/loyalty palettes): mauve, red-sand, teal, burgundy, pink, gold, bronze, blue-platinum, silver
+- **section-link**: 
+- **status-indicator**: 
+- **dismiss**: `default`=#908e9a, `inverse`=#c0bfc8
+- **alert-message**: 
+- **stepper**: 
+- **status-icon**: 
 
 ### Color — semantic
 
@@ -123,7 +129,7 @@
     - `midnight` → `#191329`
   - **sunken**
     - `default` → `#e4e3ea`
-    - `inverse` → `#f7f7fa`
+    - `inverse` → `#f0f0f5`
     - `brand` → `#bb0700`
     - `brand-muted` → `#f9cecc`
     - `midnight` → `#140f21`
@@ -140,7 +146,7 @@
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `lg` → `rgba(25, 19, 41, 0.60)`
       - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
@@ -148,6 +154,7 @@
       - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.10)`
+      - `xs` → `rgba(255, 255, 255, 0.05)`
 
 **text**
   - **default**
@@ -156,15 +163,15 @@
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.75)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.60)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.50)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
     - `muted` → `#ed6b66`
     - `strong` → `#950500`
-    - `focus` → `#bb0700`
+    - `pressed` → `#bb0700`
     - `disabled` → `#a8a6b1`
   - **positive**
     - `default` → `#27633b`
@@ -189,28 +196,28 @@
       - `inverse` → `#d8d7de`
       - `brand` → `#ed6b66`
       - `brand-muted` → `#f9cecc`
-      - `midnight` → `#312c40`
+      - `midnight` → `#494456`
     - **base**
       - `default` → `#d8d7de`
-      - `inverse` → `#f0f0f5`
+      - `inverse` → `#e4e3ea`
       - `brand` → `#e9524d`
       - `brand-muted` → `#f6b5b3`
-      - `midnight` → `#312c40`
+      - `midnight` → `#575362`
     - **raised**
-      - `default` → `#f0f0f5`
-      - `inverse` → `#f0f0f5`
+      - `default` → `#e4e3ea`
+      - `inverse` → `#e4e3ea`
       - `brand` → `#ed6b66`
       - `brand-muted` → `#f9cecc`
-      - `midnight` → `#494456`
+      - `midnight` → `#575362`
     - **sunken**
-      - `default` → `#d8d7de`
+      - `default` → `#c0bfc8`
       - `inverse` → `#d8d7de`
       - `brand` → `#e73933`
       - `brand-muted` → `#f08480`
-      - `midnight` → `#312c40`
+      - `midnight` → `#494456`
     - **overlay**
       - `floating` → `#d8d7de`
-      - `floating inverse` → `#ffffff`
+      - `floating-inverse` → `#ffffff`
     - **glass**
       - **default**
         - `lg` → `rgba(255, 255, 255, 0.60)`
@@ -225,17 +232,17 @@
       - `default` → `rgba(25, 19, 41, 0.20)`
       - `subtle` → `rgba(25, 19, 41, 0.10)`
       - `strong` → `rgba(25, 19, 41, 0.50)`
-      - `focus` → `#191329`
+      - `pressed` → `#191329`
       - `disabled` → `rgba(25, 19, 41, 0.07)`
     - **inverse**
       - `default` → `rgba(255, 255, 255, 0.60)`
       - `subtle` → `rgba(255, 255, 255, 0.40)`
       - `strong` → `rgba(255, 255, 255, 0.80)`
-      - `focus` → `#ffffff`
+      - `pressed` → `#ffffff`
       - `disabled` → `rgba(255, 255, 255, 0.40)`
     - **accent**
       - `default` → `#e00800`
-      - `focus` → `#bb0700`
+      - `pressed` → `#bb0700`
       - `subtle` → `#e9524d`
       - `muted` → `#f08480`
       - `disabled` → `#a8a6b1`
@@ -258,7 +265,7 @@
 **status**
   - `default` → `#191329`
   - `accent` → `#e00800`
-  - `accent-focus` → `#bb0700`
+  - `accent-pressed` → `#bb0700`
   - `disabled` → `#c0bfc8`
   - `disabled-inverse` → `#f0f0f5`
   - `inverse` → `#ffffff`
@@ -270,29 +277,30 @@
 
 | style | size px | weight | line-height | letter-spacing | family |
 |---|---|---|---|---|---|
-| display.lg | 48 | Bold (700) | 120% | -0.6499999761581421 | Suisse int'l |
-| display.md | 40 | Bold (700) | 120% | -0.6499999761581421 | Suisse int'l |
-| heading.xl | 32 | Bold (700) | 120% | -0.6499999761581421 | Suisse int'l |
-| heading.lg | 28 | Bold (700) | 120% | -0.6499999761581421 | Suisse int'l |
-| heading.md | 24 | Bold (700) | 120% | -0.3499999940395355 | Suisse int'l |
-| heading.sm | 20 | Bold (700) | 120% | -0.3499999940395355 | Suisse int'l |
-| heading.xs | 16 | Bold (700) | 120% | 0 | Suisse int'l |
-| title.xl | 28 | Semi bold (600) | 120% | -0.3499999940395355 | Suisse int'l |
-| title.lg | 24 | Semi bold (600) | 120% | -0.3499999940395355 | Suisse int'l |
-| title.md | 20 | Semi bold (600) | 120% | -0.3499999940395355 | Suisse int'l |
-| title.sm | 16 | Semi bold (600) | 120% | 0 | Suisse int'l |
-| title.xs | 14 | Semi bold (600) | 120% | 0 | Suisse int'l |
-| body.xl | 20 | Regular (400) | 120% | 0 | Suisse int'l |
-| body.lg | 16 | Regular (400) | 120% | 0 | Suisse int'l |
-| body.md | 14 | Regular (400) | 120% | 0 | Suisse int'l |
-| body.sm | 12 | Regular (400) | 120% | 0 | Suisse int'l |
-| body.xs | 10 | Regular (400) | 120% | 0 | Suisse int'l |
-| button.lg | 16 | Semi bold (600) | 120% | 0 | Suisse int'l |
-| button.md | 14 | Medium (500) | 120% | 0 | Suisse int'l |
-| button.sm | 12 | Medium (500) | 120% | 0 | Suisse int'l |
-| badge.lg | 14 | Book (450) | 120% | 0 | Suisse int'l |
-| badge.md | 12 | Book (450) | 120% | 0 | Suisse int'l |
-| badge.sm | 10 | Book (450) | 120% | 0 | Suisse int'l |
+| display.lg | 48 | Bold (700) | 120 | -0.6499999761581421 | Suisse int'l |
+| display.md | 40 | Bold (700) | 120 | -0.6499999761581421 | Suisse int'l |
+| heading.xl | 32 | Bold (700) | 100 | -0.6499999761581421 | Suisse int'l |
+| heading.lg | 28 | Bold (700) | 120 | -0.6499999761581421 | Suisse int'l |
+| heading.md | 24 | Bold (700) | 135 | -0.3499999940395355 | Suisse int'l |
+| heading.sm | 20 | Bold (700) | 135 | -0.3499999940395355 | Suisse int'l |
+| heading.xs | 16 | Bold (700) | 135 | 0 | Suisse int'l |
+| title.xl | 28 | Semi bold (600) | 130 | -0.3499999940395355 | Suisse int'l |
+| title.lg | 24 | Semi bold (600) | 130 | -0.3499999940395355 | Suisse int'l |
+| title.md | 20 | Semi bold (600) | 130 | -0.3499999940395355 | Suisse int'l |
+| title.sm | 16 | Semi bold (600) | 130 | 0 | Suisse int'l |
+| title.xs | 14 | Semi bold (600) | 130 | 0 | Suisse int'l |
+| body.xl | 20 | Regular (400) | 140 | 0 | Suisse int'l |
+| body.lg | 16 | Regular (400) | 140 | 0 | Suisse int'l |
+| body.md | 14 | Regular (400) | 140 | 0 | Suisse int'l |
+| body.sm | 12 | Regular (400) | 140 | 0 | Suisse int'l |
+| body.xs | 10 | Regular (400) | 140 | 0 | Suisse int'l |
+| button.lg | 16 | Semi bold (600) | 130 | 0 | Suisse int'l |
+| button.md | 14 | Medium (500) | 130 | 0 | Suisse int'l |
+| button.sm | 12 | Medium (500) | 130 | 0 | Suisse int'l |
+| badge.lg | 14 | Book (450) | 130 | 0 | Suisse int'l |
+| badge.md | 12 | Book (450) | 130 | 0 | Suisse int'l |
+| badge.sm | 10 | Book (450) | 130 | 0 | Suisse int'l |
+| alerts.md | 20 | Light (300) | 130 | -0.3499999940395355 | Suisse int'l |
 
 > Arabic ramp mirrors these as `aed/<style>` (same scale; family Suisse Int'l, distinct Arabic face TBD).
 
@@ -302,21 +310,21 @@
 
 ### Border radius
 
-`1`=4, `2`=8, `3`=12, `4`=14, `5`=16, `6`=20, `7`=24, `8`=1200
+`1`=4, `2`=6, `3`=8, `4`=12, `5`=14, `6`=16, `7`=20, `8`=24, `9`=1200
 
 ### Icon sizes
 
-`xs`=8, `sm`=12, `md`=16, `lg`=20, `xl`=24, `2xl`=32, `3xl`=40, `4xl`=48
+`xs`=8, `sm`=12, `md`=16, `lg`=20, `xl`=24, `2xl`=32, `3xl`=40, `4xl`=48, `5xl`=56
 
 ### Icons — folded into `@eand/react-design-system`
 
-Icons ship **inside** this UI library — there is no separate icons package. Import `Icon` from `@eand/react-design-system` alongside the components and render `<Icon name="…" />` into any `icon`/`leadingIcon`/`actions` slot. The set mirrors the **e& App Icons** Figma library (`9Q64oRPBkm3Sla5HMP4LJA`, MS-Fluent-2 line set + 13 Core Service Icons). Icons tint via CSS `color`, so they inherit the slot colour (red on an active `NavBar` tab, white on the brand `TopBar`, dark in a `QuickAction`/`ListRow` square). `Icon` takes `name`, `size` (px, default 24), `color`, and `title`.
+Icons ship **inside** this UI library — there is no separate icons package. Import `Icon` from `@eand/react-design-system` alongside the components and render `<Icon name="…" />` into any `icon`/`leadingIcon`/`actions` slot. The set mirrors the **etisalat App Icons** Figma library (`9Q64oRPBkm3Sla5HMP4LJA`, MS-Fluent-2 line set + 13 Core Service Icons). Icons tint via CSS `color`, so they inherit the slot colour (red on an active `NavBar` tab, white on the brand `TopBar`, dark in a `QuickAction`/`ListRow` square). `Icon` takes `name`, `size` (px, default 24), `color`, and `title`.
 
 Every icon has two forms: the outline `name` and the filled `name-filled` (e.g. `home` and `home-filled`) — **198 base names, 396 total**. Prominent slots (active nav tabs, hero tiles, quick-action squares, service tiles) take the filled form; inline and secondary glyphs (list rows, buttons, header actions, hints) take the outline form.
 
 The authoritative name list is the grouped registry in `packages/react-design-system/MAKE_KIT_GUIDELINES.md` (between the `icons:begin` / `icons:end` markers), which `npm run guidelines:check` verifies against the built library on every push. It is deliberately not duplicated here — a second copy would drift. In code, `ICONS` and `ICON_META` are exported from the package itself.
 
-> **Never generate, draw, or emoji-substitute an icon.** If the concept you want has no entry, pick the nearest real name — never a placeholder or a drawing. If nothing fits, request the glyph be added to the package (exported from the e& App Icons library) rather than inventing one.
+> **Never generate, draw, or emoji-substitute an icon.** If the concept you want has no entry, pick the nearest real name — never a placeholder or a drawing. If nothing fits, request the glyph be added to the package (exported from the etisalat App Icons library) rather than inventing one.
 
 
 
@@ -326,7 +334,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
 
 | Component | Slot | Width | Height |
 |---|---|---|---|
-| e& Logo | Primitive / brand | hug | fixed (lockup sizes) |
+| etisalat Logo | — | — | — |
 | Badges | Primitive / indicator (inline) | hug | fixed (24; lg/md/sm) |
 | Icon size | Primitive / token (sizing scale) | n/a | fixed (xs8 sm12 md16 lg20 xl24 2xl32 3xl40 4xl48) |
 | Logo row | Primitive / media row | fill | hug |
@@ -361,7 +369,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
 | Product | Card (carousel item, or stacked) | fixed (carousel) / fill (stacked) | hug |
 | Deals for you | Card (carousel item) | fixed (carousel) | hug |
 | Plans | Card (carousel or stacked) | fixed (carousel) / fill (stacked) | hug |
-| New on e& | Card (carousel item) | fixed (carousel) | hug |
+| New on etisalat | — | — | — |
 | Service | Card (grid/list cell in a Section) | grid cell / fill (row) | hug |
 | Highlight | Banner (full-bleed, in body) | fill (edge-to-edge) | hug / fixed aspect |
 | Smiles Balance | Body module / header widget | fill | hug |
@@ -378,17 +386,10 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
 ### 01 · Primitives
 
 
-#### e& Logo
+#### etisalat Logo
 - **Figma:** [`27020-6155`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=27020-6155)
 - **Role:** Brand logo lockups.
-- **Behavior:** slot `Primitive / brand` · width: hug · height: fixed (lockup sizes)
-- **States:** version: primary · monochrome · app-icon
-- **Composition:** contains logomark + wordmark · appears within Top bar, Highlight banner, splash
-- **Use case:** Brand identity mark.
-- **Anatomy (Figma-verified):**
-  - **Variants:** `version` (default, midnight, red, white).
-  - **Dimensions:** 100×100 · 96×96.
-  - **Figma node:** `27020:6155`
+- _anatomy: pending (behavior/states above are from the token model)._
 
 #### Badges
 - **Figma:** [`22668-60275`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=22668-60275)
@@ -413,7 +414,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `mega-deals` → `#e00800`
       - `green-friday` → `#e00800`
       - `discount` → `#e00800`
-      - `limited stock` → `#ffd957`
+      - `limited-stock` → `#ffd957`
       - `validity` → `#ffd957`
       - `limited-time` → `#ffd957`
       - `best-seller` → `#bb2d81`
@@ -443,7 +444,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `best-seller` → `#ffffff`
       - `online-exclusive` → `#ffffff`
       - `exclusive-for-emirati` → `#ffffff`
-      - `sold-out` → `rgba(255, 255, 255, 0.70)`
+      - `sold-out` → `rgba(255, 255, 255, 0.75)`
     - **tiers**
       - `platinum-number` → `#191329`
       - `gold-number` → `#462f2d`
@@ -477,6 +478,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
   - `2xl` → `32`
   - `3xl` → `40`
   - `4xl` → `48`
+  - `5xl` → `56`
 - **Anatomy (Figma-verified):**
   - **Variants:** `category` (3d-icon, icon, logo) × `size` (2xl, 3xl, 4xl, lg, md, sm, xl, xs).
   - **Dimensions:** 48×48 · 40×40 · 32×32 · 24×24 · 20×20 · 16×16.
@@ -510,7 +512,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
 - **Color tokens — `color.status`:**
   - `default` → `#191329`
   - `accent` → `#e00800`
-  - `accent-focus` → `#bb0700`
+  - `accent-pressed` → `#bb0700`
   - `disabled` → `#c0bfc8`
   - `disabled-inverse` → `#f0f0f5`
   - `inverse` → `#ffffff`
@@ -537,78 +539,100 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - **surface**
       - **brand**
         - `default` → `#e00800`
-        - `focus` → `#bb0700`
+        - `pressed` → `#bb0700`
         - `disabled` → `#c0bfc8`
+      - **midnight**
+        - `default` → `#191329`
+        - `pressed` → `#f0f0f5`
+        - `disabled` → `#615d6d`
       - **inverse**
         - `default` → `#ffffff`
-        - `focus` → `#fce6e6`
-        - `disabled` → `#f0f0f5`
+        - `pressed` → `#312c40`
+        - `disabled` → `#e4e3ea`
     - **text**
       - **brand**
         - `default` → `#ffffff`
-        - `focus` → `#ffffff`
-        - `disabled` → `rgba(255, 255, 255, 0.70)`
+        - `pressed` → `#ffffff`
+        - `disabled` → `rgba(255, 255, 255, 0.75)`
+      - **midnight**
+        - `default` → `#ffffff`
+        - `pressed` → `#191329`
+        - `disabled` → `rgba(255, 255, 255, 0.50)`
       - **inverse**
-        - `default` → `#e00800`
-        - `focus` → `#bb0700`
+        - `default` → `#191329`
+        - `pressed` → `#ffffff`
         - `disabled` → `#a8a6b1`
   - **secondary**
     - **surface**
       - **brand**
-        - `focus` → `#fce6e6`
+        - `pressed` → `#bb0700`
+      - **midnight**
+        - `pressed` → `#191329`
       - **inverse**
-        - `focus` → `#312c40`
+        - `pressed` → `#ffffff`
     - **text**
       - **brand**
         - `default` → `#e00800`
-        - `focus` → `#bb0700`
+        - `pressed` → `#ffffff`
+        - `disabled` → `#a8a6b1`
+      - **midnight**
+        - `default` → `#191329`
+        - `pressed` → `#ffffff`
         - `disabled` → `#a8a6b1`
       - **inverse**
         - `default` → `#ffffff`
-        - `focus` → `#ffffff`
-        - `disabled` → `rgba(255, 255, 255, 0.70)`
+        - `pressed` → `#191329`
+        - `disabled` → `rgba(255, 255, 255, 0.50)`
     - **border**
       - **brand**
         - `default` → `#e00800`
-        - `focus` → `#bb0700`
+        - `pressed` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+      - **midnight**
+        - `default` → `#191329`
+        - `pressed` → `#191329`
         - `disabled` → `#a8a6b1`
       - **inverse**
         - `default` → `#ffffff`
-        - `focus` → `#f0f0f5`
-        - `disabled` → `#d8d7de`
+        - `pressed` → `rgba(255, 255, 255, 0.40)`
+        - `disabled` → `rgba(255, 255, 255, 0.40)`
   - **tertiary**
     - **text**
       - **brand**
         - `default` → `#e00800`
-        - `focus` → `#bb0700`
+        - `pressed` → `#bb0700`
         - `disabled` → `#a8a6b1`
       - **midnight**
         - `default` → `#191329`
-        - `focus` → `#bb0700`
+        - `pressed` → `#bb0700`
         - `disabled` → `#a8a6b1`
       - **inverse**
         - `default` → `#ffffff`
-        - `focus` → `#bb0700`
-        - `disabled` → `rgba(255, 255, 255, 0.70)`
+        - `pressed` → `#bb0700`
+        - `disabled` → `rgba(255, 255, 255, 0.50)`
+  - **glass**
+    - **surface**
+      - `default` → `rgba(255, 255, 255, 0.15)`
+      - `pressed` → `#ffffff`
+      - `disabled` → `rgba(255, 255, 255, 0.10)`
+    - **text**
+      - `default` → `#ffffff`
+      - `pressed` → `#e00800`
+      - `disabled` → `rgba(255, 255, 255, 0.60)`
   - **link**
     - **text**
       - **brand**
         - `default` → `#e00800`
-        - `focus` → `#bb0700`
+        - `pressed` → `#bb0700`
         - `disabled` → `#a8a6b1`
       - **midnight**
         - `default` → `#191329`
-        - `focus` → `#bb0700`
+        - `pressed` → `#bb0700`
         - `disabled` → `#a8a6b1`
       - **inverse**
         - `default` → `#ffffff`
-        - `focus` → `#bb0700`
-        - `disabled` → `rgba(255, 255, 255, 0.70)`
-  - **text**
-    - **midnight**
-      - `default` → `#191329`
-      - `focus` → `#191329`
-      - `disabled` → `#c0bfc8`
+        - `pressed` → `#bb0700`
+        - `disabled` → `rgba(255, 255, 255, 0.50)`
 - **Anatomy (Figma-verified):**
   - **Variants:** `surface` (default, inverse).
   - **Dimensions:** 285×72.
@@ -656,7 +680,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `midnight` → `#191329`
   - **sunken**
     - `default` → `#e4e3ea`
-    - `inverse` → `#f7f7fa`
+    - `inverse` → `#f0f0f5`
     - `brand` → `#bb0700`
     - `brand-muted` → `#f9cecc`
     - `midnight` → `#140f21`
@@ -673,7 +697,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `lg` → `rgba(25, 19, 41, 0.60)`
       - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
@@ -681,6 +705,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.10)`
+      - `xs` → `rgba(255, 255, 255, 0.05)`
 - **Anatomy (Figma-verified):**
   - **Variants:** `color` (blue, cyan, default, green, orange, red, violet, yellow).
   - **Dimensions:** 224×272.
@@ -701,78 +726,100 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - **surface**
       - **brand**
         - `default` → `#e00800`
-        - `focus` → `#bb0700`
+        - `pressed` → `#bb0700`
         - `disabled` → `#c0bfc8`
+      - **midnight**
+        - `default` → `#191329`
+        - `pressed` → `#f0f0f5`
+        - `disabled` → `#615d6d`
       - **inverse**
         - `default` → `#ffffff`
-        - `focus` → `#fce6e6`
-        - `disabled` → `#f0f0f5`
+        - `pressed` → `#312c40`
+        - `disabled` → `#e4e3ea`
     - **text**
       - **brand**
         - `default` → `#ffffff`
-        - `focus` → `#ffffff`
-        - `disabled` → `rgba(255, 255, 255, 0.70)`
+        - `pressed` → `#ffffff`
+        - `disabled` → `rgba(255, 255, 255, 0.75)`
+      - **midnight**
+        - `default` → `#ffffff`
+        - `pressed` → `#191329`
+        - `disabled` → `rgba(255, 255, 255, 0.50)`
       - **inverse**
-        - `default` → `#e00800`
-        - `focus` → `#bb0700`
+        - `default` → `#191329`
+        - `pressed` → `#ffffff`
         - `disabled` → `#a8a6b1`
   - **secondary**
     - **surface**
       - **brand**
-        - `focus` → `#fce6e6`
+        - `pressed` → `#bb0700`
+      - **midnight**
+        - `pressed` → `#191329`
       - **inverse**
-        - `focus` → `#312c40`
+        - `pressed` → `#ffffff`
     - **text**
       - **brand**
         - `default` → `#e00800`
-        - `focus` → `#bb0700`
+        - `pressed` → `#ffffff`
+        - `disabled` → `#a8a6b1`
+      - **midnight**
+        - `default` → `#191329`
+        - `pressed` → `#ffffff`
         - `disabled` → `#a8a6b1`
       - **inverse**
         - `default` → `#ffffff`
-        - `focus` → `#ffffff`
-        - `disabled` → `rgba(255, 255, 255, 0.70)`
+        - `pressed` → `#191329`
+        - `disabled` → `rgba(255, 255, 255, 0.50)`
     - **border**
       - **brand**
         - `default` → `#e00800`
-        - `focus` → `#bb0700`
+        - `pressed` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+      - **midnight**
+        - `default` → `#191329`
+        - `pressed` → `#191329`
         - `disabled` → `#a8a6b1`
       - **inverse**
         - `default` → `#ffffff`
-        - `focus` → `#f0f0f5`
-        - `disabled` → `#d8d7de`
+        - `pressed` → `rgba(255, 255, 255, 0.40)`
+        - `disabled` → `rgba(255, 255, 255, 0.40)`
   - **tertiary**
     - **text**
       - **brand**
         - `default` → `#e00800`
-        - `focus` → `#bb0700`
+        - `pressed` → `#bb0700`
         - `disabled` → `#a8a6b1`
       - **midnight**
         - `default` → `#191329`
-        - `focus` → `#bb0700`
+        - `pressed` → `#bb0700`
         - `disabled` → `#a8a6b1`
       - **inverse**
         - `default` → `#ffffff`
-        - `focus` → `#bb0700`
-        - `disabled` → `rgba(255, 255, 255, 0.70)`
+        - `pressed` → `#bb0700`
+        - `disabled` → `rgba(255, 255, 255, 0.50)`
+  - **glass**
+    - **surface**
+      - `default` → `rgba(255, 255, 255, 0.15)`
+      - `pressed` → `#ffffff`
+      - `disabled` → `rgba(255, 255, 255, 0.10)`
+    - **text**
+      - `default` → `#ffffff`
+      - `pressed` → `#e00800`
+      - `disabled` → `rgba(255, 255, 255, 0.60)`
   - **link**
     - **text**
       - **brand**
         - `default` → `#e00800`
-        - `focus` → `#bb0700`
+        - `pressed` → `#bb0700`
         - `disabled` → `#a8a6b1`
       - **midnight**
         - `default` → `#191329`
-        - `focus` → `#bb0700`
+        - `pressed` → `#bb0700`
         - `disabled` → `#a8a6b1`
       - **inverse**
         - `default` → `#ffffff`
-        - `focus` → `#bb0700`
-        - `disabled` → `rgba(255, 255, 255, 0.70)`
-  - **text**
-    - **midnight**
-      - `default` → `#191329`
-      - `focus` → `#191329`
-      - `disabled` → `#c0bfc8`
+        - `pressed` → `#bb0700`
+        - `disabled` → `rgba(255, 255, 255, 0.50)`
 - **Typography:** `button.lg`(16/Semi bold), `button.md`(14/Medium), `button.sm`(12/Medium)
 - **Anatomy (Figma-verified):**
   - **Variants:** `type` (primary, secondary, tertiary, link) × `size` (lg, md, sm) × `surface`/tone (🔴 brand, ⚪️🔴 inverse-brand, ⚫️ midnight, ⚪️ white) × `state` (default, focus, disabled). 100-variant component set.
@@ -795,34 +842,32 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
 - **Color tokens — `color.input-field`:**
   - **surface**
     - **default**
-      - `default` → `#f7f7fa`
-      - `disabled` → `#f0f0f5`
+      - `default` → `#ffffff`
+      - `disabled` → `#f7f7fa`
     - **inverse**
       - `default` → `rgba(255, 255, 255, 0.15)`
       - `disabled` → `rgba(255, 255, 255, 0.15)`
   - **border**
     - `default` → `#d8d7de`
-    - `active` → `#e9524d`
+    - `focus` → `#e9524d`
     - `filled` → `#d8d7de`
     - `error` → `#ff9f52`
     - `disabled` → `rgba(25, 19, 41, 0.07)`
   - **text**
     - **default**
-      - `Color` → `#ffffff`
       - **label**
         - `default` → `#575362`
         - `disabled` → `#c0bfc8`
       - **value**
-        - `active` → `#191329`
+        - `default` → `#191329`
         - `disabled` → `#c0bfc8`
     - **inverse**
-      - `Color` → `#ffffff`
       - **label**
-        - `default` → `rgba(255, 255, 255, 0.50)`
-        - `disabled` → `rgba(255, 255, 255, 0.30)`
+        - `default` → `rgba(255, 255, 255, 0.60)`
+        - `disabled` → `rgba(255, 255, 255, 0.50)`
       - **value**
-        - `active` → `#ffffff`
-        - `disabled` → `rgba(255, 255, 255, 0.30)`
+        - `default` → `#ffffff`
+        - `disabled` → `rgba(255, 255, 255, 0.50)`
 - **Size tokens — `border`:**
   - `xs` → `0.5`
   - `sm` → `1`
@@ -848,39 +893,65 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
 - **Use case:** Selectable tag / quick filter.
 - **Color tokens — `color.chips`:**
   - **default**
-    - **default**
+    - **outline**
       - **surface**
-        - `focus` → `#140f21`
+        - `selected` → `#140f21`
       - **text**
         - `default` → `#575362`
-        - `focus` → `#ffffff`
+        - `selected` → `#ffffff`
         - `disabled` → `#c0bfc8`
       - **border**
         - `default` → `rgba(25, 19, 41, 0.50)`
-        - `focus` → `#191329`
+        - `selected` → `#191329`
+        - `disabled` → `rgba(25, 19, 41, 0.20)`
+    - **filled**
+      - **surface**
+        - `default` → `#ffffff`
+        - `selected` → `#140f21`
+        - `disabled` → `rgba(25, 19, 41, 0.07)`
+      - **text**
+        - `default` → `#575362`
+        - `selected` → `#ffffff`
+        - `disabled` → `#908e9a`
+      - **border**
+        - `default` → `rgba(25, 19, 41, 0.50)`
+        - `selected` → `#191329`
         - `disabled` → `rgba(25, 19, 41, 0.20)`
     - **inverse**
       - **surface**
-        - `focus` → `#ffffff`
+        - `selected` → `#ffffff`
       - **text**
-        - `default` → `rgba(255, 255, 255, 0.70)`
-        - `focus` → `#191329`
-        - `disabled` → `rgba(255, 255, 255, 0.30)`
+        - `default` → `rgba(255, 255, 255, 0.75)`
+        - `selected` → `#575362`
+        - `disabled` → `rgba(255, 255, 255, 0.50)`
       - **border**
         - `default` → `rgba(255, 255, 255, 0.40)`
-        - `focus` → `#ffffff`
+        - `selected` → `#ffffff`
+        - `disabled` → `rgba(255, 255, 255, 0.40)`
+    - **glass**
+      - **surface**
+        - `default` → `rgba(255, 255, 255, 0.15)`
+        - `selected` → `#ffffff`
+        - `disabled` → `rgba(255, 255, 255, 0.10)`
+      - **text**
+        - `default` → `#ffffff`
+        - `selected` → `#191329`
+        - `disabled` → `rgba(255, 255, 255, 0.50)`
+      - **border**
+        - `default` → `rgba(255, 255, 255, 0.40)`
+        - `selected` → `#ffffff`
         - `disabled` → `rgba(255, 255, 255, 0.40)`
   - **suggestion**
     - **surface**
       - `default` → `#ffffff`
-      - `focus` → `#ffffff`
+      - `selected` → `#ffffff`
       - `disabled` → `#e4e3ea`
     - **text**
       - `default` → `#575362`
-      - `focus` → `#191329`
+      - `selected` → `#191329`
       - `disabled` → `#908e9a`
     - **border**
-      - `focus` → `rgba(25, 19, 41, 0.50)`
+      - `selected` → `rgba(25, 19, 41, 0.50)`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
 - **Anatomy (Figma-verified):**
   - **Variants:** `state` (default, focus, disabled) × `Icon` (on, off); plus a **Loader** variant.
@@ -900,24 +971,24 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
 - **Color tokens — `color.filter-pill`:**
   - **surface**
     - **inverse**
-      - `focus` → `#f0f0f5`
+      - `selected` → `#f0f0f5`
   - **text**
     - **default**
       - `default` → `#575362`
-      - `focus` → `#191329`
-      - `disabled` → `#c0bfc8`
+      - `selected` → `#191329`
+      - `disabled` → `#908e9a`
     - **inverse**
-      - `default` → `rgba(255, 255, 255, 0.70)`
-      - `focus` → `#191329`
-      - `disabled` → `rgba(255, 255, 255, 0.30)`
+      - `default` → `rgba(255, 255, 255, 0.75)`
+      - `selected` → `#191329`
+      - `disabled` → `rgba(255, 255, 255, 0.50)`
   - **border**
     - **default**
       - `default` → `rgba(25, 19, 41, 0.50)`
-      - `focus` → `#191329`
-      - `disabled` → `rgba(25, 19, 41, 0.07)`
+      - `selected` → `#191329`
+      - `disabled` → `rgba(25, 19, 41, 0.20)`
     - **inverse**
       - `default` → `rgba(255, 255, 255, 0.80)`
-      - `focus` → `#ffffff`
+      - `selected` → `#ffffff`
       - `disabled` → `rgba(255, 255, 255, 0.40)`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
 - **Anatomy (Figma-verified):**
@@ -943,28 +1014,28 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `inverse` → `#d8d7de`
       - `brand` → `#ed6b66`
       - `brand-muted` → `#f9cecc`
-      - `midnight` → `#312c40`
+      - `midnight` → `#494456`
     - **base**
       - `default` → `#d8d7de`
-      - `inverse` → `#f0f0f5`
+      - `inverse` → `#e4e3ea`
       - `brand` → `#e9524d`
       - `brand-muted` → `#f6b5b3`
-      - `midnight` → `#312c40`
+      - `midnight` → `#575362`
     - **raised**
-      - `default` → `#f0f0f5`
-      - `inverse` → `#f0f0f5`
+      - `default` → `#e4e3ea`
+      - `inverse` → `#e4e3ea`
       - `brand` → `#ed6b66`
       - `brand-muted` → `#f9cecc`
-      - `midnight` → `#494456`
+      - `midnight` → `#575362`
     - **sunken**
-      - `default` → `#d8d7de`
+      - `default` → `#c0bfc8`
       - `inverse` → `#d8d7de`
       - `brand` → `#e73933`
       - `brand-muted` → `#f08480`
-      - `midnight` → `#312c40`
+      - `midnight` → `#494456`
     - **overlay**
       - `floating` → `#d8d7de`
-      - `floating inverse` → `#ffffff`
+      - `floating-inverse` → `#ffffff`
     - **glass**
       - **default**
         - `lg` → `rgba(255, 255, 255, 0.60)`
@@ -979,17 +1050,17 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `default` → `rgba(25, 19, 41, 0.20)`
       - `subtle` → `rgba(25, 19, 41, 0.10)`
       - `strong` → `rgba(25, 19, 41, 0.50)`
-      - `focus` → `#191329`
+      - `pressed` → `#191329`
       - `disabled` → `rgba(25, 19, 41, 0.07)`
     - **inverse**
       - `default` → `rgba(255, 255, 255, 0.60)`
       - `subtle` → `rgba(255, 255, 255, 0.40)`
       - `strong` → `rgba(255, 255, 255, 0.80)`
-      - `focus` → `#ffffff`
+      - `pressed` → `#ffffff`
       - `disabled` → `rgba(255, 255, 255, 0.40)`
     - **accent**
       - `default` → `#e00800`
-      - `focus` → `#bb0700`
+      - `pressed` → `#bb0700`
       - `subtle` → `#e9524d`
       - `muted` → `#f08480`
       - `disabled` → `#a8a6b1`
@@ -1042,7 +1113,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `midnight` → `#191329`
   - **sunken**
     - `default` → `#e4e3ea`
-    - `inverse` → `#f7f7fa`
+    - `inverse` → `#f0f0f5`
     - `brand` → `#bb0700`
     - `brand-muted` → `#f9cecc`
     - `midnight` → `#140f21`
@@ -1059,7 +1130,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `lg` → `rgba(25, 19, 41, 0.60)`
       - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
@@ -1067,6 +1138,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.10)`
+      - `xs` → `rgba(255, 255, 255, 0.05)`
 - **Color tokens — `color.border`:**
   - **surface-based**
     - **canvas**
@@ -1074,28 +1146,28 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `inverse` → `#d8d7de`
       - `brand` → `#ed6b66`
       - `brand-muted` → `#f9cecc`
-      - `midnight` → `#312c40`
+      - `midnight` → `#494456`
     - **base**
       - `default` → `#d8d7de`
-      - `inverse` → `#f0f0f5`
+      - `inverse` → `#e4e3ea`
       - `brand` → `#e9524d`
       - `brand-muted` → `#f6b5b3`
-      - `midnight` → `#312c40`
+      - `midnight` → `#575362`
     - **raised**
-      - `default` → `#f0f0f5`
-      - `inverse` → `#f0f0f5`
+      - `default` → `#e4e3ea`
+      - `inverse` → `#e4e3ea`
       - `brand` → `#ed6b66`
       - `brand-muted` → `#f9cecc`
-      - `midnight` → `#494456`
+      - `midnight` → `#575362`
     - **sunken**
-      - `default` → `#d8d7de`
+      - `default` → `#c0bfc8`
       - `inverse` → `#d8d7de`
       - `brand` → `#e73933`
       - `brand-muted` → `#f08480`
-      - `midnight` → `#312c40`
+      - `midnight` → `#494456`
     - **overlay**
       - `floating` → `#d8d7de`
-      - `floating inverse` → `#ffffff`
+      - `floating-inverse` → `#ffffff`
     - **glass**
       - **default**
         - `lg` → `rgba(255, 255, 255, 0.60)`
@@ -1110,17 +1182,17 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `default` → `rgba(25, 19, 41, 0.20)`
       - `subtle` → `rgba(25, 19, 41, 0.10)`
       - `strong` → `rgba(25, 19, 41, 0.50)`
-      - `focus` → `#191329`
+      - `pressed` → `#191329`
       - `disabled` → `rgba(25, 19, 41, 0.07)`
     - **inverse**
       - `default` → `rgba(255, 255, 255, 0.60)`
       - `subtle` → `rgba(255, 255, 255, 0.40)`
       - `strong` → `rgba(255, 255, 255, 0.80)`
-      - `focus` → `#ffffff`
+      - `pressed` → `#ffffff`
       - `disabled` → `rgba(255, 255, 255, 0.40)`
     - **accent**
       - `default` → `#e00800`
-      - `focus` → `#bb0700`
+      - `pressed` → `#bb0700`
       - `subtle` → `#e9524d`
       - `muted` → `#f08480`
       - `disabled` → `#a8a6b1`
@@ -1177,28 +1249,28 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `inverse` → `#d8d7de`
       - `brand` → `#ed6b66`
       - `brand-muted` → `#f9cecc`
-      - `midnight` → `#312c40`
+      - `midnight` → `#494456`
     - **base**
       - `default` → `#d8d7de`
-      - `inverse` → `#f0f0f5`
+      - `inverse` → `#e4e3ea`
       - `brand` → `#e9524d`
       - `brand-muted` → `#f6b5b3`
-      - `midnight` → `#312c40`
+      - `midnight` → `#575362`
     - **raised**
-      - `default` → `#f0f0f5`
-      - `inverse` → `#f0f0f5`
+      - `default` → `#e4e3ea`
+      - `inverse` → `#e4e3ea`
       - `brand` → `#ed6b66`
       - `brand-muted` → `#f9cecc`
-      - `midnight` → `#494456`
+      - `midnight` → `#575362`
     - **sunken**
-      - `default` → `#d8d7de`
+      - `default` → `#c0bfc8`
       - `inverse` → `#d8d7de`
       - `brand` → `#e73933`
       - `brand-muted` → `#f08480`
-      - `midnight` → `#312c40`
+      - `midnight` → `#494456`
     - **overlay**
       - `floating` → `#d8d7de`
-      - `floating inverse` → `#ffffff`
+      - `floating-inverse` → `#ffffff`
     - **glass**
       - **default**
         - `lg` → `rgba(255, 255, 255, 0.60)`
@@ -1213,17 +1285,17 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `default` → `rgba(25, 19, 41, 0.20)`
       - `subtle` → `rgba(25, 19, 41, 0.10)`
       - `strong` → `rgba(25, 19, 41, 0.50)`
-      - `focus` → `#191329`
+      - `pressed` → `#191329`
       - `disabled` → `rgba(25, 19, 41, 0.07)`
     - **inverse**
       - `default` → `rgba(255, 255, 255, 0.60)`
       - `subtle` → `rgba(255, 255, 255, 0.40)`
       - `strong` → `rgba(255, 255, 255, 0.80)`
-      - `focus` → `#ffffff`
+      - `pressed` → `#ffffff`
       - `disabled` → `rgba(255, 255, 255, 0.40)`
     - **accent**
       - `default` → `#e00800`
-      - `focus` → `#bb0700`
+      - `pressed` → `#bb0700`
       - `subtle` → `#e9524d`
       - `muted` → `#f08480`
       - `disabled` → `#a8a6b1`
@@ -1263,34 +1335,32 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
 - **Color tokens — `color.input-field`:**
   - **surface**
     - **default**
-      - `default` → `#f7f7fa`
-      - `disabled` → `#f0f0f5`
+      - `default` → `#ffffff`
+      - `disabled` → `#f7f7fa`
     - **inverse**
       - `default` → `rgba(255, 255, 255, 0.15)`
       - `disabled` → `rgba(255, 255, 255, 0.15)`
   - **border**
     - `default` → `#d8d7de`
-    - `active` → `#e9524d`
+    - `focus` → `#e9524d`
     - `filled` → `#d8d7de`
     - `error` → `#ff9f52`
     - `disabled` → `rgba(25, 19, 41, 0.07)`
   - **text**
     - **default**
-      - `Color` → `#ffffff`
       - **label**
         - `default` → `#575362`
         - `disabled` → `#c0bfc8`
       - **value**
-        - `active` → `#191329`
+        - `default` → `#191329`
         - `disabled` → `#c0bfc8`
     - **inverse**
-      - `Color` → `#ffffff`
       - **label**
-        - `default` → `rgba(255, 255, 255, 0.50)`
-        - `disabled` → `rgba(255, 255, 255, 0.30)`
+        - `default` → `rgba(255, 255, 255, 0.60)`
+        - `disabled` → `rgba(255, 255, 255, 0.50)`
       - **value**
-        - `active` → `#ffffff`
-        - `disabled` → `rgba(255, 255, 255, 0.30)`
+        - `default` → `#ffffff`
+        - `disabled` → `rgba(255, 255, 255, 0.50)`
 - **Color tokens — `color.surface`:**
   - **canvas**
     - `default` → `#ffffff`
@@ -1306,7 +1376,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `midnight` → `#191329`
   - **sunken**
     - `default` → `#e4e3ea`
-    - `inverse` → `#f7f7fa`
+    - `inverse` → `#f0f0f5`
     - `brand` → `#bb0700`
     - `brand-muted` → `#f9cecc`
     - `midnight` → `#140f21`
@@ -1323,7 +1393,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `lg` → `rgba(25, 19, 41, 0.60)`
       - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
@@ -1331,6 +1401,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.10)`
+      - `xs` → `rgba(255, 255, 255, 0.05)`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
 - **Anatomy (Figma-verified):**
   - **States:** Default, Typing, Typed. **Surfaces:** white, midnight (two color schemes).
@@ -1350,34 +1421,32 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
 - **Color tokens — `color.input-field`:**
   - **surface**
     - **default**
-      - `default` → `#f7f7fa`
-      - `disabled` → `#f0f0f5`
+      - `default` → `#ffffff`
+      - `disabled` → `#f7f7fa`
     - **inverse**
       - `default` → `rgba(255, 255, 255, 0.15)`
       - `disabled` → `rgba(255, 255, 255, 0.15)`
   - **border**
     - `default` → `#d8d7de`
-    - `active` → `#e9524d`
+    - `focus` → `#e9524d`
     - `filled` → `#d8d7de`
     - `error` → `#ff9f52`
     - `disabled` → `rgba(25, 19, 41, 0.07)`
   - **text**
     - **default**
-      - `Color` → `#ffffff`
       - **label**
         - `default` → `#575362`
         - `disabled` → `#c0bfc8`
       - **value**
-        - `active` → `#191329`
+        - `default` → `#191329`
         - `disabled` → `#c0bfc8`
     - **inverse**
-      - `Color` → `#ffffff`
       - **label**
-        - `default` → `rgba(255, 255, 255, 0.50)`
-        - `disabled` → `rgba(255, 255, 255, 0.30)`
+        - `default` → `rgba(255, 255, 255, 0.60)`
+        - `disabled` → `rgba(255, 255, 255, 0.50)`
       - **value**
-        - `active` → `#ffffff`
-        - `disabled` → `rgba(255, 255, 255, 0.30)`
+        - `default` → `#ffffff`
+        - `disabled` → `rgba(255, 255, 255, 0.50)`
 - **Color tokens — `color.surface`:**
   - **canvas**
     - `default` → `#ffffff`
@@ -1393,7 +1462,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `midnight` → `#191329`
   - **sunken**
     - `default` → `#e4e3ea`
-    - `inverse` → `#f7f7fa`
+    - `inverse` → `#f0f0f5`
     - `brand` → `#bb0700`
     - `brand-muted` → `#f9cecc`
     - `midnight` → `#140f21`
@@ -1410,7 +1479,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `lg` → `rgba(25, 19, 41, 0.60)`
       - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
@@ -1418,6 +1487,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.10)`
+      - `xs` → `rgba(255, 255, 255, 0.05)`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
 - **Anatomy (derived from token model — Figma verification pending):**
   - **Type:** AI / voice search — a search field that expands into a voice-dictation flow. (Built as a state layout, not a variant set.)
@@ -1450,7 +1520,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `midnight` → `#191329`
   - **sunken**
     - `default` → `#e4e3ea`
-    - `inverse` → `#f7f7fa`
+    - `inverse` → `#f0f0f5`
     - `brand` → `#bb0700`
     - `brand-muted` → `#f9cecc`
     - `midnight` → `#140f21`
@@ -1467,7 +1537,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `lg` → `rgba(25, 19, 41, 0.60)`
       - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
@@ -1475,6 +1545,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.10)`
+      - `xs` → `rgba(255, 255, 255, 0.05)`
 - **Color tokens — `color.border`:**
   - **surface-based**
     - **canvas**
@@ -1482,28 +1553,28 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `inverse` → `#d8d7de`
       - `brand` → `#ed6b66`
       - `brand-muted` → `#f9cecc`
-      - `midnight` → `#312c40`
+      - `midnight` → `#494456`
     - **base**
       - `default` → `#d8d7de`
-      - `inverse` → `#f0f0f5`
+      - `inverse` → `#e4e3ea`
       - `brand` → `#e9524d`
       - `brand-muted` → `#f6b5b3`
-      - `midnight` → `#312c40`
+      - `midnight` → `#575362`
     - **raised**
-      - `default` → `#f0f0f5`
-      - `inverse` → `#f0f0f5`
+      - `default` → `#e4e3ea`
+      - `inverse` → `#e4e3ea`
       - `brand` → `#ed6b66`
       - `brand-muted` → `#f9cecc`
-      - `midnight` → `#494456`
+      - `midnight` → `#575362`
     - **sunken**
-      - `default` → `#d8d7de`
+      - `default` → `#c0bfc8`
       - `inverse` → `#d8d7de`
       - `brand` → `#e73933`
       - `brand-muted` → `#f08480`
-      - `midnight` → `#312c40`
+      - `midnight` → `#494456`
     - **overlay**
       - `floating` → `#d8d7de`
-      - `floating inverse` → `#ffffff`
+      - `floating-inverse` → `#ffffff`
     - **glass**
       - **default**
         - `lg` → `rgba(255, 255, 255, 0.60)`
@@ -1518,17 +1589,17 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `default` → `rgba(25, 19, 41, 0.20)`
       - `subtle` → `rgba(25, 19, 41, 0.10)`
       - `strong` → `rgba(25, 19, 41, 0.50)`
-      - `focus` → `#191329`
+      - `pressed` → `#191329`
       - `disabled` → `rgba(25, 19, 41, 0.07)`
     - **inverse**
       - `default` → `rgba(255, 255, 255, 0.60)`
       - `subtle` → `rgba(255, 255, 255, 0.40)`
       - `strong` → `rgba(255, 255, 255, 0.80)`
-      - `focus` → `#ffffff`
+      - `pressed` → `#ffffff`
       - `disabled` → `rgba(255, 255, 255, 0.40)`
     - **accent**
       - `default` → `#e00800`
-      - `focus` → `#bb0700`
+      - `pressed` → `#bb0700`
       - `subtle` → `#e9524d`
       - `muted` → `#f08480`
       - `disabled` → `#a8a6b1`
@@ -1582,7 +1653,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `midnight` → `#191329`
   - **sunken**
     - `default` → `#e4e3ea`
-    - `inverse` → `#f7f7fa`
+    - `inverse` → `#f0f0f5`
     - `brand` → `#bb0700`
     - `brand-muted` → `#f9cecc`
     - `midnight` → `#140f21`
@@ -1599,7 +1670,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `lg` → `rgba(25, 19, 41, 0.60)`
       - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
@@ -1607,6 +1678,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.10)`
+      - `xs` → `rgba(255, 255, 255, 0.05)`
 - **Color tokens — `color.text`:**
   - **default**
     - `default` → `#191329`
@@ -1614,15 +1686,15 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.75)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.60)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.50)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
     - `muted` → `#ed6b66`
     - `strong` → `#950500`
-    - `focus` → `#bb0700`
+    - `pressed` → `#bb0700`
     - `disabled` → `#a8a6b1`
   - **positive**
     - `default` → `#27633b`
@@ -1657,12 +1729,10 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
 - **Use case:** Switch between top-level destinations.
 - **Color tokens — `color.navbar-tab`:**
   - **surface**
-    - `focus` → `#ffffff`
-    - `focus-special` → `#e00800`
+    - `selected` → `#ffffff`
   - **text**
     - `default` → `#ffffff`
-    - `focus` → `#e00800`
-    - `focus-special` → `#ffffff`
+    - `selected` → `#e00800`
 - **Typography:** `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
 - **Anatomy (Figma-verified):**
   - **Type:** **floating glass** bottom navigation — a frosted **white-15% + backdrop-blur** pill over a **midnight scrim gradient** (top→bottom: `#191329` 0α → 0.4 → 0.7).
@@ -1695,7 +1765,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `midnight` → `#191329`
   - **sunken**
     - `default` → `#e4e3ea`
-    - `inverse` → `#f7f7fa`
+    - `inverse` → `#f0f0f5`
     - `brand` → `#bb0700`
     - `brand-muted` → `#f9cecc`
     - `midnight` → `#140f21`
@@ -1712,7 +1782,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `lg` → `rgba(25, 19, 41, 0.60)`
       - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
@@ -1720,83 +1790,106 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.10)`
+      - `xs` → `rgba(255, 255, 255, 0.05)`
 - **Color tokens — `color.button`:**
   - **primary**
     - **surface**
       - **brand**
         - `default` → `#e00800`
-        - `focus` → `#bb0700`
+        - `pressed` → `#bb0700`
         - `disabled` → `#c0bfc8`
+      - **midnight**
+        - `default` → `#191329`
+        - `pressed` → `#f0f0f5`
+        - `disabled` → `#615d6d`
       - **inverse**
         - `default` → `#ffffff`
-        - `focus` → `#fce6e6`
-        - `disabled` → `#f0f0f5`
+        - `pressed` → `#312c40`
+        - `disabled` → `#e4e3ea`
     - **text**
       - **brand**
         - `default` → `#ffffff`
-        - `focus` → `#ffffff`
-        - `disabled` → `rgba(255, 255, 255, 0.70)`
+        - `pressed` → `#ffffff`
+        - `disabled` → `rgba(255, 255, 255, 0.75)`
+      - **midnight**
+        - `default` → `#ffffff`
+        - `pressed` → `#191329`
+        - `disabled` → `rgba(255, 255, 255, 0.50)`
       - **inverse**
-        - `default` → `#e00800`
-        - `focus` → `#bb0700`
+        - `default` → `#191329`
+        - `pressed` → `#ffffff`
         - `disabled` → `#a8a6b1`
   - **secondary**
     - **surface**
       - **brand**
-        - `focus` → `#fce6e6`
+        - `pressed` → `#bb0700`
+      - **midnight**
+        - `pressed` → `#191329`
       - **inverse**
-        - `focus` → `#312c40`
+        - `pressed` → `#ffffff`
     - **text**
       - **brand**
         - `default` → `#e00800`
-        - `focus` → `#bb0700`
+        - `pressed` → `#ffffff`
+        - `disabled` → `#a8a6b1`
+      - **midnight**
+        - `default` → `#191329`
+        - `pressed` → `#ffffff`
         - `disabled` → `#a8a6b1`
       - **inverse**
         - `default` → `#ffffff`
-        - `focus` → `#ffffff`
-        - `disabled` → `rgba(255, 255, 255, 0.70)`
+        - `pressed` → `#191329`
+        - `disabled` → `rgba(255, 255, 255, 0.50)`
     - **border**
       - **brand**
         - `default` → `#e00800`
-        - `focus` → `#bb0700`
+        - `pressed` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+      - **midnight**
+        - `default` → `#191329`
+        - `pressed` → `#191329`
         - `disabled` → `#a8a6b1`
       - **inverse**
         - `default` → `#ffffff`
-        - `focus` → `#f0f0f5`
-        - `disabled` → `#d8d7de`
+        - `pressed` → `rgba(255, 255, 255, 0.40)`
+        - `disabled` → `rgba(255, 255, 255, 0.40)`
   - **tertiary**
     - **text**
       - **brand**
         - `default` → `#e00800`
-        - `focus` → `#bb0700`
+        - `pressed` → `#bb0700`
         - `disabled` → `#a8a6b1`
       - **midnight**
         - `default` → `#191329`
-        - `focus` → `#bb0700`
+        - `pressed` → `#bb0700`
         - `disabled` → `#a8a6b1`
       - **inverse**
         - `default` → `#ffffff`
-        - `focus` → `#bb0700`
-        - `disabled` → `rgba(255, 255, 255, 0.70)`
+        - `pressed` → `#bb0700`
+        - `disabled` → `rgba(255, 255, 255, 0.50)`
+  - **glass**
+    - **surface**
+      - `default` → `rgba(255, 255, 255, 0.15)`
+      - `pressed` → `#ffffff`
+      - `disabled` → `rgba(255, 255, 255, 0.10)`
+    - **text**
+      - `default` → `#ffffff`
+      - `pressed` → `#e00800`
+      - `disabled` → `rgba(255, 255, 255, 0.60)`
   - **link**
     - **text**
       - **brand**
         - `default` → `#e00800`
-        - `focus` → `#bb0700`
+        - `pressed` → `#bb0700`
         - `disabled` → `#a8a6b1`
       - **midnight**
         - `default` → `#191329`
-        - `focus` → `#bb0700`
+        - `pressed` → `#bb0700`
         - `disabled` → `#a8a6b1`
       - **inverse**
         - `default` → `#ffffff`
-        - `focus` → `#bb0700`
-        - `disabled` → `rgba(255, 255, 255, 0.70)`
-  - **text**
-    - **midnight**
-      - `default` → `#191329`
-      - `focus` → `#191329`
-      - `disabled` → `#c0bfc8`
+        - `pressed` → `#bb0700`
+        - `disabled` → `rgba(255, 255, 255, 0.50)`
 - **Typography:** `button.lg`(16/Semi bold), `button.md`(14/Medium), `button.sm`(12/Medium)
 - **Anatomy (Figma-verified):**
   - **Variants:** `color-scheme` (default, inverse) × `type` (icon, image, multiple, single) × `trigger` (button, chevron, switcher) × `surface-color` (default, glass, midnight-base, midnight-raised, midnight-transparent, subtle, sunken, white-transparent) × `Type` (Bill, Sub-text) × `State` (Compact, Expanded).
@@ -1822,22 +1915,20 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
 - **Composition:** contains tab items (label, optional badge) · appears within below Top bar or inside a Section
 - **Use case:** Switch content within one screen.
 - **Color tokens — `color.tab`:**
-  - **surface**
-    - **global**
-      - `default` → `#f0f0f5`
-      - `active` → `#fce6e6`
-    - **local**
-      - `active` → `#191329`
-  - **text**
-    - **global**
+  - **default**
+    - **surface**
+      - `default` → `#ffffff`
+      - `selected` → `#fce6e6`
+    - **text**
       - `default` → `#908e9a`
-      - `active` → `#e00800`
-    - **local**
-      - `default` → `#908e9a`
-      - `active` → `#ffffff`
-  - **border**
-    - **local**
-      - `default` → `rgba(25, 19, 41, 0.50)`
+      - `selected` → `#e00800`
+  - **inverse**
+    - **surface**
+      - `default` → `rgba(255, 255, 255, 0.20)`
+      - `selected` → `#ffffff`
+    - **text**
+      - `default` → `#ffffff`
+      - `selected` → `#e00800`
 - **Size tokens — `tabs`:**
   - **height**
     - `md` → `40`
@@ -1864,15 +1955,15 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.75)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.60)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.50)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
     - `muted` → `#ed6b66`
     - `strong` → `#950500`
-    - `focus` → `#bb0700`
+    - `pressed` → `#bb0700`
     - `disabled` → `#a8a6b1`
   - **positive**
     - `default` → `#27633b`
@@ -1910,7 +2001,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
 - **Role:** Quick-action shortcut grid.
 - **Behavior:** slot `Body / grid` · width: fill · height: hug
 - **States:** —
-- **Composition:** contains grid of borderless white cards (radius 20, 4px cell gap) — each a grey radius-12 icon square (filled e& icon) + label + optional count badge · appears within a Section near top of Home
+- **Composition:** contains grid of borderless white cards (radius 20, 4px cell gap) — each a grey radius-12 icon square (filled etisalat icon) + label + optional count badge · appears within a Section near top of Home
 - **Use case:** Compact grid of top tasks. Cards have NO border (white on the grey Section).
 - **Color tokens — `color.surface`:**
   - **canvas**
@@ -1927,7 +2018,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `midnight` → `#191329`
   - **sunken**
     - `default` → `#e4e3ea`
-    - `inverse` → `#f7f7fa`
+    - `inverse` → `#f0f0f5`
     - `brand` → `#bb0700`
     - `brand-muted` → `#f9cecc`
     - `midnight` → `#140f21`
@@ -1944,7 +2035,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `lg` → `rgba(25, 19, 41, 0.60)`
       - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
@@ -1952,6 +2043,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.10)`
+      - `xs` → `rgba(255, 255, 255, 0.05)`
 - **Color tokens — `color.text`:**
   - **default**
     - `default` → `#191329`
@@ -1959,15 +2051,15 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.75)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.60)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.50)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
     - `muted` → `#ed6b66`
     - `strong` → `#950500`
-    - `focus` → `#bb0700`
+    - `pressed` → `#bb0700`
     - `disabled` → `#a8a6b1`
   - **positive**
     - `default` → `#27633b`
@@ -2017,7 +2109,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `midnight` → `#191329`
   - **sunken**
     - `default` → `#e4e3ea`
-    - `inverse` → `#f7f7fa`
+    - `inverse` → `#f0f0f5`
     - `brand` → `#bb0700`
     - `brand-muted` → `#f9cecc`
     - `midnight` → `#140f21`
@@ -2034,7 +2126,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `lg` → `rgba(25, 19, 41, 0.60)`
       - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
@@ -2042,6 +2134,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.10)`
+      - `xs` → `rgba(255, 255, 255, 0.05)`
 - **Color tokens — `color.text`:**
   - **default**
     - `default` → `#191329`
@@ -2049,15 +2142,15 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.75)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.60)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.50)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
     - `muted` → `#ed6b66`
     - `strong` → `#950500`
-    - `focus` → `#bb0700`
+    - `pressed` → `#bb0700`
     - `disabled` → `#a8a6b1`
   - **positive**
     - `default` → `#27633b`
@@ -2118,7 +2211,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `midnight` → `#191329`
   - **sunken**
     - `default` → `#e4e3ea`
-    - `inverse` → `#f7f7fa`
+    - `inverse` → `#f0f0f5`
     - `brand` → `#bb0700`
     - `brand-muted` → `#f9cecc`
     - `midnight` → `#140f21`
@@ -2135,7 +2228,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `lg` → `rgba(25, 19, 41, 0.60)`
       - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
@@ -2143,6 +2236,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.10)`
+      - `xs` → `rgba(255, 255, 255, 0.05)`
 - **Color tokens — `color.text`:**
   - **default**
     - `default` → `#191329`
@@ -2150,15 +2244,15 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.75)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.60)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.50)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
     - `muted` → `#ed6b66`
     - `strong` → `#950500`
-    - `focus` → `#bb0700`
+    - `pressed` → `#bb0700`
     - `disabled` → `#a8a6b1`
   - **positive**
     - `default` → `#27633b`
@@ -2182,28 +2276,28 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `inverse` → `#d8d7de`
       - `brand` → `#ed6b66`
       - `brand-muted` → `#f9cecc`
-      - `midnight` → `#312c40`
+      - `midnight` → `#494456`
     - **base**
       - `default` → `#d8d7de`
-      - `inverse` → `#f0f0f5`
+      - `inverse` → `#e4e3ea`
       - `brand` → `#e9524d`
       - `brand-muted` → `#f6b5b3`
-      - `midnight` → `#312c40`
+      - `midnight` → `#575362`
     - **raised**
-      - `default` → `#f0f0f5`
-      - `inverse` → `#f0f0f5`
+      - `default` → `#e4e3ea`
+      - `inverse` → `#e4e3ea`
       - `brand` → `#ed6b66`
       - `brand-muted` → `#f9cecc`
-      - `midnight` → `#494456`
+      - `midnight` → `#575362`
     - **sunken**
-      - `default` → `#d8d7de`
+      - `default` → `#c0bfc8`
       - `inverse` → `#d8d7de`
       - `brand` → `#e73933`
       - `brand-muted` → `#f08480`
-      - `midnight` → `#312c40`
+      - `midnight` → `#494456`
     - **overlay**
       - `floating` → `#d8d7de`
-      - `floating inverse` → `#ffffff`
+      - `floating-inverse` → `#ffffff`
     - **glass**
       - **default**
         - `lg` → `rgba(255, 255, 255, 0.60)`
@@ -2218,17 +2312,17 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `default` → `rgba(25, 19, 41, 0.20)`
       - `subtle` → `rgba(25, 19, 41, 0.10)`
       - `strong` → `rgba(25, 19, 41, 0.50)`
-      - `focus` → `#191329`
+      - `pressed` → `#191329`
       - `disabled` → `rgba(25, 19, 41, 0.07)`
     - **inverse**
       - `default` → `rgba(255, 255, 255, 0.60)`
       - `subtle` → `rgba(255, 255, 255, 0.40)`
       - `strong` → `rgba(255, 255, 255, 0.80)`
-      - `focus` → `#ffffff`
+      - `pressed` → `#ffffff`
       - `disabled` → `rgba(255, 255, 255, 0.40)`
     - **accent**
       - `default` → `#e00800`
-      - `focus` → `#bb0700`
+      - `pressed` → `#bb0700`
       - `subtle` → `#e9524d`
       - `muted` → `#f08480`
       - `disabled` → `#a8a6b1`
@@ -2276,7 +2370,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `midnight` → `#191329`
   - **sunken**
     - `default` → `#e4e3ea`
-    - `inverse` → `#f7f7fa`
+    - `inverse` → `#f0f0f5`
     - `brand` → `#bb0700`
     - `brand-muted` → `#f9cecc`
     - `midnight` → `#140f21`
@@ -2293,7 +2387,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `lg` → `rgba(25, 19, 41, 0.60)`
       - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
@@ -2301,6 +2395,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.10)`
+      - `xs` → `rgba(255, 255, 255, 0.05)`
 - **Color tokens — `color.text`:**
   - **default**
     - `default` → `#191329`
@@ -2308,15 +2403,15 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.75)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.60)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.50)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
     - `muted` → `#ed6b66`
     - `strong` → `#950500`
-    - `focus` → `#bb0700`
+    - `pressed` → `#bb0700`
     - `disabled` → `#a8a6b1`
   - **positive**
     - `default` → `#27633b`
@@ -2354,7 +2449,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
 - **Color tokens — `color.status`:**
   - `default` → `#191329`
   - `accent` → `#e00800`
-  - `accent-focus` → `#bb0700`
+  - `accent-pressed` → `#bb0700`
   - `disabled` → `#c0bfc8`
   - `disabled-inverse` → `#f0f0f5`
   - `inverse` → `#ffffff`
@@ -2376,7 +2471,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `midnight` → `#191329`
   - **sunken**
     - `default` → `#e4e3ea`
-    - `inverse` → `#f7f7fa`
+    - `inverse` → `#f0f0f5`
     - `brand` → `#bb0700`
     - `brand-muted` → `#f9cecc`
     - `midnight` → `#140f21`
@@ -2393,7 +2488,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `lg` → `rgba(25, 19, 41, 0.60)`
       - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
@@ -2401,6 +2496,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.10)`
+      - `xs` → `rgba(255, 255, 255, 0.05)`
 - **Color tokens — `color.text`:**
   - **default**
     - `default` → `#191329`
@@ -2408,15 +2504,15 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.75)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.60)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.50)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
     - `muted` → `#ed6b66`
     - `strong` → `#950500`
-    - `focus` → `#bb0700`
+    - `pressed` → `#bb0700`
     - `disabled` → `#a8a6b1`
   - **positive**
     - `default` → `#27633b`
@@ -2452,7 +2548,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
 - **Color tokens — `color.status`:**
   - `default` → `#191329`
   - `accent` → `#e00800`
-  - `accent-focus` → `#bb0700`
+  - `accent-pressed` → `#bb0700`
   - `disabled` → `#c0bfc8`
   - `disabled-inverse` → `#f0f0f5`
   - `inverse` → `#ffffff`
@@ -2474,7 +2570,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `midnight` → `#191329`
   - **sunken**
     - `default` → `#e4e3ea`
-    - `inverse` → `#f7f7fa`
+    - `inverse` → `#f0f0f5`
     - `brand` → `#bb0700`
     - `brand-muted` → `#f9cecc`
     - `midnight` → `#140f21`
@@ -2491,7 +2587,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `lg` → `rgba(25, 19, 41, 0.60)`
       - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
@@ -2499,6 +2595,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.10)`
+      - `xs` → `rgba(255, 255, 255, 0.05)`
 - **Color tokens — `color.text`:**
   - **default**
     - `default` → `#191329`
@@ -2506,15 +2603,15 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.75)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.60)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.50)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
     - `muted` → `#ed6b66`
     - `strong` → `#950500`
-    - `focus` → `#bb0700`
+    - `pressed` → `#bb0700`
     - `disabled` → `#a8a6b1`
   - **positive**
     - `default` → `#27633b`
@@ -2548,7 +2645,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
 - **Color tokens — `color.status`:**
   - `default` → `#191329`
   - `accent` → `#e00800`
-  - `accent-focus` → `#bb0700`
+  - `accent-pressed` → `#bb0700`
   - `disabled` → `#c0bfc8`
   - `disabled-inverse` → `#f0f0f5`
   - `inverse` → `#ffffff`
@@ -2570,7 +2667,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `midnight` → `#191329`
   - **sunken**
     - `default` → `#e4e3ea`
-    - `inverse` → `#f7f7fa`
+    - `inverse` → `#f0f0f5`
     - `brand` → `#bb0700`
     - `brand-muted` → `#f9cecc`
     - `midnight` → `#140f21`
@@ -2587,7 +2684,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `lg` → `rgba(25, 19, 41, 0.60)`
       - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
@@ -2595,6 +2692,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.10)`
+      - `xs` → `rgba(255, 255, 255, 0.05)`
 - **Color tokens — `color.text`:**
   - **default**
     - `default` → `#191329`
@@ -2602,15 +2700,15 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.75)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.60)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.50)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
     - `muted` → `#ed6b66`
     - `strong` → `#950500`
-    - `focus` → `#bb0700`
+    - `pressed` → `#bb0700`
     - `disabled` → `#a8a6b1`
   - **positive**
     - `default` → `#27633b`
@@ -2661,7 +2759,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `midnight` → `#191329`
   - **sunken**
     - `default` → `#e4e3ea`
-    - `inverse` → `#f7f7fa`
+    - `inverse` → `#f0f0f5`
     - `brand` → `#bb0700`
     - `brand-muted` → `#f9cecc`
     - `midnight` → `#140f21`
@@ -2678,7 +2776,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `lg` → `rgba(25, 19, 41, 0.60)`
       - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
@@ -2686,6 +2784,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.10)`
+      - `xs` → `rgba(255, 255, 255, 0.05)`
 - **Color tokens — `color.text`:**
   - **default**
     - `default` → `#191329`
@@ -2693,15 +2792,15 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.75)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.60)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.50)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
     - `muted` → `#ed6b66`
     - `strong` → `#950500`
-    - `focus` → `#bb0700`
+    - `pressed` → `#bb0700`
     - `disabled` → `#a8a6b1`
   - **positive**
     - `default` → `#27633b`
@@ -2756,7 +2855,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `midnight` → `#191329`
   - **sunken**
     - `default` → `#e4e3ea`
-    - `inverse` → `#f7f7fa`
+    - `inverse` → `#f0f0f5`
     - `brand` → `#bb0700`
     - `brand-muted` → `#f9cecc`
     - `midnight` → `#140f21`
@@ -2773,7 +2872,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `lg` → `rgba(25, 19, 41, 0.60)`
       - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
@@ -2781,6 +2880,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.10)`
+      - `xs` → `rgba(255, 255, 255, 0.05)`
 - **Color tokens — `color.text`:**
   - **default**
     - `default` → `#191329`
@@ -2788,15 +2888,15 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.75)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.60)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.50)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
     - `muted` → `#ed6b66`
     - `strong` → `#950500`
-    - `focus` → `#bb0700`
+    - `pressed` → `#bb0700`
     - `disabled` → `#a8a6b1`
   - **positive**
     - `default` → `#27633b`
@@ -2850,7 +2950,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `midnight` → `#191329`
   - **sunken**
     - `default` → `#e4e3ea`
-    - `inverse` → `#f7f7fa`
+    - `inverse` → `#f0f0f5`
     - `brand` → `#bb0700`
     - `brand-muted` → `#f9cecc`
     - `midnight` → `#140f21`
@@ -2867,7 +2967,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `lg` → `rgba(25, 19, 41, 0.60)`
       - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
@@ -2875,6 +2975,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.10)`
+      - `xs` → `rgba(255, 255, 255, 0.05)`
 - **Color tokens — `color.border`:**
   - **surface-based**
     - **canvas**
@@ -2882,28 +2983,28 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `inverse` → `#d8d7de`
       - `brand` → `#ed6b66`
       - `brand-muted` → `#f9cecc`
-      - `midnight` → `#312c40`
+      - `midnight` → `#494456`
     - **base**
       - `default` → `#d8d7de`
-      - `inverse` → `#f0f0f5`
+      - `inverse` → `#e4e3ea`
       - `brand` → `#e9524d`
       - `brand-muted` → `#f6b5b3`
-      - `midnight` → `#312c40`
+      - `midnight` → `#575362`
     - **raised**
-      - `default` → `#f0f0f5`
-      - `inverse` → `#f0f0f5`
+      - `default` → `#e4e3ea`
+      - `inverse` → `#e4e3ea`
       - `brand` → `#ed6b66`
       - `brand-muted` → `#f9cecc`
-      - `midnight` → `#494456`
+      - `midnight` → `#575362`
     - **sunken**
-      - `default` → `#d8d7de`
+      - `default` → `#c0bfc8`
       - `inverse` → `#d8d7de`
       - `brand` → `#e73933`
       - `brand-muted` → `#f08480`
-      - `midnight` → `#312c40`
+      - `midnight` → `#494456`
     - **overlay**
       - `floating` → `#d8d7de`
-      - `floating inverse` → `#ffffff`
+      - `floating-inverse` → `#ffffff`
     - **glass**
       - **default**
         - `lg` → `rgba(255, 255, 255, 0.60)`
@@ -2918,17 +3019,17 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `default` → `rgba(25, 19, 41, 0.20)`
       - `subtle` → `rgba(25, 19, 41, 0.10)`
       - `strong` → `rgba(25, 19, 41, 0.50)`
-      - `focus` → `#191329`
+      - `pressed` → `#191329`
       - `disabled` → `rgba(25, 19, 41, 0.07)`
     - **inverse**
       - `default` → `rgba(255, 255, 255, 0.60)`
       - `subtle` → `rgba(255, 255, 255, 0.40)`
       - `strong` → `rgba(255, 255, 255, 0.80)`
-      - `focus` → `#ffffff`
+      - `pressed` → `#ffffff`
       - `disabled` → `rgba(255, 255, 255, 0.40)`
     - **accent**
       - `default` → `#e00800`
-      - `focus` → `#bb0700`
+      - `pressed` → `#bb0700`
       - `subtle` → `#e9524d`
       - `muted` → `#f08480`
       - `disabled` → `#a8a6b1`
@@ -2954,15 +3055,15 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.75)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.60)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.50)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
     - `muted` → `#ed6b66`
     - `strong` → `#950500`
-    - `focus` → `#bb0700`
+    - `pressed` → `#bb0700`
     - `disabled` → `#a8a6b1`
   - **positive**
     - `default` → `#27633b`
@@ -3019,7 +3120,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `midnight` → `#191329`
   - **sunken**
     - `default` → `#e4e3ea`
-    - `inverse` → `#f7f7fa`
+    - `inverse` → `#f0f0f5`
     - `brand` → `#bb0700`
     - `brand-muted` → `#f9cecc`
     - `midnight` → `#140f21`
@@ -3036,7 +3137,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `lg` → `rgba(25, 19, 41, 0.60)`
       - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
@@ -3044,6 +3145,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.10)`
+      - `xs` → `rgba(255, 255, 255, 0.05)`
 - **Color tokens — `color.border`:**
   - **surface-based**
     - **canvas**
@@ -3051,28 +3153,28 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `inverse` → `#d8d7de`
       - `brand` → `#ed6b66`
       - `brand-muted` → `#f9cecc`
-      - `midnight` → `#312c40`
+      - `midnight` → `#494456`
     - **base**
       - `default` → `#d8d7de`
-      - `inverse` → `#f0f0f5`
+      - `inverse` → `#e4e3ea`
       - `brand` → `#e9524d`
       - `brand-muted` → `#f6b5b3`
-      - `midnight` → `#312c40`
+      - `midnight` → `#575362`
     - **raised**
-      - `default` → `#f0f0f5`
-      - `inverse` → `#f0f0f5`
+      - `default` → `#e4e3ea`
+      - `inverse` → `#e4e3ea`
       - `brand` → `#ed6b66`
       - `brand-muted` → `#f9cecc`
-      - `midnight` → `#494456`
+      - `midnight` → `#575362`
     - **sunken**
-      - `default` → `#d8d7de`
+      - `default` → `#c0bfc8`
       - `inverse` → `#d8d7de`
       - `brand` → `#e73933`
       - `brand-muted` → `#f08480`
-      - `midnight` → `#312c40`
+      - `midnight` → `#494456`
     - **overlay**
       - `floating` → `#d8d7de`
-      - `floating inverse` → `#ffffff`
+      - `floating-inverse` → `#ffffff`
     - **glass**
       - **default**
         - `lg` → `rgba(255, 255, 255, 0.60)`
@@ -3087,17 +3189,17 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `default` → `rgba(25, 19, 41, 0.20)`
       - `subtle` → `rgba(25, 19, 41, 0.10)`
       - `strong` → `rgba(25, 19, 41, 0.50)`
-      - `focus` → `#191329`
+      - `pressed` → `#191329`
       - `disabled` → `rgba(25, 19, 41, 0.07)`
     - **inverse**
       - `default` → `rgba(255, 255, 255, 0.60)`
       - `subtle` → `rgba(255, 255, 255, 0.40)`
       - `strong` → `rgba(255, 255, 255, 0.80)`
-      - `focus` → `#ffffff`
+      - `pressed` → `#ffffff`
       - `disabled` → `rgba(255, 255, 255, 0.40)`
     - **accent**
       - `default` → `#e00800`
-      - `focus` → `#bb0700`
+      - `pressed` → `#bb0700`
       - `subtle` → `#e9524d`
       - `muted` → `#f08480`
       - `disabled` → `#a8a6b1`
@@ -3123,15 +3225,15 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.75)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.60)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.50)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
     - `muted` → `#ed6b66`
     - `strong` → `#950500`
-    - `focus` → `#bb0700`
+    - `pressed` → `#bb0700`
     - `disabled` → `#a8a6b1`
   - **positive**
     - `default` → `#27633b`
@@ -3190,7 +3292,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `midnight` → `#191329`
   - **sunken**
     - `default` → `#e4e3ea`
-    - `inverse` → `#f7f7fa`
+    - `inverse` → `#f0f0f5`
     - `brand` → `#bb0700`
     - `brand-muted` → `#f9cecc`
     - `midnight` → `#140f21`
@@ -3207,7 +3309,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `lg` → `rgba(25, 19, 41, 0.60)`
       - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
@@ -3215,6 +3317,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.10)`
+      - `xs` → `rgba(255, 255, 255, 0.05)`
 - **Color tokens — `color.border`:**
   - **surface-based**
     - **canvas**
@@ -3222,28 +3325,28 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `inverse` → `#d8d7de`
       - `brand` → `#ed6b66`
       - `brand-muted` → `#f9cecc`
-      - `midnight` → `#312c40`
+      - `midnight` → `#494456`
     - **base**
       - `default` → `#d8d7de`
-      - `inverse` → `#f0f0f5`
+      - `inverse` → `#e4e3ea`
       - `brand` → `#e9524d`
       - `brand-muted` → `#f6b5b3`
-      - `midnight` → `#312c40`
+      - `midnight` → `#575362`
     - **raised**
-      - `default` → `#f0f0f5`
-      - `inverse` → `#f0f0f5`
+      - `default` → `#e4e3ea`
+      - `inverse` → `#e4e3ea`
       - `brand` → `#ed6b66`
       - `brand-muted` → `#f9cecc`
-      - `midnight` → `#494456`
+      - `midnight` → `#575362`
     - **sunken**
-      - `default` → `#d8d7de`
+      - `default` → `#c0bfc8`
       - `inverse` → `#d8d7de`
       - `brand` → `#e73933`
       - `brand-muted` → `#f08480`
-      - `midnight` → `#312c40`
+      - `midnight` → `#494456`
     - **overlay**
       - `floating` → `#d8d7de`
-      - `floating inverse` → `#ffffff`
+      - `floating-inverse` → `#ffffff`
     - **glass**
       - **default**
         - `lg` → `rgba(255, 255, 255, 0.60)`
@@ -3258,17 +3361,17 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `default` → `rgba(25, 19, 41, 0.20)`
       - `subtle` → `rgba(25, 19, 41, 0.10)`
       - `strong` → `rgba(25, 19, 41, 0.50)`
-      - `focus` → `#191329`
+      - `pressed` → `#191329`
       - `disabled` → `rgba(25, 19, 41, 0.07)`
     - **inverse**
       - `default` → `rgba(255, 255, 255, 0.60)`
       - `subtle` → `rgba(255, 255, 255, 0.40)`
       - `strong` → `rgba(255, 255, 255, 0.80)`
-      - `focus` → `#ffffff`
+      - `pressed` → `#ffffff`
       - `disabled` → `rgba(255, 255, 255, 0.40)`
     - **accent**
       - `default` → `#e00800`
-      - `focus` → `#bb0700`
+      - `pressed` → `#bb0700`
       - `subtle` → `#e9524d`
       - `muted` → `#f08480`
       - `disabled` → `#a8a6b1`
@@ -3294,15 +3397,15 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.75)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.60)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.50)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
     - `muted` → `#ed6b66`
     - `strong` → `#950500`
-    - `focus` → `#bb0700`
+    - `pressed` → `#bb0700`
     - `disabled` → `#a8a6b1`
   - **positive**
     - `default` → `#27633b`
@@ -3362,7 +3465,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `midnight` → `#191329`
   - **sunken**
     - `default` → `#e4e3ea`
-    - `inverse` → `#f7f7fa`
+    - `inverse` → `#f0f0f5`
     - `brand` → `#bb0700`
     - `brand-muted` → `#f9cecc`
     - `midnight` → `#140f21`
@@ -3379,7 +3482,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `lg` → `rgba(25, 19, 41, 0.60)`
       - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
@@ -3387,6 +3490,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.10)`
+      - `xs` → `rgba(255, 255, 255, 0.05)`
 - **Color tokens — `color.border`:**
   - **surface-based**
     - **canvas**
@@ -3394,28 +3498,28 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `inverse` → `#d8d7de`
       - `brand` → `#ed6b66`
       - `brand-muted` → `#f9cecc`
-      - `midnight` → `#312c40`
+      - `midnight` → `#494456`
     - **base**
       - `default` → `#d8d7de`
-      - `inverse` → `#f0f0f5`
+      - `inverse` → `#e4e3ea`
       - `brand` → `#e9524d`
       - `brand-muted` → `#f6b5b3`
-      - `midnight` → `#312c40`
+      - `midnight` → `#575362`
     - **raised**
-      - `default` → `#f0f0f5`
-      - `inverse` → `#f0f0f5`
+      - `default` → `#e4e3ea`
+      - `inverse` → `#e4e3ea`
       - `brand` → `#ed6b66`
       - `brand-muted` → `#f9cecc`
-      - `midnight` → `#494456`
+      - `midnight` → `#575362`
     - **sunken**
-      - `default` → `#d8d7de`
+      - `default` → `#c0bfc8`
       - `inverse` → `#d8d7de`
       - `brand` → `#e73933`
       - `brand-muted` → `#f08480`
-      - `midnight` → `#312c40`
+      - `midnight` → `#494456`
     - **overlay**
       - `floating` → `#d8d7de`
-      - `floating inverse` → `#ffffff`
+      - `floating-inverse` → `#ffffff`
     - **glass**
       - **default**
         - `lg` → `rgba(255, 255, 255, 0.60)`
@@ -3430,17 +3534,17 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `default` → `rgba(25, 19, 41, 0.20)`
       - `subtle` → `rgba(25, 19, 41, 0.10)`
       - `strong` → `rgba(25, 19, 41, 0.50)`
-      - `focus` → `#191329`
+      - `pressed` → `#191329`
       - `disabled` → `rgba(25, 19, 41, 0.07)`
     - **inverse**
       - `default` → `rgba(255, 255, 255, 0.60)`
       - `subtle` → `rgba(255, 255, 255, 0.40)`
       - `strong` → `rgba(255, 255, 255, 0.80)`
-      - `focus` → `#ffffff`
+      - `pressed` → `#ffffff`
       - `disabled` → `rgba(255, 255, 255, 0.40)`
     - **accent**
       - `default` → `#e00800`
-      - `focus` → `#bb0700`
+      - `pressed` → `#bb0700`
       - `subtle` → `#e9524d`
       - `muted` → `#f08480`
       - `disabled` → `#a8a6b1`
@@ -3466,15 +3570,15 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.75)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.60)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.50)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
     - `muted` → `#ed6b66`
     - `strong` → `#950500`
-    - `focus` → `#bb0700`
+    - `pressed` → `#bb0700`
     - `disabled` → `#a8a6b1`
   - **positive**
     - `default` → `#27633b`
@@ -3510,13 +3614,9 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
   - **Sizing:** fixed width (carousel) ~210; rounded 16; default has a subtle border.
   - **Figma:** node `25915-74211`.
 
-#### New on e&
+#### New on etisalat
 - **Figma:** [`25915-75766`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=25915-75766)
-- **Role:** 'New on e&' card.
-- **Behavior:** slot `Card (carousel item)` · width: fixed (carousel) · height: hug
-- **States:** default
-- **Composition:** contains media + title + optional CTA · appears within a 'New on e&' carousel Section
-- **Use case:** Editorial / newly-launched tile.
+- **Role:** 'New on etisalat' card.
 - **Color tokens — `color.surface`:**
   - **canvas**
     - `default` → `#ffffff`
@@ -3532,7 +3632,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `midnight` → `#191329`
   - **sunken**
     - `default` → `#e4e3ea`
-    - `inverse` → `#f7f7fa`
+    - `inverse` → `#f0f0f5`
     - `brand` → `#bb0700`
     - `brand-muted` → `#f9cecc`
     - `midnight` → `#140f21`
@@ -3549,7 +3649,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `lg` → `rgba(25, 19, 41, 0.60)`
       - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
@@ -3557,6 +3657,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.10)`
+      - `xs` → `rgba(255, 255, 255, 0.05)`
 - **Color tokens — `color.border`:**
   - **surface-based**
     - **canvas**
@@ -3564,28 +3665,28 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `inverse` → `#d8d7de`
       - `brand` → `#ed6b66`
       - `brand-muted` → `#f9cecc`
-      - `midnight` → `#312c40`
+      - `midnight` → `#494456`
     - **base**
       - `default` → `#d8d7de`
-      - `inverse` → `#f0f0f5`
+      - `inverse` → `#e4e3ea`
       - `brand` → `#e9524d`
       - `brand-muted` → `#f6b5b3`
-      - `midnight` → `#312c40`
+      - `midnight` → `#575362`
     - **raised**
-      - `default` → `#f0f0f5`
-      - `inverse` → `#f0f0f5`
+      - `default` → `#e4e3ea`
+      - `inverse` → `#e4e3ea`
       - `brand` → `#ed6b66`
       - `brand-muted` → `#f9cecc`
-      - `midnight` → `#494456`
+      - `midnight` → `#575362`
     - **sunken**
-      - `default` → `#d8d7de`
+      - `default` → `#c0bfc8`
       - `inverse` → `#d8d7de`
       - `brand` → `#e73933`
       - `brand-muted` → `#f08480`
-      - `midnight` → `#312c40`
+      - `midnight` → `#494456`
     - **overlay**
       - `floating` → `#d8d7de`
-      - `floating inverse` → `#ffffff`
+      - `floating-inverse` → `#ffffff`
     - **glass**
       - **default**
         - `lg` → `rgba(255, 255, 255, 0.60)`
@@ -3600,17 +3701,17 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `default` → `rgba(25, 19, 41, 0.20)`
       - `subtle` → `rgba(25, 19, 41, 0.10)`
       - `strong` → `rgba(25, 19, 41, 0.50)`
-      - `focus` → `#191329`
+      - `pressed` → `#191329`
       - `disabled` → `rgba(25, 19, 41, 0.07)`
     - **inverse**
       - `default` → `rgba(255, 255, 255, 0.60)`
       - `subtle` → `rgba(255, 255, 255, 0.40)`
       - `strong` → `rgba(255, 255, 255, 0.80)`
-      - `focus` → `#ffffff`
+      - `pressed` → `#ffffff`
       - `disabled` → `rgba(255, 255, 255, 0.40)`
     - **accent**
       - `default` → `#e00800`
-      - `focus` → `#bb0700`
+      - `pressed` → `#bb0700`
       - `subtle` → `#e9524d`
       - `muted` → `#f08480`
       - `disabled` → `#a8a6b1`
@@ -3636,15 +3737,15 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.75)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.60)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.50)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
     - `muted` → `#ed6b66`
     - `strong` → `#950500`
-    - `focus` → `#bb0700`
+    - `pressed` → `#bb0700`
     - `disabled` → `#a8a6b1`
   - **positive**
     - `default` → `#27633b`
@@ -3673,11 +3774,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `lg` → `224`
     - `xl` → `336`
 - **Typography:** `title.xl`(28/Semi bold), `title.lg`(24/Semi bold), `title.md`(20/Semi bold), `title.sm`(16/Semi bold), `title.xs`(14/Semi bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
-- **Anatomy (Figma-verified):**
-  - **Variants:** `selected` (no, yes).
-  - **Dimensions:** 170×300.
-  - **Anatomy parts:** .new-on-core.
-  - **Figma node:** `25915:75766`
+- _anatomy: pending (behavior/states above are from the token model)._
 
 #### Service
 - **Figma:** [`26019-79144`](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.1?node-id=26019-79144)
@@ -3701,7 +3798,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `midnight` → `#191329`
   - **sunken**
     - `default` → `#e4e3ea`
-    - `inverse` → `#f7f7fa`
+    - `inverse` → `#f0f0f5`
     - `brand` → `#bb0700`
     - `brand-muted` → `#f9cecc`
     - `midnight` → `#140f21`
@@ -3718,7 +3815,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `lg` → `rgba(25, 19, 41, 0.60)`
       - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
@@ -3726,6 +3823,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.10)`
+      - `xs` → `rgba(255, 255, 255, 0.05)`
 - **Color tokens — `color.border`:**
   - **surface-based**
     - **canvas**
@@ -3733,28 +3831,28 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `inverse` → `#d8d7de`
       - `brand` → `#ed6b66`
       - `brand-muted` → `#f9cecc`
-      - `midnight` → `#312c40`
+      - `midnight` → `#494456`
     - **base**
       - `default` → `#d8d7de`
-      - `inverse` → `#f0f0f5`
+      - `inverse` → `#e4e3ea`
       - `brand` → `#e9524d`
       - `brand-muted` → `#f6b5b3`
-      - `midnight` → `#312c40`
+      - `midnight` → `#575362`
     - **raised**
-      - `default` → `#f0f0f5`
-      - `inverse` → `#f0f0f5`
+      - `default` → `#e4e3ea`
+      - `inverse` → `#e4e3ea`
       - `brand` → `#ed6b66`
       - `brand-muted` → `#f9cecc`
-      - `midnight` → `#494456`
+      - `midnight` → `#575362`
     - **sunken**
-      - `default` → `#d8d7de`
+      - `default` → `#c0bfc8`
       - `inverse` → `#d8d7de`
       - `brand` → `#e73933`
       - `brand-muted` → `#f08480`
-      - `midnight` → `#312c40`
+      - `midnight` → `#494456`
     - **overlay**
       - `floating` → `#d8d7de`
-      - `floating inverse` → `#ffffff`
+      - `floating-inverse` → `#ffffff`
     - **glass**
       - **default**
         - `lg` → `rgba(255, 255, 255, 0.60)`
@@ -3769,17 +3867,17 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `default` → `rgba(25, 19, 41, 0.20)`
       - `subtle` → `rgba(25, 19, 41, 0.10)`
       - `strong` → `rgba(25, 19, 41, 0.50)`
-      - `focus` → `#191329`
+      - `pressed` → `#191329`
       - `disabled` → `rgba(25, 19, 41, 0.07)`
     - **inverse**
       - `default` → `rgba(255, 255, 255, 0.60)`
       - `subtle` → `rgba(255, 255, 255, 0.40)`
       - `strong` → `rgba(255, 255, 255, 0.80)`
-      - `focus` → `#ffffff`
+      - `pressed` → `#ffffff`
       - `disabled` → `rgba(255, 255, 255, 0.40)`
     - **accent**
       - `default` → `#e00800`
-      - `focus` → `#bb0700`
+      - `pressed` → `#bb0700`
       - `subtle` → `#e9524d`
       - `muted` → `#f08480`
       - `disabled` → `#a8a6b1`
@@ -3805,15 +3903,15 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.75)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.60)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.50)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
     - `muted` → `#ed6b66`
     - `strong` → `#950500`
-    - `focus` → `#bb0700`
+    - `pressed` → `#bb0700`
     - `disabled` → `#a8a6b1`
   - **positive**
     - `default` → `#27633b`
@@ -3874,7 +3972,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `midnight` → `#191329`
   - **sunken**
     - `default` → `#e4e3ea`
-    - `inverse` → `#f7f7fa`
+    - `inverse` → `#f0f0f5`
     - `brand` → `#bb0700`
     - `brand-muted` → `#f9cecc`
     - `midnight` → `#140f21`
@@ -3891,7 +3989,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `lg` → `rgba(25, 19, 41, 0.60)`
       - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
@@ -3899,6 +3997,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.10)`
+      - `xs` → `rgba(255, 255, 255, 0.05)`
 - **Color tokens — `color.text`:**
   - **default**
     - `default` → `#191329`
@@ -3906,15 +4005,15 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.75)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.60)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.50)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
     - `muted` → `#ed6b66`
     - `strong` → `#950500`
-    - `focus` → `#bb0700`
+    - `pressed` → `#bb0700`
     - `disabled` → `#a8a6b1`
   - **positive**
     - `default` → `#27633b`
@@ -3936,78 +4035,100 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - **surface**
       - **brand**
         - `default` → `#e00800`
-        - `focus` → `#bb0700`
+        - `pressed` → `#bb0700`
         - `disabled` → `#c0bfc8`
+      - **midnight**
+        - `default` → `#191329`
+        - `pressed` → `#f0f0f5`
+        - `disabled` → `#615d6d`
       - **inverse**
         - `default` → `#ffffff`
-        - `focus` → `#fce6e6`
-        - `disabled` → `#f0f0f5`
+        - `pressed` → `#312c40`
+        - `disabled` → `#e4e3ea`
     - **text**
       - **brand**
         - `default` → `#ffffff`
-        - `focus` → `#ffffff`
-        - `disabled` → `rgba(255, 255, 255, 0.70)`
+        - `pressed` → `#ffffff`
+        - `disabled` → `rgba(255, 255, 255, 0.75)`
+      - **midnight**
+        - `default` → `#ffffff`
+        - `pressed` → `#191329`
+        - `disabled` → `rgba(255, 255, 255, 0.50)`
       - **inverse**
-        - `default` → `#e00800`
-        - `focus` → `#bb0700`
+        - `default` → `#191329`
+        - `pressed` → `#ffffff`
         - `disabled` → `#a8a6b1`
   - **secondary**
     - **surface**
       - **brand**
-        - `focus` → `#fce6e6`
+        - `pressed` → `#bb0700`
+      - **midnight**
+        - `pressed` → `#191329`
       - **inverse**
-        - `focus` → `#312c40`
+        - `pressed` → `#ffffff`
     - **text**
       - **brand**
         - `default` → `#e00800`
-        - `focus` → `#bb0700`
+        - `pressed` → `#ffffff`
+        - `disabled` → `#a8a6b1`
+      - **midnight**
+        - `default` → `#191329`
+        - `pressed` → `#ffffff`
         - `disabled` → `#a8a6b1`
       - **inverse**
         - `default` → `#ffffff`
-        - `focus` → `#ffffff`
-        - `disabled` → `rgba(255, 255, 255, 0.70)`
+        - `pressed` → `#191329`
+        - `disabled` → `rgba(255, 255, 255, 0.50)`
     - **border**
       - **brand**
         - `default` → `#e00800`
-        - `focus` → `#bb0700`
+        - `pressed` → `#bb0700`
+        - `disabled` → `#a8a6b1`
+      - **midnight**
+        - `default` → `#191329`
+        - `pressed` → `#191329`
         - `disabled` → `#a8a6b1`
       - **inverse**
         - `default` → `#ffffff`
-        - `focus` → `#f0f0f5`
-        - `disabled` → `#d8d7de`
+        - `pressed` → `rgba(255, 255, 255, 0.40)`
+        - `disabled` → `rgba(255, 255, 255, 0.40)`
   - **tertiary**
     - **text**
       - **brand**
         - `default` → `#e00800`
-        - `focus` → `#bb0700`
+        - `pressed` → `#bb0700`
         - `disabled` → `#a8a6b1`
       - **midnight**
         - `default` → `#191329`
-        - `focus` → `#bb0700`
+        - `pressed` → `#bb0700`
         - `disabled` → `#a8a6b1`
       - **inverse**
         - `default` → `#ffffff`
-        - `focus` → `#bb0700`
-        - `disabled` → `rgba(255, 255, 255, 0.70)`
+        - `pressed` → `#bb0700`
+        - `disabled` → `rgba(255, 255, 255, 0.50)`
+  - **glass**
+    - **surface**
+      - `default` → `rgba(255, 255, 255, 0.15)`
+      - `pressed` → `#ffffff`
+      - `disabled` → `rgba(255, 255, 255, 0.10)`
+    - **text**
+      - `default` → `#ffffff`
+      - `pressed` → `#e00800`
+      - `disabled` → `rgba(255, 255, 255, 0.60)`
   - **link**
     - **text**
       - **brand**
         - `default` → `#e00800`
-        - `focus` → `#bb0700`
+        - `pressed` → `#bb0700`
         - `disabled` → `#a8a6b1`
       - **midnight**
         - `default` → `#191329`
-        - `focus` → `#bb0700`
+        - `pressed` → `#bb0700`
         - `disabled` → `#a8a6b1`
       - **inverse**
         - `default` → `#ffffff`
-        - `focus` → `#bb0700`
-        - `disabled` → `rgba(255, 255, 255, 0.70)`
-  - **text**
-    - **midnight**
-      - `default` → `#191329`
-      - `focus` → `#191329`
-      - `disabled` → `#c0bfc8`
+        - `pressed` → `#bb0700`
+        - `disabled` → `rgba(255, 255, 255, 0.50)`
 - **Typography:** `heading.xl`(32/Bold), `heading.lg`(28/Bold), `heading.md`(24/Bold), `heading.sm`(20/Bold), `heading.xs`(16/Bold), `body.xl`(20/Regular), `body.lg`(16/Regular), `body.md`(14/Regular), `body.sm`(12/Regular), `body.xs`(10/Regular)
 - **Anatomy (Figma-verified):**
   - **Type:** promotional banner — rounded 20. **Tones:** image (photo/dark + scrim) · brand (red) · purple (Smiles gradient).
@@ -4111,7 +4232,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `midnight` → `#191329`
   - **sunken**
     - `default` → `#e4e3ea`
-    - `inverse` → `#f7f7fa`
+    - `inverse` → `#f0f0f5`
     - `brand` → `#bb0700`
     - `brand-muted` → `#f9cecc`
     - `midnight` → `#140f21`
@@ -4128,7 +4249,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `lg` → `rgba(25, 19, 41, 0.60)`
       - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
@@ -4136,6 +4257,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.10)`
+      - `xs` → `rgba(255, 255, 255, 0.05)`
 - **Color tokens — `color.text`:**
   - **default**
     - `default` → `#191329`
@@ -4143,15 +4265,15 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.75)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.60)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.50)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
     - `muted` → `#ed6b66`
     - `strong` → `#950500`
-    - `focus` → `#bb0700`
+    - `pressed` → `#bb0700`
     - `disabled` → `#a8a6b1`
   - **positive**
     - `default` → `#27633b`
@@ -4268,7 +4390,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `midnight` → `#191329`
   - **sunken**
     - `default` → `#e4e3ea`
-    - `inverse` → `#f7f7fa`
+    - `inverse` → `#f0f0f5`
     - `brand` → `#bb0700`
     - `brand-muted` → `#f9cecc`
     - `midnight` → `#140f21`
@@ -4285,7 +4407,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `floating-inverse` → `#191329`
   - **glass**
     - **midnight**
-      - `lg` → `rgba(25, 19, 41, 0.30)`
+      - `lg` → `rgba(25, 19, 41, 0.60)`
       - `md` → `rgba(25, 19, 41, 0.20)`
       - `sm` → `rgba(25, 19, 41, 0.07)`
     - **white**
@@ -4293,6 +4415,7 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `lg` → `rgba(255, 255, 255, 0.20)`
       - `md` → `rgba(255, 255, 255, 0.15)`
       - `sm` → `rgba(255, 255, 255, 0.10)`
+      - `xs` → `rgba(255, 255, 255, 0.05)`
 - **Color tokens — `color.text`:**
   - **default**
     - `default` → `#191329`
@@ -4300,15 +4423,15 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
     - `muted` → `#908e9a`
     - `disabled` → `#c0bfc8`
     - `inverse` → `#ffffff`
-    - `inverse-subtle` → `rgba(255, 255, 255, 0.70)`
-    - `inverse-muted` → `rgba(255, 255, 255, 0.50)`
-    - `inverse-disabled` → `rgba(255, 255, 255, 0.30)`
+    - `inverse-subtle` → `rgba(255, 255, 255, 0.75)`
+    - `inverse-muted` → `rgba(255, 255, 255, 0.60)`
+    - `inverse-disabled` → `rgba(255, 255, 255, 0.50)`
   - **brand**
     - `default` → `#e00800`
     - `subtle` → `#e73933`
     - `muted` → `#ed6b66`
     - `strong` → `#950500`
-    - `focus` → `#bb0700`
+    - `pressed` → `#bb0700`
     - `disabled` → `#a8a6b1`
   - **positive**
     - `default` → `#27633b`
@@ -4332,28 +4455,28 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `inverse` → `#d8d7de`
       - `brand` → `#ed6b66`
       - `brand-muted` → `#f9cecc`
-      - `midnight` → `#312c40`
+      - `midnight` → `#494456`
     - **base**
       - `default` → `#d8d7de`
-      - `inverse` → `#f0f0f5`
+      - `inverse` → `#e4e3ea`
       - `brand` → `#e9524d`
       - `brand-muted` → `#f6b5b3`
-      - `midnight` → `#312c40`
+      - `midnight` → `#575362`
     - **raised**
-      - `default` → `#f0f0f5`
-      - `inverse` → `#f0f0f5`
+      - `default` → `#e4e3ea`
+      - `inverse` → `#e4e3ea`
       - `brand` → `#ed6b66`
       - `brand-muted` → `#f9cecc`
-      - `midnight` → `#494456`
+      - `midnight` → `#575362`
     - **sunken**
-      - `default` → `#d8d7de`
+      - `default` → `#c0bfc8`
       - `inverse` → `#d8d7de`
       - `brand` → `#e73933`
       - `brand-muted` → `#f08480`
-      - `midnight` → `#312c40`
+      - `midnight` → `#494456`
     - **overlay**
       - `floating` → `#d8d7de`
-      - `floating inverse` → `#ffffff`
+      - `floating-inverse` → `#ffffff`
     - **glass**
       - **default**
         - `lg` → `rgba(255, 255, 255, 0.60)`
@@ -4368,17 +4491,17 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
       - `default` → `rgba(25, 19, 41, 0.20)`
       - `subtle` → `rgba(25, 19, 41, 0.10)`
       - `strong` → `rgba(25, 19, 41, 0.50)`
-      - `focus` → `#191329`
+      - `pressed` → `#191329`
       - `disabled` → `rgba(25, 19, 41, 0.07)`
     - **inverse**
       - `default` → `rgba(255, 255, 255, 0.60)`
       - `subtle` → `rgba(255, 255, 255, 0.40)`
       - `strong` → `rgba(255, 255, 255, 0.80)`
-      - `focus` → `#ffffff`
+      - `pressed` → `#ffffff`
       - `disabled` → `rgba(255, 255, 255, 0.40)`
     - **accent**
       - `default` → `#e00800`
-      - `focus` → `#bb0700`
+      - `pressed` → `#bb0700`
       - `subtle` → `#e9524d`
       - `muted` → `#f08480`
       - `disabled` → `#a8a6b1`
@@ -4410,10 +4533,10 @@ The authoritative name list is the grouped registry in `packages/react-design-sy
 
 ## Screen assembly recipes (UX → UI)
 
-Use this to turn a UX wireframe into a UI screen built from e& components.
+Use this to turn a UX wireframe into a UI screen built from etisalat components.
 
 ### Step 1 — Frame the screen
-- Screen width = device width (e.g. 390). For e& main tabs, use the **red account header** (`<TopBar variant="brand" greeting="Hi, Ahmed" title="050 123 4567" actions={[…]} />`); for pushed/detail pages use the default white `TopBar` with a back chevron. A red **action bar** inside the header (e.g. "Complete your profile · Start") is optional.
+- Screen width = device width (e.g. 390). For etisalat main tabs, use the **red account header** (`<TopBar variant="brand" greeting="Hi, Ahmed" title="050 123 4567" actions={[…]} />`); for pushed/detail pages use the default white `TopBar` with a back chevron. A red **action bar** inside the header (e.g. "Complete your profile · Start") is optional.
 - If the screen has top-level page tabs (e.g. For you / Account / Loyalty), add a **global `Tabs`** row right under the header.
 - Persistent bottom nav → floating **`NavBar`** (Home · Support · Profile · Shop; mark the current tab `active`). The area between is the **vertical scroll body**.
 - One persistent primary CTA pinned at the bottom → **Action bar** (sticky, above Nav bar).
@@ -4424,9 +4547,9 @@ Use this to turn a UX wireframe into a UI screen built from e& components.
 - Stack Sections vertically with the section gap token.
 
 ### Step 3 — Fill each Section by matching the UX pattern
-| UX pattern in the wireframe | e& component(s) to use |
+| UX pattern in the wireframe | etisalat component(s) to use |
 |---|---|
-| Horizontal row of tiles / "cards you swipe" | carousel of **Product / Deals for you / New on e& / Recommendation / Plans** cards (`width: fixed`) |
+| Horizontal row of tiles / "cards you swipe" | carousel of **Product / Deals for you / New on etisalat / Recommendation / Plans** cards (`width: fixed`) |
 | Vertical list of content blocks | **General** cards (`width: fill`) |
 | Settings / contact / "X ›" / label↔value rows | **ListRow** stacked in a Section |
 | Account-hub / quick-links grid (icon + label + count badge) | **QuickAction** cells with a `badge` (e.g. `<Badge status="positive">3 active</Badge>`) |

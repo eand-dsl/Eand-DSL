@@ -4,7 +4,7 @@ import { Text, IconBox } from './primitives';
 import { Button } from './Button/Button';
 import { Checkbox, ConsentCheckbox, type CheckboxProps } from './controls';
 
-/* Everything in this file is reconciled against Figma "e& Consumer App DSL V1.2",
+/* Everything in this file is reconciled against Figma "etisalat Consumer App DSL V1.2",
    CTA Bar page 31501:35139 (changelog 27.07.2026: "Added molecules: Price Line,
    Checkbox Line, To Action Block"; 23.07.2026: the `surface` boolean). */
 
@@ -168,34 +168,6 @@ export function PriceLine({ label, value, actionLabel, onAction, actionIcon, not
       </span>
     </div>
   );
-}
-
-/* ---------------- CheckboxLine ----------------
-   The "checkbox line" of the action block: `checkbox-variants` 33489:12153 (inverse ×
-   selected × disabled) over `.checkbox-core-variants-core` 38351:31883 (ltr|rtl mirror).
-   A md checkbox, gap 8, then one wrapping body/md run: title ("Agree to") → link-1 →
-   "and" → link-2 → description ("before proceeding"). Links are `button type=link size=md`.
-   Copy ink: text/default/{default,disabled}; inverse text/default/inverse-{subtle,disabled}.
-   Links: button/link/text/brand/*; inverse button/link/text/inverse/*. */
-export interface CheckboxLineLink {
-  label: ReactNode;
-  onClick?: () => void;
-}
-export interface CheckboxLineProps extends Omit<CheckboxProps, 'label' | 'radio' | 'size'> {
-  /** Lead-in copy before the links (Figma `title-string`, e.g. "Agree to the"). */
-  label?: ReactNode;
-  /** One or two inline link buttons (Figma `link-1`, `link-2`), e.g. Terms, Privacy Policy. */
-  links?: CheckboxLineLink[];
-  /** Word placed between links (Figma's "and"). */
-  conjunction?: ReactNode;
-  /** Trailing copy after the links (Figma `description-string`, e.g. "before proceeding"). */
-  description?: ReactNode;
-}
-/** @deprecated Use `ConsentCheckbox` from the controls — the same Figma `checkbox-variants`
- *  33489:12153 consent row, built twice in parallel during the V1.2 sync. This keeps the
- *  `label` / `description` names and renders the one implementation. */
-export function CheckboxLine({ label, links = [], conjunction = 'and', description, ...rest }: CheckboxLineProps) {
-  return <ConsentCheckbox prefix={label} links={links} conjunction={conjunction} suffix={description} {...rest} />;
 }
 
 /* ---------------- ActionBlock ----------------

@@ -15,12 +15,7 @@ export default function HomePage() {
 
   return (
     <main className="flex flex-1 flex-col items-center justify-center px-4 py-20">
-      {/* Arabic has no letter case, and uppercasing would corrupt the `e&` mark. */}
-      <p
-        className={`text-fd-muted-foreground text-sm font-medium tracking-wide ${
-          lang === 'en' ? 'uppercase' : ''
-        }`}
-      >
+      <p className="text-fd-muted-foreground text-sm font-medium tracking-wide uppercase">
         {t.tagline}
       </p>
       <h1 className="mt-3 max-w-2xl text-center text-4xl font-bold tracking-tight sm:text-5xl">

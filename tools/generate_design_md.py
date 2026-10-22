@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate design.md — the e& DSL master file for Figma Make.
+"""Generate design.md — the etisalat DSL master file for Figma Make.
 Resolves all tokens from variables.json, maps them onto the component inventory,
 and adds the layout system, per-component behavior/composition, a composition map,
 and screen-assembly recipes so Make can turn UX wireframes into UI screens."""
@@ -71,7 +71,7 @@ VERIFIED = {"buttons","input-field","chips","filter-pill","switcher","checkbox",
 # ---- component inventory: (name, node, role, color_groups, size_groups, typo_groups)
 SECTIONS = [
  ("01 · Primitives", [
-   ("e& Logo","27020-6155","Brand logo lockups.",[],[],[]),
+   ("etisalat Logo","27020-6155","Brand logo lockups.",[],[],[]),
    ("Badges","22668-60275","Membership/status/promo badges.",["badge"],[],["badge"]),
    ("Icon size","25460-22589","Icon sizing scale.",[],["icon"],[]),
    ("Logo row","25996-32494","Row of partner/product logos.",[],[],[]),
@@ -118,7 +118,7 @@ SECTIONS = [
    ("Product","25701-12472","Product card.",["surface","border","text"],["card"],["title","body"]),
    ("Deals for you","25717-33323","Deal card.",["surface","border","text"],["card"],["title","body"]),
    ("Plans","25915-74211","Plan card.",["surface","border","text"],["card"],["title","body"]),
-   ("New on e&","25915-75766","'New on e&' card.",["surface","border","text"],["card"],["title","body"]),
+   ("New on etisalat","25915-75766","'New on etisalat' card.",["surface","border","text"],["card"],["title","body"]),
    ("Service","26019-79144","Service card.",["surface","border","text"],["card"],["title","body"]),
  ]),
  ("08 · Banners", [
@@ -218,7 +218,7 @@ B = {
    states="with/without action · with/without chevron", contains="title + 'see all' link/chevron",
    within="top of a Section", use="Title a Section and link to its full view."),
  "quick-action": dict(slot="Body / grid", w="fill", h="hug",
-   states="—", contains="grid of borderless white cards (radius 20, 4px cell gap) — each a grey radius-12 icon square (filled e& icon) + label + optional count badge",
+   states="—", contains="grid of borderless white cards (radius 20, 4px cell gap) — each a grey radius-12 icon square (filled etisalat icon) + label + optional count badge",
    within="a Section near top of Home",
    use="Compact grid of top tasks. Cards have NO border (white on the grey Section)."),
 
@@ -272,7 +272,7 @@ B = {
    contains="plan name + price + feature list + Badge + CTA", within="a plans Section",
    use="Present a selectable plan."),
  "new-on-eand": dict(slot="Card (carousel item)", w="fixed (carousel)", h="hug",
-   states="default", contains="media + title + optional CTA", within="a 'New on e&' carousel Section",
+   states="default", contains="media + title + optional CTA", within="a 'New on etisalat' carousel Section",
    use="Editorial / newly-launched tile."),
  "recommendation": dict(slot="Card (carousel item)", w="fixed (carousel)", h="hug",
    states="default", contains="media + title + CTA", within="a recommendations carousel Section",
@@ -295,12 +295,12 @@ B = {
 }
 
 MISSION = """\
-> **Master spec for Figma Make.** This file is the single source of truth for the e& Consumer App
+> **Master spec for Figma Make.** This file is the single source of truth for the etisalat Consumer App
 > design system: every token (resolved to its concrete value), every component (states, behavior,
 > placement, composition), the layout system, and recipes for assembling UI screens from UX wireframes.
 >
 > **What Make should do with it:** given a UX wireframe, identify the screen regions (header, scrollable
-> body, bottom nav, overlays), map each region/block to the right e& component(s), and assemble an
+> body, bottom nav, overlays), map each region/block to the right etisalat component(s), and assemble an
 > accurate, token-correct UI screen — picking carousels vs. stacked cards, filter rows, forms, etc.,
 > and applying the sizing rules below. Treat this as a **UI app library**, not loose mockups.
 """
@@ -308,10 +308,10 @@ MISSION = """\
 ASSEMBLY = """\
 ## Screen assembly recipes (UX → UI)
 
-Use this to turn a UX wireframe into a UI screen built from e& components.
+Use this to turn a UX wireframe into a UI screen built from etisalat components.
 
 ### Step 1 — Frame the screen
-- Screen width = device width (e.g. 390). For e& main tabs, use the **red account header** (`<TopBar variant="brand" greeting="Hi, Ahmed" title="050 123 4567" actions={[…]} />`); for pushed/detail pages use the default white `TopBar` with a back chevron. A red **action bar** inside the header (e.g. "Complete your profile · Start") is optional.
+- Screen width = device width (e.g. 390). For etisalat main tabs, use the **red account header** (`<TopBar variant="brand" greeting="Hi, Ahmed" title="050 123 4567" actions={[…]} />`); for pushed/detail pages use the default white `TopBar` with a back chevron. A red **action bar** inside the header (e.g. "Complete your profile · Start") is optional.
 - If the screen has top-level page tabs (e.g. For you / Account / Loyalty), add a **global `Tabs`** row right under the header.
 - Persistent bottom nav → floating **`NavBar`** (Home · Support · Profile · Shop; mark the current tab `active`). The area between is the **vertical scroll body**.
 - One persistent primary CTA pinned at the bottom → **Action bar** (sticky, above Nav bar).
@@ -322,9 +322,9 @@ Use this to turn a UX wireframe into a UI screen built from e& components.
 - Stack Sections vertically with the section gap token.
 
 ### Step 3 — Fill each Section by matching the UX pattern
-| UX pattern in the wireframe | e& component(s) to use |
+| UX pattern in the wireframe | etisalat component(s) to use |
 |---|---|
-| Horizontal row of tiles / "cards you swipe" | carousel of **Product / Deals for you / New on e& / Recommendation / Plans** cards (`width: fixed`) |
+| Horizontal row of tiles / "cards you swipe" | carousel of **Product / Deals for you / New on etisalat / Recommendation / Plans** cards (`width: fixed`) |
 | Vertical list of content blocks | **General** cards (`width: fill`) |
 | Settings / contact / "X ›" / label↔value rows | **ListRow** stacked in a Section |
 | Account-hub / quick-links grid (icon + label + count badge) | **QuickAction** cells with a `badge` (e.g. `<Badge status="positive">3 active</Badge>`) |
@@ -375,12 +375,12 @@ def main():
     raw = json.load(open(VARS)); R = resolved_tree(load_merged(raw))
     L = []; w = L.append
 
-    w("# e& Consumer App DSL — Master Spec\n")
+    w("# etisalat Consumer App DSL — Master Spec\n")
     w(MISSION)
 
     # ---------------- Layout system ----------------
     w("\n---\n\n## Layout system & screen composition\n")
-    w("**Screen archetype (e&):** **Top bar** — usually the **red account header** (`variant=\"brand\"`: greeting "
+    w("**Screen archetype (etisalat):** **Top bar** — usually the **red account header** (`variant=\"brand\"`: greeting "
       "\"Hi, Ahmed\" + masked number + circle icons; optional red action bar like \"Complete your profile\") → "
       "optional **global Pill Tabs** row (For you / Account / Loyalty) → **scroll body** = a vertical stack of "
       "full-width grey **Sections** (each wrapping cards / ListRows / QuickAction grids / carousels) → floating "
@@ -433,7 +433,7 @@ def main():
     w("Icons ship **inside** this UI library — there is no separate icons package. Import "
       "`Icon` from `@eand/react-design-system` alongside the components and render "
       "`<Icon name=\"…\" />` into any `icon`/`leadingIcon`/`actions` slot. The set mirrors "
-      "the **e& App Icons** Figma library (`9Q64oRPBkm3Sla5HMP4LJA`, MS-Fluent-2 line set + "
+      "the **etisalat App Icons** Figma library (`9Q64oRPBkm3Sla5HMP4LJA`, MS-Fluent-2 line set + "
       "13 Core Service Icons). Icons tint via CSS `color`, so they inherit the slot colour "
       "(red on an active `NavBar` tab, white on the brand `TopBar`, dark in a "
       "`QuickAction`/`ListRow` square). `Icon` takes `name`, `size` (px, default 24), "
@@ -450,7 +450,7 @@ def main():
       "drift. In code, `ICONS` and `ICON_META` are exported from the package itself.\n")
     w("> **Never generate, draw, or emoji-substitute an icon.** If the concept you want has "
       "no entry, pick the nearest real name — never a placeholder or a drawing. If nothing "
-      "fits, request the glyph be added to the package (exported from the e& App Icons "
+      "fits, request the glyph be added to the package (exported from the etisalat App Icons "
       "library) rather than inventing one.\n")
 
     # ---------------- Composition map ----------------

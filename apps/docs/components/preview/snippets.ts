@@ -2077,39 +2077,6 @@ fun MoreItems(count: Int, size: Dp = EandIcon.xl, inverse: Boolean = false) {
 <LogoRow size="md" logos={logos} more={4} />          {/* LogoRow appends one for you */}`,
   },
 
-  smilesrow: {
-    swift: `import SwiftUI
-import EandTokens
-
-// SmilesRow is deprecated in V1.2: Figma draws this as a logo-row of Smiles brand logos
-// closed by a more-items "+N". Build it from LogoRow + MoreItems (md: 32pt, gap 4).
-struct SmilesRow: View {
-  var more = 4
-  var body: some View {
-    HStack(spacing: EandSpacing.xs) {
-      ForEach(0..<2, id: \\.self) { _ in
-        Image("brand-smiles").resizable().scaledToFill()
-          .frame(width: EandIcon.icon2xl, height: EandIcon.icon2xl)
-          .clipShape(Circle())
-      }
-      MoreItems(count: more, size: EandIcon.icon2xl, inverse: true)
-    }
-  }
-}`,
-    kotlin: `import com.eand.tokens.*
-
-// SmilesRow is deprecated in V1.2 — use LogoRow (md, 32dp) with a +N MoreItems.
-@Composable
-fun SmilesRow(more: Int = 4) {
-  val smiles = painterResource(R.drawable.brand_smiles)
-  LogoRow(listOf(smiles, smiles), size = EandIcon.icon2xl, more = more)
-}`,
-    react: `import { LogoRow } from '@eand/react-design-system';
-
-{/* SmilesRow is deprecated — it has no V1.2 symbol. Use a logo row with a +N counter: */}
-<LogoRow size="md" logos={['/brands/smiles.png', '/brands/smiles-dining.png']} more={4} />`,
-  },
-
   atomsurface: {
     swift: `import SwiftUI
 import EandTokens

@@ -1,13 +1,13 @@
 ---
 title: NewCard
-description: The “New on e&” story tile — a rounded picture frame with a New card badge and a caption, ringed in a gradient when selected.
+description: The “New on etisalat” story tile — a rounded picture frame with a New card badge and a caption, ringed in a gradient when selected.
 ---
 
 <ComponentDemo id="newcard" />
 
 ## When to use
 
-- **Use** in a "New on e&" carousel, in a [Section](./section) of size `md`, to announce new
+- **Use** in a "New on etisalat" carousel, in a [Section](./section) of size `md`, to announce new
   services and content. Set `selected` on the last card in the carousel; Figma shows the ring
   there for three days.
 - **Don't use** for offers with a price (use [DealCard](./dealcard)) or for general tiles (use
@@ -24,8 +24,8 @@ description: The “New on e&” story tile — a rounded picture frame with a N
 The tile has no surface of its own; only the picture frame is rounded.
 
 ```tsx
-<NewCard image={<img src={cover} alt="" />} title="e& money" selected />
-<NewCard image={<img src={cover} alt="" />} title="Stream on e& tv" badge={false} />
+<NewCard image={<img src={cover} alt="" />} title="etisalat money" selected />
+<NewCard image={<img src={cover} alt="" />} title="Stream on etisalat tv" badge={false} />
 ```
 
 ## Props
@@ -34,7 +34,7 @@ The tile has no surface of its own; only the picture frame is rounded.
 
 ## Design
 
-Figma source: [.new-on-eand-state — e& Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=26523-22852)
+Figma source: [.new-on-eand-state — etisalat Consumer App DSL V1.2](https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=26523-22852)
 
 - 137 × 224 (`row-3`), with 12px (`spacing/md`) between the frame and the caption.
 - Frame: a 24px radius (`border-radius/8`) and 4px padding (`spacing/xs`) around an image

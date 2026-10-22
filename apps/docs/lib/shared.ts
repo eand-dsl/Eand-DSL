@@ -1,4 +1,4 @@
-export const appName = 'e& Design System';
+export const appName = 'etisalat Design System';
 
 // Absolute origin for metadataBase / OG images. Vercel sets VERCEL_PROJECT_PRODUCTION_URL
 // on every deployment of a production-linked project and VERCEL_URL per deployment;

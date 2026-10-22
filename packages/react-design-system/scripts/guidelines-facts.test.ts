@@ -8,14 +8,13 @@ describe('collectFacts', () => {
     expect(facts.packageName).toBe('@eand/react-design-system');
   });
 
-  it('finds all 69 exported components', () => {
-    // 58 before the V1.2 reconciliation, which added 11: StatusIndicator, MoreItems (primitives),
-    // UaePassButton (Button), ConsentCheckbox (controls), GeneralCard, FAQ (layout),
-    // Recommendation (cards), Scrim (overlays), PriceLine, CheckboxLine (deprecated), ActionBlock (ctabar).
-    expect(facts.exportedComponents).toHaveLength(69);
+  it('finds all 66 exported components', () => {
+    // 69 before the etisalat rebrand cleanup, which removed 3 deprecated components with no
+    // V1.2 counterpart: SmilesAvatar, SmilesRow (primitives), CheckboxLine (ctabar).
+    expect(facts.exportedComponents).toHaveLength(66);
     for (const name of [
       'Button', 'Picker', 'CtaFooter', 'StatusIndicator', 'MoreItems', 'UaePassButton', 'ConsentCheckbox',
-      'GeneralCard', 'FAQ', 'Recommendation', 'Scrim', 'PriceLine', 'CheckboxLine', 'ActionBlock',
+      'GeneralCard', 'FAQ', 'Recommendation', 'Scrim', 'PriceLine', 'ActionBlock',
     ]) {
       expect(facts.exportedComponents).toContain(name);
     }

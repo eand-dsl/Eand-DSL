@@ -1,4 +1,4 @@
-// AUTO-GENERATED from e& App Icons SVGs. Do not edit.
+// AUTO-GENERATED from etisalat App Icons SVGs. Do not edit.
 import type { SVGProps, CSSProperties } from 'react';
 export interface IconSvgProps extends SVGProps<SVGSVGElement> { size?: number | string; }
 
