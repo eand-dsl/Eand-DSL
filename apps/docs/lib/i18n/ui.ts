@@ -26,6 +26,15 @@ export const ui = {
       placeholder: 'Search components, icons, or describe it…',
     },
     untranslated: 'This page’s reference content is not translated yet.',
+    figma: {
+      title: 'Figma description',
+      open: 'Open in Figma',
+      more: 'Show more',
+      less: 'Show less',
+      empty: 'This component has no description in Figma yet.',
+      unpublished: 'This page is not finalised in Figma, so it has no published component or description yet.',
+      englishOnly: '',
+    },
   },
   ar: {
     langName: 'English',
@@ -50,6 +59,15 @@ export const ui = {
       placeholder: 'ابحث عن مكوّن أو أيقونة، أو اكتب وصفًا…',
     },
     untranslated: 'لم تُترجم المادة المرجعية في هذه الصفحة بعد.',
+    figma: {
+      title: 'الوصف في Figma',
+      open: 'افتح في Figma',
+      more: 'عرض المزيد',
+      less: 'عرض أقل',
+      empty: 'لا يوجد وصف لهذا المكوّن في Figma بعد.',
+      unpublished: 'لم تُعتمد هذه الصفحة نهائيًا في Figma، لذا لا يوجد لها مكوّن منشور أو وصف بعد.',
+      englishOnly: 'يُعرض الوصف بالإنجليزية كما كُتب في Figma.',
+    },
   },
 } as const;
 

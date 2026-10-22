@@ -12,6 +12,7 @@ import { getMDXComponents } from '@/components/mdx';
 import type { Metadata } from 'next';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
 import { PageDescription, PageTitle } from '@/components/i18n-text';
+import { FigmaDescription } from '@/components/figma-description';
 
 export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const params = await props.params;
@@ -30,6 +31,7 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
       <DocsDescription className="mb-0">
         <PageDescription slug={slug} en={page.data.description} />
       </DocsDescription>
+      {params.slug?.[0] === 'components' ? <FigmaDescription key={slug} slug={slug} /> : null}
       <div className="flex flex-row gap-2 items-center border-b pb-6">
         <MarkdownCopyButton markdownUrl={markdownUrl} />
       </div>
