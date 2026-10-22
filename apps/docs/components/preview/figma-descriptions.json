@@ -1,0 +1,378 @@
+{
+  "_meta": {
+    "source": "Figma etisalat Consumer App DSL V1.2 (pzm63BTLfPfT1stcF89ILQ), component-set descriptions",
+    "pulled": "2026-10-22",
+    "refresh": "Re-read each node description through the Figma MCP. Keys are docs slugs. Code-only pages (card, sectionlink, selectors) are omitted on purpose."
+  },
+  "accordion": {
+    "node": "32753:390",
+    "name": "Accordion",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=32753-390",
+    "published": true,
+    "description": "Collapsible container revealing content on demand. Takes any content in its slot.\n\nUse for: FAQ lists and progressive disclosure where content is secondary.\nNot for: content users need to see by default.\nRules: stack multiple accordions in one section to form an FAQ. Only one expanded at a time."
+  },
+  "actionbar": {
+    "node": "28201:38278",
+    "name": "action-bar",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=28201-38278",
+    "published": true,
+    "description": "Container that pairs with banners and cards. Holds an icon or image, title, description and a trailing action, giving context for that action.\n\nUse for: an actionable row inside a section, card or banner.\nNot for: standalone page rows — use list-item.\nChoosing: default in light sections. Inverse when the surrounding surface is dark or glass.\nRules: always sits inside a parent container, never directly on a page."
+  },
+  "actionblock": {
+    "node": "31617:1499",
+    "name": ".action-block",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=31617-1499",
+    "published": true,
+    "description": ""
+  },
+  "addtrigger": {
+    "node": "25973:25405",
+    "name": "add-trigger",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=25973-25405",
+    "published": true,
+    "description": "A full-width dashed trigger used to prompt the user to initiate a creation or customisation flow — such as building their own deal.\n\nUse for: Inside a section body slot as a contextual entry point for user-generated or customisable content — specifically where the user can compose their own deal or bundle.\n\nNot for: General creation actions anywhere on a page — use a button with type=primary instead. Not for navigation — use action-bar instead.\n\nChoosing: Use surface=default on light sections (renders with a dark glass fill). Use surface=inverse on dark or midnight sections (renders with a light glass fill).\n\nRules: Width is fixed at 285px — do not resize. Height is fixed at 72px. The label is single line only and never wraps. The dashed border is part of the component — do not override it. In RTL, the layout mirrors automatically. Always place inside a section body slot; never place directly on a screen or floating over content."
+  },
+  "aisearch": {
+    "node": "30635:82333",
+    "name": "AI Search component",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=30635-82333",
+    "published": false,
+    "description": ""
+  },
+  "alert": {
+    "node": "40289:34516",
+    "name": "alert-message",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=40289-34516",
+    "published": true,
+    "description": "A static, prominent page-level message that communicates the status or outcome of an action, setting, or app condition. It stays in the page/container flow and does not overlay the interface.\nUse for: Status tied to nearby content or a whole section — account information, page updates, plan eligibility, applied settings, and action outcomes.\nNot for: Transient confirmations or short-lived feedback — use snack-bar instead. Snack-bar is a temporary overlay; alert-message is static and part of the container.\nChoosing: Use Stack=no for a single message. Use Stack=yes when two or more alerts apply to the same location at the same time — they share one slot, and the step-count indicator shows how many there are and which one is in view. Set State by meaning: Success for positive activity or change, Warning for caution or attention needed, Alert for a critical issue worth checking, Info for a neutral outcome, Info Midnight for a neutral message that needs more emphasis on a dark surface.\nRules: Place directly in the main page/container flow, adjacent to the content it refers to. Never place inside a section, card, or panel. Show a CTA only when a clear follow-up action is required — one per alert. Do not use Stack for a single message; keep the indicator dot count equal to the number of stacked alerts."
+  },
+  "alertmodal": {
+    "node": "32934:67842",
+    "name": "alert-modal",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=32934-67842",
+    "published": true,
+    "description": ""
+  },
+  "atomsurface": {
+    "node": "26770:100166",
+    "name": ".default-surface",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=26770-100166",
+    "published": true,
+    "description": ""
+  },
+  "badge": {
+    "node": "12934:864",
+    "name": "badges-offers",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=12934-864",
+    "published": true,
+    "description": "Use for: a compact offer-status label attached to an eligible card, including a verified discount or limited-time offer.\nNot for: standalone headings or unverified promotions.\nChoosing: choose type=Discount only when a valid discount is present; choose size according to the host card without resizing the badge.\nRules: keep attached to its host card; do not invent offer claims; use at most one primary offer badge per card."
+  },
+  "bottomsheet": {
+    "node": "40299:160405",
+    "name": "bottom-sheet",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=40299-160405",
+    "published": true,
+    "description": ""
+  },
+  "button": {
+    "node": "25394:85067",
+    "name": "button",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=25394-85067",
+    "published": true,
+    "description": "A button enables the user to initiate an action or process.\n\nUse for: Any tappable call to action — confirming, submitting, navigating forward, or triggering a flow.\n\nNot for: Passive navigation between views; use tab-pill or navigation bar instead. Not for destructive confirmation without a supporting pattern.\n\nChoosing: Use primary for the single strongest action on a screen. Use secondary for supporting actions alongside a primary. Use tertiary for low-emphasis inline actions that need no fill. Use link for the lowest-weight action, typically in dense or text-heavy contexts. Use glass only over imagery or glass surfaces. Match size to the component it lives in — sm (32px) for compact slots, md (40px) for standard, lg (48px) for hero or primary CTAs. Set scheme=midnight on dark surfaces, scheme=inverse on brand-coloured surfaces, scheme=default everywhere else. Width follows the container — do not set a fixed width.\n\nRules: Use one primary button per screen or section. Do not place a glass button on a flat colour surface. In RTL, icon order and layout direction reverse automatically — do not manually mirror. Do not disable a button without providing context elsewhere on the screen for why the action is unavailable."
+  },
+  "checkbox": {
+    "node": "27685:5017",
+    "name": "checkbox",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=27685-5017",
+    "published": true,
+    "description": "A binary selection control for forms and lists, available in square (multi-select) and circular (radio-style) shapes.\n\nUse for: Form fields, settings screens, and list items where the user needs to select one or more options. Use the square shape (radio=false) when multiple items can be selected simultaneously. Use the circular shape (radio=true) when the checkbox needs to feel softer or less rigid in context — note this is still a checkbox that allows multi-select, not a true radio button.\n\nNot for: Mutually exclusive single-select choices where only one option can be active — use a switcher or a true radio input pattern instead.\n\nChoosing: Use size=md (20×20px) for standard forms, settings, and main content areas. Use size=sm (16×16px) for dense layouts, compact lists, or inline use. Set inverse=false on light or neutral backgrounds. Set inverse=true on midnight or brand red surfaces. Set selected=true to show a checked state — brand red fill with white checkmark. Set disabled=true to make the control non-interactive; a selected disabled checkbox renders with desaturated grey fill.\n\nRules: Always pair with a visible label — do not use the checkbox alone without accompanying text. Do not use radio=true to imply single-select behaviour; its shape is cosmetic. Do not mix radio=true and radio=false within the same list."
+  },
+  "chip": {
+    "node": "31539:8725",
+    "name": "chips",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=31539-8725",
+    "published": true,
+    "description": "A compact interactive element for representing categories, filter options, or selection states.\n\nUse for: Filtering content within a section, selecting one or more categories from a set, or representing a toggleable option in a horizontal scrollable row.\n\nNot for: Navigation between screens — use tab-pill instead. Not for actions with immediate side effects — use a button instead.\n\nChoosing: Use type=outline on light flat surfaces. Use type=filled when the chip needs stronger visual weight on a light surface. Use type=glass over imagery or glass surfaces. Use type=inverse on dark or midnight surfaces. Set state=selected when the option is active — the leading icon automatically swaps to a checkmark and the trailing icon appears. Set state=disabled to remove interactivity without hiding the chip.\n\nRules: Always group chips in a horizontally scrollable row — do not stack them vertically in isolation. Edit the label via the text property on the instance; do not detach to change copy. In RTL the entire layout mirrors — do not manually adjust icon placement."
+  },
+  "consentcheckbox": {
+    "node": "33489:12153",
+    "name": "checkbox-variants",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=33489-12153",
+    "published": true,
+    "description": "A labelled checkbox row combining a checkbox atom with inline text and optional link buttons, for use in consent and agreement contexts.\nUse for: Consent flows, terms acceptance, and any form field where the label contains one or more linked legal documents — such as \"Agree to T&C's and Privacy Policy before proceeding.\"\n\nNot for: Standard list selections or filter choices — use the bare checkbox atom or chips instead. Not for multi-option form groups without inline links — use a list of checkbox atoms with adjacent labels.\n\nChoosing: Set inverse=false on light or neutral backgrounds. Set inverse=true on midnight or brand red surfaces — all text and link colours adapt automatically. Set selected=true when the user has agreed. Set disabled=true to prevent interaction — both the checkbox and all inline links reduce to their disabled colour tokens.\n\nRules: Do not detach to change the label copy — edit text via the component's text properties. Inline link buttons are link-type buttons and inherit disabled state from the parent; do not make them independently interactive when disabled=true. Always include the full label — do not use this component with a blank label."
+  },
+  "ctabar": {
+    "node": "31617:1007",
+    "name": "cta-bar",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=31617-1007",
+    "published": true,
+    "description": "A sticky footer container that holds the primary call-to-action area at the bottom of a screen, combining a button group, optional status messaging, optional pricing, and the iOS Home Indicator.\nUse for: Any screen that requires a persistent bottom action — such as confirming a plan selection, completing a purchase, or proceeding through a flow. Always the last element on a screen, pinned above the navbar or directly at the screen edge when no navbar is present.\nNot for: Actions that belong inline within content — use a button directly inside a section body slot instead. Not for navigation between views — use the navbar.\nChoosing: Set surface=true to apply the white card surface and drop shadow, lifting the bar above the screen content. Set surface=false when the bar sits on a surface that already provides the visual separation. Choose the button group composition based on the number of actions needed: primary for a single full-width CTA; primary+secondary for a primary action with a supporting option; primary+tertiary for a primary with a low-weight inline alternative; primary+secondary+tertiary for three-level action hierarchy. Use vertical grouping when actions stack, horizontal when they sit side by side. Add the status ribbon above the buttons when the screen needs to surface a success, alert, warning, or info message directly in the footer. Add the price line when the user needs to see the cost before confirming. Toggle payment=true on the action block to include payment method detail alongside the buttons.\nRules: Always place at the bottom of the screen, outside any scroll container or section. The Home Indicator is always present — do not remove it. In RTL, all button layouts and status ribbon icons mirror automatically. Use at most one CTA Bar per screen."
+  },
+  "dealcard": {
+    "node": "25973:22611",
+    "name": "deals-card/ltr",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=25973-22611",
+    "published": true,
+    "description": ""
+  },
+  "dismiss": {
+    "node": "28961:19839",
+    "name": "dismiss",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=28961-19839",
+    "published": true,
+    "description": "An icon button for closing or dismissing a card, sheet, modal, or overlay.\n\nUse for: Placement in the top corner of dismissible components — cards, bottom sheets, modals, and banners — where the user needs a tap target to close or remove the element.\n\nNot for: Inline actions or destructive delete. Use a text button or icon button from the action set instead.\n\nChoosing: Use surface=default on light surfaces. Use surface=inverse on dark or glass surfaces. Use small=true in compact components where a 24px target would crowd the layout.\n\nRules: Do not use dismiss as a navigation back control — it signals closing, not going back. Always pair with an accessible label in implementation."
+  },
+  "faq": {
+    "node": "38563:27574",
+    "name": "faq",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=38563-27574",
+    "published": true,
+    "description": "FAQ\n\nA page-end section for presenting common questions and answers.\n\nUsage rules\n\nPlace at the end of the page, primarily on level-2 and level-3 pages.\nUse only when there are at least 3 FAQ items. Do not use for 1–2 questions.\nTabs are optional. Add them only when the questions need categorization, and build them with Pill component instances.\nSet each question box surface using the appropriate surface color from the color-token hierarchy. Do not apply arbitrary or hard-coded surface colors.\n\nAI generation guidance\n\nInsert an instance of this FAQ component; do not recreate its structure from scratch.\nGenerate page-relevant questions and concise answers, with one question per item.\nWhen tabs are needed, group questions into clear categories and represent each category with a Pill component instance.\nPreserve the component’s existing layout, spacing, states, and token bindings."
+  },
+  "filterpill": {
+    "node": "26151:391",
+    "name": "filter-pill",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=26151-391",
+    "published": true,
+    "description": "A pill-shaped selector for categorising or filtering content, with a trailing chevron indicating a dropdown or sheet.\n\nUse for: Horizontal filter rows inside section headers or above content lists — where the user selects a category, time range, or filter value from a set of options.\n\nNot for: Toggleable selections within a content body — use chips instead. Not for navigation between views — use tab-pill instead.\n\nChoosing: Use inverse=false on light surfaces. Use inverse=true on dark or midnight surfaces. Set state=selected when a filter value has been applied — the border darkens to signal active state. Set state=disabled to prevent interaction without removing the pill from the layout.\n\nRules: Height is fixed at 40px — do not resize. Width hugs the label; the label is single line only and never wraps. Do not use filter-pill for selections where the user toggles between items directly — use chips. On mobile, the pill supports a swipe gesture; do not suppress this behaviour. In RTL, layout mirrors automatically."
+  },
+  "generalcard": {
+    "node": "28463:12391",
+    "name": "General-card",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=28463-12391",
+    "published": true,
+    "description": "Use for\nA flexible media card for surfacing content, features, or navigational entry points where an image or icon is the primary visual and a short title supports it. Use in grid or carousel section layouts when the content doesn't have a price or service-bundle structure that would require a more specific card variant.\n\nNot for\nPlan or subscription content with pricing — use plans-mini or card-features-package. Product items with a product image and price — use card-features-product. Category entry points — use card-features-category. Content that requires body text, descriptions, or multiple CTAs — this card supports a title and badge only.\n\nChoosing\nSet surface=default when the card sits in a light section context. Set surface=inverse when it sits in a dark section context. Do not choose surface for visual variety — match it to the surrounding section surface. Both variants share the same internal structure; only the surface, text, and color tokens differ.\nSet carousel=true for a scrollable horizontal layout; carousel=false for a fixed grid layout. In carousel mode the card width is narrower (147px); in grid mode it is wider (166px) to fill the grid slot — do not manually resize to compensate.\nSet top-alignment=true to pin the title to the top of the card with the image centered below. Set top-alignment=false to pin the title to the top and allow the image to sit vertically centered in the remaining space. Use top-alignment when the title is the primary read and the image is supporting. Use bottom-alignment when the image carries more visual weight.\nSet size to control the media slot: sm for supporting visuals where imagery is secondary, md for a balanced media-and-text read, lg when the image is the primary communication layer. Do not pick size for aesthetic reasons — match it to the content's role in the layout.\nSet badge to show a badges-offers or badges-status tag when there is an active offer or status to surface. The badge sits at the bottom-left of the card inside the .badge-placement slot at 12px padding. Set badge off when there is no offer or status to show.\nSet direction=rtl for Arabic. The title uses centered alignment and will reflow correctly; the badge placement mirrors to the bottom-right.\n\nRules\nThe title uses title/sm (16px semi-bold), centered, maximum 2 lines. Do not allow it to overflow beyond 2 lines — truncate or shorten copy to fit. The media slot is absolutely positioned and fills the card — do not move or reposition the image layer manually. All spacing and sizing values are tokenized — do not hard-code any measurements. Card height is fixed at 224px across all variants. Do not resize the instance height. For RTL, set direction=rtl at the component level — do not override text alignment or badge position manually."
+  },
+  "highlight": {
+    "node": "34272:25571",
+    "name": "highlight",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=34272-25571",
+    "published": true,
+    "description": "Promotional banner card for featuring content, offers or app highlights.\n\nUse for: promotional or editorial content inside a section body slot.\nNot for: functional actions or navigation — use a card or action-bar.\nChoosing: stacked for carousels, which is the common case. Single for a standalone placement.\nRules: sits inside a section, never directly on a page. Composes badges-offers for the offer tag and action-bar for the action row."
+  },
+  "input": {
+    "node": "29010:3152",
+    "name": "input-field",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=29010-3152",
+    "published": true,
+    "description": "Field for collecting or selecting a user value. Use this set rather than building inputs by hand.\nAnatomy\nLabel above, surface with optional left/right addons, value, status message below.\nCategories (type)\ntext - free-form entry\ndropdown - selection from a list, opens inline\npicker - selection through a dedicated picker surface\ncomment - longer-form, multi-line\notp - one-time passcode\nNot for search (use searchbar) or filtering (use filter-pill, chips).\nChoosing a state\nDecide in order: type, then empty or filled, then one interaction state.\nEmpty is default=true. Filled is filled=true. They are complementary - never set both the same.\nThen at most one of: active (focused or engaged), disabled, error.\nResting is active=false, disabled=false, error=false.\nNever combine disabled=true with active=true or error=true.\ntext, dropdown, picker and comment support all eight combinations. otp has no empty-error and no filled-active variant. Do not construct unsupported combinations - use a published variant.\nFixed internally, not selectable\nAddons, status message, inverse and RTL are set inside the component and are not exposed as properties. Do not attempt to select them.\nAddons appear left or right: an icon for context, a copy control for reusable values, dropdown tools for list controls.\nThe status message carries validation - error after failed validation, success on confirmation, neutral for hints.\nDesigner and AI usage\nPreserve the instance and select variants. Never detach or restyle manually.\nInfer filled from whether a value exists. Use active only for current focus, disabled only for genuinely unavailable controls, error only after validation fails.\nAlways label the field - placeholder text is not a label.\nAlways pair an error state with error status text. Colour alone is not sufficient."
+  },
+  "listrow": {
+    "node": "34677:66964",
+    "name": "list-item",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=34677-66964",
+    "published": true,
+    "description": "A single data row presenting a label and either a price value or rich informational content.\n\nUse for: Itemised lists inside bottom sheets, accordion panels, or section body slots — such as plan charge breakdowns, usage line items, or service details.\n\nNot for: Standalone page rows that require a tap target for navigation — use action-bar instead. Not for filter or selection rows — use chips instead.\n\nChoosing: Use type=price for billing or usage line items where a right-aligned value and chevron are needed. Use type=info for descriptive rows that need a leading visual (icon, art, or logo at 40×40px), a label, a description, and an optional tertiary button for a secondary action. The info type renders with a card surface; price renders flat with a bottom divider only.\n\nRules: Always stack list items vertically within a containing section or panel slot. Do not use type=price when the row needs a leading visual — use type=info instead. Do not place list items directly on a screen or inside a section header. In RTL, layout and icon direction mirror automatically. Use variants without surface only when it's a plain white of surface-default background. In other cases, use 'padding=true' + 'surface' variants. Select surface variant based on background, it should have contrast."
+  },
+  "logo": {
+    "node": "27032:50455",
+    "name": "etisalat-logo",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=27032-50455",
+    "published": true,
+    "description": "The primary etisalat brand logo in four colour versions, used wherever the brand identity needs to appear.\n\nUse for: Headers, footers, splash screens, cards, and any surface that requires the etisalat brand mark.\n\nNot for: Decorative illustration or partner/app logos — use the partner logo assets instead.\n\nChoosing: Use version=default on any neutral or light surface — it works independently in most contexts. Use version=white on dark-tone surfaces (brand red, midnight, or any background where midnight or red would fail accessibility contrast). Use version=midnight on bright or neutral light surfaces when the logo needs less visual emphasis. Use version=red on surfaces with prominent contrast against red per accessibility standards — suitable for both light and darker tones, but dark-surface use is limited to high-contrast cases only.\n\nRules: Do not place version=default on brand-red or similar red-toned backgrounds — switch to a different version based on the surface rules above. Do not place version=red on brand-red or similar backgrounds — use version=white on darker surfaces and version=midnight on brighter ones instead. Always verify sufficient contrast between the logo version and its background surface."
+  },
+  "logorow": {
+    "node": "25997:32516",
+    "name": "logo-row",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=25997-32516",
+    "published": true,
+    "description": "A horizontal row of partner or app brand logos with an overflow counter, used to show which services are included in a deal or offer.\n\nUse for: Inside deal cards, offer cards, or any component that needs to communicate which apps or services are bundled.\n\nNot for: Navigation or decorative brand display unrelated to an offer or bundled service.\n\nChoosing: Match size to the card it sits in — sm (24px) for compact cards, md (32px) for standard cards, lg (40px) for prominent or featured cards. Use style=glass over imagery or glass surfaces; use style=default on flat surfaces. Set direction=rtl for Arabic. Toggle individual logo slots (logo1–logo5) to match the number of actual partner logos. Enable xMore only when there are more logos than the visible slots can show.\n\nRules: Do not use xMore when all logos are visible. Do not mix logo slot sizes — all logos in a row share the same size value. The overflow pill count must reflect the actual number of hidden logos."
+  },
+  "moreitems": {
+    "node": "26560:27420",
+    "name": "more-items",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=26560-27420",
+    "published": true,
+    "description": ""
+  },
+  "navbar": {
+    "node": "29317:6983",
+    "name": "navbar",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=29317-6983",
+    "published": true,
+    "description": "Use for\nApp-level navigation on every main screen. Place exactly one navbar per screen, fixed to the bottom of the viewport, outside any section or scroll container.\n\nNot for\nNavigation within a page or section — use tabs or page-header-tabs instead. Do not use alongside cta-bar or cta-navbar; when either of those is present on a screen, the navbar is not used.\n\nChoosing\nThe navbar ships in two configurations driven by authentication state.\nlogged-in shows Home, Support, Profile, and Shop tabs. Home is the default active tab.\nlogged-out (guest) shows Shop, Plans, Devices, and eLife tabs. Plans is the default active tab.\nThe active tab is always indicated by a filled brand red icon and an expanded pill. Do not manually override individual tab states inside the component — active state is set at the screen level by selecting the correct page variant on navbar-tabs-set.\nSet scroll-direction=down to hide the navbar on downward scroll and scroll-direction=up to reveal it on upward scroll.\nSet logged-in=true or logged-in=false on the profile atom to adapt the Profile tab to the user's authentication state.\nIn RTL contexts, the full tab set mirrors automatically — no manual adjustment to individual tabs is needed.\n\nRules\nFix to the bottom of the screen. Never place inside a section, card, or scroll slot. Use exactly one navbar per screen — never stack or duplicate. Never use together with cta-bar; when cta-navbar is present, the navbar is omitted from the screen. Outer padding is 16px on both sides. Gap between tab items is 8px. Total component height is 114px, including the iOS Home Indicator. Do not resize the component or manually select individual tab active states — the tab set and active destination are always controlled at the screen level."
+  },
+  "newcard": {
+    "node": "26523:22852",
+    "name": ".new-on-eand-state",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=26523-22852",
+    "published": true,
+    "description": ""
+  },
+  "pageheader": {
+    "node": "37390:28734",
+    "name": "page-header",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=37390-28734",
+    "published": true,
+    "description": "A centred introductory block that introduces a page or category with an icon, a two-line heading, a subtitle, and a horizontally scrollable tab-pill row. Acts as the general thematic header — it sets the topic and tone for an entire page.\nUse for: The top of a content page, directly below the top bar — to orient the user, establish the page theme, and provide immediate category filtering.\nNot for: Outcome or status messages after a user action — use page-title instead. Not for section headings within a page — use section with a header slot instead. Not for modal or sheet titles.\nChoosing: Use state=default on light surfaces — renders with a white card surface, dark heading text, and subtle muted colour for the secondary heading words. Use state=Inverse on dark or glass backgrounds — renders with a glass white surface (20% opacity), and all text tokens shift to inverse white. The tab-pills inside the block automatically use inverse=true tokens on the Inverse state and inverse=false on the default state — do not manually override individual tab-pill colour schemes inside this component.\nRules: Use exactly one page-header per screen. Place it directly below the top bar and outside any section or scroll slot. The heading supports a two-line structure with a muted word and a strong word per line — edit via the .title-block text properties. The icon slot is 56px; do not resize it. The subtitle is optional but recommended for context. The tab-pill row scrolls horizontally when there are more tabs than the viewport allows; always keep exactly one tab-pill selected.\npage-header vs page-title: page-header introduces — it is a general thematic header that opens a page and sets context. page-title concludes — it is a generic informative message or a specific scenario outcome (success, error, warning). If the block orients the user at the start of a page, use page-header. If the block communicates the result of an activity, use page-title."
+  },
+  "pagetitle": {
+    "node": "40283:145186",
+    "name": "page-title",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=40283-145186",
+    "published": true,
+    "description": "A centred or left-aligned status message block that communicates the outcome of an activity with a status icon, a primary heading, and an optional secondary description. Acts as a generic informative message or a specific scenario outcome — it delivers a conclusion, not an introduction.\nUse for: Confirmation, success, warning, alert, or neutral outcome screens — inside bottom-sheets, within sections, outside sections, or as a standalone page message. Use it anywhere you need a concise conclusion or result statement after a user action, or a generic informative message block.\nNot for: General thematic page introductions — use page-header instead. Not for inline form validation or toast notifications.\nChoosing: Use alignment=center for general, standalone outcome messages (e.g. a full-page success confirmation). Use alignment=left when the message is contextual — embedded within a content flow, a section, or alongside left-aligned siblings. Use type=lg for the most prominent, top-level outcomes (e.g. payment success). Step down through md, sm as the context gets tighter or the message sits lower in the visual hierarchy. Use type=xs for the smallest footprint — works as a generic text placeholder or a compact inline message within a bottom-sheet or card. Pair the status-icon slot with the appropriate icon type — positive, alert, warning, or neutral — to reflect the nature of the outcome. Toggle text-secondary off when a description is unnecessary and the heading alone is sufficient.\nRules: Always match the status-icon type to the actual outcome (positive for success, alert for errors, warning for caution, neutral for informational). Keep the primary heading to two lines maximum. The secondary description is optional — hide it via text-secondary when the heading is self-explanatory. Do not resize the status-icon slot.\npage-title vs page-header: page-title concludes — it is a generic informative message or a specific scenario outcome (success, error, warning). page-header introduces — it is a general thematic header that opens a page and sets context. If the block communicates the result of an activity or delivers informational content, use page-title. If the block orients the user at the start of a page, use page-header."
+  },
+  "picker": {
+    "node": "34373:16787",
+    "name": "picker",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=34373-16787",
+    "published": true,
+    "description": "A compact selectable tile displaying a value, a description label, and an optional status badge — used for choosing between discrete options in a constrained layout.\nUse for: Horizontal picker rows where the user selects one value from a set of discrete options — such as a data amount, a duration, or a quantity — where each option needs a value and a unit or description label.\nNot for: General navigation or filtering — use chips or filter-pill instead. Not for free-form input — use a text field instead.\nChoosing: Use color-scheme=default on light and sunken surfaces. Use color-scheme=inverse on glass, midnight, or dark surfaces — the tile renders with a white glass fill and inverse text tokens. Toggle badges to show or hide the status badge at the bottom of the tile. Set state=selected to highlight the active option. Set state=disabled to prevent interaction and reduce visual prominence.\nRules: Width is fixed at 106px, height at 72px — do not resize. Padding is 20px top, 8px left and right. The status badge is 16px tall and spans the full tile width — do not change its dimensions. Edit the value and description label via text properties on the instance. Do not place pickers outside a horizontal picker row — they are always grouped with sibling pickers representing alternative options."
+  },
+  "plancard": {
+    "node": "26003:40647",
+    "name": "plans-portable",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=26003-40647",
+    "published": true,
+    "description": "Use for\nA compact plan card used to present a named plan or subscription tier with its price, bundled service logos, and an optional promotional badge. Use in contexts where plan information needs to be surfaced at a glance alongside other content — carousel rows, comparison panels, or summary screens.\n\nNot for\nFull plan detail pages or primary plan selection flows — use a full-size plan card for those. Promotional or offer-only content with no plan name or price — use a card-features or offer component instead.\n\nChoosing\nSet color-scheme=default for light surface contexts. Set color-scheme=inverse for dark surface contexts — the card background switches to surface/base/midnight and all text and badge tokens invert accordingly. Do not apply color-scheme=inverse on a light screen background; ensure the surrounding context is dark. Background color is content-driven, not status-driven — any named color can be used for any plan; there is no fixed color assignment per plan type.\nSet services=on when the plan has bundled add-ons to surface via the logo-row. Set services=off when there are no bundled services — the logo-row slot collapses. Set badge=on when there is an active promotional offer (Discount or New) to highlight. Set badge=off when there is no offer. The badge color contrasts with the card background — a red badge on light cards, a light badge on dark cards. Do not override badge color manually; it is set by the color-scheme property.\nFor the logo-row, use size=md (40px) to match this card's standard context. Toggle individual logo slots (logo1–logo5) to match the number of actual partner logos. Enable xMore only when logos exceed the visible slots; the overflow pill must reflect the actual count of hidden logos. Maximum 3 logos visible before overflow. Set direction=rtl for Arabic.\n\nRules\nThe plan label sits top-left using body/md (14px regular) with dir=auto. The plan title sits below it using heading/md (24px bold) with dir=auto, max 2 lines, wraps allowed. Do not truncate the title to a single line. The logo-row sits in the header, 8px below the title. The price sits at the bottom of the card using title/md (20px semi-bold). The \"from\" label above the price uses body/md subtle — show it when the price is a starting price, hide it otherwise. The badge sits above the price row in the footer. Card is fixed at 222×300px. Do not resize the instance. For RTL, set direction=rtl at the component level — all text fields use dir=auto and will flip automatically."
+  },
+  "planusagebar": {
+    "node": "28927:23669",
+    "name": ".plan-usage-bar",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=28927-23669",
+    "published": true,
+    "description": ""
+  },
+  "priceline": {
+    "node": "33496:60459",
+    "name": "price-line",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=33496-60459",
+    "published": true,
+    "description": "Use for: displaying the price summary within a plan card or CTA Bar when the customer must compare an original price with a discounted price.\nNot for: standalone page content or non-price information.\nChoosing: use the content and pricing state supplied by the parent plan or purchase context; show the original-price treatment only when both original and discounted values are valid.\nRules: keep inside its parent card or CTA Bar; never invent pricing; never show a strikethrough without a verified replacement price."
+  },
+  "productcard": {
+    "node": "37905:18719",
+    "name": "card-features-package",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=37905-18719",
+    "published": true,
+    "description": "Use for: Named plans, bundles, or subscription tiers where partner or app inclusions need to be surfaced alongside the package name.\n\nNot for: Physical or digital products — use card-features-product. Category entry points — use card-features-category. Service add-ons — use card-features-addon.\n\nChoosing: Set logoRow=true when the package includes bundled partner services with logos to show; logoRow=false when there are none. Set badgeOrColor=true when there is an active offer badge to show in the footer; badgeOrColor=false when there is none. Set label=true on the price sub-component for a starting price; label=false for a fixed price. Set priceMonthly=true for recurring prices; priceMonthly=false for one-time. Use size=sm on the logo-row to match this card's compact header. Set direction=rtl for Arabic.\n\nRules: The overline and title use dir=auto — do not override direction on the text layers. The logo-row sits at the bottom of the header block — do not move it to the footer. The badge sits in the .product-card-badge-or-color-selection slot in the footer — do not reposition it. Card is fixed at 229×300px — do not resize."
+  },
+  "progressbar": {
+    "node": "26437:43709",
+    "name": "progress-bar-core",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=26437-43709",
+    "published": true,
+    "description": "Use for\nA low-level progress indicator used to represent a proportion of consumption or completion — data usage remaining, plan fill level, or any percentage-based status. Used as an atom inside plan-usage-bar and similar components. Do not use standalone in product screens; always embed it within a containing card or bar component.\n\nNot for\nStep-based progress flows or onboarding indicators — use a dedicated stepper component for those. Loading or indeterminate states — this component only represents a known percentage value. Any context where a label or value needs to be attached directly to the bar — the containing component handles labelling.\n\nChoosing\nSet progress to the appropriate value in increments of 5 (5 through 100) matching the percentage of data or usage remaining. The bar fill uses color/text/positive/subtle (green, #54bc72) by default. The bar color is overridden by the parent component based on usage state — green above 30% remaining, orange below 30% or within 3 days of expiry. Do not override the bar color directly on this component.\nSet direction=ltr for English — the bar fills from the left. Set direction=rtl for Arabic — the bar fills from the right. Do not manually mirror the bar; the direction property handles it.\n\nRules\nThe component is fixed at 4px height (scale/4). Do not resize the height. Width is set by the parent container — always place this component inside a frame set to fill width; do not set a fixed width on the instance. The bar is a single absolutely positioned layer that fills from one edge to the opposite based on the progress value. Do not add additional layers inside the bar. The track background is inherited from the parent container — do not add a background to the bar itself. All values are tokenized — do not hard-code colors or dimensions."
+  },
+  "quickaction": {
+    "node": "27962:37107",
+    "name": "quick-action",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=27962-37107",
+    "published": true,
+    "description": "Use for\nTappable shortcut tiles that surface a predefined set of common tasks or service entry points in a grid or carousel. Use when the goal is to give users fast access to high-frequency actions without navigating through a full menu.\n\nNot for\nAd hoc or custom actions — quick-action tiles are drawn from a fixed catalogue of 13 predefined task types. New services require a catalogue entry before they can be used. Do not use for promotional or offer content — use a card component for that.\n\nChoosing\nSet grid=true for a fixed-width tile layout. Set carousel=true for a scrollable horizontal row. Do not set both to true at the same time. Set rows=1, rows=2, or rows=3 to control how many rows of tiles are shown in grid mode. Content configurations adapt to what data the backend returns — there are four combinations based on label length and badge availability (2-line with tag, 1-line with tag, 2-line without tag, 1-line without tag). These are not designer choices per tile.\n\nRules\nEach tile is fixed at 147×148px. Do not resize individual instances. The icon sits in the header at the top-left of the tile inside a 40px container with border-radius/3 (12px). The label sits at the bottom of the tile using title/sm (16px semi-bold) with dir=auto — do not override direction on the text layer. The status badge sits in the header at the top-right and reflects live service state — neutral, positive, disabled, warning, or danger. Do not use the badge to show offers or promotions; use badges-status only. Tiles without a status badge hide the badge slot entirely — do not leave an empty badge container visible. For RTL, set direction=rtl at the component level; the label will flip automatically via dir=auto."
+  },
+  "radio": {
+    "node": "26369:775",
+    "name": "radio-button",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=26369-775",
+    "published": true,
+    "description": "A circular selection control for choosing one option from a mutually exclusive set.\nUse for: Form fields and settings screens where the user must select exactly one option from a group — such as choosing a plan type, a billing cycle, or a preference.\nNot for: Multi-select scenarios where more than one option can be active simultaneously — use the checkbox atom instead. Not for toggling a single setting on or off — use a switcher instead.\nChoosing: Use small=false (24×24px) for standard forms, settings screens, and main content. Use small=true (20×20px) for dense layouts, list items, and compact UI. Set color-scheme=default on light or neutral backgrounds. Set color-scheme=inverse on midnight or brand red surfaces. Set selected=true for the active option in the group — renders as a brand red filled dot. Set disabled=true to prevent interaction; a selected disabled radio renders at reduced opacity.\nRules: Always use radio buttons in a group of two or more options. Only one radio button in a group can be selected=true at a time — selecting one must deselect the others. Always pair with a visible label for each option. Do not use a single radio button in isolation."
+  },
+  "recommendation": {
+    "node": "36698:108342",
+    "name": "Recommendation",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=36698-108342",
+    "published": true,
+    "description": "Use for\nA self-contained card for surfacing a single personalized recommendation — a feature, service, or content item — with a branded icon, a short title, a supporting description, and a CTA button. Use in a horizontal carousel or as a standalone unit within a section when the goal is to prompt the user toward a specific action based on their context or usage.\n\nNot for\nPlan or product selling with pricing — use card-features variants for those. Category or service navigation — use service-card for that. Content that requires an image in the header — use card-info for that. Lists of items — use card-list for that. Any context where more than one CTA is needed.\n\nChoosing\nSet carousel=true when the card is part of a horizontally scrollable row — two cards are shown side by side with a 4px gap, each at 338px width, peeking the next item. Set carousel=false for a standalone full-width card at 353px.\nSet inverse=true when the card sits on a dark or midnight surface — the background uses surface/glass/white/md (15% white glass), the title uses text/default/inverse (white), the description uses text/default/inverse-subtle (75% white), and the button uses scheme=inverse (white button, dark label). Set inverse=false on light surfaces — the background uses surface/base/default, text uses default dark tokens, and the button uses scheme=midnight (dark button, white label). Do not mix schemes — match inverse to the surrounding section surface.\nSet direction=rtl for Arabic — the title and description use dir=auto and flip automatically. The button label also flips via dir=auto. Do not override text alignment manually.\n\nRules\nThe card is fixed at 224px height. In carousel mode each card is 338px wide; in standalone mode 353px wide. Do not resize the instance. The icon sits centered at the top of the card in a 32px container with border-radius/2 (8px) — do not replace it with a flat icon or image, and do not resize the container. The title uses title/md (20px semi-bold), centered, truncated with ellipsis — do not allow it to wrap beyond the available height. The description uses body/md (14px regular), centered, subtle color — it fills the remaining flex space and is also truncated. The CTA button is full-width, size=md (40px), primary style, centered at the bottom with 12px top padding. Do not remove the button or add a second one. All spacing values are tokenized — do not hard-code measurements."
+  },
+  "scrim": {
+    "node": "32960:77013",
+    "name": "scrim",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=32960-77013",
+    "published": true,
+    "description": ""
+  },
+  "searchbar": {
+    "node": "28114:62804",
+    "name": "Standard search",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=28114-62804",
+    "published": false,
+    "description": ""
+  },
+  "section": {
+    "node": "36698:87167",
+    "name": "section",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=36698-87167",
+    "published": true,
+    "description": "Content block wrapper. Optional header (title, description, filter pill, trigger) plus a body slot holding cards or rows.\n\nUSE FOR    Every content block on a page. All content components sit inside a section.\nNOT FOR    Fixed chrome. Topbar, navbar and tab-pill are placed directly on the screen.\n\nSIZE\nContent determines rows; rows determine size. Never resize the body manually.\n  xs 1 row (72) · sm 2 (148) · md 3 (224) · lg 4 (300) · xl 6 (452)\nCount the rows the content needs, then pick the matching size. If the content does not fill the size, step down one. Never exceed xl.\n  single input field → xs or sm     full highlight banner → xl\n\nCOLOUR\nSet on the section, never on the content inside it.\n  inverse=false → default · raised · ai-powered\n  inverse=true  → brand · midnight-base · midnight-raised · glass-midnight · glass-white\nUse glass only over imagery. It has no contrast guarantee on flat colour.\nUse gradient only to emphasise the most important section, and only on pages with more than two sections.\n\nCONTENT\nOne major item per section, or several repeating components such as a set of forms.\nA major component plus a supporting one is allowed — a stack of cards with a cta-bar below, for example — provided the total stays within xl.\n\nGRID\nTwo systems. The general grid applies to the whole screen. The section grid applies inside the body slot only.\nSection grid: up to 6 rows, each with 24 responsive columns and constant 4px spacing.\nColumns stretch to fill the row at any container or screen width. Spacing is always 4px unless a placed component adds its own internal padding.\n\nRULES\nOne section per content block.\nNever nest sections.\nNever stretch beyond xl."
+  },
+  "servicecard": {
+    "node": "37840:18370",
+    "name": ".service-card-core",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=37840-18370",
+    "published": true,
+    "description": ""
+  },
+  "smilesbalance": {
+    "node": "27131:101113",
+    "name": "smiles-balance-card",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=27131-101113",
+    "published": true,
+    "description": ""
+  },
+  "snackbar": {
+    "node": "40278:34192",
+    "name": "Snack-bar",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=40278-34192",
+    "published": true,
+    "description": "A transient, non-blocking overlay that confirms a user action. It appears near the bottom of the viewport, above the current interface, without taking space in the page/container flow.\nUse for: Immediate confirmation of a completed action or low-priority outcome — saved, copied, added, removed, settings updated, or an amount applied.\nNot for: Persistent, critical, or detailed status, or messages that need a follow-up action — use alert-message instead.\nChoosing: Use back-ground=no when the snack bar sits over a calm area of the screen. Use back-ground=yes when it overlays busy, scrolling, or dark content — it adds a blurred gradient scrim behind the pill to keep the message readable.\nRules: Keep copy to one clear outcome. Show one at a time; never stack snack bars. No CTA. Position above persistent bottom controls such as navbar or cta-bar and never overlap them. Never cause layout shift."
+  },
+  "statusindicator": {
+    "node": "37171:3537",
+    "name": "status-indicator-type",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=37171-3537",
+    "published": true,
+    "description": "A status label combining a dot icon and a text label to communicate state at a glance.\n\nUse for: Surfacing the status of a deal, offer, plan, or item — such as active, expiring, unavailable, or pending.\n\nNot for: Progress or completion tracking — use a progress indicator instead. Categorising or tagging content — use a tag or badge component. Communicating form validation errors or inline feedback — use a form error component. Do not use as a decorative element or to add colour without a corresponding semantic state.\n\nChoosing: Use basic on light flat surfaces. Use glass over light imagery or translucent backgrounds. Use glass-dark over dark imagery or dark surfaces. Use pill when the status needs stronger visual containment, such as inside a card footer or inline with dense content. Set status to match the semantic meaning — positive, warning, danger, or neutral — never for decorative purposes.\n\nRules: Do not use status colour alone to convey meaning — the text label must always be present. Do not override status token colours. The dot icon is not interchangeable with other icons."
+  },
+  "stepper": {
+    "node": "32960:73561",
+    "name": "stepper",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=32960-73561",
+    "published": true,
+    "description": ""
+  },
+  "switcher": {
+    "node": "26215:7141",
+    "name": "switcher",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=26215-7141",
+    "published": true,
+    "description": "Use for: Standalone settings and preferences that take effect immediately on tap — such as enabling notifications, toggling a feature, or activating a subscription option. Each switcher controls exactly one independent setting.\nNot for: Mutually exclusive choices within a group — use a radio pattern or chips instead. Not for confirming an action — use a button instead.\nChoosing: Use small=false (40×24px) for standard settings screens and main content. Use small=true (32×20px) for dense layouts, list items, and compact toolbars. Set inverse=false on light or neutral backgrounds. Set inverse=true on brand red or dark midnight surfaces — the track and knob tokens invert to remain legible. Set active=true when the setting is on — the track fills brand red and the knob moves to the right edge. Set disabled=true to prevent interaction — both track and knob render at reduced opacity.\nRules: Always pair with a visible label that describes what the switcher controls. Do not use more than one switcher to control the same setting. The knob is always white on default surfaces; do not override the knob token."
+  },
+  "tabs": {
+    "node": "25502:12416",
+    "name": "tab-pill",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=25502-12416",
+    "published": true,
+    "description": "A pill-shaped tab control for filtering content or switching between categories within a view.\n\nUse for: Horizontal tab rows at the top of a content area where the user needs to switch between predefined categories or filter sets — such as plan types, content sections, or product categories.\n\nNot for: Navigation between screens — use the navbar instead. Not for binary on/off toggles — use a switcher instead. Not for selecting items from a dropdown — use filter-pill instead.\n\nChoosing: Use inverse=false on light surfaces. Use inverse=true on dark, midnight, or glass surfaces where standard colours would not provide sufficient contrast. Set selected=true on the active tab — the surface fills with a light red tint and the icon and label turn brand red. Only one tab-pill in a set should be selected=true at a time.\n\nRules: Height is fixed at 48px — do not resize. Width hugs the label; the label is single line only and never wraps. The leading icon (20px) is always present — do not remove it. Group multiple tab-pills horizontally in a scrollable row; never stack them vertically. Exactly one pill must always be selected within a set — do not leave all pills unselected. In RTL, layout mirrors automatically."
+  },
+  "tooltip": {
+    "node": "33202:6649",
+    "name": "Tooltip",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=33202-6649",
+    "published": true,
+    "description": "Use for\nContextual popover that surfaces supplementary information anchored to a trigger element — an icon button, a label, or an inline element. Use when the information is helpful but not critical enough to be shown inline, and when the user needs to actively request it. The caret points toward the trigger to maintain spatial context.\n\nNot for\nPersistent information that the user needs to complete a task — surface that inline or in a form hint. Error messages or validation — use an inline error state instead. Any content that requires user input or a form — tooltips are read-only. Navigation or dismissal flows.\n\nChoosing\nsize=simple — A single line of body text with no container border-radius or padding beyond 4px vertical / 12px horizontal. Use for very short labels or values where a full card would feel heavy. Width hugs the content.\nsize=standard — A multi-line body text block inside a card with border-radius/3 (12px) and 12px padding. Use for short explanatory text up to 4 lines. Width is between 200px and 280px. Use when a label alone isn't enough but no image or CTA is needed.\nsize=rich — A full card with border-radius/6 (20px) and 16px padding, supporting a title, optional media image, body text, optional icon button in the header, and an optional action block (step counter + CTA button). Width is fixed at 280px. Use for onboarding tours, feature highlights, or any tooltip that needs structured content with a call to action.\nFor caret-direction: set bottom to position the tooltip above the trigger (caret points down), top to position it below (caret points up), left to position it to the right of the trigger (caret points left), right to position it to the left (caret points right). Match the caret direction to the actual spatial relationship between the tooltip and its trigger — do not choose direction for aesthetic reasons.\nFor caret-placement on simple and standard: set left, center, or right to align the caret to the appropriate edge of the tooltip relative to where the trigger sits horizontally.\nFor surface=default use the white canvas surface on light backgrounds. For surface=dark use the dark surface variant on dark or midnight backgrounds.\nFor the rich tooltip: set mediaBlock=true when a supporting image adds meaningful context; set mediaBlock=false when text alone is sufficient. Set iconButton=true when there is a dismiss or secondary action needed in the header. Set actionBlock=true when the tooltip is part of a multi-step tour and needs a step counter or CTA; set actionBlock=false for a single informational tooltip with no required action. Set cta=true inside the action block when a primary button is needed; set cta=false when only the step counter is needed. The step counter uses body/sm (12px regular) in muted color (color/text/default/muted) and shows the format \"1 of 3\".\nSet direction=rtl for Arabic on standard and rich variants — body text uses dir=auto and flips automatically. For RTL, the step counter and button order in the action block reverse.\n\nRules\nAll three sizes apply shadow/md (color/midnight/a10, 22px blur). Do not remove the shadow or add additional elevation. The caret is a 6px tall SVG asset — do not resize it or replace it with a custom shape. The caret always fills the full width of the tooltip container. On simple tooltips, the body text uses body/sm (12px regular) in subtle color and never wraps. On standard tooltips, the body text uses body/sm in default dark color and wraps up to 4 lines. On rich tooltips, the title uses title/xs (14px semi-bold) and the body uses body/sm (12px regular) in subtle color. The media image is fixed at 140px height with border-radius/6 (20px) and object-cover. The icon button in the rich header is 32px with border-radius/3 (12px). The CTA button uses size=md (40px), primary style, scheme=default. Do not add more than one button to the action block."
+  },
+  "topbar": {
+    "node": "38172:12163",
+    "name": "topbar",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=38172-12163",
+    "published": true,
+    "description": "Screen-level header assembly. Used everywhere by default. Combines the left side (account or back button), a middle part (page name, logo or title), controls, and optional add-ons — chips, inputs, tabs or stepper.\n\nUse for: the header of every screen. Exactly one per screen.\nNot for: section headings within a page — use section or page-header.\nChoosing: white on light screens, midnight on dark, red for brand moments, grey for utility screens.\nRules: fixed to the top, outside any section. Add-ons stack below the main bar; enable only what the screen needs.\n\nInverse variants come by default for level-1 screens. The midnight version is selected only when specified by the design. Default scheme variants are used for LV2 and futher types of pages and must use 'false or 'white', depending on initial canvas color to reach contrast. If canvas color is white 'default' - use 'white' surface. If it's shades of midnight light greys - use 'false'"
+  },
+  "uaepassbutton": {
+    "node": "39861:22282",
+    "name": "button-uae-pass",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=39861-22282",
+    "published": true,
+    "description": ""
+  },
+  "voucher": {
+    "node": "28278:13817",
+    "name": "Voucher",
+    "url": "https://www.figma.com/design/pzm63BTLfPfT1stcF89ILQ/e--Consumer-App-DSL-V1.2?node-id=28278-13817",
+    "published": true,
+    "description": ""
+  }
+}

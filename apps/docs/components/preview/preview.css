@@ -12,6 +12,9 @@
   font-family: var(--sans);
   color: var(--ink);
   margin: 20px 0 28px;
+  /* Components ship sticky headers and z-indexed layers (TopBar z-10, overlays z-1000).
+     Contain them so none can paint over the docs header or the sticky TOC bar. */
+  isolation: isolate;
 }
 .eapg-missing { color: #b00; font-family: monospace; }
 
